@@ -28,4 +28,24 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git); `--
    daraus Heim/Remis/Auswärts, Über/Unter 2,5, Beide treffen und die Top-3-Ergebnisse.
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
 
-Die Gewichte sind gesetzte Erfahrungswerte, nicht an vergangenen Spielen getestet.
+### Gewichte
+
+Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
+
+| Konstante | Wert | Bedeutung |
+|---|---|---|
+| `XG_ANTEIL` | 0,70 | xG gegen echte Tore bei der Teamstärke |
+| `LIGA_BASIS_XG` | 0,40 | Liga-Basis: 60 % Tore, 40 % xG |
+| `SEITE_K` | 6 | Heim-/Auswärtsbilanz gegen Gesamtwerte: n / (n + 6) |
+| `DAEMPFUNG_K` | 5 | Saisonstärke Richtung 1,00, wie 5 Spiele auf Liga-Niveau |
+| `FORM_ANTEIL` | 0,25 | Anteil der letzten 6 Spiele |
+| `FORM_DAEMPFUNG_K` | 3 | Dämpfung der Formwerte |
+| `H2H_ANTEIL` | 0,10 | Direkte Duelle auf die Gesamttore |
+| `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
+| `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
+| `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
+
+Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optimiert** – so gewollt.
+Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,
+Begründung im Code danebenschreiben und diese Tabelle nachziehen.
+Nicht nachträglich an einzelne Spielausgänge anpassen.

@@ -41,11 +41,44 @@ def hole(endpoint, params, datei, args):
     json.dump(daten, open(pfad, "w"))
     return daten
 
+# ---------------------------------------------------------------- Gewichte
+#
+# NACH ERFAHRUNG GESETZT, NICHT AN VERGANGENEN SPIELEN OPTIMIERT.
+# So gewollt. Die Werte bleiben fest, damit jede Analyse vergleichbar ist und
+# nicht jede Session anders rechnet.
+#
+# NUR ÄNDERN, WENN DER NUTZER ES AUSDRÜCKLICH VERLANGT.
+# Dann hier ändern, die Begründung danebenschreiben und im README nachziehen.
+# Nicht "weil es für dieses eine Spiel besser passt" – das ist Ergebnis-Anpassung
+# im Nachhinein und macht alle früheren Prognosen unvergleichbar.
+
+XG_ANTEIL           = 0.70   # xG gegen echte Tore bei der Teamstärke.
+                             # xG ist stabiler: Tore schwanken bei 5-10 Spielen stark.
+LIGA_BASIS_XG       = 0.40   # Liga-Basis: 60 % echte Tore, 40 % Liga-xG.
+                             # Tore zählen hier mehr, weil der Liga-Schnitt über
+                             # hunderte Spiele läuft und dadurch schon stabil ist.
+SEITE_K             = 6      # Heim-/Auswärtswerte gegen Gesamtwerte: n / (n + 6).
+                             # Bei 6 Heimspielen zählt die Heimbilanz zur Hälfte.
+DAEMPFUNG_K         = 5      # Saisonstärke Richtung 1,00 ziehen, Wirkung wie
+                             # 5 zusätzliche Spiele auf Liga-Niveau. Fängt
+                             # Ausreißer am Saisonstart ab.
+FORM_ANTEIL         = 0.25   # Form der letzten 6 Spiele. Genug für eine echte
+                             # Formkurve, zu wenig, damit eine Glückssträhne
+                             # durchschlägt.
+FORM_DAEMPFUNG_K    = 3      # Form stärker dämpfen: nur 6 Spiele Grundlage.
+H2H_ANTEIL          = 0.10   # Direkte Duelle auf die Gesamttore. Klein, weil
+                             # Kader und Trainer wechseln.
+H2H_MAX_JAHRE       = 3      # Duelle älter als 3 Jahre zählen gar nicht.
+DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
+                             # Literatur; reine Poisson unterschätzt enge Ergebnisse.
+MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
+                             # (Regel in CLAUDE.md). Über --markt zuschaltbar.
+
 # ---------------------------------------------------------------- Modell
 
 def pois(l, n=11): return np.array([math.exp(-l)*l**k/math.factorial(k) for k in range(n)])
 
-def matrix(lh, la, rho=-0.07):
+def matrix(lh, la, rho=DIXON_COLES_RHO):
     """Ergebnis-Matrix 0:0 bis 10:10 (Poisson mit Dixon-Coles-Korrektur)."""
     M=np.outer(pois(lh),pois(la))
     M[0,0]*=1-lh*la*rho; M[0,1]*=1+lh*rho; M[1,0]*=1+la*rho; M[1,1]*=1-rho
@@ -55,27 +88,30 @@ def probs(M):
     i,j=np.indices(M.shape)
     return dict(H=M[i>j].sum(),D=M[i==j].sum(),A=M[i<j].sum(),O25=M[i+j>=3].sum(),U25=M[i+j<=2].sum(),BTTS=M[(i>0)&(j>0)].sum())
 
-def shrink(x,n,k=5):
+def shrink(x,n,k=DAEMPFUNG_K):
     """Zieht Werte aus kleinen Stichproben Richtung Liga-Durchschnitt (1,0)."""
     return (n*x+k*1.0)/(n+k)
 
 def strengths(t, side, L, last6):
-    """Angriffs- und Abwehrstärke relativ zum Liga-Durchschnitt (70 % xG, 30 % Tore)."""
+    """Angriffs- und Abwehrstärke relativ zum Liga-Durchschnitt (XG_ANTEIL xG, Rest Tore)."""
     s=t['stats']; n_v=s[f'seasonMatchesPlayed_{side}']; n_o=s['seasonMatchesPlayed_overall']
     Lg_v = L[side]; Lx_v = L['x'+side]; Lg_o=(L['home']+L['away'])/2; Lx_o=(L['xhome']+L['xaway'])/2
     opp = 'away' if side=='home' else 'home'
+    x, g = XG_ANTEIL, 1-XG_ANTEIL
     # Heim- bzw. Auswärtswerte und Gesamtwerte
-    att_v = 0.7*s[f'xg_for_avg_{side}']/Lx_v + 0.3*s[f'seasonScoredAVG_{side}']/Lg_v
-    att_o = 0.7*s['xg_for_avg_overall']/Lx_o + 0.3*s['seasonScoredAVG_overall']/Lg_o
-    dfn_v = 0.7*s[f'xg_against_avg_{side}']/L['x'+opp] + 0.3*s[f'seasonConcededAVG_{side}']/L[opp]
-    dfn_o = 0.7*s['xg_against_avg_overall']/Lx_o + 0.3*s['seasonConcededAVG_overall']/Lg_o
-    wv = n_v/(n_v+6)
+    att_v = x*s[f'xg_for_avg_{side}']/Lx_v + g*s[f'seasonScoredAVG_{side}']/Lg_v
+    att_o = x*s['xg_for_avg_overall']/Lx_o + g*s['seasonScoredAVG_overall']/Lg_o
+    dfn_v = x*s[f'xg_against_avg_{side}']/L['x'+opp] + g*s[f'seasonConcededAVG_{side}']/L[opp]
+    dfn_o = x*s['xg_against_avg_overall']/Lx_o + g*s['seasonConcededAVG_overall']/Lg_o
+    wv = n_v/(n_v+SEITE_K)
     att = shrink(wv*att_v+(1-wv)*att_o, n_o); dfn = shrink(wv*dfn_v+(1-wv)*dfn_o, n_o)
-    # Form der letzten 6 Spiele mit 25 %
+    # Form der letzten 6 Spiele
     f=last6['stats']
-    att_f = 0.7*f['xg_for_avg_overall']/Lx_o + 0.3*f['seasonScoredAVG_overall']/Lg_o
-    dfn_f = 0.7*f['xg_against_avg_overall']/Lx_o + 0.3*f['seasonConcededAVG_overall']/Lg_o
-    att = 0.75*att + 0.25*shrink(att_f,6,3); dfn = 0.75*dfn + 0.25*shrink(dfn_f,6,3)
+    att_f = x*f['xg_for_avg_overall']/Lx_o + g*f['seasonScoredAVG_overall']/Lg_o
+    dfn_f = x*f['xg_against_avg_overall']/Lx_o + g*f['seasonConcededAVG_overall']/Lg_o
+    fa = FORM_ANTEIL
+    att = (1-fa)*att + fa*shrink(att_f,6,FORM_DAEMPFUNG_K)
+    dfn = (1-fa)*dfn + fa*shrink(dfn_f,6,FORM_DAEMPFUNG_K)
     return att, dfn
 
 def market_lambdas(m):
@@ -98,12 +134,12 @@ def league(T):
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
                 xhome=avg('xg_for_avg_home','seasonMatchesPlayed_home'),xaway=avg('xg_for_avg_away','seasonMatchesPlayed_away'))
 
-def h2h_gewicht(m, jahre=3):
-    """Direkte Duelle zählen 10 %, aber nur wenn das letzte Duell höchstens 3 Jahre zurückliegt."""
+def h2h_gewicht(m, jahre=H2H_MAX_JAHRE):
+    """Direkte Duelle zählen H2H_ANTEIL, aber nur wenn das letzte Duell nicht zu alt ist."""
     spiele = m.get('h2h', {}).get('previous_matches_ids') or []
     if not spiele: return 0.0
     letztes = max(s['date_unix'] for s in spiele)
-    return 0.10 if m['date_unix'] - letztes <= jahre*365*86400 else 0.0
+    return H2H_ANTEIL if m['date_unix'] - letztes <= jahre*365*86400 else 0.0
 
 # ---------------------------------------------------------------- Ablauf
 
@@ -118,7 +154,8 @@ def analysiere(mid, args):
 
     ah,dh=strengths(T[m['homeID']],'home',L,last6(m['homeID']))
     aa,da=strengths(T[m['awayID']],'away',L,last6(m['awayID']))
-    base_h=0.6*L['home']+0.4*L['xhome']; base_a=0.6*L['away']+0.4*L['xaway']
+    b = LIGA_BASIS_XG
+    base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
     h2h_w = h2h_gewicht(m)
     if h2h_w:
@@ -159,7 +196,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Spielprognose aus FootyStats-Daten")
     ap.add_argument("spiele", nargs="*", type=int, help="FootyStats match_id(s)")
     ap.add_argument("--liste", metavar="DATUM", help="Spiele eines Tages (YYYY-MM-DD) anzeigen")
-    ap.add_argument("--markt", type=float, default=0.0, help="Anteil Vorab-Quoten (0 bis 1, Standard 0)")
+    ap.add_argument("--markt", type=float, default=MARKT_ANTEIL, help="Anteil Vorab-Quoten (0 bis 1, Standard 0)")
     ap.add_argument("--neu", action="store_true", help="API-Daten neu laden")
     ap.add_argument("--daten", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "daten"))
     args = ap.parse_args()

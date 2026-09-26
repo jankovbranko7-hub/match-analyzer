@@ -36,6 +36,18 @@ Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`)
 Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
 für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
 
+### Gewichte nicht verändern
+
+Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
+Sie sind **bewusst nach Erfahrung gesetzt** und nicht an vergangenen Spielen optimiert. Das ist so gewollt.
+
+**Diese Werte bleiben fest.** Nicht anpassen, weil sie für ein einzelnes Spiel besser passen würden –
+das wäre Anpassung im Nachhinein und macht alle früheren Prognosen unvergleichbar.
+Ändern nur, wenn der Nutzer es ausdrücklich verlangt; dann die Konstante ändern,
+die Begründung danebenschreiben und die Tabelle im `README.md` nachziehen.
+
+In der Antwort einmal kurz sagen, dass die Gewichte gesetzte Erfahrungswerte sind und nicht getestet wurden.
+
 ## Methode
 
 1. **Alle relevanten Daten je Team einbeziehen**, die FootyStats liefert – nicht auf wenige Kennzahlen beschränken.
