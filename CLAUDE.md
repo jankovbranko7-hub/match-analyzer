@@ -27,6 +27,15 @@ Nützliche Endpunkte (Feldnamen vor der Nutzung an der echten Antwort prüfen):
 
 Auf das Stundenlimit des Tarifs achten: nur die Abfragen machen, die für das Spiel nötig sind.
 
+Ist nur die Variable `APIKEY` gesetzt, ist das derselbe FootyStats-Key – dann diesen verwenden.
+
+## Rechenmodell
+
+Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`), damit jede Analyse gleich gerechnet wird:
+`python3 analyse/modell.py --liste YYYY-MM-DD` für die Spiel-IDs, dann `python3 analyse/modell.py <match_id> …`.
+Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
+für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
+
 ## Methode
 
 1. **Alle relevanten Daten je Team einbeziehen**, die FootyStats liefert – nicht auf wenige Kennzahlen beschränken.
