@@ -26,45 +26,35 @@ Nützliche Endpunkte (Feldnamen vor der Nutzung an der echten Antwort prüfen):
 - `league-list` – Ligen und Saison-IDs
 
 Auf das Stundenlimit des Tarifs achten: nur die Abfragen machen, die für das Spiel nötig sind.
-Hilfsskripte dürfen im Arbeitsverzeichnis entstehen, werden aber nicht committet.
 
 ## Methode
 
-1. Daten holen: Form (letzte 5–10 Spiele), Heim-Bilanz des Heimteams und Auswärts-Bilanz des Auswärtsteams,
-   erzielte/kassierte Tore, xG/xGA, direkte Duelle (nur leicht gewichten), Vorab-Quoten falls vorhanden.
-2. Erwartete Tore je Team schätzen (Angriff des einen gegen Abwehr des anderen, Heim/Auswärts getrennt,
-   xG stärker gewichten als reine Tore bei kleinen Stichproben).
-3. Mit Poisson (Dixon-Coles-Korrektur für 0:0/1:0/0:1/1:1) die Ergebnis-Matrix **per Code** berechnen.
-4. Wenn FootyStats-Quoten vorliegen: margenbereinigte Markt-Wahrscheinlichkeiten mit dem Modell mischen
-   (Markt ist meist genauer – etwa 60 % Markt / 40 % Modell). Kurz angeben, ob gemischt wurde.
+1. **Alle relevanten Daten je Team einbeziehen**, die FootyStats liefert – nicht auf wenige Kennzahlen beschränken.
+   Zum Beispiel: Form (letzte 5/6/10 Spiele), Heim- bzw. Auswärtsbilanz, erzielte/kassierte Tore,
+   xG/xGA, Punkte pro Spiel, Schüsse und Schüsse aufs Tor, Ballbesitz, Dangerous Attacks,
+   Über-/Unter- und BTTS-Quoten der Teams, Zu-Null-Spiele und Spiele ohne eigenes Tor,
+   Torzeitpunkte, Tabellenplatz und Liga-Durchschnitt, direkte Duelle, Vorab-Quoten.
+   Was für das Spiel wichtig ist, gehört in die Rechnung.
+2. Daraus die erwarteten Tore je Team ableiten (Angriff des einen gegen Abwehr des anderen,
+   Heim/Auswärts getrennt, xG bei kleinen Stichproben stärker gewichten als reine Tore).
+3. Die Wahrscheinlichkeiten für Ergebnisse und Wetten **per Code** berechnen, nicht schätzen.
 
 ## Ausgabe pro Spiel
 
 1. **Prognose Spielausgang** (das Wichtigste): Heim / Unentschieden / Auswärts in %,
    wahrscheinlichstes Ergebnis (Top 3 mit %), kurze Begründung in 2–3 Sätzen.
 2. **Wahrscheinlichkeiten nur für diese Wetten:**
-   - Sieg Heim / Sieg Auswärts (Unentschieden nur als Info – **keine Wette darauf** empfehlen)
+   - Sieg Heim / Sieg Auswärts
    - Über 2,5
    - Unter 2,5
    - Beide treffen – Ja (**kein** „Beide treffen – Nein“)
-3. **Tipp:** welche dieser Wetten am besten passt, mit Einstufung *stark / mittel / schwach*.
-   Passt keine: klar „Kein Tipp“ sagen.
+3. **Bester Tipp:** Beziehe klar Stellung. Sag deutlich, welche dieser Wetten du für den besten Tipp hältst.
+   Sei ehrlich und direkt, vermeide Absicherungen und unnötige Vorsicht.
 4. **Optional:** faire Mindestquote für den Tipp (= 1 / Wahrscheinlichkeit).
    Value nur erwähnen, wenn eine FootyStats-Quote deutlich darüber liegt. Value ist Nebensache.
 
 Der Nutzer schickt **keine Quoten** – er prüft sie selbst beim Buchmacher.
 
-## Live-Spiele
-
-Wenn Minute, Spielstand oder ein GoalSpy-Screenshot mitkommt: Restspielzeit, Spielstand, Vorab-Stärke
-und Druck/Schüsse aus dem Screenshot einbeziehen und zusätzlich
-**nächstes Tor: Heim / Auswärts / keins** in % angeben.
-
 ## Mehrere Spiele
 
-Am Ende eine Übersichtstabelle: `Spiel | Prognose | Tipp | Einstufung`.
-
-## Sonstiges
-
-- Ehrlich bleiben: Wahrscheinlichkeiten, keine Garantien. Wenig Daten (z. B. Saisonstart, Aufsteiger) offen benennen.
-- Nichts committen oder pushen, außer der Nutzer verlangt es ausdrücklich.
+Am Ende eine Übersichtstabelle: `Spiel | Prognose | Bester Tipp`.
