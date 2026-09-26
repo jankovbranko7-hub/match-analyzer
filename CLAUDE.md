@@ -62,20 +62,45 @@ In der Antwort einmal kurz sagen, dass die Gewichte gesetzte Erfahrungswerte sin
 
 ## Ausgabe pro Spiel
 
-1. **Prognose Spielausgang** (das Wichtigste): Heim / Unentschieden / Auswärts in %,
-   wahrscheinlichstes Ergebnis (Top 3 mit %), kurze Begründung in 2–3 Sätzen.
-2. **Wahrscheinlichkeiten nur für diese Wetten:**
-   - Sieg Heim / Sieg Auswärts
-   - Über 2,5
-   - Unter 2,5
-   - Beide treffen – Ja (**kein** „Beide treffen – Nein“)
-3. **Bester Tipp:** Beziehe klar Stellung. Sag deutlich, welche dieser Wetten du für den besten Tipp hältst.
-   Sei ehrlich und direkt, vermeide Absicherungen und unnötige Vorsicht.
-4. **Optional:** faire Mindestquote für den Tipp (= 1 / Wahrscheinlichkeit).
-   Value nur erwähnen, wenn eine FootyStats-Quote deutlich darüber liegt. Value ist Nebensache.
+**Diese Vorlage genau so verwenden, bei jedem Spiel, in jeder Session.**
+Der Bericht sieht immer gleich aus. Keine zusätzlichen Abschnitte, keine Umbenennung
+der Überschriften, keine zusätzlichen Tabellenspalten, keine Nummerierung der Abschnitte
+innerhalb eines Spiels.
+
+```
+## N. Heim – Auswärts (Liga, N. Spieltag)
+Erwartete Tore: **1,42 : 0,94**
+
+**Prognose Spielausgang:** Heim **47 %** · Unentschieden **29 %** · Auswärts **24 %**
+Wahrscheinlichste Ergebnisse: **1:1 (13,5 %)**, 1:0 (12,5 %), 0:0 (10,3 %)
+
+<Begründung, 2–3 Sätze, die wichtigsten Zahlen aus den Teamdaten>
+
+| Wette | Wahrscheinlichkeit |
+|---|---|
+| Sieg Heim | 47,3 % |
+| Sieg Auswärts | 24,0 % |
+| Über 2,5 | 42,2 % |
+| Unter 2,5 | **57,8 %** |
+| Beide treffen – Ja | 47,2 % |
+
+**Bester Tipp: <Wette>.** <1–3 Sätze, warum genau diese Wette>
+Faire Mindestquote: **1,73**. <Value-Satz>
+```
+
+Regeln zur Vorlage:
+- Die Tabelle hat **immer genau diese fünf Zeilen und zwei Spalten**. Kein „Beide treffen – Nein“,
+  keine Spalte mit fairen Quoten oder Buchmacherquoten – die faire Quote steht nur beim Tipp.
+- Die Wahrscheinlichkeit des besten Tipps in der Tabelle **fett**.
+- **Bester Tipp:** klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Value-Satz:** liegt die FootyStats-Quote unter der fairen Quote, genügt „FootyStats-Quote X,XX,
+  also kein Value.“ Liegt sie deutlich darüber, das in einem Satz sagen. Value ist Nebensache.
+- Einschränkungen (dünne Datenlage, Markt sieht es anders, H2H spricht dagegen) gehören
+  **in die Begründung oder den Tipp-Satz**, nicht in eigene Kapitel.
 
 Der Nutzer schickt **keine Quoten** – er prüft sie selbst beim Buchmacher.
 
 ## Mehrere Spiele
 
-Am Ende eine Übersichtstabelle: `Spiel | Prognose | Bester Tipp`.
+Am Ende eine Übersichtstabelle: `Spiel | Prognose | Bester Tipp`,
+darunter höchstens drei Sätze Gesamteinordnung.
