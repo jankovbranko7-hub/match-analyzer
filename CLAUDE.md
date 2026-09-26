@@ -36,6 +36,12 @@ Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`)
 Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
 für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
 
+### Sollbruchstellen
+
+`SOLLBRUCHSTELLEN.md` listet die bekannten Schwachstellen von Modell und Ablauf.
+**Vor der Analyse überfliegen.** Was dort als `OFFEN` steht, kann eine Prognose verfälschen,
+ohne dass man es der Ausgabe ansieht.
+
 ### Länderspiele und Saisonstart: keine Prognose
 
 `analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`
@@ -109,7 +115,15 @@ Regeln zur Vorlage:
 - Die Tabelle hat **immer genau diese fünf Zeilen und zwei Spalten**. Kein „Beide treffen – Nein“,
   keine Spalte mit fairen Quoten oder Buchmacherquoten – die faire Quote steht nur beim Tipp.
 - Die Wahrscheinlichkeit des besten Tipps in der Tabelle **fett**.
-- **Bester Tipp:** klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Bester Tipp = die Wette mit der höchsten Wahrscheinlichkeit** aus den fünf Zeilen der Tabelle
+  (Variante A, vom Nutzer am 26.09.2026 entschieden). **Der Preis entscheidet nicht mit** – auch
+  nicht in engen Fällen, auch dann nicht, wenn eine andere Wette besseren Value hätte.
+  Bei Gleichstand die Wette mit der besseren Datengrundlage, und das im Tipp-Satz sagen.
+  Im Tipp-Satz klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
+  Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
+  Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten
+  ist – der Value-Satz, ob man darauf setzen sollte.
 - **Value-Satz:** liegt die FootyStats-Quote unter der fairen Quote, genügt „FootyStats-Quote X,XX,
   also kein Value.“ Liegt sie deutlich darüber, das in einem Satz sagen. Value ist Nebensache.
 - Einschränkungen gehören **in die Begründung, den Tipp-Satz oder die drei Sätze unter der

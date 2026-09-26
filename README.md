@@ -11,7 +11,8 @@ python3 analyse/modell.py 8548331 8548255 8408933   # Prognose für diese Spiele
 ```
 
 Der API-Key kommt aus der Umgebungsvariable `FOOTYSTATS_API_KEY` (ersatzweise `APIKEY`).
-API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git); `--neu` lädt sie neu.
+API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie gelten
+`CACHE_STUNDEN` lang und werden danach automatisch neu geladen; `--neu` erzwingt es sofort.
 
 ### Rechenweg
 
@@ -29,6 +30,9 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git); `--
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
 
 ### Grenzen
+
+Die bekannten Schwachstellen stehen vollständig in [`SOLLBRUCHSTELLEN.md`](SOLLBRUCHSTELLEN.md).
+Kurzfassung:
 
 Das Modell ist für **Ligen** gebaut, in denen alle Teams gegen dieselben Gegner spielen.
 Hat ein Team weniger als `MIN_SAISONSPIELE` Spiele, verweigert das Skript die Prognose,
@@ -57,6 +61,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
+| `CACHE_STUNDEN` | 6 | danach werden API-Daten neu geladen |
 
 Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optimiert** – so gewollt.
 Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,
