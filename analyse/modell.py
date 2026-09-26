@@ -72,6 +72,10 @@ H2H_MAX_JAHRE       = 3      # Duelle älter als 3 Jahre zählen gar nicht.
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
+MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
+                             # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
+                             # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
+                             # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).
                              # (Regel in CLAUDE.md). Über --markt zuschaltbar.
 
 # ---------------------------------------------------------------- Modell
@@ -148,6 +152,18 @@ def analysiere(mid, args):
     sid = m['competition_id']
     T = hole("league-teams", {"season_id": sid, "include": "stats"}, f"teams_{sid}.json", args)['data']
     L = league(T); T = {t['id']: t for t in T}
+
+    nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
+    na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
+    if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
+        print('='*70)
+        print(f"{m['home_name']} - {m['away_name']} (Spiel {mid}, Saison {sid})")
+        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {nh}, {m['away_name']} {na}"
+              f" (noetig: {MIN_SAISONSPIELE}).")
+        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
+        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
+        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
+        return
     def last6(tid):
         d = hole("lastx", {"team_id": tid}, f"lastx_{tid}.json", args)['data']
         return [e for e in d if e['last_x_match_num']==6][0]
@@ -198,6 +214,8 @@ if __name__ == "__main__":
     ap.add_argument("--liste", metavar="DATUM", help="Spiele eines Tages (YYYY-MM-DD) anzeigen")
     ap.add_argument("--markt", type=float, default=MARKT_ANTEIL, help="Anteil Vorab-Quoten (0 bis 1, Standard 0)")
     ap.add_argument("--neu", action="store_true", help="API-Daten neu laden")
+    ap.add_argument("--trotzdem", action="store_true",
+                    help="Sperre bei zu wenigen Saisonspielen umgehen (Ergebnis ist kein Tipp)")
     ap.add_argument("--daten", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "daten"))
     args = ap.parse_args()
     if args.liste: liste(args.liste, args)

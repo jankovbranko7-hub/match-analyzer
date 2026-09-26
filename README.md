@@ -28,6 +28,18 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git); `--
    daraus Heim/Remis/Auswärts, Über/Unter 2,5, Beide treffen und die Top-3-Ergebnisse.
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
 
+### Grenzen
+
+Das Modell ist für **Ligen** gebaut, in denen alle Teams gegen dieselben Gegner spielen.
+Hat ein Team weniger als `MIN_SAISONSPIELE` Spiele, verweigert das Skript die Prognose,
+weil die Dämpfung die Teamstärke dann durch den Liga-Durchschnitt ersetzt (`--trotzdem` erzwingt
+die Ausgabe, taugt aber nicht als Tipp).
+
+Für **Länderspiele ist das Modell ungeeignet**, auch bei ausreichender Spielzahl: Es vergleicht
+rohe Form-Durchschnitte ohne Korrektur für die Stärke der Gegner. Am 26.09.2026 wich es bei zehn
+Länderspielen im Schnitt 17 Prozentpunkte vom Markt ab und gab für San Marino gegen Finnland
+35 % Heimsieg aus (Markt: 3 %).
+
 ### Gewichte
 
 Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
@@ -44,6 +56,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
+| `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
 
 Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optimiert** – so gewollt.
 Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,

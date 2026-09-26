@@ -36,6 +36,23 @@ Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`)
 Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
 für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
 
+### Länderspiele und Saisonstart: keine Prognose
+
+`analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`
+Saisonspiele hat. Das ist kein Fehler, sondern eine Sperre: Darunter ersetzt die Dämpfung die
+Teamstärke praktisch komplett durch den Liga-Durchschnitt, und das Modell liefert für jedes Spiel
+fast dieselben Zahlen (Remis rund 29 %).
+
+**Länderspiele (Nations League, Qualifikation, Turniere) werden grundsätzlich nicht getippt** –
+auch dann nicht, wenn genug Spiele vorliegen. Das Modell vergleicht rohe Form-Durchschnitte, ohne
+zu berücksichtigen, **gegen wen** gespielt wurde. In einer Liga spielen alle Teams gegen dieselben
+Gegner, bei Nationalmannschaften nicht. Gemessen am 26.09.2026 lag das Modell bei zehn
+Länderspielen im Schnitt 17 Prozentpunkte neben dem Markt (San Marino 35 % statt 3 %,
+Slowakei 45 % statt 82 %).
+
+Fragt der Nutzer nach einem Länderspiel: **das offen sagen, keinen Tipp abgeben**, und erklären,
+woran es liegt. Keine geschätzten Zahlen als Ersatz liefern.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
