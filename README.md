@@ -30,6 +30,9 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git); `--
 
 ### Grenzen
 
+Die bekannten Schwachstellen stehen vollständig in [`SOLLBRUCHSTELLEN.md`](SOLLBRUCHSTELLEN.md).
+Kurzfassung:
+
 Das Modell ist für **Ligen** gebaut, in denen alle Teams gegen dieselben Gegner spielen.
 Hat ein Team weniger als `MIN_SAISONSPIELE` Spiele, verweigert das Skript die Prognose,
 weil die Dämpfung die Teamstärke dann durch den Liga-Durchschnitt ersetzt (`--trotzdem` erzwingt

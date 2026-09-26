@@ -36,6 +36,12 @@ Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`)
 Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
 für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
 
+### Sollbruchstellen
+
+`SOLLBRUCHSTELLEN.md` listet die bekannten Schwachstellen von Modell und Ablauf.
+**Vor der Analyse überfliegen.** Was dort als `OFFEN` steht, kann eine Prognose verfälschen,
+ohne dass man es der Ausgabe ansieht.
+
 ### Länderspiele und Saisonstart: keine Prognose
 
 `analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`
