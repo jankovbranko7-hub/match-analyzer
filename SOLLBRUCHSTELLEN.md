@@ -50,7 +50,7 @@ Das Risiko liegt zwischen Tagen, nicht innerhalb eines Tages.
 
 ---
 
-## 4. Bester Tipp: Wahrscheinlichkeit oder Preis — OFFEN
+## 4. Bester Tipp: Wahrscheinlichkeit oder Preis — GELÖST
 
 **Was passiert:** `CLAUDE.md` sagt „Value ist Nebensache", in der Praxis entscheidet der Preis
 aber in engen Fällen, welche Wette benannt wird. Beides zugleich geht nicht.
@@ -73,7 +73,17 @@ Immer gleich, ignoriert aber, dass eine 58-%-Wette bei 1,57 auf Dauer Geld verli
 **Variante B:** Bester Tipp = beste Wette aus Wahrscheinlichkeit und Preis.
 Näher am Wetten, hängt aber an Quoten, die sich bewegen.
 
-**Zu entscheiden vom Nutzer.** Bis dahin: die gewählte Variante in der Antwort benennen.
+**Entschieden am 26.09.2026: Variante A.** Der beste Tipp ist immer die Wette mit der höchsten
+Wahrscheinlichkeit, der Preis entscheidet nicht mit.
+
+Damit trägt der **Value-Satz** die Wettentscheidung: Weil der Tipp den Preis ignoriert, benennt er
+nur, was am wahrscheinlichsten ist. Ob sich die Wette zu dieser Quote lohnt, muss der Value-Satz
+unmissverständlich sagen. Erst beides zusammen ergibt eine Empfehlung.
+
+**Was Variante A kostet:** Sie benennt regelmäßig Wetten, die zum verfügbaren Preis auf Dauer Geld
+verlieren. Die drei Morgentipps vom 26.09.2026 (BTTS bei 1,55 / 1,71 / 1,70 gegen faire
+1,75 / 1,77 / 1,79) gingen alle auf, waren rechnerisch aber trotzdem Verlustwetten. Das ist der
+bewusst gewählte Preis für eine Ausgabe, die immer gleich funktioniert.
 
 ---
 
