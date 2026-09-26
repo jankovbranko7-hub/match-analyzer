@@ -28,10 +28,16 @@ def api_key():
     return key
 
 def hole(endpoint, params, datei, args):
-    """Holt eine API-Antwort und speichert sie; vorhandene Dateien werden wiederverwendet."""
+    """Holt eine API-Antwort und speichert sie.
+
+    Zwischengespeicherte Dateien werden bis CACHE_STUNDEN wiederverwendet, danach neu geladen.
+    """
     pfad = os.path.join(args.daten, datei)
     if os.path.exists(pfad) and not args.neu:
-        return json.load(open(pfad))
+        alter_h = (time.time() - os.path.getmtime(pfad)) / 3600
+        if alter_h < CACHE_STUNDEN:
+            return json.load(open(pfad))
+        print(f"  (aktualisiere {datei}, war {alter_h:.1f} h alt)")
     url = f"{BASE}/{endpoint}?" + urllib.parse.urlencode({**params, "key": api_key()})
     with urllib.request.urlopen(url, timeout=60) as r:
         daten = json.load(r)
@@ -73,6 +79,9 @@ DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe 
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
 MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
+CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
+                             # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
+                             # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
                              # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
                              # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
                              # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).

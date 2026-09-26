@@ -32,7 +32,7 @@ ausreichender Spielzahl. Offen sagen statt schätzen.
 
 ---
 
-## 3. Zwischenspeicher läuft nie ab — OFFEN
+## 3. Zwischenspeicher läuft nie ab — GELÖST
 
 **Was passiert:** `analyse/daten/` speichert jede API-Antwort und verwendet sie unbegrenzt weiter.
 Es gibt keine Verfallszeit.
@@ -43,10 +43,12 @@ Es gibt keine Verfallszeit.
   zwischenzeitlich gespielt, ändern sich Stärke und Form — und damit alle fünf
   Wahrscheinlichkeiten. Der beste Tipp kann kippen.
 
-**Zwischenlösung:** `--neu` erzwingt frische Daten. Muss man aber daran denken.
+**Gelöst durch:** `CACHE_STUNDEN = 6` in `analyse/modell.py`. Zwischengespeicherte Antworten
+gelten sechs Stunden, danach lädt das Skript von selbst neu und sagt es in einer Zeile.
+`--neu` erzwingt weiterhin sofort.
 
 **Geprüft am 26.09.2026:** Innerhalb desselben Tages hatte sich keine einzige von 24 Quoten bewegt.
-Das Risiko liegt zwischen Tagen, nicht innerhalb eines Tages.
+Das Risiko lag zwischen Tagen, nicht innerhalb eines Tages – sechs Stunden decken beides ab.
 
 ---
 
