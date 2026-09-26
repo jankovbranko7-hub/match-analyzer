@@ -29,6 +29,18 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    daraus Heim/Remis/Auswärts, Über/Unter 2,5, Beide treffen und die Top-3-Ergebnisse.
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
 
+### Bilanz führen
+
+```bash
+python3 analyse/bilanz.py --merken 8549906 8549907   # Prognosen speichern
+python3 analyse/bilanz.py --auswerten                # Ergebnisse holen, Bilanz ziehen
+```
+
+`analyse/bilanz.json` liegt im Git und sammelt jede Prognose. Die Auswertung vergleicht
+Trefferquote, Kalibrierung und Geld-Saldo mit dem, was das Modell vorhergesagt hat, und prüft
+per z-Test, ob eine Abweichung echt ist oder Zufall. Erst ab rund 190 Spielen ist eine
+Verzerrung von 10 Prozentpunkten überhaupt nachweisbar.
+
 ### Grenzen
 
 Die bekannten Schwachstellen stehen vollständig in [`SOLLBRUCHSTELLEN.md`](SOLLBRUCHSTELLEN.md).
@@ -58,6 +70,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `FORM_DAEMPFUNG_K` | 3 | Dämpfung der Formwerte |
 | `H2H_ANTEIL` | 0,10 | Direkte Duelle auf die Gesamttore |
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
+| `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |

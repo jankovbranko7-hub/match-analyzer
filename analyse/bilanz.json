@@ -1,0 +1,377 @@
+[
+ {
+  "id": 8548331,
+  "liga": 17099,
+  "datum_unix": 1790384400,
+  "heim": "Atlante",
+  "ausw": "Monterrey",
+  "lh": 1.25,
+  "la": 1.5,
+  "p": {
+   "H": 0.308,
+   "D": 0.27,
+   "A": 0.423,
+   "O25": 0.52,
+   "U25": 0.48,
+   "BTTS": 0.564
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.564,
+  "faire_quote": 1.77,
+  "quote": 1.55,
+  "ergebnis": {
+   "h": 4,
+   "a": 2
+  }
+ },
+ {
+  "id": 8548255,
+  "liga": 17099,
+  "datum_unix": 1790391600,
+  "heim": "Tijuana",
+  "ausw": "Atlas",
+  "lh": 1.56,
+  "la": 1.27,
+  "p": {
+   "H": 0.434,
+   "D": 0.265,
+   "A": 0.301,
+   "O25": 0.537,
+   "U25": 0.463,
+   "BTTS": 0.576
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.576,
+  "faire_quote": 1.74,
+  "quote": 1.71,
+  "ergebnis": {
+   "h": 2,
+   "a": 3
+  }
+ },
+ {
+  "id": 8408933,
+  "liga": 16540,
+  "datum_unix": 1790384400,
+  "heim": "El Paso Locomotive",
+  "ausw": "Tulsa Roughnecks",
+  "lh": 1.56,
+  "la": 1.22,
+  "p": {
+   "H": 0.442,
+   "D": 0.266,
+   "A": 0.291,
+   "O25": 0.526,
+   "U25": 0.474,
+   "BTTS": 0.565
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.565,
+  "faire_quote": 1.77,
+  "quote": 1.7,
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
+ },
+ {
+  "id": 8584399,
+  "liga": 17269,
+  "datum_unix": 1790424000,
+  "heim": "Ceuta",
+  "ausw": "Real Sociedad II",
+  "lh": 1.24,
+  "la": 1.4,
+  "p": {
+   "H": 0.324,
+   "D": 0.278,
+   "A": 0.398,
+   "O25": 0.489,
+   "U25": 0.511,
+   "BTTS": 0.542
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.542,
+  "faire_quote": 1.85,
+  "quote": 1.57,
+  "ergebnis": {
+   "h": 3,
+   "a": 1
+  }
+ },
+ {
+  "id": 8584403,
+  "liga": 17269,
+  "datum_unix": 1790432100,
+  "heim": "Granada CF",
+  "ausw": "FC Andorra",
+  "lh": 1.4,
+  "la": 1.4,
+  "p": {
+   "H": 0.366,
+   "D": 0.269,
+   "A": 0.365,
+   "O25": 0.532,
+   "U25": 0.468,
+   "BTTS": 0.577
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.577,
+  "faire_quote": 1.73,
+  "quote": null,
+  "ergebnis": {
+   "h": 2,
+   "a": 3
+  }
+ },
+ {
+  "id": 8584382,
+  "liga": 17269,
+  "datum_unix": 1790440200,
+  "heim": "CD Tenerife",
+  "ausw": "Cádiz",
+  "lh": 1.42,
+  "la": 0.94,
+  "p": {
+   "H": 0.473,
+   "D": 0.286,
+   "A": 0.24,
+   "O25": 0.422,
+   "U25": 0.578,
+   "BTTS": 0.472
+  },
+  "tipp": "U25",
+  "p_tipp": 0.578,
+  "faire_quote": 1.73,
+  "quote": 1.6,
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
+ },
+ {
+  "id": 8584393,
+  "liga": 17269,
+  "datum_unix": 1790440200,
+  "heim": "Celta de Vigo II",
+  "ausw": "CE Sabadell FC",
+  "lh": 1.38,
+  "la": 1.5,
+  "p": {
+   "H": 0.34,
+   "D": 0.265,
+   "A": 0.395,
+   "O25": 0.548,
+   "U25": 0.452,
+   "BTTS": 0.588
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.588,
+  "faire_quote": 1.7,
+  "quote": 1.72,
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
+ },
+ {
+  "id": 8576123,
+  "liga": 17227,
+  "datum_unix": 1790431200,
+  "heim": "Brühl",
+  "ausw": "Paradiso",
+  "lh": 1.88,
+  "la": 1.66,
+  "p": {
+   "H": 0.428,
+   "D": 0.233,
+   "A": 0.339,
+   "O25": 0.686,
+   "U25": 0.314,
+   "BTTS": 0.692
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.692,
+  "faire_quote": 1.45,
+  "quote": 1.37,
+  "ergebnis": {
+   "h": 0,
+   "a": 2
+  }
+ },
+ {
+  "id": 8576126,
+  "liga": 17227,
+  "datum_unix": 1790431200,
+  "heim": "Young Boys II",
+  "ausw": "Basel II",
+  "lh": 2.0,
+  "la": 2.22,
+  "p": {
+   "H": 0.353,
+   "D": 0.209,
+   "A": 0.438,
+   "O25": 0.793,
+   "U25": 0.207,
+   "BTTS": 0.776
+  },
+  "tipp": "O25",
+  "p_tipp": 0.793,
+  "faire_quote": 1.26,
+  "quote": 1.36,
+  "ergebnis": {
+   "h": 0,
+   "a": 2
+  }
+ },
+ {
+  "id": 8576192,
+  "liga": 17227,
+  "datum_unix": 1790436600,
+  "heim": "Lugano II",
+  "ausw": "Cham",
+  "lh": 1.38,
+  "la": 1.73,
+  "p": {
+   "H": 0.3,
+   "D": 0.249,
+   "A": 0.451,
+   "O25": 0.6,
+   "U25": 0.4,
+   "BTTS": 0.622
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.622,
+  "faire_quote": 1.61,
+  "quote": 1.33,
+  "ergebnis": {
+   "h": 0,
+   "a": 1
+  }
+ },
+ {
+  "id": 8549906,
+  "liga": 17110,
+  "datum_unix": 1790445600,
+  "heim": "Roda JC",
+  "ausw": "RKC Waalwijk",
+  "lh": 1.39,
+  "la": 1.49,
+  "p": {
+   "H": 0.347,
+   "D": 0.265,
+   "A": 0.389,
+   "O25": 0.55,
+   "U25": 0.45,
+   "BTTS": 0.59
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.59,
+  "faire_quote": 1.69,
+  "quote": 1.53,
+  "ergebnis": {
+   "h": 2,
+   "a": 0
+  }
+ },
+ {
+  "id": 8549907,
+  "liga": 17110,
+  "datum_unix": 1790445600,
+  "heim": "NAC Breda",
+  "ausw": "Eindhoven",
+  "lh": 2.19,
+  "la": 1.28,
+  "p": {
+   "H": 0.574,
+   "D": 0.215,
+   "A": 0.211,
+   "O25": 0.674,
+   "U25": 0.326,
+   "BTTS": 0.647
+  },
+  "tipp": "O25",
+  "p_tipp": 0.674,
+  "faire_quote": 1.48,
+  "quote": 1.36,
+  "ergebnis": {
+   "h": 4,
+   "a": 2
+  }
+ },
+ {
+  "id": 8550028,
+  "liga": 17110,
+  "datum_unix": 1790445600,
+  "heim": "MVV",
+  "ausw": "Helmond Sport",
+  "lh": 1.65,
+  "la": 1.41,
+  "p": {
+   "H": 0.426,
+   "D": 0.253,
+   "A": 0.321,
+   "O25": 0.591,
+   "U25": 0.409,
+   "BTTS": 0.619
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.619,
+  "faire_quote": 1.62,
+  "quote": 1.5,
+  "ergebnis": {
+   "h": 2,
+   "a": 0
+  }
+ },
+ {
+  "id": 8550136,
+  "liga": 17110,
+  "datum_unix": 1790445600,
+  "heim": "Emmen",
+  "ausw": "Oss",
+  "lh": 2.41,
+  "la": 1.23,
+  "p": {
+   "H": 0.629,
+   "D": 0.196,
+   "A": 0.175,
+   "O25": 0.704,
+   "U25": 0.296,
+   "BTTS": 0.649
+  },
+  "tipp": "O25",
+  "p_tipp": 0.704,
+  "faire_quote": 1.42,
+  "quote": 1.33,
+  "ergebnis": {
+   "h": 1,
+   "a": 0
+  }
+ },
+ {
+  "id": 8550173,
+  "liga": 17110,
+  "datum_unix": 1790445600,
+  "heim": "Volendam",
+  "ausw": "VVV",
+  "lh": 2.12,
+  "la": 1.59,
+  "p": {
+   "H": 0.495,
+   "D": 0.22,
+   "A": 0.285,
+   "O25": 0.716,
+   "U25": 0.284,
+   "BTTS": 0.706
+  },
+  "tipp": "O25",
+  "p_tipp": 0.716,
+  "faire_quote": 1.4,
+  "quote": 1.24,
+  "ergebnis": {
+   "h": 3,
+   "a": 2
+  }
+ }
+]

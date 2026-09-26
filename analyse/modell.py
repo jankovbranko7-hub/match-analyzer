@@ -75,6 +75,10 @@ FORM_DAEMPFUNG_K    = 3      # Form stärker dämpfen: nur 6 Spiele Grundlage.
 H2H_ANTEIL          = 0.10   # Direkte Duelle auf die Gesamttore. Klein, weil
                              # Kader und Trainer wechseln.
 H2H_MAX_JAHRE       = 3      # Duelle älter als 3 Jahre zählen gar nicht.
+H2H_DAEMPFUNG_K     = 3      # Direkte Duelle daempfen: Gewicht = H2H_ANTEIL * n/(n+3), wobei n
+                             # die Zahl der jungen Duelle ist. Ein einzelnes Duell zaehlt damit
+                             # 2,5 %, sechs Duelle 6,7 %. Gleicher Wert wie FORM_DAEMPFUNG_K,
+                             # dieselbe Ueberlegung - nicht an Ergebnissen angepasst.
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
@@ -147,16 +151,33 @@ def league(T):
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
                 xhome=avg('xg_for_avg_home','seasonMatchesPlayed_home'),xaway=avg('xg_for_avg_away','seasonMatchesPlayed_away'))
 
-def h2h_gewicht(m, jahre=H2H_MAX_JAHRE):
-    """Direkte Duelle zählen H2H_ANTEIL, aber nur wenn das letzte Duell nicht zu alt ist."""
-    spiele = m.get('h2h', {}).get('previous_matches_ids') or []
-    if not spiele: return 0.0
-    letztes = max(s['date_unix'] for s in spiele)
-    return H2H_ANTEIL if m['date_unix'] - letztes <= jahre*365*86400 else 0.0
+def h2h_werte(m, jahre=H2H_MAX_JAHRE, k=H2H_DAEMPFUNG_K):
+    """Gewicht und Tor-Schnitt der direkten Duelle, beides nur aus den jungen Duellen.
+
+    Fehler bis 26.09.2026: Die Frische-Prüfung sah nur auf das jüngste Duell, der
+    verwendete Tor-Schnitt (`betting_stats.avg_goals`) umfasste dagegen **alle** Duelle,
+    teils zurück bis 2009. Bei Emmen – Oss flossen so 24 Duelle mit 3,46 Toren ein,
+    während die sechs jungen bei 2,33 lagen. Der Schnitt wird deshalb hier selbst
+    gerechnet, aus denselben Duellen, die auch die Frische-Prüfung bestehen.
+
+    Zweiter Fehler: Das Gewicht war fest, egal ob ein Duell vorlag oder zwanzig.
+    Jetzt wächst es mit der Zahl der jungen Duelle (n/(n+k)) – dieselbe Dämpfung,
+    die das Modell schon bei Teamstärke und Form verwendet.
+    """
+    spiele = (m.get('h2h') or {}).get('previous_matches_ids') or []
+    jung = [s for s in spiele if m['date_unix'] - s['date_unix'] <= jahre*365*86400]
+    if not jung: return 0.0, None
+    schnitt = sum(s['team_a_goals'] + s['team_b_goals'] for s in jung) / len(jung)
+    return H2H_ANTEIL * len(jung) / (len(jung) + k), schnitt
 
 # ---------------------------------------------------------------- Ablauf
 
-def analysiere(mid, args):
+def berechne(mid, args):
+    """Rechnet ein Spiel durch und gibt alle Werte zurueck.
+
+    Trennt die Rechnung von der Ausgabe, damit modell.py und bilanz.py garantiert
+    dieselben Zahlen verwenden. Bei zu wenigen Saisonspielen gesperrt=True.
+    """
     m = hole("match", {"match_id": mid}, f"match_{mid}.json", args)['data']
     sid = m['competition_id']
     T = hole("league-teams", {"season_id": sid, "include": "stats"}, f"teams_{sid}.json", args)['data']
@@ -165,14 +186,8 @@ def analysiere(mid, args):
     nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
     na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
     if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
-        print('='*70)
-        print(f"{m['home_name']} - {m['away_name']} (Spiel {mid}, Saison {sid})")
-        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {nh}, {m['away_name']} {na}"
-              f" (noetig: {MIN_SAISONSPIELE}).")
-        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
-        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
-        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
-        return
+        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
+
     def last6(tid):
         d = hole("lastx", {"team_id": tid}, f"lastx_{tid}.json", args)['data']
         return [e for e in d if e['last_x_match_num']==6][0]
@@ -182,32 +197,48 @@ def analysiere(mid, args):
     b = LIGA_BASIS_XG
     base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
-    h2h_w = h2h_gewicht(m)
+    h2h_w, h2h_tore = h2h_werte(m)
     if h2h_w:
-        tot=lh+la; f=(1-h2h_w)+h2h_w*m['h2h']['betting_stats']['avg_goals']/tot; lh*=f; la*=f
+        tot=lh+la; f=(1-h2h_w)+h2h_w*h2h_tore/tot; lh*=f; la*=f
 
-    mk = None
+    mk = mlh = mla = None
     if quoten_da(m):
         (mlh,mla),mk=market_lambdas(m)
     w = args.markt if mk else 0.0
     flh=(1-w)*lh+w*(mlh if mk else 0); fla=(1-w)*la+w*(mla if mk else 0)
     M=matrix(flh,fla); p=probs(M)
     idx=np.dstack(np.unravel_index(np.argsort(-M.ravel()),M.shape))[0][:3]
+    return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
+                lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
+                M=M, p=p, h2h_w=h2h_w,
+                top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
 
+
+def analysiere(mid, args):
+    r = berechne(mid, args); m = r['match']
+    print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {r['sid']})")
+    if r['gesperrt']:
+        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
+              f" (noetig: {MIN_SAISONSPIELE}).")
+        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
+        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
+        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
+        return
+    L=r['L']; p=r['p']
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
-    print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {sid})")
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
-    print(f' Stärken: Heim Att {ah:.2f} Def {dh:.2f} | Ausw Att {aa:.2f} Def {da:.2f}')
-    print(f' H2H-Gewicht: {h2h_w:.0%}')
-    if mk:
-        print(f' λ Modell {lh:.2f}-{la:.2f} | λ Markt {mlh:.2f}-{mla:.2f} | Markt-Anteil {w:.0%} | final {flh:.2f}-{fla:.2f}')
-        print(' Markt (ohne Marge):', pct(mk))
+    print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
+    print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
+    if r['mk']:
+        print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
+              f" | Markt-Anteil {r['w']:.0%} | final {r['flh']:.2f}-{r['fla']:.2f}")
+        print(' Markt (ohne Marge):', pct(r['mk']))
     else:
-        print(f' λ Modell {lh:.2f}-{la:.2f} (keine vollständigen Vorab-Quoten)')
+        print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
-    print(' Top3:',[(f'{a}:{b}',round(float(M[a,b])*100,1)) for a,b in idx])
+    print(' Top3:',[(e,round(v*100,1)) for e,v in r['top3']])
     print(' Faire Quoten:',{k:round(1/float(v),2) for k,v in p.items()})
-    if mk:
+    if r['mk']:
         print(' FootyStats-Quoten: 1',m['odds_ft_1'],'X',m['odds_ft_x'],'2',m['odds_ft_2'],
               'O2.5',m['odds_ft_over25'],'U2.5',m['odds_ft_under25'],'BTTS',m['odds_btts_yes'])
 

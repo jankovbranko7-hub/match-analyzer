@@ -89,12 +89,31 @@ bewusst gewählte Preis für eine Ausgabe, die immer gleich funktioniert.
 
 ---
 
-## 5. Gewichte sind ungeprüft — BEKANNT, so gewollt
+## 5. Gewichte sind ungeprüft — IN ARBEIT
 
 Die Gewichte in `analyse/modell.py` sind nach Erfahrung gesetzt, nicht an vergangenen Spielen
-optimiert. Sie bleiben fest, damit Analysen vergleichbar sind. Ob sie gut sind, weiß niemand —
-dafür bräuchte es einen Backtest über eine ganze Saison. Der Nutzer hat entschieden, es bei
-Erfahrungswerten zu belassen.
+optimiert. Sie bleiben fest, damit Analysen vergleichbar sind.
+
+**Seit 26.09.2026 gibt es einen Weg, das zu prüfen:** `analyse/bilanz.py` hält jede Prognose fest
+und wertet sie gegen die Ergebnisse aus, mit z-Test gegen den Zufall.
+
+**Erster Stand (15 Spiele, 26.09.2026):**
+
+| | erwartet | tatsächlich | z |
+|---|---|---|---|
+| Tipps getroffen | 9,4 | 9 | −0,22 |
+| Beide treffen | 9,2 | 9 | −0,10 |
+| Über 2,5 | 8,9 | 6 | −1,55 |
+| Heimsiege | 6,2 | 7 | +0,41 |
+| Tore gesamt | 46,7 | 47 | — |
+
+Keine einzige Abweichung ist signifikant. Das Modell lag an diesem Tag **nicht** falsch; die sechs
+Fehltipps sind das, was bei 60-Prozent-Wetten normal ist.
+
+**Wichtig für künftige Fehlersuchen:** Mit 15 Spielen wäre erst eine Verzerrung ab 36
+Prozentpunkten nachweisbar. Für 10 Prozentpunkte braucht es rund 190 Spiele, für 5 rund 750.
+Bis dahin ist jede Anpassung der Gewichte eine Anpassung an Rauschen und macht das Modell
+schlechter, nicht besser.
 
 ---
 
@@ -111,7 +130,7 @@ gegen. Das Modell setzte sie auf Augenhöhe mit Granada. Entweder ist es Pech, d
 
 ---
 
-## 7. Direkte Duelle mit winzigen Stichproben — INHÄRENT
+## 7. Direkte Duelle mit winzigen Stichproben — GELÖST
 
 **Was passiert:** Direkte Duelle gehen mit 10 % in die Gesamttore ein, unabhängig davon, ob es
 zwei oder dreißig Duelle sind.
@@ -119,7 +138,20 @@ zwei oder dreißig Duelle sind.
 **Wie es sich zeigte:** Celta Fortuna gegen Sabadell hat zwei Duelle mit 4,5 Toren im Schnitt.
 Das hob die Torerwartung um rund 7 % — auf Grundlage von zwei Spielen.
 
-**Umgang:** Bei weniger als etwa fünf Duellen den H2H-Einfluss in der Begründung erwähnen.
+**Zweiter, schwererer Fehler, gefunden am 26.09.2026:** Die Frische-Prüfung sah nur auf das
+**jüngste** Duell, der eingespeiste Tor-Schnitt (`betting_stats.avg_goals`) umfasste dagegen
+**alle** Duelle. Bei Emmen – Oss flossen so 24 Duelle zurück bis 2009 mit 3,46 Toren ein,
+während die sechs jungen bei 2,33 lagen – eine Verzerrung von 1,13 Toren. Bei MVV – Helmond
+waren es 35 Duelle seit 2009.
+
+**Gelöst durch:** `h2h_werte()` rechnet den Schnitt selbst, aus genau den Duellen, die auch die
+Frische-Prüfung bestehen. Das Gewicht wächst zusätzlich mit ihrer Zahl
+(`H2H_ANTEIL * n/(n+H2H_DAEMPFUNG_K)`): ein einzelnes Duell zählt 2,5 % statt 10 %.
+
+**Gemessen an den 15 Spielen vom 26.09.2026:** Rechnung in 12 von 15 Fällen verändert,
+Trefferquote unverändert 9, Log-Likelihood der echten Ergebnisse von −46,28 auf −46,00
+verbessert. Der Fix wurde gemacht, weil die alte Rechnung **falsch** war, nicht weil die
+Messung ihn belegt – dafür sind 15 Spiele zu wenig.
 
 ---
 

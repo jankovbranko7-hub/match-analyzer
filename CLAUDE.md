@@ -36,6 +36,21 @@ Für die Berechnung **`analyse/modell.py`** verwenden (Rechenweg in `README.md`)
 Standard ist ohne Markt-Mix (`--markt 0`). Die übrigen Teamdaten (Form, Schüsse, Zu-Null, Torzeitpunkte usw.)
 für die Begründung zusätzlich aus den gespeicherten API-Antworten in `analyse/daten/` lesen.
 
+### Jede Prognose festhalten
+
+Nach der Analyse **immer** `python3 analyse/bilanz.py --merken <match_id> …` aufrufen.
+Das schreibt Tipp und Wahrscheinlichkeiten nach `analyse/bilanz.json` (liegt im Git).
+`python3 analyse/bilanz.py --auswerten` holt später die Ergebnisse und rechnet Trefferquote,
+Kalibrierung und Geld-Saldo aus.
+
+**Einmal eingetragene Prognosen nie nachträglich ändern** – auch nicht, wenn sich die Teamdaten
+später ändern. Eine korrigierte Aufzeichnung ist wertlos.
+
+Fragt der Nutzer, warum eine Prognose danebenlag: **erst `--auswerten` laufen lassen, dann
+antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 Spielen lässt
+sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist
+eine Abweichung **kein** Grund, an den Gewichten zu drehen.
+
 ### Sollbruchstellen
 
 `SOLLBRUCHSTELLEN.md` listet die bekannten Schwachstellen von Modell und Ablauf.
