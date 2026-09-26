@@ -104,3 +104,10 @@ Der Nutzer schickt **keine Quoten** – er prüft sie selbst beim Buchmacher.
 
 Am Ende eine Übersichtstabelle: `Spiel | Prognose | Bester Tipp`,
 darunter höchstens drei Sätze Gesamteinordnung.
+
+In der Spalte `Prognose` steht der Ausgang mit Prozent, dahinter in Klammern das häufigste
+Einzelergebnis – aber **nie als „Tipp“ bezeichnet**, sondern als `häufigstes Ergebnis 1:1`.
+Das häufigste Einzelergebnis ist keine Empfehlung: Es liegt meist bei 12–14 %, während sich
+der Ausgang aus vielen Ergebnissen summiert. Deshalb kann der beste Tipp „Sieg Auswärts“ sein,
+obwohl oben 1:1 steht. Das ist kein Widerspruch und muss nicht erklärt werden,
+solange die Beschriftung stimmt.
