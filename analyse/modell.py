@@ -156,7 +156,12 @@ def h2h_gewicht(m, jahre=H2H_MAX_JAHRE):
 
 # ---------------------------------------------------------------- Ablauf
 
-def analysiere(mid, args):
+def berechne(mid, args):
+    """Rechnet ein Spiel durch und gibt alle Werte zurueck.
+
+    Trennt die Rechnung von der Ausgabe, damit modell.py und bilanz.py garantiert
+    dieselben Zahlen verwenden. Bei zu wenigen Saisonspielen gesperrt=True.
+    """
     m = hole("match", {"match_id": mid}, f"match_{mid}.json", args)['data']
     sid = m['competition_id']
     T = hole("league-teams", {"season_id": sid, "include": "stats"}, f"teams_{sid}.json", args)['data']
@@ -165,14 +170,8 @@ def analysiere(mid, args):
     nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
     na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
     if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
-        print('='*70)
-        print(f"{m['home_name']} - {m['away_name']} (Spiel {mid}, Saison {sid})")
-        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {nh}, {m['away_name']} {na}"
-              f" (noetig: {MIN_SAISONSPIELE}).")
-        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
-        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
-        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
-        return
+        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
+
     def last6(tid):
         d = hole("lastx", {"team_id": tid}, f"lastx_{tid}.json", args)['data']
         return [e for e in d if e['last_x_match_num']==6][0]
@@ -186,28 +185,44 @@ def analysiere(mid, args):
     if h2h_w:
         tot=lh+la; f=(1-h2h_w)+h2h_w*m['h2h']['betting_stats']['avg_goals']/tot; lh*=f; la*=f
 
-    mk = None
+    mk = mlh = mla = None
     if quoten_da(m):
         (mlh,mla),mk=market_lambdas(m)
     w = args.markt if mk else 0.0
     flh=(1-w)*lh+w*(mlh if mk else 0); fla=(1-w)*la+w*(mla if mk else 0)
     M=matrix(flh,fla); p=probs(M)
     idx=np.dstack(np.unravel_index(np.argsort(-M.ravel()),M.shape))[0][:3]
+    return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
+                lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
+                M=M, p=p, h2h_w=h2h_w,
+                top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
 
+
+def analysiere(mid, args):
+    r = berechne(mid, args); m = r['match']
+    print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {r['sid']})")
+    if r['gesperrt']:
+        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
+              f" (noetig: {MIN_SAISONSPIELE}).")
+        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
+        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
+        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
+        return
+    L=r['L']; p=r['p']
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
-    print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {sid})")
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
-    print(f' Stärken: Heim Att {ah:.2f} Def {dh:.2f} | Ausw Att {aa:.2f} Def {da:.2f}')
-    print(f' H2H-Gewicht: {h2h_w:.0%}')
-    if mk:
-        print(f' λ Modell {lh:.2f}-{la:.2f} | λ Markt {mlh:.2f}-{mla:.2f} | Markt-Anteil {w:.0%} | final {flh:.2f}-{fla:.2f}')
-        print(' Markt (ohne Marge):', pct(mk))
+    print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
+    print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
+    if r['mk']:
+        print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
+              f" | Markt-Anteil {r['w']:.0%} | final {r['flh']:.2f}-{r['fla']:.2f}")
+        print(' Markt (ohne Marge):', pct(r['mk']))
     else:
-        print(f' λ Modell {lh:.2f}-{la:.2f} (keine vollständigen Vorab-Quoten)')
+        print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
-    print(' Top3:',[(f'{a}:{b}',round(float(M[a,b])*100,1)) for a,b in idx])
+    print(' Top3:',[(e,round(v*100,1)) for e,v in r['top3']])
     print(' Faire Quoten:',{k:round(1/float(v),2) for k,v in p.items()})
-    if mk:
+    if r['mk']:
         print(' FootyStats-Quoten: 1',m['odds_ft_1'],'X',m['odds_ft_x'],'2',m['odds_ft_2'],
               'O2.5',m['odds_ft_over25'],'U2.5',m['odds_ft_under25'],'BTTS',m['odds_btts_yes'])
 

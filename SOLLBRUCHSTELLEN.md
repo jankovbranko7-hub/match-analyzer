@@ -89,12 +89,31 @@ bewusst gewählte Preis für eine Ausgabe, die immer gleich funktioniert.
 
 ---
 
-## 5. Gewichte sind ungeprüft — BEKANNT, so gewollt
+## 5. Gewichte sind ungeprüft — IN ARBEIT
 
 Die Gewichte in `analyse/modell.py` sind nach Erfahrung gesetzt, nicht an vergangenen Spielen
-optimiert. Sie bleiben fest, damit Analysen vergleichbar sind. Ob sie gut sind, weiß niemand —
-dafür bräuchte es einen Backtest über eine ganze Saison. Der Nutzer hat entschieden, es bei
-Erfahrungswerten zu belassen.
+optimiert. Sie bleiben fest, damit Analysen vergleichbar sind.
+
+**Seit 26.09.2026 gibt es einen Weg, das zu prüfen:** `analyse/bilanz.py` hält jede Prognose fest
+und wertet sie gegen die Ergebnisse aus, mit z-Test gegen den Zufall.
+
+**Erster Stand (15 Spiele, 26.09.2026):**
+
+| | erwartet | tatsächlich | z |
+|---|---|---|---|
+| Tipps getroffen | 9,4 | 9 | −0,22 |
+| Beide treffen | 9,2 | 9 | −0,10 |
+| Über 2,5 | 8,9 | 6 | −1,55 |
+| Heimsiege | 6,2 | 7 | +0,41 |
+| Tore gesamt | 46,7 | 47 | — |
+
+Keine einzige Abweichung ist signifikant. Das Modell lag an diesem Tag **nicht** falsch; die sechs
+Fehltipps sind das, was bei 60-Prozent-Wetten normal ist.
+
+**Wichtig für künftige Fehlersuchen:** Mit 15 Spielen wäre erst eine Verzerrung ab 36
+Prozentpunkten nachweisbar. Für 10 Prozentpunkte braucht es rund 190 Spiele, für 5 rund 750.
+Bis dahin ist jede Anpassung der Gewichte eine Anpassung an Rauschen und macht das Modell
+schlechter, nicht besser.
 
 ---
 
