@@ -70,6 +70,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `FORM_DAEMPFUNG_K` | 3 | Dämpfung der Formwerte |
 | `H2H_ANTEIL` | 0,10 | Direkte Duelle auf die Gesamttore |
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
+| `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
