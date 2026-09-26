@@ -95,12 +95,35 @@ Regeln zur Vorlage:
 - **Bester Tipp:** klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
 - **Value-Satz:** liegt die FootyStats-Quote unter der fairen Quote, genügt „FootyStats-Quote X,XX,
   also kein Value.“ Liegt sie deutlich darüber, das in einem Satz sagen. Value ist Nebensache.
-- Einschränkungen (dünne Datenlage, Markt sieht es anders, H2H spricht dagegen) gehören
-  **in die Begründung oder den Tipp-Satz**, nicht in eigene Kapitel.
+- Einschränkungen gehören **in die Begründung, den Tipp-Satz oder die drei Sätze unter der
+  Übersichtstabelle** – nie in einen eigenen Absatz, nie in ein eigenes Kapitel.
+  Das gilt **auch für schwere Datenprobleme** (z. B. Saison ohne gespielte Spiele, Modell rechnet
+  überwiegend mit dem Liga-Durchschnitt): ein Satz in der Begründung, mehr nicht.
+- **Die Überschrift ist immer nummeriert**, auch bei einem einzigen Spiel: `## 1. Heim – Auswärts (…)`.
+- **Vor dem ersten Spielblock steht nichts** – kein Vorwort, keine Warnung, keine Einleitung.
+  **Nach der Übersicht steht nichts** außer den drei Sätzen Gesamteinordnung: keine
+  Schlussempfehlung, kein „wenn du heute nur eine Wette spielst“, keine Nachbemerkung.
 
 Der Nutzer schickt **keine Quoten** – er prüft sie selbst beim Buchmacher.
 
-## Mehrere Spiele
+## Übersicht am Ende
 
-Am Ende eine Übersichtstabelle: `Spiel | Prognose | Bester Tipp`,
-darunter höchstens drei Sätze Gesamteinordnung.
+**Immer**, auch bei einem einzigen Spiel, endet die Antwort so:
+
+```
+## Übersicht
+
+| Spiel | Prognose | Bester Tipp |
+|---|---|---|
+| Heim – Auswärts | Heimsieg 47 % (häufigstes Ergebnis 1:1) | Unter 2,5 (58 %, ab 1,73) |
+
+<höchstens drei Sätze Gesamteinordnung – hier gehören Hinweise auf dünne Datenlage,
+fehlenden Value oder ein gemeinsames Muster mehrerer Spiele hin>
+```
+
+In der Spalte `Prognose` steht der Ausgang mit Prozent, dahinter in Klammern das häufigste
+Einzelergebnis – aber **nie als „Tipp“ bezeichnet**, sondern als `häufigstes Ergebnis 1:1`.
+Das häufigste Einzelergebnis ist keine Empfehlung: Es liegt meist bei 12–14 %, während sich
+der Ausgang aus vielen Ergebnissen summiert. Deshalb kann der beste Tipp „Sieg Auswärts“ sein,
+obwohl oben 1:1 steht. Das ist kein Widerspruch und muss nicht erklärt werden,
+solange die Beschriftung stimmt.
