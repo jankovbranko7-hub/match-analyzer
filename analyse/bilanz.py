@@ -26,6 +26,10 @@ WETTEN = {'H': 'Sieg Heim', 'A': 'Sieg Auswärts', 'O25': 'Über 2,5',
 QUOTENFELD = {'H': 'odds_ft_1', 'A': 'odds_ft_2', 'O25': 'odds_ft_over25',
               'U25': 'odds_ft_under25', 'BTTS': 'odds_btts_yes'}
 
+# Spiele mit diesen Status wurden nie gespielt. Sie zaehlen weder als Treffer noch als
+# Fehltipp und duerfen nicht ewig als "offen" stehen bleiben.
+ABGESAGT = ('suspended', 'canceled', 'cancelled', 'postponed', 'abandoned')
+
 
 def laden():
     return json.load(open(BILANZ)) if os.path.exists(BILANZ) else []
@@ -99,17 +103,21 @@ def auswerten(args):
                        argparse.Namespace(daten=args.daten, neu=True))['data']
             if m['status'] == 'complete':
                 e['ergebnis'] = {'h': m['homeGoalCount'], 'a': m['awayGoalCount']}
+            elif m['status'] in ABGESAGT:
+                e['ergebnis'] = {'abgesagt': m['status']}
     speichern(eintraege)
 
-    fertig = [e for e in eintraege if e['ergebnis']]
+    fertig = [e for e in eintraege if e['ergebnis'] and not e['ergebnis'].get('abgesagt')]
+    abgesagt = [e for e in eintraege if e['ergebnis'] and e['ergebnis'].get('abgesagt')]
     if args.liga:
         fertig = [e for e in fertig if e['liga'] == args.liga]
-    offen = len(eintraege) - len([e for e in eintraege if e['ergebnis']])
+    offen = len([e for e in eintraege if e['ergebnis'] is None])
     if not fertig:
         print(f"Noch kein Spiel beendet ({offen} offen).")
         return
 
-    print(f"=== Bilanz über {len(fertig)} beendete Spiele ({offen} noch offen) ===\n")
+    zusatz = f", {len(abgesagt)} abgesagt" if abgesagt else ""
+    print(f"=== Bilanz über {len(fertig)} beendete Spiele ({offen} noch offen{zusatz}) ===\n")
     treffer = sum(getroffen(e['tipp'], e['ergebnis']['h'], e['ergebnis']['a']) for e in fertig)
     zeile("Tipps getroffen", [e['p_tipp'] for e in fertig], treffer)
     for k in ('BTTS', 'O25', 'H', 'A'):
@@ -142,6 +150,9 @@ def auswerten(args):
     d = (1.96 + 0.84) * math.sqrt(0.25 / n) * 100
     print(f"\n  Aussagekraft: Mit {n} Spielen wäre erst eine Verzerrung ab rund"
           f" {d:.0f} Prozentpunkten nachweisbar.")
+    for e in abgesagt:
+        print(f"  Nicht gespielt ({e['ergebnis']['abgesagt']}): {e['heim']} – {e['ausw']}"
+              f" – zählt weder als Treffer noch als Fehltipp.")
     if n < 190:
         print(f"  Für 10 Prozentpunkte braucht es rund 190 Spiele, für 5 rund 750."
               f" Bis dahin sind Abweichungen kein Grund, die Gewichte anzufassen.")
