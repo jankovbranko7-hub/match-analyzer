@@ -373,5 +373,225 @@
    "h": 3,
    "a": 2
   }
+ },
+ {
+  "id": 8390862,
+  "liga": 16504,
+  "datum_unix": 1790465400,
+  "heim": "Atlanta United FC",
+  "ausw": "New York City",
+  "lh": 1.424,
+  "la": 1.224,
+  "p": {
+   "H": 0.4079,
+   "D": 0.2768,
+   "A": 0.3153,
+   "O25": 0.4936,
+   "U25": 0.5064,
+   "BTTS": 0.5447
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5447,
+  "faire_quote": 1.84,
+  "quote": 1.55,
+  "ergebnis": null
+ },
+ {
+  "id": 8391080,
+  "liga": 16504,
+  "datum_unix": 1790465400,
+  "heim": "Montreal Impact",
+  "ausw": "FC Cincinnati",
+  "lh": 1.905,
+  "la": 1.561,
+  "p": {
+   "H": 0.4537,
+   "D": 0.2338,
+   "A": 0.3125,
+   "O25": 0.6729,
+   "U25": 0.3271,
+   "BTTS": 0.679
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.679,
+  "faire_quote": 1.47,
+  "quote": 1.36,
+  "ergebnis": null
+ },
+ {
+  "id": 8391081,
+  "liga": 16504,
+  "datum_unix": 1790465400,
+  "heim": "Philadelphia Union",
+  "ausw": "Orlando City",
+  "lh": 2.613,
+  "la": 1.089,
+  "p": {
+   "H": 0.6951,
+   "D": 0.1736,
+   "A": 0.1313,
+   "O25": 0.7149,
+   "U25": 0.2851,
+   "BTTS": 0.6198
+  },
+  "tipp": "O25",
+  "p_tipp": 0.7149,
+  "faire_quote": 1.4,
+  "quote": 1.25,
+  "ergebnis": null
+ },
+ {
+  "id": 8390893,
+  "liga": 16504,
+  "datum_unix": 1790465400,
+  "heim": "New York RB",
+  "ausw": "St. Louis City",
+  "lh": 1.455,
+  "la": 1.55,
+  "p": {
+   "H": 0.3501,
+   "D": 0.2581,
+   "A": 0.3918,
+   "O25": 0.5779,
+   "U25": 0.4221,
+   "BTTS": 0.6117
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6117,
+  "faire_quote": 1.63,
+  "quote": 1.4,
+  "ergebnis": null
+ },
+ {
+  "id": 8390891,
+  "liga": 16504,
+  "datum_unix": 1790465400,
+  "heim": "Charlotte",
+  "ausw": "Chicago Fire",
+  "lh": 1.771,
+  "la": 1.559,
+  "p": {
+   "H": 0.4236,
+   "D": 0.2417,
+   "A": 0.3347,
+   "O25": 0.6464,
+   "U25": 0.3536,
+   "BTTS": 0.6621
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6621,
+  "faire_quote": 1.51,
+  "quote": 1.36,
+  "ergebnis": null
+ },
+ {
+  "id": 8390892,
+  "liga": 16504,
+  "datum_unix": 1790469000,
+  "heim": "FC Dallas",
+  "ausw": "Los Angeles FC",
+  "lh": 1.563,
+  "la": 1.492,
+  "p": {
+   "H": 0.3876,
+   "D": 0.2557,
+   "A": 0.3566,
+   "O25": 0.5889,
+   "U25": 0.4111,
+   "BTTS": 0.6203
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6203,
+  "faire_quote": 1.61,
+  "quote": 1.47,
+  "ergebnis": null
+ },
+ {
+  "id": 8391101,
+  "liga": 16504,
+  "datum_unix": 1790469000,
+  "heim": "Seattle Sounders",
+  "ausw": "Minnesota United",
+  "lh": 1.839,
+  "la": 1.622,
+  "p": {
+   "H": 0.4268,
+   "D": 0.236,
+   "A": 0.3372,
+   "O25": 0.6719,
+   "U25": 0.3281,
+   "BTTS": 0.6815
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6815,
+  "faire_quote": 1.47,
+  "quote": 1.44,
+  "ergebnis": null
+ },
+ {
+  "id": 8390863,
+  "liga": 16504,
+  "datum_unix": 1790469000,
+  "heim": "Houston Dynamo",
+  "ausw": "Sporting KC",
+  "lh": 1.788,
+  "la": 1.081,
+  "p": {
+   "H": 0.5316,
+   "D": 0.2477,
+   "A": 0.2206,
+   "O25": 0.5466,
+   "U25": 0.4534,
+   "BTTS": 0.5577
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5577,
+  "faire_quote": 1.79,
+  "quote": 1.62,
+  "ergebnis": null
+ },
+ {
+  "id": 8390794,
+  "liga": 16504,
+  "datum_unix": 1790469000,
+  "heim": "Nashville SC",
+  "ausw": "Toronto",
+  "lh": 1.941,
+  "la": 1.031,
+  "p": {
+   "H": 0.5786,
+   "D": 0.2322,
+   "A": 0.1892,
+   "O25": 0.5705,
+   "U25": 0.4295,
+   "BTTS": 0.5581
+  },
+  "tipp": "H",
+  "p_tipp": 0.5786,
+  "faire_quote": 1.73,
+  "quote": 1.33,
+  "ergebnis": null
+ },
+ {
+  "id": 8390846,
+  "liga": 16504,
+  "datum_unix": 1790469000,
+  "heim": "Austin",
+  "ausw": "San Diego",
+  "lh": 1.472,
+  "la": 1.25,
+  "p": {
+   "H": 0.4148,
+   "D": 0.2721,
+   "A": 0.3131,
+   "O25": 0.5117,
+   "U25": 0.4883,
+   "BTTS": 0.5582
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5582,
+  "faire_quote": 1.79,
+  "quote": 1.47,
+  "ergebnis": null
  }
 ]
