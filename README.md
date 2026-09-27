@@ -113,3 +113,23 @@ python3 analyse/live.py --spiel "A – B" --minute 62 --stand 1:1 --druck heim \
 python3 analyse/live.py --ergebnis 1 ja     # nach dem Spiel
 python3 analyse/live.py --auswerten
 ```
+
+### Einstellung in GoalSpy (Alerts → Signals)
+
+Drei Signale, gleiche Regeln, nur Zeitfenster und Mindestquote verschieden. Die Mindestquote gilt
+für das **Ende** des Fensters (dort ist sie am höchsten) – so ist sie im ganzen Fenster fair.
+
+| Regel | Wert | Team |
+|---|---|---|
+| Match Time | 55–61 / 62–68 / 69–75 | – |
+| Recent Pressure % | ≥ 65 | Any team |
+| Shots on Target | ≥ 5 | Any team |
+| Shots on Target | ≤ 7 | Combined |
+| Dangerous Attacks | ≥ 40 | Any team |
+| Red Cards | ≤ 0 | Combined |
+| Trends: Goals scored (avg) | ≥ 1.4 | Any team |
+| Trends: Total goals (avg) | ≥ 2.7 | Both teams |
+| Live Odds: Over, 1 more goal, Full match | ≥ 1.65 / 1.90 / 2.34 | – |
+
+Die App kann nicht prüfen, ob Druck, Schüsse und Tore-Schnitt vom selben Team kommen, und
+nicht, wer führt. Das bleibt der Blick aufs Spiel (oder `analyse/live.py`).
