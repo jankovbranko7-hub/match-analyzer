@@ -1019,5 +1019,137 @@
   "faire_quote": 1.61,
   "quote": 1.44,
   "ergebnis": null
+ },
+ {
+  "id": 8390894,
+  "liga": 16504,
+  "datum_unix": 1790550000,
+  "heim": "Columbus Crew",
+  "ausw": "Inter Miami",
+  "lh": 1.516,
+  "la": 1.574,
+  "p": {
+   "H": 0.3605,
+   "D": 0.254,
+   "A": 0.3855,
+   "O25": 0.5967,
+   "U25": 0.4033,
+   "BTTS": 0.6263
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6263,
+  "faire_quote": 1.6,
+  "quote": 1.36,
+  "ergebnis": null
+ },
+ {
+  "id": 8548268,
+  "liga": 17099,
+  "datum_unix": 1790557200,
+  "heim": "León",
+  "ausw": "Juárez",
+  "lh": 2.188,
+  "la": 0.944,
+  "p": {
+   "H": 0.6507,
+   "D": 0.205,
+   "A": 0.1442,
+   "O25": 0.6058,
+   "U25": 0.3942,
+   "BTTS": 0.5488
+  },
+  "tipp": "H",
+  "p_tipp": 0.6507,
+  "faire_quote": 1.54,
+  "quote": 1.55,
+  "ergebnis": null
+ },
+ {
+  "id": 8548270,
+  "liga": 17099,
+  "datum_unix": 1790565000,
+  "heim": "Necaxa",
+  "ausw": "América",
+  "lh": 1.366,
+  "la": 1.872,
+  "p": {
+   "H": 0.2739,
+   "D": 0.2392,
+   "A": 0.4869,
+   "O25": 0.6281,
+   "U25": 0.3719,
+   "BTTS": 0.6374
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6374,
+  "faire_quote": 1.57,
+  "quote": 1.58,
+  "ergebnis": null
+ },
+ {
+  "id": 8544069,
+  "liga": 16614,
+  "datum_unix": 1790550300,
+  "heim": "Fortaleza CEIF",
+  "ausw": "Deportes Tolima",
+  "lh": 1.221,
+  "la": 1.229,
+  "p": {
+   "H": 0.3523,
+   "D": 0.2914,
+   "A": 0.3563,
+   "O25": 0.4433,
+   "U25": 0.5567,
+   "BTTS": 0.5078
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5567,
+  "faire_quote": 1.8,
+  "quote": 1.64,
+  "ergebnis": null
+ },
+ {
+  "id": 8543980,
+  "liga": 16614,
+  "datum_unix": 1790557800,
+  "heim": "Deportivo Cali",
+  "ausw": "Rionegro Águilas",
+  "lh": 1.527,
+  "la": 0.87,
+  "p": {
+   "H": 0.5188,
+   "D": 0.2754,
+   "A": 0.2058,
+   "O25": 0.4295,
+   "U25": 0.5705,
+   "BTTS": 0.4632
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5705,
+  "faire_quote": 1.75,
+  "quote": 1.69,
+  "ergebnis": null
+ },
+ {
+  "id": 8422156,
+  "liga": 16580,
+  "datum_unix": 1790553600,
+  "heim": "Gimnasia Jujuy",
+  "ausw": "San Martín Tucumán",
+  "lh": 1.585,
+  "la": 1.127,
+  "p": {
+   "H": 0.4712,
+   "D": 0.2664,
+   "A": 0.2625,
+   "O25": 0.5094,
+   "U25": 0.4906,
+   "BTTS": 0.5459
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5459,
+  "faire_quote": 1.83,
+  "quote": 1.83,
+  "ergebnis": null
  }
 ]
