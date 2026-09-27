@@ -176,3 +176,53 @@ ab etwa 25 Prozentpunkten das Modell hinterfragen statt den Markt.
 zusätzliche Tabellenspalten, eigene Kapitel für Einschränkungen, fehlende Übersichtstabelle.
 
 **Gelöst durch:** feste Vorlage in `CLAUDE.md` mit Regeln zu Tabelle, Überschrift und Zusätzen.
+
+---
+
+## 10. Datenfenster bei junger Saison — EINGEBAUT, WIRKUNG UNKLAR
+
+**Was es löst:** Am Saisonanfang stehen einem Team 3 bis 6 Spiele zur Verfügung. Die FootyStats-
+Website zeigt daneben ein rollendes Fenster über 7 bis 10 Spiele – deutlich andere Werte.
+Für Manchester United W am 27.09.2026 (4. Spieltag):
+
+| | Website (rollendes Fenster) | API, Saison 17475 |
+|---|---|---|
+| Tore erzielt | 1,4 (Heim) | 0,00 (Heim), 0,67 gesamt |
+| Tore kassiert | 1,6 (Heim) | 5,00 (Heim), 2,67 gesamt |
+| Schüsse / Match | 9,71 | 3,33 |
+| Zu Null | 10 % | 0 % |
+| Spiele | 7 bis 10 | **3** |
+
+**Eingebaut am 27.09.2026 auf Verlangen des Nutzers:** `FENSTER_MIN_SPIELE = 10`. Unter zehn
+Saisonspielen bekommt die Saison das Gewicht `n/10`, die letzten 10 Spiele den Rest; die
+Spielzahl wird auf die des Fensters gehoben. Ab zehn Saisonspielen wirkungslos, reife Ligen
+rechnen unverändert. Kostet keine zusätzliche API-Abfrage (derselbe `lastx`-Aufruf wie die Form).
+
+**Was dabei herauskam – und es spricht gegen die Änderung.** Abstand zwischen Modell und
+margenbereinigtem Markt beim Heimsieg, an den vier Spielen des 27.09.2026 mit Vorab-Quoten:
+
+| Spiel | Markt | ohne Fenster | nur Datenmischung | voll (eingebaut) |
+|---|---|---|---|---|
+| Tottenham W – Villa W | 57,4 % | 67,5 % (10,1) | **58,5 % (1,1)** | 70,9 % (13,5) |
+| Birmingham W – Palace W | 54,8 % | 33,7 % (21,1) | 27,7 % (27,1) | 31,6 % (23,2) |
+| Chelsea W – Arsenal W | 40,5 % | 33,5 % (7,0) | 28,7 % (11,8) | 28,0 % (12,5) |
+| Mallorca – Almería | 44,6 % | 45,6 % (1,0) | 45,5 % (0,9) | 47,1 % (2,5) |
+| **Mittlerer Abstand** | | **9,8** | 10,2 | **12,9** |
+
+Die Datenmischung allein ist etwa neutral. Das **Anheben der Spielzahl** ist der schädliche
+Teil: Es nimmt der Dämpfung ihre Wirkung, und ohne diese Glättung schlägt ein anderer Fehler
+voll durch – der Liga-Durchschnitt selbst. In der WSL lautet er am 4. Spieltag Heim 1,22 Tore
+gegen **Auswärts 1,70**, das Verhältnis ist also verdreht. Weniger Dämpfung heißt: Dieser
+verdrehte Maßstab wirkt stärker. Das erklärt, warum in drei von vier Spielen die
+Auswärtsmannschaft noch weiter nach oben rutscht.
+
+**Vier Spiele beweisen nichts.** Das ist keine Auswertung über viele Spiele (die ist in diesem
+Repo verboten), sondern der Markt-Vergleich nach Sollbruchstelle 8 an den Spielen eines Tages.
+Die Richtung ist einheitlich, die Grundlage winzig.
+
+**Offen und wichtiger als das Fenster:** Der Liga-Durchschnitt wird aus derselben jungen Saison
+gebildet wie alles andere. Solange er verdreht sein kann, bringt eine bessere Teamstatistik
+nichts – sie wird an einem falschen Maßstab gemessen. Wer hier weitermacht, repariert zuerst
+den Maßstab, nicht die Teamwerte.
+
+**Zurückschalten:** `git checkout modell-v1-erfahrungswerte -- analyse/modell.py`

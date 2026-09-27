@@ -78,6 +78,21 @@ vorab festgehaltenen Prognosen gegen ihr Ergebnis. Die zählt, weil sie vorwärt
 **Vor der Analyse überfliegen.** Was dort als `OFFEN` steht, kann eine Prognose verfälschen,
 ohne dass man es der Ausgabe ansieht.
 
+### Datenfenster bei junger Saison
+
+Hat ein Team weniger als `FENSTER_MIN_SPIELE` (10) Saisonspiele, füllt `modell.py` seine
+Statistik mit den **letzten 10 Spielen** auf – Saison `n/10`, Fenster der Rest. Ab zehn
+Saisonspielen wirkungslos. Die Ausgabe zeigt den Anteil in der Zeile `Fenster:`.
+
+**Steht dort ein Anteil, gehört ein Satz in die Begründung**, dass das Modell überwiegend mit
+dem rollenden Fenster über die Saisongrenze rechnet – wie jede andere Einschränkung, in der
+Begründung und nicht in einem eigenen Abschnitt.
+
+Am 27.09.2026 eingebaut. **Die Wirkung ist ungeklärt und eher negativ** – an vier Spielen mit
+Vorab-Quoten wuchs der Abstand zum Markt von 9,8 auf 12,9 Prozentpunkte (Sollbruchstelle 10).
+Zurückschalten auf die Fassung ohne Fenster:
+`git checkout modell-v1-erfahrungswerte -- analyse/modell.py`
+
 ### Länderspiele und Saisonstart: keine Prognose
 
 `analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`

@@ -51,6 +51,23 @@ Hat ein Team weniger als `MIN_SAISONSPIELE` Spiele, verweigert das Skript die Pr
 weil die Dämpfung die Teamstärke dann durch den Liga-Durchschnitt ersetzt (`--trotzdem` erzwingt
 die Ausgabe, taugt aber nicht als Tipp).
 
+### Datenfenster bei junger Saison
+
+Hat ein Team weniger als `FENSTER_MIN_SPIELE` Saisonspiele, wird seine Statistik mit den
+**letzten 10 Spielen** aufgefüllt. Die laufende Saison bekommt das Gewicht `n / 10`, das
+rollende Fenster den Rest – bei 3 Saisonspielen also 30 % Saison und 70 % Fenster.
+Die Spielzahl wird dabei auf die des Fensters gehoben, weil die Werte danach auf 10 Spielen
+stehen und die Dämpfung sonst weiter so glätten würde, als lägen nur drei vor.
+
+Die Daten kommen aus dem `lastx`-Block, den das Skript für die Form ohnehin holt – das
+**kostet keine zusätzliche API-Abfrage**. Ab 10 Saisonspielen passiert nichts mehr, reife
+Ligen rechnen unverändert wie vorher.
+
+Das Fenster läuft über die Saisongrenze und über Pokalspiele. Es ist die dreifache
+Datenmenge, aber nicht dieselbe Grundgesamtheit wie die Liga-Werte, gegen die normiert wird.
+Gemessen an vier Spielen mit Vorab-Quoten hat es den Abstand zum Markt **nicht verkleinert**
+(siehe `SOLLBRUCHSTELLEN.md`, Punkt 10).
+
 Für **Länderspiele ist das Modell ungeeignet**, auch bei ausreichender Spielzahl: Es vergleicht
 rohe Form-Durchschnitte ohne Korrektur für die Stärke der Gegner. Am 26.09.2026 wich es bei zehn
 Länderspielen im Schnitt 17 Prozentpunkte vom Markt ab und gab für San Marino gegen Finnland
@@ -74,6 +91,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
+| `FENSTER_MIN_SPIELE` | 10 | darunter wird die Saison mit den letzten 10 Spielen aufgefüllt |
 | `CACHE_STUNDEN` | 6 | danach werden API-Daten neu geladen |
 
 Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optimiert** – so gewollt.

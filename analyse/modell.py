@@ -83,6 +83,16 @@ DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe 
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
 MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
+FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird die
+                             # Teamstatistik mit den letzten 10 Spielen aufgefuellt (aus
+                             # derselben lastx-Abfrage, die schon fuer die Form geholt wird -
+                             # kostet keine zusaetzliche Abfrage). Grund: Am 4. Spieltag
+                             # stehen 3 Saisonspiele gegen 10 im rollenden Fenster. Das
+                             # Fenster laeuft ueber die Saisongrenze und ueber Pokalspiele,
+                             # ist dafuer aber die dreifache Datenmenge. Ab 10 Saisonspielen
+                             # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
+                             # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
+                             # Vom Nutzer am 27.09.2026 verlangt.
 CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
                              # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
                              # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
@@ -108,6 +118,49 @@ def probs(M):
 def shrink(x,n,k=DAEMPFUNG_K):
     """Zieht Werte aus kleinen Stichproben Richtung Liga-Durchschnitt (1,0)."""
     return (n*x+k*1.0)/(n+k)
+
+# Felder, die beim Auffuellen gemischt werden. Genau die, die strengths() liest.
+FENSTER_FELDER = (
+    'seasonScoredAVG_overall', 'seasonScoredAVG_home', 'seasonScoredAVG_away',
+    'seasonConcededAVG_overall', 'seasonConcededAVG_home', 'seasonConcededAVG_away',
+    'xg_for_avg_overall', 'xg_for_avg_home', 'xg_for_avg_away',
+    'xg_against_avg_overall', 'xg_against_avg_home', 'xg_against_avg_away',
+)
+
+
+def saisonfenster(t, last10, k=FENSTER_MIN_SPIELE):
+    """Fuellt eine junge Saison mit den letzten 10 Spielen auf.
+
+    Hat ein Team erst n < k Saisonspiele, bekommt die Saison das Gewicht n/k und das
+    rollende 10er-Fenster den Rest. Die Spielzahl wird auf die des Fensters gehoben,
+    weil die Werte danach auf 10 Spielen stehen - sonst wuerde die Daempfung die
+    Teamstaerke weiter so stark glaetten, als haette man nur drei Spiele.
+
+    Ab k Saisonspielen passiert nichts: t kommt unveraendert zurueck, Anteil 0.
+
+    Gibt (team_dict, anteil_fenster) zurueck.
+    """
+    s = t['stats']
+    n = s['seasonMatchesPlayed_overall']
+    if n >= k or not last10:
+        return t, 0.0
+    l = last10['stats']
+    n10 = l.get('seasonMatchesPlayed_overall') or 0
+    if n10 <= n:                     # Fenster bringt nichts Neues
+        return t, 0.0
+    w = n / k                        # Gewicht der laufenden Saison
+    f = dict(s)
+    for feld in FENSTER_FELDER:
+        if feld in l and feld in s:
+            f[feld] = w * s[feld] + (1 - w) * l[feld]
+    # Stichprobengroesse auf das Fenster heben - die Werte stehen jetzt auf n10 Spielen
+    for feld, lf in (('seasonMatchesPlayed_overall', 'seasonMatchesPlayed_overall'),
+                     ('seasonMatchesPlayed_home', 'seasonMatchesPlayed_home'),
+                     ('seasonMatchesPlayed_away', 'seasonMatchesPlayed_away')):
+        if lf in l:
+            f[feld] = max(s.get(feld, 0), l[lf])
+    return {'stats': f}, 1 - w
+
 
 def strengths(t, side, L, last6):
     """Angriffs- und Abwehrstärke relativ zum Liga-Durchschnitt (XG_ANTEIL xG, Rest Tore)."""
@@ -188,12 +241,19 @@ def berechne(mid, args):
     if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
         return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
 
-    def last6(tid):
+    def block(tid, num):
+        """Ein lastx-Block. Alle drei (5/6/10) stehen in derselben Antwort,
+        die ausserdem zwischengespeichert ist - kostet keine zusaetzliche Abfrage."""
         d = hole("lastx", {"team_id": tid}, f"lastx_{tid}.json", args)['data']
-        return [e for e in d if e['last_x_match_num']==6][0]
+        tr = [e for e in d if e['last_x_match_num']==num]
+        return tr[0] if tr else None
 
-    ah,dh=strengths(T[m['homeID']],'home',L,last6(m['homeID']))
-    aa,da=strengths(T[m['awayID']],'away',L,last6(m['awayID']))
+    # Junge Saison mit den letzten 10 Spielen auffuellen (ab FENSTER_MIN_SPIELE wirkungslos)
+    th, fen_h = saisonfenster(T[m['homeID']], block(m['homeID'], 10))
+    ta, fen_a = saisonfenster(T[m['awayID']], block(m['awayID'], 10))
+
+    ah,dh=strengths(th,'home',L,block(m['homeID'], 6))
+    aa,da=strengths(ta,'away',L,block(m['awayID'], 6))
     b = LIGA_BASIS_XG
     base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
@@ -209,6 +269,7 @@ def berechne(mid, args):
     M=matrix(flh,fla); p=probs(M)
     idx=np.dstack(np.unravel_index(np.argsort(-M.ravel()),M.shape))[0][:3]
     return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
+                nh=nh, na=na, fen_h=fen_h, fen_a=fen_a,
                 lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
                 M=M, p=p, h2h_w=h2h_w,
                 top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
@@ -228,6 +289,9 @@ def analysiere(mid, args):
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
     print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
+    if r['fen_h'] or r['fen_a']:
+        print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"
+              f" | Ausw {r['fen_a']:.0%} ({r['na']} Saisonspiele)")
     print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
     if r['mk']:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
