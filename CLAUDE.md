@@ -91,7 +91,7 @@ Begründung und nicht in einem eigenen Abschnitt.
 Am 27.09.2026 eingebaut. **Die Wirkung ist ungeklärt und eher negativ** – an vier Spielen mit
 Vorab-Quoten wuchs der Abstand zum Markt von 9,8 auf 12,9 Prozentpunkte (Sollbruchstelle 10).
 Zurückschalten auf die Fassung ohne Fenster:
-`git checkout modell-v1-erfahrungswerte -- analyse/modell.py`
+`git checkout d912a1c -- analyse/modell.py`
 
 ### Länderspiele und Saisonstart: keine Prognose
 

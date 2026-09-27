@@ -51,6 +51,26 @@ Hat ein Team weniger als `MIN_SAISONSPIELE` Spiele, verweigert das Skript die Pr
 weil die Dämpfung die Teamstärke dann durch den Liga-Durchschnitt ersetzt (`--trotzdem` erzwingt
 die Ausgabe, taugt aber nicht als Tipp).
 
+### Modellstände zum Zurückgreifen
+
+Jede Fassung des Rechenwegs bleibt dauerhaft abrufbar. Tags lassen sich aus der
+Cloud-Sitzung nicht auf den Server schieben, deshalb stehen hier die Commit-Kennungen –
+die gelten unbegrenzt.
+
+| Stand | Commit | Was drin ist |
+|---|---|---|
+| **v1 – reine Erfahrungswerte** | `d912a1c` | xG 0,70 / Tore 0,30, ohne Datenfenster. Die 25 Prognosen in `bilanz.json` sind damit entstanden. |
+| **v2 – mit Datenfenster** | `605fab4` | wie v1, plus `FENSTER_MIN_SPIELE = 10`. Ab zehn Saisonspielen identisch mit v1. |
+
+```
+git checkout d912a1c -- analyse/modell.py     # zurück auf v1
+git checkout 605fab4 -- analyse/modell.py     # zurück auf v2
+git diff d912a1c 605fab4 -- analyse/modell.py    # Unterschied ansehen
+```
+
+Die Gewichte selbst sind in beiden Fassungen dieselben. v2 ändert nur, **aus welchem
+Zeitraum** die Teamzahlen stammen, wenn die Saison jünger als zehn Spiele ist.
+
 ### Datenfenster bei junger Saison
 
 Hat ein Team weniger als `FENSTER_MIN_SPIELE` Saisonspiele, wird seine Statistik mit den

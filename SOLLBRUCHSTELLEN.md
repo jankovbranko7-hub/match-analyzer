@@ -225,4 +225,5 @@ gebildet wie alles andere. Solange er verdreht sein kann, bringt eine bessere Te
 nichts – sie wird an einem falschen Maßstab gemessen. Wer hier weitermacht, repariert zuerst
 den Maßstab, nicht die Teamwerte.
 
-**Zurückschalten:** `git checkout modell-v1-erfahrungswerte -- analyse/modell.py`
+**Zurückschalten auf die Fassung ohne Fenster:**
+`git checkout d912a1c -- analyse/modell.py`
