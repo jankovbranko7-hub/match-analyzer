@@ -1,7 +1,7 @@
 """Live-Filter: prüft einen Alarm aus der Live-App, bevor gewettet wird.
 
     python3 analyse/live.py --spiel "Heim – Auswärts" --minute 62 --stand 1:1 \\
-        --druck heim --druck-prozent 68 --sot 6:1 --schnitt 1.6 --quote 1.55
+        --druck heim --druck-prozent 68 --sot 6:1 --da 45:24 --schnitt 1.6 --quote 1.55
     python3 analyse/live.py ... --merken                 # Prüfung festhalten
     python3 analyse/live.py --ergebnis 3 ja              # Alarm 3: fiel danach ein Tor?
     python3 analyse/live.py --auswerten                  # Bilanz aller Signale
@@ -33,6 +33,9 @@ MINUTE_BIS        = 75     # übrig. Danach bleibt zu wenig Restzeit für eine f
 DRUCK_MIN         = 65     # Pressure Recent % des Druck-Teams. 60 lässt zu viel Ballgeschiebe durch.
 SOT_TEAM_MIN      = 5      # Schüsse aufs Tor des Druck-Teams.
 SOT_GEGNER_MAX    = 2      # Schüsse aufs Tor des Gegners: das Spiel muss einseitig sein.
+DA_ANTEIL_MIN     = 60     # Anteil des Druck-Teams an allen Dangerous Attacks, in %.
+                           # Schüsse sind wenige Ereignisse und schwanken, Dangerous Attacks
+                           # zeigen über das ganze Spiel, ob die Überlegenheit echt ist.
 SCHNITT_MIN       = 1.4    # Saison-Tore pro Spiel des Druck-Teams. Schüsse ohne Abschluss-
                            # qualität bringen nichts (siehe SOLLBRUCHSTELLEN.md, Punkt 6).
 RUECKSTAND_MAX    = 1      # Das Druck-Team darf nicht führen und höchstens 1 Tor zurückliegen.
@@ -55,9 +58,12 @@ def tor_chance(minute, liga_schnitt):
 def pruefen(a):
     h, g = (int(x) for x in a.stand.split(':'))
     sh, sg = (int(x) for x in a.sot.split(':'))
+    dh, dg = (int(x) for x in a.da.split(':'))
     eigen, gegner = (h, g) if a.druck == 'heim' else (g, h)
     sot_e, sot_g = (sh, sg) if a.druck == 'heim' else (sg, sh)
     rueck = gegner - eigen
+    da_e = dh if a.druck == 'heim' else dg
+    da_anteil = 100 * da_e / max(1, dh + dg)
 
     p = tor_chance(a.minute, a.liga_schnitt)
     fair = 1 / p
@@ -67,6 +73,8 @@ def pruefen(a):
         (f"Druck ≥ {DRUCK_MIN} %", a.druck_prozent >= DRUCK_MIN, f"{a.druck_prozent:g} %"),
         (f"Schüsse aufs Tor ≥ {SOT_TEAM_MIN}", sot_e >= SOT_TEAM_MIN, str(sot_e)),
         (f"Gegner Schüsse aufs Tor ≤ {SOT_GEGNER_MAX}", sot_g <= SOT_GEGNER_MAX, str(sot_g)),
+        (f"Dangerous Attacks ≥ {DA_ANTEIL_MIN} %", da_anteil >= DA_ANTEIL_MIN,
+         f"{da_anteil:.0f} % ({a.da})"),
         (f"Tore-Schnitt ≥ {SCHNITT_MIN}".replace('.', ','), a.schnitt >= SCHNITT_MIN,
          f"{a.schnitt:.2f}".replace('.', ',')),
         (f"führt nicht, max. {RUECKSTAND_MAX} Tor hinten", 0 <= rueck <= RUECKSTAND_MAX,
@@ -106,7 +114,7 @@ def merken(a, r):
     nr = max((x['nr'] for x in e), default=0) + 1
     e.append(dict(nr=nr, zeit=datetime.now().isoformat(timespec='minutes'), spiel=a.spiel,
                   minute=a.minute, stand=a.stand, druck=a.druck, druck_prozent=a.druck_prozent,
-                  sot=a.sot, schnitt=a.schnitt, liga_schnitt=a.liga_schnitt, quote=a.quote,
+                  sot=a.sot, da=a.da, schnitt=a.schnitt, liga_schnitt=a.liga_schnitt, quote=a.quote,
                   p=round(r['p'], 4), fair=round(r['fair'], 2), signal=r['signal'],
                   ergebnis=None))
     speichern(e)
@@ -156,6 +164,7 @@ if __name__ == '__main__':
     ap.add_argument('--druck', choices=['heim', 'auswaerts'], help='Team mit dem Druck')
     ap.add_argument('--druck-prozent', type=float, help='Pressure Recent %% dieses Teams')
     ap.add_argument('--sot', help='Schüsse aufs Tor Heim:Auswärts, z. B. 6:1')
+    ap.add_argument('--da', help='Dangerous Attacks Heim:Auswärts, z. B. 24:45')
     ap.add_argument('--schnitt', type=float, help='Saison-Tore pro Spiel des Druck-Teams')
     ap.add_argument('--liga-schnitt', type=float, default=2.7, help='Tore pro Spiel der Liga')
     ap.add_argument('--quote', type=float, help='Live-Quote für Über (Stand + 0,5)')
@@ -169,7 +178,7 @@ if __name__ == '__main__':
     elif a.ergebnis:
         ergebnis(int(a.ergebnis[0]), a.ergebnis[1])
     else:
-        fehlt = [n for n in ('minute', 'stand', 'druck', 'druck_prozent', 'sot', 'schnitt')
+        fehlt = [n for n in ('minute', 'stand', 'druck', 'druck_prozent', 'sot', 'da', 'schnitt')
                  if getattr(a, n) is None]
         if fehlt:
             ap.error("es fehlt: " + ", ".join('--' + n.replace('_', '-') for n in fehlt))

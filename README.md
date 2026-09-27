@@ -91,6 +91,7 @@ Prüft einen Alarm aus der Live-App, bevor gewettet wird. Die Wette ist immer �
 | Minute | 55–75 |
 | Pressure Recent % des Druck-Teams | ≥ 65 |
 | Schüsse aufs Tor Druck-Team / Gegner | ≥ 5 / ≤ 2 |
+| Anteil an den Dangerous Attacks | ≥ 60 % |
 | Saison-Tore pro Spiel des Druck-Teams | ≥ 1,4 |
 | Spielstand aus Sicht des Druck-Teams | führt nicht, höchstens 1 Tor hinten |
 | Live-Quote | ≥ faire Quote × 1,05 |
@@ -101,7 +102,7 @@ Erfahrungswerte, nicht getestet.
 
 ```bash
 python3 analyse/live.py --spiel "A – B" --minute 62 --stand 1:1 --druck heim \
-    --druck-prozent 68 --sot 6:1 --schnitt 1.6 --quote 1.55 --merken
+    --druck-prozent 68 --sot 6:1 --da 45:24 --schnitt 1.6 --quote 1.55 --merken
 python3 analyse/live.py --ergebnis 1 ja     # nach dem Spiel
 python3 analyse/live.py --auswerten
 ```
