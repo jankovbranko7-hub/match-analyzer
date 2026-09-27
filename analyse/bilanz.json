@@ -394,7 +394,10 @@
   "p_tipp": 0.5447,
   "faire_quote": 1.84,
   "quote": 1.55,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 2,
+   "a": 2
+  }
  },
  {
   "id": 8391080,
@@ -416,7 +419,10 @@
   "p_tipp": 0.679,
   "faire_quote": 1.47,
   "quote": 1.36,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 1
+  }
  },
  {
   "id": 8391081,
@@ -438,7 +444,10 @@
   "p_tipp": 0.7149,
   "faire_quote": 1.4,
   "quote": 1.25,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 4,
+   "a": 2
+  }
  },
  {
   "id": 8390893,
@@ -482,7 +491,10 @@
   "p_tipp": 0.6621,
   "faire_quote": 1.51,
   "quote": 1.36,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 1
+  }
  },
  {
   "id": 8390892,
@@ -504,7 +516,10 @@
   "p_tipp": 0.6203,
   "faire_quote": 1.61,
   "quote": 1.47,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 0
+  }
  },
  {
   "id": 8391101,
@@ -526,7 +541,10 @@
   "p_tipp": 0.6815,
   "faire_quote": 1.47,
   "quote": 1.44,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 1
+  }
  },
  {
   "id": 8390863,
@@ -548,7 +566,10 @@
   "p_tipp": 0.5577,
   "faire_quote": 1.79,
   "quote": 1.62,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 2
+  }
  },
  {
   "id": 8390794,
@@ -570,7 +591,10 @@
   "p_tipp": 0.5786,
   "faire_quote": 1.73,
   "quote": 1.33,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 2,
+   "a": 0
+  }
  },
  {
   "id": 8390846,
@@ -592,6 +616,9 @@
   "p_tipp": 0.5582,
   "faire_quote": 1.79,
   "quote": 1.47,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 3
+  }
  }
 ]
