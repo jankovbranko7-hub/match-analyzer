@@ -191,5 +191,14 @@ Spielstand und lässt nur Wetten über der fairen Quote zu. Die Schwellen sind E
 nicht getestet. Jeder Alarm wird mit `--merken` festgehalten. Unter 50 Signalen ist keine
 Aussage über den Filter möglich, und bis dahin werden die Schwellen nicht nachgestellt.
 
-**Unsicherster Wert:** `DRUCK_FAKTOR = 1,20`. Ist Druck in Wahrheit weniger wert, sind alle
-fairen Quoten zu niedrig und der Filter verliert auf Dauer Geld, obwohl er richtig filtert.
+**Nach Recherche geändert (28.09.2026, auf Verlangen des Nutzers):** `DRUCK_FAKTOR` von 1,20
+auf 1,00. Laufende Schussdaten verbessern die Prognose über die Marktquote hinaus kaum
+(arXiv 2605.16066), der Druck steckt also schon im Preis. Mit 1,20 lagen alle Mindestquoten
+rund 10 % zu niedrig. Die Rückstand-Grenze entfällt (zurückliegende Teams treffen häufiger,
+nicht seltener), dazu kommt die Regel „keine Rote Karte beim Druck-Team“ (Torchance ×0,47).
+
+**Weiter unbelegt:** Druck ≥ 65 %, Schüsse, Dangerous Attacks, Minute, Tore-Schnitt. GoalSpy
+veröffentlicht nicht, wie „Recent Pressure“ berechnet wird.
+
+**Grundsätzlich:** Weil der Markt Druck und Schüsse schon einpreist, liegt ein Vorteil fast nur
+in Alarmen, bei denen die Quote über der fairen liegt. Das wird selten sein.

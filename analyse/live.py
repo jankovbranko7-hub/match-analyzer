@@ -38,13 +38,22 @@ DA_ANTEIL_MIN     = 60     # Anteil des Druck-Teams an allen Dangerous Attacks, 
                            # zeigen über das ganze Spiel, ob die Überlegenheit echt ist.
 SCHNITT_MIN       = 1.4    # Saison-Tore pro Spiel des Druck-Teams. Schüsse ohne Abschluss-
                            # qualität bringen nichts (siehe SOLLBRUCHSTELLEN.md, Punkt 6).
-RUECKSTAND_MAX    = 1      # Das Druck-Team darf nicht führen und höchstens 1 Tor zurückliegen.
-                           # Wer führt, nimmt Tempo raus. Wer 2 hinten liegt, gibt oft auf.
+                           # Das Druck-Team darf nicht führen (Regel fest im Code, kein Wert).
+                           # Beleg: Führende Teams treffen in der 2. Halbzeit seltener (Odds Ratio
+                           # 0,80 bei 1 Tor Führung, 38.882 Tore Top-5-Ligen 2017-2025, John Knight)
+                           # und schießen weniger (46,6 % Schussanteil bei +1, StatsBomb). Ihre
+                           # Druck- und Schusswerte überzeichnen also die aktuelle Gefahr.
+                           # Rückstand ist unbegrenzt: Zurückliegende Teams treffen häufiger als
+                           # Teams bei Gleichstand, auch bei 2+ Toren (Knight). Die frühere Grenze
+                           # von 1 Tor ("wer 2 hinten liegt, gibt auf") war nicht belegt.
 NACHSPIELZEIT     = 5      # Minuten Nachspielzeit in der 2. Halbzeit.
-ANTEIL_2HZ        = 0.55   # Anteil der Tore, die in der 2. Halbzeit fallen.
-DRUCK_FAKTOR      = 1.20   # So viel höher als normal liegt die Torrate bei klarem Druck.
-                           # Der unsicherste Wert hier. Ist er zu hoch, sind alle fairen
-                           # Quoten zu niedrig und jede Wette verliert auf Dauer.
+ANTEIL_2HZ        = 0.55   # Anteil der Tore, die in der 2. Halbzeit fallen (45 % / 55 %,
+                           # übliche Verteilung, z. B. PlayThePercentage).
+DRUCK_FAKTOR      = 1.00   # Kein Aufschlag für Druck. Bis 28.09.2026 stand hier 1,20 nach Gefühl.
+                           # Beleg: Laufende Schussdaten (Post-Shot-xG) verbessern die Prognose
+                           # über die Marktquote hinaus kaum (RPS 0,1353 -> 0,1347, 140 Premier-
+                           # League-Spiele, arXiv 2605.16066). Die Quote enthält den Druck also
+                           # schon. Wer 20 % draufrechnet, hält zu niedrige Quoten für fair.
 MARGE             = 1.05   # Gewettet wird erst 5 % über der fairen Quote.
 
 
@@ -62,6 +71,8 @@ def pruefen(a):
     eigen, gegner = (h, g) if a.druck == 'heim' else (g, h)
     sot_e, sot_g = (sh, sg) if a.druck == 'heim' else (sg, sh)
     rueck = gegner - eigen
+    rh, rg = (int(x) for x in a.rot.split(':'))
+    rot_e = rh if a.druck == 'heim' else rg
     da_e = dh if a.druck == 'heim' else dg
     da_anteil = 100 * da_e / max(1, dh + dg)
 
@@ -77,7 +88,9 @@ def pruefen(a):
          f"{da_anteil:.0f} % ({a.da})"),
         (f"Tore-Schnitt ≥ {SCHNITT_MIN}".replace('.', ','), a.schnitt >= SCHNITT_MIN,
          f"{a.schnitt:.2f}".replace('.', ',')),
-        (f"führt nicht, max. {RUECKSTAND_MAX} Tor hinten", 0 <= rueck <= RUECKSTAND_MAX,
+        # Eigene Rote Karte senkt die Torchance in der 2. Halbzeit auf das 0,47-Fache (Knight).
+        ("Druck-Team ohne Rote Karte", rot_e == 0, str(rot_e)),
+        ("Druck-Team führt nicht", rueck >= 0,
          f"{eigen}:{gegner} aus Sicht Druck-Team"),
     ]
     if a.quote:
@@ -114,7 +127,7 @@ def merken(a, r):
     nr = max((x['nr'] for x in e), default=0) + 1
     e.append(dict(nr=nr, zeit=datetime.now().isoformat(timespec='minutes'), spiel=a.spiel,
                   minute=a.minute, stand=a.stand, druck=a.druck, druck_prozent=a.druck_prozent,
-                  sot=a.sot, da=a.da, schnitt=a.schnitt, liga_schnitt=a.liga_schnitt, quote=a.quote,
+                  sot=a.sot, da=a.da, rot=a.rot, schnitt=a.schnitt, liga_schnitt=a.liga_schnitt, quote=a.quote,
                   p=round(r['p'], 4), fair=round(r['fair'], 2), signal=r['signal'],
                   ergebnis=None))
     speichern(e)
@@ -165,6 +178,7 @@ if __name__ == '__main__':
     ap.add_argument('--druck-prozent', type=float, help='Pressure Recent %% dieses Teams')
     ap.add_argument('--sot', help='Schüsse aufs Tor Heim:Auswärts, z. B. 6:1')
     ap.add_argument('--da', help='Dangerous Attacks Heim:Auswärts, z. B. 24:45')
+    ap.add_argument('--rot', default='0:0', help='Rote Karten Heim:Auswärts (Standard 0:0)')
     ap.add_argument('--schnitt', type=float, help='Saison-Tore pro Spiel des Druck-Teams')
     ap.add_argument('--liga-schnitt', type=float, default=2.7, help='Tore pro Spiel der Liga')
     ap.add_argument('--quote', type=float, help='Live-Quote für Über (Stand + 0,5)')

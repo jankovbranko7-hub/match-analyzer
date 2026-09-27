@@ -93,12 +93,19 @@ Prüft einen Alarm aus der Live-App, bevor gewettet wird. Die Wette ist immer �
 | Schüsse aufs Tor Druck-Team / Gegner | ≥ 5 / ≤ 2 |
 | Anteil an den Dangerous Attacks | ≥ 60 % |
 | Saison-Tore pro Spiel des Druck-Teams | ≥ 1,4 |
-| Spielstand aus Sicht des Druck-Teams | führt nicht, höchstens 1 Tor hinten |
+| Rote Karte Druck-Team | keine |
+| Spielstand aus Sicht des Druck-Teams | führt nicht |
 | Live-Quote | ≥ faire Quote × 1,05 |
 
-Faire Quote: Poisson mit der Torrate der 2. Halbzeit (Liga-Schnitt × 0,55 über 50 Minuten)
-× 1,20 für den Druck, über die Restzeit bis zur 95. Minute. Alle Schwellen sind
-Erfahrungswerte, nicht getestet.
+Faire Quote: Poisson mit der Torrate der 2. Halbzeit (Liga-Schnitt × 0,55 über 50 Minuten),
+über die Restzeit bis zur 95. Minute, **ohne Aufschlag für Druck** – laufende Schussdaten
+verbessern die Prognose über die Marktquote hinaus kaum (arXiv 2605.16066).
+
+Mit Studien belegt: Spielstand-Regel, Rote Karte, fehlender Druck-Aufschlag, 55 % der Tore in
+der 2. Halbzeit (Quellen als Kommentar in `analyse/live.py`). **Nicht belegt**, weil GoalSpy die
+Berechnung von „Recent Pressure“ nicht veröffentlicht und es zu Dangerous Attacks keine Studien
+gibt: Minute, Druck ≥ 65 %, Schüsse aufs Tor, Dangerous Attacks, Tore-Schnitt. Diese Schwellen
+sind Erfahrungswerte und lassen sich nur über die festgehaltenen Alarme messen.
 
 ```bash
 python3 analyse/live.py --spiel "A – B" --minute 62 --stand 1:1 --druck heim \
