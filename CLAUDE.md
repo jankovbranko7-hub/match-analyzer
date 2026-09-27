@@ -51,17 +51,26 @@ antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 
 sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist
 eine Abweichung **kein** Grund, an den Gewichten zu drehen.
 
-### Backtest: messen, nicht ändern
+### Kein Backtest, keine Massenauswertung
 
-`analyse/backtest.py` misst das bestehende Modell an historischen Spielen (walk-forward:
-vor jedem Spiel nur die vorherigen Spieltage). Es ruft dieselben Funktionen auf wie eine
-echte Prognose und liest dieselben Konstanten.
+**Es gibt in diesem Repo kein Backtest-Werkzeug, und es wird keines gebaut.**
+Am 27.09.2026 vom Nutzer ausdrücklich entfernt und verboten.
 
-**Das Skript ändert das Modell nicht und darf es nie tun.** Über zehntausende Spiele lassen
-sich immer Gewichte finden, die rückwärts besser aussehen und vorwärts schlechter sind.
-Ein Backtest-Ergebnis ist **allein kein Grund**, eine Konstante anzufassen – dafür gilt
-unverändert die Regel unter „Gewichte nicht verändern": nur auf ausdrückliches Verlangen
-des Nutzers. Befunde werden **berichtet**, nicht umgesetzt.
+Nicht erlaubt ist damit:
+- ein Skript, das das Modell über historische Spieltage laufen lässt (walk-forward oder anders),
+- Massenabfragen wie `league-matches` über ganze Saisons, um Trefferquoten oder Renditen zu rechnen,
+- Kalibrierungskurven, Korrekturfaktoren, AUC, Margenstatistiken, Tippregel-Vergleiche,
+- **jede Zahl aus solchen Auswertungen als Begründung** – nicht für eine Konstante, nicht für
+  die Wahl des Tipps, nicht für eine Spielempfehlung, nicht als „gemessen über N Spiele".
+
+**Der Grund:** Über zehntausende Spiele lässt sich immer etwas finden, das rückwärts besser
+aussieht und vorwärts schlechter ist. Am 27.09.2026 ist genau das passiert: Aus einer solchen
+Auswertung wurde eine Regel gebaut, die zwei Wettarten sperrte und damit bei 20 von 21 Spielen
+„nicht spielen" ergab. Die Gewichte sind **Erfahrungswerte** – sie werden nicht an Vergangenheit
+gemessen, weil sie nicht daraus stammen.
+
+**Die einzige erlaubte Rückschau** ist `analyse/bilanz.py --auswerten`: die eigenen,
+vorab festgehaltenen Prognosen gegen ihr Ergebnis. Die zählt, weil sie vorwärts entstanden ist.
 
 ### Sollbruchstellen
 
