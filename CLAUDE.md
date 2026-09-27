@@ -183,7 +183,7 @@ Regeln zur Vorlage:
   überwiegend mit dem Liga-Durchschnitt): ein Satz in der Begründung, mehr nicht.
 - **Die Überschrift ist immer nummeriert**, auch bei einem einzigen Spiel: `## 1. Heim – Auswärts (…)`.
 - **Vor dem ersten Spielblock steht nichts** – kein Vorwort, keine Warnung, keine Einleitung.
-  **Nach der Übersicht steht nichts** außer den drei Sätzen Gesamteinordnung: keine
+  **Nach der Übersicht steht nur die Rangliste** (siehe unten) und sonst nichts: keine
   Schlussempfehlung, kein „wenn du heute nur eine Wette spielst“, keine Nachbemerkung.
 
 Der Nutzer schickt **keine Quoten** – er prüft sie selbst beim Buchmacher.
@@ -209,3 +209,51 @@ Das häufigste Einzelergebnis ist keine Empfehlung: Es liegt meist bei 12–14 %
 der Ausgang aus vielen Ergebnissen summiert. Deshalb kann der beste Tipp „Sieg Auswärts“ sein,
 obwohl oben 1:1 steht. Das ist kein Widerspruch und muss nicht erklärt werden,
 solange die Beschriftung stimmt.
+
+## Rangliste am Ende
+
+**Nach der Übersicht folgt immer die Rangliste**, auch bei einem einzigen Spiel. Sie ist der
+letzte Abschnitt der Antwort, danach steht nichts mehr.
+
+```
+## Rangliste
+
+| # | Spiel | Tipp | Wahrscheinlichkeit | Faire Quote | FootyStats | gegen fair |
+|---|---|---|---|---|---|---|
+| 1 | Real Oviedo – Gijón | Unter 2,5 | 67,6 % | 1,48 | 1,54 | **+4 %** |
+| 2 | Mallorca – Almería | Unter 2,5 | 62,4 % | 1,60 | 1,91 | **+19 %** |
+| 3 | Eibar – Las Palmas | Beide treffen | 57,6 % | 1,74 | 1,69 | −3 % |
+| 4 | Chelsea W – Arsenal W | Beide treffen | 53,3 % | 1,88 | 1,53 | −19 % |
+```
+
+Regeln zur Rangliste:
+- **Sortiert nach `gegen fair`, absteigend** – die Spiele mit Value oben, die teuersten unten.
+  Nicht nach Wahrscheinlichkeit sortieren; die steht als eigene Spalte daneben.
+- `gegen fair` = FootyStats-Quote geteilt durch faire Quote, minus 1, in Prozent.
+  Werte über null **fett**. Fehlt die Quote, steht `–` und die Zeile kommt ans Ende.
+- Genau diese sieben Spalten, keine weiteren. Jedes analysierte Spiel bekommt eine Zeile,
+  auch ein bereits angepfiffenes.
+- Darunter **ein Satz**: wie viele Spiele überhaupt Value haben und welches oben steht.
+  Gibt es keines, genau das sagen.
+
+### Kombiwetten
+
+Fragt der Nutzer nach einer Kombination oder schickt er einen Wettschein, gilt:
+**Die Marge multipliziert sich mit jedem Leg.** `Gesamtmarge = 1 − (1 − Einzelmarge)^n`.
+
+| Legs bei 7 % Marge je Leg | Gesamtmarge |
+|---|---|
+| 1 | 7,0 % |
+| 3 | 19,6 % |
+| 5 | 30,4 % |
+| 7 | 39,8 % |
+| 10 | 51,6 % |
+
+Belegt am Wettschein des Nutzers vom 27.09.2026: sieben Legs, **sechs davon gewonnen**, Schein
+trotzdem verloren. Dieselben sieben Tipps einzeln gespielt hätten aus 10 € Einsatz 16,64 €
+gemacht (+66 %), als Kombi wurden es 0 €. Die sechs vorab gewetteten Legs hatten im Schnitt
+5,3 % Marge je Leg – zusammen **27,8 %**, faire Kombiquote 25,15 gegen gezahlte 18,17.
+
+**Das offen sagen, ohne zu moralisieren:** Die Zahl der Legs ist der größere Hebel als die
+Spielauswahl. Keine Kombination empfehlen und keine zusammenstellen – die Rangliste liefern
+und den Nutzer entscheiden lassen.
