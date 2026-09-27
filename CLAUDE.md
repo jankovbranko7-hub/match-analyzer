@@ -51,6 +51,18 @@ antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 
 sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist
 eine Abweichung **kein** Grund, an den Gewichten zu drehen.
 
+### Backtest: messen, nicht ändern
+
+`analyse/backtest.py` misst das bestehende Modell an historischen Spielen (walk-forward:
+vor jedem Spiel nur die vorherigen Spieltage). Es ruft dieselben Funktionen auf wie eine
+echte Prognose und liest dieselben Konstanten.
+
+**Das Skript ändert das Modell nicht und darf es nie tun.** Über zehntausende Spiele lassen
+sich immer Gewichte finden, die rückwärts besser aussehen und vorwärts schlechter sind.
+Ein Backtest-Ergebnis ist **allein kein Grund**, eine Konstante anzufassen – dafür gilt
+unverändert die Regel unter „Gewichte nicht verändern": nur auf ausdrückliches Verlangen
+des Nutzers. Befunde werden **berichtet**, nicht umgesetzt.
+
 ### Sollbruchstellen
 
 `SOLLBRUCHSTELLEN.md` listet die bekannten Schwachstellen von Modell und Ablauf.
