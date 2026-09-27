@@ -202,3 +202,32 @@ veröffentlicht nicht, wie „Recent Pressure“ berechnet wird.
 
 **Grundsätzlich:** Weil der Markt Druck und Schüsse schon einpreist, liegt ein Vorteil fast nur
 in Alarmen, bei denen die Quote über der fairen liegt. Das wird selten sein.
+
+---
+
+## 11. Wie Live-Wetten funktionieren — RECHERCHE 28.09.2026
+
+Grundlage für jede Änderung am Live-Filter. Quellen in der Antwort vom 28.09.2026.
+
+- **Gleiche Daten wie der Buchmacher.** Live-Quoten rechnet ein Algorithmus aus Datenfeeds
+  (Sportradar, Genius Sports). „Dangerous Attacks“ ist eine Kategorie genau dieser Feeds.
+  GoalSpy zeigt also nichts, was der Buchmacher nicht schon eingepreist hat.
+- **Höhere Marge live.** Branchenangaben: 4–6 % vor dem Spiel, 9–13 % live im Fußball. Die
+  Live-Quote liegt also meist deutlich unter der fairen. Value-Alarme sind selten.
+- **Belegte Schwächen der Live-Märkte liegen bei Toren, nicht bei Druck.** Märkte reagieren
+  bis etwa 5 Minuten nach einem Tor verzerrt (Choi & Hui 2014), unterschätzen einen Außenseiter,
+  der spät in Führung geht (Angelini, De Angelis, Singleton 2022). Beides betrifft den Sieg-Markt.
+  Für Druck-Filter auf „noch ein Tor“ gibt es keine Studie, die einen Vorteil zeigt.
+- **Wer gewinnt, wird begrenzt.** Kaunitz, Zhong, Kreiner (2017): Strategie war mit echtem Geld
+  profitabel, die Konten wurden danach eingeschränkt. Buchmacher profilieren Konten auch nach
+  Wettzeitpunkt und Nähe zu Quotenbewegungen.
+- **Verzögerung.** Live-Wetten werden mit einigen Sekunden Verzögerung angenommen, bei gefährlichen
+  Szenen wird der Markt gesperrt. Ändert sich die Quote in der Zeit, wird die Wette abgelehnt oder
+  neu angeboten.
+- **Der einzige belegte Gewinn** (arXiv 2605.16066: 4,5 % Rendite über 17.458 Wetten) kam von einem
+  vollen Modell, kalibriert an Börsenquoten, gegen die Betfair-Börse – nicht von einem Filter
+  gegen einen normalen Buchmacher.
+
+**Folge für den Filter:** Er bleibt ein Messversuch. Entscheidend ist allein, ob die tatsächlich
+angenommene Quote beim eigenen Buchmacher über der fairen liegt. Die Quote in GoalSpy kann von
+einem anderen Anbieter stammen.
