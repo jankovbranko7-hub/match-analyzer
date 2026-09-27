@@ -86,6 +86,13 @@ Slowakei 45 % statt 82 %).
 Fragt der Nutzer nach einem Länderspiel: **das offen sagen, keinen Tipp abgeben**, und erklären,
 woran es liegt. Keine geschätzten Zahlen als Ersatz liefern.
 
+### Live-Alarme
+
+Schickt der Nutzer einen Alarm aus der Live-App, ihn mit `python3 analyse/live.py … --merken`
+prüfen und das Ergebnis ohne die Spielvorlage wiedergeben: Signal ja/nein, welche Regel scheitert,
+faire Quote. Die Schwellen oben in `analyse/live.py` sind Erfahrungswerte und werden wie die
+Modellgewichte nur auf ausdrückliches Verlangen geändert.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).

@@ -80,3 +80,28 @@ Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optim
 Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,
 Begründung im Code danebenschreiben und diese Tabelle nachziehen.
 Nicht nachträglich an einzelne Spielausgänge anpassen.
+
+## Live-Filter: `analyse/live.py`
+
+Prüft einen Alarm aus der Live-App, bevor gewettet wird. Die Wette ist immer „noch ein Tor“
+(Über aktueller Stand + 0,5). Alle Bedingungen müssen für **dasselbe** Team gelten:
+
+| Regel | Schwelle |
+|---|---|
+| Minute | 55–75 |
+| Pressure Recent % des Druck-Teams | ≥ 65 |
+| Schüsse aufs Tor Druck-Team / Gegner | ≥ 5 / ≤ 2 |
+| Saison-Tore pro Spiel des Druck-Teams | ≥ 1,4 |
+| Spielstand aus Sicht des Druck-Teams | führt nicht, höchstens 1 Tor hinten |
+| Live-Quote | ≥ faire Quote × 1,05 |
+
+Faire Quote: Poisson mit der Torrate der 2. Halbzeit (Liga-Schnitt × 0,55 über 50 Minuten)
+× 1,20 für den Druck, über die Restzeit bis zur 95. Minute. Alle Schwellen sind
+Erfahrungswerte, nicht getestet.
+
+```bash
+python3 analyse/live.py --spiel "A – B" --minute 62 --stand 1:1 --druck heim \
+    --druck-prozent 68 --sot 6:1 --schnitt 1.6 --quote 1.55 --merken
+python3 analyse/live.py --ergebnis 1 ja     # nach dem Spiel
+python3 analyse/live.py --auswerten
+```

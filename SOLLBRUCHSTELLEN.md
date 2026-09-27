@@ -176,3 +176,20 @@ ab etwa 25 Prozentpunkten das Modell hinterfragen statt den Markt.
 zusätzliche Tabellenspalten, eigene Kapitel für Einschränkungen, fehlende Übersichtstabelle.
 
 **Gelöst durch:** feste Vorlage in `CLAUDE.md` mit Regeln zu Tabelle, Überschrift und Zusätzen.
+
+---
+
+## 10. Live-Filter — IN ARBEIT
+
+**Was passiert war:** Der erste Live-Filter in der App (Minute 37–67, Druck ≥ 60 %,
+Schüsse aufs Tor ≥ 5 und kombiniert ≤ 7, Tore-Schnitt ≥ 1,3) lieferte am 27.09.2026
+zehn Alarme, alle zehn Fehlsignale. Die App prüft jede Regel einzeln: Druck, Schüsse und
+Tore-Schnitt konnten von verschiedenen Teams kommen, und den Spielstand prüfte sie gar nicht.
+
+**Umgang:** `analyse/live.py` prüft alle Bedingungen für dasselbe Team, prüft den
+Spielstand und lässt nur Wetten über der fairen Quote zu. Die Schwellen sind Erfahrungswerte,
+nicht getestet. Jeder Alarm wird mit `--merken` festgehalten. Unter 50 Signalen ist keine
+Aussage über den Filter möglich, und bis dahin werden die Schwellen nicht nachgestellt.
+
+**Unsicherster Wert:** `DRUCK_FAKTOR = 1,20`. Ist Druck in Wahrheit weniger wert, sind alle
+fairen Quoten zu niedrig und der Filter verliert auf Dauer Geld, obwohl er richtig filtert.
