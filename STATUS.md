@@ -15,8 +15,22 @@ die Frage „warum lag die Prognose daneben" zwingend zuerst ausführen.**
 
 ## Modellstand
 
-**Eingefroren.** Letzte Änderung am Rechenweg: Datenfenster (`FENSTER_MIN_SPIELE = 10`)
-am 27.09.2026. Keine Schuss-Komponente – besprochen, gemessen, **nicht eingebaut**.
+**Eingefroren.** Letzte und einzige Änderung am Rechenweg: Datenfenster
+(`FENSTER_MIN_SPIELE = 10`) am 27.09.2026.
+
+**Wie es dazu kam – die Schüsse waren der Auslöser.** Der Nutzer schickte Screenshots seiner
+FootyStats-Seite. Dort standen für Manchester United W **9,71 Schüsse pro Spiel**, die API
+lieferte für dieselbe Saison **3,33** – fast das Dreifache, dazu 1,4 gegen 0,00 Heimtore und
+10 % gegen 0 % Zu-Null. Das war der Beweis, dass Website und API **verschiedene
+Grundgesamtheiten** zeigen: die Seite ein rollendes Fenster über 7 bis 10 Spiele, die API nur
+die drei Spiele der laufenden Saison. Daraus entstand das Datenfenster (`SOLLBRUCHSTELLEN.md`
+Punkt 10).
+
+**Eine Schuss-Komponente selbst wurde geprüft und nicht eingebaut.** Zwei Gründe: FootyStats
+liefert 18 Schuss-Felder, alle für das eigene Team – **kein einziges für gegnerische Schüsse**,
+also ließe sich nur der Angriff stützen, die Abwehr nicht. Und durchgerechnet änderte
+`SCHUSS_ANTEIL` von 0,15 bis 0,80 **bei keinem von 21 Tipps** den besten Tipp. `SCHUSS_ANTEIL`
+existiert im Code nicht.
 
 | Konstante | Wert |
 |---|---|

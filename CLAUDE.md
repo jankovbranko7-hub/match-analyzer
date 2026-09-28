@@ -114,8 +114,18 @@ woran es liegt. Keine geschätzten Zahlen als Ersatz liefern.
 
 **Der Nutzer hat am 28.09.2026 festgelegt: Das Modell bleibt, wie es ist.** Die letzte und
 einzige Änderung am Rechenweg war das **Datenfenster** (`FENSTER_MIN_SPIELE = 10`) vom
-27.09.2026. Es gibt **keine** Schuss-Komponente – `SCHUSS_ANTEIL` wurde besprochen, gemessen
-(sie hätte bei keinem von 21 Spielen den Tipp geändert) und **nicht eingebaut**.
+27.09.2026.
+
+**Ausgelöst hat es der Schuss-Vergleich aus den Screenshots des Nutzers:** Website 9,71 Schüsse
+pro Spiel gegen 3,33 aus der API, bei demselben Team in derselben Saison. Das deckte auf, dass
+die Seite ein rollendes 7-bis-10-Spiele-Fenster zeigt und die API nur die laufende Saison –
+der Anlass für das Datenfenster. Wer das Thema „Schüsse" ansprechen hört, muss diesen
+Zusammenhang kennen und darf ihn nicht als erledigt abtun.
+
+**Eine Schuss-Komponente selbst gibt es nicht.** `SCHUSS_ANTEIL` wurde geprüft und **nicht
+eingebaut**: FootyStats liefert 18 Schuss-Felder, alle für das eigene Team und keines für
+gegnerische Schüsse – die Abwehrseite ließe sich gar nicht bauen –, und von 0,15 bis 0,80
+hätte der Anteil bei **keinem von 21 Spielen** den Tipp geändert.
 
 Ab hier keine Änderung am Rechenweg mehr ohne ausdrückliche neue Anweisung – auch nicht auf
 eigenen Vorschlag hin.
