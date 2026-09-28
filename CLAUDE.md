@@ -218,23 +218,46 @@ letzte Abschnitt der Antwort, danach steht nichts mehr.
 ```
 ## Rangliste
 
-| # | Spiel | Tipp | Wahrscheinlichkeit | Faire Quote | FootyStats | gegen fair |
-|---|---|---|---|---|---|---|
-| 1 | Real Oviedo – Gijón | Unter 2,5 | 67,6 % | 1,48 | 1,54 | **+4 %** |
-| 2 | Mallorca – Almería | Unter 2,5 | 62,4 % | 1,60 | 1,91 | **+19 %** |
-| 3 | Eibar – Las Palmas | Beide treffen | 57,6 % | 1,74 | 1,69 | −3 % |
-| 4 | Chelsea W – Arsenal W | Beide treffen | 53,3 % | 1,88 | 1,53 | −19 % |
+| # | Spiel | Tipp | Wahrsch. | Faire Quote | FootyStats | gegen fair | Abstand Markt | Fenster |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Bor – Metalac | Unter 2,5 | 57,7 % | 1,73 | 1,80 | **+4 %** | +3 Pkt | 0 % |
+| 2 | Leganés – Castellón | Unter 2,5 | 53,4 % | 1,87 | 1,93 | **+3 %** | +5 Pkt | 40 % |
+| — | **unsichere Datenlage, Preis zählt hier nicht** | | | | | | | |
+| 3 | Žilina II – Humenné | Sieg Heim | 55,7 % | 1,79 | 2,00 | +12 % | **+12 Pkt** | 10 % |
+| 4 | Marko – Panthrakikos | Unter 2,5 | 62,4 % | 1,60 | 1,71 | +7 % | **+9 Pkt** | **70 %** |
 ```
 
 Regeln zur Rangliste:
-- **Sortiert nach `gegen fair`, absteigend** – die Spiele mit Value oben, die teuersten unten.
-  Nicht nach Wahrscheinlichkeit sortieren; die steht als eigene Spalte daneben.
-- `gegen fair` = FootyStats-Quote geteilt durch faire Quote, minus 1, in Prozent.
-  Werte über null **fett**. Fehlt die Quote, steht `–` und die Zeile kommt ans Ende.
-- Genau diese sieben Spalten, keine weiteren. Jedes analysierte Spiel bekommt eine Zeile,
+- **Genau diese neun Spalten**, keine weiteren. Jedes analysierte Spiel bekommt eine Zeile,
   auch ein bereits angepfiffenes.
-- Darunter **ein Satz**: wie viele Spiele überhaupt Value haben und welches oben steht.
-  Gibt es keines, genau das sagen.
+- `gegen fair` = FootyStats-Quote geteilt durch faire Quote, minus 1, in Prozent.
+  Fehlt die Quote, steht `–`.
+- `Abstand Markt` = Modell-Wahrscheinlichkeit minus margenbereinigte Marktwahrscheinlichkeit
+  beim getippten Ausgang, in Prozentpunkten. `modell.py` gibt die Zahl direkt aus
+  (Zeile `Abstand zum Markt beim Tipp`). Ist sie nicht berechenbar, steht `–` und das
+  Spiel gilt als unsicher.
+- `Fenster` = der größere der beiden Anteile aus der Zeile `Fenster:`, sonst 0 %.
+
+**Die Liste hat zwei Blöcke, und diese Trennung ist wichtiger als die Sortierung:**
+
+1. **Oben, belastbar:** `Abstand Markt` höchstens 8 Punkte **und** `Fenster` höchstens 50 %.
+   Innerhalb des Blocks nach `gegen fair` absteigend, Werte über null **fett**.
+2. Dann eine Trennzeile `| — | **unsichere Datenlage, Preis zählt hier nicht** | …`.
+3. **Unten:** alles andere, ebenfalls nach `gegen fair` sortiert, aber die Value-Werte
+   **nicht fett** – der Auslöser (`Abstand Markt` oder `Fenster`) wird fett gesetzt.
+
+**Warum das so sein muss (Fehler vom 28.09.2026):** `gegen fair` ist *meine Schätzung minus
+Marktpreis*. Ist die Schätzung verrauscht, misst die Spalte nicht Value, sondern **das eigene
+Rauschen** – und weil Rauschen nach oben wie nach unten streut, landen ausgerechnet die
+unsichersten Spiele bevorzugt oben. Am 28.09. standen die drei Legs mit dem größten
+Marktabstand (12, 10 und 10 Punkte) auf den Plätzen 1 bis 3 der Rangliste. Der Nutzer hat
+danach gefragt, warum ein Spiel, das im Text als „bestbezahlt und zugleich unsicherst"
+bezeichnet war, trotzdem oben stand. Die Antwort: Die Warnung stand in Prosa, die Sortierung
+in der Tabelle – **und die Tabelle entscheidet**.
+
+Darunter **ein Satz**: wie viele Spiele im oberen Block Value haben und welches oben steht.
+Gibt es keines, genau das sagen. Steht ein Spiel unten, weil der Markt stark widerspricht,
+gehört **ein Halbsatz** dazu, dass dort der Buchmacher mehr weiß als das Modell.
 
 ### Kombiwetten
 

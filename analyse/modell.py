@@ -300,6 +300,20 @@ def analysiere(mid, args):
     else:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
+    if r['mk']:
+        # Abstand zum Markt: Warnsignal, keine Rechengroesse. Weicht das Modell beim
+        # besten Tipp stark vom Markt ab, ist der scheinbare Value meist eigenes Rauschen
+        # und nicht Value - der Buchmacher weiss mehr (Regel in CLAUDE.md, Rangliste).
+        tipp = max(('H','A','O25','U25','BTTS'), key=lambda w: p[w])
+        ab = {w: (float(p[w])-float(r['mk'][w]))*100 for w in ('H','A','O25','BTTS')
+              if w in r['mk']}
+        if 'O25' in ab: ab['U25'] = -ab['O25']
+        d = ab.get(tipp)
+        if d is not None:
+            warn = '  <-- ueber 8 Punkte, Rangliste ans Ende' if abs(d) > 8 else ''
+            print(f" Abstand zum Markt beim Tipp {tipp}: {d:+.1f} Punkte{warn}")
+        else:
+            print(f" Abstand zum Markt beim Tipp {tipp}: nicht berechenbar (Markt fuehrt ihn nicht)")
     print(' Top3:',[(e,round(v*100,1)) for e,v in r['top3']])
     print(' Faire Quoten:',{k:round(1/float(v),2) for k,v in p.items()})
     if r['mk']:
