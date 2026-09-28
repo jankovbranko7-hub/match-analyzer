@@ -110,6 +110,16 @@ Slowakei 45 % statt 82 %).
 Fragt der Nutzer nach einem Länderspiel: **das offen sagen, keinen Tipp abgeben**, und erklären,
 woran es liegt. Keine geschätzten Zahlen als Ersatz liefern.
 
+### Modellstand eingefroren
+
+**Der Nutzer hat am 28.09.2026 festgelegt: Das Modell bleibt, wie es ist.** Die letzte und
+einzige Änderung am Rechenweg war das **Datenfenster** (`FENSTER_MIN_SPIELE = 10`) vom
+27.09.2026. Es gibt **keine** Schuss-Komponente – `SCHUSS_ANTEIL` wurde besprochen, gemessen
+(sie hätte bei keinem von 21 Spielen den Tipp geändert) und **nicht eingebaut**.
+
+Ab hier keine Änderung am Rechenweg mehr ohne ausdrückliche neue Anweisung – auch nicht auf
+eigenen Vorschlag hin.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
@@ -121,6 +131,30 @@ das wäre Anpassung im Nachhinein und macht alle früheren Prognosen unvergleich
 die Begründung danebenschreiben und die Tabelle im `README.md` nachziehen.
 
 In der Antwort einmal kurz sagen, dass die Gewichte gesetzte Erfahrungswerte sind und nicht getestet wurden.
+
+### Jedes Spiel zwei- bis dreimal prüfen
+
+**Vom Nutzer am 28.09.2026 verlangt.** Bevor der beste Tipp feststeht, wird jedes Spiel
+mindestens zweimal durchgesehen, bei Auffälligkeiten dreimal. Die Rechnung selbst ist
+deterministisch – ein zweiter Lauf liefert dieselben Zahlen. Geprüft werden deshalb die
+**Eingaben und die Plausibilität**, nicht die Arithmetik:
+
+**Durchgang 1 – rechnen.** `modell.py` laufen lassen, Zahlen notieren.
+
+**Durchgang 2 – Eingaben prüfen.** Stimmen Liga, Saison-ID, Spieltag und die beiden Teams?
+Passt die Zeile `Fenster:` zur erwarteten Spielzahl? Sind einzelne Werte unplausibel –
+0,00 Tore zu Hause, xG unter 0,6, über 3,0 Tore pro Spiel, eine Teamstärke unter 0,70 oder
+über 1,40? Solche Werte kommen fast immer aus zu wenigen Spielen oder aus einem veralteten
+Zwischenspeicher. Im Zweifel mit `--neu` neu laden und vergleichen.
+
+**Durchgang 3 – gegen den Markt halten.** Die Zeile `Abstand zum Markt beim Tipp` ansehen.
+Über 8 Punkte heißt: noch einmal in die Teamdaten schauen und **benennen, woher die Differenz
+kommt**. Findest du keinen Grund in den Daten, ist es Rauschen – dann gehört das Spiel in den
+unteren Block der Rangliste und der Satz dazu in die Begründung.
+
+**Erst danach steht der beste Tipp fest.** Bei den fünf Wetten mit weniger als zwei
+Prozentpunkten Abstand zueinander immer den dritten Durchgang machen – dort entscheidet
+die Datengrundlage, nicht die dritte Nachkommastelle.
 
 ## Methode
 
@@ -266,42 +300,32 @@ Fragt er danach, stellst du eine zusammen – nach dem Modell und den Erfahrungs
 mit klarer Begründung je Leg. Keine Rückfrage, kein Ausweichen auf „das entscheidest du".
 Die Entscheidung zu setzen bleibt seine; die Auswahl ist deine Arbeit.
 
-**Zwei Schritte, niemals einer.** Das ist die wichtigste Regel dieses Abschnitts.
+**Die Auswahl macht das Modell, nicht der Preis.** Ein Leg wird ausgewählt nach
+Wahrscheinlichkeit, Datenlage und Abstand zum Markt – also nach denselben Maßstäben wie der
+obere Block der Rangliste. **Ein Leg wird nie gestrichen, nur weil die Quote gerade schlechter
+steht.** Quoten wandern ständig, mal hoch, mal runter; das ändert nichts daran, ob das Modell
+das Spiel richtig gerechnet hat.
+
+**Zwei Schritte, aber der zweite streicht nichts:**
 
 1. **Vorschlag:** Legs benennen, je Leg die **faire Mindestquote**, dazu Kombiquote,
    Trefferchance und Marge – gerechnet mit den FootyStats-Werten, ausdrücklich als
-   *vorläufig* gekennzeichnet.
-2. **Der Nutzer schickt die echten Buchmacherquoten.** Erst dann wird neu gerechnet und
-   der Schein bestätigt oder gekürzt. **Ein Schein gilt nie als fertig, solange nur
-   FootyStats-Quoten vorliegen.**
+   *vorläufig* gekennzeichnet, weil FootyStats nicht der Preis des Nutzers ist.
+2. **Schickt der Nutzer die echten Quoten, wird neu gerechnet** – Kombiquote, Marge,
+   Erwartungswert, Empfindlichkeit. Das Ergebnis wird **berichtet, nicht umgesetzt**:
+   Steht ein Leg unter fair, sagst du es klar mit Zahl, und der Nutzer entscheidet, ob er
+   es behält. Du streichst nichts von dir aus.
 
-**Warum (Fehler vom 28.09.2026):** Ein 4er-Schein wurde auf FootyStats-Quoten gebaut und
-abgegeben, bevor die echten Quoten geprüft waren. Drei von vier Legs lagen bei Tipico unter
-der Mindestquote. Aus −15,9 % Marge für den Nutzer wurden **+11,4 % für den Buchmacher**;
-der Erwartungswert fiel von 23,18 € auf 17,72 €. Die Warnung „jede Quote prüfen" stand in
-Prosa – zum zweiten Mal an einem Tag derselbe Fehler.
-
-**Der FootyStats-Abschlag ist gemessen, nicht geschätzt** (11 Beobachtungen vom 28.09.2026,
-Tipico gegen FootyStats-Referenz):
-
-| | Abschlag |
-|---|---|
-| Median | **−6,1 %** |
-| Mittelwert | −6,5 % |
-| schlechtester Fall | **−17,5 %** (Žilina II 2,00 → 1,65) |
-| bester Fall | ±0 % |
-
-Daraus die **Vorfilter-Regel für Kombi-Kandidaten**: Ein Leg kommt nur in den Vorschlag,
-wenn es **mindestens 8 % Value bei FootyStats** hat – darunter ist es nach dem typischen
-Abschlag unter fair. Dazu muss es die Rangliste-Bedingungen des oberen Blocks erfüllen
-(Abstand Markt höchstens 8 Punkte, Fenster höchstens 50 %).
-
-**Beide Bedingungen zusammen sind streng, und das ist Absicht.** An den meisten Tagen bleibt
-kein Leg übrig. Dann sagst du genau das: „Heute gibt es keinen Schein, der die Bedingungen
-erfüllt." Das ist ein gültiges Ergebnis, kein Versagen.
+**Warum der zweite Schritt trotzdem sein muss (28.09.2026):** Ein 4er-Schein wurde auf
+FootyStats-Quoten abgegeben. Bei Tipico lagen drei von vier Legs darunter, aus −15,9 % Marge
+für den Nutzer wurden **+11,4 % für den Buchmacher**, der Erwartungswert fiel von 23,18 € auf
+17,72 €. Der Fehler war nicht die Auswahl der Spiele, sondern dass die Zahlen im Vorschlag
+als endgültig gelesen wurden. Gemessen an 11 Beobachtungen desselben Tages liegt die
+Tipico-Quote im Median **6,1 % unter** der FootyStats-Referenz, im schlechtesten Fall 17,5 %.
+Diese Zahl gehört in den Vorschlag, damit der Nutzer weiß, womit er rechnen muss.
 
 **Quoten wandern.** Bor stand am 28.09. innerhalb von zwei Stunden bei 1,80, 1,75 und 1,65,
-Kiryat Gat bei 1,74, 1,65 und 1,55. Eine geprüfte Quote ist nur im Moment der Abgabe gültig.
+Kiryat Gat bei 1,74, 1,65 und 1,55. Eine geprüfte Quote gilt nur im Moment der Abgabe.
 
 **Keine zwei Legs aus derselben Liga mit derselben Wettart.** Die Kombi-Rechnung multipliziert
 die Wahrscheinlichkeiten und setzt damit Unabhängigkeit voraus. Spiele derselben Liga hängen
