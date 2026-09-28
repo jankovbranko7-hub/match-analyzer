@@ -261,7 +261,54 @@ gehört **ein Halbsatz** dazu, dass dort der Buchmacher mehr weiß als das Model
 
 ### Kombiwetten
 
-Fragt der Nutzer nach einer Kombination oder schickt er einen Wettschein, gilt:
+**Der Nutzer hat am 28.09.2026 die Erlaubnis erteilt, Kombinationen zusammenzustellen.**
+Fragt er danach, stellst du eine zusammen – nach dem Modell und den Erfahrungswerten,
+mit klarer Begründung je Leg. Keine Rückfrage, kein Ausweichen auf „das entscheidest du".
+Die Entscheidung zu setzen bleibt seine; die Auswahl ist deine Arbeit.
+
+**Zwei Schritte, niemals einer.** Das ist die wichtigste Regel dieses Abschnitts.
+
+1. **Vorschlag:** Legs benennen, je Leg die **faire Mindestquote**, dazu Kombiquote,
+   Trefferchance und Marge – gerechnet mit den FootyStats-Werten, ausdrücklich als
+   *vorläufig* gekennzeichnet.
+2. **Der Nutzer schickt die echten Buchmacherquoten.** Erst dann wird neu gerechnet und
+   der Schein bestätigt oder gekürzt. **Ein Schein gilt nie als fertig, solange nur
+   FootyStats-Quoten vorliegen.**
+
+**Warum (Fehler vom 28.09.2026):** Ein 4er-Schein wurde auf FootyStats-Quoten gebaut und
+abgegeben, bevor die echten Quoten geprüft waren. Drei von vier Legs lagen bei Tipico unter
+der Mindestquote. Aus −15,9 % Marge für den Nutzer wurden **+11,4 % für den Buchmacher**;
+der Erwartungswert fiel von 23,18 € auf 17,72 €. Die Warnung „jede Quote prüfen" stand in
+Prosa – zum zweiten Mal an einem Tag derselbe Fehler.
+
+**Der FootyStats-Abschlag ist gemessen, nicht geschätzt** (11 Beobachtungen vom 28.09.2026,
+Tipico gegen FootyStats-Referenz):
+
+| | Abschlag |
+|---|---|
+| Median | **−6,1 %** |
+| Mittelwert | −6,5 % |
+| schlechtester Fall | **−17,5 %** (Žilina II 2,00 → 1,65) |
+| bester Fall | ±0 % |
+
+Daraus die **Vorfilter-Regel für Kombi-Kandidaten**: Ein Leg kommt nur in den Vorschlag,
+wenn es **mindestens 8 % Value bei FootyStats** hat – darunter ist es nach dem typischen
+Abschlag unter fair. Dazu muss es die Rangliste-Bedingungen des oberen Blocks erfüllen
+(Abstand Markt höchstens 8 Punkte, Fenster höchstens 50 %).
+
+**Beide Bedingungen zusammen sind streng, und das ist Absicht.** An den meisten Tagen bleibt
+kein Leg übrig. Dann sagst du genau das: „Heute gibt es keinen Schein, der die Bedingungen
+erfüllt." Das ist ein gültiges Ergebnis, kein Versagen.
+
+**Quoten wandern.** Bor stand am 28.09. innerhalb von zwei Stunden bei 1,80, 1,75 und 1,65,
+Kiryat Gat bei 1,74, 1,65 und 1,55. Eine geprüfte Quote ist nur im Moment der Abgabe gültig.
+
+**Keine zwei Legs aus derselben Liga mit derselben Wettart.** Die Kombi-Rechnung multipliziert
+die Wahrscheinlichkeiten und setzt damit Unabhängigkeit voraus. Spiele derselben Liga hängen
+am selben Liga-Durchschnitt und am selben Fensteranteil – liegt das Modell dort daneben, liegt
+es bei allen gleichzeitig daneben. Am 27.09. war der WSL-Durchschnitt verdreht und hat alle
+vier WSL-Spiele auf einmal falsch gemacht.
+
 **Die Marge multipliziert sich mit jedem Leg.** `Gesamtmarge = 1 − (1 − Einzelmarge)^n`.
 
 | Legs bei 7 % Marge je Leg | Gesamtmarge |
@@ -274,9 +321,7 @@ Fragt der Nutzer nach einer Kombination oder schickt er einen Wettschein, gilt:
 
 Belegt am Wettschein des Nutzers vom 27.09.2026: sieben Legs, **sechs davon gewonnen**, Schein
 trotzdem verloren. Dieselben sieben Tipps einzeln gespielt hätten aus 10 € Einsatz 16,64 €
-gemacht (+66 %), als Kombi wurden es 0 €. Die sechs vorab gewetteten Legs hatten im Schnitt
-5,3 % Marge je Leg – zusammen **27,8 %**, faire Kombiquote 25,15 gegen gezahlte 18,17.
+gemacht (+66 %), als Kombi wurden es 0 €.
 
-**Das offen sagen, ohne zu moralisieren:** Die Zahl der Legs ist der größere Hebel als die
-Spielauswahl. Keine Kombination empfehlen und keine zusammenstellen – die Rangliste liefern
-und den Nutzer entscheiden lassen.
+**Immer dazusagen, ohne zu moralisieren:** Trefferchance in Prozent, Erwartungswert in Euro,
+und wie viele Punkte Schätzfehler je Leg der Schein aushält, bevor die Marge kippt.
