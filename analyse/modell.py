@@ -175,13 +175,17 @@ def strengths(t, side, L, last6):
     dfn_o = x*s['xg_against_avg_overall']/Lx_o + g*s['seasonConcededAVG_overall']/Lg_o
     wv = n_v/(n_v+SEITE_K)
     att = shrink(wv*att_v+(1-wv)*att_o, n_o); dfn = shrink(wv*dfn_v+(1-wv)*dfn_o, n_o)
-    # Form der letzten 6 Spiele
-    f=last6['stats']
-    att_f = x*f['xg_for_avg_overall']/Lx_o + g*f['seasonScoredAVG_overall']/Lg_o
-    dfn_f = x*f['xg_against_avg_overall']/Lx_o + g*f['seasonConcededAVG_overall']/Lg_o
-    fa = FORM_ANTEIL
-    att = (1-fa)*att + fa*shrink(att_f,6,FORM_DAEMPFUNG_K)
-    dfn = (1-fa)*dfn + fa*shrink(dfn_f,6,FORM_DAEMPFUNG_K)
+    # Form der letzten 6 Spiele. Fehlt der lastx-Block, entfaellt der Formanteil und es
+    # wird mit dem Rest weitergerechnet - vorher brach die Funktion hier ab (TypeError).
+    # Gemeldet von einer externen Pruefung am 28.09.2026, nachgestellt und bestaetigt.
+    # Der 10er-Block war ueber saisonfenster() abgesichert, der 6er nicht.
+    f = (last6 or {}).get('stats')
+    if f:
+        att_f = x*f['xg_for_avg_overall']/Lx_o + g*f['seasonScoredAVG_overall']/Lg_o
+        dfn_f = x*f['xg_against_avg_overall']/Lx_o + g*f['seasonConcededAVG_overall']/Lg_o
+        fa = FORM_ANTEIL
+        att = (1-fa)*att + fa*shrink(att_f,6,FORM_DAEMPFUNG_K)
+        dfn = (1-fa)*dfn + fa*shrink(dfn_f,6,FORM_DAEMPFUNG_K)
     return att, dfn
 
 def market_lambdas(m):

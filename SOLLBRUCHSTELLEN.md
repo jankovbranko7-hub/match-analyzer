@@ -227,3 +227,45 @@ den Maßstab, nicht die Teamwerte.
 
 **Zurückschalten auf die Fassung ohne Fenster:**
 `git checkout d912a1c -- analyse/modell.py`
+
+---
+
+## 11. Externe Prüfung vom 28.09.2026 — ein Fehler behoben, ein Vorschlag verworfen
+
+Der Nutzer hat die Modellbeschreibung von einem anderen Modell prüfen lassen. Acht Punkte,
+davon sieben zutreffend. Was daraus folgte:
+
+**BEHOBEN — `strengths()` stürzte ohne den lastx-6er-Block ab.** Fehlte der Block, warf die
+Funktion einen `TypeError`. Der 10er-Block war über `saisonfenster()` abgesichert, der 6er
+nicht. Jetzt entfällt bei fehlendem Block der Formanteil und es wird mit dem Rest gerechnet.
+**An fünf echten Spielen geprüft: kein einziger Wert hat sich geändert** – die Korrektur
+greift nur in dem Fall, in dem vorher gar nichts herauskam.
+
+**VERWORFEN — den Liga-Maßstab gegen die Vorsaison schrumpfen.** Der Gedanke war richtig:
+Der Maßstab stammt aus derselben dünnen Saison wie die Teams, und ein verdrehtes
+Heim-Auswärts-Verhältnis macht jedes Spiel der Liga gleichzeitig falsch. Gemessen an den
+14 Spielen vom 28.09.2026 mit `Liga = w·Saison + (1−w)·Vorsaison`, `w = n/(n+k)`:
+
+| k | Tipp geändert | Abstand zum Markt vorher | nachher |
+|---|---|---|---|
+| 25 | 1 von 14 | 6,1 | **6,5** |
+| 50 | 2 von 14 | 6,1 | **7,1** |
+| 100 | 3 von 14 | 5,9 | **7,5** |
+
+In allen drei Varianten **schlechter**, und je stärker die Schrumpfung, desto schlechter.
+Nur in Griechenland wirkte sie richtig (1,76 → 1,48, Kallithea von 4,5 auf 1,6 Punkte an den
+Markt heran), in Serbien und Israel dagegen falsch. Die Vorsaison ist offenbar kein guter
+Anker: Auf- und Absteiger machen die Liga zu einer anderen.
+
+**Die Schwachstelle bleibt damit OFFEN.** Der verdrehte Liga-Maßstab am Saisonanfang ist real
+und unbehoben – die naheliegende Reparatur ist geprüft und taugt nicht.
+
+**Nicht umgesetzt, weil nicht baubar:** ein seitengetrennter H2H-Faktor. Die H2H-Einträge
+führen `team_a_id`, `team_b_id` und die Tore, aber **kein Feld für Heim oder Auswärts** –
+ein Split würde Heim- und Auswärtspartien vermischen.
+
+**Widerlegt:** Der Einwand, die Overall-Abwehr werde gegen die Liga-Angriffs-xG normiert und
+dort sitze ein Versatz. In einer geschlossenen Liga ist jedes erzielte xG das kassierte xG
+eines anderen. An drei echten Ligatabellen nachgerechnet: Mittel xG-für und Mittel xG-gegen
+sind auf drei Nachkommastellen **identisch** (Differenz 0,0 %).
+
