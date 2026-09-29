@@ -53,23 +53,24 @@ Zurückschalten: `git checkout <commit> -- analyse/modell.py`
 
 | | |
 |---|---|
-| Prognosen gesamt | 61 |
-| ausgewertet | 60 |
+| Prognosen gesamt | 71 |
+| ausgewertet | 70 |
 | **offen** | **0** |
 | abgesagt | 1 (New York RB – St. Louis City) |
-| Treffer | 40 gegen 36.8 erwartete (z = +0.85, Zufallsbereich) |
-| Trefferquote | 67.8 % (Modell sagte 62.4 %) |
-| Tore | 170 gegen 169.8 erwartete (+0.1 %) |
-| Geld, alle Tipps zu 10 € | +13 € auf 590 € Einsatz (+2.2 %) |
+| Treffer | 46 gegen 42.8 erwartete (z = +0.78, Zufallsbereich) |
+| Trefferquote | 66.7 % (Modell sagte 62.0 %) |
+| Tore | 196 gegen 199.9 erwartete (−2.0 %) |
+| Geld, alle Tipps zu 10 € | +5 € auf 690 € Einsatz (+0.8 %) |
 | Geld, nur die 15 mit Value | +17 € auf 150 € Einsatz |
 
-Aussagekraft: Bei 60 Spielen wäre erst eine Verzerrung ab rund 18 Prozentpunkten
+Aussagekraft: Bei 70 Spielen wäre erst eine Verzerrung ab rund 17 Prozentpunkten
 nachweisbar. Für 10 Punkte braucht es rund 190 Spiele. **Bis dahin ist keine Abweichung ein
 Grund, an den Gewichten zu drehen.**
 
 ## Offene Prognosen
 
-Keine. Die 11 Spiele vom 28.09. sind ausgewertet (Stand 29.09.2026).
+Keine. Alles ausgewertet, Stand 29.09.2026 abends. Zuletzt dazugekommen: die zehn Spiele
+der National League vom 29.09. (6 von 10 getroffen bei 5,9 erwarteten).
 
 ## Wettschein des Nutzers vom 28.09. – verloren
 
@@ -96,3 +97,21 @@ hätten diese vier Tipps aus 20 € Einsatz rund 25 € gemacht.
    im Extremfall 17,5 %.
 4. **Die Marge multipliziert sich je Leg.** Sieben Legs, sechs gewonnen, Schein verloren.
 5. **Der Backtest ist verboten.** Die einzige erlaubte Rückschau ist `bilanz.py --auswerten`.
+6. **Vor dem Rechnen die Uhr prüfen.** Am 29.09. wurden zehn Spiele um 21:26 UTC gerechnet,
+   Anstoß war 18:00 und 18:45 – eine Rückschau mit Prognose-Etikett. Dafür gibt es jetzt
+   Durchgang 0 in `CLAUDE.md`.
+7. **Zwei Sessions können dieselben Spiele eintragen.** Am 29.09. wären die zehn
+   National-League-Spiele doppelt in `bilanz.json` gelandet. Vor `--merken` immer `git fetch`
+   und die `id` prüfen.
+
+## Regeländerungen vom 29.09.2026
+
+- **Empfehlungen sind Dauerfreigabe.** Fragt der Nutzer, wird empfohlen – ohne Rückfrage.
+- **Keine feste Obergrenze von drei Legs mehr.** Die Datenlage entscheidet; bei sehr guter
+  Datenlage fünf bis sechs Legs.
+- **Ligenregel jetzt nach Wett-Familie statt nach Wettart.** Pro Liga höchstens ein Leg aus
+  der Tor-Familie (Über/Unter 2,5, Beide treffen) und eines aus der Ausgangs-Familie
+  (Sieg Heim/Auswärts). Grund: Über 2,5 und Beide treffen lesen dieselbe Zahl ab und
+  korrelierten an den zehn Spielen vom 29.09. mit +0,96.
+- **Durchgang 0 und Durchgang 4** in der Prüfroutine: Uhrzeit, Cache-Alter, Doppeleintrag und
+  Vollzähligkeit vorher; Formkontrolle der ganzen Antwort nachher.
