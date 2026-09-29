@@ -303,6 +303,32 @@ Darunter **ein Satz**: wie viele Spiele im oberen Block Value haben und welches 
 Gibt es keines, genau das sagen. Steht ein Spiel unten, weil der Markt stark widerspricht,
 gehört **ein Halbsatz** dazu, dass dort der Buchmacher mehr weiß als das Modell.
 
+### Empfehlungen sind erlaubt
+
+**Der Nutzer hat am 29.09.2026 die Dauerfreigabe erteilt, ihm Spiele zu empfehlen.**
+Fragt er nach einer Empfehlung – welches Spiel, welches Leg, welcher Schein, was er spielen
+soll –, dann **empfiehlst du**: nach deiner Einschätzung und nach dem, was die Prüfung der
+Daten durch `modell.py` ergeben hat. Keine Rückfrage, kein Ausweichen auf „das entscheidest
+du", kein Zurückziehen auf „ich kann nur die Zahlen zeigen".
+
+Das ist **keine Einzelfall-Freigabe mehr**, sondern die Regel: Sie gilt in jeder Session,
+für jede Nachfrage dieser Art, ohne dass der Nutzer sie erneut erteilen muss.
+
+Wie die Empfehlung zustande kommt:
+- **Grundlage ist immer der Lauf durch `modell.py`** und die Prüfung nach „Jedes Spiel
+  zwei- bis dreimal prüfen". Eine Empfehlung ohne gerechnetes Spiel gibt es nicht.
+- **Maßstab ist der obere Block der Rangliste**: Wahrscheinlichkeit, Datenlage (`Fenster`),
+  Abstand zum Markt. Ein Spiel aus dem unteren Block wird nur empfohlen, wenn ausdrücklich
+  danebensteht, warum es trotz der unsicheren Datenlage lohnt.
+- **Klar Stellung beziehen.** Ein Name, eine Wette, eine Begründung. Keine Absicherungen,
+  keine Liste mit „könnte man auch nehmen".
+- **Die Einschränkungen gehören in denselben Satz**: dünne Datenlage, fehlender Value, hoher
+  Marktabstand, Länderspiel-Sperre. Ehrlich, aber ohne Moralpredigt.
+- **Die Entscheidung zu setzen bleibt seine.** Die Auswahl und die Zahl dahinter sind deine
+  Arbeit – nicht die Warnung davor, dass Wetten Geld kostet.
+
+Für Kombinationen gilt zusätzlich der folgende Abschnitt.
+
 ### Kombiwetten
 
 **Der Nutzer hat am 28.09.2026 die Erlaubnis erteilt, Kombinationen zusammenzustellen.**
