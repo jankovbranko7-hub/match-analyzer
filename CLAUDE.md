@@ -149,6 +149,23 @@ mindestens zweimal durchgesehen, bei Auffälligkeiten dreimal. Die Rechnung selb
 deterministisch – ein zweiter Lauf liefert dieselben Zahlen. Geprüft werden deshalb die
 **Eingaben und die Plausibilität**, nicht die Arithmetik:
 
+**Durchgang 0 – vor der ersten Zahl.** Vom Nutzer am 29.09.2026 verlangt, weil hier die
+Fehler entstehen, die man der Ausgabe nicht ansieht. Alle vier Punkte abarbeiten, bevor
+`modell.py` überhaupt startet:
+
+1. **Anstoßzeit gegen die Uhr halten.** `date -u` laufen lassen und mit der Anstoßzeit aus
+   `--liste` vergleichen. **Ist ein Spiel schon angepfiffen oder beendet, ist es keine
+   Prognose.** Dann das offen sagen und entweder weglassen oder ausdrücklich als Rückschau
+   kennzeichnen – nie als Prognose ausgeben und nie mit `--merken` festhalten.
+   Am 29.09.2026 passiert: zehn Spiele um 21:26 UTC gerechnet, Anstoß war 18:00 und 18:45.
+2. **Alter des Zwischenspeichers prüfen.** Wurden die Teamdaten nach dem Anstoß geholt,
+   können sie das Spiel selbst schon enthalten. Im Zweifel `--neu` und den Zeitpunkt nennen.
+3. **Nachsehen, ob die Partie schon eingetragen ist.** Erst `git fetch`, dann `bilanz.json`
+   auf die `id` prüfen. Eine zweite Session kann dieselben Spiele bereits festgehalten haben –
+   ein zweiter Eintrag verdoppelt das Spiel in der Auswertung. Am 29.09.2026 passiert.
+4. **Vollzähligkeit der Liste.** So viele Spiel-IDs wie geschickte Spiele. Fehlt eine,
+   das Spiel benennen statt es stillschweigend wegzulassen.
+
 **Durchgang 1 – rechnen.** `modell.py` laufen lassen, Zahlen notieren.
 
 **Durchgang 2 – Eingaben prüfen.** Stimmen Liga, Saison-ID, Spieltag und die beiden Teams?
@@ -165,6 +182,25 @@ unteren Block der Rangliste und der Satz dazu in die Begründung.
 **Erst danach steht der beste Tipp fest.** Bei den fünf Wetten mit weniger als zwei
 Prozentpunkten Abstand zueinander immer den dritten Durchgang machen – dort entscheidet
 die Datengrundlage, nicht die dritte Nachkommastelle.
+
+**Durchgang 4 – Schlusskontrolle vor dem Absenden.** Vom Nutzer am 29.09.2026 verlangt:
+lieber dreimal rechnen als einmal etwas vergessen. Die Antwort wird erst abgeschickt, wenn
+jeder Punkt stimmt:
+
+- **So viele Spielblöcke wie geschickte Spiele**, durchgezählt, fortlaufend nummeriert.
+- **Jede Tabelle hat genau fünf Zeilen und zwei Spalten**, die Wahrscheinlichkeit des
+  besten Tipps fett.
+- **Bester Tipp = höchster Wert der fünf Zeilen.** Nachrechnen, nicht aus dem Gedächtnis.
+- **Rangliste: neun Spalten, jedes Spiel genau eine Zeile**, Trennzeile vorhanden.
+- **Blockzuordnung stimmt:** oben nur `Abstand Markt` ≤ 8 Punkte **und** `Fenster` ≤ 50 %.
+- **Faire Quote = 1 / Wahrscheinlichkeit**, an einem Spiel nachgerechnet.
+- **`bilanz.py --merken` ist gelaufen** – aber nur für Spiele, die noch nicht angepfiffen
+  waren (Durchgang 0) und noch nicht in `bilanz.json` stehen.
+- **Keine Zahl in der Begründung, die nicht aus der Ausgabe oder aus `analyse/daten/` stammt.**
+  Im Zweifel nachsehen statt schätzen.
+
+Findet die Schlusskontrolle einen Fehler, wird er behoben und die Kontrolle **komplett neu**
+durchlaufen – nicht nur die eine Stelle nachgebessert.
 
 ## Methode
 
