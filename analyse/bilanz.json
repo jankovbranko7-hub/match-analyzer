@@ -1522,5 +1522,225 @@
    "h": 2,
    "a": 1
   }
+ },
+ {
+  "id": 8586291,
+  "liga": 17279,
+  "datum_unix": 1790704800,
+  "heim": "Boreham Wood",
+  "ausw": "Kidderminster Harriers",
+  "lh": 1.763,
+  "la": 1.054,
+  "p": {
+   "H": 0.5321,
+   "D": 0.25,
+   "A": 0.2178,
+   "O25": 0.5346,
+   "U25": 0.4654,
+   "BTTS": 0.5475
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5475,
+  "faire_quote": 1.83,
+  "quote": 1.65,
+  "ergebnis": null
+ },
+ {
+  "id": 8586000,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Gateshead",
+  "ausw": "Altrincham",
+  "lh": 1.267,
+  "la": 1.591,
+  "p": {
+   "H": 0.2964,
+   "D": 0.2624,
+   "A": 0.4412,
+   "O25": 0.5444,
+   "U25": 0.4556,
+   "BTTS": 0.5802
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5802,
+  "faire_quote": 1.72,
+  "quote": 1.58,
+  "ergebnis": null
+ },
+ {
+  "id": 8586339,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Woking",
+  "ausw": "Solihull Moors",
+  "lh": 2.001,
+  "la": 1.184,
+  "p": {
+   "H": 0.5561,
+   "D": 0.229,
+   "A": 0.2149,
+   "O25": 0.6169,
+   "U25": 0.3831,
+   "BTTS": 0.6069
+  },
+  "tipp": "O25",
+  "p_tipp": 0.6169,
+  "faire_quote": 1.62,
+  "quote": 1.57,
+  "ergebnis": null
+ },
+ {
+  "id": 8586338,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Yeovil Town",
+  "ausw": "Worthing",
+  "lh": 1.755,
+  "la": 1.624,
+  "p": {
+   "H": 0.407,
+   "D": 0.2403,
+   "A": 0.3527,
+   "O25": 0.6563,
+   "U25": 0.3437,
+   "BTTS": 0.6709
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6709,
+  "faire_quote": 1.49,
+  "quote": 1.43,
+  "ergebnis": null
+ },
+ {
+  "id": 8586318,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Halifax Town",
+  "ausw": "Boston United",
+  "lh": 1.597,
+  "la": 1.274,
+  "p": {
+   "H": 0.4414,
+   "D": 0.2617,
+   "A": 0.2969,
+   "O25": 0.5473,
+   "U25": 0.4527,
+   "BTTS": 0.5825
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5825,
+  "faire_quote": 1.72,
+  "quote": 1.57,
+  "ergebnis": null
+ },
+ {
+  "id": 8586290,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Hartlepool United",
+  "ausw": "Harrogate Town",
+  "lh": 1.31,
+  "la": 1.737,
+  "p": {
+   "H": 0.2824,
+   "D": 0.2502,
+   "A": 0.4674,
+   "O25": 0.5872,
+   "U25": 0.4128,
+   "BTTS": 0.6092
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6092,
+  "faire_quote": 1.64,
+  "quote": 1.6,
+  "ergebnis": null
+ },
+ {
+  "id": 8586115,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Forest Green Rovers",
+  "ausw": "Wealdstone",
+  "lh": 1.711,
+  "la": 1.304,
+  "p": {
+   "H": 0.4626,
+   "D": 0.2522,
+   "A": 0.2851,
+   "O25": 0.5803,
+   "U25": 0.4197,
+   "BTTS": 0.6047
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6047,
+  "faire_quote": 1.65,
+  "quote": 1.46,
+  "ergebnis": null
+ },
+ {
+  "id": 8586102,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Fylde",
+  "ausw": "Carlisle United",
+  "lh": 1.759,
+  "la": 1.517,
+  "p": {
+   "H": 0.4294,
+   "D": 0.2436,
+   "A": 0.327,
+   "O25": 0.6357,
+   "U25": 0.3643,
+   "BTTS": 0.6532
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6532,
+  "faire_quote": 1.53,
+  "quote": 1.36,
+  "ergebnis": null
+ },
+ {
+  "id": 8586005,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "AFC Hornchurch",
+  "ausw": "Aldershot Town",
+  "lh": 1.272,
+  "la": 1.334,
+  "p": {
+   "H": 0.3451,
+   "D": 0.281,
+   "A": 0.3739,
+   "O25": 0.483,
+   "U25": 0.517,
+   "BTTS": 0.5389
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5389,
+  "faire_quote": 1.86,
+  "quote": 1.57,
+  "ergebnis": null
+ },
+ {
+  "id": 8586004,
+  "liga": 17279,
+  "datum_unix": 1790707500,
+  "heim": "Barrow",
+  "ausw": "Scunthorpe United",
+  "lh": 1.728,
+  "la": 1.299,
+  "p": {
+   "H": 0.4678,
+   "D": 0.2511,
+   "A": 0.2811,
+   "O25": 0.5829,
+   "U25": 0.4171,
+   "BTTS": 0.6056
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6056,
+  "faire_quote": 1.65,
+  "quote": 1.53,
+  "ergebnis": null
  }
 ]
