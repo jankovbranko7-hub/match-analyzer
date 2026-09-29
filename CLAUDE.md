@@ -342,6 +342,22 @@ obere Block der Rangliste. **Ein Leg wird nie gestrichen, nur weil die Quote ger
 steht.** Quoten wandern ständig, mal hoch, mal runter; das ändert nichts daran, ob das Modell
 das Spiel richtig gerechnet hat.
 
+**Wie viele Legs: die Datenlage entscheidet, nicht eine feste Zahl.**
+Vom Nutzer am 29.09.2026 festgelegt. Es gibt **keine Obergrenze von drei Legs** – die war eine
+eigenmächtige Erfindung und ist gestrichen. Maßgeblich ist, wie viele Spiele den oberen Block
+der Rangliste erreichen:
+
+- Ist die Datenlage sehr gut – reife Saison, `Fenster` 0 %, `Abstand Markt` klein –, dürfen es
+  **fünf bis sechs Legs** sein. Das ist die Obergrenze.
+- Tragen nur zwei oder drei Spiele, werden es zwei oder drei. Ein Leg wird nie dazugenommen,
+  nur um auf eine Zahl zu kommen.
+- Aus dem unteren Block kommt nichts in eine Kombi.
+
+Die Marge bleibt davon unberührt und wächst mit jedem Leg weiter – **sie ist ein Grund, sie
+dazuzusagen, kein Grund, Legs zu streichen.** Bei fünf Legs à 7 % sind es 30,4 %, bei sechs
+34,9 %. Diese Zahl gehört in den Vorschlag, zusammen mit Trefferchance, Erwartungswert und
+dem Puffer in Prozentpunkten.
+
 **Zwei Schritte, aber der zweite streicht nichts:**
 
 1. **Vorschlag:** Legs benennen, je Leg die **faire Mindestquote**, dazu Kombiquote,
