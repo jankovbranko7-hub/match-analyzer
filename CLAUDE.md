@@ -379,11 +379,34 @@ Diese Zahl gehört in den Vorschlag, damit der Nutzer weiß, womit er rechnen mu
 **Quoten wandern.** Bor stand am 28.09. innerhalb von zwei Stunden bei 1,80, 1,75 und 1,65,
 Kiryat Gat bei 1,74, 1,65 und 1,55. Eine geprüfte Quote gilt nur im Moment der Abgabe.
 
-**Keine zwei Legs aus derselben Liga mit derselben Wettart.** Die Kombi-Rechnung multipliziert
-die Wahrscheinlichkeiten und setzt damit Unabhängigkeit voraus. Spiele derselben Liga hängen
-am selben Liga-Durchschnitt und am selben Fensteranteil – liegt das Modell dort daneben, liegt
-es bei allen gleichzeitig daneben. Am 27.09. war der WSL-Durchschnitt verdreht und hat alle
+**Pro Liga höchstens ein Leg aus jeder Wett-Familie.** Vom Nutzer am 29.09.2026 festgelegt;
+ersetzt die frühere Fassung „keine zwei Legs aus derselben Liga mit derselben Wettart".
+
+| Familie | Wetten | hängt ab von |
+|---|---|---|
+| **Tore** | Über 2,5 · Unter 2,5 · Beide treffen | Summe λ Heim + λ Auswärts |
+| **Ausgang** | Sieg Heim · Sieg Auswärts | Differenz λ Heim − λ Auswärts |
+
+Zwei Legs aus derselben Liga sind also **erlaubt**, wenn sie aus verschiedenen Familien kommen
+(z. B. Über 2,5 im einen Spiel, Sieg Heim im anderen). Verboten ist die Scheinstreuung:
+Über 2,5 und Beide treffen derselben Liga in einen Schein.
+
+**Warum nach Familie und nicht nach Wettart:** Die Kombi-Rechnung multipliziert die
+Wahrscheinlichkeiten und setzt damit Unabhängigkeit voraus. Über 2,5 und Beide treffen lesen
+aber **dieselbe Zahl** ab – die Summe der erwarteten Tore. An den zehn National-League-Spielen
+vom 29.09.2026 lagen sie im Schnitt 2,3 Punkte auseinander, die Korrelation betrug **+0,96**;
+Über 2,5 gegen Sieg Heim dagegen nur +0,23. Zwei Legs derselben Liga mit „verschiedener
+Wettart" konnten nach der alten Fassung also zwei Wetten auf exakt dieselbe Annahme sein –
+das fühlt sich nach Streuung an und ist keine.
+
+Der Grund für die Ligenbindung bleibt: Spiele derselben Liga hängen am selben Liga-Durchschnitt
+und am selben Fensteranteil – liegt das Modell dort daneben, liegt es bei allen gleichzeitig
+daneben. Am 27.09. war der Durchschnitt der WSL (englische Frauen-Liga) verdreht und hat alle
 vier WSL-Spiele auf einmal falsch gemacht.
+
+Die **+0,96** stammen aus den Modellwahrscheinlichkeiten eines Tages in einer Liga, nicht aus
+einer Massenauswertung – die ist verboten. Die Regel steht auf der Mechanik des Modells
+(beide Wetten lesen dieselbe Zahl), nicht auf einer Messung über viele Spiele.
 
 **Die Marge multipliziert sich mit jedem Leg.** `Gesamtmarge = 1 − (1 − Einzelmarge)^n`.
 
