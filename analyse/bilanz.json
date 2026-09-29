@@ -1193,7 +1193,10 @@
   "p_tipp": 0.5339,
   "faire_quote": 1.87,
   "quote": 1.93,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 2
+  }
  },
  {
   "id": 8559550,
@@ -1265,7 +1268,10 @@
   "p_tipp": 0.615,
   "faire_quote": 1.63,
   "quote": 1.81,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 2,
+   "a": 0
+  }
  },
  {
   "id": 8552735,

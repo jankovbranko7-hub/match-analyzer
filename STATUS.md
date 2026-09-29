@@ -1,6 +1,6 @@
 # Stand
 
-Zuletzt aktualisiert: 28.09.2026. Diese Datei ist die Übergabe an die nächste Session –
+Zuletzt aktualisiert: 29.09.2026. Diese Datei ist die Übergabe an die nächste Session –
 sie sagt, wo alles steht. Die Regeln stehen in `CLAUDE.md`, der Rechenweg in `README.md`,
 die Schwachstellen in `SOLLBRUCHSTELLEN.md`.
 
@@ -54,37 +54,37 @@ Zurückschalten: `git checkout <commit> -- analyse/modell.py`
 | | |
 |---|---|
 | Prognosen gesamt | 61 |
-| ausgewertet | 49 |
-| **offen** | **11** |
-| Treffer | 33 gegen 30.1 erwartete |
-| Trefferquote | 67.3 % (Modell sagte 61.5 %) |
-| Geld, alle Tipps zu 10 € | +8 € auf 480 € Einsatz (+1.8 %) |
+| ausgewertet | 60 |
+| **offen** | **0** |
+| abgesagt | 1 (New York RB – St. Louis City) |
+| Treffer | 40 gegen 36.8 erwartete (z = +0.85, Zufallsbereich) |
+| Trefferquote | 67.8 % (Modell sagte 62.4 %) |
+| Tore | 170 gegen 169.8 erwartete (+0.1 %) |
+| Geld, alle Tipps zu 10 € | +13 € auf 590 € Einsatz (+2.2 %) |
+| Geld, nur die 15 mit Value | +17 € auf 150 € Einsatz |
 
-Aussagekraft: Bei 49 Spielen wäre erst eine Verzerrung ab rund 20 Prozentpunkten
+Aussagekraft: Bei 60 Spielen wäre erst eine Verzerrung ab rund 18 Prozentpunkten
 nachweisbar. Für 10 Punkte braucht es rund 190 Spiele. **Bis dahin ist keine Abweichung ein
 Grund, an den Gewichten zu drehen.**
 
-## Offene Prognosen (11)
+## Offene Prognosen
 
-| Spiel | Tipp | Wahrsch. | Faire Quote | Anstoß UTC |
-|---|---|---|---|---|
-| Žilina II – Futura Humenné | Sieg Heim | 55.7 % | 1.79 | 15:00 |
-| Naftagas – Jedinstvo Ub | Beide treffen | 52.2 % | 1.91 | 16:00 |
-| Bor – Metalac GM | Unter 2,5 | 57.7 % | 1.73 | 16:00 |
-| Dubočica – Javor Ivanjica | Beide treffen | 58.0 % | 1.72 | 16:00 |
-| Hapoel Kfar Shalem – Maccabi Kabilio Jaffa | Beide treffen | 67.6 % | 1.48 | 16:00 |
-| Hapoel Kfar Saba – Bnei Yehuda | Über 2,5 | 70.0 % | 1.43 | 16:00 |
-| Maccabi Kiryat Gat – Kafr Qasim | Beide treffen | 59.7 % | 1.68 | 16:00 |
-| Maccabi Bnei Raina – Hapoel Ra'anana | Beide treffen | 66.4 % | 1.51 | 16:45 |
-| Rudar – Dravinja | Über 2,5 | 65.5 % | 1.53 | 17:00 |
-| Loznica – Spartak Subotica | Beide treffen | 61.5 % | 1.63 | 18:00 |
-| Leganés – CD Castellón | Unter 2,5 | 53.4 % | 1.87 | 18:30 |
+Keine. Die 11 Spiele vom 28.09. sind ausgewertet (Stand 29.09.2026).
 
-## Laufender Wettschein des Nutzers
+## Wettschein des Nutzers vom 28.09. – verloren
 
-4er-Kombi vom 28.09., Einsatz 20 €, Kombiquote 7,26, möglicher Gewinn 145,11 €.
-Legs: Kiryat Gat BTTS 1,55 · Bor Unter 2,5 1,65 · Bney Reine BTTS 1,47 · Leganés Unter 2,5 1,93.
-Trefferchance 12,2 %, Erwartungswert 17,72 € – drei der vier Quoten lagen unter der fairen.
+4er-Kombi, Einsatz 20 €, Kombiquote 7,26. **Drei Legs getroffen, eines nicht:**
+
+| Leg | Tipp | Ergebnis | |
+|---|---|---|---|
+| Bor – Metalac GM | Unter 2,5 | 0:2 | getroffen |
+| Leganés – Castellón | Unter 2,5 | 0:2 | getroffen |
+| Bnei Raina – Ra'anana | Beide treffen | 1:2 | getroffen |
+| Kiryat Gat – Kafr Qasim | Beide treffen | 0:1 | **verloren** |
+
+Damit ist der Schein weg. **Das ist die dritte Bestätigung derselben Rechnung:** am 27.09.
+sechs von sieben Legs getroffen und trotzdem 0 €, jetzt drei von vier. Einzeln gespielt
+hätten diese vier Tipps aus 20 € Einsatz rund 25 € gemacht.
 
 ## Was in dieser Session gelernt wurde
 
