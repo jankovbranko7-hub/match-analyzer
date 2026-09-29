@@ -36,7 +36,8 @@ def hole(endpoint, params, datei, args):
     if os.path.exists(pfad) and not args.neu:
         alter_h = (time.time() - os.path.getmtime(pfad)) / 3600
         if alter_h < CACHE_STUNDEN:
-            return json.load(open(pfad))
+            with open(pfad) as f:
+                return json.load(f)
         print(f"  (aktualisiere {datei}, war {alter_h:.1f} h alt)")
     url = f"{BASE}/{endpoint}?" + urllib.parse.urlencode({**params, "key": api_key()})
     with urllib.request.urlopen(url, timeout=60) as r:
@@ -44,7 +45,8 @@ def hole(endpoint, params, datei, args):
     if not daten.get("success", True):
         sys.exit(f"API-Fehler bei {endpoint}: {daten.get('message')}")
     os.makedirs(args.daten, exist_ok=True)
-    json.dump(daten, open(pfad, "w"))
+    with open(pfad, "w") as f:
+        json.dump(daten, f)
     return daten
 
 # ---------------------------------------------------------------- Gewichte
@@ -82,7 +84,11 @@ H2H_DAEMPFUNG_K     = 3      # Direkte Duelle daempfen: Gewicht = H2H_ANTEIL * n
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
+                             # (Regel in CLAUDE.md). Über --markt zuschaltbar.
 MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
+                             # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
+                             # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
+                             # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).
 FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird die
                              # Teamstatistik mit den letzten 10 Spielen aufgefuellt (aus
                              # derselben lastx-Abfrage, die schon fuer die Form geholt wird -
@@ -96,10 +102,6 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
 CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
                              # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
                              # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
-                             # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
-                             # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
-                             # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).
-                             # (Regel in CLAUDE.md). Über --markt zuschaltbar.
 
 # ---------------------------------------------------------------- Modell
 

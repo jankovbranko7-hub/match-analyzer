@@ -32,11 +32,15 @@ ABGESAGT = ('suspended', 'canceled', 'cancelled', 'postponed', 'abandoned')
 
 
 def laden():
-    return json.load(open(BILANZ)) if os.path.exists(BILANZ) else []
+    if not os.path.exists(BILANZ):
+        return []
+    with open(BILANZ) as f:
+        return json.load(f)
 
 
 def speichern(eintraege):
-    json.dump(eintraege, open(BILANZ, 'w'), indent=1, ensure_ascii=False)
+    with open(BILANZ, 'w') as f:
+        json.dump(eintraege, f, indent=1, ensure_ascii=False)
 
 
 def bester_tipp(p):
