@@ -1693,7 +1693,10 @@
   "p_tipp": 0.6047,
   "faire_quote": 1.65,
   "quote": 1.46,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
  },
  {
   "id": 8586102,
