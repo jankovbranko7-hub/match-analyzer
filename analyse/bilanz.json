@@ -1772,5 +1772,181 @@
    "h": 3,
    "a": 0
   }
+ },
+ {
+  "id": 8576112,
+  "liga": 17227,
+  "datum_unix": 1790791200,
+  "heim": "Kreuzlingen",
+  "ausw": "Brühl",
+  "lh": 1.561,
+  "la": 1.457,
+  "p": {
+   "H": 0.3942,
+   "D": 0.2574,
+   "A": 0.3484,
+   "O25": 0.5808,
+   "U25": 0.4192,
+   "BTTS": 0.6138
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6138,
+  "faire_quote": 1.63,
+  "quote": 1.39,
+  "ergebnis": null
+ },
+ {
+  "id": 8593572,
+  "liga": 17308,
+  "datum_unix": 1790792100,
+  "heim": "Wohlen",
+  "ausw": "Schötz",
+  "lh": 1.036,
+  "la": 1.432,
+  "p": {
+   "H": 0.2642,
+   "D": 0.2831,
+   "A": 0.4527,
+   "O25": 0.4482,
+   "U25": 0.5518,
+   "BTTS": 0.5
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5518,
+  "faire_quote": 1.81,
+  "quote": 2.37,
+  "ergebnis": null
+ },
+ {
+  "id": 8585996,
+  "liga": 17279,
+  "datum_unix": 1790793900,
+  "heim": "Tamworth",
+  "ausw": "Sutton United",
+  "lh": 1.57,
+  "la": 1.482,
+  "p": {
+   "H": 0.3913,
+   "D": 0.2558,
+   "A": 0.3529,
+   "O25": 0.5883,
+   "U25": 0.4117,
+   "BTTS": 0.6197
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6197,
+  "faire_quote": 1.61,
+  "quote": 1.51,
+  "ergebnis": null
+ },
+ {
+  "id": 8586284,
+  "liga": 17279,
+  "datum_unix": 1790793900,
+  "heim": "Eastleigh",
+  "ausw": "Southend United",
+  "lh": 1.305,
+  "la": 1.679,
+  "p": {
+   "H": 0.2906,
+   "D": 0.2547,
+   "A": 0.4548,
+   "O25": 0.5732,
+   "U25": 0.4268,
+   "BTTS": 0.6006
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6006,
+  "faire_quote": 1.66,
+  "quote": 1.57,
+  "ergebnis": null
+ },
+ {
+  "id": 8719949,
+  "liga": 16811,
+  "datum_unix": 1790796600,
+  "heim": "Atlético El Vigía",
+  "ausw": "Zamora II",
+  "lh": 1.492,
+  "la": 1.586,
+  "p": {
+   "H": 0.3524,
+   "D": 0.2545,
+   "A": 0.3932,
+   "O25": 0.594,
+   "U25": 0.406,
+   "BTTS": 0.6239
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6239,
+  "faire_quote": 1.6,
+  "quote": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8578286,
+  "liga": 16905,
+  "datum_unix": 1790798400,
+  "heim": "Cienciano",
+  "ausw": "Los Chankas",
+  "lh": 2.144,
+  "la": 0.966,
+  "p": {
+   "H": 0.6367,
+   "D": 0.2103,
+   "A": 0.153,
+   "O25": 0.6011,
+   "U25": 0.3989,
+   "BTTS": 0.5534
+  },
+  "tipp": "H",
+  "p_tipp": 0.6367,
+  "faire_quote": 1.57,
+  "quote": 1.36,
+  "ergebnis": null
+ },
+ {
+  "id": 8465185,
+  "liga": 16743,
+  "datum_unix": 1790802000,
+  "heim": "Unión San Felipe",
+  "ausw": "San Luis",
+  "lh": 1.235,
+  "la": 1.38,
+  "p": {
+   "H": 0.3264,
+   "D": 0.2797,
+   "A": 0.3939,
+   "O25": 0.4853,
+   "U25": 0.5147,
+   "BTTS": 0.5394
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5394,
+  "faire_quote": 1.85,
+  "quote": 1.8,
+  "ergebnis": null
+ },
+ {
+  "id": 8608759,
+  "liga": 17387,
+  "datum_unix": 1790802000,
+  "heim": "Águila",
+  "ausw": "Inter",
+  "lh": 1.536,
+  "la": 1.2,
+  "p": {
+   "H": 0.4422,
+   "D": 0.2688,
+   "A": 0.289,
+   "O25": 0.5152,
+   "U25": 0.4848,
+   "BTTS": 0.5568
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5568,
+  "faire_quote": 1.8,
+  "quote": 1.7,
+  "ergebnis": null
  }
 ]
