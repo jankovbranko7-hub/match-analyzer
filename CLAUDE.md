@@ -46,6 +46,17 @@ Kalibrierung und Geld-Saldo aus.
 **Einmal eingetragene Prognosen nie nachträglich ändern** – auch nicht, wenn sich die Teamdaten
 später ändern. Eine korrigierte Aufzeichnung ist wertlos.
 
+**Seit dem 30.09.2026 wird zusätzlich `abstand_markt` mitgeschrieben** – die Zahl aus der Zeile
+`Abstand zum Markt beim Tipp`, gerechnet in `bilanz.py` mit derselben Formel wie in `modell.py`
+(an drei Spielen auf die erste Nachkommastelle gegengeprüft). `null`, wenn die Vorab-Quoten
+unvollständig sind. Vom Nutzer verlangt, damit `--auswerten` später beantworten kann, ob Tipps
+mit großem Marktabstand schlechter liefen und ob die Grenze von 8 Punkten stimmt.
+
+**Die 79 älteren Einträge haben das Feld nicht, und es wird nicht nachgetragen.** Der Wert ließe
+sich heute nur mit Teamdaten von *nach* dem Spiel neu rechnen – das wäre genau die Rückschau,
+die eine Aufzeichnung wertlos macht. Eine Auswertung über den Marktabstand ist also erst ab den
+Prognosen vom 30.09.2026 möglich.
+
 Fragt der Nutzer, warum eine Prognose danebenlag: **erst `--auswerten` laufen lassen, dann
 antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 Spielen lässt
 sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist

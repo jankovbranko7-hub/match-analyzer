@@ -56,6 +56,27 @@ def getroffen(tipp, h, a):
 
 # ---------------------------------------------------------------- Merken
 
+def abstand_markt(r, p, tipp):
+    """Modell-Wahrscheinlichkeit minus margenbereinigte Marktwahrscheinlichkeit, in Punkten.
+
+    Dieselbe Rechnung wie die Zeile 'Abstand zum Markt beim Tipp' in modell.py, nur hier
+    festgehalten statt nur ausgegeben. Vom Nutzer am 30.09.2026 verlangt: Ohne die Zahl kann
+    --auswerten nie sagen, ob Tipps mit grossem Marktabstand schlechter liefen als solche mit
+    kleinem, und ob die Grenze von 8 Punkten die richtige ist.
+
+    Gibt None zurueck, wenn die Vorab-Quoten unvollstaendig sind - dann steht in der Rangliste
+    ohnehin ein Strich und das Spiel gilt als unsicher.
+    """
+    if not r.get('mk'):
+        return None
+    ab = {w: (float(p[w]) - float(r['mk'][w])) * 100
+          for w in ('H', 'A', 'O25', 'BTTS') if w in r['mk']}
+    if 'O25' in ab:
+        ab['U25'] = -ab['O25']
+    d = ab.get(tipp)
+    return round(d, 1) if d is not None else None
+
+
 def merken(mid, args):
     eintraege = laden()
     if any(e['id'] == mid for e in eintraege):
@@ -75,6 +96,7 @@ def merken(mid, args):
         p={k: round(v, 4) for k, v in p.items()},
         tipp=tipp, p_tipp=round(pt, 4), faire_quote=round(1 / pt, 2),
         quote=m.get(QUOTENFELD[tipp]) or None,
+        abstand_markt=abstand_markt(r, p, tipp),
         ergebnis=None))
     print(f"  gemerkt: {m['home_name']} - {m['away_name']} | {WETTEN[tipp]} {pt*100:.1f} %")
     speichern(eintraege)
