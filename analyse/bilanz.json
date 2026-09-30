@@ -1793,7 +1793,10 @@
   "p_tipp": 0.6138,
   "faire_quote": 1.63,
   "quote": 1.39,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 0
+  }
  },
  {
   "id": 8593572,
@@ -1815,7 +1818,10 @@
   "p_tipp": 0.5518,
   "faire_quote": 1.81,
   "quote": 2.37,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 5
+  }
  },
  {
   "id": 8585996,
@@ -1837,7 +1843,10 @@
   "p_tipp": 0.6197,
   "faire_quote": 1.61,
   "quote": 1.51,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 2,
+   "a": 0
+  }
  },
  {
   "id": 8586284,
@@ -1859,7 +1868,10 @@
   "p_tipp": 0.6006,
   "faire_quote": 1.66,
   "quote": 1.57,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
  },
  {
   "id": 8719949,
@@ -1881,7 +1893,10 @@
   "p_tipp": 0.6239,
   "faire_quote": 1.6,
   "quote": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 4,
+   "a": 3
+  }
  },
  {
   "id": 8578286,
@@ -1903,7 +1918,10 @@
   "p_tipp": 0.6367,
   "faire_quote": 1.57,
   "quote": 1.36,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
  },
  {
   "id": 8465185,
