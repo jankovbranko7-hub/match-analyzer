@@ -142,6 +142,16 @@ die Begründung danebenschreiben und die Tabelle im `README.md` nachziehen.
 
 In der Antwort einmal kurz sagen, dass die Gewichte gesetzte Erfahrungswerte sind und nicht getestet wurden.
 
+### Keine eigenen Auswahlregeln erfinden
+
+**Vom Nutzer am 30.09.2026 verlangt.** Die Regeln in dieser Datei sind vollständig. Es wird
+keine zusätzliche Schwelle, kein Filter, keine Obergrenze und kein Ausschlusskriterium
+erfunden – auch nicht als gut gemeinter Hinweis, auch nicht in Prosa. Dreimal passiert und
+jedes Mal vom Nutzer zurückgenommen: ein 8-%-Value-Vorfilter (28.09.), „höchstens drei Legs"
+(29.09.), Value als eigener Abschnitt mit Kaufurteil (30.09.). Am Rechenweg wurde dabei nie
+etwas geändert – die Schicht lag darüber, und genau deshalb fiel sie im Code nicht auf.
+Fehlt eine Regel, wird gefragt, nicht ergänzt.
+
 ### Jedes Spiel zwei- bis dreimal prüfen
 
 **Vom Nutzer am 28.09.2026 verlangt.** Bevor der beste Tipp feststeht, wird jedes Spiel
