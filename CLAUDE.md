@@ -212,6 +212,24 @@ jeder Punkt stimmt:
 Findet die Schlusskontrolle einen Fehler, wird er behoben und die Kontrolle **komplett neu**
 durchlaufen – nicht nur die eine Stelle nachgebessert.
 
+### Keine Zahl von Hand in die Rangliste
+
+**Vom Nutzer am 30.09.2026 verlangt.** Die Spalten der Rangliste werden **gerechnet, nicht
+abgetippt**. Jede Zahl stammt aus der Ausgabe von `modell.py` oder aus `analyse/bilanz.json`,
+und `gegen fair` wird ausgerechnet (`FootyStats / faire Quote − 1`), nie geschätzt.
+
+- **`–` nur, wenn das Feld wirklich leer ist.** Vor jedem `–` wird der Wert nachgesehen.
+  Am 30.09.2026 stand bei Wohlen – Schötz `–`, obwohl eine Quote von 2,37 vorlag: das Modell
+  hatte „keine vollständigen Vorab-Quoten" gemeldet, was sich auf den 1X2-Satz für den
+  **Marktabstand** bezieht, nicht auf die Quote der getippten Wette. Beides ist zu trennen –
+  der Marktabstand kann fehlen, während die Quote da ist.
+- **Teamdaten nur über die `id`, nie über den Namen.** Ein Namensvergleich greift daneben:
+  am 30.09.2026 landete „Atlético El Vigía" auf „Atlético Ávila". Steht kein eindeutiger
+  Treffer fest, wird die Zeile weggelassen und das gesagt – keine Zahl aus einem fremden Team.
+- **Gegenprobe gegen `bilanz.json`:** Tipp und Wahrscheinlichkeit jeder Zeile müssen mit dem
+  übereinstimmen, was `--merken` festgehalten hat. Weicht etwas ab, ist die Tabelle falsch,
+  nicht die Aufzeichnung.
+
 ## Methode
 
 1. **Alle relevanten Daten je Team einbeziehen**, die FootyStats liefert – nicht auf wenige Kennzahlen beschränken.
