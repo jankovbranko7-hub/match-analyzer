@@ -391,6 +391,23 @@ Wie die Empfehlung zustande kommt:
 - **Die Entscheidung zu setzen bleibt seine.** Die Auswahl und die Zahl dahinter sind deine
   Arbeit – nicht die Warnung davor, dass Wetten Geld kostet.
 
+**Form der Antwort auf „welche Spiele würdest du empfehlen".** Vom Nutzer am 30.09.2026
+ausdrücklich so verlangt:
+
+1. **Eine nummerierte Reihenfolge**, das sicherste Spiel zuerst. Je Spiel Name, Wette,
+   Wahrscheinlichkeit, **zwei bis drei Sätze Begründung aus den Teamdaten** und die Quote
+   gegen die faire Mindestquote.
+2. **Danach die nicht empfohlenen Spiele mit je einem Halbsatz, woran es liegt.**
+3. **Zum Schluss: welches einzelne Spiel**, wenn er nur eines nimmt – und ob die Auswahl
+   als Kombi zusammenpasst (Familien- und Ligenregel).
+
+**Die Anzahl ergibt sich aus den Daten, nie aus einer Vorgabe.** Empfohlen wird ein Spiel,
+wenn alle vier Punkte stimmen: Wahrscheinlichkeit deutlich über den anderen Wetten desselben
+Spiels, genug Saisonspiele und `Fenster` niedrig, kleiner Abstand zum Markt, und die Teamdaten
+tragen die Wette **direkt** – nicht über eine Serie, die überperformt (z. B. eine Zu-Null-Quote
+weit über dem xGA). Erfüllen sechs Spiele das, werden sechs genannt; erfüllt es keines, wird
+genau das gesagt.
+
 Für Kombinationen gilt zusätzlich der folgende Abschnitt.
 
 ### Kombiwetten
