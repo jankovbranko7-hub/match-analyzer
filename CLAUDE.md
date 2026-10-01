@@ -107,9 +107,26 @@ Zurückschalten auf die Fassung ohne Fenster:
 ### Länderspiele und Saisonstart: keine Prognose
 
 `analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`
-Saisonspiele hat. Das ist kein Fehler, sondern eine Sperre: Darunter ersetzt die Dämpfung die
-Teamstärke praktisch komplett durch den Liga-Durchschnitt, und das Modell liefert für jedes Spiel
-fast dieselben Zahlen (Remis rund 29 %).
+Saisonspiele hat. Das ist kein Fehler, sondern eine Sperre: Darunter zieht die Dämpfung die
+Teamstärke so weit zum Liga-Durchschnitt, dass die Prognose kaum noch vom Spiel abhängt.
+
+**Am 01.10.2026 nachgemessen und die Begründung richtiggestellt.** Hier stand vorher, das
+Modell liefere darunter „für jedes Spiel fast dieselben Zahlen (Remis rund 29 %)" – das war zu
+scharf. Gemessen am Abstand zwischen einem starken und einem schwachen Heimteam (2,6 gegen
+0,7 Tore pro Spiel):
+
+| Saisonspiele | Unterschied in der Heimsieg-Wahrscheinlichkeit |
+|---|---|
+| 1 | 13,0 Punkte |
+| 2 | 21,8 Punkte |
+| **3 (Grenze)** | **28,2 Punkte** |
+| 8 | 44,1 Punkte |
+| 12 | 49,6 Punkte |
+
+Das Modell unterscheidet also auch bei ein bis zwei Spielen noch, nur deutlich schwächer –
+bei einem Spiel bleibt rund ein Viertel der Trennschärfe von zwölf Spielen übrig.
+**Der Nutzer hat die Grenze am 01.10.2026 ausdrücklich bei 3 belassen**, nachdem er diese
+Zahlen gesehen hatte. Nicht ändern ohne neue Anweisung.
 
 **Länderspiele (Nations League, Qualifikation, Turniere) werden grundsätzlich nicht getippt** –
 auch dann nicht, wenn genug Spiele vorliegen. Das Modell vergleicht rohe Form-Durchschnitte, ohne

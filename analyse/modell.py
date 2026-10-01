@@ -337,8 +337,10 @@ def analysiere(mid, args):
             return
         print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
               f" (noetig: {MIN_SAISONSPIELE}).")
-        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
-        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
+        print("  Darunter zieht die Daempfung die Teamstaerke so weit zum Liga-Durchschnitt,")
+        print("  dass die Trennschaerfe stark faellt: Der Abstand zwischen einem starken und")
+        print("  einem schwachen Heimteam betraegt bei 2 Saisonspielen 21,8 Punkte, bei 3")
+        print("  schon 28,2 und bei 12 Spielen 49,6 (gemessen am 01.10.2026).")
         print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
         return
     L=r['L']; p=r['p']
