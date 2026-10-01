@@ -117,52 +117,6 @@ def probs(M):
     i,j=np.indices(M.shape)
     return dict(H=M[i>j].sum(),D=M[i==j].sum(),A=M[i<j].sum(),O25=M[i+j>=3].sum(),U25=M[i+j<=2].sum(),BTTS=M[(i>0)&(j>0)].sum())
 
-WETTARTEN = ('H', 'A', 'O25', 'U25', 'BTTS')
-
-def robustheit(lh, la, stoerung=0.10):
-    """Wie stark schwankt jede Wette, wenn die erwarteten Tore um 10 % danebenliegen?
-
-    Gibt je Wette die Spannweite in Prozentpunkten zurueck, gemessen an den vier Ecken
-    (lh und la je 10 % hoch und runter). Kleine Zahl = fehlertolerante Wette: Liegt das
-    Modell bei lambda daneben, bleibt ihre Wahrscheinlichkeit - und damit die faire Quote -
-    trotzdem ungefaehr richtig.
-
-    Reine Eigenschaft der Formel, keine Anpassung an Ergebnisse: BTTS ist das Produkt zweier
-    abgeflachter Kurven und schwankt um 10 Punkte, Ueber/Unter 2,5 sitzt am steilsten Punkt
-    der Verteilung und schwankt um 13.
-    """
-    ecken = [probs(matrix(lh*a, la*b))
-             for a in (1-stoerung, 1+stoerung) for b in (1-stoerung, 1+stoerung)]
-    return {w: (max(float(e[w]) for e in ecken) - min(float(e[w]) for e in ecken)) * 100
-            for w in WETTARTEN}
-
-
-def bester_tipp(p, lh, la, fenster=2.0):
-    """Hoechste Wahrscheinlichkeit - bei Gleichstand entscheidet die Robustheit.
-
-    Variante A bleibt der Kern: Wer deutlich vorn liegt, wird getippt. Liegen mehrere Wetten
-    innerhalb von `fenster` Prozentpunkten der besten, waehlt die kleinste Schwankung.
-
-    Das Fenster von 2 Punkten ist die Zahl aus CLAUDE.md vom 28.09.2026 ("bei weniger als zwei
-    Prozentpunkten Abstand entscheidet die Datengrundlage, nicht die dritte Nachkommastelle") -
-    bisher war "Datengrundlage" ein Urteil, jetzt ist es eine gerechnete Zahl. Vom Nutzer am
-    30.09.2026 verlangt.
-
-    Robustheit allein waere unbrauchbar: Sie ist dort am hoechsten, wo die Wahrscheinlichkeit
-    am niedrigsten ist. An 76 Spielen gemessen haette sie den Tipp bei 46 % geaendert und im
-    Schnitt 28,9 Prozentpunkte Wahrscheinlichkeit gekostet. Deshalb nur im engen Fenster.
-
-    Gibt (wette, wahrscheinlichkeit) zurueck.
-    """
-    spitze = max(float(p[w]) for w in WETTARTEN)
-    eng = [w for w in WETTARTEN if spitze - float(p[w]) <= fenster/100]
-    if len(eng) == 1:
-        return eng[0], float(p[eng[0]])
-    r = robustheit(lh, la)
-    w = min(eng, key=lambda x: r[x])
-    return w, float(p[w])
-
-
 def shrink(x,n,k=DAEMPFUNG_K):
     """Zieht Werte aus kleinen Stichproben Richtung Liga-Durchschnitt (1,0)."""
     return (n*x+k*1.0)/(n+k)
@@ -352,15 +306,11 @@ def analysiere(mid, args):
     else:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
-    rb = robustheit(r['lh'], r['la'])
-    tipp, _ = bester_tipp(p, r['lh'], r['la'])
-    hoechste = max(('H','A','O25','U25','BTTS'), key=lambda w: float(p[w]))
-    print(' Schwankung bei 10 % Fehler:', {k: round(v,1) for k,v in rb.items()},
-          f"-> Tipp {tipp}" + (f" (robuster als {hoechste})" if tipp != hoechste else ""))
     if r['mk']:
         # Abstand zum Markt: Warnsignal, keine Rechengroesse. Weicht das Modell beim
         # besten Tipp stark vom Markt ab, ist der scheinbare Value meist eigenes Rauschen
         # und nicht Value - der Buchmacher weiss mehr (Regel in CLAUDE.md, Rangliste).
+        tipp = max(('H','A','O25','U25','BTTS'), key=lambda w: p[w])
         ab = {w: (float(p[w])-float(r['mk'][w]))*100 for w in ('H','A','O25','BTTS')
               if w in r['mk']}
         if 'O25' in ab: ab['U25'] = -ab['O25']

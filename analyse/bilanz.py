@@ -43,13 +43,10 @@ def speichern(eintraege):
         json.dump(eintraege, f, indent=1, ensure_ascii=False)
 
 
-def bester_tipp(p, lh, la):
-    """Variante A mit Robustheit als Entscheider im engen Fall - Rechnung in modell.py.
-
-    Eine einzige Quelle fuer die Tippwahl, damit bilanz.json und die Ausgabe von modell.py
-    nie auseinanderlaufen koennen.
-    """
-    return M.bester_tipp(p, lh, la)
+def bester_tipp(p):
+    """Variante A: die Wette mit der höchsten Wahrscheinlichkeit, ohne Rücksicht auf den Preis."""
+    k = max(WETTEN, key=lambda k: p[k])
+    return k, p[k]
 
 
 def getroffen(tipp, h, a):
@@ -91,7 +88,7 @@ def merken(mid, args):
         print(f"  {m['home_name']} - {m['away_name']}: gesperrt, nicht aufgenommen.")
         return
     p = {k: float(v) for k, v in r['p'].items()}
-    tipp, pt = bester_tipp(p, r['lh'], r['la'])
+    tipp, pt = bester_tipp(p)
     eintraege.append(dict(
         id=mid, liga=r['sid'], datum_unix=m['date_unix'],
         heim=m['home_name'], ausw=m['away_name'],
