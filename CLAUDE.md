@@ -141,6 +141,19 @@ hätte der Anteil bei **keinem von 21 Spielen** den Tipp geändert.
 Ab hier keine Änderung am Rechenweg mehr ohne ausdrückliche neue Anweisung – auch nicht auf
 eigenen Vorschlag hin.
 
+**Einzige Änderung seither: fehlendes xG abfangen (30.09.2026, vom Nutzer verlangt).** Das ist
+keine Korrektur an einem Erfahrungswert, sondern an einem **Datenfehler**: FootyStats erhebt xG
+nicht in jeder Liga und füllt es teils erst nach dem Spiel. Steht dort 0,00, obwohl das Team
+trifft, zählen für diesen Term nur die Tore, und das Team wird beim Liga-xG-Mittel ausgelassen.
+
+Gemessen an 495 Teams: **27 mit unbrauchbarem xG (5,5 %), 7 mit glatter Null, 14 davon in einer
+einzigen Liga.** Ein Team mit exakt Liga-Durchschnitt bekam dadurch Angriffsstärke **0,30 statt
+1,01**; zusätzlich lag der Liga-Nenner 15 % zu niedrig, was die Stärke **aller** 41 intakten
+Teams derselben Liga um 17 % aufblähte. An 76 zwischengespeicherten Spielen geprüft: **70 völlig
+unverändert**, 6 betroffen, 2 Tipps gewechselt, Abstand zum Markt **4,17 → 4,09 Punkte**.
+`XG_ANTEIL` bleibt bei 0,70 – geändert wurde nicht das Gewicht, sondern dass es nur noch vergeben
+wird, wenn in dem Feld etwas steht.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).

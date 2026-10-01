@@ -22,6 +22,12 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    (Gewicht Heim/Auswärts = Spiele / (Spiele + 6)); kleine Stichproben Richtung 1,00 gezogen;
    Form der letzten 6 Spiele mit 25 %.
 3. **Erwartete Tore** = Liga-Basis (60 % Tore, 40 % xG) × eigener Angriff × Abwehr des Gegners.
+   **Fehlt das xG-Feld eines Teams** (0,00 bei erzielten Toren – FootyStats erhebt xG nicht in
+   jeder Liga und füllt es teils erst nachträglich), zählen für diesen Term nur die Tore, und
+   das Team wird beim Liga-xG-Mittel ausgelassen. Ohne das las das Modell ein leeres Feld als
+   „erspielt keine Chancen": Ein Team mit Liga-Durchschnitt bekam Angriffsstärke 0,30 statt
+   1,01, und die Nullen zogen zusätzlich den Liga-Nenner um 15 % nach unten, was die Stärke
+   **aller** Teams derselben Liga um 17 % aufblähte. Eingebaut am 30.09.2026.
 4. **Direkte Duelle** verschieben die Gesamttore um 10 %, wenn das letzte Duell höchstens 3 Jahre alt ist.
 5. **Vorab-Quoten** (optional, `--markt 0.3`): margenbereinigt in erwartete Tore umgerechnet und beigemischt.
    Standard ist 0 – reines Datenmodell.

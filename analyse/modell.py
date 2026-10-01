@@ -169,12 +169,16 @@ def strengths(t, side, L, last6):
     s=t['stats']; n_v=s[f'seasonMatchesPlayed_{side}']; n_o=s['seasonMatchesPlayed_overall']
     Lg_v = L[side]; Lx_v = L['x'+side]; Lg_o=(L['home']+L['away'])/2; Lx_o=(L['xhome']+L['xaway'])/2
     opp = 'away' if side=='home' else 'home'
-    x, g = XG_ANTEIL, 1-XG_ANTEIL
+    # Je Term eigenes xG-Gewicht: fehlt das Feld, zaehlen nur die Tore (siehe xg_anteil).
+    def term(xg_k, tor_k, Lx, Lg, q=None):
+        q = q or s
+        x, g = xg_anteil(q[xg_k], q[tor_k])
+        return x*q[xg_k]/Lx + g*q[tor_k]/Lg
     # Heim- bzw. Auswärtswerte und Gesamtwerte
-    att_v = x*s[f'xg_for_avg_{side}']/Lx_v + g*s[f'seasonScoredAVG_{side}']/Lg_v
-    att_o = x*s['xg_for_avg_overall']/Lx_o + g*s['seasonScoredAVG_overall']/Lg_o
-    dfn_v = x*s[f'xg_against_avg_{side}']/L['x'+opp] + g*s[f'seasonConcededAVG_{side}']/L[opp]
-    dfn_o = x*s['xg_against_avg_overall']/Lx_o + g*s['seasonConcededAVG_overall']/Lg_o
+    att_v = term(f'xg_for_avg_{side}', f'seasonScoredAVG_{side}', Lx_v, Lg_v)
+    att_o = term('xg_for_avg_overall', 'seasonScoredAVG_overall', Lx_o, Lg_o)
+    dfn_v = term(f'xg_against_avg_{side}', f'seasonConcededAVG_{side}', L['x'+opp], L[opp])
+    dfn_o = term('xg_against_avg_overall', 'seasonConcededAVG_overall', Lx_o, Lg_o)
     wv = n_v/(n_v+SEITE_K)
     att = shrink(wv*att_v+(1-wv)*att_o, n_o); dfn = shrink(wv*dfn_v+(1-wv)*dfn_o, n_o)
     # Form der letzten 6 Spiele. Fehlt der lastx-Block, entfaellt der Formanteil und es
@@ -183,8 +187,8 @@ def strengths(t, side, L, last6):
     # Der 10er-Block war ueber saisonfenster() abgesichert, der 6er nicht.
     f = (last6 or {}).get('stats')
     if f:
-        att_f = x*f['xg_for_avg_overall']/Lx_o + g*f['seasonScoredAVG_overall']/Lg_o
-        dfn_f = x*f['xg_against_avg_overall']/Lx_o + g*f['seasonConcededAVG_overall']/Lg_o
+        att_f = term('xg_for_avg_overall', 'seasonScoredAVG_overall', Lx_o, Lg_o, f)
+        dfn_f = term('xg_against_avg_overall', 'seasonConcededAVG_overall', Lx_o, Lg_o, f)
         fa = FORM_ANTEIL
         att = (1-fa)*att + fa*shrink(att_f,6,FORM_DAEMPFUNG_K)
         dfn = (1-fa)*dfn + fa*shrink(dfn_f,6,FORM_DAEMPFUNG_K)
@@ -205,10 +209,38 @@ def quoten_da(m):
     return all(m.get(k, 0) and m[k] > 1 for k in
                ['odds_ft_1','odds_ft_x','odds_ft_2','odds_ft_over25','odds_ft_under25','odds_btts_yes','odds_btts_no'])
 
+def xg_fehlt(xg, tore):
+    """True, wenn das xG-Feld leer ist, obwohl Tore gefallen sind.
+
+    FootyStats erhebt xG nicht in jeder Liga. Steht dort 0,00 bei Teams, die regelmaessig
+    treffen, ist das keine Messung, sondern eine fehlende Angabe - und darf nicht als
+    "erspielt keine Chancen" gelesen werden. Am 30.09.2026 an 495 Teams gemessen: 27 mit
+    unbrauchbarem xG, davon 7 mit glatter Null, 14 davon in einer einzigen Liga.
+    """
+    return (xg or 0) == 0 and (tore or 0) > 0
+
+
+def xg_anteil(xg, tore):
+    """XG_ANTEIL - oder 0, wenn das xG-Feld fehlt. Gibt (xg_gewicht, tor_gewicht) zurueck."""
+    return (0.0, 1.0) if xg_fehlt(xg, tore) else (XG_ANTEIL, 1 - XG_ANTEIL)
+
+
 def league(T):
     def avg(k,w): return sum(t['stats'][k]*t['stats'][w] for t in T)/sum(t['stats'][w] for t in T)
+    def avg_xg(k, tor_k, w):
+        """Liga-xG ohne die Teams, deren xG-Feld fehlt.
+
+        Sonst zieht jede Null den Nenner nach unten und blaeht die Staerke aller anderen
+        Teams derselben Liga auf. In Liga 17308 lag der Nenner dadurch 15 % zu niedrig -
+        alle 41 Teams mit funktionierenden Daten bekamen eine 17 % zu hohe Angriffsstaerke.
+        """
+        G = [t for t in T if not xg_fehlt(t['stats'][k], t['stats'][tor_k])]
+        if not G or sum(t['stats'][w] for t in G) == 0:
+            G = T
+        return sum(t['stats'][k]*t['stats'][w] for t in G)/sum(t['stats'][w] for t in G)
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
-                xhome=avg('xg_for_avg_home','seasonMatchesPlayed_home'),xaway=avg('xg_for_avg_away','seasonMatchesPlayed_away'))
+                xhome=avg_xg('xg_for_avg_home','seasonScoredAVG_home','seasonMatchesPlayed_home'),
+                xaway=avg_xg('xg_for_avg_away','seasonScoredAVG_away','seasonMatchesPlayed_away'))
 
 def h2h_werte(m, jahre=H2H_MAX_JAHRE, k=H2H_DAEMPFUNG_K):
     """Gewicht und Tor-Schnitt der direkten Duelle, beides nur aus den jungen Duellen.

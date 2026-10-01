@@ -269,3 +269,34 @@ dort sitze ein Versatz. In einer geschlossenen Liga ist jedes erzielte xG das ka
 eines anderen. An drei echten Ligatabellen nachgerechnet: Mittel xG-für und Mittel xG-gegen
 sind auf drei Nachkommastellen **identisch** (Differenz 0,0 %).
 
+
+## 12. Fehlendes xG — BEHOBEN am 30.09.2026
+
+**FootyStats erhebt xG nicht in jeder Liga**, und wo es erhoben wird, steht es vor dem Anpfiff
+manchmal noch nicht drin. Das Feld zeigt dann 0,00. Das Modell las diese Null als Messung —
+also als „dieses Team erspielt sich keine Chancen".
+
+Gemessen an 495 Teams im Zwischenspeicher:
+
+| | |
+|---|---|
+| Teams mit unbrauchbarem xG | **27 (5,5 %)** |
+| davon mit glatter Null | 7 |
+| in einer einzigen Liga (17308) | 14 |
+| Ligen mit kaputtem xG insgesamt | **5 von 28 (18 %)** |
+
+**Zwei Fehler auf einmal.** Ein Team mit 1,63 Toren bei Liga-Schnitt 1,61 — also exakt
+Durchschnitt — bekam mit `XG_ANTEIL = 0,70` die Angriffsstärke **0,30 statt 1,01**. Und weil
+die Nullen in den Liga-xG-Durchschnitt einflossen, lag der Nenner 15 % zu niedrig: Alle 41
+Teams derselben Liga **mit** funktionierenden Daten bekamen eine 17 % zu hohe Angriffsstärke.
+
+**Der Fix** steht in `xg_fehlt()` und `xg_anteil()`: Fehlt das Feld, zählen für diesen Term nur
+die Tore, und das Team wird beim Liga-Mittel ausgelassen. Keine neue Konstante, keine Schwelle —
+0,00 bei erzielten Toren ist objektiv eine fehlende Angabe. `XG_ANTEIL` bleibt bei 0,70.
+
+**Geprüft an 76 Spielen mit Vorab-Quoten, ohne ein einziges Ergebnis:** 70 völlig unverändert,
+6 betroffen, 2 Tipps gewechselt, Abstand zum Markt 4,17 → 4,09 Punkte.
+
+**Was offen bleibt:** Teams mit *verzerrtem* statt fehlendem xG. Zwanzig Teams liegen beim
+Verhältnis xG zu Toren unter 0,45 oder über 2,2 — dort ist das Feld gefüllt, aber unplausibel.
+Sie zu erkennen bräuchte eine Schwelle, und die wäre erfunden. Bleibt deshalb unbehandelt.
