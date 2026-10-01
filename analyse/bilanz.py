@@ -196,7 +196,12 @@ if __name__ == "__main__":
     args = ap.parse_args()
     if args.merken:
         for mid in args.merken:
-            merken(mid, args)
+            # Ein Spiel, das die API nicht sauber liefert, darf die uebrigen nicht
+            # mitreissen - sonst fehlen Prognosen, ohne dass es auffaellt (01.10.2026).
+            try:
+                merken(mid, args)
+            except Exception as e:
+                print(f"  {mid}: nicht aufgenommen ({type(e).__name__}: {e})")
     if args.auswerten:
         auswerten(args)
     if not args.merken and not args.auswerten:

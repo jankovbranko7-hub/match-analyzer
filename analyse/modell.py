@@ -226,7 +226,9 @@ def xg_anteil(xg, tore):
 
 
 def league(T):
-    def avg(k,w): return sum(t['stats'][k]*t['stats'][w] for t in T)/sum(t['stats'][w] for t in T)
+    def avg(k,w):
+        n = sum(t['stats'][w] for t in T)
+        return sum(t['stats'][k]*t['stats'][w] for t in T)/n if n else 0.0
     def avg_xg(k, tor_k, w):
         """Liga-xG ohne die Teams, deren xG-Feld fehlt.
 
@@ -272,12 +274,25 @@ def berechne(mid, args):
     m = hole("match", {"match_id": mid}, f"match_{mid}.json", args)['data']
     sid = m['competition_id']
     T = hole("league-teams", {"season_id": sid, "include": "stats"}, f"teams_{sid}.json", args)['data']
-    L = league(T); T = {t['id']: t for t in T}
+    T = {t['id']: t for t in T}
 
+    # Erst pruefen, dann rechnen. Am 01.10.2026 gefunden: league() lief vorher zuerst und
+    # stuerzte am Saisonstart mit ZeroDivisionError ab - ausgerechnet in dem Fall, fuer den
+    # die Sperre da ist. Und fehlte ein Team in der Ligatabelle (Pokalspiel, Play-off,
+    # abweichende competition_id), gab es einen KeyError.
+    fehlend = [m[k] for k in ('homeID', 'awayID') if m[k] not in T]
+    if fehlend:
+        return dict(gesperrt=True, match=m, sid=sid, nh=0, na=0,
+                    grund=f"Team {fehlend[0]} steht nicht in der Ligatabelle von Saison {sid}")
     nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
     na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
     if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
         return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
+
+    L = league(list(T.values()))
+    if min(L['home'], L['away'], L['xhome'], L['xaway']) <= 0:
+        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na,
+                    grund=f"Liga-Durchschnitt ist 0 (Saison {sid} hat noch keine Tore)")
 
     def block(tid, num):
         """Ein lastx-Block. Alle drei (5/6/10) stehen in derselben Antwort,
@@ -317,6 +332,9 @@ def analysiere(mid, args):
     r = berechne(mid, args); m = r['match']
     print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {r['sid']})")
     if r['gesperrt']:
+        if r.get('grund'):
+            print(f"  KEINE PROGNOSE. {r['grund']}.")
+            return
         print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
               f" (noetig: {MIN_SAISONSPIELE}).")
         print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
@@ -375,5 +393,13 @@ if __name__ == "__main__":
     ap.add_argument("--daten", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "daten"))
     args = ap.parse_args()
     if args.liste: liste(args.liste, args)
-    for mid in args.spiele: analysiere(mid, args)
+    # Ein Spiel, das die API nicht sauber liefert, darf die uebrigen nicht mitreissen.
+    # Am 01.10.2026 gefunden: ohne das brach der ganze Aufruf beim ersten Fehler ab.
+    for mid in args.spiele:
+        try:
+            analysiere(mid, args)
+        except Exception as e:
+            print("=" * 70)
+            print(f"Spiel {mid}: KEINE PROGNOSE. {type(e).__name__}: {e}")
+            print("  Die uebrigen Spiele werden trotzdem gerechnet.")
     if not args.liste and not args.spiele: ap.print_help()

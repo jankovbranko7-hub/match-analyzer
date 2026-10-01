@@ -300,3 +300,26 @@ die Tore, und das Team wird beim Liga-Mittel ausgelassen. Keine neue Konstante, 
 **Was offen bleibt:** Teams mit *verzerrtem* statt fehlendem xG. Zwanzig Teams liegen beim
 Verhältnis xG zu Toren unter 0,45 oder über 2,2 — dort ist das Feld gefüllt, aber unplausibel.
 Sie zu erkennen bräuchte eine Schwelle, und die wäre erfunden. Bleibt deshalb unbehandelt.
+
+## 13. Abstürze statt Sperre — BEHOBEN am 01.10.2026
+
+Bei der systematischen Fehlersuche gefunden: `berechne()` konnte mit einer unbehandelten
+Ausnahme abbrechen, statt sauber „keine Prognose" zu melden.
+
+| Fall | vorher | jetzt |
+|---|---|---|
+| Saisonstart, noch kein Spiel gespielt | `ZeroDivisionError` | gesperrt |
+| Liga ohne Tore in den bisherigen Spielen | `ZeroDivisionError` in `strengths()` | gesperrt, mit Grund |
+| Team nicht in der Ligatabelle (Pokal, Play-off, abweichende `competition_id`) | `KeyError` | gesperrt, mit Grund |
+
+**Die Ursache beim ersten Fall:** `L = league(T)` lief **vor** der `MIN_SAISONSPIELE`-Prüfung —
+ausgerechnet in dem Fall, für den die Sperre gebaut wurde. Die Reihenfolge ist jetzt umgedreht:
+erst prüfen, dann rechnen.
+
+**Der eigentliche Schaden lag aber in der Schleife.** `for mid in args.spiele: analysiere(...)`
+fing nichts ab: Ein einziges kaputtes Spiel brach den ganzen Aufruf ab, und alle folgenden
+Spiele wurden nie gerechnet. Bei `bilanz.py --merken` fehlten dadurch Prognosen, ohne dass es
+auffiel. Beide Schleifen fangen jetzt je Spiel ab und rechnen weiter.
+
+**Geprüft an 97 zwischengespeicherten Spielen:** 82 gerechnet, **alle identisch zu vorher**,
+null Abweichungen. Der Fix ist rein defensiv.
