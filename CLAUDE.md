@@ -202,7 +202,10 @@ unteren Block der Rangliste und der Satz dazu in die Begründung.
 
 **Erst danach steht der beste Tipp fest.** Bei den fünf Wetten mit weniger als zwei
 Prozentpunkten Abstand zueinander immer den dritten Durchgang machen – dort entscheidet
-die Datengrundlage, nicht die dritte Nachkommastelle.
+die Datengrundlage, nicht die dritte Nachkommastelle. **Seit dem 30.09.2026 rechnet das Modell
+diesen Fall selbst**: Innerhalb der zwei Punkte wählt es die robusteste Wette (Zeile
+`Schwankung bei 10 % Fehler`). Der dritte Durchgang prüft dann nur noch, ob die Eingaben
+dazu passen.
 
 **Durchgang 4 – Schlusskontrolle vor dem Absenden.** Vom Nutzer am 29.09.2026 verlangt:
 lieber dreimal rechnen als einmal etwas vergessen. Die Antwort wird erst abgeschickt, wenn
@@ -288,8 +291,24 @@ Regeln zur Vorlage:
 - **Bester Tipp = die Wette mit der höchsten Wahrscheinlichkeit** aus den fünf Zeilen der Tabelle
   (Variante A, vom Nutzer am 26.09.2026 entschieden). **Der Preis entscheidet nicht mit** – auch
   nicht in engen Fällen, auch dann nicht, wenn eine andere Wette besseren Value hätte.
-  Bei Gleichstand die Wette mit der besseren Datengrundlage, und das im Tipp-Satz sagen.
   Im Tipp-Satz klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Liegen mehrere Wetten innerhalb von zwei Prozentpunkten, entscheidet die Robustheit** –
+  die Wette, deren Wahrscheinlichkeit am wenigsten schwankt, wenn die erwarteten Tore um 10 %
+  danebenliegen. `modell.py` gibt die Zahlen in der Zeile `Schwankung bei 10 % Fehler` aus und
+  wählt danach; `bilanz.py` benutzt dieselbe Funktion, damit beide nie auseinanderlaufen.
+  Vom Nutzer am 30.09.2026 verlangt: Das Zwei-Punkte-Fenster ist seine Zahl vom 28.09., und
+  „Datengrundlage" war dort bisher ein Urteil – jetzt ist es gerechnet.
+  **Hat die Robustheit entschieden, gehört ein Halbsatz in den Tipp-Satz.**
+
+  Warum nur im engen Fenster: Robustheit ist dort am höchsten, wo die Wahrscheinlichkeit am
+  niedrigsten ist – eine 20-%-Wette bewegt sich kaum, weil sie ohnehin fast nie eintritt. Als
+  alleiniges Kriterium hätte sie an 76 Spielen den Tipp bei **46 %** geändert und im Schnitt
+  **28,9 Prozentpunkte** Wahrscheinlichkeit gekostet; „Sieg Auswärts" wäre in 24 % der Spiele
+  Tipp geworden, obwohl es in keinem einzigen vorne lag. Im Zwei-Punkte-Fenster ändert sie den
+  Tipp bei **8 %** der Spiele, kostet dabei **0,97 Punkte** Wahrscheinlichkeit und bringt
+  **2,51 Punkte** weniger Schwankung. Der Abstand zum Markt bleibt praktisch gleich
+  (4,17 → 4,21 Punkte). Gemessen am 30.09.2026 an 76 zwischengespeicherten Spielen, **ohne ein
+  einziges Ergebnis** – verglichen wurde nur gegen den Buchmacherpreis, nicht gegen Ausgänge.
 - **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
   Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
   Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten

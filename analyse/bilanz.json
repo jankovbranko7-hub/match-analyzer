@@ -1943,7 +1943,10 @@
   "p_tipp": 0.5394,
   "faire_quote": 1.85,
   "quote": 1.8,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 1
+  }
  },
  {
   "id": 8608759,
@@ -1965,6 +1968,9 @@
   "p_tipp": 0.5568,
   "faire_quote": 1.8,
   "quote": 1.7,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 2,
+   "a": 1
+  }
  }
 ]

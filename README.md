@@ -28,6 +28,19 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
 6. **Poisson mit Dixon-Coles-Korrektur** (rho = −0,07) ergibt die Ergebnis-Matrix 0:0 bis 10:10;
    daraus Heim/Remis/Auswärts, Über/Unter 2,5, Beide treffen und die Top-3-Ergebnisse.
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
+8. **Bester Tipp** = höchste Wahrscheinlichkeit der fünf Wetten. Liegen mehrere innerhalb von
+   zwei Prozentpunkten, entscheidet die **Robustheit**: Für jede Wette wird gemessen, um wie
+   viele Punkte ihre Wahrscheinlichkeit schwankt, wenn beide erwarteten Tore um 10 % daneben
+   liegen (vier Ecken: je 10 % hoch und runter). Die kleinste Schwankung gewinnt. Zahlen in
+   der Ausgabezeile `Schwankung bei 10 % Fehler`.
+
+   Hintergrund: „Beide treffen" ist das Produkt zweier abgeflachter Kurven und schwankt um
+   rund 10 Punkte, „Über/Unter 2,5" sitzt am steilsten Punkt der Verteilung und schwankt um
+   13. Eine fehlertolerante Wette hat damit auch die verlässlichere faire Quote. Nur im
+   Zwei-Punkte-Fenster, weil Robustheit sonst die unwahrscheinlichsten Wetten belohnt – als
+   alleiniges Kriterium hätte sie an 76 Spielen 28,9 Prozentpunkte Wahrscheinlichkeit
+   gekostet. Im Fenster ändert sie den Tipp bei 8 % der Spiele: −0,97 Punkte
+   Wahrscheinlichkeit, +2,51 Punkte weniger Schwankung. Eingebaut am 30.09.2026.
 
 ### Bilanz führen
 
