@@ -323,3 +323,129 @@ auffiel. Beide Schleifen fangen jetzt je Spiel ab und rechnen weiter.
 
 **Geprüft an 97 zwischengespeicherten Spielen:** 82 gerechnet, **alle identisch zu vorher**,
 null Abweichungen. Der Fix ist rein defensiv.
+
+## 14. API-Fehler riss doch den ganzen Lauf mit — BEHOBEN am 02.10.2026
+
+Punkt 13 hat die Schleifen abgesichert, aber nur gegen `Exception`. Der in der Praxis
+häufigste Fehler kam trotzdem durch:
+
+```
+hole() ->  if not daten.get("success", True): sys.exit(...)
+```
+
+`sys.exit` wirft `SystemExit`, und **`SystemExit` erbt von `BaseException`, nicht von
+`Exception`** (`issubclass(SystemExit, Exception)` ist `False`). Ein `except Exception`
+fängt es also nicht. Betroffen war genau die Antwort, die FootyStats bei erreichtem
+Stundenlimit, ungültigem Key oder unbekannter Spiel-ID schickt: `{"success": false}`.
+
+**Wirkung:** Schickt man zwanzig Spiele und das dritte läuft ins Stundenlimit, brechen
+Spiel 4 bis 20 ab — **ohne eine Zeile Ausgabe**. Bei `bilanz.py --merken` fehlen dadurch
+Prognosen, ohne dass es auffällt. Nachgestellt und bestätigt. Dass HTTP-Fehler (417, 500)
+abgefangen wurden, hat das verdeckt: die sind `Exception`.
+
+**Behoben:** `hole()` wirft jetzt `RuntimeError` statt `sys.exit`. Der fehlende API-Key
+bleibt bei `sys.exit` — der *soll* alles anhalten. Geprüft: identische Zahlen, nichts
+Kaputtes landet im Zwischenspeicher.
+
+Das ist auch der Grund, warum Durchgang 0 Punkt 4 (Vollzähligkeit der Liste) bleibt.
+
+## 15. Kaputtes xG wird nur bei glatter Null erkannt — OFFEN
+
+Punkt 12 fängt `xg == 0 and tore > 0` ab. Der Test ist zu scharf: Er erkennt die glatte
+Null, nicht das halb erfasste xG. Gemessen am 02.10.2026 an **519 Teams mit mindestens
+fünf Spielen**:
+
+| | Teams | Anteil |
+|---|---|---|
+| xG glatt null (wird abgefangen) | 7 | 1,3 % |
+| xG/Tore unter 0,40 (wird **nicht** abgefangen) | 11 | 2,1 % |
+| Median xG/Tore aller Teams | 1,05 | |
+
+**Alle 11 stehen in Saison 17308** (Schweizer Amateurliga), neben den 7 Nullen derselben
+Liga: 18 von 48 Teams mit unbrauchbarem xG, 7 davon abgefangen. Beispiele: FC Bassecourt
+0,02 xG bei 1,25 Toren, CS Chênois 0,18 bei 1,88, FC Monthey 0,52 bei 1,50.
+
+**Wirkung auf die Angriffsstärke** (Saison 17308, überall sonst keine Änderung):
+
+| Team | jetzt | mit Grenze 0,40 | |
+|---|---|---|---|
+| FC Coffrane | 0,19 | 0,55 | **+182 %** |
+| CS Chênois | 0,44 | 1,17 | **+166 %** |
+| FC Monthey | 0,54 | 0,93 | **+73 %** |
+| FC Sion II (intakt) | 0,90 | 0,87 | −3 % |
+
+Dazu bleiben die 11 Teams im Liga-xG-Nenner und drücken ihn um **4,5 %**, was alle intakten
+Teams derselben Liga entsprechend zu stark macht — dieselbe Mechanik wie in Punkt 12, nur
+schwächer.
+
+**Die eine Prognose aus dieser Liga ist die, die am deutlichsten danebenlag:**
+Wohlen – Schötz, Unter 2,5 mit 55,2 % bei λ 1,04–1,43 — **Ergebnis 1:5**. Schötz hatte
+auswärts 3,40 Tore pro Spiel erzielt, die API nennt dafür 1,69 xG (Verhältnis 0,50).
+Mit `XG_ANTEIL = 0,70` hat das Modell 70 % auf die 1,69 gelegt statt auf die 3,40 — der
+Angriff war halbiert. Verhältnis 0,50 liegt über jeder Grenze von 0,40, wäre also **auch
+mit dem Fix nicht erkannt worden**. Der Eintrag in `bilanz.json` bleibt unverändert.
+
+**Der bessere Test ist der auf Liga-Ebene**, nicht je Team. Gesamt-xG gegen Gesamt-Tore,
+über alle 29 zwischengespeicherten Ligen gerechnet, trennt scharf:
+
+| Saison | Tore | xG | xG/Tore | |
+|---|---|---|---|---|
+| 16808 (Nations League) | 1,06 | 0,56 | **0,52** | schon gesperrt (Länderspiele) |
+| 17308 (Schweiz) | 1,61 | 0,87 | **0,54** | die Liga mit den 18 Teams |
+| 17139 | 1,87 | 1,41 | 0,76 | auffällig |
+| 17110 (Eerste Divisie) | 1,85 | 1,64 | 0,89 | Grenzfall |
+| 20 weitere Ligen | | | 0,90 – 1,12 | ok |
+| 16580 | 0,97 | 1,29 | **1,34** | Gegenrichtung |
+
+Zwischen 0,54 und 0,76 liegt eine deutliche Lücke. Ein Liga-Test würde also beide bekannten
+Problemligen fangen, inklusive der halb erfassten Teams, und nicht nur die Nullen.
+
+**Nicht eingebaut.** Das wäre eine Änderung am Rechenweg und braucht eine ausdrückliche
+Anweisung. Vorgelegt am 02.10.2026.
+
+## 16. Gegenrichtung: xG über den Toren — OFFEN, klein
+
+Saison 16580 hat **34 % mehr xG als Tore** (0,97 Tore, 1,29 xG). Weil `LIGA_BASIS_XG = 0,40`
+dem xG blind 40 % der Liga-Basis gibt, liegt die Torbasis dort **8,8 % über** dem, was
+tatsächlich fiel — das drückt systematisch Richtung Über 2,5 und Beide treffen. Die zehn
+Prognosen dieser Liga in `bilanz.json` waren alle Unter 2,5 oder Beide treffen und kamen auf
+21 Tore gegen 22,3 erwartete (−6,0 %), 7 von 10 getroffen — zu wenige Spiele, um etwas zu
+belegen, aber die Richtung passt zur Rechnung.
+
+## 17. Fenster und Form zählen dieselben Spiele doppelt — OFFEN, bekannt
+
+Bei junger Saison füllt das Fenster (Punkt 10) mit den letzten **10** Spielen auf, danach
+mischt `strengths()` noch die Form der letzten **6** dazu. Die sechs jüngsten Spiele stecken
+damit in beiden Blöcken:
+
+| Saisonspiele | Gewicht Saison | Gewicht 10er-Fenster | Gewicht 6er-Form |
+|---|---|---|---|
+| 3 | 0,22 | 0,52 | 0,25 |
+| 5 | 0,38 | 0,38 | 0,25 |
+| 8 | 0,60 | 0,15 | 0,25 |
+| 10 | 0,75 | 0,00 | 0,25 |
+
+Bei drei Saisonspielen hängen also 77 % der Teamstärke an Spielen außerhalb der laufenden
+Saison, die sechs jüngsten davon doppelt. Das ist keine Falschrechnung, sondern eine
+Überschneidung der beiden Gewichte — sie macht die Form bei junger Saison stärker, als
+`FORM_ANTEIL = 0,25` vermuten lässt. Nicht angefasst (Gewichte liegen fest).
+
+## 18. Was geprüft wurde und in Ordnung war (02.10.2026)
+
+Damit nicht zweimal gesucht wird:
+
+| geprüft | Ergebnis |
+|---|---|
+| Dixon-Coles-Faktoren negativ? | kleinster Faktor 0,72 über λ 0,2–4,0; negativ erst ab λ = 14,3 |
+| Massenverlust der 11×11-Matrix | höchstens 5,7 · 10⁻³ bei λ 4,0/4,0 |
+| `H + D + A` und `O25 + U25` | Abweichung von 1 höchstens 7 · 10⁻¹⁶ |
+| Doppelte Team-IDs in `league-teams` (würde eine still verschlucken) | keine, 29 Ligen |
+| Fehlende Felder in den `lastx`-Blöcken | keine, 418 Blöcke |
+| H2H-Daten: `date_unix` vorhanden, Fremdpaare | 1287 Duelle, alle mit Datum, keine Fremdpaare |
+| Seitenlogik `lh = base_h · att_heim · def_ausw` | richtig zugeordnet, kein doppelter Heimvorteil |
+| `abstand_markt` in `bilanz.py` gegen `modell.py` | identische Formel, `U25 = −O25` korrekt |
+| Margenbereinigung proportional statt Quotenverhältnis | Unterschied im Mittel 0,71 Punkte (Heimsieg), max 2,87; 2 von 32 Spielen wechseln den Rangliste-Block |
+
+Der `lastx`-10er-Block behauptet **immer** 10 Spiele, auch wenn ein Team weniger gespielt
+hat — aus der Antwort nicht prüfbar. `saisonfenster()` hebt die Stichprobe deshalb auch dann
+auf 10. Betrifft nur neu gegründete Teams.

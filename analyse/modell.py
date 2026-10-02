@@ -43,7 +43,12 @@ def hole(endpoint, params, datei, args):
     with urllib.request.urlopen(url, timeout=60) as r:
         daten = json.load(r)
     if not daten.get("success", True):
-        sys.exit(f"API-Fehler bei {endpoint}: {daten.get('message')}")
+        # Bewusst raise und nicht sys.exit: sys.exit wirft SystemExit, und SystemExit erbt
+        # von BaseException, nicht von Exception. Die Schleifen in modell.py und bilanz.py
+        # fangen "except Exception" - ein sys.exit hier waere also durchgeschlagen und haette
+        # alle noch nicht gerechneten Spiele stillschweigend fallen lassen, genau der Fehler,
+        # der am 01.10.2026 behoben werden sollte. Gefunden am 02.10.2026.
+        raise RuntimeError(f"API-Fehler bei {endpoint}: {daten.get('message')}")
     os.makedirs(args.daten, exist_ok=True)
     with open(pfad, "w") as f:
         json.dump(daten, f)
