@@ -716,3 +716,70 @@ der Session und sind mit ihr weg. Wer sie wieder braucht, baut sie neu – oder 
 dass sie ins Repo sollen. Der Aufbau steht oben beschrieben: `league-matches` je Liga, nach
 `date_unix` sortieren, Teamdaten je Spiel nur aus Spielen davor, mindestens 10 Vorspiele je
 Team, dann Log-Likelihood der echten Ergebnisse unter der Dixon-Coles-Matrix.
+
+## 25. Alle acht Gewichte an echten Ergebnissen geprüft — KEINES GEÄNDERT, Grenze korrigiert
+
+Am 02.10.2026, nachdem der Nutzer die Rückschau erlaubt hatte. Walk-forward über **2136 Spiele
+aus 12 reifen Ligen**, jede Konstante einzeln durchgefahren, **getrennt auf zwei unabhängigen
+Ligen-Hälften** – damit sich Anpassung von echtem Gewinn unterscheiden lässt.
+
+| Konstante | jetzt | beste in A | beste in B | |
+|---|---|---|---|---|
+| `XG_ANTEIL` | 0,70 | 0,4 | 0,6 | uneinig |
+| `LIGA_BASIS_XG` | 0,40 | 0,2 | 0,6 | uneinig |
+| `SEITE_K` | 6 | 2 | 20 | uneinig |
+| `DAEMPFUNG_K` | 5 | 12 | 3 | uneinig |
+| `FORM_ANTEIL` | 0,25 | 0,4 | 0,25 | uneinig |
+| `FORM_DAEMPFUNG_K` | 3 | 3 | 1 | uneinig |
+| Formfenster | 6 | 4 | 8 | uneinig |
+| `DIXON_COLES_RHO` | −0,07 | −0,025 | −0,07 | uneinig |
+
+**Acht von acht widersprechen sich.** Das ist die Signatur von Anpassung an Rauschen. Die
+Regel „nicht an vergangenen Spielen optimieren" ist damit nicht länger nur eine Haltung,
+sondern gemessen. **Kein Gewicht wurde geändert.**
+
+### Der scheinbare Ausreißer und was er wirklich war
+
+`XG_ANTEIL` war die einzige Konstante, bei der **beide** Hälften in dieselbe Richtung zeigten
+(0,4 und 0,6, beide unter 0,70). Auf alle 12 Ligen gerechnet war 0,55 gegen 0,70 sogar
+**+12,10 LL bei t = +3,60**, also klar signifikant. Das sah nach einem echten Fund aus.
+
+Die Kontrolle war, das xG je Liga gegen die Tore zu halten. Ergebnis: **eine** Liga fiel
+heraus – Saison 16015 mit einem Verhältnis von **0,66**, also knapp über der damaligen Grenze
+`LIGA_XG_MIN = 0,65`. Ohne diese Liga:
+
+| Menge | Optimum | 0,55 gegen 0,70 |
+|---|---|---|
+| alle 11 guten Ligen | 0,6 | +1,81 LL, t = +0,66 |
+| gute Ligen, Hälfte A | 0,6 | +0,92 LL, t = +0,47 |
+| gute Ligen, Hälfte B | 0,6 | +0,90 LL, t = +0,46 |
+
+Das Optimum ist zum ersten Mal in allen Mengen **gleich**, und der Unterschied zu 0,70 ist
+nicht mehr signifikant. **Eine von zwölf Ligen hat gereicht, um ein Gewicht um 0,2 bis 0,3
+falsch aussehen zu lassen.**
+
+**Die Lehre:** Sieht eine Konstante schlecht aus, erst nach der kaputten Liga suchen, nicht
+am Gewicht drehen.
+
+### Was geändert wurde: `LIGA_XG_MIN` 0,65 → 0,85
+
+Die 0,65 stammten aus einer Lücke in 29 Ligen-Momentaufnahmen (0,54 / 0,76), waren also nie
+an Ergebnissen geprüft. Jetzt sind sie es:
+
+| Saison 16015 allein, 161 Spiele | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| xG mit 0,70 (Grenze 0,65) | −2,69346 | 64,0 % | 0,22492 |
+| **xG aus (Grenze 0,85)** | **−2,55881** | **65,8 %** | **0,21080** |
+
+Über alle 2136 Spiele: LogLik je Spiel −2,91260 → **−2,90246**, Brier 0,23240 → **0,23134**,
+paarweise **+21,68 LL bei t = +2,91 – signifikant.**
+
+**Grenze 0,95 wäre zu weit:** fasst vier Ligen, +1,75 LL bei t = +0,18, Trefferquote fällt von
+59,3 auf 58,1 %. Die Verhältnisse der zwölf Ligen lagen bei 0,66 und dann erst wieder bei
+0,91 bis 1,12 – 0,85 liegt in der Lücke, 0,95 schon im guten Bereich. `LIGA_XG_WARN` deshalb
+jetzt 0,95.
+
+An den 114 zwischengespeicherten Spielen: **alle 114 völlig unverändert**, 0 Tippwechsel,
+0 Sperrenwechsel – die betroffenen Ligen kommen dort nicht vor. Von den 29
+Ligen-Momentaufnahmen wird zusätzlich Saison 17139 (0,76) verworfen; 16504, 17110, 17227 und
+17279 (0,89 bis 0,93) bekommen nur den Hinweis.

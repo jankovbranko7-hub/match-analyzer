@@ -202,11 +202,12 @@ nachgemessen: 7 mit glatter Null (erkannt), **11 mit xG/Tore unter 0,40 (nicht e
 alle 11 in Saison 17308. Dort hatten **18 von 48 Teams** unbrauchbares xG; die
 Angriffsstärke lag bis zu **182 % zu niedrig** (FC Coffrane 0,19 statt 0,55).
 
-**Der Defekt sitzt in der Liga, nicht im Team.** `LIGA_XG_MIN = 0,65` vergleicht deshalb
+**Der Defekt sitzt in der Liga, nicht im Team.** `LIGA_XG_MIN` vergleicht deshalb
 Gesamt-xG gegen Gesamt-Tore der Saison. Liegt der Wert darunter, entfallen `XG_ANTEIL` und
 `LIGA_BASIS_XG` **für die ganze Liga** – gerechnet wird nur mit Toren, auch für Teams, deren
-Feld gefüllt aussieht. Zwischen 0,65 und `LIGA_XG_WARN = 0,85` wird nicht eingegriffen, die
-Ausgabe weist nur hin.
+Feld gefüllt aussieht. Zwischen `LIGA_XG_MIN` und `LIGA_XG_WARN` wird nicht eingegriffen, die
+Ausgabe weist nur hin. **Die Grenzen stehen seit der fünften Änderung bei 0,85 und 0,95** –
+anfangs waren es 0,65 und 0,85.
 
 Die Grenze liegt in der Mitte einer gemessenen Lücke: 20 von 29 Ligen liegen zwischen 0,89
 und 1,34, dann folgen 0,89 und 0,76, dann 0,54 (Saison 17308) und 0,52 (Nations League).
@@ -349,10 +350,64 @@ Die Ausgabe zeigt die Dämpfungszeile nur, wenn der Faktor nicht 1,00 ist. Die 7
 Aufzeichnungen in `bilanz.json` sind von der Episode unberührt – es wurde keine Prognose
 mit 0,85 festgehalten.
 
+**Fünfte Änderung: `LIGA_XG_MIN` von 0,65 auf 0,85 (02.10.2026, vom Nutzer verlangt).**
+**Die erste und einzige Änderung dieser Session, deren Gewinn an echten Ergebnissen belegt
+ist.** Sie entstand aus dem Konstanten-Durchlauf (siehe „Gewichte nicht verändern"): Das
+xG-Gewicht sah zu hoch aus, und die Ursache war eine einzige Liga mit kaputtem xG, die knapp
+unter der alten Grenze lag.
+
+| Saison 16015 allein, 161 Spiele | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| xG mit 0,70 (Grenze 0,65) | −2,69346 | 64,0 % | 0,22492 |
+| **xG aus (Grenze 0,85)** | **−2,55881** | **65,8 %** | **0,21080** |
+
+Über alle 2136 Spiele: LogLik je Spiel −2,91260 → **−2,90246**, Brier 0,23240 → **0,23134**,
+Trefferquote 59,1 → 59,3 %, paarweise **+21,68 LL bei t = +2,91 – signifikant.**
+
+**Weiter hinauf geht nicht.** Eine Grenze von 0,95 fasst vier Ligen und wird wieder
+schlechter: +1,75 LL, t = +0,18, Trefferquote fällt auf 58,1 %. Die Verhältnisse der zwölf
+geprüften Ligen lagen bei 0,66 und dann erst wieder bei 0,91 bis 1,12; 0,85 liegt in dieser
+Lücke. `LIGA_XG_WARN` steht deshalb jetzt bei 0,95 – die Ligen zwischen 0,85 und 0,95 haben
+brauchbares xG und bekommen nur einen Hinweis.
+
+**Kein Gewicht wurde angefasst.** Geändert wurde eine Schranke für Datenqualität. An den
+114 zwischengespeicherten Spielen: **alle 114 völlig unverändert** – die betroffenen Ligen
+(17139 bei 0,76 wird jetzt zusätzlich verworfen) kommen dort nicht vor.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
 Sie sind **bewusst nach Erfahrung gesetzt** und nicht an vergangenen Spielen optimiert. Das ist so gewollt.
+
+**Am 02.10.2026 einmal gegen echte Ergebnisse geprüft – und die Regel ist damit gemessen,
+nicht nur gesetzt.** Der Nutzer hat die Rückschau erlaubt. Alle acht Konstanten wurden im
+Walk-forward über 2136 Spiele durchgefahren, getrennt auf **zwei unabhängigen Ligen-Hälften**:
+
+| Konstante | jetzt | beste in Hälfte A | beste in Hälfte B | |
+|---|---|---|---|---|
+| `XG_ANTEIL` | 0,70 | 0,4 | 0,6 | uneinig |
+| `LIGA_BASIS_XG` | 0,40 | 0,2 | 0,6 | uneinig |
+| `SEITE_K` | 6 | 2 | 20 | uneinig |
+| `DAEMPFUNG_K` | 5 | 12 | 3 | uneinig |
+| `FORM_ANTEIL` | 0,25 | 0,4 | 0,25 | uneinig |
+| `FORM_DAEMPFUNG_K` | 3 | 3 | 1 | uneinig |
+| Formfenster | 6 | 4 | 8 | uneinig |
+| `DIXON_COLES_RHO` | −0,07 | −0,025 | −0,07 | uneinig |
+
+**Acht von acht widersprechen sich.** Keine einzige Konstante hat in beiden Hälften dasselbe
+Optimum. Wer das nächste Mal eine Konstante „verbessern" will: das ist nachgemessen und es
+ist Rauschen. Die Werte bleiben.
+
+Der einzige scheinbare Ausreißer war `XG_ANTEIL` – **beide** Hälften bevorzugten etwas unter
+0,70. Die Kontrolle löste es auf: Es kam aus **einer** Liga mit kaputtem xG (Saison 16015,
+Verhältnis 0,66), die knapp an der damaligen Grenze `LIGA_XG_MIN = 0,65` vorbeirutschte. Ohne
+diese Liga liegt das Optimum in allen drei Mengen einheitlich bei 0,6 und der Unterschied zu
+0,7 ist nicht signifikant (t = +0,66 über alle, +0,47 und +0,46 je Hälfte). Geändert wurde
+deshalb **kein Gewicht**, sondern die Datenschranke – siehe unten, fünfte Änderung.
+
+**Die Lehre für jede künftige Idee:** Sieht eine Konstante schlechter aus als eine andere,
+dann **erst nach der kaputten Liga suchen**, nicht am Gewicht drehen. Hier hat eine von zwölf
+Ligen gereicht, um ein Gewicht um 0,2 bis 0,3 falsch aussehen zu lassen.
 
 **Diese Werte bleiben fest.** Nicht anpassen, weil sie für ein einzelnes Spiel besser passen würden –
 das wäre Anpassung im Nachhinein und macht alle früheren Prognosen unvergleichbar.

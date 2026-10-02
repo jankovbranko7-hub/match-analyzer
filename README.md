@@ -23,10 +23,11 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    Form der letzten 6 Spiele mit 25 %.
 3. **Erwartete Tore** = Liga-Basis (60 % Tore, 40 % xG) × eigener Angriff × Abwehr des Gegners.
    **Taugt das xG einer ganzen Liga nicht** – Gesamt-xG geteilt durch Gesamt-Tore unter
-   `LIGA_XG_MIN` (0,65) –, entfallen `XG_ANTEIL` und `LIGA_BASIS_XG` **für diese Liga**: Es
+   `LIGA_XG_MIN` (0,85) –, entfallen `XG_ANTEIL` und `LIGA_BASIS_XG` **für diese Liga**: Es
    wird nur mit Toren gerechnet, für jedes Team, auch für die mit gefüllt aussehendem Feld.
-   Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team. Zwischen 0,65 und 0,85
-   wird nicht eingegriffen, die Ausgabe weist nur darauf hin. Eingebaut am 02.10.2026.
+   Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team. Zwischen 0,85 und 0,95
+   wird nicht eingegriffen, die Ausgabe weist nur darauf hin. Eingebaut am 02.10.2026,
+   Grenze am selben Tag an echten Ergebnissen von 0,65 auf 0,85 korrigiert.
    **Fehlt das xG-Feld eines Teams** (0,00 bei erzielten Toren – FootyStats erhebt xG nicht in
    jeder Liga und füllt es teils erst nachträglich), zählen für diesen Term nur die Tore, und
    das Team wird beim Liga-xG-Mittel ausgelassen. Ohne das las das Modell ein leeres Feld als
@@ -193,9 +194,22 @@ an 29 Ligen:
 | 0,89 / 0,76 | 2 | Hinweis, keine Änderung |
 | **0,54 / 0,52** | 2 | xG wird verworfen |
 
-Zwischen 0,54 und 0,76 liegt eine deutliche Lücke; die Grenze liegt in ihrer Mitte. Die zwei
-verworfenen sind Saison 17308 (die Liga mit den 18 Teams) und 16808 (Nations League, ohnehin
-gesperrt). Der Test **kostet keine zusätzliche API-Abfrage** – die Werte stehen in der
+**Die Grenze lag zunächst bei 0,65 und ist am 02.10.2026 auf 0,85 korrigiert worden**, gemessen
+an echten Ergebnissen. Im Walk-forward über 2136 Spiele rutschte Saison 16015 mit einem
+Verhältnis von **0,66** knapp durch – und genau diese Liga verdarb das xG-Gewicht:
+
+| Saison 16015 allein, 161 Spiele | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| xG mit 0,70 (Grenze 0,65) | −2,69346 | 64,0 % | 0,22492 |
+| **xG aus (Grenze 0,85)** | **−2,55881** | **65,8 %** | **0,21080** |
+
+Über alle 2136 Spiele: LogLik je Spiel −2,91260 → **−2,90246**, Brier 0,23240 → **0,23134**,
+paarweise **+21,68 LL bei t = +2,91**. Weiter hinauf geht nicht: eine Grenze von 0,95 fasst
+vier Ligen und wird wieder schlechter (+1,75 LL, t = +0,18, Trefferquote 58,1 statt 59,3 %).
+Die Verhältnisse der zwölf geprüften Ligen lagen bei 0,66 und dann erst wieder bei 0,91 bis
+1,12 – 0,85 liegt in dieser Lücke. `LIGA_XG_WARN` steht deshalb jetzt bei 0,95.
+
+Der Test **kostet keine zusätzliche API-Abfrage** – die Werte stehen in der
 `league-teams`-Antwort, die das Modell ohnehin holt.
 
 **Gegengeprüft an 114 zwischengespeicherten Spielen:** 113 völlig unverändert (99,1 %), ein
@@ -243,12 +257,40 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `LAMBDA_DAEMPFUNG` | 1,00 | aus – geprüft und verworfen, siehe unten |
 | `GLEICHSTAND_PUNKTE` | 2,0 | darunter entscheidet die Empfindlichkeit, nicht die Wahrscheinlichkeit |
 | `EMPF_STOERUNG` | 0,10 | λ-Fehler, an dem die Empfindlichkeit gemessen wird |
-| `LIGA_XG_MIN` | 0,65 | darunter rechnet die ganze Liga nur mit Toren |
-| `LIGA_XG_WARN` | 0,85 | darunter nur ein Hinweis in der Ausgabe |
+| `LIGA_XG_MIN` | 0,85 | darunter rechnet die ganze Liga nur mit Toren |
+| `LIGA_XG_WARN` | 0,95 | darunter nur ein Hinweis in der Ausgabe |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
 | `FENSTER_MIN_SPIELE` | 10 | darunter wird die Saison mit den letzten 10 Spielen aufgefüllt |
 | `CACHE_STUNDEN` | 6 | danach werden API-Daten neu geladen |
+
+### Die Gewichte wurden am 02.10.2026 einmal gegen echte Ergebnisse geprüft
+
+Der Nutzer hat die Rückschau erlaubt. Alle acht Konstanten wurden im Walk-forward über
+2136 Spiele durchgefahren, und zwar **auf zwei unabhängigen Ligen-Hälften getrennt**, um
+Anpassung von echtem Gewinn zu unterscheiden:
+
+| Konstante | jetzt | beste in Hälfte A | beste in Hälfte B | |
+|---|---|---|---|---|
+| `XG_ANTEIL` | 0,70 | 0,4 | 0,6 | uneinig |
+| `LIGA_BASIS_XG` | 0,40 | 0,2 | 0,6 | uneinig |
+| `SEITE_K` | 6 | 2 | 20 | uneinig |
+| `DAEMPFUNG_K` | 5 | 12 | 3 | uneinig |
+| `FORM_ANTEIL` | 0,25 | 0,4 | 0,25 | uneinig |
+| `FORM_DAEMPFUNG_K` | 3 | 3 | 1 | uneinig |
+| Formfenster | 6 | 4 | 8 | uneinig |
+| `DIXON_COLES_RHO` | −0,07 | −0,025 | −0,07 | uneinig |
+
+**Acht von acht widersprechen sich.** Keine einzige Konstante hat in beiden Hälften dasselbe
+Optimum – das ist die Signatur von Anpassung an Rauschen, und damit ist die Regel „nicht an
+vergangenen Spielen optimieren" nicht länger nur eine Haltung, sondern gemessen.
+
+Der einzige scheinbare Ausreißer war `XG_ANTEIL`, wo **beide** Hälften etwas unter 0,70
+bevorzugten. Das löste sich in der Kontrolle auf: Es kam aus **einer** Liga mit kaputtem xG
+(Saison 16015, Verhältnis 0,66), die knapp an der damaligen Grenze von 0,65 vorbeirutschte.
+Ohne diese Liga liegt das Optimum in allen drei Mengen bei 0,6 und der Unterschied zu 0,7 ist
+nicht mehr signifikant (t = +0,66 über alle, +0,47 und +0,46 je Hälfte). **Geändert wurde
+deshalb kein Gewicht, sondern die Datenschranke `LIGA_XG_MIN`.**
 
 Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optimiert** – so gewollt.
 Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,

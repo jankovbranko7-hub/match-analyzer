@@ -199,7 +199,7 @@ GLEICHSTAND_PUNKTE  = 2.0    # Liegt eine Wette weniger als so viele Prozentpunk
 EMPF_STOERUNG       = 0.10   # Um so viel werden beide Lambda angehoben, um die Empfindlichkeit
                              # einer Wette zu messen. 10 % ist die Groessenordnung, um die die
                              # Modell-Lambda typisch von den Markt-Lambda abweichen.
-LIGA_XG_MIN         = 0.65   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Gesamt-Tore
+LIGA_XG_MIN         = 0.85   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Gesamt-Tore
                              # der Saison. Liegt der Wert darunter, erhebt FootyStats das xG
                              # in dieser Liga nicht verlaesslich - dann rechnet das Modell
                              # dort NUR mit Toren (XG_ANTEIL und LIGA_BASIS_XG entfallen fuer
@@ -215,9 +215,33 @@ LIGA_XG_MIN         = 0.65   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Ge
                              # halbiertem Schoetz-Angriff auf Unter 2,5 und endete 1:5.
                              # Der Defekt sitzt in der Liga, nicht im Team - deshalb der
                              # Liga-Test. Er kostet keine zusaetzliche API-Abfrage.
-LIGA_XG_WARN        = 0.85   # Dazwischen wird nicht eingegriffen, nur ein Hinweis
-                             # ausgegeben - damit ein Grenzfall (17139 bei 0,76, 17110 bei
-                             # 0,89) sichtbar ist, ohne dass eine Zahl davon abhaengt.
+LIGA_XG_WARN        = 0.95   # Dazwischen wird nicht eingegriffen, nur ein Hinweis
+                             # ausgegeben - damit ein Grenzfall sichtbar ist, ohne dass eine
+                             # Zahl davon abhaengt.
+                             #
+                             # GRENZE AM 02.10.2026 VON 0,65 AUF 0,85 ANGEHOBEN, gemessen an
+                             # echten Ergebnissen (der Nutzer hat die Rueckschau erlaubt).
+                             # Die 0,65 stammten aus einer Luecke in 29 Ligen-Momentaufnahmen.
+                             # Im Walk-forward ueber 2136 Spiele aus 12 Ligen zeigte sich, dass
+                             # Saison 16015 mit einem Verhaeltnis von 0,66 knapp durchrutschte -
+                             # und genau diese Liga das xG-Gewicht verdorben hat:
+                             #
+                             #   Saison 16015 allein, 161 Spiele
+                             #     xG mit 0,70 (vorher)  LogLik/Spiel -2,69346  Treffer 64,0 %
+                             #     xG aus (nur Tore)     LogLik/Spiel -2,55881  Treffer 65,8 %
+                             #     paarweise +21,68 LL, t = +2,97
+                             #
+                             #   alle 2136 Spiele
+                             #     Grenze 0,65 (vorher)  LogLik/Spiel -2,91260  Brier 0,23240
+                             #     Grenze 0,85 (jetzt)   LogLik/Spiel -2,90246  Brier 0,23134
+                             #     paarweise +21,68 LL, t = +2,91  SIGNIFIKANT
+                             #
+                             # Weiter hinauf geht NICHT: Grenze 0,95 fasst vier Ligen und wird
+                             # wieder schlechter (+1,75 LL, t = +0,18, Trefferquote 58,1 statt
+                             # 59,3 %). Die Verhaeltnisse der 12 Ligen lagen bei 0,66 und dann
+                             # erst wieder bei 0,91 bis 1,12 - 0,85 liegt in dieser Luecke.
+                             # LIGA_XG_WARN steht deshalb jetzt bei 0,95: die Ligen zwischen
+                             # 0,85 und 0,95 haben brauchbares xG und bekommen nur einen Hinweis.
 CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
                              # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
                              # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
