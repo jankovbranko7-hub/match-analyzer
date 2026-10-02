@@ -39,6 +39,11 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
 6. **Poisson mit Dixon-Coles-Korrektur** (rho = −0,07) ergibt die Ergebnis-Matrix 0:0 bis 10:10;
    daraus Heim/Remis/Auswärts, Über/Unter 2,5, Beide treffen und die Top-3-Ergebnisse.
 7. **Faire Quote** = 1 / Wahrscheinlichkeit.
+8. **Bester Tipp** = die wahrscheinlichste der fünf Wetten. Liegen mehrere weniger als
+   `GLEICHSTAND_PUNKTE` (2,0) auseinander, entscheidet unter diesen die **kleinste
+   Empfindlichkeit**: um wie viele Punkte sich die Wette verschiebt, wenn beide erwarteten
+   Tore um `EMPF_STOERUNG` (10 %) falsch sind. Der Preis entscheidet weiterhin nicht mit.
+   Eingebaut am 02.10.2026 – verändert keine Wahrscheinlichkeit, nur die Auswahl.
 
 ### Bilanz führen
 
@@ -81,6 +86,38 @@ git diff d912a1c 605fab4 -- analyse/modell.py    # Unterschied ansehen
 
 Die Gewichte selbst sind in beiden Fassungen dieselben. v2 ändert nur, **aus welchem
 Zeitraum** die Teamzahlen stammen, wenn die Saison jünger als zehn Spiele ist.
+
+### Gleichstand-Entscheid bei der Tipp-Auswahl
+
+Die fünf Wetten reagieren sehr unterschiedlich auf einen Fehler in den erwarteten Toren.
+Gemessen an 32 Spielen aus fünf Ligen, 10 % Fehler auf beide λ:
+
+| Wette | Bewegung |
+|---|---|
+| Über 2,5 / Unter 2,5 | **6,22 Punkte** |
+| Beide treffen | **4,73 Punkte** |
+| Sieg Heim | 1,01 Punkte |
+| Sieg Auswärts | 0,54 Punkte |
+
+Über/Unter 2,5 liest die **Summe** der erwarteten Tore direkt ab, Sieg Heim und Sieg Auswärts
+hängen an der **Differenz** und kaum am Niveau. Die Regel „höchste Wahrscheinlichkeit" wählte
+deshalb 30 von 32 Tipps aus den drei empfindlichsten Zeilen.
+
+Seit 02.10.2026 gilt: Liegen mehrere Wetten unter 2 Punkten auseinander, gewinnt die
+unempfindlichste. Darüber bleibt es bei der höchsten Wahrscheinlichkeit, und der Preis
+entscheidet in keinem Fall mit.
+
+| | Wahrscheinlichkeit | Abstand zum Markt |
+|---|---|---|
+| vorher | 61,07 % | 4,14 Punkte |
+| **jetzt** | **60,93 %** | **4,01 Punkte** |
+
+Gegengeprüft an 114 zwischengespeicherten Spielen: **Wahrscheinlichkeiten überall auf 1e-12
+identisch** (die Rechnung ist unberührt), 31 Spiele mit Gleichstand (27 %), **10 Tipps
+gewechselt** (9 %), mittlere Kosten 0,81 Punkte Wahrscheinlichkeit. Zwei Alternativen, die
+auch außerhalb des Gleichstands eingreifen, wurden gemessen und verworfen: Normierung auf den
+Liga-Schnitt kostet 11,4 Punkte Wahrscheinlichkeit bei 5,04 Marktabstand, Abweichung je Punkt
+Empfindlichkeit 16,8 Punkte bei 4,92.
 
 ### Liga-Test für das xG
 
@@ -147,6 +184,8 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
 | `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
+| `GLEICHSTAND_PUNKTE` | 2,0 | darunter entscheidet die Empfindlichkeit, nicht die Wahrscheinlichkeit |
+| `EMPF_STOERUNG` | 0,10 | λ-Fehler, an dem die Empfindlichkeit gemessen wird |
 | `LIGA_XG_MIN` | 0,65 | darunter rechnet die ganze Liga nur mit Toren |
 | `LIGA_XG_WARN` | 0,85 | darunter nur ein Hinweis in der Ausgabe |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |

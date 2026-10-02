@@ -542,3 +542,51 @@ wahren Wert — je mehr Rauschen, desto mehr. Die erwartete Trefferzahl in `--au
 wäre **teils Auswahl und nicht Fehlkalibrierung**. Nicht korrigierbar ohne die wahren
 Wahrscheinlichkeiten, also nicht korrigiert. Praktisch derzeit ohne Belang: die tatsächliche
 Zahl liegt mit 49 **über** der erwarteten, der Verzerrung also entgegen.
+
+## 22. Die fünf Wetten standen nicht auf derselben Skala — TEILS BEHOBEN am 02.10.2026
+
+Von 78 aufgezeichneten Tipps waren **45 „Beide treffen" (58 %)** und **kein einziger
+„Sieg Auswärts"**. Das ist keine Aussage über Spiele, sondern Arithmetik: Die fünf Wetten
+starten auf völlig verschiedenen Basisraten. Bei einem Durchschnittsspiel der fünf geprüften
+Ligen:
+
+| Wette | Basisrate |
+|---|---|
+| Sieg Auswärts | 29,6 – 30,8 % |
+| Sieg Heim | 42,4 – 46,5 % |
+| Unter 2,5 | 31,6 – 51,2 % |
+| Über 2,5 | 48,8 – 68,4 % |
+| **Beide treffen** | **53,8 – 68,6 %** |
+
+Über 32 Spiele lag der **höchste** Wert von Sieg Auswärts bei 49,8 %, der **niedrigste** von
+Beide treffen bei 43,4 %. Sieg Auswärts kann das argmax also praktisch nie gewinnen.
+
+**Der schwerere Teil: die gewählten Wetten sind die zerbrechlichsten.** Bei 10 % Fehler auf
+beide λ bewegt sich Über/Unter 2,5 um **6,22** Punkte, Beide treffen um **4,73**, Sieg Heim um
+**1,01**, Sieg Auswärts um **0,54**. Die alte Regel wählte 30 von 32 Tipps aus den drei
+oberen Zeilen — also systematisch dort, wo ein Modellfehler am stärksten durchschlägt.
+
+**Was dagegen NICHT hilft** (beides gemessen, beides verworfen):
+
+| Regel | Wahrsch. | Abstand Markt |
+|---|---|---|
+| höchste Wahrscheinlichkeit | 61,07 % | 4,14 |
+| Abweichung vom Liga-Schnitt | 49,7 % | 5,04 |
+| Abweichung je Punkt Empfindlichkeit | 44,3 % | 4,92 |
+
+Beide kosten 11 bis 17 Punkte Wahrscheinlichkeit und entfernen sich dabei **weiter** vom
+Markt. Die hohe Basisrate von Beide treffen ist kein Fehler, sondern der Grund, warum es
+öfter eintritt; sie herauszurechnen heißt, absichtlich die unwahrscheinlichere Wette zu
+nehmen (Sieg Auswärts in 13 bzw. 18 von 32 Spielen, bei Wahrscheinlichkeiten um 35 %).
+
+**Eingebaut wurde deshalb nur der Gleichstand-Entscheid** (`GLEICHSTAND_PUNKTE = 2.0`):
+Liegen mehrere Wetten unter 2 Punkten auseinander, gewinnt die unempfindlichste. Kosten
+0,14 Punkte Wahrscheinlichkeit, Marktabstand 4,14 → 4,01 (**t = −0,86, im Zufallsbereich** —
+der Gewinn ist nicht belegt). An 114 Spielen: Wahrscheinlichkeiten überall identisch, 31
+Gleichstände, 10 Tipps gewechselt, alle von Über/Unter 2,5 zu Beide treffen oder Sieg Heim.
+
+**OFFEN bleibt die Schieflage selbst.** Außerhalb des Gleichstands wählt das Modell weiter
+nach Wahrscheinlichkeit und landet damit weiter überwiegend bei Beide treffen. Die Bilanz
+misst also auch künftig überwiegend, wie gut das Modell „Beide treffen" vorhersagt (dort
+41 getroffene gegen 44,0 erwartete). Das ist die Folge von Variante A und keine Schwäche der
+Rechnung — aber man muss es wissen, wenn man die Trefferquote liest.

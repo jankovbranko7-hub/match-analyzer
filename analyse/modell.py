@@ -104,6 +104,37 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
                              # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
                              # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
                              # Vom Nutzer am 27.09.2026 verlangt.
+GLEICHSTAND_PUNKTE  = 2.0    # Liegt eine Wette weniger als so viele Prozentpunkte hinter der
+                             # wahrscheinlichsten, entscheidet nicht mehr die Wahrscheinlichkeit,
+                             # sondern die Empfindlichkeit (siehe empfindlichkeit()). Vom Nutzer
+                             # am 02.10.2026 verlangt. Die Grenze von 2 Punkten stand schon vorher
+                             # in CLAUDE.md ("dort entscheidet die Datengrundlage, nicht die dritte
+                             # Nachkommastelle") - neu ist nur, dass eine Zahl entscheidet und
+                             # nicht mehr mein Gefuehl.
+                             #
+                             # ANLASS: Die fuenf Wetten reagieren voellig unterschiedlich auf einen
+                             # Fehler in den erwarteten Toren. Gemessen an 32 Spielen aus fuenf
+                             # Ligen, 10 % Fehler auf beide Lambda: Ueber/Unter 2,5 bewegt sich um
+                             # 6,22 Punkte, Beide treffen um 4,73, Sieg Heim um 1,01, Sieg
+                             # Auswaerts um 0,54. Die Regel "hoechste Wahrscheinlichkeit" waehlte
+                             # 30 von 32 Tipps aus den drei empfindlichsten Zeilen.
+                             #
+                             # NICHT geaendert wurde die Regel selbst: Bei einem Abstand von mehr
+                             # als 2 Punkten gewinnt weiter die hoechste Wahrscheinlichkeit, der
+                             # Preis entscheidet nach wie vor nicht mit. Gemessen an denselben
+                             # 32 Spielen kostet der Gleichstand-Entscheid 0,08 Punkte
+                             # Wahrscheinlichkeit (61,06 -> 60,97 %) und verkleinert den Abstand
+                             # zum Markt von 4,15 auf 4,00 Punkte (t = -1,04, also im
+                             # Zufallsbereich - der Gewinn ist nicht belegt, der Preis dafuer
+                             # aber auch praktisch null). Drei von 32 Tipps wechseln.
+                             # Die Alternativen, die auch ausserhalb des Gleichstands eingreifen,
+                             # wurden gemessen und verworfen: Abweichung vom Liga-Schnitt kostet
+                             # 11,4 Punkte Wahrscheinlichkeit und vergroessert den Marktabstand
+                             # auf 5,04; Abweichung je Punkt Empfindlichkeit kostet 16,8 Punkte
+                             # und ergibt 4,92.
+EMPF_STOERUNG       = 0.10   # Um so viel werden beide Lambda angehoben, um die Empfindlichkeit
+                             # einer Wette zu messen. 10 % ist die Groessenordnung, um die die
+                             # Modell-Lambda typisch von den Markt-Lambda abweichen.
 LIGA_XG_MIN         = 0.65   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Gesamt-Tore
                              # der Saison. Liegt der Wert darunter, erhebt FootyStats das xG
                              # in dieser Liga nicht verlaesslich - dann rechnet das Modell
@@ -140,6 +171,48 @@ def matrix(lh, la, rho=DIXON_COLES_RHO):
 def probs(M):
     i,j=np.indices(M.shape)
     return dict(H=M[i>j].sum(),D=M[i==j].sum(),A=M[i<j].sum(),O25=M[i+j>=3].sum(),U25=M[i+j<=2].sum(),BTTS=M[(i>0)&(j>0)].sum())
+
+# Die fuenf Wetten aus CLAUDE.md, in fester Reihenfolge. Unentschieden ist bewusst nicht dabei.
+WETTEN = ('H', 'A', 'O25', 'U25', 'BTTS')
+
+
+def empfindlichkeit(lh, la, stoer=EMPF_STOERUNG):
+    """Wie viele Prozentpunkte bewegt sich jede Wette, wenn beide Lambda um stoer steigen?
+
+    Das ist keine Schaetzung, sondern faellt aus der Poisson-Rechnung selbst: Ueber/Unter 2,5
+    liest die Summe der erwarteten Tore direkt ab und reagiert deshalb stark, Sieg Heim und
+    Sieg Auswaerts haengen an der Differenz und kaum am Niveau. Gemessen an 32 Spielen:
+    Ueber/Unter 6,22 Punkte, Beide treffen 4,73, Sieg Heim 1,01, Sieg Auswaerts 0,54.
+    """
+    def fuenf(a, b):
+        q = probs(matrix(a, b))
+        q['U25'] = 1 - q['O25']
+        return q
+    p0 = fuenf(lh, la); p1 = fuenf(lh * (1 + stoer), la * (1 + stoer))
+    return {w: abs(float(p1[w] - p0[w])) * 100 for w in WETTEN}
+
+
+def bester_tipp(p, lh, la, grenze=GLEICHSTAND_PUNKTE):
+    """Der beste Tipp: hoechste Wahrscheinlichkeit, bei Gleichstand die unempfindlichste Wette.
+
+    Variante A bleibt der Kern (Nutzer, 26.09.2026): Der Preis entscheidet nicht mit, und bei
+    mehr als `grenze` Punkten Abstand gewinnt schlicht die wahrscheinlichste Wette. Liegen
+    mehrere innerhalb von `grenze` Punkten, entscheidet unter diesen die kleinste
+    Empfindlichkeit - also die Wette, die ein Fehler in den erwarteten Toren am wenigsten
+    verschiebt. Vom Nutzer am 02.10.2026 verlangt; vorher entschied dort das Gefuehl.
+
+    Gibt (tipp, p_tipp, kandidaten, empf) zurueck. `kandidaten` sind die Wetten im
+    Gleichstand - mehr als eine heisst: hier hat die Empfindlichkeit entschieden.
+    """
+    p = {w: float(p[w]) for w in WETTEN}
+    spitze = max(p.values())
+    kand = [w for w in WETTEN if (spitze - p[w]) * 100 < grenze]
+    e = empfindlichkeit(lh, la)
+    # Kleinste Empfindlichkeit; bei exaktem Gleichstand die hoehere Wahrscheinlichkeit,
+    # danach die feste Reihenfolge in WETTEN - damit die Wahl reproduzierbar bleibt.
+    tipp = min(kand, key=lambda w: (round(e[w], 6), -p[w], WETTEN.index(w)))
+    return tipp, p[tipp], kand, e
+
 
 def shrink(x,n,k=DAEMPFUNG_K):
     """Zieht Werte aus kleinen Stichproben Richtung Liga-Durchschnitt (1,0)."""
@@ -362,11 +435,15 @@ def berechne(mid, args):
     w = args.markt if mk else 0.0
     flh=(1-w)*lh+w*(mlh if mk else 0); fla=(1-w)*la+w*(mla if mk else 0)
     M=matrix(flh,fla); p=probs(M)
+    # Den Tipp hier waehlen, nicht in der Ausgabe und nicht in bilanz.py - sonst koennten
+    # Bericht und Aufzeichnung auseinanderlaufen.
+    tipp, p_tipp, kand, empf = bester_tipp(p, flh, fla)
     idx=np.dstack(np.unravel_index(np.argsort(-M.ravel()),M.shape))[0][:3]
     return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
                 nh=nh, na=na, fen_h=fen_h, fen_a=fen_a,
                 lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
                 M=M, p=p, h2h_w=h2h_w,
+                tipp=tipp, p_tipp=p_tipp, kandidaten=kand, empf=empf,
                 top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
 
 
@@ -408,11 +485,20 @@ def analysiere(mid, args):
     else:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
+    t = r['tipp']; e = r['empf']
+    if len(r['kandidaten']) > 1:
+        andere = ', '.join(f"{w} {float(p[w])*100:.1f} % (Empf {e[w]:.1f})"
+                           for w in r['kandidaten'] if w != t)
+        print(f" Bester Tipp: {t} {r['p_tipp']*100:.1f} % (Empf {e[t]:.1f})"
+              f" - GLEICHSTAND unter {GLEICHSTAND_PUNKTE:.0f} Punkten gegen {andere};"
+              f" entschieden hat die kleinere Empfindlichkeit")
+    else:
+        print(f" Bester Tipp: {t} {r['p_tipp']*100:.1f} % (Empf {e[t]:.1f}) - hoechste Wahrscheinlichkeit")
     if r['mk']:
         # Abstand zum Markt: Warnsignal, keine Rechengroesse. Weicht das Modell beim
         # besten Tipp stark vom Markt ab, ist der scheinbare Value meist eigenes Rauschen
         # und nicht Value - der Buchmacher weiss mehr (Regel in CLAUDE.md, Rangliste).
-        tipp = max(('H','A','O25','U25','BTTS'), key=lambda w: p[w])
+        tipp = r['tipp']          # derselbe Tipp wie oben, nicht neu das argmax
         ab = {w: (float(p[w])-float(r['mk'][w]))*100 for w in ('H','A','O25','BTTS')
               if w in r['mk']}
         if 'O25' in ab: ab['U25'] = -ab['O25']

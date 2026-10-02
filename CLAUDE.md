@@ -219,6 +219,44 @@ werden. Kostet keine zusätzliche API-Abfrage.
 die Begründung** – wie bei der Zeile `Fenster:`, in der Begründung und nicht in einem
 eigenen Abschnitt.
 
+**Dritte Änderung: Gleichstand-Entscheid (02.10.2026, vom Nutzer verlangt).** Das betrifft
+nicht den Rechenweg – **die Wahrscheinlichkeiten sind bei allen 114 zwischengespeicherten
+Spielen auf 1e-12 identisch** –, sondern nur die **Auswahl** unter den fünf Wetten.
+
+**Anlass:** 58 % aller 78 aufgezeichneten Tipps waren „Beide treffen", Sieg Auswärts kein
+einziger. Nachgerechnet an 32 Spielen aus fünf Ligen: Die fünf Wetten stehen nicht auf
+derselben Skala (Basisrate Sieg Auswärts 30 %, Beide treffen 54–69 %) **und** sie reagieren
+völlig unterschiedlich auf einen Fehler in den erwarteten Toren. Bei 10 % λ-Fehler bewegt
+sich Über/Unter 2,5 um **6,22** Punkte, Beide treffen um **4,73**, Sieg Heim um **1,01**,
+Sieg Auswärts um **0,54**. Die alte Regel wählte 30 von 32 Tipps aus den drei
+empfindlichsten Zeilen.
+
+**Drei Alternativen gemessen, zwei verworfen:**
+
+| Regel | Wahrsch. | Abstand Markt | |
+|---|---|---|---|
+| höchste Wahrscheinlichkeit (vorher) | 61,07 % | 4,14 | |
+| Abweichung vom Liga-Schnitt | 49,7 % | 5,04 | **verworfen** |
+| Abweichung je Punkt Empfindlichkeit | 44,3 % | 4,92 | **verworfen** |
+| **Gleichstand-Entscheid (jetzt)** | **60,93 %** | **4,01** | eingebaut |
+
+Die beiden verworfenen kosten 11 bis 17 Punkte Wahrscheinlichkeit und entfernen sich dabei
+**weiter** vom Markt. Die hohe Basisrate von Beide treffen ist kein Fehler, sondern genau
+der Grund, warum es öfter eintritt – sie herauszurechnen heißt, absichtlich die
+unwahrscheinlichere Wette zu nehmen.
+
+Der Gleichstand-Entscheid kostet **0,14 Punkte** Wahrscheinlichkeit und verkleinert den
+Marktabstand von 4,14 auf 4,01 (t = −0,86, also **im Zufallsbereich** – der Gewinn ist nicht
+belegt, der Preis dafür aber praktisch null). An 114 Spielen: **31 mit Gleichstand (27 %),
+10 Tipps gewechselt (9 %)**, mittlere Kosten 0,81 Punkte Wahrscheinlichkeit, höchste 1,71.
+Alle zehn Wechsel gehen von Über/Unter 2,5 (Empfindlichkeit 6) zu Beide treffen (4,5) oder
+Sieg Heim (1,7).
+
+**Die Grenze von 2 Punkten ist nicht neu** – sie stand schon vorher in dieser Datei
+(„dort entscheidet die Datengrundlage, nicht die dritte Nachkommastelle"). Neu ist nur, dass
+eine gerechnete Zahl entscheidet statt meines Gefühls. `GLEICHSTAND_PUNKTE = 2.0`,
+`EMPF_STOERUNG = 0.10`.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
@@ -289,7 +327,11 @@ jeder Punkt stimmt:
 - **So viele Spielblöcke wie geschickte Spiele**, durchgezählt, fortlaufend nummeriert.
 - **Jede Tabelle hat genau fünf Zeilen und zwei Spalten**, die Wahrscheinlichkeit des
   besten Tipps fett.
-- **Bester Tipp = höchster Wert der fünf Zeilen.** Nachrechnen, nicht aus dem Gedächtnis.
+- **Bester Tipp = die Zeile `Bester Tipp:` aus `modell.py`.** Nicht aus dem Gedächtnis und
+  **nicht selbst das argmax bilden**: Bei einem Abstand unter 2 Punkten ist der Tipp
+  absichtlich nicht die wahrscheinlichste Wette (Gleichstand-Entscheid, seit 02.10.2026).
+  Die fett gesetzte Zeile der Tabelle ist die des Tipps – bei Gleichstand also nicht die
+  höchste Zahl. Das ist kein Fehler und wird nicht „korrigiert".
 - **Rangliste: neun Spalten, jedes Spiel genau eine Zeile**, Trennzeile vorhanden.
 - **Blockzuordnung stimmt:** oben nur `Abstand Markt` ≤ 8 Punkte **und** `Fenster` ≤ 50 %.
 - **Faire Quote = 1 / Wahrscheinlichkeit**, an einem Spiel nachgerechnet.
@@ -366,8 +408,15 @@ Regeln zur Vorlage:
 - **Bester Tipp = die Wette mit der höchsten Wahrscheinlichkeit** aus den fünf Zeilen der Tabelle
   (Variante A, vom Nutzer am 26.09.2026 entschieden). **Der Preis entscheidet nicht mit** – auch
   nicht in engen Fällen, auch dann nicht, wenn eine andere Wette besseren Value hätte.
-  Bei Gleichstand die Wette mit der besseren Datengrundlage, und das im Tipp-Satz sagen.
   Im Tipp-Satz klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Gleichstand unter 2 Punkten: die unempfindlichere Wette gewinnt.** Vom Nutzer am 02.10.2026
+  verlangt. Liegt eine Wette weniger als `GLEICHSTAND_PUNKTE` (2,0) hinter der wahrscheinlichsten,
+  entscheidet nicht mehr die dritte Nachkommastelle, sondern die **Empfindlichkeit**: um wie viele
+  Punkte sich die Wette verschiebt, wenn beide erwarteten Tore um 10 % falsch sind.
+  **`modell.py` rechnet das aus und gibt den Tipp direkt aus** (Zeile `Bester Tipp:`) – nicht
+  selbst das argmax bilden, nicht selbst abwägen. Hat die Empfindlichkeit entschieden, steht
+  `GLEICHSTAND` in der Zeile; dann **einen Halbsatz in den Tipp-Satz**, dass beide Wetten
+  praktisch gleich wahrscheinlich sind und die robustere genommen wurde.
 - **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
   Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
   Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten
