@@ -128,6 +128,31 @@ bei einem Spiel bleibt rund ein Viertel der Trennschärfe von zwölf Spielen üb
 **Der Nutzer hat die Grenze am 01.10.2026 ausdrücklich bei 3 belassen**, nachdem er diese
 Zahlen gesehen hatte. Nicht ändern ohne neue Anweisung.
 
+**Am 02.10.2026 nachgemessen: Diese Tabelle beschreibt einen Lauf OHNE Datenfenster.**
+Im echten Lauf liegt immer ein `lastx`-10er-Block vor, das Fenster hebt die Stichprobe
+auf 10 – und damit greift die Dämpfung fast nicht mehr. Gemessen an denselben zwei
+synthetischen Heimteams (2,6 gegen 0,7 Tore), Form abgeschaltet:
+
+| Saisonspiele | ohne Fenster | Fenster bestätigt die Saison | Fenster zeigt Liga-Schnitt |
+|---|---|---|---|
+| 1 | 5,0 Punkte | **24,1** | 2,5 |
+| **3 (Grenze)** | 11,2 Punkte | **24,1** | 7,4 |
+| 8 | 21,6 Punkte | **24,1** | 19,4 |
+| 12 | 26,1 Punkte | 26,1 | 26,1 |
+
+Die Spalte „ohne Fenster" steigt, wie die Tabelle oben es beschreibt. **Mit Fenster ist
+sie flach** – 24,1 Punkte von einem bis acht Saisonspielen, also 92 % der Trennschärfe
+von zwölf Spielen. Die absoluten Werte sind nicht mit der Tabelle oben vergleichbar
+(anderer synthetischer Aufbau), der Verlauf schon.
+
+**Was das bedeutet:** Unter drei Saisonspielen ist nicht mehr die Dämpfung das Problem,
+sondern **woher die Zahlen kommen**. Je nachdem, was die letzten 10 Spiele sagen, liegt
+die Trennschärfe bei 3 Saisonspielen zwischen 7,4 und 24,1 Punkten. Die Sperre schützt
+also nicht mehr vor einer flachen Prognose, sondern vor einer Prognose, die zu 70 % auf
+Spielen außerhalb der Saison steht. Das ist weiterhin ein guter Grund für die Sperre –
+aber ein anderer als der oben genannte. **Die Grenze bleibt bei 3**, nur die Begründung
+ist jetzt die richtige.
+
 **Länderspiele (Nations League, Qualifikation, Turniere) werden grundsätzlich nicht getippt** –
 auch dann nicht, wenn genug Spiele vorliegen. Das Modell vergleicht rohe Form-Durchschnitte, ohne
 zu berücksichtigen, **gegen wen** gespielt wurde. In einer Liga spielen alle Teams gegen dieselben

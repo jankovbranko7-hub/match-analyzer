@@ -475,3 +475,70 @@ Damit nicht zweimal gesucht wird:
 Der `lastx`-10er-Block behauptet **immer** 10 Spiele, auch wenn ein Team weniger gespielt
 hat — aus der Antwort nicht prüfbar. `saisonfenster()` hebt die Stichprobe deshalb auch dann
 auf 10. Betrifft nur neu gegründete Teams.
+
+## 19. `--auswerten` verwarf geholte Ergebnisse bei einem API-Fehler — BEHOBEN am 02.10.2026
+
+Dieselbe Familie wie Punkt 13 und 14, dritte Stelle. Die Schleife in `bilanz.py`, die die
+fehlenden Ergebnisse nachholt, hatte **kein** `try/except`, und `speichern(eintraege)` steht
+**hinter** der Schleife:
+
+```
+for e in eintraege:
+    if e['ergebnis'] is None:
+        m = M.hole("match", ...)     # hier bricht es ab
+        ...
+speichern(eintraege)                 # wird nie erreicht
+```
+
+**Wirkung:** Bei 30 offenen Spielen und dem Stundenlimit beim zehnten waren die neun bereits
+geholten Ergebnisse weg und mussten beim nächsten Lauf erneut abgefragt werden — in derselben
+Stunde also gar nicht. Weil `--auswerten` mit `neu=True` arbeitet, zählt jeder offene Eintrag
+bei jedem Lauf gegen das Limit.
+
+**Behoben:** je Eintrag abfangen, das Spiel bleibt offen, die übrigen werden weiter geholt, und
+`speichern()` wird erreicht. Nicht abrufbare Spiele werden am Anfang der Auswertung aufgelistet.
+Nachgestellt mit einer Testbilanz und einer API, die nur `success: false` antwortet: alle drei
+Spiele gemeldet, Bilanz danach unbeschädigt. Keine Zahl verändert.
+
+## 20. Die Begründung der Saisonspiel-Sperre beschrieb einen Lauf ohne Datenfenster — KORRIGIERT am 02.10.2026
+
+Die Tabelle in `CLAUDE.md` zur Trennschärfe bei `MIN_SAISONSPIELE` (13,0 Punkte bei einem
+Spiel, 28,2 bei drei, 49,6 bei zwölf) steigt mit der Spielzahl — so wirkt die Dämpfung,
+**wenn kein Datenfenster läuft**. Im echten Lauf liegt immer ein `lastx`-10er-Block vor,
+`saisonfenster()` hebt die Stichprobe auf 10, und `DAEMPFUNG_K = 5` greift dann fast nicht
+mehr. Gemessen an zwei synthetischen Heimteams (2,6 gegen 0,7 Tore), Form abgeschaltet:
+
+| Saisonspiele | ohne Fenster | Fenster bestätigt die Saison | Fenster zeigt Liga-Schnitt |
+|---|---|---|---|
+| 1 | 5,0 Punkte | **24,1** | 2,5 |
+| **3 (Grenze)** | 11,2 Punkte | **24,1** | 7,4 |
+| 8 | 21,6 Punkte | **24,1** | 19,4 |
+| 12 | 26,1 Punkte | 26,1 | 26,1 |
+
+Die mittlere Spalte ist **flach** — 24,1 Punkte von einem bis acht Saisonspielen, 92 % der
+Trennschärfe von zwölf Spielen. Die absoluten Werte sind nicht mit der Tabelle vom 01.10.
+vergleichbar (anderer synthetischer Aufbau), der Verlauf schon.
+
+**Folge:** Unter drei Saisonspielen ist nicht die Dämpfung das Problem, sondern die Herkunft
+der Zahlen. Bei 3 Saisonspielen liegt die Trennschärfe je nach Fensterinhalt zwischen 7,4 und
+24,1 Punkten. Die Sperre ist weiter sinnvoll — sie schützt vor einer Prognose, die zu 70 % auf
+Spielen außerhalb der Saison steht —, aber aus einem anderen Grund als dokumentiert. Grenze
+unverändert bei 3, Begründung in `CLAUDE.md` richtiggestellt. Hängt mit Punkt 17 zusammen.
+
+## 21. Zwei Dinge, die bleiben wie sie sind — OFFEN, bewusst
+
+**Ein Spiel kann in zwei Tageslisten stehen.** `todays-matches?date=` folgt nicht dem
+UTC-Tag. Am 02.10.2026 geprüft: `date=2026-10-03` liefert 82 Spiele, zwei davon stoßen am
+**04.10. um 00:00 UTC** an (Tulsa – Sacramento, Aragua – Marítimo). Dieselben zwei stehen
+auch in `date=2026-10-04`. Es geht also nichts verloren, aber **ein Spiel kann doppelt in
+die Liste geraten**, wenn zwei aufeinanderfolgende Tage abgefragt werden. `bilanz.py --merken`
+fängt den Doppeleintrag ab (`if any(e['id'] == mid …)`), die Antwort an den Nutzer nicht —
+dafür gibt es Durchgang 4, erster Punkt. **Spiel-IDs vor der Analyse über die `id` entdoppeln.**
+
+**`p_tipp` ist nach oben verzerrt.** Der beste Tipp ist das Maximum aus fünf Wetten
+(Variante A). Das Maximum mehrerer verrauschter Schätzungen liegt systematisch über dem
+wahren Wert — je mehr Rauschen, desto mehr. Die erwartete Trefferzahl in `--auswerten`
+(aktuell 47,6 bei 78 Spielen) ist deshalb eher zu hoch angesetzt, und ein Rückstand darauf
+wäre **teils Auswahl und nicht Fehlkalibrierung**. Nicht korrigierbar ohne die wahren
+Wahrscheinlichkeiten, also nicht korrigiert. Praktisch derzeit ohne Belang: die tatsächliche
+Zahl liegt mit 49 **über** der erwarteten, der Verzerrung also entgegen.

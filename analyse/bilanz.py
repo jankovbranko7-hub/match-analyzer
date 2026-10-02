@@ -122,16 +122,31 @@ def auswerten(args):
         print("Bilanz ist leer. Erst mit --merken Prognosen aufnehmen.")
         return
 
-    # Fehlende Ergebnisse nachholen
+    # Fehlende Ergebnisse nachholen. Je Eintrag abfangen: Laeuft die Abfrage mitten in der
+    # Schleife ins Stundenlimit, waren vorher ALLE in diesem Lauf geholten Ergebnisse weg -
+    # speichern() steht hinter der Schleife und wurde nie erreicht. Bei 30 offenen Spielen
+    # und einem Limit beim zehnten hiess das: neun geholte Ergebnisse verworfen und beim
+    # naechsten Lauf erneut abgefragt. Gefunden am 02.10.2026, dieselbe Familie wie der
+    # Fehler vom 01.10. in modell.py.
+    fehler = []
     for e in eintraege:
         if e['ergebnis'] is None:
-            m = M.hole("match", {"match_id": e['id']}, f"erg_{e['id']}.json",
-                       argparse.Namespace(daten=args.daten, neu=True))['data']
+            try:
+                m = M.hole("match", {"match_id": e['id']}, f"erg_{e['id']}.json",
+                           argparse.Namespace(daten=args.daten, neu=True))['data']
+            except Exception as ex:
+                fehler.append(f"{e['heim']} - {e['ausw']} ({type(ex).__name__}: {ex})")
+                continue
             if m['status'] == 'complete':
                 e['ergebnis'] = {'h': m['homeGoalCount'], 'a': m['awayGoalCount']}
             elif m['status'] in ABGESAGT:
                 e['ergebnis'] = {'abgesagt': m['status']}
     speichern(eintraege)
+    if fehler:
+        print(f"  {len(fehler)} Ergebnis(se) nicht abrufbar, bleiben offen:")
+        for f in fehler:
+            print(f"    {f}")
+        print()
 
     fertig = [e for e in eintraege if e['ergebnis'] and not e['ergebnis'].get('abgesagt')]
     abgesagt = [e for e in eintraege if e['ergebnis'] and e['ergebnis'].get('abgesagt')]
