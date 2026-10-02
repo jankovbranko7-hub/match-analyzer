@@ -104,6 +104,25 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
                              # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
                              # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
                              # Vom Nutzer am 27.09.2026 verlangt.
+LIGA_XG_MIN         = 0.65   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Gesamt-Tore
+                             # der Saison. Liegt der Wert darunter, erhebt FootyStats das xG
+                             # in dieser Liga nicht verlaesslich - dann rechnet das Modell
+                             # dort NUR mit Toren (XG_ANTEIL und LIGA_BASIS_XG entfallen fuer
+                             # diese Liga). Gemessen am 02.10.2026 an 29 Ligen: 20 liegen
+                             # zwischen 0,89 und 1,34, dann folgt eine Luecke, dann 0,76 /
+                             # 0,54 / 0,52. Die Grenze liegt in der Mitte dieser Luecke.
+                             # Vom Nutzer am 02.10.2026 verlangt. Anlass: Der Team-Test aus
+                             # Punkt 12 erkennt nur xG == 0, nicht das halb erfasste xG. In
+                             # Saison 17308 hatten 18 von 48 Teams unbrauchbares xG, 7 davon
+                             # glatt null (erkannt), 11 mit Werten wie 0,02 xG bei 1,25 Toren
+                             # (nicht erkannt) - Angriffsstaerke dort bis 182 % zu niedrig.
+                             # Die einzige Prognose aus dieser Liga, Wohlen - Schoetz, kam mit
+                             # halbiertem Schoetz-Angriff auf Unter 2,5 und endete 1:5.
+                             # Der Defekt sitzt in der Liga, nicht im Team - deshalb der
+                             # Liga-Test. Er kostet keine zusaetzliche API-Abfrage.
+LIGA_XG_WARN        = 0.85   # Dazwischen wird nicht eingegriffen, nur ein Hinweis
+                             # ausgegeben - damit ein Grenzfall (17139 bei 0,76, 17110 bei
+                             # 0,89) sichtbar ist, ohne dass eine Zahl davon abhaengt.
 CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
                              # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
                              # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
@@ -174,10 +193,14 @@ def strengths(t, side, L, last6):
     s=t['stats']; n_v=s[f'seasonMatchesPlayed_{side}']; n_o=s['seasonMatchesPlayed_overall']
     Lg_v = L[side]; Lx_v = L['x'+side]; Lg_o=(L['home']+L['away'])/2; Lx_o=(L['xhome']+L['xaway'])/2
     opp = 'away' if side=='home' else 'home'
-    # Je Term eigenes xG-Gewicht: fehlt das Feld, zaehlen nur die Tore (siehe xg_anteil).
+    # Je Term eigenes xG-Gewicht: fehlt das Feld oder taugt das xG der ganzen Liga nicht,
+    # zaehlen nur die Tore (siehe xg_anteil und LIGA_XG_MIN).
+    liga_ok = L.get('xg_ok', True)
     def term(xg_k, tor_k, Lx, Lg, q=None):
         q = q or s
-        x, g = xg_anteil(q[xg_k], q[tor_k])
+        x, g = xg_anteil(q[xg_k], q[tor_k], liga_ok)
+        if not x:                    # ohne diesen Zweig teilt 0 * (xg/0) durch null
+            return g*q[tor_k]/Lg
         return x*q[xg_k]/Lx + g*q[tor_k]/Lg
     # Heim- bzw. Auswärtswerte und Gesamtwerte
     att_v = term(f'xg_for_avg_{side}', f'seasonScoredAVG_{side}', Lx_v, Lg_v)
@@ -225,9 +248,14 @@ def xg_fehlt(xg, tore):
     return (xg or 0) == 0 and (tore or 0) > 0
 
 
-def xg_anteil(xg, tore):
-    """XG_ANTEIL - oder 0, wenn das xG-Feld fehlt. Gibt (xg_gewicht, tor_gewicht) zurueck."""
-    return (0.0, 1.0) if xg_fehlt(xg, tore) else (XG_ANTEIL, 1 - XG_ANTEIL)
+def xg_anteil(xg, tore, liga_ok=True):
+    """XG_ANTEIL - oder 0, wenn das Feld fehlt oder die ganze Liga kein brauchbares xG hat.
+
+    liga_ok=False kommt aus dem Liga-Test (LIGA_XG_MIN): Dann zaehlen in dieser Liga fuer
+    jedes Team nur die Tore, auch fuer die Teams, deren eigenes xG-Feld gefuellt aussieht.
+    Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team.
+    """
+    return (0.0, 1.0) if (not liga_ok or xg_fehlt(xg, tore)) else (XG_ANTEIL, 1 - XG_ANTEIL)
 
 
 def league(T):
@@ -245,9 +273,16 @@ def league(T):
         if not G or sum(t['stats'][w] for t in G) == 0:
             G = T
         return sum(t['stats'][k]*t['stats'][w] for t in G)/sum(t['stats'][w] for t in G)
+    # Liga-Test: Gesamt-xG gegen Gesamt-Tore, ueber ALLE Teams der Liga - auch die mit
+    # kaputtem xG, denn genau die sollen den Wert druecken. Ein ehrlich erhobenes xG liegt
+    # dicht an den Toren (gemessen: 20 von 29 Ligen zwischen 0,89 und 1,34).
+    g_o = avg('seasonScoredAVG_overall', 'seasonMatchesPlayed_overall')
+    x_o = avg('xg_for_avg_overall', 'seasonMatchesPlayed_overall')
+    rel = x_o / g_o if g_o else 0.0
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
                 xhome=avg_xg('xg_for_avg_home','seasonScoredAVG_home','seasonMatchesPlayed_home'),
-                xaway=avg_xg('xg_for_avg_away','seasonScoredAVG_away','seasonMatchesPlayed_away'))
+                xaway=avg_xg('xg_for_avg_away','seasonScoredAVG_away','seasonMatchesPlayed_away'),
+                xg_rel=rel, xg_ok=rel >= LIGA_XG_MIN)
 
 def h2h_werte(m, jahre=H2H_MAX_JAHRE, k=H2H_DAEMPFUNG_K):
     """Gewicht und Tor-Schnitt der direkten Duelle, beides nur aus den jungen Duellen.
@@ -295,7 +330,9 @@ def berechne(mid, args):
         return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
 
     L = league(list(T.values()))
-    if min(L['home'], L['away'], L['xhome'], L['xaway']) <= 0:
+    # Das Liga-xG muss nur dann groesser null sein, wenn es auch verwendet wird. Faellt es
+    # ueber LIGA_XG_MIN weg, darf eine Liga ohne jedes xG-Feld weiter gerechnet werden.
+    if min(L['home'], L['away']) <= 0 or (L['xg_ok'] and min(L['xhome'], L['xaway']) <= 0):
         return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na,
                     grund=f"Liga-Durchschnitt ist 0 (Saison {sid} hat noch keine Tore)")
 
@@ -312,7 +349,7 @@ def berechne(mid, args):
 
     ah,dh=strengths(th,'home',L,block(m['homeID'], 6))
     aa,da=strengths(ta,'away',L,block(m['awayID'], 6))
-    b = LIGA_BASIS_XG
+    b = LIGA_BASIS_XG if L['xg_ok'] else 0.0
     base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
     h2h_w, h2h_tore = h2h_werte(m)
@@ -351,6 +388,14 @@ def analysiere(mid, args):
     L=r['L']; p=r['p']
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
+    # Liga-Test fuer das xG. Faellt das xG weg, gehoert das in die Begruendung - es ist
+    # dieselbe Art Einschraenkung wie die Zeile Fenster:.
+    if not L['xg_ok']:
+        print(f" xG DIESER LIGA UNBRAUCHBAR: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
+              f" (Grenze {LIGA_XG_MIN:.2f}) -> gerechnet wird nur mit Toren")
+    elif L['xg_rel'] < LIGA_XG_WARN:
+        print(f" xG auffällig: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
+              f" (unter {LIGA_XG_WARN:.2f}) -> xG zählt weiter, aber in die Begründung")
     print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
     if r['fen_h'] or r['fen_a']:
         print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"

@@ -349,7 +349,7 @@ Kaputtes landet im Zwischenspeicher.
 
 Das ist auch der Grund, warum Durchgang 0 Punkt 4 (Vollzähligkeit der Liste) bleibt.
 
-## 15. Kaputtes xG wird nur bei glatter Null erkannt — OFFEN
+## 15. Kaputtes xG wird nur bei glatter Null erkannt — BEHOBEN am 02.10.2026
 
 Punkt 12 fängt `xg == 0 and tore > 0` ab. Der Test ist zu scharf: Er erkennt die glatte
 Null, nicht das halb erfasste xG. Gemessen am 02.10.2026 an **519 Teams mit mindestens
@@ -400,8 +400,34 @@ mit dem Fix nicht erkannt worden**. Der Eintrag in `bilanz.json` bleibt unverän
 Zwischen 0,54 und 0,76 liegt eine deutliche Lücke. Ein Liga-Test würde also beide bekannten
 Problemligen fangen, inklusive der halb erfassten Teams, und nicht nur die Nullen.
 
-**Nicht eingebaut.** Das wäre eine Änderung am Rechenweg und braucht eine ausdrückliche
-Anweisung. Vorgelegt am 02.10.2026.
+**Eingebaut am 02.10.2026 auf ausdrückliche Anweisung des Nutzers** als `LIGA_XG_MIN = 0,65`
+(Grenze in der Mitte der Lücke zwischen 0,54 und 0,76) und `LIGA_XG_WARN = 0,85` (nur
+Hinweis, kein Eingriff). Liegt eine Liga unter 0,65, entfallen `XG_ANTEIL` und
+`LIGA_BASIS_XG` **für die ganze Liga** – auch für Teams mit gefüllt aussehendem Feld.
+
+**Gegenprobe an 114 zwischengespeicherten Spielen, beide Fassungen mit denselben
+Eingangsdaten gerechnet:**
+
+| | |
+|---|---|
+| völlig unverändert | **113** (99,1 %) |
+| verändert | 1 – Wohlen – Schötz, Saison 17308 |
+| Tipp gewechselt | 1 – Beide treffen → Über 2,5 |
+| Sperre gewechselt | keine |
+
+Der Eingriff trifft also genau die Liga, für die er gebaut ist, und keine andere.
+
+**Was die Gegenprobe NICHT zeigt:** ob der Tipp vor dem Spiel anders ausgefallen wäre. Die
+zwischengespeicherte Teamstatistik wurde am 30.09. um 22:42 UTC geholt, Anstoß war 18:15 –
+sie enthält das 1:5 also schon. Das λ von Schötz steigt in dieser Gegenprobe von 1,62 auf
+2,62, aber ein Teil davon ist das Spiel selbst. Der Schnappschuss von vorher existiert nicht
+mehr, also ist es nicht messbar. Die Aufzeichnung in `bilanz.json` bleibt unverändert.
+
+**Nebenbei behoben:** `term()` in `strengths()` teilte auch dann durch das Liga-xG, wenn das
+xG-Gewicht null war (`0 * (xg/0)`). Bei einer Liga ganz ohne xG-Felder wäre das ein
+`ZeroDivisionError` gewesen. Jetzt wird der Term bei Gewicht null gar nicht erst gebildet.
+Dieselbe Stelle ist der Grund, warum die Sperre jetzt `L['xhome']` nur noch prüft, wenn das
+Liga-xG überhaupt verwendet wird.
 
 ## 16. Gegenrichtung: xG über den Toren — OFFEN, klein
 

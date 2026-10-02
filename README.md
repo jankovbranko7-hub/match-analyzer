@@ -22,6 +22,11 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    (Gewicht Heim/Auswärts = Spiele / (Spiele + 6)); kleine Stichproben Richtung 1,00 gezogen;
    Form der letzten 6 Spiele mit 25 %.
 3. **Erwartete Tore** = Liga-Basis (60 % Tore, 40 % xG) × eigener Angriff × Abwehr des Gegners.
+   **Taugt das xG einer ganzen Liga nicht** – Gesamt-xG geteilt durch Gesamt-Tore unter
+   `LIGA_XG_MIN` (0,65) –, entfallen `XG_ANTEIL` und `LIGA_BASIS_XG` **für diese Liga**: Es
+   wird nur mit Toren gerechnet, für jedes Team, auch für die mit gefüllt aussehendem Feld.
+   Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team. Zwischen 0,65 und 0,85
+   wird nicht eingegriffen, die Ausgabe weist nur darauf hin. Eingebaut am 02.10.2026.
    **Fehlt das xG-Feld eines Teams** (0,00 bei erzielten Toren – FootyStats erhebt xG nicht in
    jeder Liga und füllt es teils erst nachträglich), zählen für diesen Term nur die Tore, und
    das Team wird beim Liga-xG-Mittel ausgelassen. Ohne das las das Modell ein leeres Feld als
@@ -77,6 +82,33 @@ git diff d912a1c 605fab4 -- analyse/modell.py    # Unterschied ansehen
 Die Gewichte selbst sind in beiden Fassungen dieselben. v2 ändert nur, **aus welchem
 Zeitraum** die Teamzahlen stammen, wenn die Saison jünger als zehn Spiele ist.
 
+### Liga-Test für das xG
+
+FootyStats erhebt xG nicht in jeder Liga gleich sorgfältig. Punkt 12 in
+`SOLLBRUCHSTELLEN.md` fing bisher nur das **einzelne Team** mit glatt null xG ab. Das ist zu
+eng: In Saison 17308 hatten 18 von 48 Teams unbrauchbares xG, davon 7 glatt null (erkannt)
+und 11 mit Werten wie 0,02 xG bei 1,25 Toren (nicht erkannt) – die Angriffsstärke lag dort
+bis zu 182 % zu niedrig.
+
+Der Liga-Test vergleicht **Gesamt-xG gegen Gesamt-Tore** der Saison, über alle Teams, mit
+Spielen gewichtet. Ein ehrlich erhobenes xG liegt dicht an den Toren. Gemessen am 02.10.2026
+an 29 Ligen:
+
+| Bereich | Ligen | |
+|---|---|---|
+| 0,89 – 1,34 | 20 | unauffällig |
+| 0,89 / 0,76 | 2 | Hinweis, keine Änderung |
+| **0,54 / 0,52** | 2 | xG wird verworfen |
+
+Zwischen 0,54 und 0,76 liegt eine deutliche Lücke; die Grenze liegt in ihrer Mitte. Die zwei
+verworfenen sind Saison 17308 (die Liga mit den 18 Teams) und 16808 (Nations League, ohnehin
+gesperrt). Der Test **kostet keine zusätzliche API-Abfrage** – die Werte stehen in der
+`league-teams`-Antwort, die das Modell ohnehin holt.
+
+**Gegengeprüft an 114 zwischengespeicherten Spielen:** 113 völlig unverändert (99,1 %), ein
+einziges verändert – Wohlen – Schötz aus Saison 17308, wo der Tipp von „Beide treffen" auf
+„Über 2,5" wechselt.
+
 ### Datenfenster bei junger Saison
 
 Hat ein Team weniger als `FENSTER_MIN_SPIELE` Saisonspiele, wird seine Statistik mit den
@@ -115,6 +147,8 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
 | `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
+| `LIGA_XG_MIN` | 0,65 | darunter rechnet die ganze Liga nur mit Toren |
+| `LIGA_XG_WARN` | 0,85 | darunter nur ein Hinweis in der Ausgabe |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
 | `FENSTER_MIN_SPIELE` | 10 | darunter wird die Saison mit den letzten 10 Spielen aufgefüllt |

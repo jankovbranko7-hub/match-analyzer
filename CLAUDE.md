@@ -171,6 +171,29 @@ unverändert**, 6 betroffen, 2 Tipps gewechselt, Abstand zum Markt **4,17 → 4,
 `XG_ANTEIL` bleibt bei 0,70 – geändert wurde nicht das Gewicht, sondern dass es nur noch vergeben
 wird, wenn in dem Feld etwas steht.
 
+**Zweite Änderung: Liga-Test für das xG (02.10.2026, vom Nutzer verlangt).** Der Test vom
+30.09. war zu eng – er erkennt `xg == 0`, nicht das halb erfasste xG. An 519 Teams
+nachgemessen: 7 mit glatter Null (erkannt), **11 mit xG/Tore unter 0,40 (nicht erkannt)**,
+alle 11 in Saison 17308. Dort hatten **18 von 48 Teams** unbrauchbares xG; die
+Angriffsstärke lag bis zu **182 % zu niedrig** (FC Coffrane 0,19 statt 0,55).
+
+**Der Defekt sitzt in der Liga, nicht im Team.** `LIGA_XG_MIN = 0,65` vergleicht deshalb
+Gesamt-xG gegen Gesamt-Tore der Saison. Liegt der Wert darunter, entfallen `XG_ANTEIL` und
+`LIGA_BASIS_XG` **für die ganze Liga** – gerechnet wird nur mit Toren, auch für Teams, deren
+Feld gefüllt aussieht. Zwischen 0,65 und `LIGA_XG_WARN = 0,85` wird nicht eingegriffen, die
+Ausgabe weist nur hin.
+
+Die Grenze liegt in der Mitte einer gemessenen Lücke: 20 von 29 Ligen liegen zwischen 0,89
+und 1,34, dann folgen 0,89 und 0,76, dann 0,54 (Saison 17308) und 0,52 (Nations League).
+**Geprüft an 114 zwischengespeicherten Spielen: 113 völlig unverändert (99,1 %)**, ein
+einziges verändert – Wohlen – Schötz aus genau dieser Liga, Tipp von „Beide treffen" auf
+„Über 2,5". Die Gewichte selbst sind unverändert; geändert wurde nur, **wann** sie vergeben
+werden. Kostet keine zusätzliche API-Abfrage.
+
+**Steht in der Ausgabe `xG DIESER LIGA UNBRAUCHBAR` oder `xG auffällig`, gehört ein Satz in
+die Begründung** – wie bei der Zeile `Fenster:`, in der Begründung und nicht in einem
+eigenen Abschnitt.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
