@@ -590,3 +590,57 @@ nach Wahrscheinlichkeit und landet damit weiter überwiegend bei Beide treffen. 
 misst also auch künftig überwiegend, wie gut das Modell „Beide treffen" vorhersagt (dort
 41 getroffene gegen 44,0 erwartete). Das ist die Folge von Variante A und keine Schwäche der
 Rechnung — aber man muss es wissen, wenn man die Trefferquote liest.
+
+## 23. Das Modell streute zu weit — BEHOBEN am 02.10.2026
+
+Der erste Fund dieser Session, der die **Genauigkeit** betrifft und nicht die Verlässlichkeit.
+Gemessen an 108 zwischengespeicherten Spielen mit vollständigen Vorab-Quoten, Modell-λ gegen
+margenbereinigtes Markt-λ:
+
+| | Bias | Steigung | t gegen 1 |
+|---|---|---|---|
+| Heimtore | −0,013 | 0,842 | **−3,15** |
+| Auswärtstore | −0,014 | 0,857 | −2,27 |
+| Tore gesamt | −0,027 | **0,809** | **−3,54** |
+| Differenz (Ausgang) | +0,001 | 0,879 | −2,13 |
+
+**Das Niveau war richtig:** Bias praktisch null, Heimvorteil 1,304 gegen 1,307, Gesamttore
+2,889 gegen 2,916. Falsch war die **Spreizung** – bei hohen Modellwerten sagte der Markt
+niedrigere und umgekehrt. Drei bis dreieinhalb Standardfehler.
+
+**Die Ursache ist nicht trennbar, die Antwort schon.** Eine Steigung unter 1 entsteht sowohl,
+wenn das Modell wirklich übertreibt, als auch, wenn es nur verrauschter ist als der Markt
+(Regressionsverdünnung). In beiden Fällen gilt derselbe Satz aus der Statistik: eine
+verrauschte Schätzung gehört zum Mittel gezogen, sonst ist ihr Fehler größer als nötig.
+
+**Eingebaut:** `LAMBDA_DAEMPFUNG = 0.85`, angewandt nach dem H2H-Faktor und vor dem Markt-Mix.
+Gedämpft wird nur das Modell-λ, nie das Markt-λ.
+
+| | vorher | jetzt |
+|---|---|---|
+| λ-Fehler gegen Markt | 0,303 Tore | **0,291** |
+| Abstand zum Markt beim Tipp | 4,18 | **3,63** (paarweise t = **−3,34**) |
+| Wahrscheinlichkeit des Tipps | 61,24 % | 60,89 % (−0,35 Punkte) |
+| größter Marktabstand | 24,0 | **18,7** |
+| Spiele über der 8-Punkte-Grenze | 11 von 108 | **9** |
+| Tipp gewechselt | – | 7 von 114 |
+| Sperren gewechselt | – | 0 |
+
+Praktisch heißt das: weniger Spiele landen wegen „Markt widerspricht stark" im unteren Block
+der Rangliste, und die Extremfälle verschwinden. Boreham Wood – Altrincham stand vorher bei
+Sieg Heim mit **−13,8** Punkten Marktabstand und steht jetzt bei Beide treffen mit **−2,4**.
+
+**Warum 0,85 und nicht 0,77:** Der kleinste λ-Fehler liegt bei 0,77, die gemessenen Steigungen
+bei 0,81 bis 0,88. 0,85 liegt am oberen Rand, holt vier Fünftel des Gewinns (4,18 → 3,63 von
+3,41 möglich) und greift so wenig ein wie möglich.
+
+**OFFEN: was die Messung nicht zeigt.** Ob die Trefferquote steigt, ist damit nicht belegt —
+dafür bräuchte es den Vergleich gegen echte Ergebnisse über vergangene Spieltage, also den
+Backtest, den dieses Repo verbietet. Und der Marktabstand verbessert sich zum Teil deshalb,
+weil auf den Markt hin gedämpft wird; diese Zahl ist also teilweise zirkulär. **Nicht**
+zirkulär ist der Befund selbst: eine Steigung von 0,81 bei t = −3,5 ist unabhängig davon, was
+man danach damit macht.
+
+Die Aufzeichnungen in `bilanz.json` bleiben unverändert — alle 79 sind vor dieser Änderung
+entstanden und mit der alten Spreizung gerechnet. Ab der nächsten Prognose ist die Bilanz
+deshalb **nicht mehr mit den 79 alten vergleichbar**, was die λ betrifft.

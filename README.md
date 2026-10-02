@@ -34,6 +34,10 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    1,01, und die Nullen zogen zusätzlich den Liga-Nenner um 15 % nach unten, was die Stärke
    **aller** Teams derselben Liga um 17 % aufblähte. Eingebaut am 30.09.2026.
 4. **Direkte Duelle** verschieben die Gesamttore um 10 %, wenn das letzte Duell höchstens 3 Jahre alt ist.
+4b. **Spreizung dämpfen:** `λ' = Liga-Basis + LAMBDA_DAEMPFUNG · (λ − Liga-Basis)` mit 0,85.
+   Gemessen an 108 Spielen streut das Modell zu weit (Steigung gegen den Markt 0,81 bis 0,88,
+   t bis −3,5), während das Niveau stimmt. Gedämpft wird nur das Modell-λ, nie das Markt-λ.
+   Eingebaut am 02.10.2026.
 5. **Vorab-Quoten** (optional, `--markt 0.3`): margenbereinigt in erwartete Tore umgerechnet und beigemischt.
    Standard ist 0 – reines Datenmodell.
 6. **Poisson mit Dixon-Coles-Korrektur** (rho = −0,07) ergibt die Ergebnis-Matrix 0:0 bis 10:10;
@@ -86,6 +90,42 @@ git diff d912a1c 605fab4 -- analyse/modell.py    # Unterschied ansehen
 
 Die Gewichte selbst sind in beiden Fassungen dieselben. v2 ändert nur, **aus welchem
 Zeitraum** die Teamzahlen stammen, wenn die Saison jünger als zehn Spiele ist.
+
+### Spreizung der erwarteten Tore
+
+Das Modell traf das **Niveau** der erwarteten Tore gut, aber nicht die **Spreizung**. Gemessen
+an 108 zwischengespeicherten Spielen mit vollständigen Vorab-Quoten, Modell-λ gegen Markt-λ:
+
+| | Bias | Steigung | t gegen 1 |
+|---|---|---|---|
+| Heimtore | −0,013 | 0,842 | −3,15 |
+| Auswärtstore | −0,014 | 0,857 | −2,27 |
+| Tore gesamt | −0,027 | **0,809** | **−3,54** |
+| Differenz | +0,001 | 0,879 | −2,13 |
+
+Heimvorteil 1,304 gegen 1,307 beim Markt, Gesamttore 2,889 gegen 2,916 – das Niveau passt.
+Aber eine Steigung unter 1 heißt: sagt das Modell einen hohen Wert, sagt der Markt einen
+weniger hohen. Ob das Modell übertreibt oder nur verrauschter ist als der Markt, lässt sich
+nicht trennen (Regressionsverdünnung); die Antwort ist in beiden Fällen dieselbe und folgt aus
+der Statistik: eine verrauschte Schätzung gehört zum Mittel gezogen.
+
+Seit 02.10.2026 gilt `λ' = Liga-Basis + 0,85 · (λ − Liga-Basis)`. Gemessen an denselben
+108 Spielen:
+
+| | vorher | jetzt |
+|---|---|---|
+| λ-Fehler gegen Markt | 0,303 Tore | **0,291** |
+| Abstand zum Markt beim Tipp | 4,18 Punkte | **3,63** (t = −3,34) |
+| Wahrscheinlichkeit des Tipps | 61,24 % | 60,89 % |
+| größter Marktabstand | 24,0 Punkte | **18,7** |
+| Spiele über der 8-Punkte-Grenze | 11 | **9** |
+| Tipp gewechselt | – | 7 von 114 |
+
+0,85 statt 0,77 (dort läge der kleinste λ-Fehler), weil 0,85 am oberen Rand der gemessenen
+Steigungen liegt, vier Fünftel des Gewinns holt und so wenig eingreift wie möglich.
+**Was die Messung nicht zeigt:** ob die Trefferquote steigt – dafür bräuchte es den verbotenen
+Backtest. Der Marktabstand verbessert sich zum Teil deshalb, weil auf den Markt hin gedämpft
+wird; die Steigung unter 1 ist davon unabhängig.
 
 ### Gleichstand-Entscheid bei der Tipp-Auswahl
 
@@ -184,6 +224,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
 | `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
+| `LAMBDA_DAEMPFUNG` | 0,85 | erwartete Tore zur Liga-Basis ziehen (Spreizung war zu groß) |
 | `GLEICHSTAND_PUNKTE` | 2,0 | darunter entscheidet die Empfindlichkeit, nicht die Wahrscheinlichkeit |
 | `EMPF_STOERUNG` | 0,10 | λ-Fehler, an dem die Empfindlichkeit gemessen wird |
 | `LIGA_XG_MIN` | 0,65 | darunter rechnet die ganze Liga nur mit Toren |

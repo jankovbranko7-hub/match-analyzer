@@ -257,6 +257,51 @@ Sieg Heim (1,7).
 eine gerechnete Zahl entscheidet statt meines Gefühls. `GLEICHSTAND_PUNKTE = 2.0`,
 `EMPF_STOERUNG = 0.10`.
 
+**Vierte Änderung: Spreizung der erwarteten Tore dämpfen (02.10.2026, vom Nutzer verlangt).**
+`LAMBDA_DAEMPFUNG = 0.85`, also `λ' = Liga-Basis + 0,85 · (λ − Liga-Basis)`, angewandt nach
+dem H2H-Faktor und vor dem Markt-Mix. **Das ist die erste Änderung dieser Session, die auf
+die Genauigkeit zielt** und nicht auf Verlässlichkeit oder Datenfehler.
+
+**Anlass:** Gemessen an 108 zwischengespeicherten Spielen mit vollständigen Vorab-Quoten,
+Modell-λ gegen margenbereinigtes Markt-λ:
+
+| | Bias | Steigung | t gegen 1 |
+|---|---|---|---|
+| Heimtore | −0,013 | 0,842 | **−3,15** |
+| Auswärtstore | −0,014 | 0,857 | −2,27 |
+| Tore gesamt | −0,027 | **0,809** | **−3,54** |
+| Differenz | +0,001 | 0,879 | −2,13 |
+
+Das **Niveau** war richtig (Bias praktisch null, Heimvorteil 1,304 gegen 1,307 beim Markt,
+Gesamttore 2,889 gegen 2,916). Falsch war die **Spreizung**: bei hohen Modellwerten sagte
+der Markt niedrigere. Ob das Modell übertreibt oder nur verrauschter ist als der Markt, ist
+nicht trennbar (Regressionsverdünnung) – die Antwort ist in beiden Fällen dieselbe und folgt
+aus der Statistik, nicht aus einer Anpassung: eine verrauschte Schätzung gehört zum Mittel
+gezogen.
+
+**Wirkung, gemessen an denselben Spielen:**
+
+| | vorher | jetzt |
+|---|---|---|
+| λ-Fehler gegen Markt | 0,303 Tore | **0,291** |
+| Abstand zum Markt beim Tipp | 4,18 | **3,63** (paarweise **t = −3,34**) |
+| Wahrscheinlichkeit des Tipps | 61,24 % | 60,89 % |
+| größter Marktabstand | 24,0 | **18,7** |
+| Spiele über der 8-Punkte-Grenze | 11 von 108 | **9** |
+| Tipp gewechselt / Sperren gewechselt | – | 7 von 114 / 0 |
+
+**0,85 und nicht 0,77** (dort liegt der kleinste λ-Fehler), weil 0,85 am oberen Rand der
+gemessenen Steigungen liegt, vier Fünftel des Gewinns holt und so wenig eingreift wie möglich.
+
+**Was die Messung nicht zeigt:** ob die Trefferquote steigt. Dafür bräuchte es den Vergleich
+gegen echte Ergebnisse über vergangene Spieltage – den Backtest, den dieses Repo verbietet.
+Der Marktabstand verbessert sich zum Teil deshalb, weil auf den Markt hin gedämpft wird; die
+Steigung unter 1 bei t = −3,5 ist davon unabhängig und bleibt der Befund.
+
+**Die Ausgabe zeigt beide Werte** (`λ roh … -> gedämpft …`). Die 79 Aufzeichnungen in
+`bilanz.json` sind vor dieser Änderung entstanden und bleiben unverändert; ihre λ sind mit der
+alten Spreizung gerechnet und mit den neuen nicht vergleichbar.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).

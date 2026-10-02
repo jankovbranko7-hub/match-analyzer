@@ -104,6 +104,49 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
                              # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
                              # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
                              # Vom Nutzer am 27.09.2026 verlangt.
+LAMBDA_DAEMPFUNG    = 0.85   # Zieht die erwarteten Tore zur Liga-Basis:
+                             #   lambda' = Liga-Basis + LAMBDA_DAEMPFUNG * (lambda - Liga-Basis)
+                             #
+                             # Vom Nutzer am 02.10.2026 ausdruecklich verlangt. Anlass: Das Modell
+                             # streut zu weit. Gemessen an 108 zwischengespeicherten Spielen mit
+                             # vollstaendigen Vorab-Quoten, Modell-Lambda gegen Markt-Lambda:
+                             #
+                             #   Heimtore       Bias -0,013  Steigung 0,842  t gegen 1 = -3,15
+                             #   Auswaertstore  Bias -0,014  Steigung 0,857  t gegen 1 = -2,27
+                             #   Tore gesamt    Bias -0,027  Steigung 0,809  t gegen 1 = -3,54
+                             #   Differenz      Bias +0,001  Steigung 0,879  t gegen 1 = -2,13
+                             #
+                             # Das NIVEAU stimmt (Bias praktisch null, Heimvorteil 1,304 gegen
+                             # 1,307 beim Markt, Gesamttore 2,889 gegen 2,916). Falsch ist die
+                             # SPREIZUNG: Sagt das Modell einen hohen Wert, sagt der Markt einen
+                             # weniger hohen. Drei bis dreieinhalb Standardfehler, kein Rauschen.
+                             #
+                             # Ob das Modell wirklich uebertreibt oder nur verrauschter ist als der
+                             # Markt, laesst sich nicht trennen (Regressionsverduennung) - die
+                             # Antwort ist in beiden Faellen dieselbe und folgt aus der Statistik,
+                             # nicht aus einer Anpassung: eine verrauschte Schaetzung gehoert zum
+                             # Mittel gezogen, sonst ist ihr Fehler groesser als noetig.
+                             #
+                             # Warum 0,85 und nicht 0,77 (dort liegt der kleinste Lambda-Fehler):
+                             # 0,85 liegt am oberen Rand der gemessenen Steigungen, holt vier
+                             # Fuenftel des Gewinns und greift so wenig ein wie moeglich.
+                             #
+                             # Gemessen an denselben 108 Spielen, 0,85 gegen 1,0:
+                             #   Lambda-Fehler gegen Markt   0,303 -> 0,291 Tore
+                             #   Abstand zum Markt beim Tipp 4,18 -> 3,63 Punkte (t = -3,34)
+                             #   Wahrscheinlichkeit des Tipps 61,1 -> 60,7 % (Kosten 0,4 Punkte)
+                             #   groesster Marktabstand      24,0 -> 18,7 Punkte
+                             #   Spiele ueber der 8-Punkte-Grenze  11 -> 9
+                             #   Tipp gewechselt             7 von 108
+                             #
+                             # WAS DIE MESSUNG NICHT ZEIGT: ob die Trefferquote steigt. Dafuer
+                             # braeuchte es einen Backtest gegen echte Ergebnisse, und der ist in
+                             # diesem Repo verboten (CLAUDE.md). Der Marktabstand verbessert sich
+                             # zum Teil deshalb, weil auf den Markt hin gedaempft wird. Die
+                             # Steigung unter 1 ist davon unabhaengig und bleibt der Befund.
+                             #
+                             # Gedaempft wird nur das MODELL-Lambda, nie das Markt-Lambda: der
+                             # Markt streut nicht zu weit.
 GLEICHSTAND_PUNKTE  = 2.0    # Liegt eine Wette weniger als so viele Prozentpunkte hinter der
                              # wahrscheinlichsten, entscheidet nicht mehr die Wahrscheinlichkeit,
                              # sondern die Empfindlichkeit (siehe empfindlichkeit()). Vom Nutzer
@@ -428,6 +471,11 @@ def berechne(mid, args):
     h2h_w, h2h_tore = h2h_werte(m)
     if h2h_w:
         tot=lh+la; f=(1-h2h_w)+h2h_w*h2h_tore/tot; lh*=f; la*=f
+    # Spreizung daempfen (siehe LAMBDA_DAEMPFUNG). Nach dem H2H, weil die Duelle Teil der
+    # Modellschaetzung sind, und vor dem Markt-Mix, weil das Markt-Lambda nicht gedaempft wird.
+    lh_roh, la_roh = lh, la
+    lh = base_h + LAMBDA_DAEMPFUNG * (lh - base_h)
+    la = base_a + LAMBDA_DAEMPFUNG * (la - base_a)
 
     mk = mlh = mla = None
     if quoten_da(m):
@@ -442,7 +490,8 @@ def berechne(mid, args):
     return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
                 nh=nh, na=na, fen_h=fen_h, fen_a=fen_a,
                 lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
-                M=M, p=p, h2h_w=h2h_w,
+                M=M, p=p, h2h_w=h2h_w, lh_roh=lh_roh, la_roh=la_roh,
+                base_h=base_h, base_a=base_a,
                 tipp=tipp, p_tipp=p_tipp, kandidaten=kand, empf=empf,
                 top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
 
@@ -478,6 +527,8 @@ def analysiere(mid, args):
         print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"
               f" | Ausw {r['fen_a']:.0%} ({r['na']} Saisonspiele)")
     print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
+    print(f" λ roh {r['lh_roh']:.2f}-{r['la_roh']:.2f} -> gedämpft {r['lh']:.2f}-{r['la']:.2f}"
+          f" (Faktor {LAMBDA_DAEMPFUNG:.2f} zur Liga-Basis {r['base_h']:.2f}-{r['base_a']:.2f})")
     if r['mk']:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
               f" | Markt-Anteil {r['w']:.0%} | final {r['flh']:.2f}-{r['fla']:.2f}")
