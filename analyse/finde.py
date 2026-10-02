@@ -2,6 +2,11 @@
 
     python3 analyse/finde.py 2026-10-02 "CD Eldense - Real Oviedo" "Helmond - Heracles"
     python3 analyse/finde.py 2026-10-02 --liste          # alle Spiele des Tages zeigen
+    python3 analyse/finde.py --text <<'E'               # so, wie der Nutzer schreibt:
+    02.10.
+    Eldense - Oviedo
+    Helmond - Heracles
+    E
 
 Der Nutzer schickt Paarung und Datum, keine Liga - die steht in den Spieldaten selbst
 (`competition_id`). Dieses Skript loest die Namen auf und erledigt dabei Durchgang 0 aus
@@ -59,6 +64,58 @@ def passt(frage, name):
     # "Helmond Sport", aber nicht "Atletico El Vigia" auf "Atletico Avila", weil dort
     # "el" und "vigia" fehlen.
     return fs <= ns or ns <= fs
+
+
+DATUM_MUSTER = (
+    (r'^(\d{4})-(\d{1,2})-(\d{1,2})$',      lambda g: (int(g[0]), int(g[1]), int(g[2]))),
+    (r'^(\d{1,2})\.(\d{1,2})\.(\d{4})$',    lambda g: (int(g[2]), int(g[1]), int(g[0]))),
+    (r'^(\d{1,2})\.(\d{1,2})\.?$',           lambda g: (None, int(g[1]), int(g[0]))),
+    (r'^(\d{1,2})/(\d{1,2})/(\d{4})$',       lambda g: (int(g[2]), int(g[1]), int(g[0]))),
+)
+
+
+def lies_datum(zeile):
+    """Erkennt 2026-10-02, 02.10.2026, 02.10. und 02/10/2026. Ohne Jahr: das laufende."""
+    import datetime, re
+    t = zeile.strip().strip(':').strip()
+    for muster, f in DATUM_MUSTER:
+        m = re.match(muster, t)
+        if m:
+            j, mo, d = f(m.groups())
+            if j is None:
+                j = datetime.date.today().year
+            try:
+                return datetime.date(j, mo, d).isoformat()
+            except ValueError:
+                return None
+    return None
+
+
+def lies_block(text):
+    """Erste Zeile mit einem Datum, danach je Zeile eine Paarung.
+
+    So schickt der Nutzer es: das Datum oben, darunter die Spiele des Tages. Nummerierung
+    und Aufzaehlungszeichen werden abgeschnitten, Leerzeilen uebersprungen.
+    """
+    import re
+    datum = None; paarungen = []
+    for zeile in text.splitlines():
+        roh = zeile.strip()
+        if not roh:
+            continue
+        # ERST das Datum pruefen, DANN die Nummerierung abschneiden: sonst frisst
+        # "\d+[.)]" den Tag aus "02.10." und das Datum ist weg (hier passiert, 02.10.2026).
+        d = lies_datum(roh)
+        if d:
+            if datum is None:
+                datum = d
+            else:
+                print(f"  (weiteres Datum '{roh}' im Block - bitte einen Tag je Nachricht)")
+            continue
+        z = re.sub(r'^(?:\d+[.)]|[-*\u2022\u2013])\s+', '', roh).strip()
+        if z:
+            paarungen.append(z)
+    return datum, paarungen
 
 
 def trenne(paarung):
@@ -119,12 +176,25 @@ def zeige(m, jetzt, drin):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Spiel-IDs aus Paarungen finden")
-    ap.add_argument("datum", help="YYYY-MM-DD")
+    ap.add_argument("datum", nargs="?", help="YYYY-MM-DD (oder --text)")
     ap.add_argument("paarungen", nargs="*", help='je Spiel "Heim - Auswaerts"')
+    ap.add_argument("--text", action="store_true",
+                    help="Block von der Standardeingabe lesen: Datum oben, darunter die Spiele")
     ap.add_argument("--liste", action="store_true", help="alle Spiele des Tages zeigen")
     ap.add_argument("--neu", action="store_true")
     ap.add_argument("--daten", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "daten"))
     args = ap.parse_args()
+
+    if args.text:
+        datum, paarungen = lies_block(sys.stdin.read())
+        if not datum:
+            sys.exit("Kein Datum im Block gefunden. Erste Zeile z. B. '02.10.' oder '2026-10-02'.")
+        if not paarungen:
+            sys.exit("Datum erkannt, aber keine Paarung darunter.")
+        args.datum, args.paarungen = datum, paarungen
+        print(f"Datum {datum}, {len(paarungen)} Paarungen gelesen.")
+    elif not args.datum:
+        sys.exit("Datum fehlt. Entweder als erstes Argument oder mit --text als Block.")
 
     jetzt = time.time()
     drin = bilanz_ids()
