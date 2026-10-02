@@ -29,6 +29,9 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team. Zwischen 0,85 und 0,95
    wird nicht eingegriffen, die Ausgabe weist nur darauf hin. Eingebaut am 02.10.2026,
    Grenze am selben Tag an echten Ergebnissen von 0,65 auf 0,85 korrigiert.
+   **Liegt das Liga-xG mehr als 15 % ÜBER den Liga-Toren** (`LIGA_XG_MAX` = 1,15), fällt nur
+   `LIGA_BASIS_XG` weg – die Teamstärken sind Verhältnisse und gegen eine gleichmäßige
+   Verzerrung immun, die Torbasis nicht.
    **Fehlt das xG-Feld eines Teams** (0,00 bei erzielten Toren – FootyStats erhebt xG nicht in
    jeder Liga und füllt es teils erst nachträglich), zählen für diesen Term nur die Tore, und
    das Team wird beim Liga-xG-Mittel ausgelassen. Ohne das las das Modell ein leeres Feld als
@@ -235,6 +238,27 @@ vier Ligen und wird wieder schlechter (+1,75 LL, t = +0,18, Trefferquote 58,1 st
 Die Verhältnisse der zwölf geprüften Ligen lagen bei 0,66 und dann erst wieder bei 0,91 bis
 1,12 – 0,85 liegt in dieser Lücke. `LIGA_XG_WARN` steht deshalb jetzt bei 0,95.
 
+**Und er gilt in beide Richtungen, seit dem 02.10.2026.** Liegt das Liga-xG über
+`LIGA_XG_MAX` = 1,15, ist die Torbasis `(1−b)·Tore + b·xG` um `b·(q−1)` zu hoch – bei
+q = 1,34 also um 13,6 %, was systematisch Richtung Über 2,5 und Beide treffen drückt. Die
+**Teamstärken** sind Verhältnisse (Team-xG / Liga-xG) und kürzen eine gleichmäßige Verzerrung
+heraus, deshalb bleibt `XG_ANTEIL` dort stehen. Gemessen im Walk-forward:
+
+| Variante | t gegen die Fassung mit nur der Untergrenze |
+|---|---|
+| unter 0,85 nur `XG_ANTEIL` aus | −1,63 |
+| unter 0,85 nur `LIGA_BASIS` aus | **−3,04** |
+| über 1,10 nur `LIGA_BASIS` aus | **+2,00** |
+| über 1,10 beides aus | −0,63 |
+
+Unten trägt das Teamgewicht den Gewinn, oben die Basis – beide „beides aus"-Varianten sind
+schlechter. **Die Grenze 1,15 ist das Spiegelbild von 0,85, nicht das gemessene Optimum:**
+die +2,00 hängen an einer Liga mit Verhältnis 1,12, und 1,12 ist der oberste Wert des
+beobachteten Normalbereichs (0,91 bis 1,12). Eine Grenze mitten hinein wäre Anpassung an eine
+Liga. Mit 1,15 ist die einzige messbare Liga 17387 (1,21, nur 12 bewertbare Spiele):
+LogLik −2,60403 → −2,57766, Brier 0,22599 → 0,22380, **t = +0,78 – Richtung stimmt,
+Stichprobe reicht nicht.**
+
 Der Test **kostet keine zusätzliche API-Abfrage** – die Werte stehen in der
 `league-teams`-Antwort, die das Modell ohnehin holt.
 
@@ -284,6 +308,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `GLEICHSTAND_PUNKTE` | 2,0 | darunter entscheidet die Empfindlichkeit, nicht die Wahrscheinlichkeit |
 | `EMPF_STOERUNG` | 0,10 | λ-Fehler, an dem die Empfindlichkeit gemessen wird |
 | `LIGA_XG_MIN` | 0,85 | darunter rechnet die ganze Liga nur mit Toren |
+| `LIGA_XG_MAX` | 1,15 | darüber fällt nur `LIGA_BASIS_XG` weg, Teamstärken bleiben |
 | `LIGA_XG_WARN` | 0,95 | darunter nur ein Hinweis in der Ausgabe |
 | `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
