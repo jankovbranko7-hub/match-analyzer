@@ -34,10 +34,10 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    1,01, und die Nullen zogen zusätzlich den Liga-Nenner um 15 % nach unten, was die Stärke
    **aller** Teams derselben Liga um 17 % aufblähte. Eingebaut am 30.09.2026.
 4. **Direkte Duelle** verschieben die Gesamttore um 10 %, wenn das letzte Duell höchstens 3 Jahre alt ist.
-4b. **Spreizung dämpfen:** `λ' = Liga-Basis + LAMBDA_DAEMPFUNG · (λ − Liga-Basis)` mit 0,85.
-   Gemessen an 108 Spielen streut das Modell zu weit (Steigung gegen den Markt 0,81 bis 0,88,
-   t bis −3,5), während das Niveau stimmt. Gedämpft wird nur das Modell-λ, nie das Markt-λ.
-   Eingebaut am 02.10.2026.
+4b. **Spreizung dämpfen:** `λ' = Liga-Basis + LAMBDA_DAEMPFUNG · (λ − Liga-Basis)`.
+   Steht auf **1,00, also aus.** Am 02.10.2026 mit 0,85 eingebaut (die Spreizung lag gegen
+   den Markt bei 0,81 bis 0,88, t bis −3,5) und am selben Tag zurückgenommen: der
+   Walk-forward über 2136 Spiele gegen echte Ergebnisse bevorzugt 1,00.
 5. **Vorab-Quoten** (optional, `--markt 0.3`): margenbereinigt in erwartete Tore umgerechnet und beigemischt.
    Standard ist 0 – reines Datenmodell.
 6. **Poisson mit Dixon-Coles-Korrektur** (rho = −0,07) ergibt die Ergebnis-Matrix 0:0 bis 10:10;
@@ -121,11 +121,27 @@ Seit 02.10.2026 gilt `λ' = Liga-Basis + 0,85 · (λ − Liga-Basis)`. Gemessen 
 | Spiele über der 8-Punkte-Grenze | 11 | **9** |
 | Tipp gewechselt | – | 7 von 114 |
 
-0,85 statt 0,77 (dort läge der kleinste λ-Fehler), weil 0,85 am oberen Rand der gemessenen
-Steigungen liegt, vier Fünftel des Gewinns holt und so wenig eingreift wie möglich.
-**Was die Messung nicht zeigt:** ob die Trefferquote steigt – dafür bräuchte es den verbotenen
-Backtest. Der Marktabstand verbessert sich zum Teil deshalb, weil auf den Markt hin gedämpft
-wird; die Steigung unter 1 ist davon unabhängig.
+**Am 02.10.2026 zurückgenommen – `LAMBDA_DAEMPFUNG` steht auf 1,00.** Der Nutzer hat die
+Rückschau auf echte Ergebnisse erlaubt, und die sagt das Gegenteil: Walk-forward über
+**2136 Spiele aus 12 reifen Ligen**, Teamdaten je Spiel nur aus Spielen davor, bewertet nur
+mit mindestens 10 Vorspielen je Team.
+
+| k | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| 0,80 | −2,91495 | 60,1 % | 0,23264 |
+| 0,85 | −2,91396 | 60,0 % | 0,23253 |
+| **1,00** | **−2,91260** | 60,0 % | **0,23240** |
+
+Beste Log-Likelihood und bester Brier bei 1,00; paarweise 0,85 gegen 1,00 t = −1,26 (im
+Zufallsbereich, Richtung negativ); 9 von 12 Ligen bevorzugen einzeln 1,00.
+
+**Näher am Markt heißt nicht näher an der Wirklichkeit.** Der Marktabstand ist ein
+Warnsignal, keine Zielfunktion. Der Befund selbst (Steigung 0,81 bei t = −3,5) bleibt richtig,
+die Schlussfolgerung war falsch.
+
+**Was dieselbe Messung über das Modell sagt:** Über die 2136 Spiele trifft es **60,0 % bei
+59,7 % vorhergesagten (z = +0,29)**, keine der fünf Wetten weicht signifikant ab, und die
+Torzahl stimmt auf **−0,3 %** (5753 gegen 5769 erwartete). Das Modell ist kalibriert.
 
 ### Gleichstand-Entscheid bei der Tipp-Auswahl
 
@@ -224,7 +240,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `H2H_MAX_JAHRE` | 3 | Ältere Duelle zählen gar nicht |
 | `H2H_DAEMPFUNG_K` | 3 | Gewicht der Duelle wächst mit ihrer Zahl: n/(n+3) |
 | `DIXON_COLES_RHO` | −0,07 | Korrektur für 0:0/1:0/0:1/1:1 |
-| `LAMBDA_DAEMPFUNG` | 0,85 | erwartete Tore zur Liga-Basis ziehen (Spreizung war zu groß) |
+| `LAMBDA_DAEMPFUNG` | 1,00 | aus – geprüft und verworfen, siehe unten |
 | `GLEICHSTAND_PUNKTE` | 2,0 | darunter entscheidet die Empfindlichkeit, nicht die Wahrscheinlichkeit |
 | `EMPF_STOERUNG` | 0,10 | λ-Fehler, an dem die Empfindlichkeit gemessen wird |
 | `LIGA_XG_MIN` | 0,65 | darunter rechnet die ganze Liga nur mit Toren |

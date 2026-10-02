@@ -644,3 +644,75 @@ man danach damit macht.
 Die Aufzeichnungen in `bilanz.json` bleiben unverändert — alle 79 sind vor dieser Änderung
 entstanden und mit der alten Spreizung gerechnet. Ab der nächsten Prognose ist die Bilanz
 deshalb **nicht mehr mit den 79 alten vergleichbar**, was die λ betrifft.
+
+## 24. Die λ-Dämpfung: Befund richtig, Schlussfolgerung falsch — ZURÜCKGENOMMEN am 02.10.2026
+
+Am 02.10.2026 eingebaut (Punkt 23) und am selben Tag zurückgenommen, nachdem der Nutzer die
+Rückschau auf echte Ergebnisse erlaubt hat. **Die Episode ist der Grund, warum der Marktabstand
+ein Warnsignal bleibt und nie eine Zielfunktion wird.**
+
+**Der Befund war echt.** Modell-λ gegen Markt-λ an 108 Spielen: Steigung 0,809 für die
+Gesamttore bei t = −3,54. Das Modell streut messbar weiter als der Markt, bei korrektem Niveau.
+
+**Die Schlussfolgerung war falsch.** Walk-forward über **2136 Spiele aus 12 reifen Ligen**,
+Teamdaten je Spiel ausschließlich aus Spielen davor gerechnet (Tore und Per-Spiel-xG aus
+`league-matches`), bewertet nur Spiele mit mindestens 10 Vorspielen je Team, damit das
+Datenfenster aus ist und kein Spiel sich selbst bewertet:
+
+| k | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| 0,65 | −2,91952 | 59,1 % | 0,23316 |
+| 0,75 | −2,91621 | 60,1 % | 0,23278 |
+| 0,85 | −2,91396 | 60,0 % | 0,23253 |
+| **1,00** | **−2,91260** | 60,0 % | **0,23240** |
+| 1,05 | −2,91270 | 59,9 % | 0,23242 |
+
+Beste Log-Likelihood und bester Brier bei **k = 1,00**, Trefferquote flach. Paarweise 0,85
+gegen 1,00: −2,90 LL gesamt, **t = −1,26** – im Zufallsbereich, aber mit negativem Vorzeichen,
+und **9 von 12 Ligen bevorzugen einzeln 1,00**.
+
+**Näher am Markt heißt nicht näher an der Wirklichkeit.** Der Marktabstand misst, wie weit
+Modell und Buchmacher auseinanderliegen – nicht, wer recht hat. Auf ihn hin zu optimieren ist
+derselbe Fehler wie der vom 27.09.2026, nur mit dem Markt statt der Vergangenheit als Ziel.
+
+### Was dieselbe Messung über das Modell sagt — und das ist der eigentliche Ertrag
+
+2136 Spiele, strikt vorwärts, k = 1,00:
+
+| | tatsächlich | erwartet | z |
+|---|---|---|---|
+| Tipps getroffen | 1282 (60,0 %) | 1275,4 (59,7 %) | **+0,29** |
+| Sieg Heim | 943 | 911,4 | +1,41 |
+| Sieg Auswärts | 621 | 647,9 | −1,29 |
+| Über 2,5 | 1079 | 1071,9 | +0,32 |
+| Unter 2,5 | 1057 | 1064,1 | −0,32 |
+| Beide treffen | 1162 | 1144,5 | +0,77 |
+| Tore | 5753 | 5769 | **−0,3 %** |
+
+**Das Modell ist kalibriert.** Keine der fünf Wetten weicht signifikant ab, die Torzahl stimmt
+auf 0,3 %, die Trefferquote auf 0,3 Prozentpunkte. Die 78 Spiele in `bilanz.json` deuteten
+darauf hin, die 2136 belegen es. Wer die Gewichte anfassen will, hat hier die Messlatte:
+**sie sind nicht nachweisbar verzerrt.**
+
+### Der Gleichstand-Entscheid wurde mitgeprüft
+
+Auf den **557** Spielen, in denen er eingriff:
+
+| Auswahl | Treffer | erwartet | z |
+|---|---|---|---|
+| nur argmax | 356 | 324,8 | +2,70 |
+| **mit Gleichstand** | **365** | 323,0 | **+3,63** |
+
+**+9 Treffer** bei 99 Spielen mit verschiedenem Tipp. McNemar: argmax allein richtig 45×,
+Gleichstand allein richtig 54×, **z = +0,90 – nicht signifikant.** Er schadet nicht, kostet
+0,35 Punkte Wahrscheinlichkeit, und das Vorzeichen stimmt. **Er bleibt**, aber er ist nicht
+bewiesen.
+
+### Der Walk-forward liegt nicht im Repo
+
+Die Erlaubnis vom 02.10.2026 galt für **diese Messung**, nicht für ein dauerhaftes
+Backtest-Werkzeug. Die Skripte (`walk.py`, `score.py`, `sig.py`) lagen im Arbeitsverzeichnis
+der Session und sind mit ihr weg. Wer sie wieder braucht, baut sie neu – oder der Nutzer sagt,
+dass sie ins Repo sollen. Der Aufbau steht oben beschrieben: `league-matches` je Liga, nach
+`date_unix` sortieren, Teamdaten je Spiel nur aus Spielen davor, mindestens 10 Vorspiele je
+Team, dann Log-Likelihood der echten Ergebnisse unter der Dixon-Coles-Matrix.

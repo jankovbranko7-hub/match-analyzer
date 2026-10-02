@@ -298,9 +298,56 @@ gegen echte Ergebnisse über vergangene Spieltage – den Backtest, den dieses R
 Der Marktabstand verbessert sich zum Teil deshalb, weil auf den Markt hin gedämpft wird; die
 Steigung unter 1 bei t = −3,5 ist davon unabhängig und bleibt der Befund.
 
-**Die Ausgabe zeigt beide Werte** (`λ roh … -> gedämpft …`). Die 79 Aufzeichnungen in
-`bilanz.json` sind vor dieser Änderung entstanden und bleiben unverändert; ihre λ sind mit der
-alten Spreizung gerechnet und mit den neuen nicht vergleichbar.
+**ZURÜCKGENOMMEN AM 02.10.2026, noch am selben Tag. `LAMBDA_DAEMPFUNG = 1.00`, also aus.**
+Der Nutzer hat die Rückschau auf echte Ergebnisse erlaubt, und die sagt das Gegenteil.
+
+**Walk-forward über 2136 Spiele aus 12 reifen Ligen.** Für jedes Spiel wurden die Teamdaten
+ausschließlich aus Spielen *davor* gerechnet (Tore und Per-Spiel-xG aus `league-matches`),
+bewertet wurden nur Spiele, bei denen beide Teams schon 10 Vorspiele hatten – damit ist das
+Datenfenster aus und kein Spiel bewertet sich selbst.
+
+| k | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| 0,80 | −2,91495 | 60,1 % | 0,23264 |
+| 0,85 | −2,91396 | 60,0 % | 0,23253 |
+| **1,00** | **−2,91260** | 60,0 % | **0,23240** |
+
+Beste Log-Likelihood und bester Brier bei **k = 1,00**, die Trefferquote ist flach. Paarweise
+0,85 gegen 1,00: −2,90 LL, t = −1,26 – im Zufallsbereich, aber die Richtung ist negativ, und
+**9 von 12 Ligen bevorzugen einzeln k = 1,00**.
+
+**Die Lehre, und sie gehört zu den wichtigsten in dieser Datei:** Der Befund war echt – die
+Steigung gegen den Markt lag bei 0,81 mit t = −3,5. Die Schlussfolgerung war falsch.
+**Näher am Markt heißt nicht näher an der Wirklichkeit.** Das ist genau der Fehler, vor dem
+der Abschnitt „Kein Backtest" warnt, nur mit dem Markt statt der Vergangenheit als Ziel.
+Der Marktabstand ist ein **Warnsignal**, keine Zielfunktion. Nicht wieder einbauen ohne neue
+Messung gegen echte Ergebnisse.
+
+**Was dieselbe Messung über das Modell sagt – und das ist gute Nachricht.** Dieselben
+2136 Spiele, k = 1,00:
+
+| | tatsächlich | erwartet | z |
+|---|---|---|---|
+| Tipps getroffen | 1282 (60,0 %) | 1275,4 (59,7 %) | **+0,29** |
+| Sieg Heim | 943 | 911,4 | +1,41 |
+| Sieg Auswärts | 621 | 647,9 | −1,29 |
+| Über 2,5 | 1079 | 1071,9 | +0,32 |
+| Beide treffen | 1162 | 1144,5 | +0,77 |
+| Tore | 5753 | 5769 | **−0,3 %** |
+
+**Das Modell ist kalibriert.** Über 2136 vorwärts gerechnete Spiele trifft es 60,0 % bei
+59,7 % vorhergesagten, keine der fünf Wetten weicht signifikant ab, die Torzahl stimmt auf
+0,3 %. Das ist eine viel stärkere Aussage als die 78 Spiele in `bilanz.json`.
+
+**Der Gleichstand-Entscheid wurde dabei mitgeprüft** und bestätigt sich der Richtung nach:
+Auf den 557 Spielen, in denen er eingriff, 365 Treffer gegen 323,0 erwartete (z = +3,63),
+gegenüber 356 bei reinem argmax (z = +2,70) – **+9 Treffer** bei 99 Spielen mit verschiedenem
+Tipp. McNemar z = +0,90, also **nicht** signifikant. Er schadet nicht, kostet 0,35 Punkte
+Wahrscheinlichkeit und liegt mit dem Vorzeichen richtig. Er bleibt.
+
+Die Ausgabe zeigt die Dämpfungszeile nur, wenn der Faktor nicht 1,00 ist. Die 79
+Aufzeichnungen in `bilanz.json` sind von der Episode unberührt – es wurde keine Prognose
+mit 0,85 festgehalten.
 
 ### Gewichte nicht verändern
 

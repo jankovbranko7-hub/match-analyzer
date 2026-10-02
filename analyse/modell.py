@@ -104,7 +104,7 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
                              # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
                              # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
                              # Vom Nutzer am 27.09.2026 verlangt.
-LAMBDA_DAEMPFUNG    = 0.85   # Zieht die erwarteten Tore zur Liga-Basis:
+LAMBDA_DAEMPFUNG    = 1.00   # AUS. Zieht die erwarteten Tore zur Liga-Basis:
                              #   lambda' = Liga-Basis + LAMBDA_DAEMPFUNG * (lambda - Liga-Basis)
                              #
                              # Vom Nutzer am 02.10.2026 ausdruecklich verlangt. Anlass: Das Modell
@@ -147,6 +147,27 @@ LAMBDA_DAEMPFUNG    = 0.85   # Zieht die erwarteten Tore zur Liga-Basis:
                              #
                              # Gedaempft wird nur das MODELL-Lambda, nie das Markt-Lambda: der
                              # Markt streut nicht zu weit.
+                             #
+                             # ZURUECK AUF 1,00 AM 02.10.2026. Der Nutzer hat die Rueckschau auf
+                             # echte Ergebnisse erlaubt, und die sagt das Gegenteil. Walk-forward
+                             # ueber 2136 Spiele aus 12 reifen Ligen, Teamdaten je Spiel NUR aus
+                             # Spielen davor gerechnet, Per-Spiel-xG aus league-matches:
+                             #
+                             #   k      LogLik/Spiel   Trefferquote   Brier
+                             #   0,80   -2,91495       60,1 %         0,23264
+                             #   0,85   -2,91396       60,0 %         0,23253
+                             #   1,00   -2,91260       60,0 %         0,23240   <- beste
+                             #
+                             # Beste Log-Likelihood und bester Brier bei k = 1,00, Trefferquote
+                             # flach. Paarweise 0,85 gegen 1,00: -2,90 LL, t = -1,26, also im
+                             # Zufallsbereich - aber die Richtung ist negativ, und 9 von 12 Ligen
+                             # bevorzugen einzeln k = 1,00.
+                             #
+                             # DIE LEHRE: Der Befund war echt (Steigung 0,81 gegen den Markt,
+                             # t = -3,5), die Schlussfolgerung falsch. Naeher am Markt heisst nicht
+                             # naeher an der Wirklichkeit. Genau der Fehler, vor dem CLAUDE.md
+                             # warnt - nur mit dem Markt statt mit der Vergangenheit als Ziel.
+                             # Nicht wieder einbauen ohne neue Messung gegen echte Ergebnisse.
 GLEICHSTAND_PUNKTE  = 2.0    # Liegt eine Wette weniger als so viele Prozentpunkte hinter der
                              # wahrscheinlichsten, entscheidet nicht mehr die Wahrscheinlichkeit,
                              # sondern die Empfindlichkeit (siehe empfindlichkeit()). Vom Nutzer
@@ -527,8 +548,9 @@ def analysiere(mid, args):
         print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"
               f" | Ausw {r['fen_a']:.0%} ({r['na']} Saisonspiele)")
     print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
-    print(f" λ roh {r['lh_roh']:.2f}-{r['la_roh']:.2f} -> gedämpft {r['lh']:.2f}-{r['la']:.2f}"
-          f" (Faktor {LAMBDA_DAEMPFUNG:.2f} zur Liga-Basis {r['base_h']:.2f}-{r['base_a']:.2f})")
+    if LAMBDA_DAEMPFUNG != 1.0:
+        print(f" λ roh {r['lh_roh']:.2f}-{r['la_roh']:.2f} -> gedämpft {r['lh']:.2f}-{r['la']:.2f}"
+              f" (Faktor {LAMBDA_DAEMPFUNG:.2f} zur Liga-Basis {r['base_h']:.2f}-{r['base_a']:.2f})")
     if r['mk']:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
               f" | Markt-Anteil {r['w']:.0%} | final {r['flh']:.2f}-{r['fla']:.2f}")
