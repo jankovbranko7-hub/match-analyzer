@@ -1,6 +1,6 @@
 # Stand
 
-Zuletzt aktualisiert: 29.09.2026. Diese Datei ist die Übergabe an die nächste Session –
+Zuletzt aktualisiert: **02.10.2026**. Diese Datei ist die Übergabe an die nächste Session –
 sie sagt, wo alles steht. Die Regeln stehen in `CLAUDE.md`, der Rechenweg in `README.md`,
 die Schwachstellen in `SOLLBRUCHSTELLEN.md`.
 
@@ -15,103 +15,138 @@ die Frage „warum lag die Prognose daneben" zwingend zuerst ausführen.**
 
 ## Modellstand
 
-**Eingefroren.** Letzte und einzige Änderung am Rechenweg: Datenfenster
-(`FENSTER_MIN_SPIELE = 10`) am 27.09.2026.
+| Konstante | Wert | |
+|---|---|---|
+| `XG_ANTEIL` | 0,70 | |
+| `LIGA_BASIS_XG` | 0,40 | |
+| `SEITE_K` | 6 | |
+| `DAEMPFUNG_K` | 5 | |
+| `FORM_ANTEIL` / `FORM_DAEMPFUNG_K` | 0,25 / 3 | |
+| `H2H_ANTEIL` / `H2H_MAX_JAHRE` / `H2H_DAEMPFUNG_K` | 0,10 / 3 / 3 | |
+| `DIXON_COLES_RHO` | −0,07 | |
+| `LAMBDA_DAEMPFUNG` | **1,00** | aus – am 02.10. geprüft und verworfen |
+| `GLEICHSTAND_PUNKTE` / `EMPF_STOERUNG` | **2,0 / 0,10** | neu am 02.10. |
+| `LIGA_XG_MIN` / `LIGA_XG_WARN` | **0,85 / 0,95** | neu am 02.10. |
+| `MARKT_ANTEIL` | 0,0 (aus) | |
+| `MIN_SAISONSPIELE` | 3 | |
+| `FENSTER_MIN_SPIELE` | 10 | |
+| `CACHE_STUNDEN` | 6 | |
 
-**Wie es dazu kam – die Schüsse waren der Auslöser.** Der Nutzer schickte Screenshots seiner
-FootyStats-Seite. Dort standen für Manchester United W **9,71 Schüsse pro Spiel**, die API
-lieferte für dieselbe Saison **3,33** – fast das Dreifache, dazu 1,4 gegen 0,00 Heimtore und
-10 % gegen 0 % Zu-Null. Das war der Beweis, dass Website und API **verschiedene
-Grundgesamtheiten** zeigen: die Seite ein rollendes Fenster über 7 bis 10 Spiele, die API nur
-die drei Spiele der laufenden Saison. Daraus entstand das Datenfenster (`SOLLBRUCHSTELLEN.md`
-Punkt 10).
-
-**Eine Schuss-Komponente selbst wurde geprüft und nicht eingebaut.** Zwei Gründe: FootyStats
-liefert 18 Schuss-Felder, alle für das eigene Team – **kein einziges für gegnerische Schüsse**,
-also ließe sich nur der Angriff stützen, die Abwehr nicht. Und durchgerechnet änderte
-`SCHUSS_ANTEIL` von 0,15 bis 0,80 **bei keinem von 21 Tipps** den besten Tipp. `SCHUSS_ANTEIL`
-existiert im Code nicht.
-
-| Konstante | Wert |
-|---|---|
-| `XG_ANTEIL` | 0,70 |
-| `LIGA_BASIS_XG` | 0,40 |
-| `SEITE_K` | 6 |
-| `DAEMPFUNG_K` | 5 |
-| `FORM_ANTEIL` / `FORM_DAEMPFUNG_K` | 0,25 / 3 |
-| `H2H_ANTEIL` / `H2H_MAX_JAHRE` / `H2H_DAEMPFUNG_K` | 0,10 / 3 / 3 |
-| `DIXON_COLES_RHO` | −0,07 |
-| `MARKT_ANTEIL` | 0,0 (aus) |
-| `MIN_SAISONSPIELE` | 3 |
-| `FENSTER_MIN_SPIELE` | 10 |
-| `CACHE_STUNDEN` | 6 |
+**Kein Gewicht ist je an vergangenen Spielen optimiert worden**, und am 02.10. wurde geprüft,
+dass das richtig ist: alle acht Gewichte im Walk-forward über 2136 Spiele durchgefahren,
+getrennt auf zwei Ligen-Hälften – **acht von acht widersprechen sich**. Details in
+`SOLLBRUCHSTELLEN.md` Punkt 25.
 
 Frühere Fassungen: `d912a1c` (ohne Datenfenster), `605fab4` (mit).
 Zurückschalten: `git checkout <commit> -- analyse/modell.py`
 
-## Bilanz
+## Wie gut das Modell ist
+
+Gemessen am 02.10.2026 im Walk-forward über **2136 Spiele aus 12 reifen Ligen**, Teamdaten je
+Spiel nur aus Spielen davor:
+
+| | tatsächlich | erwartet | z |
+|---|---|---|---|
+| Tipps getroffen | 1282 (60,0 %) | 1275,4 (59,7 %) | +0,29 |
+| Sieg Heim | 943 | 911,4 | +1,41 |
+| Sieg Auswärts | 621 | 647,9 | −1,29 |
+| Über 2,5 | 1079 | 1071,9 | +0,32 |
+| Beide treffen | 1162 | 1144,5 | +0,77 |
+| Tore | 5753 | 5769 | −0,3 % |
+
+**Das Modell ist kalibriert.** Keine der fünf Wetten weicht signifikant ab. Was es nicht
+kann: den Buchmacher schlagen – der Abstand zum Markt liegt bei rund 4 Punkten, die Marge
+bei 7 bis 10 %.
+
+## Bilanz der eigenen Prognosen
 
 | | |
 |---|---|
-| Prognosen gesamt | 71 |
-| ausgewertet | 70 |
+| Prognosen gesamt | 79 |
+| ausgewertet | 78 |
 | **offen** | **0** |
 | abgesagt | 1 (New York RB – St. Louis City) |
-| Treffer | 46 gegen 42.8 erwartete (z = +0.78, Zufallsbereich) |
-| Trefferquote | 66.7 % (Modell sagte 62.0 %) |
-| Tore | 196 gegen 199.9 erwartete (−2.0 %) |
-| Geld, alle Tipps zu 10 € | +5 € auf 690 € Einsatz (+0.8 %) |
-| Geld, nur die 15 mit Value | +17 € auf 150 € Einsatz |
+| Treffer | 49 gegen 47,6 erwartete (z = +0,33) |
+| Trefferquote | 62,8 % (Modell sagte 61,0 %) |
+| Tore | 222 gegen 223,0 erwartete (−0,4 %) |
+| Geld, alle Tipps zu 10 € | −32 € auf 760 € (−4,2 %) |
+| Geld, nur die 16 mit Value | +7 € auf 160 € |
 
-Aussagekraft: Bei 70 Spielen wäre erst eine Verzerrung ab rund 17 Prozentpunkten
-nachweisbar. Für 10 Punkte braucht es rund 190 Spiele. **Bis dahin ist keine Abweichung ein
-Grund, an den Gewichten zu drehen.**
+**`abstand_markt` steht bei 0 von 78 Einträgen** – seit das Feld am 30.09. dazukam, ist keine
+Prognose mehr aufgezeichnet worden. Die Frage, ob Tipps mit großem Marktabstand schlechter
+liefen, ist weiter unbeantwortet. Ab der nächsten Prognose kommen `abstand_markt`,
+`empf_tipp` und `gleichstand` mit.
 
-## Offene Prognosen
+**58 % der 78 Tipps waren „Beide treffen", Sieg Auswärts kein einziger.** Das ist Arithmetik
+(Basisraten 54–69 % gegen 30 %), kein Fehler – aber es heißt, die Bilanz misst überwiegend,
+wie gut „Beide treffen" vorhergesagt wird.
 
-Keine. Alles ausgewertet, Stand 29.09.2026 abends. Zuletzt dazugekommen: die zehn Spiele
-der National League vom 29.09. (6 von 10 getroffen bei 5,9 erwarteten).
+## Was am 02.10.2026 passiert ist
 
-## Wettschein des Nutzers vom 28.09. – verloren
+Fünf Änderungen, sechs Commits. **Drei betreffen Datenqualität und Verlässlichkeit, eine die
+Auswahl, eine wurde zurückgenommen.** Kein Gewicht wurde angefasst.
 
-4er-Kombi, Einsatz 20 €, Kombiquote 7,26. **Drei Legs getroffen, eines nicht:**
+| Commit | Was | belegt? |
+|---|---|---|
+| `1dd3616` | API-Fehler riss den ganzen Lauf mit (`SystemExit` statt `Exception`) | Fehler, behoben |
+| `6f60d52` | Liga-Test für das xG eingebaut | Datenfehler, behoben |
+| `5bbb1ba` | `--auswerten` verwarf geholte Ergebnisse | Fehler, behoben |
+| `c717e7a` | Gleichstand-Entscheid unter 2 Punkten | Richtung stimmt, nicht signifikant |
+| `eb66b39` → `5f750fa` | λ-Dämpfung 0,85 eingebaut und **zurückgenommen** | an Ergebnissen widerlegt |
+| `4419e30` | `LIGA_XG_MIN` 0,65 → 0,85 | **+21,68 LL, t = +2,91, signifikant** |
 
-| Leg | Tipp | Ergebnis | |
-|---|---|---|---|
-| Bor – Metalac GM | Unter 2,5 | 0:2 | getroffen |
-| Leganés – Castellón | Unter 2,5 | 0:2 | getroffen |
-| Bnei Raina – Ra'anana | Beide treffen | 1:2 | getroffen |
-| Kiryat Gat – Kafr Qasim | Beide treffen | 0:1 | **verloren** |
+**Die einzige an echten Ergebnissen belegte Verbesserung ist die letzte** – und sie ist eine
+Schranke für Datenqualität, kein Gewicht. Das ist die Lehre des Tages: Treffsicherheit kommt
+daraus, kaputte Daten zu erkennen, bevor sie in die Rechnung gehen.
 
-Damit ist der Schein weg. **Das ist die dritte Bestätigung derselben Rechnung:** am 27.09.
-sechs von sieben Legs getroffen und trotzdem 0 €, jetzt drei von vier. Einzeln gespielt
-hätten diese vier Tipps aus 20 € Einsatz rund 25 € gemacht.
+## Die drei wichtigsten Lehren vom 02.10.2026
 
-## Was in dieser Session gelernt wurde
+1. **Näher am Markt heißt nicht näher an der Wirklichkeit.** Die λ-Dämpfung war auf den
+   Marktabstand hin gebaut (Steigung 0,81, t = −3,5) und fiel gegen echte Ergebnisse durch.
+   Der Marktabstand ist ein Warnsignal, keine Zielfunktion.
+2. **Sieht eine Konstante schlecht aus, erst nach der kaputten Liga suchen.** Eine von zwölf
+   Ligen hat gereicht, um `XG_ANTEIL` um 0,2 bis 0,3 falsch aussehen zu lassen.
+3. **Die Fehler sitzen nicht in der Rechnung, sondern davor und danebe**n: drei von fünf
+   Änderungen waren Abbrüche und Datenfehler, die man der Ausgabe nicht ansieht.
 
-1. **Die Tabelle entscheidet, nicht die Prosa.** Warnungen im Fließtext werden überlesen.
-   Alles Entscheidungsrelevante gehört in eine Spalte.
-2. **`gegen fair` misst bei dünner Datenlage das eigene Rauschen**, nicht Value. Deshalb hat
-   die Rangliste zwei Blöcke.
-3. **FootyStats-Quoten sind nicht die Quoten des Nutzers** – im Median 6,1 % darüber,
-   im Extremfall 17,5 %.
-4. **Die Marge multipliziert sich je Leg.** Sieben Legs, sechs gewonnen, Schein verloren.
-5. **Der Backtest ist verboten.** Die einzige erlaubte Rückschau ist `bilanz.py --auswerten`.
-6. **Vor dem Rechnen die Uhr prüfen.** Am 29.09. wurden zehn Spiele um 21:26 UTC gerechnet,
-   Anstoß war 18:00 und 18:45 – eine Rückschau mit Prognose-Etikett. Dafür gibt es jetzt
-   Durchgang 0 in `CLAUDE.md`.
-7. **Zwei Sessions können dieselben Spiele eintragen.** Am 29.09. wären die zehn
-   National-League-Spiele doppelt in `bilanz.json` gelandet. Vor `--merken` immer `git fetch`
-   und die `id` prüfen.
+## Offene Punkte
 
-## Regeländerungen vom 29.09.2026
+| Punkt | Was | warum offen |
+|---|---|---|
+| 10 | Wirkung des Datenfensters ungeklärt, eher negativ | nie an Ergebnissen geprüft |
+| 16 | Saison 16580: xG 34 % über den Toren, Torbasis 8,8 % zu hoch | verändert Zahlen |
+| 17 | Fenster (10 Spiele) und Form (6) zählen dieselben Spiele doppelt | Gewichte liegen fest |
+| 20 | Begründung der Saisonspiel-Sperre korrigiert, Grenze bleibt bei 3 | erledigt, nur Doku |
+| 21 | Ein Spiel kann in zwei Tageslisten stehen – IDs entdoppeln | Ablauf, nicht Code |
+| 21 | `p_tipp` ist als Maximum aus fünf Wetten nach oben verzerrt | nicht korrigierbar |
+| – | Margenbereinigung proportional statt Quotenverhältnis | 2 von 32 Spielen wechseln den Block |
 
-- **Empfehlungen sind Dauerfreigabe.** Fragt der Nutzer, wird empfohlen – ohne Rückfrage.
-- **Keine feste Obergrenze von drei Legs mehr.** Die Datenlage entscheidet; bei sehr guter
-  Datenlage fünf bis sechs Legs.
-- **Ligenregel jetzt nach Wett-Familie statt nach Wettart.** Pro Liga höchstens ein Leg aus
-  der Tor-Familie (Über/Unter 2,5, Beide treffen) und eines aus der Ausgangs-Familie
-  (Sieg Heim/Auswärts). Grund: Über 2,5 und Beide treffen lesen dieselbe Zahl ab und
-  korrelierten an den zehn Spielen vom 29.09. mit +0,96.
-- **Durchgang 0 und Durchgang 4** in der Prüfroutine: Uhrzeit, Cache-Alter, Doppeleintrag und
-  Vollzähligkeit vorher; Formkontrolle der ganzen Antwort nachher.
+## Der Walk-forward liegt nicht im Repo
+
+Der Nutzer hat die Rückschau auf echte Ergebnisse am 02.10.2026 erlaubt – **für diese
+Messung**, nicht als dauerhaftes Werkzeug. Die Skripte lagen im Arbeitsverzeichnis der
+Session. Der Aufbau steht in `SOLLBRUCHSTELLEN.md` Punkt 24 beschrieben: `league-matches` je
+Liga, nach `date_unix` sortieren, Teamdaten je Spiel nur aus Spielen davor, mindestens 10
+Vorspiele je Team, dann Log-Likelihood der echten Ergebnisse unter der Dixon-Coles-Matrix.
+
+**Der Nutzer wurde gefragt, ob es ins Repo soll – noch keine Antwort.** Mit dem Werkzeug
+ließe sich jede künftige Idee gegen 2000 echte Spiele prüfen statt gegen 78.
+
+## Wettscheine des Nutzers
+
+| Datum | Schein | Ergebnis |
+|---|---|---|
+| 27.09. | 7 Legs, 10 € | **verloren** – 6 von 7 getroffen. Einzeln: 16,64 € (+66 %) |
+| 28.09. | 4 Legs, 20 €, Kombiquote 7,26 | **verloren** – 3 von 4 getroffen. Einzeln: rund 25 € |
+| 30.09. | 6 Legs (Tipico) | – |
+
+**Dreimal dieselbe Rechnung:** Die Marge multipliziert sich je Leg. Fünf Legs à 7 % sind
+30,4 %, sechs 34,9 %.
+
+## Was als Nächstes ansteht
+
+Der Nutzer spielt **ab dem 10.10.2026 Topligen**. Dort ist die Saison reif, `Fenster` 0 %,
+das xG sauber – die beste Datenlage, die das Modell bekommen kann. Jede Prognose von da an
+landet mit `abstand_markt`, `empf_tipp` und `gleichstand` in `bilanz.json`. **Nach rund
+hundert solchen Spielen** lässt sich erstmals beantworten, ob die 8-Punkte-Grenze stimmt und
+ob der Gleichstand-Entscheid trägt.

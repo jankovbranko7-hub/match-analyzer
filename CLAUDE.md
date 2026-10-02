@@ -62,26 +62,55 @@ antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 
 sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist
 eine Abweichung **kein** Grund, an den Gewichten zu drehen.
 
-### Kein Backtest, keine Massenauswertung
+### Rückschau: erlaubt als Prüfgerät, verboten als Suchmaschine
 
-**Es gibt in diesem Repo kein Backtest-Werkzeug, und es wird keines gebaut.**
-Am 27.09.2026 vom Nutzer ausdrücklich entfernt und verboten.
+**Das Verbot vom 27.09.2026 ist am 02.10.2026 vom Nutzer gelockert worden.** Es gibt jetzt
+`analyse/rueckschau.py` – ein Walk-forward über echte Ergebnisse vergangener Spieltage. Der
+Nutzer hat es ausdrücklich verlangt, nachdem zwei Entscheidungen desselben Tages nur damit zu
+treffen waren: `LAMBDA_DAEMPFUNG` sah gegen die Quoten stark aus und fiel gegen echte
+Ergebnisse durch; `LIGA_XG_MIN` wurde dadurch von 0,65 auf 0,85 korrigiert (+21,68 LL,
+t = +2,91). Ohne das Werkzeug wäre beides Meinung geblieben.
 
-Nicht erlaubt ist damit:
-- ein Skript, das das Modell über historische Spieltage laufen lässt (walk-forward oder anders),
-- Massenabfragen wie `league-matches` über ganze Saisons, um Trefferquoten oder Renditen zu rechnen,
-- Kalibrierungskurven, Korrekturfaktoren, AUC, Margenstatistiken, Tippregel-Vergleiche,
-- **jede Zahl aus solchen Auswertungen als Begründung** – nicht für eine Konstante, nicht für
-  die Wahl des Tipps, nicht für eine Spielempfehlung, nicht als „gemessen über N Spiele".
+**Der Grund für das alte Verbot gilt unverändert weiter.** Über zehntausende Spiele lässt sich
+immer etwas finden, das rückwärts besser aussieht und vorwärts schlechter ist. Am 27.09.2026
+ist genau das passiert: Aus einer Auswertung wurde eine Regel gebaut, die zwei Wettarten
+sperrte und bei 20 von 21 Spielen „nicht spielen" ergab. Deshalb:
 
-**Der Grund:** Über zehntausende Spiele lässt sich immer etwas finden, das rückwärts besser
-aussieht und vorwärts schlechter ist. Am 27.09.2026 ist genau das passiert: Aus einer solchen
-Auswertung wurde eine Regel gebaut, die zwei Wettarten sperrte und damit bei 20 von 21 Spielen
-„nicht spielen" ergab. Die Gewichte sind **Erfahrungswerte** – sie werden nicht an Vergangenheit
-gemessen, weil sie nicht daraus stammen.
+**Erlaubt ist**, einen **konkreten Vorschlag** gegen echte Ergebnisse zu prüfen:
 
-**Die einzige erlaubte Rückschau** ist `analyse/bilanz.py --auswerten`: die eigenen,
-vorab festgehaltenen Prognosen gegen ihr Ergebnis. Die zählt, weil sie vorwärts entstanden ist.
+```
+python3 analyse/rueckschau.py                                  # Kalibrierung, Stand sehen
+python3 analyse/rueckschau.py --konstante XG_ANTEIL --werte 0.5 0.6 0.7 0.8 --haelften
+python3 analyse/rueckschau.py --ligen 16540 15066               # weitere Ligen dazuholen
+```
+
+- **`--haelften` ist Pflicht, wenn eine Zahl das Ergebnis sein soll.** Das Werkzeug teilt nach
+  **Ligen** (nicht nach Spielen) und sagt selbst „EINIG" oder „UNEINIG". Uneinig heißt:
+  Anpassung an Rauschen, Konstante bleibt, Thema beendet.
+- **Gegenprobe auf die kaputte Liga, bevor eine Konstante schuld ist.** Am 02.10. sah
+  `XG_ANTEIL` um 0,2 bis 0,3 falsch aus, und die Ursache war **eine** von zwölf Ligen mit
+  unbrauchbarem xG. Erst die Daten prüfen, dann das Gewicht verdächtigen.
+- **Maßstab ist die Log-Likelihood**, nicht die Trefferquote eines Laufs. Die Trefferquote
+  schwankt über ein paar Spiele, die Likelihood misst die ganze Verteilung.
+
+**Verboten bleibt:**
+- **Gewichte darauf optimieren.** Am 02.10. wurden alle acht durchgefahren: **acht von acht
+  widersprechen sich zwischen den Hälften** (Tabelle unter „Gewichte nicht verändern").
+  Das ist nachgemessen – wer es wieder versucht, sucht Rauschen.
+- **Eine Zahl daraus als Begründung für einen Tipp oder eine Empfehlung.** Das Werkzeug sagt
+  etwas über das Modell, nie über ein einzelnes Spiel.
+- **Eine neue Auswahlregel, Schwelle oder Obergrenze daraus ableiten.** Siehe „Keine eigenen
+  Auswahlregeln erfinden" – das gilt unverändert.
+- **Renditen und Margenstatistiken.** Das Werkzeug rechnet Wahrscheinlichkeiten gegen
+  Ergebnisse, kein Geld. Was Geld angeht, zählt nur `bilanz.py --auswerten`.
+
+**Was das Werkzeug nicht nachbaut** und was man dazusagen muss, wenn man es zitiert: H2H
+(höchstens 10 %) und das Datenfenster (umgangen, weil nur Spiele mit mindestens 10 Vorspielen
+je Team bewertet werden). Eine Zahl daraus gilt für den **Kern** des Modells.
+
+**Die Rückschau auf die eigenen Prognosen bleibt `analyse/bilanz.py --auswerten`** – vorab
+festgehaltene Tipps gegen ihr Ergebnis, inklusive Geld. Die zählt weiter am meisten, weil sie
+vorwärts entstanden ist und den ganzen Ablauf misst, nicht nur den Rechenkern.
 
 ### Sollbruchstellen
 
@@ -128,6 +157,31 @@ bei einem Spiel bleibt rund ein Viertel der Trennschärfe von zwölf Spielen üb
 **Der Nutzer hat die Grenze am 01.10.2026 ausdrücklich bei 3 belassen**, nachdem er diese
 Zahlen gesehen hatte. Nicht ändern ohne neue Anweisung.
 
+**Am 02.10.2026 nachgemessen: Diese Tabelle beschreibt einen Lauf OHNE Datenfenster.**
+Im echten Lauf liegt immer ein `lastx`-10er-Block vor, das Fenster hebt die Stichprobe
+auf 10 – und damit greift die Dämpfung fast nicht mehr. Gemessen an denselben zwei
+synthetischen Heimteams (2,6 gegen 0,7 Tore), Form abgeschaltet:
+
+| Saisonspiele | ohne Fenster | Fenster bestätigt die Saison | Fenster zeigt Liga-Schnitt |
+|---|---|---|---|
+| 1 | 5,0 Punkte | **24,1** | 2,5 |
+| **3 (Grenze)** | 11,2 Punkte | **24,1** | 7,4 |
+| 8 | 21,6 Punkte | **24,1** | 19,4 |
+| 12 | 26,1 Punkte | 26,1 | 26,1 |
+
+Die Spalte „ohne Fenster" steigt, wie die Tabelle oben es beschreibt. **Mit Fenster ist
+sie flach** – 24,1 Punkte von einem bis acht Saisonspielen, also 92 % der Trennschärfe
+von zwölf Spielen. Die absoluten Werte sind nicht mit der Tabelle oben vergleichbar
+(anderer synthetischer Aufbau), der Verlauf schon.
+
+**Was das bedeutet:** Unter drei Saisonspielen ist nicht mehr die Dämpfung das Problem,
+sondern **woher die Zahlen kommen**. Je nachdem, was die letzten 10 Spiele sagen, liegt
+die Trennschärfe bei 3 Saisonspielen zwischen 7,4 und 24,1 Punkten. Die Sperre schützt
+also nicht mehr vor einer flachen Prognose, sondern vor einer Prognose, die zu 70 % auf
+Spielen außerhalb der Saison steht. Das ist weiterhin ein guter Grund für die Sperre –
+aber ein anderer als der oben genannte. **Die Grenze bleibt bei 3**, nur die Begründung
+ist jetzt die richtige.
+
 **Länderspiele (Nations League, Qualifikation, Turniere) werden grundsätzlich nicht getippt** –
 auch dann nicht, wenn genug Spiele vorliegen. Das Modell vergleicht rohe Form-Durchschnitte, ohne
 zu berücksichtigen, **gegen wen** gespielt wurde. In einer Liga spielen alle Teams gegen dieselben
@@ -171,10 +225,218 @@ unverändert**, 6 betroffen, 2 Tipps gewechselt, Abstand zum Markt **4,17 → 4,
 `XG_ANTEIL` bleibt bei 0,70 – geändert wurde nicht das Gewicht, sondern dass es nur noch vergeben
 wird, wenn in dem Feld etwas steht.
 
+**Zweite Änderung: Liga-Test für das xG (02.10.2026, vom Nutzer verlangt).** Der Test vom
+30.09. war zu eng – er erkennt `xg == 0`, nicht das halb erfasste xG. An 519 Teams
+nachgemessen: 7 mit glatter Null (erkannt), **11 mit xG/Tore unter 0,40 (nicht erkannt)**,
+alle 11 in Saison 17308. Dort hatten **18 von 48 Teams** unbrauchbares xG; die
+Angriffsstärke lag bis zu **182 % zu niedrig** (FC Coffrane 0,19 statt 0,55).
+
+**Der Defekt sitzt in der Liga, nicht im Team.** `LIGA_XG_MIN` vergleicht deshalb
+Gesamt-xG gegen Gesamt-Tore der Saison. Liegt der Wert darunter, entfallen `XG_ANTEIL` und
+`LIGA_BASIS_XG` **für die ganze Liga** – gerechnet wird nur mit Toren, auch für Teams, deren
+Feld gefüllt aussieht. Zwischen `LIGA_XG_MIN` und `LIGA_XG_WARN` wird nicht eingegriffen, die
+Ausgabe weist nur hin. **Die Grenzen stehen seit der fünften Änderung bei 0,85 und 0,95** –
+anfangs waren es 0,65 und 0,85.
+
+Die Grenze liegt in der Mitte einer gemessenen Lücke: 20 von 29 Ligen liegen zwischen 0,89
+und 1,34, dann folgen 0,89 und 0,76, dann 0,54 (Saison 17308) und 0,52 (Nations League).
+**Geprüft an 114 zwischengespeicherten Spielen: 113 völlig unverändert (99,1 %)**, ein
+einziges verändert – Wohlen – Schötz aus genau dieser Liga, Tipp von „Beide treffen" auf
+„Über 2,5". Die Gewichte selbst sind unverändert; geändert wurde nur, **wann** sie vergeben
+werden. Kostet keine zusätzliche API-Abfrage.
+
+**Steht in der Ausgabe `xG DIESER LIGA UNBRAUCHBAR` oder `xG auffällig`, gehört ein Satz in
+die Begründung** – wie bei der Zeile `Fenster:`, in der Begründung und nicht in einem
+eigenen Abschnitt.
+
+**Dritte Änderung: Gleichstand-Entscheid (02.10.2026, vom Nutzer verlangt).** Das betrifft
+nicht den Rechenweg – **die Wahrscheinlichkeiten sind bei allen 114 zwischengespeicherten
+Spielen auf 1e-12 identisch** –, sondern nur die **Auswahl** unter den fünf Wetten.
+
+**Anlass:** 58 % aller 78 aufgezeichneten Tipps waren „Beide treffen", Sieg Auswärts kein
+einziger. Nachgerechnet an 32 Spielen aus fünf Ligen: Die fünf Wetten stehen nicht auf
+derselben Skala (Basisrate Sieg Auswärts 30 %, Beide treffen 54–69 %) **und** sie reagieren
+völlig unterschiedlich auf einen Fehler in den erwarteten Toren. Bei 10 % λ-Fehler bewegt
+sich Über/Unter 2,5 um **6,22** Punkte, Beide treffen um **4,73**, Sieg Heim um **1,01**,
+Sieg Auswärts um **0,54**. Die alte Regel wählte 30 von 32 Tipps aus den drei
+empfindlichsten Zeilen.
+
+**Drei Alternativen gemessen, zwei verworfen:**
+
+| Regel | Wahrsch. | Abstand Markt | |
+|---|---|---|---|
+| höchste Wahrscheinlichkeit (vorher) | 61,07 % | 4,14 | |
+| Abweichung vom Liga-Schnitt | 49,7 % | 5,04 | **verworfen** |
+| Abweichung je Punkt Empfindlichkeit | 44,3 % | 4,92 | **verworfen** |
+| **Gleichstand-Entscheid (jetzt)** | **60,93 %** | **4,01** | eingebaut |
+
+Die beiden verworfenen kosten 11 bis 17 Punkte Wahrscheinlichkeit und entfernen sich dabei
+**weiter** vom Markt. Die hohe Basisrate von Beide treffen ist kein Fehler, sondern genau
+der Grund, warum es öfter eintritt – sie herauszurechnen heißt, absichtlich die
+unwahrscheinlichere Wette zu nehmen.
+
+Der Gleichstand-Entscheid kostet **0,14 Punkte** Wahrscheinlichkeit und verkleinert den
+Marktabstand von 4,14 auf 4,01 (t = −0,86, also **im Zufallsbereich** – der Gewinn ist nicht
+belegt, der Preis dafür aber praktisch null). An 114 Spielen: **31 mit Gleichstand (27 %),
+10 Tipps gewechselt (9 %)**, mittlere Kosten 0,81 Punkte Wahrscheinlichkeit, höchste 1,71.
+Alle zehn Wechsel gehen von Über/Unter 2,5 (Empfindlichkeit 6) zu Beide treffen (4,5) oder
+Sieg Heim (1,7).
+
+**Die Grenze von 2 Punkten ist nicht neu** – sie stand schon vorher in dieser Datei
+(„dort entscheidet die Datengrundlage, nicht die dritte Nachkommastelle"). Neu ist nur, dass
+eine gerechnete Zahl entscheidet statt meines Gefühls. `GLEICHSTAND_PUNKTE = 2.0`,
+`EMPF_STOERUNG = 0.10`.
+
+**Vierte Änderung: Spreizung der erwarteten Tore dämpfen (02.10.2026, vom Nutzer verlangt).**
+`LAMBDA_DAEMPFUNG = 0.85`, also `λ' = Liga-Basis + 0,85 · (λ − Liga-Basis)`, angewandt nach
+dem H2H-Faktor und vor dem Markt-Mix. **Das ist die erste Änderung dieser Session, die auf
+die Genauigkeit zielt** und nicht auf Verlässlichkeit oder Datenfehler.
+
+**Anlass:** Gemessen an 108 zwischengespeicherten Spielen mit vollständigen Vorab-Quoten,
+Modell-λ gegen margenbereinigtes Markt-λ:
+
+| | Bias | Steigung | t gegen 1 |
+|---|---|---|---|
+| Heimtore | −0,013 | 0,842 | **−3,15** |
+| Auswärtstore | −0,014 | 0,857 | −2,27 |
+| Tore gesamt | −0,027 | **0,809** | **−3,54** |
+| Differenz | +0,001 | 0,879 | −2,13 |
+
+Das **Niveau** war richtig (Bias praktisch null, Heimvorteil 1,304 gegen 1,307 beim Markt,
+Gesamttore 2,889 gegen 2,916). Falsch war die **Spreizung**: bei hohen Modellwerten sagte
+der Markt niedrigere. Ob das Modell übertreibt oder nur verrauschter ist als der Markt, ist
+nicht trennbar (Regressionsverdünnung) – die Antwort ist in beiden Fällen dieselbe und folgt
+aus der Statistik, nicht aus einer Anpassung: eine verrauschte Schätzung gehört zum Mittel
+gezogen.
+
+**Wirkung, gemessen an denselben Spielen:**
+
+| | vorher | jetzt |
+|---|---|---|
+| λ-Fehler gegen Markt | 0,303 Tore | **0,291** |
+| Abstand zum Markt beim Tipp | 4,18 | **3,63** (paarweise **t = −3,34**) |
+| Wahrscheinlichkeit des Tipps | 61,24 % | 60,89 % |
+| größter Marktabstand | 24,0 | **18,7** |
+| Spiele über der 8-Punkte-Grenze | 11 von 108 | **9** |
+| Tipp gewechselt / Sperren gewechselt | – | 7 von 114 / 0 |
+
+**0,85 und nicht 0,77** (dort liegt der kleinste λ-Fehler), weil 0,85 am oberen Rand der
+gemessenen Steigungen liegt, vier Fünftel des Gewinns holt und so wenig eingreift wie möglich.
+
+**Was die Messung nicht zeigt:** ob die Trefferquote steigt. Dafür bräuchte es den Vergleich
+gegen echte Ergebnisse über vergangene Spieltage – den Backtest, den dieses Repo verbietet.
+Der Marktabstand verbessert sich zum Teil deshalb, weil auf den Markt hin gedämpft wird; die
+Steigung unter 1 bei t = −3,5 ist davon unabhängig und bleibt der Befund.
+
+**ZURÜCKGENOMMEN AM 02.10.2026, noch am selben Tag. `LAMBDA_DAEMPFUNG = 1.00`, also aus.**
+Der Nutzer hat die Rückschau auf echte Ergebnisse erlaubt, und die sagt das Gegenteil.
+
+**Walk-forward über 2136 Spiele aus 12 reifen Ligen.** Für jedes Spiel wurden die Teamdaten
+ausschließlich aus Spielen *davor* gerechnet (Tore und Per-Spiel-xG aus `league-matches`),
+bewertet wurden nur Spiele, bei denen beide Teams schon 10 Vorspiele hatten – damit ist das
+Datenfenster aus und kein Spiel bewertet sich selbst.
+
+| k | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| 0,80 | −2,91495 | 60,1 % | 0,23264 |
+| 0,85 | −2,91396 | 60,0 % | 0,23253 |
+| **1,00** | **−2,91260** | 60,0 % | **0,23240** |
+
+Beste Log-Likelihood und bester Brier bei **k = 1,00**, die Trefferquote ist flach. Paarweise
+0,85 gegen 1,00: −2,90 LL, t = −1,26 – im Zufallsbereich, aber die Richtung ist negativ, und
+**9 von 12 Ligen bevorzugen einzeln k = 1,00**.
+
+**Die Lehre, und sie gehört zu den wichtigsten in dieser Datei:** Der Befund war echt – die
+Steigung gegen den Markt lag bei 0,81 mit t = −3,5. Die Schlussfolgerung war falsch.
+**Näher am Markt heißt nicht näher an der Wirklichkeit.** Das ist genau der Fehler, vor dem
+der Abschnitt „Kein Backtest" warnt, nur mit dem Markt statt der Vergangenheit als Ziel.
+Der Marktabstand ist ein **Warnsignal**, keine Zielfunktion. Nicht wieder einbauen ohne neue
+Messung gegen echte Ergebnisse.
+
+**Was dieselbe Messung über das Modell sagt – und das ist gute Nachricht.** Dieselben
+2136 Spiele, k = 1,00:
+
+| | tatsächlich | erwartet | z |
+|---|---|---|---|
+| Tipps getroffen | 1282 (60,0 %) | 1275,4 (59,7 %) | **+0,29** |
+| Sieg Heim | 943 | 911,4 | +1,41 |
+| Sieg Auswärts | 621 | 647,9 | −1,29 |
+| Über 2,5 | 1079 | 1071,9 | +0,32 |
+| Beide treffen | 1162 | 1144,5 | +0,77 |
+| Tore | 5753 | 5769 | **−0,3 %** |
+
+**Das Modell ist kalibriert.** Über 2136 vorwärts gerechnete Spiele trifft es 60,0 % bei
+59,7 % vorhergesagten, keine der fünf Wetten weicht signifikant ab, die Torzahl stimmt auf
+0,3 %. Das ist eine viel stärkere Aussage als die 78 Spiele in `bilanz.json`.
+
+**Der Gleichstand-Entscheid wurde dabei mitgeprüft** und bestätigt sich der Richtung nach:
+Auf den 557 Spielen, in denen er eingriff, 365 Treffer gegen 323,0 erwartete (z = +3,63),
+gegenüber 356 bei reinem argmax (z = +2,70) – **+9 Treffer** bei 99 Spielen mit verschiedenem
+Tipp. McNemar z = +0,90, also **nicht** signifikant. Er schadet nicht, kostet 0,35 Punkte
+Wahrscheinlichkeit und liegt mit dem Vorzeichen richtig. Er bleibt.
+
+Die Ausgabe zeigt die Dämpfungszeile nur, wenn der Faktor nicht 1,00 ist. Die 79
+Aufzeichnungen in `bilanz.json` sind von der Episode unberührt – es wurde keine Prognose
+mit 0,85 festgehalten.
+
+**Fünfte Änderung: `LIGA_XG_MIN` von 0,65 auf 0,85 (02.10.2026, vom Nutzer verlangt).**
+**Die erste und einzige Änderung dieser Session, deren Gewinn an echten Ergebnissen belegt
+ist.** Sie entstand aus dem Konstanten-Durchlauf (siehe „Gewichte nicht verändern"): Das
+xG-Gewicht sah zu hoch aus, und die Ursache war eine einzige Liga mit kaputtem xG, die knapp
+unter der alten Grenze lag.
+
+| Saison 16015 allein, 161 Spiele | LogLik je Spiel | Trefferquote | Brier |
+|---|---|---|---|
+| xG mit 0,70 (Grenze 0,65) | −2,69346 | 64,0 % | 0,22492 |
+| **xG aus (Grenze 0,85)** | **−2,55881** | **65,8 %** | **0,21080** |
+
+Über alle 2136 Spiele: LogLik je Spiel −2,91260 → **−2,90246**, Brier 0,23240 → **0,23134**,
+Trefferquote 59,1 → 59,3 %, paarweise **+21,68 LL bei t = +2,91 – signifikant.**
+
+**Weiter hinauf geht nicht.** Eine Grenze von 0,95 fasst vier Ligen und wird wieder
+schlechter: +1,75 LL, t = +0,18, Trefferquote fällt auf 58,1 %. Die Verhältnisse der zwölf
+geprüften Ligen lagen bei 0,66 und dann erst wieder bei 0,91 bis 1,12; 0,85 liegt in dieser
+Lücke. `LIGA_XG_WARN` steht deshalb jetzt bei 0,95 – die Ligen zwischen 0,85 und 0,95 haben
+brauchbares xG und bekommen nur einen Hinweis.
+
+**Kein Gewicht wurde angefasst.** Geändert wurde eine Schranke für Datenqualität. An den
+114 zwischengespeicherten Spielen: **alle 114 völlig unverändert** – die betroffenen Ligen
+(17139 bei 0,76 wird jetzt zusätzlich verworfen) kommen dort nicht vor.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
 Sie sind **bewusst nach Erfahrung gesetzt** und nicht an vergangenen Spielen optimiert. Das ist so gewollt.
+
+**Am 02.10.2026 einmal gegen echte Ergebnisse geprüft – und die Regel ist damit gemessen,
+nicht nur gesetzt.** Der Nutzer hat die Rückschau erlaubt. Alle acht Konstanten wurden im
+Walk-forward über 2136 Spiele durchgefahren, getrennt auf **zwei unabhängigen Ligen-Hälften**:
+
+| Konstante | jetzt | beste in Hälfte A | beste in Hälfte B | |
+|---|---|---|---|---|
+| `XG_ANTEIL` | 0,70 | 0,4 | 0,6 | uneinig |
+| `LIGA_BASIS_XG` | 0,40 | 0,2 | 0,6 | uneinig |
+| `SEITE_K` | 6 | 2 | 20 | uneinig |
+| `DAEMPFUNG_K` | 5 | 12 | 3 | uneinig |
+| `FORM_ANTEIL` | 0,25 | 0,4 | 0,25 | uneinig |
+| `FORM_DAEMPFUNG_K` | 3 | 3 | 1 | uneinig |
+| Formfenster | 6 | 4 | 8 | uneinig |
+| `DIXON_COLES_RHO` | −0,07 | −0,025 | −0,07 | uneinig |
+
+**Acht von acht widersprechen sich.** Keine einzige Konstante hat in beiden Hälften dasselbe
+Optimum. Wer das nächste Mal eine Konstante „verbessern" will: das ist nachgemessen und es
+ist Rauschen. Die Werte bleiben.
+
+Der einzige scheinbare Ausreißer war `XG_ANTEIL` – **beide** Hälften bevorzugten etwas unter
+0,70. Die Kontrolle löste es auf: Es kam aus **einer** Liga mit kaputtem xG (Saison 16015,
+Verhältnis 0,66), die knapp an der damaligen Grenze `LIGA_XG_MIN = 0,65` vorbeirutschte. Ohne
+diese Liga liegt das Optimum in allen drei Mengen einheitlich bei 0,6 und der Unterschied zu
+0,7 ist nicht signifikant (t = +0,66 über alle, +0,47 und +0,46 je Hälfte). Geändert wurde
+deshalb **kein Gewicht**, sondern die Datenschranke – siehe unten, fünfte Änderung.
+
+**Die Lehre für jede künftige Idee:** Sieht eine Konstante schlechter aus als eine andere,
+dann **erst nach der kaputten Liga suchen**, nicht am Gewicht drehen. Hier hat eine von zwölf
+Ligen gereicht, um ein Gewicht um 0,2 bis 0,3 falsch aussehen zu lassen.
 
 **Diese Werte bleiben fest.** Nicht anpassen, weil sie für ein einzelnes Spiel besser passen würden –
 das wäre Anpassung im Nachhinein und macht alle früheren Prognosen unvergleichbar.
@@ -241,7 +503,11 @@ jeder Punkt stimmt:
 - **So viele Spielblöcke wie geschickte Spiele**, durchgezählt, fortlaufend nummeriert.
 - **Jede Tabelle hat genau fünf Zeilen und zwei Spalten**, die Wahrscheinlichkeit des
   besten Tipps fett.
-- **Bester Tipp = höchster Wert der fünf Zeilen.** Nachrechnen, nicht aus dem Gedächtnis.
+- **Bester Tipp = die Zeile `Bester Tipp:` aus `modell.py`.** Nicht aus dem Gedächtnis und
+  **nicht selbst das argmax bilden**: Bei einem Abstand unter 2 Punkten ist der Tipp
+  absichtlich nicht die wahrscheinlichste Wette (Gleichstand-Entscheid, seit 02.10.2026).
+  Die fett gesetzte Zeile der Tabelle ist die des Tipps – bei Gleichstand also nicht die
+  höchste Zahl. Das ist kein Fehler und wird nicht „korrigiert".
 - **Rangliste: neun Spalten, jedes Spiel genau eine Zeile**, Trennzeile vorhanden.
 - **Blockzuordnung stimmt:** oben nur `Abstand Markt` ≤ 8 Punkte **und** `Fenster` ≤ 50 %.
 - **Faire Quote = 1 / Wahrscheinlichkeit**, an einem Spiel nachgerechnet.
@@ -318,8 +584,15 @@ Regeln zur Vorlage:
 - **Bester Tipp = die Wette mit der höchsten Wahrscheinlichkeit** aus den fünf Zeilen der Tabelle
   (Variante A, vom Nutzer am 26.09.2026 entschieden). **Der Preis entscheidet nicht mit** – auch
   nicht in engen Fällen, auch dann nicht, wenn eine andere Wette besseren Value hätte.
-  Bei Gleichstand die Wette mit der besseren Datengrundlage, und das im Tipp-Satz sagen.
   Im Tipp-Satz klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
+- **Gleichstand unter 2 Punkten: die unempfindlichere Wette gewinnt.** Vom Nutzer am 02.10.2026
+  verlangt. Liegt eine Wette weniger als `GLEICHSTAND_PUNKTE` (2,0) hinter der wahrscheinlichsten,
+  entscheidet nicht mehr die dritte Nachkommastelle, sondern die **Empfindlichkeit**: um wie viele
+  Punkte sich die Wette verschiebt, wenn beide erwarteten Tore um 10 % falsch sind.
+  **`modell.py` rechnet das aus und gibt den Tipp direkt aus** (Zeile `Bester Tipp:`) – nicht
+  selbst das argmax bilden, nicht selbst abwägen. Hat die Empfindlichkeit entschieden, steht
+  `GLEICHSTAND` in der Zeile; dann **einen Halbsatz in den Tipp-Satz**, dass beide Wetten
+  praktisch gleich wahrscheinlich sind und die robustere genommen wurde.
 - **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
   Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
   Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten
