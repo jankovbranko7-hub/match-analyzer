@@ -62,26 +62,55 @@ antworten.** Ohne die Zahlen ist jede Fehlersuche geraten. Und erst ab rund 190 
 sich eine Verzerrung von 10 Prozentpunkten überhaupt von Zufall unterscheiden – darunter ist
 eine Abweichung **kein** Grund, an den Gewichten zu drehen.
 
-### Kein Backtest, keine Massenauswertung
+### Rückschau: erlaubt als Prüfgerät, verboten als Suchmaschine
 
-**Es gibt in diesem Repo kein Backtest-Werkzeug, und es wird keines gebaut.**
-Am 27.09.2026 vom Nutzer ausdrücklich entfernt und verboten.
+**Das Verbot vom 27.09.2026 ist am 02.10.2026 vom Nutzer gelockert worden.** Es gibt jetzt
+`analyse/rueckschau.py` – ein Walk-forward über echte Ergebnisse vergangener Spieltage. Der
+Nutzer hat es ausdrücklich verlangt, nachdem zwei Entscheidungen desselben Tages nur damit zu
+treffen waren: `LAMBDA_DAEMPFUNG` sah gegen die Quoten stark aus und fiel gegen echte
+Ergebnisse durch; `LIGA_XG_MIN` wurde dadurch von 0,65 auf 0,85 korrigiert (+21,68 LL,
+t = +2,91). Ohne das Werkzeug wäre beides Meinung geblieben.
 
-Nicht erlaubt ist damit:
-- ein Skript, das das Modell über historische Spieltage laufen lässt (walk-forward oder anders),
-- Massenabfragen wie `league-matches` über ganze Saisons, um Trefferquoten oder Renditen zu rechnen,
-- Kalibrierungskurven, Korrekturfaktoren, AUC, Margenstatistiken, Tippregel-Vergleiche,
-- **jede Zahl aus solchen Auswertungen als Begründung** – nicht für eine Konstante, nicht für
-  die Wahl des Tipps, nicht für eine Spielempfehlung, nicht als „gemessen über N Spiele".
+**Der Grund für das alte Verbot gilt unverändert weiter.** Über zehntausende Spiele lässt sich
+immer etwas finden, das rückwärts besser aussieht und vorwärts schlechter ist. Am 27.09.2026
+ist genau das passiert: Aus einer Auswertung wurde eine Regel gebaut, die zwei Wettarten
+sperrte und bei 20 von 21 Spielen „nicht spielen" ergab. Deshalb:
 
-**Der Grund:** Über zehntausende Spiele lässt sich immer etwas finden, das rückwärts besser
-aussieht und vorwärts schlechter ist. Am 27.09.2026 ist genau das passiert: Aus einer solchen
-Auswertung wurde eine Regel gebaut, die zwei Wettarten sperrte und damit bei 20 von 21 Spielen
-„nicht spielen" ergab. Die Gewichte sind **Erfahrungswerte** – sie werden nicht an Vergangenheit
-gemessen, weil sie nicht daraus stammen.
+**Erlaubt ist**, einen **konkreten Vorschlag** gegen echte Ergebnisse zu prüfen:
 
-**Die einzige erlaubte Rückschau** ist `analyse/bilanz.py --auswerten`: die eigenen,
-vorab festgehaltenen Prognosen gegen ihr Ergebnis. Die zählt, weil sie vorwärts entstanden ist.
+```
+python3 analyse/rueckschau.py                                  # Kalibrierung, Stand sehen
+python3 analyse/rueckschau.py --konstante XG_ANTEIL --werte 0.5 0.6 0.7 0.8 --haelften
+python3 analyse/rueckschau.py --ligen 16540 15066               # weitere Ligen dazuholen
+```
+
+- **`--haelften` ist Pflicht, wenn eine Zahl das Ergebnis sein soll.** Das Werkzeug teilt nach
+  **Ligen** (nicht nach Spielen) und sagt selbst „EINIG" oder „UNEINIG". Uneinig heißt:
+  Anpassung an Rauschen, Konstante bleibt, Thema beendet.
+- **Gegenprobe auf die kaputte Liga, bevor eine Konstante schuld ist.** Am 02.10. sah
+  `XG_ANTEIL` um 0,2 bis 0,3 falsch aus, und die Ursache war **eine** von zwölf Ligen mit
+  unbrauchbarem xG. Erst die Daten prüfen, dann das Gewicht verdächtigen.
+- **Maßstab ist die Log-Likelihood**, nicht die Trefferquote eines Laufs. Die Trefferquote
+  schwankt über ein paar Spiele, die Likelihood misst die ganze Verteilung.
+
+**Verboten bleibt:**
+- **Gewichte darauf optimieren.** Am 02.10. wurden alle acht durchgefahren: **acht von acht
+  widersprechen sich zwischen den Hälften** (Tabelle unter „Gewichte nicht verändern").
+  Das ist nachgemessen – wer es wieder versucht, sucht Rauschen.
+- **Eine Zahl daraus als Begründung für einen Tipp oder eine Empfehlung.** Das Werkzeug sagt
+  etwas über das Modell, nie über ein einzelnes Spiel.
+- **Eine neue Auswahlregel, Schwelle oder Obergrenze daraus ableiten.** Siehe „Keine eigenen
+  Auswahlregeln erfinden" – das gilt unverändert.
+- **Renditen und Margenstatistiken.** Das Werkzeug rechnet Wahrscheinlichkeiten gegen
+  Ergebnisse, kein Geld. Was Geld angeht, zählt nur `bilanz.py --auswerten`.
+
+**Was das Werkzeug nicht nachbaut** und was man dazusagen muss, wenn man es zitiert: H2H
+(höchstens 10 %) und das Datenfenster (umgangen, weil nur Spiele mit mindestens 10 Vorspielen
+je Team bewertet werden). Eine Zahl daraus gilt für den **Kern** des Modells.
+
+**Die Rückschau auf die eigenen Prognosen bleibt `analyse/bilanz.py --auswerten`** – vorab
+festgehaltene Tipps gegen ihr Ergebnis, inklusive Geld. Die zählt weiter am meisten, weil sie
+vorwärts entstanden ist und den ganzen Ablauf misst, nicht nur den Rechenkern.
 
 ### Sollbruchstellen
 

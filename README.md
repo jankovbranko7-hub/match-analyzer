@@ -8,6 +8,7 @@ Prognosen für einzelne Fußballspiele aus FootyStats-Daten. Regeln für die Ana
 pip install -r requirements.txt
 python3 analyse/modell.py --liste 2026-09-26        # Spiele des Tages mit ID
 python3 analyse/modell.py 8548331 8548255 8408933   # Prognose für diese Spiele
+python3 analyse/rueckschau.py                       # Modell gegen echte Ergebnisse prüfen
 ```
 
 Der API-Key kommt aus der Umgebungsvariable `FOOTYSTATS_API_KEY` (ersatzweise `APIKEY`).
@@ -49,6 +50,31 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    Empfindlichkeit**: um wie viele Punkte sich die Wette verschiebt, wenn beide erwarteten
    Tore um `EMPF_STOERUNG` (10 %) falsch sind. Der Preis entscheidet weiterhin nicht mit.
    Eingebaut am 02.10.2026 – verändert keine Wahrscheinlichkeit, nur die Auswahl.
+
+### Rückschau gegen echte Ergebnisse: `analyse/rueckschau.py`
+
+```bash
+python3 analyse/rueckschau.py                                  # Kalibrierung über alle Ligen
+python3 analyse/rueckschau.py --konstante XG_ANTEIL --werte 0.5 0.6 0.7 0.8 --haelften
+python3 analyse/rueckschau.py --ligen 16540 15066               # weitere Ligen dazuholen
+```
+
+Walk-forward: Für jedes Spiel werden die Teamdaten **ausschließlich aus Spielen davor**
+gerechnet (Tore und Per-Spiel-xG aus `league-matches`, ein Aufruf je Liga). Bewertet werden
+nur Spiele, bei denen beide Teams schon 10 Vorspiele haben – damit ist das Datenfenster aus
+und kein Spiel bewertet sich selbst. Maßstab ist die **Log-Likelihood** des echten Ergebnisses
+unter der Dixon-Coles-Matrix, dazu Trefferquote und Brier.
+
+`--haelften` teilt nach **Ligen** in zwei unabhängige Hälften und meldet selbst „EINIG" oder
+„UNEINIG". Das ist der Schutz gegen Anpassung: Nur was in beiden Hälften dasselbe Optimum hat,
+ist überhaupt ein Kandidat. Am 02.10.2026 waren **acht von acht Konstanten uneinig**.
+
+Das Werkzeug baut H2H und das Datenfenster nicht nach – eine Zahl daraus gilt für den **Kern**
+des Modells. Was damit erlaubt und was verboten ist, steht in `CLAUDE.md` unter „Rückschau".
+
+Stand am 02.10.2026 über 2136 Spiele aus 12 reifen Ligen: **1282 Treffer gegen 1275,4
+erwartete (60,0 gegen 59,7 %, z = +0,29)**, Tore −0,3 %, Log-Likelihood je Spiel −2,91260,
+Brier 0,23240. Das Modell ist kalibriert.
 
 ### Bilanz führen
 
