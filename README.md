@@ -9,6 +9,7 @@ pip install -r requirements.txt
 python3 analyse/modell.py --liste 2026-09-26        # Spiele des Tages mit ID
 python3 analyse/modell.py 8548331 8548255 8408933   # Prognose für diese Spiele
 python3 analyse/rueckschau.py                       # Modell gegen echte Ergebnisse prüfen
+python3 analyse/finde.py 2026-10-02 "Eldense - Oviedo" "Helmond - Heracles"   # IDs aus Paarungen
 ```
 
 Der API-Key kommt aus der Umgebungsvariable `FOOTYSTATS_API_KEY` (ersatzweise `APIKEY`).
@@ -53,6 +54,29 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
    Empfindlichkeit**: um wie viele Punkte sich die Wette verschiebt, wenn beide erwarteten
    Tore um `EMPF_STOERUNG` (10 %) falsch sind. Der Preis entscheidet weiterhin nicht mit.
    Eingebaut am 02.10.2026 – verändert keine Wahrscheinlichkeit, nur die Auswahl.
+
+### Spiel-IDs aus Paarungen: `analyse/finde.py`
+
+```bash
+python3 analyse/finde.py 2026-10-02 "CD Eldense - Real Oviedo" "Helmond - Heracles"
+python3 analyse/finde.py 2026-10-02 --liste          # alle Spiele des Tages
+```
+
+Der Nutzer schickt Paarung und Datum, **keine Liga** – die steht in den Spieldaten selbst.
+Das Skript löst die Namen auf und erledigt dabei Durchgang 0 aus `CLAUDE.md`:
+
+- **Beide Namen müssen passen**, nicht einer. Bleiben mehrere Spiele übrig, meldet es
+  `MEHRDEUTIG` und wählt nicht; findet es nichts, steht `NICHT GEFUNDEN` – nie ein geratenes
+  Spiel. Der Fehler vom 30.09.2026 („Atlético El Vigía" auf „Atlético Ávila") wird damit
+  abgewiesen statt falsch zugeordnet.
+- Toleriert Schreibweisen: „Helmond" findet „Helmond Sport", Akzente und Vereinszusätze
+  (FC, CD, SV …) fallen weg, Trennzeichen `-`, `–`, `vs`, `gegen` werden erkannt. „II", „B"
+  und „Women" bleiben stehen, weil sie Mannschaften unterscheiden.
+- Markiert **schon angepfiffen** (Durchgang 0, Punkt 1), **steht schon in `bilanz.json`**
+  (Punkt 3) und **Länderspiel** – und nimmt diese Spiele aus der Vorschlagszeile heraus,
+  benennt sie aber, damit nichts stillschweigend wegfällt (Punkt 4).
+- Findet sich eine Paarung am genannten Tag nicht, werden Vor- und Folgetag mitgesucht –
+  der Tag der API ist nicht UTC-genau (`SOLLBRUCHSTELLEN.md`, Punkt 21).
 
 ### Rückschau gegen echte Ergebnisse: `analyse/rueckschau.py`
 
