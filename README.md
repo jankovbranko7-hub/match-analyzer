@@ -60,7 +60,19 @@ API-Antworten werden in `analyse/daten/` zwischengespeichert (nicht im Git). Sie
 ```bash
 python3 analyse/finde.py 2026-10-02 "CD Eldense - Real Oviedo" "Helmond - Heracles"
 python3 analyse/finde.py 2026-10-02 --liste          # alle Spiele des Tages
+
+python3 analyse/finde.py --text <<'ENDE'             # so, wie der Nutzer schreibt
+02.10.
+1. Eldense - Oviedo
+2. Helmond - Heracles
+- Dundalk – Bohemians
+ENDE
 ```
+
+`--text` liest den Block, wie er in der Nachricht steht: **Datum oben, darunter je Zeile ein
+Spiel.** Erkannt werden `2026-10-02`, `02.10.2026`, `02.10.` und `02/10/2026` – ohne Jahr das
+laufende. Nummerierung (`1.`, `2)`), Aufzählungszeichen (`-`, `*`, `•`) und Leerzeilen fallen
+weg. Fehlt das Datum oder fehlen die Paarungen, bricht es ab statt zu raten.
 
 Der Nutzer schickt Paarung und Datum, **keine Liga** – die steht in den Spieldaten selbst.
 Das Skript löst die Namen auf und erledigt dabei Durchgang 0 aus `CLAUDE.md`:
