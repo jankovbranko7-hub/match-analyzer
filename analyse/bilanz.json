@@ -1972,5 +1972,267 @@
    "h": 2,
    "a": 1
   }
+ },
+ {
+  "id": 8419375,
+  "liga": 16571,
+  "datum_unix": 1790979300,
+  "heim": "Independiente",
+  "ausw": "Instituto",
+  "lh": 1.073,
+  "la": 0.972,
+  "p": {
+   "H": 0.3648,
+   "D": 0.3228,
+   "A": 0.3124,
+   "O25": 0.3353,
+   "U25": 0.6647,
+   "BTTS": 0.4184
+  },
+  "tipp": "U25",
+  "p_tipp": 0.6647,
+  "faire_quote": 1.5,
+  "quote": 1.47,
+  "abstand_markt": 2.6,
+  "empf_tipp": 5.5,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8469639,
+  "liga": 16783,
+  "datum_unix": 1790980200,
+  "heim": "São Bernardo",
+  "ausw": "CRB",
+  "lh": 1.243,
+  "la": 1.384,
+  "p": {
+   "H": 0.3277,
+   "D": 0.279,
+   "A": 0.3934,
+   "O25": 0.4884,
+   "U25": 0.5116,
+   "BTTS": 0.5419
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5419,
+  "faire_quote": 1.85,
+  "quote": 1.83,
+  "abstand_markt": 3.1,
+  "empf_tipp": 4.88,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8419357,
+  "liga": 16571,
+  "datum_unix": 1790987400,
+  "heim": "Boca Juniors",
+  "ausw": "Unión Santa Fe",
+  "lh": 1.441,
+  "la": 0.96,
+  "p": {
+   "H": 0.4734,
+   "D": 0.2842,
+   "A": 0.2424,
+   "O25": 0.4304,
+   "U25": 0.5696,
+   "BTTS": 0.4797
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5696,
+  "faire_quote": 1.76,
+  "quote": 1.63,
+  "abstand_markt": null,
+  "empf_tipp": 6.13,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8419350,
+  "liga": 16571,
+  "datum_unix": 1790987400,
+  "heim": "Independiente Rivadavia",
+  "ausw": "Gimnasia La Plata",
+  "lh": 1.712,
+  "la": 1.056,
+  "p": {
+   "H": 0.5193,
+   "D": 0.255,
+   "A": 0.2256,
+   "O25": 0.5231,
+   "U25": 0.4769,
+   "BTTS": 0.5425
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5425,
+  "faire_quote": 1.84,
+  "quote": null,
+  "abstand_markt": null,
+  "empf_tipp": 4.74,
+  "gleichstand": [
+   "BTTS",
+   "O25"
+  ],
+  "ergebnis": null
+ },
+ {
+  "id": 8469591,
+  "liga": 16783,
+  "datum_unix": 1790983800,
+  "heim": "Londrina",
+  "ausw": "Criciúma",
+  "lh": 1.257,
+  "la": 1.059,
+  "p": {
+   "H": 0.3991,
+   "D": 0.2991,
+   "A": 0.3018,
+   "O25": 0.4084,
+   "U25": 0.5916,
+   "BTTS": 0.4767
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5916,
+  "faire_quote": 1.69,
+  "quote": 1.63,
+  "abstand_markt": 1.9,
+  "empf_tipp": 6.01,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8469610,
+  "liga": 16783,
+  "datum_unix": 1790984700,
+  "heim": "Juventude",
+  "ausw": "Operário PR",
+  "lh": 1.43,
+  "la": 0.886,
+  "p": {
+   "H": 0.489,
+   "D": 0.2868,
+   "A": 0.2242,
+   "O25": 0.4082,
+   "U25": 0.5918,
+   "BTTS": 0.4557
+  },
+  "tipp": "U25",
+  "p_tipp": 0.5918,
+  "faire_quote": 1.69,
+  "quote": 1.7,
+  "abstand_markt": -0.3,
+  "empf_tipp": 6.01,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8469630,
+  "liga": 16783,
+  "datum_unix": 1790987700,
+  "heim": "Fortaleza",
+  "ausw": "Náutico",
+  "lh": 1.489,
+  "la": 1.071,
+  "p": {
+   "H": 0.4596,
+   "D": 0.2766,
+   "A": 0.2638,
+   "O25": 0.4716,
+   "U25": 0.5284,
+   "BTTS": 0.5177
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5177,
+  "faire_quote": 1.93,
+  "quote": 1.93,
+  "abstand_markt": 3.8,
+  "empf_tipp": 4.8,
+  "gleichstand": [
+   "BTTS",
+   "U25"
+  ],
+  "ergebnis": null
+ },
+ {
+  "id": 8579911,
+  "liga": 17248,
+  "datum_unix": 1790989200,
+  "heim": "Tepatitlán de Morelos",
+  "ausw": "CDS Tampico Madero",
+  "lh": 1.393,
+  "la": 1.449,
+  "p": {
+   "H": 0.3539,
+   "D": 0.267,
+   "A": 0.3791,
+   "O25": 0.5403,
+   "U25": 0.4597,
+   "BTTS": 0.5833
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.5833,
+  "faire_quote": 1.71,
+  "quote": 1.68,
+  "abstand_markt": 3.5,
+  "empf_tipp": 4.88,
+  "gleichstand": null,
+  "ergebnis": null
+ },
+ {
+  "id": 8579969,
+  "liga": 17248,
+  "datum_unix": 1790989200,
+  "heim": "Correcaminos UAT",
+  "ausw": "Cruz Azul Hidalgo",
+  "lh": 2.01,
+  "la": 1.215,
+  "p": {
+   "H": 0.551,
+   "D": 0.2285,
+   "A": 0.2205,
+   "O25": 0.6254,
+   "U25": 0.3746,
+   "BTTS": 0.616
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.616,
+  "faire_quote": 1.62,
+  "quote": null,
+  "abstand_markt": null,
+  "empf_tipp": 4.65,
+  "gleichstand": [
+   "BTTS",
+   "O25"
+  ],
+  "ergebnis": null
+ },
+ {
+  "id": 8579926,
+  "liga": 17248,
+  "datum_unix": 1790996400,
+  "heim": "CA La Paz",
+  "ausw": "Venados",
+  "lh": 2.135,
+  "la": 1.328,
+  "p": {
+   "H": 0.5528,
+   "D": 0.2194,
+   "A": 0.2278,
+   "O25": 0.6724,
+   "U25": 0.3276,
+   "BTTS": 0.6544
+  },
+  "tipp": "BTTS",
+  "p_tipp": 0.6544,
+  "faire_quote": 1.53,
+  "quote": 1.41,
+  "abstand_markt": 0.1,
+  "empf_tipp": 4.56,
+  "gleichstand": [
+   "BTTS",
+   "O25"
+  ],
+  "ergebnis": null
  }
 ]
