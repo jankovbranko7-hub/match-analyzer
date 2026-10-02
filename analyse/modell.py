@@ -215,6 +215,47 @@ LIGA_XG_MIN         = 0.85   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Ge
                              # halbiertem Schoetz-Angriff auf Unter 2,5 und endete 1:5.
                              # Der Defekt sitzt in der Liga, nicht im Team - deshalb der
                              # Liga-Test. Er kostet keine zusaetzliche API-Abfrage.
+LIGA_XG_MAX         = 1.15   # Obergrenze, Spiegelbild von LIGA_XG_MIN: Liegt das Liga-xG
+                             # mehr als 15 % UEBER den Liga-Toren, geht nur LIGA_BASIS_XG weg,
+                             # XG_ANTEIL bleibt. Vom Nutzer am 02.10.2026 verlangt.
+                             #
+                             # WARUM NUR DIE BASIS: Die Teamstaerken sind VERHAELTNISSE
+                             # (Team-xG / Liga-xG). Ein gleichmaessig aufgeblaehtes Liga-xG
+                             # kuerzt sich darin heraus. Die Liga-Basis
+                             # (1-b)*Tore + b*xG ist dagegen ein absoluter Wert und waechst
+                             # mit: bei einem Verhaeltnis q liegt sie um b*(q-1) zu hoch, bei
+                             # q = 1,34 also um 13,6 %. Das drueckt systematisch Richtung
+                             # Ueber 2,5 und Beide treffen.
+                             #
+                             # GEMESSEN im Walk-forward ueber 2136 Spiele aus 12 Ligen
+                             # (analyse/rueckschau.py), jeweils gegen die Fassung mit nur der
+                             # Untergrenze:
+                             #
+                             #   unter 0,85 nur XG_ANTEIL aus      t = -1,63
+                             #   unter 0,85 nur LIGA_BASIS aus     t = -3,04
+                             #   ueber 1,10 nur LIGA_BASIS aus     t = +2,00   <- besser
+                             #   ueber 1,10 beides aus             t = -0,63
+                             #
+                             # Die Richtung ist damit belegt: unten traegt das Teamgewicht den
+                             # Gewinn, oben die Basis. Nur die BEIDES-Varianten sind jeweils
+                             # schlechter.
+                             #
+                             # WARUM 1,15 UND NICHT 1,10: Der gemessene Gewinn von t = +2,00
+                             # haengt an EINER Liga (16743, Verhaeltnis 1,12), und 1,12 ist der
+                             # oberste Wert des beobachteten Normalbereichs (0,91 bis 1,12).
+                             # Eine Grenze mitten hinein waere Anpassung an eine Liga - genau
+                             # der Fehler, der am selben Tag schon einmal passiert ist
+                             # (XG_ANTEIL sah wegen einer Liga um 0,2 bis 0,3 falsch aus).
+                             # 1,15 ist das Spiegelbild von 0,85: das Liga-xG muss zu den
+                             # Liga-Toren passen, in beide Richtungen gleich streng. Die
+                             # Grenze folgt damit der Symmetrie und nicht einer Messung an
+                             # einer Liga. Im Walk-forward liegt KEINE der 12 Ligen darueber -
+                             # die Aenderung ist dort also wirkungslos und insofern
+                             # ungemessen; belegt ist der Mechanismus, nicht diese Zahl.
+                             #
+                             # Betroffen sind unter den 29 Ligen-Momentaufnahmen 16580 (1,34),
+                             # 16783 (1,26), 17387 (1,25) und 16743 (1,21). Aus 16580 stammen
+                             # 10 der 79 Prognosen in bilanz.json.
 LIGA_XG_WARN        = 0.95   # Dazwischen wird nicht eingegriffen, nur ein Hinweis
                              # ausgegeben - damit ein Grenzfall sichtbar ist, ohne dass eine
                              # Zahl davon abhaengt.
@@ -440,10 +481,13 @@ def league(T):
     g_o = avg('seasonScoredAVG_overall', 'seasonMatchesPlayed_overall')
     x_o = avg('xg_for_avg_overall', 'seasonMatchesPlayed_overall')
     rel = x_o / g_o if g_o else 0.0
+    # basis_ok: Liga-xG passt zu den Liga-Toren, also darf es in die Torbasis. xg_ok ist
+    # schaerfer - faellt das weg, zaehlt in der ganzen Liga nur noch das Tor-Gewicht.
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
                 xhome=avg_xg('xg_for_avg_home','seasonScoredAVG_home','seasonMatchesPlayed_home'),
                 xaway=avg_xg('xg_for_avg_away','seasonScoredAVG_away','seasonMatchesPlayed_away'),
-                xg_rel=rel, xg_ok=rel >= LIGA_XG_MIN)
+                xg_rel=rel, xg_ok=rel >= LIGA_XG_MIN,
+                basis_ok=LIGA_XG_MIN <= rel <= LIGA_XG_MAX)
 
 def h2h_werte(m, jahre=H2H_MAX_JAHRE, k=H2H_DAEMPFUNG_K):
     """Gewicht und Tor-Schnitt der direkten Duelle, beides nur aus den jungen Duellen.
@@ -510,7 +554,7 @@ def berechne(mid, args):
 
     ah,dh=strengths(th,'home',L,block(m['homeID'], 6))
     aa,da=strengths(ta,'away',L,block(m['awayID'], 6))
-    b = LIGA_BASIS_XG if L['xg_ok'] else 0.0
+    b = LIGA_BASIS_XG if L['basis_ok'] else 0.0
     base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
     h2h_w, h2h_tore = h2h_werte(m)
@@ -564,6 +608,9 @@ def analysiere(mid, args):
     if not L['xg_ok']:
         print(f" xG DIESER LIGA UNBRAUCHBAR: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
               f" (Grenze {LIGA_XG_MIN:.2f}) -> gerechnet wird nur mit Toren")
+    elif L['xg_rel'] > LIGA_XG_MAX:
+        print(f" xG DIESER LIGA ZU HOCH: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
+              f" (Grenze {LIGA_XG_MAX:.2f}) -> Torbasis nur aus Toren, Teamstärken wie sonst")
     elif L['xg_rel'] < LIGA_XG_WARN:
         print(f" xG auffällig: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
               f" (unter {LIGA_XG_WARN:.2f}) -> xG zählt weiter, aber in die Begründung")

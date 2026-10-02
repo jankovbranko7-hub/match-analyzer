@@ -35,6 +35,10 @@ WAS ES NICHT NACHBAUT, und das ist wichtig
   - Das Datenfenster: bewertet werden nur Spiele, bei denen beide Teams schon
     MIN_VOR Vorspiele haben - dann ist das Fenster ohnehin aus.
   - Den Gleichstand-Entscheid bei der Tipp-Auswahl nur, wenn --gleichstand gesetzt ist.
+  - Die LIGA-SCHRANKEN fuer das xG (LIGA_XG_MIN / LIGA_XG_MAX). Das Werkzeug rechnet mit
+    XG_ANTEIL und LIGA_BASIS_XG fuer jede Liga gleich und faengt nur das fehlende xG je Team
+    ab. Wer eine Schranke pruefen will, setzt --konstante XG_ANTEIL bzw. LIGA_BASIS_XG je
+    Liga von Hand - so sind beide Schranken am 02.10.2026 gemessen worden.
 
 Eine Zahl aus diesem Werkzeug gilt also fuer den Kern des Modells, nicht fuer jede Zeile
 von modell.py. Wer sie zitiert, sagt das dazu.

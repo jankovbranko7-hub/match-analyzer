@@ -403,6 +403,53 @@ brauchbares xG und bekommen nur einen Hinweis.
 114 zwischengespeicherten Spielen: **alle 114 völlig unverändert** – die betroffenen Ligen
 (17139 bei 0,76 wird jetzt zusätzlich verworfen) kommen dort nicht vor.
 
+**Sechste Änderung: `LIGA_XG_MAX = 1.15` – der Liga-Test gilt jetzt in beide Richtungen
+(02.10.2026, vom Nutzer verlangt).** Der Test von eben fing nur Ligen mit **zu wenig** xG.
+Ligen mit **zu viel** liefen durch, und von denen gibt es vier unter den 29
+Momentaufnahmen: 16580 (1,34), 16783 (1,26), 17387 (1,25) und 16743 (1,21). **Aus 16580
+stammen 10 der 79 Prognosen in `bilanz.json`.**
+
+**Oben greift ein anderer Teil als unten, und das ist der Kern.** Die Teamstärken sind
+**Verhältnisse** (Team-xG / Liga-xG) – ein gleichmäßig aufgeblähtes Liga-xG kürzt sich darin
+heraus. Die Torbasis `(1−b)·Tore + b·xG` ist dagegen absolut und liegt um `b·(q−1)` zu hoch,
+bei q = 1,34 also um **13,6 %**. Das drückt systematisch Richtung Über 2,5 und Beide treffen.
+Deshalb fällt oben **nur `LIGA_BASIS_XG`** weg, `XG_ANTEIL` bleibt.
+
+**Gemessen** im Walk-forward, jeweils gegen die Fassung mit nur der Untergrenze:
+
+| Variante | t |
+|---|---|
+| unter 0,85 nur `XG_ANTEIL` aus | −1,63 |
+| unter 0,85 nur `LIGA_BASIS` aus | **−3,04** |
+| über 1,10 nur `LIGA_BASIS` aus | **+2,00** |
+| über 1,10 beides aus | −0,63 |
+
+Unten trägt das **Teamgewicht** den Gewinn, oben die **Basis** – beide „beides aus"-Varianten
+sind schlechter. Der Mechanismus ist damit belegt.
+
+**Die Grenze 1,15 ist aber nicht das gemessene Optimum, sondern das Spiegelbild von 0,85.**
+Die +2,00 hängen an **einer** Liga (16743, Verhältnis 1,12), und 1,12 ist der oberste Wert des
+beobachteten Normalbereichs (0,91 bis 1,12). Eine Grenze mitten hinein wäre Anpassung an eine
+Liga – derselbe Fehler, der am selben Tag schon `XG_ANTEIL` um 0,2 bis 0,3 falsch aussehen
+ließ. Mit 1,15 ist die einzige messbare Liga 17387 (1,21), und die hat nur 12 bewertbare
+Spiele: LogLik −2,60403 → −2,57766, Brier 0,22599 → 0,22380, **t = +0,78 – Richtung stimmt,
+Stichprobe reicht nicht.** Über alle 2148 Spiele t = +0,79, die Gegenprobe „beides aus"
+t = −0,17.
+
+**Offen und der Mühe wert:** 16580 (1,34) und 16783 (1,26) liefen am 02.10. ins Stundenlimit
+(HTTP 417). Mit ihnen wären es drei betroffene Ligen und mehrere hundert Spiele – dann ließe
+sich entscheiden, ob 1,15 oder 1,10 die richtige Grenze ist. **Bis dahin gilt: der
+Mechanismus ist gemessen, die Zahl folgt der Symmetrie.**
+
+An den 114 zwischengespeicherten Spielen: 101 unverändert, **13 verändert, 4 Tipps
+gewechselt** – alle vier von „Beide treffen" bzw. „Sieg Heim" zu **Unter 2,5**, weil die
+aufgeblähte Torbasis vorher nach oben drückte. Betroffen: Gimnasia Jujuy – San Martín (16580),
+Unión San Felipe – San Luis (16743), Criciúma – Avaí (16783), Águila – Inter (17387).
+Keine Sperre gewechselt. Die Aufzeichnungen in `bilanz.json` bleiben unverändert.
+
+**Steht in der Ausgabe `xG DIESER LIGA ZU HOCH`, gehört ein Satz in die Begründung** – wie bei
+`xG DIESER LIGA UNBRAUCHBAR` und bei `Fenster:`.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
