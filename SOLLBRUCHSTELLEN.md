@@ -576,6 +576,18 @@ wäre **teils Auswahl und nicht Fehlkalibrierung**. Nicht korrigierbar ohne die 
 Wahrscheinlichkeiten, also nicht korrigiert. Praktisch derzeit ohne Belang: die tatsächliche
 Zahl liegt mit 49 **über** der erwarteten, der Verzerrung also entgegen.
 
+**Am 03.10.2026 gemessen und die Größe benannt.** Über 2971 Walk-forward-Spiele versprach
+`modell.py` 1802,6 Treffer und lieferte 1766 – z = **−1,37**. Dieselben Spiele, aber der Tipp
+**gewürfelt** statt als Maximum genommen (Ziehung proportional zur Wahrscheinlichkeit, drei
+Seeds): 1457 gegen 1433,1 erwartete, z = **+0,89**. Die Wahrscheinlichkeiten selbst sind also
+in Ordnung; **die Überheblichkeit entsteht erst bei der Auswahl.** Rund 1,2 Prozentpunkte
+Versprechen gehen auf das Maximum-Nehmen zurück, nicht auf den Rechenweg.
+
+Das heißt für die Auswertung: ein Rückstand der tatsächlichen auf die erwartete Trefferzahl
+in `--auswerten` ist bis etwa **1,5 Punkte** erwartbar und **kein** Kalibrierungsfehler.
+Seit `MARKT_ANTEIL = 0,5` ist die Verzerrung kleiner, weil weniger Rauschen im Maximum steht
+(Value-Fehler +0,4 statt +2,8 Punkte). Weiterhin nicht korrigierbar und nicht korrigiert.
+
 ## 22. Die fünf Wetten standen nicht auf derselben Skala — TEILS BEHOBEN am 02.10.2026
 
 Von 78 aufgezeichneten Tipps waren **45 „Beide treffen" (58 %)** und **kein einziger

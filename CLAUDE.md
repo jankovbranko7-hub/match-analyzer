@@ -546,6 +546,61 @@ Ein Unterschied bleibt zugunsten des neuen Kerns: **Kalibrierung.** Alt verspric
 beim Value), **bleibt `modell.py` der laufende Rechenweg**. `modell2.py` ist der
 geprüfte Gegenentwurf und rechnet keine Tipps.
 
+### Zufall als Bauprinzip: dreimal gemessen, dreimal nichts
+
+**Am 03.10.2026 geprüft, nachdem der Nutzer gefragt hatte, was ein Modell „aus einer
+Mischung aus dem Zufalls-Prinzip und dem Erfahrungs-Prinzip" leisten würde.** Alle drei
+sinnvollen Lesarten sind durchgerechnet. Keine hilft, und der Grund ist derselbe.
+
+**A – gewürfelter Tipp statt höchste Wahrscheinlichkeit** (Ziehung proportional zur
+Wahrscheinlichkeit, „probability matching"), 2971 Spiele:
+
+| | Trefferquote | Tipp-Mischung |
+|---|---|---|
+| argmax (heute) | **59,4 %** | BTTS 1315 · U25 1231 · H 324 · A 53 · O25 48 |
+| gewürfelt | 49,0 % | U25 711 · BTTS 705 · O25 593 · H 558 · A 404 |
+
+Die Log-Likelihood ist **identisch** – gewürfelt wird nur die Auswahl, nicht die
+Wahrscheinlichkeit. Die Mischung wird gleichmäßig, und das kostet **10,4 Prozentpunkte**
+Trefferquote. **Die Konzentration auf „Beide treffen" ist also kein Fehler, sondern der
+Preis der Genauigkeit.** Wer sie auflösen will, zahlt in Treffern (vgl. Sollbruchstelle 22).
+
+**B – über die acht Erfahrungswerte mitteln.** Die Konstanten werden aus den Spannweiten
+der gemessenen Hälften-Optima gezogen und die Ergebnis-Matrizen gemittelt. Das ist die
+ehrliche Antwort auf „acht von acht uneinig": nicht einen Punkt raten, sondern über das
+Nichtwissen integrieren. Ergebnis über 40 Ziehungen: **t = +0,79**, nicht signifikant,
+Hälfte A **−0,48** und B +1,44 (nicht beide positiv), **81 % des Gewinns aus einer Liga**,
+Trefferquote 59,4 → 58,5 %. Die Gegenprobe „nur mittleres Lambda" liefert t = +0,72 – die
+zusätzliche **Breite** trägt also praktisch nichts.
+
+**Das ist zugleich eine beruhigende Nachricht:** das Modell ist gegen seine eigenen Gewichte
+im ganzen plausiblen Bereich **unempfindlich**. Die 8-von-8-Uneinigkeit ist deshalb kein
+offenes Problem, sondern folgenlos.
+
+**C – Bootstrap-Mittelung der Schätzunsicherheit** (Bayesscher Bootstrap auf dem MLE-Kern:
+Spielgewichte mit Exp(1) multipliziert, K Fits, Matrizen gemittelt – das Prinzip eines
+Random Forest). Gegen den Punkt-Schätzer:
+
+| | LogLik | Trefferquote | t |
+|---|---|---|---|
+| Punkt-Schätzer | −2,86898 | 59,6 % | – |
+| K = 5 | −2,87337 | 58,4 % | **−2,99** |
+| K = 15 | −2,87068 | 58,5 % | −1,83 |
+
+Beide Hälften negativ (A −1,62, B −1,06), 4 von 15 Ligen besser. **Schlechter, nicht
+besser.**
+
+**Und darin steckt die Antwort auf die Frage.** Das Zufallsprinzip ist längst eingebaut –
+es heißt **Dämpfung**. `DAEMPFUNG_K`, `SEITE_K`, `FORM_DAEMPFUNG_K` und im neuen Kern
+`RIDGE` sind genau die Antwort darauf, dass eine Schätzung aus 100 bis 300 Spielen zufällig
+ist: eine verrauschte Schätzung wird zum Mittel gezogen. Wer obendrauf noch explizit Zufall
+mittelt, **zählt dieselbe Unsicherheit zweimal** – die Verteilung wird zu breit und die
+Likelihood fällt. Deshalb schadet C, und deshalb bringt B nichts.
+
+**Für jede künftige Idee dieser Art:** eine Mischung aus Zufall und Erfahrung ist das
+Modell schon. Neue Zufallsquellen helfen nur, wenn sie eine Unsicherheit abdecken, die die
+Dämpfung **nicht** abdeckt – und das wäre zu zeigen, bevor etwas gebaut wird.
+
 ### Werkzeuge zum Nachmessen
 
 Drei Dateien, alle lesen nur den Zwischenspeicher – **keine API-Abfrage, kein
