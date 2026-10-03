@@ -1996,7 +1996,10 @@
   "abstand_markt": 2.6,
   "empf_tipp": 5.5,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 4
+  }
  },
  {
   "id": 8469639,
@@ -2021,7 +2024,10 @@
   "abstand_markt": 3.1,
   "empf_tipp": 4.88,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 1
+  }
  },
  {
   "id": 8419357,
