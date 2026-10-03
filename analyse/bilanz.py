@@ -32,20 +32,17 @@ ABGESAGT = ('suspended', 'canceled', 'cancelled', 'postponed', 'abandoned')
 
 
 def laden():
-    if not os.path.exists(BILANZ):
-        return []
-    with open(BILANZ) as f:
-        return json.load(f)
+    return json.load(open(BILANZ)) if os.path.exists(BILANZ) else []
 
 
 def speichern(eintraege):
-    with open(BILANZ, 'w') as f:
-        json.dump(eintraege, f, indent=1, ensure_ascii=False)
+    json.dump(eintraege, open(BILANZ, 'w'), indent=1, ensure_ascii=False)
 
 
-# Der Tipp wird NICHT hier gewaehlt, sondern in modell.berechne() - sonst koennten Bericht
-# und Aufzeichnung auseinanderlaufen. Seit 02.10.2026 entscheidet bei einem Abstand unter
-# GLEICHSTAND_PUNKTE die Empfindlichkeit statt der dritten Nachkommastelle (M.bester_tipp).
+def bester_tipp(p):
+    """Variante A: die Wette mit der höchsten Wahrscheinlichkeit, ohne Rücksicht auf den Preis."""
+    k = max(WETTEN, key=lambda k: p[k])
+    return k, p[k]
 
 
 def getroffen(tipp, h, a):
@@ -54,27 +51,6 @@ def getroffen(tipp, h, a):
 
 
 # ---------------------------------------------------------------- Merken
-
-def abstand_markt(r, p, tipp):
-    """Modell-Wahrscheinlichkeit minus margenbereinigte Marktwahrscheinlichkeit, in Punkten.
-
-    Dieselbe Rechnung wie die Zeile 'Abstand zum Markt beim Tipp' in modell.py, nur hier
-    festgehalten statt nur ausgegeben. Vom Nutzer am 30.09.2026 verlangt: Ohne die Zahl kann
-    --auswerten nie sagen, ob Tipps mit grossem Marktabstand schlechter liefen als solche mit
-    kleinem, und ob die Grenze von 8 Punkten die richtige ist.
-
-    Gibt None zurueck, wenn die Vorab-Quoten unvollstaendig sind - dann steht in der Rangliste
-    ohnehin ein Strich und das Spiel gilt als unsicher.
-    """
-    if not r.get('mk'):
-        return None
-    ab = {w: (float(p[w]) - float(r['mk'][w])) * 100
-          for w in ('H', 'A', 'O25', 'BTTS') if w in r['mk']}
-    if 'O25' in ab:
-        ab['U25'] = -ab['O25']
-    d = ab.get(tipp)
-    return round(d, 1) if d is not None else None
-
 
 def merken(mid, args):
     eintraege = laden()
@@ -87,7 +63,7 @@ def merken(mid, args):
         print(f"  {m['home_name']} - {m['away_name']}: gesperrt, nicht aufgenommen.")
         return
     p = {k: float(v) for k, v in r['p'].items()}
-    tipp, pt = r['tipp'], r['p_tipp']
+    tipp, pt = bester_tipp(p)
     eintraege.append(dict(
         id=mid, liga=r['sid'], datum_unix=m['date_unix'],
         heim=m['home_name'], ausw=m['away_name'],
@@ -95,13 +71,8 @@ def merken(mid, args):
         p={k: round(v, 4) for k, v in p.items()},
         tipp=tipp, p_tipp=round(pt, 4), faire_quote=round(1 / pt, 2),
         quote=m.get(QUOTENFELD[tipp]) or None,
-        abstand_markt=abstand_markt(r, p, tipp),
-        empf_tipp=round(r['empf'][tipp], 2),
-        gleichstand=len(r['kandidaten']) > 1 and sorted(r['kandidaten']) or None,
         ergebnis=None))
-    zusatz = (f" (Gleichstand gegen {', '.join(w for w in r['kandidaten'] if w != tipp)},"
-              f" Empf {r['empf'][tipp]:.1f})") if len(r['kandidaten']) > 1 else ""
-    print(f"  gemerkt: {m['home_name']} - {m['away_name']} | {WETTEN[tipp]} {pt*100:.1f} %{zusatz}")
+    print(f"  gemerkt: {m['home_name']} - {m['away_name']} | {WETTEN[tipp]} {pt*100:.1f} %")
     speichern(eintraege)
 
 
@@ -125,31 +96,16 @@ def auswerten(args):
         print("Bilanz ist leer. Erst mit --merken Prognosen aufnehmen.")
         return
 
-    # Fehlende Ergebnisse nachholen. Je Eintrag abfangen: Laeuft die Abfrage mitten in der
-    # Schleife ins Stundenlimit, waren vorher ALLE in diesem Lauf geholten Ergebnisse weg -
-    # speichern() steht hinter der Schleife und wurde nie erreicht. Bei 30 offenen Spielen
-    # und einem Limit beim zehnten hiess das: neun geholte Ergebnisse verworfen und beim
-    # naechsten Lauf erneut abgefragt. Gefunden am 02.10.2026, dieselbe Familie wie der
-    # Fehler vom 01.10. in modell.py.
-    fehler = []
+    # Fehlende Ergebnisse nachholen
     for e in eintraege:
         if e['ergebnis'] is None:
-            try:
-                m = M.hole("match", {"match_id": e['id']}, f"erg_{e['id']}.json",
-                           argparse.Namespace(daten=args.daten, neu=True))['data']
-            except Exception as ex:
-                fehler.append(f"{e['heim']} - {e['ausw']} ({type(ex).__name__}: {ex})")
-                continue
+            m = M.hole("match", {"match_id": e['id']}, f"erg_{e['id']}.json",
+                       argparse.Namespace(daten=args.daten, neu=True))['data']
             if m['status'] == 'complete':
                 e['ergebnis'] = {'h': m['homeGoalCount'], 'a': m['awayGoalCount']}
             elif m['status'] in ABGESAGT:
                 e['ergebnis'] = {'abgesagt': m['status']}
     speichern(eintraege)
-    if fehler:
-        print(f"  {len(fehler)} Ergebnis(se) nicht abrufbar, bleiben offen:")
-        for f in fehler:
-            print(f"    {f}")
-        print()
 
     fertig = [e for e in eintraege if e['ergebnis'] and not e['ergebnis'].get('abgesagt')]
     abgesagt = [e for e in eintraege if e['ergebnis'] and e['ergebnis'].get('abgesagt')]
@@ -214,12 +170,7 @@ if __name__ == "__main__":
     args = ap.parse_args()
     if args.merken:
         for mid in args.merken:
-            # Ein Spiel, das die API nicht sauber liefert, darf die uebrigen nicht
-            # mitreissen - sonst fehlen Prognosen, ohne dass es auffaellt (01.10.2026).
-            try:
-                merken(mid, args)
-            except Exception as e:
-                print(f"  {mid}: nicht aufgenommen ({type(e).__name__}: {e})")
+            merken(mid, args)
     if args.auswerten:
         auswerten(args)
     if not args.merken and not args.auswerten:

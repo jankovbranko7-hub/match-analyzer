@@ -36,22 +36,15 @@ def hole(endpoint, params, datei, args):
     if os.path.exists(pfad) and not args.neu:
         alter_h = (time.time() - os.path.getmtime(pfad)) / 3600
         if alter_h < CACHE_STUNDEN:
-            with open(pfad) as f:
-                return json.load(f)
+            return json.load(open(pfad))
         print(f"  (aktualisiere {datei}, war {alter_h:.1f} h alt)")
     url = f"{BASE}/{endpoint}?" + urllib.parse.urlencode({**params, "key": api_key()})
     with urllib.request.urlopen(url, timeout=60) as r:
         daten = json.load(r)
     if not daten.get("success", True):
-        # Bewusst raise und nicht sys.exit: sys.exit wirft SystemExit, und SystemExit erbt
-        # von BaseException, nicht von Exception. Die Schleifen in modell.py und bilanz.py
-        # fangen "except Exception" - ein sys.exit hier waere also durchgeschlagen und haette
-        # alle noch nicht gerechneten Spiele stillschweigend fallen lassen, genau der Fehler,
-        # der am 01.10.2026 behoben werden sollte. Gefunden am 02.10.2026.
-        raise RuntimeError(f"API-Fehler bei {endpoint}: {daten.get('message')}")
+        sys.exit(f"API-Fehler bei {endpoint}: {daten.get('message')}")
     os.makedirs(args.daten, exist_ok=True)
-    with open(pfad, "w") as f:
-        json.dump(daten, f)
+    json.dump(daten, open(pfad, "w"))
     return daten
 
 # ---------------------------------------------------------------- Gewichte
@@ -88,53 +81,8 @@ H2H_DAEMPFUNG_K     = 3      # Direkte Duelle daempfen: Gewicht = H2H_ANTEIL * n
                              # dieselbe Ueberlegung - nicht an Ergebnissen angepasst.
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
-MARKT_ANTEIL        = 0.5    # Anteil der margenbereinigten Vorab-Quoten an den erwarteten
-                             # Toren. Am 03.10.2026 von 0,0 auf 0,5 gesetzt, nachdem es
-                             # ERSTMALS gegen echte Ergebnisse messbar war: league-matches
-                             # liefert die Quoten mit, also 2333 Spiele im Walk-forward.
-                             #
-                             # Gemessen (pruefung.py --markt), Trefferquote und LogLik:
-                             #   0,0  60,7 %  -2,86028   (vorher)
-                             #   0,2  60,9 %  -2,85092   t = +9,81
-                             #   0,4  61,8 %  -2,84400   t = +8,68
-                             #   1,0  62,5 %  -2,83706   t = +5,08
-                             # Beide Ligen-Haelften bei JEDEM Wert positiv, bei 0,2 und 0,4
-                             # 13 von 13 Ligen besser, groesste Einzelliga 14 % des Gewinns.
-                             # Das ist der groesste gemessene Effekt im ganzen Projekt und
-                             # der einzige, der nicht an einer Liga haengt.
-                             #
-                             # 0,5 und nicht 1,0 aus zwei Gruenden, die auf dieselbe Zahl
-                             # zeigen. Erstens: bei 1,0 ist das Modell rechnerisch der
-                             # Buchmacher, `gegen fair` wird null und es gibt nie wieder
-                             # Value. Zweitens, gemessen (pruefung.py --widerspruch): das
-                             # Modell UEBERTREIBT seinen Vorsprung etwa um das Doppelte. Bei
-                             # Abstand >= 8 Punkten sagte es 64,4 %, der Markt 52,6 %,
-                             # eingetreten sind 59,1 % - fast genau die Mitte. Einen halben
-                             # Marktanteil einzurechnen ist dasselbe wie den behaupteten
-                             # Vorsprung zu halbieren.
-                             #
-                             # Wirkung auf das Value-Signal, gemessen an denselben Spielen
-                             # (Abstand >= 2 Punkte, Versprechen minus Eintritt):
-                             #   ohne Markt   verspricht 61,4 %, trifft 58,6 %  Fehler +2,8
-                             #   Markt 0,5    verspricht 60,3 %, trifft 59,8 %  Fehler +0,4
-                             # Die Uebertreibung ist weg, und die Wirklichkeit liegt weiter
-                             # UEBER dem Marktpreis (z = +1,51). Das Signal bleibt also.
-                             #
-                             # FOLGE, die man kennen muss: der `Abstand zum Markt` halbiert
-                             # sich, weil der Markt jetzt in beiden Zahlen steckt. Die Spiele
-                             # ueber 8 Punkten gingen von 232 auf 19 zurueck. Die 8-Punkte-
-                             # Grenze ist deshalb NICHT angepasst - eine neue Schwelle aus der
-                             # Rueckschau abzuleiten ist verboten (CLAUDE.md). Wer sie aendern
-                             # will, muss das ausdruecklich anweisen.
-                             #
-                             # Fehlen die Quoten, rechnet das Modell wie bisher ohne Markt
-                             # (w = 0). Die Ausgabe zeigt den Anteil in der Zeile `Markt-
-                             # Anteil`; steht dort nichts, lagen keine Quoten vor.
-                             # Ueber --markt 0 jederzeit abschaltbar.
+MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
 MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
-                             # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
-                             # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
-                             # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).
 FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird die
                              # Teamstatistik mit den letzten 10 Spielen aufgefuellt (aus
                              # derselben lastx-Abfrage, die schon fuer die Form geholt wird -
@@ -145,188 +93,13 @@ FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird 
                              # wird es NICHT mehr benutzt, damit reife Ligen unveraendert
                              # bleiben. Nach Erfahrung gesetzt, nicht an Ergebnissen geprueft.
                              # Vom Nutzer am 27.09.2026 verlangt.
-LAMBDA_DAEMPFUNG    = 1.00   # AUS. Zieht die erwarteten Tore zur Liga-Basis:
-                             #   lambda' = Liga-Basis + LAMBDA_DAEMPFUNG * (lambda - Liga-Basis)
-                             #
-                             # Vom Nutzer am 02.10.2026 ausdruecklich verlangt. Anlass: Das Modell
-                             # streut zu weit. Gemessen an 108 zwischengespeicherten Spielen mit
-                             # vollstaendigen Vorab-Quoten, Modell-Lambda gegen Markt-Lambda:
-                             #
-                             #   Heimtore       Bias -0,013  Steigung 0,842  t gegen 1 = -3,15
-                             #   Auswaertstore  Bias -0,014  Steigung 0,857  t gegen 1 = -2,27
-                             #   Tore gesamt    Bias -0,027  Steigung 0,809  t gegen 1 = -3,54
-                             #   Differenz      Bias +0,001  Steigung 0,879  t gegen 1 = -2,13
-                             #
-                             # Das NIVEAU stimmt (Bias praktisch null, Heimvorteil 1,304 gegen
-                             # 1,307 beim Markt, Gesamttore 2,889 gegen 2,916). Falsch ist die
-                             # SPREIZUNG: Sagt das Modell einen hohen Wert, sagt der Markt einen
-                             # weniger hohen. Drei bis dreieinhalb Standardfehler, kein Rauschen.
-                             #
-                             # Ob das Modell wirklich uebertreibt oder nur verrauschter ist als der
-                             # Markt, laesst sich nicht trennen (Regressionsverduennung) - die
-                             # Antwort ist in beiden Faellen dieselbe und folgt aus der Statistik,
-                             # nicht aus einer Anpassung: eine verrauschte Schaetzung gehoert zum
-                             # Mittel gezogen, sonst ist ihr Fehler groesser als noetig.
-                             #
-                             # Warum 0,85 und nicht 0,77 (dort liegt der kleinste Lambda-Fehler):
-                             # 0,85 liegt am oberen Rand der gemessenen Steigungen, holt vier
-                             # Fuenftel des Gewinns und greift so wenig ein wie moeglich.
-                             #
-                             # Gemessen an denselben 108 Spielen, 0,85 gegen 1,0:
-                             #   Lambda-Fehler gegen Markt   0,303 -> 0,291 Tore
-                             #   Abstand zum Markt beim Tipp 4,18 -> 3,63 Punkte (t = -3,34)
-                             #   Wahrscheinlichkeit des Tipps 61,1 -> 60,7 % (Kosten 0,4 Punkte)
-                             #   groesster Marktabstand      24,0 -> 18,7 Punkte
-                             #   Spiele ueber der 8-Punkte-Grenze  11 -> 9
-                             #   Tipp gewechselt             7 von 108
-                             #
-                             # WAS DIE MESSUNG NICHT ZEIGT: ob die Trefferquote steigt. Dafuer
-                             # braeuchte es einen Backtest gegen echte Ergebnisse, und der ist in
-                             # diesem Repo verboten (CLAUDE.md). Der Marktabstand verbessert sich
-                             # zum Teil deshalb, weil auf den Markt hin gedaempft wird. Die
-                             # Steigung unter 1 ist davon unabhaengig und bleibt der Befund.
-                             #
-                             # Gedaempft wird nur das MODELL-Lambda, nie das Markt-Lambda: der
-                             # Markt streut nicht zu weit.
-                             #
-                             # ZURUECK AUF 1,00 AM 02.10.2026. Der Nutzer hat die Rueckschau auf
-                             # echte Ergebnisse erlaubt, und die sagt das Gegenteil. Walk-forward
-                             # ueber 2136 Spiele aus 12 reifen Ligen, Teamdaten je Spiel NUR aus
-                             # Spielen davor gerechnet, Per-Spiel-xG aus league-matches:
-                             #
-                             #   k      LogLik/Spiel   Trefferquote   Brier
-                             #   0,80   -2,91495       60,1 %         0,23264
-                             #   0,85   -2,91396       60,0 %         0,23253
-                             #   1,00   -2,91260       60,0 %         0,23240   <- beste
-                             #
-                             # Beste Log-Likelihood und bester Brier bei k = 1,00, Trefferquote
-                             # flach. Paarweise 0,85 gegen 1,00: -2,90 LL, t = -1,26, also im
-                             # Zufallsbereich - aber die Richtung ist negativ, und 9 von 12 Ligen
-                             # bevorzugen einzeln k = 1,00.
-                             #
-                             # DIE LEHRE: Der Befund war echt (Steigung 0,81 gegen den Markt,
-                             # t = -3,5), die Schlussfolgerung falsch. Naeher am Markt heisst nicht
-                             # naeher an der Wirklichkeit. Genau der Fehler, vor dem CLAUDE.md
-                             # warnt - nur mit dem Markt statt mit der Vergangenheit als Ziel.
-                             # Nicht wieder einbauen ohne neue Messung gegen echte Ergebnisse.
-GLEICHSTAND_PUNKTE  = 2.0    # Liegt eine Wette weniger als so viele Prozentpunkte hinter der
-                             # wahrscheinlichsten, entscheidet nicht mehr die Wahrscheinlichkeit,
-                             # sondern die Empfindlichkeit (siehe empfindlichkeit()). Vom Nutzer
-                             # am 02.10.2026 verlangt. Die Grenze von 2 Punkten stand schon vorher
-                             # in CLAUDE.md ("dort entscheidet die Datengrundlage, nicht die dritte
-                             # Nachkommastelle") - neu ist nur, dass eine Zahl entscheidet und
-                             # nicht mehr mein Gefuehl.
-                             #
-                             # ANLASS: Die fuenf Wetten reagieren voellig unterschiedlich auf einen
-                             # Fehler in den erwarteten Toren. Gemessen an 32 Spielen aus fuenf
-                             # Ligen, 10 % Fehler auf beide Lambda: Ueber/Unter 2,5 bewegt sich um
-                             # 6,22 Punkte, Beide treffen um 4,73, Sieg Heim um 1,01, Sieg
-                             # Auswaerts um 0,54. Die Regel "hoechste Wahrscheinlichkeit" waehlte
-                             # 30 von 32 Tipps aus den drei empfindlichsten Zeilen.
-                             #
-                             # NICHT geaendert wurde die Regel selbst: Bei einem Abstand von mehr
-                             # als 2 Punkten gewinnt weiter die hoechste Wahrscheinlichkeit, der
-                             # Preis entscheidet nach wie vor nicht mit. Gemessen an denselben
-                             # 32 Spielen kostet der Gleichstand-Entscheid 0,08 Punkte
-                             # Wahrscheinlichkeit (61,06 -> 60,97 %) und verkleinert den Abstand
-                             # zum Markt von 4,15 auf 4,00 Punkte (t = -1,04, also im
-                             # Zufallsbereich - der Gewinn ist nicht belegt, der Preis dafuer
-                             # aber auch praktisch null). Drei von 32 Tipps wechseln.
-                             # Die Alternativen, die auch ausserhalb des Gleichstands eingreifen,
-                             # wurden gemessen und verworfen: Abweichung vom Liga-Schnitt kostet
-                             # 11,4 Punkte Wahrscheinlichkeit und vergroessert den Marktabstand
-                             # auf 5,04; Abweichung je Punkt Empfindlichkeit kostet 16,8 Punkte
-                             # und ergibt 4,92.
-EMPF_STOERUNG       = 0.10   # Um so viel werden beide Lambda angehoben, um die Empfindlichkeit
-                             # einer Wette zu messen. 10 % ist die Groessenordnung, um die die
-                             # Modell-Lambda typisch von den Markt-Lambda abweichen.
-LIGA_XG_MIN         = 0.85   # Liga-Test fuer das xG: Gesamt-xG geteilt durch Gesamt-Tore
-                             # der Saison. Liegt der Wert darunter, erhebt FootyStats das xG
-                             # in dieser Liga nicht verlaesslich - dann rechnet das Modell
-                             # dort NUR mit Toren (XG_ANTEIL und LIGA_BASIS_XG entfallen fuer
-                             # diese Liga). Gemessen am 02.10.2026 an 29 Ligen: 20 liegen
-                             # zwischen 0,89 und 1,34, dann folgt eine Luecke, dann 0,76 /
-                             # 0,54 / 0,52. Die Grenze liegt in der Mitte dieser Luecke.
-                             # Vom Nutzer am 02.10.2026 verlangt. Anlass: Der Team-Test aus
-                             # Punkt 12 erkennt nur xG == 0, nicht das halb erfasste xG. In
-                             # Saison 17308 hatten 18 von 48 Teams unbrauchbares xG, 7 davon
-                             # glatt null (erkannt), 11 mit Werten wie 0,02 xG bei 1,25 Toren
-                             # (nicht erkannt) - Angriffsstaerke dort bis 182 % zu niedrig.
-                             # Die einzige Prognose aus dieser Liga, Wohlen - Schoetz, kam mit
-                             # halbiertem Schoetz-Angriff auf Unter 2,5 und endete 1:5.
-                             # Der Defekt sitzt in der Liga, nicht im Team - deshalb der
-                             # Liga-Test. Er kostet keine zusaetzliche API-Abfrage.
-LIGA_XG_MAX         = 1.15   # Obergrenze, Spiegelbild von LIGA_XG_MIN: Liegt das Liga-xG
-                             # mehr als 15 % UEBER den Liga-Toren, geht nur LIGA_BASIS_XG weg,
-                             # XG_ANTEIL bleibt. Vom Nutzer am 02.10.2026 verlangt.
-                             #
-                             # WARUM NUR DIE BASIS: Die Teamstaerken sind VERHAELTNISSE
-                             # (Team-xG / Liga-xG). Ein gleichmaessig aufgeblaehtes Liga-xG
-                             # kuerzt sich darin heraus. Die Liga-Basis
-                             # (1-b)*Tore + b*xG ist dagegen ein absoluter Wert und waechst
-                             # mit: bei einem Verhaeltnis q liegt sie um b*(q-1) zu hoch, bei
-                             # q = 1,34 also um 13,6 %. Das drueckt systematisch Richtung
-                             # Ueber 2,5 und Beide treffen.
-                             #
-                             # GEMESSEN im Walk-forward ueber 2136 Spiele aus 12 Ligen
-                             # (analyse/rueckschau.py), jeweils gegen die Fassung mit nur der
-                             # Untergrenze:
-                             #
-                             #   unter 0,85 nur XG_ANTEIL aus      t = -1,63
-                             #   unter 0,85 nur LIGA_BASIS aus     t = -3,04
-                             #   ueber 1,10 nur LIGA_BASIS aus     t = +2,00   <- besser
-                             #   ueber 1,10 beides aus             t = -0,63
-                             #
-                             # Die Richtung ist damit belegt: unten traegt das Teamgewicht den
-                             # Gewinn, oben die Basis. Nur die BEIDES-Varianten sind jeweils
-                             # schlechter.
-                             #
-                             # WARUM 1,15 UND NICHT 1,10: Der gemessene Gewinn von t = +2,00
-                             # haengt an EINER Liga (16743, Verhaeltnis 1,12), und 1,12 ist der
-                             # oberste Wert des beobachteten Normalbereichs (0,91 bis 1,12).
-                             # Eine Grenze mitten hinein waere Anpassung an eine Liga - genau
-                             # der Fehler, der am selben Tag schon einmal passiert ist
-                             # (XG_ANTEIL sah wegen einer Liga um 0,2 bis 0,3 falsch aus).
-                             # 1,15 ist das Spiegelbild von 0,85: das Liga-xG muss zu den
-                             # Liga-Toren passen, in beide Richtungen gleich streng. Die
-                             # Grenze folgt damit der Symmetrie und nicht einer Messung an
-                             # einer Liga. Im Walk-forward liegt KEINE der 12 Ligen darueber -
-                             # die Aenderung ist dort also wirkungslos und insofern
-                             # ungemessen; belegt ist der Mechanismus, nicht diese Zahl.
-                             #
-                             # Betroffen sind unter den 29 Ligen-Momentaufnahmen 16580 (1,34),
-                             # 16783 (1,26), 17387 (1,25) und 16743 (1,21). Aus 16580 stammen
-                             # 10 der 79 Prognosen in bilanz.json.
-LIGA_XG_WARN        = 0.95   # Dazwischen wird nicht eingegriffen, nur ein Hinweis
-                             # ausgegeben - damit ein Grenzfall sichtbar ist, ohne dass eine
-                             # Zahl davon abhaengt.
-                             #
-                             # GRENZE AM 02.10.2026 VON 0,65 AUF 0,85 ANGEHOBEN, gemessen an
-                             # echten Ergebnissen (der Nutzer hat die Rueckschau erlaubt).
-                             # Die 0,65 stammten aus einer Luecke in 29 Ligen-Momentaufnahmen.
-                             # Im Walk-forward ueber 2136 Spiele aus 12 Ligen zeigte sich, dass
-                             # Saison 16015 mit einem Verhaeltnis von 0,66 knapp durchrutschte -
-                             # und genau diese Liga das xG-Gewicht verdorben hat:
-                             #
-                             #   Saison 16015 allein, 161 Spiele
-                             #     xG mit 0,70 (vorher)  LogLik/Spiel -2,69346  Treffer 64,0 %
-                             #     xG aus (nur Tore)     LogLik/Spiel -2,55881  Treffer 65,8 %
-                             #     paarweise +21,68 LL, t = +2,97
-                             #
-                             #   alle 2136 Spiele
-                             #     Grenze 0,65 (vorher)  LogLik/Spiel -2,91260  Brier 0,23240
-                             #     Grenze 0,85 (jetzt)   LogLik/Spiel -2,90246  Brier 0,23134
-                             #     paarweise +21,68 LL, t = +2,91  SIGNIFIKANT
-                             #
-                             # Weiter hinauf geht NICHT: Grenze 0,95 fasst vier Ligen und wird
-                             # wieder schlechter (+1,75 LL, t = +0,18, Trefferquote 58,1 statt
-                             # 59,3 %). Die Verhaeltnisse der 12 Ligen lagen bei 0,66 und dann
-                             # erst wieder bei 0,91 bis 1,12 - 0,85 liegt in dieser Luecke.
-                             # LIGA_XG_WARN steht deshalb jetzt bei 0,95: die Ligen zwischen
-                             # 0,85 und 0,95 haben brauchbares xG und bekommen nur einen Hinweis.
 CACHE_STUNDEN       = 6      # Zwischengespeicherte API-Antworten gelten so lange. Danach laedt
                              # das Skript neu. Schuetzt vor veralteten Quoten im Tagesverlauf und
                              # vor veralteter Teamstatistik am naechsten Tag. --neu erzwingt sofort.
+                             # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
+                             # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und
+                             # das Ergebnis ist fuer jedes Spiel fast dasselbe (Remis ~29 %).
+                             # (Regel in CLAUDE.md). Über --markt zuschaltbar.
 
 # ---------------------------------------------------------------- Modell
 
@@ -341,48 +114,6 @@ def matrix(lh, la, rho=DIXON_COLES_RHO):
 def probs(M):
     i,j=np.indices(M.shape)
     return dict(H=M[i>j].sum(),D=M[i==j].sum(),A=M[i<j].sum(),O25=M[i+j>=3].sum(),U25=M[i+j<=2].sum(),BTTS=M[(i>0)&(j>0)].sum())
-
-# Die fuenf Wetten aus CLAUDE.md, in fester Reihenfolge. Unentschieden ist bewusst nicht dabei.
-WETTEN = ('H', 'A', 'O25', 'U25', 'BTTS')
-
-
-def empfindlichkeit(lh, la, stoer=EMPF_STOERUNG):
-    """Wie viele Prozentpunkte bewegt sich jede Wette, wenn beide Lambda um stoer steigen?
-
-    Das ist keine Schaetzung, sondern faellt aus der Poisson-Rechnung selbst: Ueber/Unter 2,5
-    liest die Summe der erwarteten Tore direkt ab und reagiert deshalb stark, Sieg Heim und
-    Sieg Auswaerts haengen an der Differenz und kaum am Niveau. Gemessen an 32 Spielen:
-    Ueber/Unter 6,22 Punkte, Beide treffen 4,73, Sieg Heim 1,01, Sieg Auswaerts 0,54.
-    """
-    def fuenf(a, b):
-        q = probs(matrix(a, b))
-        q['U25'] = 1 - q['O25']
-        return q
-    p0 = fuenf(lh, la); p1 = fuenf(lh * (1 + stoer), la * (1 + stoer))
-    return {w: abs(float(p1[w] - p0[w])) * 100 for w in WETTEN}
-
-
-def bester_tipp(p, lh, la, grenze=GLEICHSTAND_PUNKTE):
-    """Der beste Tipp: hoechste Wahrscheinlichkeit, bei Gleichstand die unempfindlichste Wette.
-
-    Variante A bleibt der Kern (Nutzer, 26.09.2026): Der Preis entscheidet nicht mit, und bei
-    mehr als `grenze` Punkten Abstand gewinnt schlicht die wahrscheinlichste Wette. Liegen
-    mehrere innerhalb von `grenze` Punkten, entscheidet unter diesen die kleinste
-    Empfindlichkeit - also die Wette, die ein Fehler in den erwarteten Toren am wenigsten
-    verschiebt. Vom Nutzer am 02.10.2026 verlangt; vorher entschied dort das Gefuehl.
-
-    Gibt (tipp, p_tipp, kandidaten, empf) zurueck. `kandidaten` sind die Wetten im
-    Gleichstand - mehr als eine heisst: hier hat die Empfindlichkeit entschieden.
-    """
-    p = {w: float(p[w]) for w in WETTEN}
-    spitze = max(p.values())
-    kand = [w for w in WETTEN if (spitze - p[w]) * 100 < grenze]
-    e = empfindlichkeit(lh, la)
-    # Kleinste Empfindlichkeit; bei exaktem Gleichstand die hoehere Wahrscheinlichkeit,
-    # danach die feste Reihenfolge in WETTEN - damit die Wahl reproduzierbar bleibt.
-    tipp = min(kand, key=lambda w: (round(e[w], 6), -p[w], WETTEN.index(w)))
-    return tipp, p[tipp], kand, e
-
 
 def shrink(x,n,k=DAEMPFUNG_K):
     """Zieht Werte aus kleinen Stichproben Richtung Liga-Durchschnitt (1,0)."""
@@ -436,20 +167,12 @@ def strengths(t, side, L, last6):
     s=t['stats']; n_v=s[f'seasonMatchesPlayed_{side}']; n_o=s['seasonMatchesPlayed_overall']
     Lg_v = L[side]; Lx_v = L['x'+side]; Lg_o=(L['home']+L['away'])/2; Lx_o=(L['xhome']+L['xaway'])/2
     opp = 'away' if side=='home' else 'home'
-    # Je Term eigenes xG-Gewicht: fehlt das Feld oder taugt das xG der ganzen Liga nicht,
-    # zaehlen nur die Tore (siehe xg_anteil und LIGA_XG_MIN).
-    liga_ok = L.get('xg_ok', True)
-    def term(xg_k, tor_k, Lx, Lg, q=None):
-        q = q or s
-        x, g = xg_anteil(q[xg_k], q[tor_k], liga_ok)
-        if not x:                    # ohne diesen Zweig teilt 0 * (xg/0) durch null
-            return g*q[tor_k]/Lg
-        return x*q[xg_k]/Lx + g*q[tor_k]/Lg
+    x, g = XG_ANTEIL, 1-XG_ANTEIL
     # Heim- bzw. Auswärtswerte und Gesamtwerte
-    att_v = term(f'xg_for_avg_{side}', f'seasonScoredAVG_{side}', Lx_v, Lg_v)
-    att_o = term('xg_for_avg_overall', 'seasonScoredAVG_overall', Lx_o, Lg_o)
-    dfn_v = term(f'xg_against_avg_{side}', f'seasonConcededAVG_{side}', L['x'+opp], L[opp])
-    dfn_o = term('xg_against_avg_overall', 'seasonConcededAVG_overall', Lx_o, Lg_o)
+    att_v = x*s[f'xg_for_avg_{side}']/Lx_v + g*s[f'seasonScoredAVG_{side}']/Lg_v
+    att_o = x*s['xg_for_avg_overall']/Lx_o + g*s['seasonScoredAVG_overall']/Lg_o
+    dfn_v = x*s[f'xg_against_avg_{side}']/L['x'+opp] + g*s[f'seasonConcededAVG_{side}']/L[opp]
+    dfn_o = x*s['xg_against_avg_overall']/Lx_o + g*s['seasonConcededAVG_overall']/Lg_o
     wv = n_v/(n_v+SEITE_K)
     att = shrink(wv*att_v+(1-wv)*att_o, n_o); dfn = shrink(wv*dfn_v+(1-wv)*dfn_o, n_o)
     # Form der letzten 6 Spiele. Fehlt der lastx-Block, entfaellt der Formanteil und es
@@ -458,8 +181,8 @@ def strengths(t, side, L, last6):
     # Der 10er-Block war ueber saisonfenster() abgesichert, der 6er nicht.
     f = (last6 or {}).get('stats')
     if f:
-        att_f = term('xg_for_avg_overall', 'seasonScoredAVG_overall', Lx_o, Lg_o, f)
-        dfn_f = term('xg_against_avg_overall', 'seasonConcededAVG_overall', Lx_o, Lg_o, f)
+        att_f = x*f['xg_for_avg_overall']/Lx_o + g*f['seasonScoredAVG_overall']/Lg_o
+        dfn_f = x*f['xg_against_avg_overall']/Lx_o + g*f['seasonConcededAVG_overall']/Lg_o
         fa = FORM_ANTEIL
         att = (1-fa)*att + fa*shrink(att_f,6,FORM_DAEMPFUNG_K)
         dfn = (1-fa)*dfn + fa*shrink(dfn_f,6,FORM_DAEMPFUNG_K)
@@ -480,55 +203,10 @@ def quoten_da(m):
     return all(m.get(k, 0) and m[k] > 1 for k in
                ['odds_ft_1','odds_ft_x','odds_ft_2','odds_ft_over25','odds_ft_under25','odds_btts_yes','odds_btts_no'])
 
-def xg_fehlt(xg, tore):
-    """True, wenn das xG-Feld leer ist, obwohl Tore gefallen sind.
-
-    FootyStats erhebt xG nicht in jeder Liga. Steht dort 0,00 bei Teams, die regelmaessig
-    treffen, ist das keine Messung, sondern eine fehlende Angabe - und darf nicht als
-    "erspielt keine Chancen" gelesen werden. Am 30.09.2026 an 495 Teams gemessen: 27 mit
-    unbrauchbarem xG, davon 7 mit glatter Null, 14 davon in einer einzigen Liga.
-    """
-    return (xg or 0) == 0 and (tore or 0) > 0
-
-
-def xg_anteil(xg, tore, liga_ok=True):
-    """XG_ANTEIL - oder 0, wenn das Feld fehlt oder die ganze Liga kein brauchbares xG hat.
-
-    liga_ok=False kommt aus dem Liga-Test (LIGA_XG_MIN): Dann zaehlen in dieser Liga fuer
-    jedes Team nur die Tore, auch fuer die Teams, deren eigenes xG-Feld gefuellt aussieht.
-    Der Defekt sitzt in der Erhebung der Liga, nicht im einzelnen Team.
-    """
-    return (0.0, 1.0) if (not liga_ok or xg_fehlt(xg, tore)) else (XG_ANTEIL, 1 - XG_ANTEIL)
-
-
 def league(T):
-    def avg(k,w):
-        n = sum(t['stats'][w] for t in T)
-        return sum(t['stats'][k]*t['stats'][w] for t in T)/n if n else 0.0
-    def avg_xg(k, tor_k, w):
-        """Liga-xG ohne die Teams, deren xG-Feld fehlt.
-
-        Sonst zieht jede Null den Nenner nach unten und blaeht die Staerke aller anderen
-        Teams derselben Liga auf. In Liga 17308 lag der Nenner dadurch 15 % zu niedrig -
-        alle 41 Teams mit funktionierenden Daten bekamen eine 17 % zu hohe Angriffsstaerke.
-        """
-        G = [t for t in T if not xg_fehlt(t['stats'][k], t['stats'][tor_k])]
-        if not G or sum(t['stats'][w] for t in G) == 0:
-            G = T
-        return sum(t['stats'][k]*t['stats'][w] for t in G)/sum(t['stats'][w] for t in G)
-    # Liga-Test: Gesamt-xG gegen Gesamt-Tore, ueber ALLE Teams der Liga - auch die mit
-    # kaputtem xG, denn genau die sollen den Wert druecken. Ein ehrlich erhobenes xG liegt
-    # dicht an den Toren (gemessen: 20 von 29 Ligen zwischen 0,89 und 1,34).
-    g_o = avg('seasonScoredAVG_overall', 'seasonMatchesPlayed_overall')
-    x_o = avg('xg_for_avg_overall', 'seasonMatchesPlayed_overall')
-    rel = x_o / g_o if g_o else 0.0
-    # basis_ok: Liga-xG passt zu den Liga-Toren, also darf es in die Torbasis. xg_ok ist
-    # schaerfer - faellt das weg, zaehlt in der ganzen Liga nur noch das Tor-Gewicht.
+    def avg(k,w): return sum(t['stats'][k]*t['stats'][w] for t in T)/sum(t['stats'][w] for t in T)
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
-                xhome=avg_xg('xg_for_avg_home','seasonScoredAVG_home','seasonMatchesPlayed_home'),
-                xaway=avg_xg('xg_for_avg_away','seasonScoredAVG_away','seasonMatchesPlayed_away'),
-                xg_rel=rel, xg_ok=rel >= LIGA_XG_MIN,
-                basis_ok=LIGA_XG_MIN <= rel <= LIGA_XG_MAX)
+                xhome=avg('xg_for_avg_home','seasonMatchesPlayed_home'),xaway=avg('xg_for_avg_away','seasonMatchesPlayed_away'))
 
 def h2h_werte(m, jahre=H2H_MAX_JAHRE, k=H2H_DAEMPFUNG_K):
     """Gewicht und Tor-Schnitt der direkten Duelle, beides nur aus den jungen Duellen.
@@ -560,27 +238,12 @@ def berechne(mid, args):
     m = hole("match", {"match_id": mid}, f"match_{mid}.json", args)['data']
     sid = m['competition_id']
     T = hole("league-teams", {"season_id": sid, "include": "stats"}, f"teams_{sid}.json", args)['data']
-    T = {t['id']: t for t in T}
+    L = league(T); T = {t['id']: t for t in T}
 
-    # Erst pruefen, dann rechnen. Am 01.10.2026 gefunden: league() lief vorher zuerst und
-    # stuerzte am Saisonstart mit ZeroDivisionError ab - ausgerechnet in dem Fall, fuer den
-    # die Sperre da ist. Und fehlte ein Team in der Ligatabelle (Pokalspiel, Play-off,
-    # abweichende competition_id), gab es einen KeyError.
-    fehlend = [m[k] for k in ('homeID', 'awayID') if m[k] not in T]
-    if fehlend:
-        return dict(gesperrt=True, match=m, sid=sid, nh=0, na=0,
-                    grund=f"Team {fehlend[0]} steht nicht in der Ligatabelle von Saison {sid}")
     nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
     na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
     if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
         return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
-
-    L = league(list(T.values()))
-    # Das Liga-xG muss nur dann groesser null sein, wenn es auch verwendet wird. Faellt es
-    # ueber LIGA_XG_MIN weg, darf eine Liga ohne jedes xG-Feld weiter gerechnet werden.
-    if min(L['home'], L['away']) <= 0 or (L['xg_ok'] and min(L['xhome'], L['xaway']) <= 0):
-        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na,
-                    grund=f"Liga-Durchschnitt ist 0 (Saison {sid} hat noch keine Tore)")
 
     def block(tid, num):
         """Ein lastx-Block. Alle drei (5/6/10) stehen in derselben Antwort,
@@ -595,17 +258,12 @@ def berechne(mid, args):
 
     ah,dh=strengths(th,'home',L,block(m['homeID'], 6))
     aa,da=strengths(ta,'away',L,block(m['awayID'], 6))
-    b = LIGA_BASIS_XG if L['basis_ok'] else 0.0
+    b = LIGA_BASIS_XG
     base_h=(1-b)*L['home']+b*L['xhome']; base_a=(1-b)*L['away']+b*L['xaway']
     lh=base_h*ah*da; la=base_a*aa*dh
     h2h_w, h2h_tore = h2h_werte(m)
     if h2h_w:
         tot=lh+la; f=(1-h2h_w)+h2h_w*h2h_tore/tot; lh*=f; la*=f
-    # Spreizung daempfen (siehe LAMBDA_DAEMPFUNG). Nach dem H2H, weil die Duelle Teil der
-    # Modellschaetzung sind, und vor dem Markt-Mix, weil das Markt-Lambda nicht gedaempft wird.
-    lh_roh, la_roh = lh, la
-    lh = base_h + LAMBDA_DAEMPFUNG * (lh - base_h)
-    la = base_a + LAMBDA_DAEMPFUNG * (la - base_a)
 
     mk = mlh = mla = None
     if quoten_da(m):
@@ -613,16 +271,11 @@ def berechne(mid, args):
     w = args.markt if mk else 0.0
     flh=(1-w)*lh+w*(mlh if mk else 0); fla=(1-w)*la+w*(mla if mk else 0)
     M=matrix(flh,fla); p=probs(M)
-    # Den Tipp hier waehlen, nicht in der Ausgabe und nicht in bilanz.py - sonst koennten
-    # Bericht und Aufzeichnung auseinanderlaufen.
-    tipp, p_tipp, kand, empf = bester_tipp(p, flh, fla)
     idx=np.dstack(np.unravel_index(np.argsort(-M.ravel()),M.shape))[0][:3]
     return dict(gesperrt=False, match=m, sid=sid, L=L, ah=ah, dh=dh, aa=aa, da=da,
                 nh=nh, na=na, fen_h=fen_h, fen_a=fen_a,
                 lh=lh, la=la, mlh=mlh, mla=mla, mk=mk, w=w, flh=flh, fla=fla,
-                M=M, p=p, h2h_w=h2h_w, lh_roh=lh_roh, la_roh=la_roh,
-                base_h=base_h, base_a=base_a,
-                tipp=tipp, p_tipp=p_tipp, kandidaten=kand, empf=empf,
+                M=M, p=p, h2h_w=h2h_w,
                 top3=[(f'{a}:{b}', float(M[a,b])) for a,b in idx])
 
 
@@ -630,39 +283,20 @@ def analysiere(mid, args):
     r = berechne(mid, args); m = r['match']
     print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {r['sid']})")
     if r['gesperrt']:
-        if r.get('grund'):
-            print(f"  KEINE PROGNOSE. {r['grund']}.")
-            return
         print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
               f" (noetig: {MIN_SAISONSPIELE}).")
-        print("  Darunter zieht die Daempfung die Teamstaerke so weit zum Liga-Durchschnitt,")
-        print("  dass die Trennschaerfe stark faellt: Der Abstand zwischen einem starken und")
-        print("  einem schwachen Heimteam betraegt bei 2 Saisonspielen 21,8 Punkte, bei 3")
-        print("  schon 28,2 und bei 12 Spielen 49,6 (gemessen am 01.10.2026).")
+        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
+        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
         print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
         return
     L=r['L']; p=r['p']
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
-    # Liga-Test fuer das xG. Faellt das xG weg, gehoert das in die Begruendung - es ist
-    # dieselbe Art Einschraenkung wie die Zeile Fenster:.
-    if not L['xg_ok']:
-        print(f" xG DIESER LIGA UNBRAUCHBAR: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
-              f" (Grenze {LIGA_XG_MIN:.2f}) -> gerechnet wird nur mit Toren")
-    elif L['xg_rel'] > LIGA_XG_MAX:
-        print(f" xG DIESER LIGA ZU HOCH: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
-              f" (Grenze {LIGA_XG_MAX:.2f}) -> Torbasis nur aus Toren, Teamstärken wie sonst")
-    elif L['xg_rel'] < LIGA_XG_WARN:
-        print(f" xG auffällig: Gesamt-xG/Gesamt-Tore {L['xg_rel']:.2f}"
-              f" (unter {LIGA_XG_WARN:.2f}) -> xG zählt weiter, aber in die Begründung")
     print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
     if r['fen_h'] or r['fen_a']:
         print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"
               f" | Ausw {r['fen_a']:.0%} ({r['na']} Saisonspiele)")
     print(f" H2H-Gewicht: {r['h2h_w']:.0%}")
-    if LAMBDA_DAEMPFUNG != 1.0:
-        print(f" λ roh {r['lh_roh']:.2f}-{r['la_roh']:.2f} -> gedämpft {r['lh']:.2f}-{r['la']:.2f}"
-              f" (Faktor {LAMBDA_DAEMPFUNG:.2f} zur Liga-Basis {r['base_h']:.2f}-{r['base_a']:.2f})")
     if r['mk']:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} | λ Markt {r['mlh']:.2f}-{r['mla']:.2f}"
               f" | Markt-Anteil {r['w']:.0%} | final {r['flh']:.2f}-{r['fla']:.2f}")
@@ -670,20 +304,11 @@ def analysiere(mid, args):
     else:
         print(f" λ Modell {r['lh']:.2f}-{r['la']:.2f} (keine vollständigen Vorab-Quoten)")
     print(' FINAL:', pct(p))
-    t = r['tipp']; e = r['empf']
-    if len(r['kandidaten']) > 1:
-        andere = ', '.join(f"{w} {float(p[w])*100:.1f} % (Empf {e[w]:.1f})"
-                           for w in r['kandidaten'] if w != t)
-        print(f" Bester Tipp: {t} {r['p_tipp']*100:.1f} % (Empf {e[t]:.1f})"
-              f" - GLEICHSTAND unter {GLEICHSTAND_PUNKTE:.0f} Punkten gegen {andere};"
-              f" entschieden hat die kleinere Empfindlichkeit")
-    else:
-        print(f" Bester Tipp: {t} {r['p_tipp']*100:.1f} % (Empf {e[t]:.1f}) - hoechste Wahrscheinlichkeit")
     if r['mk']:
         # Abstand zum Markt: Warnsignal, keine Rechengroesse. Weicht das Modell beim
         # besten Tipp stark vom Markt ab, ist der scheinbare Value meist eigenes Rauschen
         # und nicht Value - der Buchmacher weiss mehr (Regel in CLAUDE.md, Rangliste).
-        tipp = r['tipp']          # derselbe Tipp wie oben, nicht neu das argmax
+        tipp = max(('H','A','O25','U25','BTTS'), key=lambda w: p[w])
         ab = {w: (float(p[w])-float(r['mk'][w]))*100 for w in ('H','A','O25','BTTS')
               if w in r['mk']}
         if 'O25' in ab: ab['U25'] = -ab['O25']
@@ -716,13 +341,5 @@ if __name__ == "__main__":
     ap.add_argument("--daten", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "daten"))
     args = ap.parse_args()
     if args.liste: liste(args.liste, args)
-    # Ein Spiel, das die API nicht sauber liefert, darf die uebrigen nicht mitreissen.
-    # Am 01.10.2026 gefunden: ohne das brach der ganze Aufruf beim ersten Fehler ab.
-    for mid in args.spiele:
-        try:
-            analysiere(mid, args)
-        except Exception as e:
-            print("=" * 70)
-            print(f"Spiel {mid}: KEINE PROGNOSE. {type(e).__name__}: {e}")
-            print("  Die uebrigen Spiele werden trotzdem gerechnet.")
+    for mid in args.spiele: analysiere(mid, args)
     if not args.liste and not args.spiele: ap.print_help()

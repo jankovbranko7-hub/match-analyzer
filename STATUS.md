@@ -15,31 +15,48 @@ die Frage „warum lag die Prognose daneben" zwingend zuerst ausführen.**
 
 ## Modellstand
 
-| Konstante | Wert | |
-|---|---|---|
-| `XG_ANTEIL` | 0,70 | |
-| `LIGA_BASIS_XG` | 0,40 | |
-| `SEITE_K` | 6 | |
-| `DAEMPFUNG_K` | 5 | |
-| `FORM_ANTEIL` / `FORM_DAEMPFUNG_K` | 0,25 / 3 | |
-| `H2H_ANTEIL` / `H2H_MAX_JAHRE` / `H2H_DAEMPFUNG_K` | 0,10 / 3 / 3 | |
-| `DIXON_COLES_RHO` | −0,07 | |
-| `LAMBDA_DAEMPFUNG` | **1,00** | aus – am 02.10. geprüft und verworfen |
-| `GLEICHSTAND_PUNKTE` / `EMPF_STOERUNG` | **2,0 / 0,10** | neu am 02.10. |
-| `LIGA_XG_MIN` / `LIGA_XG_WARN` | **0,85 / 0,95** | neu am 02.10. |
-| `LIGA_XG_MAX` | **1,15** | neu am 02.10. – Test gilt in beide Richtungen |
-| `MARKT_ANTEIL` | **0,5** | neu am 03.10. – halber Markt, die groesste belegte Verbesserung |
-| `MIN_SAISONSPIELE` | 3 | |
-| `FENSTER_MIN_SPIELE` | 10 | |
-| `CACHE_STUNDEN` | 6 | |
+**Am 03.10.2026 auf den Stand vom 28.09.2026 zurückgesetzt** (Commit `c6d006a`,
+Fassung 2), vom Nutzer verlangt. `modell.py` und `bilanz.py` stehen wieder dort.
+**Genau 14 Konstanten:**
 
-**Kein Gewicht ist je an vergangenen Spielen optimiert worden**, und am 02.10. wurde geprüft,
-dass das richtig ist: alle acht Gewichte im Walk-forward über 2136 Spiele durchgefahren,
-getrennt auf zwei Ligen-Hälften – **acht von acht widersprechen sich**. Details in
-`SOLLBRUCHSTELLEN.md` Punkt 25.
+| Konstante | Wert |
+|---|---|
+| `XG_ANTEIL` | 0,70 |
+| `LIGA_BASIS_XG` | 0,40 |
+| `SEITE_K` | 6 |
+| `DAEMPFUNG_K` | 5 |
+| `FORM_ANTEIL` / `FORM_DAEMPFUNG_K` | 0,25 / 3 |
+| `H2H_ANTEIL` / `H2H_MAX_JAHRE` / `H2H_DAEMPFUNG_K` | 0,10 / 3 / 3 |
+| `DIXON_COLES_RHO` | −0,07 |
+| `MARKT_ANTEIL` | **0,0** |
+| `MIN_SAISONSPIELE` | 3 |
+| `FENSTER_MIN_SPIELE` | 10 |
+| `CACHE_STUNDEN` | 6 |
 
-Frühere Fassungen: `d912a1c` (ohne Datenfenster), `605fab4` (mit).
-Zurückschalten: `git checkout <commit> -- analyse/modell.py`
+**Weg mit dem Rücksprung:** die drei xG-Liga-Schranken, `xg_fehlt`, der
+Gleichstand-Entscheid, `LAMBDA_DAEMPFUNG`, `MARKT_ANTEIL = 0,5`, und in `bilanz.json`
+die Felder `abstand_markt`, `empf_tipp`, `gleichstand`.
+
+**Vier bekannte Fehler sind damit zurück** – `sys.exit` bei API-Fehlern reißt den
+ganzen Lauf mit, fehlendes xG wird als „keine Chancen" gelesen, `--auswerten` verwirft
+geholte Ergebnisse, `abstand_markt` wird nicht aufgezeichnet. Dem Nutzer gesagt, von ihm
+zweimal verlangt. Details in `CLAUDE.md`, Abschnitt „Modellstand eingefroren".
+
+**Kein Gewicht ist je an vergangenen Spielen optimiert worden.** Am 02.10. im
+Walk-forward über 2136 Spiele geprüft, getrennt auf zwei Ligen-Hälften: **acht von acht
+widersprechen sich.** Am 03.10. zusätzlich geprüft, ob eine Mittelung über die
+Erfahrungswerte hilft – nein (t = +0,79, Hälfte A negativ). Das Modell ist gegen seine
+eigenen Gewichte unempfindlich.
+
+**Neu daneben: die Forebet-Gegenprobe** (`analyse/forebet.py`, vom Nutzer am 03.10.
+verlangt). Ein Tipp gilt nur, wenn Forebets häufigstes Ergebnis dieselbe Wette trägt
+**und** die Torerwartungen höchstens 0,40 auseinanderliegen. Die zwei Werte liest der
+Nutzer ab – Forebet steckt hinter einer Cloudflare-Challenge (403 auf alles, auch
+`robots.txt`), ein automatischer Abruf wird nicht gebaut.
+
+Frühere Fassungen: `d912a1c` (ohne Datenfenster), `605fab4` (mit), `c6d006a` (**jetzt**),
+`853b732` (mit Markt 0,5 und allen xG-Schranken).
+Umschalten: `git checkout <commit> -- analyse/modell.py analyse/bilanz.py`
 
 ## Wie gut das Modell ist
 

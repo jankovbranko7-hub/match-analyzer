@@ -46,7 +46,12 @@ Kalibrierung und Geld-Saldo aus.
 **Einmal eingetragene Prognosen nie nachträglich ändern** – auch nicht, wenn sich die Teamdaten
 später ändern. Eine korrigierte Aufzeichnung ist wertlos.
 
-**Seit dem 30.09.2026 wird zusätzlich `abstand_markt` mitgeschrieben** – die Zahl aus der Zeile
+**Seit dem Rücksprung vom 03.10.2026 wird `abstand_markt` NICHT mehr mitgeschrieben.**
+Die zurückgesetzte `bilanz.py` (Stand 28.09.) kennt das Feld nicht. Die zehn Einträge vom
+03.10. tragen es noch, die übrigen 79 nie, und neue bekommen es nicht. Der folgende
+Abschnitt beschreibt den Stand vom 30.09. bis 02.10. und gilt nur für diese zehn Einträge.
+
+**Vom 30.09.2026 bis 02.10.2026 wurde zusätzlich `abstand_markt` mitgeschrieben** – die Zahl aus der Zeile
 `Abstand zum Markt beim Tipp`, gerechnet in `bilanz.py` mit derselben Formel wie in `modell.py`
 (an drei Spielen auf die erste Nachkommastelle gegengeprüft). `null`, wenn die Vorab-Quoten
 unvollständig sind. Vom Nutzer verlangt, damit `--auswerten` später beantworten kann, ob Tipps
@@ -193,6 +198,98 @@ Fragt der Nutzer nach einem Länderspiel: **das offen sagen, keinen Tipp abgeben
 woran es liegt. Keine geschätzten Zahlen als Ersatz liefern.
 
 ### Modellstand eingefroren
+
+**ZURÜCKGESETZT AM 03.10.2026 AUF DEN STAND VOM 28.09.2026 (Fassung 2), vom Nutzer
+verlangt.** `analyse/modell.py` und `analyse/bilanz.py` stehen wieder auf Commit
+`c6d006a` (28.09., 18:58). Das ist der Stand, den der Nutzer als Datei hochgeladen hat:
+**genau 14 Konstanten**, `MARKT_ANTEIL = 0.0`, der `lastx`-6er-Absturz behoben.
+
+**Was damit NICHT mehr im Rechenweg steckt** – die Abschnitte weiter unten beschreiben
+es, aber sie beschreiben ab jetzt **Messungen, nicht den laufenden Code**:
+
+| weg | war | Stand |
+|---|---|---|
+| `MARKT_ANTEIL = 0,5` | halber Markt in den λ | wieder 0,0 |
+| `LIGA_XG_MIN / MAX / WARN` | xG-Schranken je Liga | **gibt es nicht mehr** |
+| `xg_fehlt` / `avg_xg` | leeres xG-Feld abfangen | **gibt es nicht mehr** |
+| `GLEICHSTAND_PUNKTE` / `EMPF_STOERUNG` | Gleichstand-Entscheid | **gibt es nicht mehr** |
+| `LAMBDA_DAEMPFUNG` | stand auf 1,00, ohne Wirkung | gibt es nicht mehr |
+| `WETTEN`, `bester_tipp`, `empfindlichkeit` | zentrale Tippwahl | wieder argmax in `analysiere` |
+| `abstand_markt`, `empf_tipp`, `gleichstand` | Felder in `bilanz.json` | **werden nicht mehr geschrieben** |
+
+**Vier bekannte Fehler sind damit zurück, und das muss man wissen:**
+
+1. `hole()` benutzt wieder `sys.exit` bei `success: false`. `SystemExit` erbt von
+   `BaseException`, nicht von `Exception` – **ein Stundenlimit (HTTP 417) reißt den
+   ganzen Lauf mit** und lässt alle noch nicht gerechneten Spiele stillschweigend
+   fallen. Am 02.10. passiert, am 03.10. live bestätigt.
+2. **Fehlendes xG wird wieder als „keine Chancen" gelesen.** Gemessen an 495 Teams:
+   27 betroffen; ein Team mit exakt Liga-Durchschnitt bekam Angriffsstärke 0,30 statt
+   1,01, und der Liga-Nenner lag 15 % zu niedrig, was alle 41 intakten Teams derselben
+   Liga um 17 % aufblähte.
+3. `--auswerten` **verwirft geholte Ergebnisse**, wenn eine einzige Abfrage scheitert.
+4. `abstand_markt` wird nicht aufgezeichnet – die Frage, ob Tipps mit großem
+   Marktabstand schlechter liefen, bleibt unbeantwortbar.
+
+**Das ist dem Nutzer gesagt worden, er hat den Stand zweimal verlangt.** Nicht
+eigenmächtig zurückändern. Wer eine dieser vier Behebungen zurückholen will, braucht
+eine neue Anweisung – und holt dann **nur** die Fehlerbehebung zurück, nicht die
+Gewichte und nicht den Markt-Anteil.
+
+Die **89 Aufzeichnungen in `bilanz.json` sind unberührt** und bleiben es. Die zehn
+Einträge vom 03.10. tragen noch `abstand_markt`, `empf_tipp` und `gleichstand`; die
+übrigen nicht, und ab jetzt kommen keine neuen dazu.
+
+Die Messwerkzeuge `rueckschau.py`, `pruefung.py`, `pruefung2.py` und der Gegenentwurf
+`modell2.py` liegen weiter im Repo. Sie rechnen keine Tipps und greifen nicht in den
+Rechenweg ein. `pruefung.py` verträgt das fehlende `LIGA_XG_MAX` (Rückfall auf keine
+Obergrenze).
+
+### Forebet-Gegenprobe
+
+**Vom Nutzer am 03.10.2026 verlangt, wortwörtlich:** „Forebet wird daneben gelesen.
+Der Tipp gilt nur, wenn Forebet denselben Markt als häufigstes Ergebnis hat und die
+erwarteten Tore höchstens 0,40 auseinanderliegen."
+
+**Zwei Bedingungen, beide müssen stimmen, sonst verfällt der Tipp:**
+
+1. **Markt.** Forebets häufigstes Ergebnis muss die getippte Wette *erfüllen*. Aus
+   einem Ergebnis `h:a` folgt eindeutig, welche der fünf Wetten es trägt – dieselbe
+   Abgrenzung wie in `modell.probs()`: `H` bei h > a, `A` bei h < a, `O25` bei
+   h + a ≥ 3, `U25` bei h + a ≤ 2, `BTTS` bei h > 0 und a > 0. Sagt Forebet 1:1 und
+   das Modell tippt Unter 2,5, stimmt es. Tippt das Modell Sieg Heim, stimmt es nicht.
+2. **Tore.** `|Summe der Modell-λ − Forebets Torerwartung| ≤ 0,40`.
+
+**Gerechnet wird das in `analyse/forebet.py`, nicht im Kopf:**
+
+```
+python3 analyse/forebet.py 8419375=1:1@2.31 8469639=2:1
+python3 analyse/forebet.py --text        # ein Spiel je Zeile: <id> <h>:<a> [<Tore>]
+```
+
+Format `<match_id>=<Forebet-Ergebnis>[@<Forebet-Torerwartung>]`. Fehlt die
+Torerwartung, nimmt das Skript die Summe des Ergebnisses (1:1 → 2,00) und **sagt das
+in der Ausgabe** – Forebets eigene Zahl ist genauer, weil sie nicht gerundet ist.
+Die Modellzahlen holt das Skript selbst aus `modell.berechne()`, damit nichts
+abgetippt wird.
+
+**Warum die zwei Werte von Hand kommen:** Forebet läuft hinter einer
+Cloudflare-Managed-Challenge – HTTP 403 auf jede Anfrage, auch auf `robots.txt`, dort
+zusätzlich `noindex, nofollow`. Ein automatischer Abruf wäre das Umgehen eines
+gesetzten Zugangsschutzes und wird **nicht gebaut**. Der Nutzer liest die zwei Werte
+ab, wie er die Quoten beim Buchmacher abliest. Hat er einen bezahlten Forebet-Datenzugang,
+ließe sich das ändern – dann sagt er es.
+
+**Was mit einem verfallenen Tipp passiert:** Er wird im Bericht **als verfallen
+ausgewiesen** und kommt **in keine Kombi**. Das folgt direkt aus „der Tipp gilt nur,
+wenn" – mehr steht nicht in der Anweisung.
+
+**Was NICHT entschieden ist und deshalb nicht erfunden wird:** ob ein verfallener Tipp
+mit `--merken` aufgezeichnet wird, ob die Rangliste eine eigene Spalte dafür bekommt,
+und ob ein Spiel ohne Forebet-Angabe als verfallen oder als ungeprüft gilt. Fehlt die
+Regel, wird gefragt. Bis dahin: ein Spiel ohne Forebet-Werte wird **ungeprüft**
+genannt, nicht verfallen, und das steht in der Begründung.
+
 
 **Der Nutzer hat am 28.09.2026 festgelegt: Das Modell bleibt, wie es ist.** Die letzte und
 einzige Änderung am Rechenweg war das **Datenfenster** (`FENSTER_MIN_SPIELE = 10`) vom
@@ -721,11 +818,12 @@ jeder Punkt stimmt:
 - **So viele Spielblöcke wie geschickte Spiele**, durchgezählt, fortlaufend nummeriert.
 - **Jede Tabelle hat genau fünf Zeilen und zwei Spalten**, die Wahrscheinlichkeit des
   besten Tipps fett.
-- **Bester Tipp = die Zeile `Bester Tipp:` aus `modell.py`.** Nicht aus dem Gedächtnis und
-  **nicht selbst das argmax bilden**: Bei einem Abstand unter 2 Punkten ist der Tipp
-  absichtlich nicht die wahrscheinlichste Wette (Gleichstand-Entscheid, seit 02.10.2026).
-  Die fett gesetzte Zeile der Tabelle ist die des Tipps – bei Gleichstand also nicht die
-  höchste Zahl. Das ist kein Fehler und wird nicht „korrigiert".
+- **Bester Tipp = die höchste Wahrscheinlichkeit der fünf Zeilen**, abgelesen aus der
+  Ausgabe von `modell.py`, nicht aus dem Gedächtnis. Seit dem Rücksprung vom 03.10.2026
+  gibt es keine Zeile `Bester Tipp:` und keinen Gleichstand-Entscheid mehr.
+- **`analyse/forebet.py` ist gelaufen** und sein Urteil steht im Bericht. Fehlen die
+  Forebet-Werte, wird der Tipp **ungeprüft** genannt – nicht stillschweigend als gültig
+  behandelt.
 - **Rangliste: neun Spalten, jedes Spiel genau eine Zeile**, Trennzeile vorhanden.
 - **Blockzuordnung stimmt:** oben nur `Abstand Markt` ≤ 8 Punkte **und** `Fenster` ≤ 50 %.
 - **Faire Quote = 1 / Wahrscheinlichkeit**, an einem Spiel nachgerechnet.
@@ -803,14 +901,15 @@ Regeln zur Vorlage:
   (Variante A, vom Nutzer am 26.09.2026 entschieden). **Der Preis entscheidet nicht mit** – auch
   nicht in engen Fällen, auch dann nicht, wenn eine andere Wette besseren Value hätte.
   Im Tipp-Satz klar Stellung beziehen, ehrlich und direkt, keine Absicherungen.
-- **Gleichstand unter 2 Punkten: die unempfindlichere Wette gewinnt.** Vom Nutzer am 02.10.2026
-  verlangt. Liegt eine Wette weniger als `GLEICHSTAND_PUNKTE` (2,0) hinter der wahrscheinlichsten,
-  entscheidet nicht mehr die dritte Nachkommastelle, sondern die **Empfindlichkeit**: um wie viele
-  Punkte sich die Wette verschiebt, wenn beide erwarteten Tore um 10 % falsch sind.
-  **`modell.py` rechnet das aus und gibt den Tipp direkt aus** (Zeile `Bester Tipp:`) – nicht
-  selbst das argmax bilden, nicht selbst abwägen. Hat die Empfindlichkeit entschieden, steht
-  `GLEICHSTAND` in der Zeile; dann **einen Halbsatz in den Tipp-Satz**, dass beide Wetten
-  praktisch gleich wahrscheinlich sind und die robustere genommen wurde.
+- **Der Gleichstand-Entscheid ist am 03.10.2026 mit dem Rücksprung entfallen.**
+  `GLEICHSTAND_PUNKTE` und `EMPF_STOERUNG` gibt es nicht mehr, `modell.py` gibt keine
+  Zeile `Bester Tipp:` aus. Es gilt wieder allein die höchste Wahrscheinlichkeit der fünf.
+  Bei weniger als zwei Punkten Abstand zwischen zwei Wetten entscheidet trotzdem nicht die
+  dritte Nachkommastelle, sondern der dritte Durchgang: **in die Datengrundlage schauen**
+  und das in der Begründung sagen.
+- **Jeder Tipp braucht die Forebet-Gegenprobe** (eigener Abschnitt oben). Besteht er sie
+  nicht, wird er **als verfallen ausgewiesen** – im Tipp-Satz, nicht in einem eigenen
+  Abschnitt.
 - **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
   Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
   Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten

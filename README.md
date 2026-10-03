@@ -330,6 +330,14 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 
 | Konstante | Wert | Bedeutung |
 |---|---|---|
+> **Am 03.10.2026 auf den Stand vom 28.09.2026 zurückgesetzt** (Commit `c6d006a`),
+> vom Nutzer verlangt. Der laufende Rechenweg hat **genau 14 Konstanten**:
+> `MARKT_ANTEIL` steht wieder auf **0,0**, und `LAMBDA_DAEMPFUNG`,
+> `GLEICHSTAND_PUNKTE`, `EMPF_STOERUNG`, `LIGA_XG_MIN`, `LIGA_XG_MAX` und
+> `LIGA_XG_WARN` **gibt es nicht mehr**. Die Zeilen dazu in der Tabelle und die
+> Abschnitte weiter unten beschreiben Messungen, nicht den laufenden Code.
+> Neu daneben: die Forebet-Gegenprobe in `analyse/forebet.py`.
+
 | `XG_ANTEIL` | 0,70 | xG gegen echte Tore bei der Teamstärke |
 | `LIGA_BASIS_XG` | 0,40 | Liga-Basis: 60 % Tore, 40 % xG |
 | `SEITE_K` | 6 | Heim-/Auswärtsbilanz gegen Gesamtwerte: n / (n + 6) |
