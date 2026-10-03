@@ -2052,7 +2052,10 @@
   "abstand_markt": null,
   "empf_tipp": 6.13,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 0
+  }
  },
  {
   "id": 8419350,
@@ -2080,7 +2083,10 @@
    "BTTS",
    "O25"
   ],
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
  },
  {
   "id": 8469591,
@@ -2105,7 +2111,10 @@
   "abstand_markt": 1.9,
   "empf_tipp": 6.01,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 2
+  }
  },
  {
   "id": 8469610,
@@ -2130,7 +2139,10 @@
   "abstand_markt": -0.3,
   "empf_tipp": 6.01,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 0
+  }
  },
  {
   "id": 8469630,
@@ -2158,7 +2170,10 @@
    "BTTS",
    "U25"
   ],
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 1
+  }
  },
  {
   "id": 8579911,
@@ -2183,7 +2198,10 @@
   "abstand_markt": 3.5,
   "empf_tipp": 4.88,
   "gleichstand": null,
-  "ergebnis": null
+  "ergebnis": {
+   "h": 3,
+   "a": 1
+  }
  },
  {
   "id": 8579969,
@@ -2211,7 +2229,10 @@
    "BTTS",
    "O25"
   ],
-  "ergebnis": null
+  "ergebnis": {
+   "h": 0,
+   "a": 0
+  }
  },
  {
   "id": 8579926,
