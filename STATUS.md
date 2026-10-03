@@ -48,12 +48,6 @@ widersprechen sich.** Am 03.10. zusätzlich geprüft, ob eine Mittelung über di
 Erfahrungswerte hilft – nein (t = +0,79, Hälfte A negativ). Das Modell ist gegen seine
 eigenen Gewichte unempfindlich.
 
-**Neu daneben: die Forebet-Gegenprobe** (`analyse/forebet.py`, vom Nutzer am 03.10.
-verlangt). Ein Tipp gilt nur, wenn Forebets häufigstes Ergebnis dieselbe Wette trägt
-**und** die Torerwartungen höchstens 0,40 auseinanderliegen. Die zwei Werte liest der
-Nutzer ab – Forebet steckt hinter einer Cloudflare-Challenge (403 auf alles, auch
-`robots.txt`), ein automatischer Abruf wird nicht gebaut.
-
 Frühere Fassungen: `d912a1c` (ohne Datenfenster), `605fab4` (mit), `c6d006a` (**jetzt**),
 `853b732` (mit Markt 0,5 und allen xG-Schranken).
 Umschalten: `git checkout <commit> -- analyse/modell.py analyse/bilanz.py`

@@ -245,52 +245,6 @@ Die Messwerkzeuge `rueckschau.py`, `pruefung.py`, `pruefung2.py` und der Gegenen
 Rechenweg ein. `pruefung.py` verträgt das fehlende `LIGA_XG_MAX` (Rückfall auf keine
 Obergrenze).
 
-### Forebet-Gegenprobe
-
-**Vom Nutzer am 03.10.2026 verlangt, wortwörtlich:** „Forebet wird daneben gelesen.
-Der Tipp gilt nur, wenn Forebet denselben Markt als häufigstes Ergebnis hat und die
-erwarteten Tore höchstens 0,40 auseinanderliegen."
-
-**Zwei Bedingungen, beide müssen stimmen, sonst verfällt der Tipp:**
-
-1. **Markt.** Forebets häufigstes Ergebnis muss die getippte Wette *erfüllen*. Aus
-   einem Ergebnis `h:a` folgt eindeutig, welche der fünf Wetten es trägt – dieselbe
-   Abgrenzung wie in `modell.probs()`: `H` bei h > a, `A` bei h < a, `O25` bei
-   h + a ≥ 3, `U25` bei h + a ≤ 2, `BTTS` bei h > 0 und a > 0. Sagt Forebet 1:1 und
-   das Modell tippt Unter 2,5, stimmt es. Tippt das Modell Sieg Heim, stimmt es nicht.
-2. **Tore.** `|Summe der Modell-λ − Forebets Torerwartung| ≤ 0,40`.
-
-**Gerechnet wird das in `analyse/forebet.py`, nicht im Kopf:**
-
-```
-python3 analyse/forebet.py 8419375=1:1@2.31 8469639=2:1
-python3 analyse/forebet.py --text        # ein Spiel je Zeile: <id> <h>:<a> [<Tore>]
-```
-
-Format `<match_id>=<Forebet-Ergebnis>[@<Forebet-Torerwartung>]`. Fehlt die
-Torerwartung, nimmt das Skript die Summe des Ergebnisses (1:1 → 2,00) und **sagt das
-in der Ausgabe** – Forebets eigene Zahl ist genauer, weil sie nicht gerundet ist.
-Die Modellzahlen holt das Skript selbst aus `modell.berechne()`, damit nichts
-abgetippt wird.
-
-**Warum die zwei Werte von Hand kommen:** Forebet läuft hinter einer
-Cloudflare-Managed-Challenge – HTTP 403 auf jede Anfrage, auch auf `robots.txt`, dort
-zusätzlich `noindex, nofollow`. Ein automatischer Abruf wäre das Umgehen eines
-gesetzten Zugangsschutzes und wird **nicht gebaut**. Der Nutzer liest die zwei Werte
-ab, wie er die Quoten beim Buchmacher abliest. Hat er einen bezahlten Forebet-Datenzugang,
-ließe sich das ändern – dann sagt er es.
-
-**Was mit einem verfallenen Tipp passiert:** Er wird im Bericht **als verfallen
-ausgewiesen** und kommt **in keine Kombi**. Das folgt direkt aus „der Tipp gilt nur,
-wenn" – mehr steht nicht in der Anweisung.
-
-**Was NICHT entschieden ist und deshalb nicht erfunden wird:** ob ein verfallener Tipp
-mit `--merken` aufgezeichnet wird, ob die Rangliste eine eigene Spalte dafür bekommt,
-und ob ein Spiel ohne Forebet-Angabe als verfallen oder als ungeprüft gilt. Fehlt die
-Regel, wird gefragt. Bis dahin: ein Spiel ohne Forebet-Werte wird **ungeprüft**
-genannt, nicht verfallen, und das steht in der Begründung.
-
-
 **Der Nutzer hat am 28.09.2026 festgelegt: Das Modell bleibt, wie es ist.** Die letzte und
 einzige Änderung am Rechenweg war das **Datenfenster** (`FENSTER_MIN_SPIELE = 10`) vom
 27.09.2026.
@@ -821,9 +775,6 @@ jeder Punkt stimmt:
 - **Bester Tipp = die höchste Wahrscheinlichkeit der fünf Zeilen**, abgelesen aus der
   Ausgabe von `modell.py`, nicht aus dem Gedächtnis. Seit dem Rücksprung vom 03.10.2026
   gibt es keine Zeile `Bester Tipp:` und keinen Gleichstand-Entscheid mehr.
-- **`analyse/forebet.py` ist gelaufen** und sein Urteil steht im Bericht. Fehlen die
-  Forebet-Werte, wird der Tipp **ungeprüft** genannt – nicht stillschweigend als gültig
-  behandelt.
 - **Rangliste: neun Spalten, jedes Spiel genau eine Zeile**, Trennzeile vorhanden.
 - **Blockzuordnung stimmt:** oben nur `Abstand Markt` ≤ 8 Punkte **und** `Fenster` ≤ 50 %.
 - **Faire Quote = 1 / Wahrscheinlichkeit**, an einem Spiel nachgerechnet.
@@ -907,9 +858,6 @@ Regeln zur Vorlage:
   Bei weniger als zwei Punkten Abstand zwischen zwei Wetten entscheidet trotzdem nicht die
   dritte Nachkommastelle, sondern der dritte Durchgang: **in die Datengrundlage schauen**
   und das in der Begründung sagen.
-- **Jeder Tipp braucht die Forebet-Gegenprobe** (eigener Abschnitt oben). Besteht er sie
-  nicht, wird er **als verfallen ausgewiesen** – im Tipp-Satz, nicht in einem eigenen
-  Abschnitt.
 - **Weil der Tipp den Preis ignoriert, trägt der Value-Satz die Wettentscheidung.**
   Liegt die Quote unter der fairen, immer unmissverständlich sagen, dass sich die Wette zu diesem
   Preis nicht lohnt und ab welcher Quote sie fair wäre. Der Tipp sagt, was am wahrscheinlichsten

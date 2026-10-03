@@ -336,7 +336,6 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 > `GLEICHSTAND_PUNKTE`, `EMPF_STOERUNG`, `LIGA_XG_MIN`, `LIGA_XG_MAX` und
 > `LIGA_XG_WARN` **gibt es nicht mehr**. Die Zeilen dazu in der Tabelle und die
 > Abschnitte weiter unten beschreiben Messungen, nicht den laufenden Code.
-> Neu daneben: die Forebet-Gegenprobe in `analyse/forebet.py`.
 
 | `XG_ANTEIL` | 0,70 | xG gegen echte Tore bei der Teamstärke |
 | `LIGA_BASIS_XG` | 0,40 | Liga-Basis: 60 % Tore, 40 % xG |
