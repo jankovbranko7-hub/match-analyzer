@@ -450,6 +450,122 @@ Keine Sperre gewechselt. Die Aufzeichnungen in `bilanz.json` bleiben unveränder
 **Steht in der Ausgabe `xG DIESER LIGA ZU HOCH`, gehört ein Satz in die Begründung** – wie bei
 `xG DIESER LIGA UNBRAUCHBAR` und bei `Fenster:`.
 
+**Siebte Änderung: `MARKT_ANTEIL` von 0,0 auf 0,5 (03.10.2026, vom Nutzer verlangt –
+„erfinde das komplette System neu").** Die Vorab-Quoten rechnen jetzt zur Hälfte mit.
+**Das ist die größte gemessene Verbesserung des Projekts und die einzige, die nicht an
+einer einzelnen Liga hängt.**
+
+**Warum es vorher nicht messbar war:** die Quoten standen nur im `match`-Endpunkt, also
+je Spiel einzeln. `league-matches` liefert sie **mit** – damit stehen 2333 Spiele im
+Walk-forward zur Verfügung statt einer Momentaufnahme.
+
+| `MARKT_ANTEIL` | LogLik je Spiel | Trefferquote | Brier | t gegen 0 | Ligen besser |
+|---|---|---|---|---|---|
+| **0,0** (vorher) | −2,86028 | 60,7 % | 0,23056 | – | – |
+| 0,2 | −2,85092 | 60,9 % | 0,22936 | **+9,81** | **13 von 13** |
+| 0,4 | −2,84400 | 61,8 % | 0,22847 | +8,68 | **13 von 13** |
+| 1,0 | −2,83706 | 62,5 % | 0,22762 | +5,08 | 11 von 13 |
+
+Beide Ligen-Hälften sind bei **jedem** Wert positiv, größte Einzelliga 14 % des Gewinns.
+Zum Vergleich mit allem, was am selben Tag durchfiel: bei der Gegnerstärke kamen **100 %**
+des scheinbaren Gewinns aus einer Liga mit kaputtem xG, bei der Summen-Dämpfung 70 % aus
+einer Liga ohne xG.
+
+**0,5 und nicht 1,0 – zwei unabhängige Gründe, dieselbe Zahl:**
+
+1. Bei 1,0 ist das Modell rechnerisch der Buchmacher. `gegen fair` wird null, es gibt nie
+   wieder Value. Genauer und als Wettgrundlage wertlos.
+2. Gemessen: das Modell **übertreibt seinen Vorsprung um etwa das Doppelte**. Bei Abstand
+   ≥ 8 Punkten sagte es 64,4 %, der Markt 52,6 %, eingetreten sind **59,1 %** – fast genau
+   die Mitte. Einen halben Marktanteil einzurechnen ist dasselbe wie den behaupteten
+   Vorsprung zu halbieren.
+
+**Das Value-Signal bleibt** (Abstand ≥ 2 Punkte, „Fehler" = Versprechen minus Eintritt):
+
+| | verspricht | trifft | Fehler | z gegen Markt |
+|---|---|---|---|---|
+| ohne Markt | 61,4 % | 58,6 % | **+2,8** | +2,12 |
+| Markt 0,5 | 60,3 % | 59,8 % | **+0,4** | +1,51 |
+
+**Damit ist eine Aussage dieser Datei richtigzustellen.** Im Abschnitt zur Rangliste steht,
+`gegen fair` messe bei verrauschter Schätzung „nicht Value, sondern das eigene Rauschen".
+Das ist zu pessimistisch: der Abstand **trägt Signal** – wo das Modell optimistischer ist
+als der Markt, liegt die Wirklichkeit über dem Marktpreis (z = +2,12 bei ≥ 2 Punkten, noch
++1,99 bei ≥ 8). Er war nur **doppelt zu groß angeschrieben**. Die zweiblockige Rangliste
+bleibt trotzdem richtig, weil sie vor Überzeichnung schützt – die Begründung ist jetzt
+„doppelt zu groß" statt „reines Rauschen".
+
+**Folge, die man kennen muss:** der `Abstand zum Markt` **halbiert sich**, weil der Markt
+jetzt in beiden Zahlen steckt. Spiele über 8 Punkten gingen von 232 auf 19 zurück. **Die
+8-Punkte-Grenze ist NICHT angepasst** – eine neue Schwelle aus der Rückschau abzuleiten ist
+verboten. Wer sie ändern will, muss es ausdrücklich anweisen.
+
+Fehlen die Quoten, rechnet das Modell wie bisher ohne Markt (w = 0); die Ausgabe zeigt es in
+der Zeile `Markt-Anteil`. **Steht dort kein Markt-Anteil, gehört ein Satz in die Begründung**
+– wie bei `Fenster:` und den xG-Hinweisen, denn dieses Spiel ist dann anders gerechnet als
+die übrigen. Über `--markt 0` jederzeit abschaltbar.
+
+Die **79 bzw. 89 Aufzeichnungen in `bilanz.json` bleiben unverändert.** Sie sind ohne
+Markt-Anteil entstanden; ab dem 03.10.2026 entstehen sie mit. Beim Auswerten ist das zu
+trennen, nicht nachzurechnen.
+
+### Die Grenze sitzt in den Daten, nicht im Rechenweg
+
+**Am 03.10.2026 gemessen, nachdem der Nutzer verlangt hatte, das System komplett neu zu
+erfinden.** Das ist der wichtigste Befund für jede künftige Idee.
+
+`analyse/modell2.py` ist der Rechenkern **neu gebaut**: eine gewichtete
+Poisson-Regression auf Spielebene, die Angriff und Abwehr **aller** Teams simultan
+schätzt (`log E[Tore] = mu + heim + angriff − abwehr`, konvex, L-BFGS mit analytischem
+Gradienten). Die Gegnerstärke ist darin per Konstruktion herausgerechnet. Vier Größen
+statt acht Konstanten, jede im Walk-forward bestimmt: `HALBWERT` 180 Tage, `RIDGE` 4,0,
+`XG_K` 1,0 (xG-Anteil **0,50**, nicht 0,70), `RHO` −0,07 – die ersten drei **EINIG** in
+beiden Ligen-Hälften, die vierte uneinig und deshalb unverändert.
+
+| | LogLik je Spiel | Trefferquote | Brier | Treffer | erwartet |
+|---|---|---|---|---|---|
+| alt (`modell.py`) | −2,86649 | 59,4 % | 0,23258 | 1766 | 1802,6 |
+| neu (`modell2.py`) | −2,86898 | 59,6 % | 0,23278 | 1770 | 1768,6 |
+
+**t = −0,87 – gleich gut.** Und die **Mischung beider Kerne bringt auch nichts** (beste
+Stufe t = +0,55, UNEINIG, 63 % aus einer Liga). Zwei strukturell verschiedene Schätzer,
+dieselbe Genauigkeit, und gemischt kein Gewinn: **sie ziehen dieselbe Information aus
+denselben Daten.**
+
+**Was daraus folgt, und es gilt für jeden künftigen Vorschlag:** Eine weitere Komponente
+im Rechenkern wird die Trefferquote nicht heben. Gemessen und durchgefallen sind an
+diesem Tag: Gegnerstärke (t = −1,14 bis −2,42 mit Liga-xG-Schranke), Ruhetage und
+Spieldichte (t = −0,82 bis +0,94, gar kein Zusammenhang), Dämpfung nur auf die Summe
+(70 % aus einer Liga), Punkte pro Spiel (hält die Ligen-Gegenprobe, wirkt aber erst ab
+15 Vorspielen – im Oktober nutzlos), ein zweiter Rechenkern, die Mischung beider Kerne.
+**Das Einzige, was gewirkt hat, war Information von außen: die Vorab-Quoten.**
+
+Ein Unterschied bleibt zugunsten des neuen Kerns: **Kalibrierung.** Alt verspricht
+1802,6 Treffer und liefert 1766 (z = −1,37), neu verspricht 1768,6 und liefert 1770
+(z = +0,05). Da `MARKT_ANTEIL = 0,5` denselben Fehler behebt (+0,4 statt +2,8 Punkte
+beim Value), **bleibt `modell.py` der laufende Rechenweg**. `modell2.py` ist der
+geprüfte Gegenentwurf und rechnet keine Tipps.
+
+### Werkzeuge zum Nachmessen
+
+Drei Dateien, alle lesen nur den Zwischenspeicher – **keine API-Abfrage, kein
+Stundenlimit**:
+
+```
+python3 analyse/rueckschau.py                      Konstanten des alten Kerns
+python3 analyse/pruefung.py --markt                MARKT_ANTEIL gegen echte Ergebnisse
+python3 analyse/pruefung.py --widerspruch          Modell gegen Markt: wer hat recht?
+python3 analyse/pruefung.py --residuen             woran hängt der Modellfehler?
+python3 analyse/pruefung.py --gegner               Gegnerstärke
+python3 analyse/pruefung2.py --vergleich           alter gegen neuen Kern
+python3 analyse/pruefung2.py --scan RIDGE 2 4 8    eine der vier neuen Größen
+```
+
+`pruefung.py` baut die Liga-xG-Schranken nach, `rueckschau.py` nicht. **Das ist kein
+Detail:** ohne die Schranken sah die Gegnerstärke nach t = +3,27 aus, mit ihnen nach
+t = −1,14. Wer mit `rueckschau.py` eine Idee prüft, die mit xG zu tun hat, muss das
+Ergebnis in `pruefung.py` gegenprüfen.
+
 ### Gewichte nicht verändern
 
 Die Gewichte stehen als Konstanten oben in `analyse/modell.py` (xG-Anteil, Form, Dämpfung, H2H, Dixon-Coles).
@@ -723,6 +839,16 @@ Marktabstand (12, 10 und 10 Punkte) auf den Plätzen 1 bis 3 der Rangliste. Der 
 danach gefragt, warum ein Spiel, das im Text als „bestbezahlt und zugleich unsicherst"
 bezeichnet war, trotzdem oben stand. Die Antwort: Die Warnung stand in Prosa, die Sortierung
 in der Tabelle – **und die Tabelle entscheidet**.
+
+**Am 03.10.2026 nachgemessen und die Begründung richtiggestellt.** „Das eigene Rauschen" ist
+zu scharf. An 2333 Spielen mit Vorab-Quoten gilt: wo das Modell optimistischer ist als der
+Markt, liegt die Wirklichkeit **über** dem Marktpreis – bei Abstand ≥ 2 Punkten z = +2,12,
+bei ≥ 8 noch +1,99. Der Abstand **trägt also Signal**. Er war nur **doppelt zu groß
+angeschrieben**: bei Abstand ≥ 8 sagte das Modell 64,4 %, der Markt 52,6 %, eingetreten sind
+59,1 % – fast genau die Mitte. Seit `MARKT_ANTEIL = 0,5` ist diese Überzeichnung behoben
+(Fehler +0,4 statt +2,8 Punkte). **Die zweiblockige Rangliste bleibt unverändert richtig** –
+sie schützt vor der Überzeichnung, und der Grund dafür ist jetzt „doppelt zu groß" statt
+„reines Rauschen".
 
 Darunter **ein Satz**: wie viele Spiele im oberen Block Value haben und welches oben steht.
 Gibt es keines, genau das sagen. Steht ein Spiel unten, weil der Markt stark widerspricht,

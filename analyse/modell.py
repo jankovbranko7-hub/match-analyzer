@@ -88,8 +88,49 @@ H2H_DAEMPFUNG_K     = 3      # Direkte Duelle daempfen: Gewicht = H2H_ANTEIL * n
                              # dieselbe Ueberlegung - nicht an Ergebnissen angepasst.
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
-MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
-                             # (Regel in CLAUDE.md). Über --markt zuschaltbar.
+MARKT_ANTEIL        = 0.5    # Anteil der margenbereinigten Vorab-Quoten an den erwarteten
+                             # Toren. Am 03.10.2026 von 0,0 auf 0,5 gesetzt, nachdem es
+                             # ERSTMALS gegen echte Ergebnisse messbar war: league-matches
+                             # liefert die Quoten mit, also 2333 Spiele im Walk-forward.
+                             #
+                             # Gemessen (pruefung.py --markt), Trefferquote und LogLik:
+                             #   0,0  60,7 %  -2,86028   (vorher)
+                             #   0,2  60,9 %  -2,85092   t = +9,81
+                             #   0,4  61,8 %  -2,84400   t = +8,68
+                             #   1,0  62,5 %  -2,83706   t = +5,08
+                             # Beide Ligen-Haelften bei JEDEM Wert positiv, bei 0,2 und 0,4
+                             # 13 von 13 Ligen besser, groesste Einzelliga 14 % des Gewinns.
+                             # Das ist der groesste gemessene Effekt im ganzen Projekt und
+                             # der einzige, der nicht an einer Liga haengt.
+                             #
+                             # 0,5 und nicht 1,0 aus zwei Gruenden, die auf dieselbe Zahl
+                             # zeigen. Erstens: bei 1,0 ist das Modell rechnerisch der
+                             # Buchmacher, `gegen fair` wird null und es gibt nie wieder
+                             # Value. Zweitens, gemessen (pruefung.py --widerspruch): das
+                             # Modell UEBERTREIBT seinen Vorsprung etwa um das Doppelte. Bei
+                             # Abstand >= 8 Punkten sagte es 64,4 %, der Markt 52,6 %,
+                             # eingetreten sind 59,1 % - fast genau die Mitte. Einen halben
+                             # Marktanteil einzurechnen ist dasselbe wie den behaupteten
+                             # Vorsprung zu halbieren.
+                             #
+                             # Wirkung auf das Value-Signal, gemessen an denselben Spielen
+                             # (Abstand >= 2 Punkte, Versprechen minus Eintritt):
+                             #   ohne Markt   verspricht 61,4 %, trifft 58,6 %  Fehler +2,8
+                             #   Markt 0,5    verspricht 60,3 %, trifft 59,8 %  Fehler +0,4
+                             # Die Uebertreibung ist weg, und die Wirklichkeit liegt weiter
+                             # UEBER dem Marktpreis (z = +1,51). Das Signal bleibt also.
+                             #
+                             # FOLGE, die man kennen muss: der `Abstand zum Markt` halbiert
+                             # sich, weil der Markt jetzt in beiden Zahlen steckt. Die Spiele
+                             # ueber 8 Punkten gingen von 232 auf 19 zurueck. Die 8-Punkte-
+                             # Grenze ist deshalb NICHT angepasst - eine neue Schwelle aus der
+                             # Rueckschau abzuleiten ist verboten (CLAUDE.md). Wer sie aendern
+                             # will, muss das ausdruecklich anweisen.
+                             #
+                             # Fehlen die Quoten, rechnet das Modell wie bisher ohne Markt
+                             # (w = 0). Die Ausgabe zeigt den Anteil in der Zeile `Markt-
+                             # Anteil`; steht dort nichts, lagen keine Quoten vor.
+                             # Ueber --markt 0 jederzeit abschaltbar.
 MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
                              # Modell KEINE Prognose aus. Darunter ersetzt die Daempfung die
                              # Teamstaerke praktisch komplett durch den Liga-Durchschnitt, und

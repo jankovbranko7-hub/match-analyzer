@@ -346,7 +346,7 @@ Alle Gewichte stehen als Konstanten oben in `analyse/modell.py`:
 | `LIGA_XG_MIN` | 0,85 | darunter rechnet die ganze Liga nur mit Toren |
 | `LIGA_XG_MAX` | 1,15 | darüber fällt nur `LIGA_BASIS_XG` weg, Teamstärken bleiben |
 | `LIGA_XG_WARN` | 0,95 | darunter nur ein Hinweis in der Ausgabe |
-| `MARKT_ANTEIL` | 0,0 | Vorab-Quoten standardmäßig aus |
+| `MARKT_ANTEIL` | **0,5** | halber Markt in den erwarteten Toren – gemessen, siehe unten |
 | `MIN_SAISONSPIELE` | 3 | darunter keine Prognose (Sperre) |
 | `FENSTER_MIN_SPIELE` | 10 | darunter wird die Saison mit den letzten 10 Spielen aufgefüllt |
 | `CACHE_STUNDEN` | 6 | danach werden API-Daten neu geladen |
@@ -383,3 +383,100 @@ Diese Werte sind **nach Erfahrung gesetzt und nicht an vergangenen Spielen optim
 Sie bleiben fest, damit jede Analyse vergleichbar ist. Nur auf ausdrücklichen Wunsch ändern,
 Begründung im Code danebenschreiben und diese Tabelle nachziehen.
 Nicht nachträglich an einzelne Spielausgänge anpassen.
+
+## Markt-Anteil 0,5 (03.10.2026)
+
+`MARKT_ANTEIL` stand von Anfang an auf **0,0** – die Vorab-Quoten rechneten nicht mit.
+Am 03.10.2026 war das **erstmals gegen echte Ergebnisse messbar**: `league-matches`
+liefert die Quoten mit, damit stehen 2333 Spiele im Walk-forward zur Verfügung statt
+der Momentaufnahmen des jeweiligen Tages.
+
+| `MARKT_ANTEIL` | LogLik je Spiel | Trefferquote | Brier | t gegen 0 | Ligen besser |
+|---|---|---|---|---|---|
+| **0,0** (vorher) | −2,86028 | 60,7 % | 0,23056 | – | – |
+| 0,2 | −2,85092 | 60,9 % | 0,22936 | **+9,81** | **13 von 13** |
+| 0,4 | −2,84400 | 61,8 % | 0,22847 | +8,68 | **13 von 13** |
+| 0,8 | −2,83710 | 62,3 % | 0,22760 | +6,31 | 11 von 13 |
+| 1,0 | −2,83706 | 62,5 % | 0,22762 | +5,08 | 11 von 13 |
+
+Beide Ligen-Hälften sind bei **jedem** Wert positiv, die größte Einzelliga trägt 14 %
+des Gewinns. Das ist der größte gemessene Effekt im ganzen Projekt – und der einzige,
+der nicht an einer einzelnen Liga hängt. Zum Vergleich: bei `SUM_D` kamen 70 % des
+scheinbaren Gewinns aus einer Liga ohne xG, bei der Gegnerstärke 100 % aus einer Liga
+mit kaputtem xG.
+
+**0,5 und nicht 1,0.** Zwei unabhängige Gründe zeigen auf dieselbe Zahl:
+
+1. Bei 1,0 ist das Modell rechnerisch der Buchmacher. `gegen fair` wird null, Value
+   gibt es nie wieder. Das Modell wäre genauer und als Wettgrundlage wertlos.
+2. Gemessen (`pruefung.py --widerspruch`): das Modell **übertreibt seinen Vorsprung
+   um etwa das Doppelte**. Bei Abstand ≥ 8 Punkten sagte es 64,4 %, der Markt 52,6 %,
+   eingetreten sind **59,1 %** – fast genau die Mitte. Einen halben Marktanteil
+   einzurechnen ist mathematisch dasselbe wie den behaupteten Vorsprung zu halbieren.
+
+**Das Value-Signal bleibt erhalten**, gemessen an denselben Spielen (Abstand ≥ 2
+Punkte, „Fehler" = Versprechen minus Eintritt):
+
+| | verspricht | trifft | Fehler | z gegen Markt |
+|---|---|---|---|---|
+| ohne Markt | 61,4 % | 58,6 % | **+2,8** | +2,12 |
+| Markt 0,5 | 60,3 % | 59,8 % | **+0,4** | +1,51 |
+
+Die Übertreibung ist weg, und die Wirklichkeit liegt weiter **über** dem Marktpreis.
+Damit ist auch die Aussage in `CLAUDE.md`, der Value-Abstand messe „das eigene
+Rauschen", als zu pessimistisch widerlegt: er trägt Signal, war aber doppelt zu groß
+angeschrieben.
+
+**Folge, die man kennen muss:** der `Abstand zum Markt` halbiert sich, weil der Markt
+jetzt in beiden Zahlen steckt. Spiele über 8 Punkten gingen von 232 auf 19 zurück.
+Die 8-Punkte-Grenze der Rangliste ist deshalb **nicht** angepasst – eine neue Schwelle
+aus der Rückschau abzuleiten ist verboten. Wer sie ändern will, muss es anweisen.
+
+Fehlen die Quoten, rechnet das Modell wie bisher ohne Markt. Über `--markt 0`
+jederzeit abschaltbar.
+
+## Zweiter Rechenkern: Maximum Likelihood (03.10.2026)
+
+`analyse/modell2.py` ist der Rechenweg **neu gebaut**, nicht erweitert. Statt
+Teamstärke = Saisonmittel ÷ Ligamittel plus acht handgesetzte Dämpfungskonstanten
+steht dort eine gewichtete Poisson-Regression auf Spielebene:
+
+```
+log E[Tore Heim] = mu + heim + angriff[Heim] − abwehr[Ausw]
+log E[Tore Ausw] = mu        + angriff[Ausw] − abwehr[Heim]
+```
+
+Angriff und Abwehr **aller** Teams werden simultan geschätzt. Damit ist die
+Gegnerstärke per Konstruktion herausgerechnet, statt nachträglich korrigiert zu
+werden. Die Zielfunktion ist konvex – L-BFGS mit analytischem Gradienten findet das
+eine Optimum; mit Warmstart laufen 373 Zeitpunkte einer Saison in 0,5 Sekunden.
+
+Vier Größen statt acht Konstanten, jede im Walk-forward über 2971 Spiele aus 16 Ligen
+bestimmt und mit Ligen-Hälften geprüft:
+
+| Größe | Wert | Verdikt | ersetzt |
+|---|---|---|---|
+| `HALBWERT` | 180 Tage | EINIG | `FORM_ANTEIL`, `FORM_DAEMPFUNG_K`, Formfenster |
+| `RIDGE` | 4,0 | EINIG | `SEITE_K`, `DAEMPFUNG_K`, `MIN_SAISONSPIELE` |
+| `XG_K` | 1,0 (xG-Anteil 0,50) | EINIG | `XG_ANTEIL`, `LIGA_BASIS_XG` |
+| `RHO` | −0,07 | UNEINIG → unverändert | `DIXON_COLES_RHO` |
+
+**Das Ergebnis ist der eigentliche Befund:**
+
+| | LogLik je Spiel | Trefferquote | Brier | Treffer | erwartet |
+|---|---|---|---|---|---|
+| alt | −2,86649 | 59,4 % | 0,23258 | 1766 | 1802,6 |
+| neu | −2,86898 | 59,6 % | 0,23278 | 1770 | 1768,6 |
+
+**t = −0,87.** Ein völlig anderes Verfahren landet an derselben Stelle. Die Mischung
+beider Kerne bringt ebenfalls nichts (beste Stufe t = +0,55, UNEINIG, 63 % aus einer
+Liga) – beide ziehen also dieselbe Information aus denselben Daten. **Die Grenze
+sitzt in den Daten, nicht im Rechenweg.** Das ist gemessen, nicht vermutet, und es
+ist der Grund, warum weitere Zusatzkomponenten nichts bringen werden.
+
+Einen Unterschied gibt es: **Kalibrierung.** Alt verspricht 1802,6 Treffer und
+liefert 1766 (z = −1,37), neu verspricht 1768,6 und liefert 1770 (z = +0,05). Das
+alte Modell überschätzt seine Wahrscheinlichkeiten – und damit jede Value-Zahl. Mit
+`MARKT_ANTEIL = 0,5` ist dieser Fehler behoben (+0,4 statt +2,8 Punkte), deshalb
+bleibt `modell.py` der laufende Rechenweg und `modell2.py` ist der geprüfte
+Gegenentwurf.
