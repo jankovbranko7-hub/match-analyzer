@@ -52,12 +52,25 @@ import math
 import numpy as np
 from scipy.optimize import minimize
 
-# Startwerte. Keine Erfahrungswerte - sie werden von pruefung2.py gegen echte
-# Ergebnisse bestimmt und hier eingetragen, mit der Messung daneben.
-HALBWERT = 180.0      # Tage
-RIDGE    = 4.0
-XG_K     = 2.0        # entspricht einem xG-Anteil von 2/3
-RHO      = -0.07      # uebernommen aus modell.py, wird mitgeprueft
+# Alle vier im Walk-forward ueber 2971 Spiele aus 16 Ligen bestimmt (pruefung2.py
+# --scan), jede mit Ligen-Haelften geprueft. Keine Erfahrungswerte.
+HALBWERT = 180.0      # Tage. EINIG (A 180, B 180). 90 ist schlechter (t = -0,49),
+                      # 360 ebenfalls (-1,45), gar kein Abklingen am schlechtesten
+                      # (-2,14). Zeitabklingen wirkt also, aber milde.
+RIDGE    = 4.0        # EINIG (A 4, B 4), Optimum im Inneren: 2 -> t = -1,73,
+                      # 3 -> -0,67, 6 -> -1,54, 8 -> -2,55. Nach unten wird das
+                      # Modell ueberheblich (bei 0,25 verspricht es 1810 Treffer
+                      # und liefert 1774), nach oben flach.
+XG_K     = 1.0        # EINIG (A 1, B 1), entspricht einem xG-Anteil von 0,50 -
+                      # deutlich weniger als XG_ANTEIL = 0,70 im alten Kern.
+                      # 10 von 15 Ligen besser, groesste 28 % des Gewinns,
+                      # t = +2,86. Ohne xG (0) ist es klar schlechter (-2,44),
+                      # mit 3 oder 6 auch (-5,44 / -6,53). 0,75 ist von 1,0 nicht
+                      # zu unterscheiden (t = +0,39) - genommen ist die runde Zahl,
+                      # Tore und xG gleich gewichtet.
+RHO      = -0.07      # UNEINIG (A 0, B -0,07), alles innerhalb t = +-1 ausser
+                      # -0,10 (-1,92). Unveraendert aus modell.py uebernommen:
+                      # uneinig heisst, die Konstante bleibt.
 
 TAG = 86400.0
 MAXTOR = 11
