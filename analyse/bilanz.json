@@ -2260,6 +2260,9 @@
    "BTTS",
    "O25"
   ],
-  "ergebnis": null
+  "ergebnis": {
+   "h": 1,
+   "a": 2
+  }
  }
 ]
