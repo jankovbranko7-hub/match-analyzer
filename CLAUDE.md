@@ -138,11 +138,47 @@ Vorab-Quoten wuchs der Abstand zum Markt von 9,8 auf 12,9 Prozentpunkte (Sollbru
 Zurückschalten auf die Fassung ohne Fenster:
 `git checkout d912a1c -- analyse/modell.py`
 
-### Länderspiele und Saisonstart: keine Prognose
+### Keine Sperre nach Spielzahl mehr, und das maximale Spielbild
 
-`analyse/modell.py` gibt **keine Prognose** aus, wenn ein Team weniger als `MIN_SAISONSPIELE`
-Saisonspiele hat. Das ist kein Fehler, sondern eine Sperre: Darunter zieht die Dämpfung die
-Teamstärke so weit zum Liga-Durchschnitt, dass die Prognose kaum noch vom Spiel abhängt.
+**Vom Nutzer am 04.10.2026 verlangt:** „Es sollte ein maximales Spiel Bild entstehen. Und
+keine Sperre wieviel Spiele sie hatten."
+
+**`MIN_SAISONSPIELE` sperrt nicht mehr.** Ein Spiel wird immer gerechnet, egal ob ein Team
+2 oder 28 Saisonspiele hat. Die Dämpfung erledigt das stufenlos: `shrink(x, n, 5)` zieht
+einen Wert aus n Spielen um `5/(n+5)` zum Liga-Durchschnitt – bei 2 Spielen um 71 %, bei
+20 um 20 %. Ein Übergang statt eines Sprungs. **Die Spielzahl entscheidet nicht mehr über
+Ja/Nein, aber sie gehört in die Begründung:** steht in der Ausgabe `duenne Datenlage`
+(unter 3 Saisonspielen), ist das ein Satz wert – wie `Fenster:`.
+
+**Es gibt nur noch einen Grund für „keine Prognose":** der Liga-Durchschnitt ist 0, die
+Saison hat also noch kein einziges Spiel. Das ist keine Ermessensfrage, da ist nichts zu
+rechnen. `league()` ist gegen die Division durch null abgesichert.
+
+**Das maximale Spielbild steht in `analyse/bild.py`:**
+
+```
+python3 analyse/bild.py 8419375 8469639
+```
+
+Es rechnet nichts Neues und ändert keinen Tipp – es stellt die Rohdaten beider Teams
+nebeneinander, plus Ligamittel in einer eigenen Spalte: Punkte/Spiel, S-U-N, Tore,
+Gegentore, xG, xGA, Halbzeit-Tore, Schüsse, Schüsse aufs Tor, Ballbesitz, Angriffe,
+gefährliche Angriffe, Ecken, Karten, Zu-Null, ohne eigenes Tor, Über 2,5, Beide treffen,
+Tordifferenz – jeweils gesamt und seitenspezifisch. Dazu alle drei `lastx`-Blöcke (5/6/10),
+die jungen direkten Duelle mit Ergebnissen, die Vorab-Quoten und der margenbereinigte Markt.
+
+**Jedes dort gezeigte Feld ist an echten Daten geprüft.** FootyStats liefert 1065 Felder je
+Team, das Modell rechnet mit 11, das Bild zeigt rund 40. Fehlt eine Seite (Ecken, Karten und
+Halbzeit-Tore gibt es nur gesamt), bleibt die Spalte leer statt geschätzt zu werden.
+
+**Für die Begründung gilt weiter: keine Zahl, die nicht aus `modell.py`, `bild.py` oder
+`analyse/daten/` stammt.** `bild.py` macht das leichter, nicht beliebiger.
+
+### Länderspiele: keine Prognose
+
+**Die folgenden Messungen beschreiben die Sperre, die es seit dem 04.10.2026 nicht mehr
+gibt.** Sie bleiben hier, weil sie sagen, wie viel Trennschärfe bei wenigen Spielen übrig
+ist – und genau das gehört in die Begründung, wenn `duenne Datenlage` in der Ausgabe steht.
 
 **Am 01.10.2026 nachgemessen und die Begründung richtiggestellt.** Hier stand vorher, das
 Modell liefere darunter „für jedes Spiel fast dieselben Zahlen (Remis rund 29 %)" – das war zu
@@ -665,6 +701,7 @@ python3 analyse/pruefung.py --residuen             woran hängt der Modellfehler
 python3 analyse/pruefung.py --gegner               Gegnerstärke
 python3 analyse/pruefung2.py --vergleich           alter gegen neuen Kern
 python3 analyse/pruefung2.py --scan RIDGE 2 4 8    eine der vier neuen Größen
+python3 analyse/bild.py <match_id>                maximales Spielbild (braucht die API)
 ```
 
 `pruefung.py` baut die Liga-xG-Schranken nach, `rueckschau.py` nicht. **Das ist kein

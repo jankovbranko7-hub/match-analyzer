@@ -82,7 +82,11 @@ H2H_DAEMPFUNG_K     = 3      # Direkte Duelle daempfen: Gewicht = H2H_ANTEIL * n
 DIXON_COLES_RHO     = -0.07  # Korrektur für 0:0/1:0/0:1/1:1. Übliche Größe aus der
                              # Literatur; reine Poisson unterschätzt enge Ergebnisse.
 MARKT_ANTEIL        = 0.0    # Vorab-Quoten fließen standardmäßig NICHT ein
-MIN_SAISONSPIELE    = 3      # Sperre: unter so vielen Saisonspielen eines Teams gibt das
+MIN_SAISONSPIELE    = 3      # KEINE SPERRE MEHR, nur noch ein Hinweis in der Ausgabe.
+                             # Am 04.10.2026 vom Nutzer abgeschafft: "keine Sperre wieviel
+                             # Spiele sie hatten". Unter diesem Wert schreibt die Ausgabe
+                             # "duenne Datenlage" neben die Spielzahl - gerechnet wird
+                             # trotzdem, die Daempfung erledigt es stufenlos. Vorher gab das
 FENSTER_MIN_SPIELE  = 10     # Ist die Saison juenger als so viele Spiele, wird die
                              # Teamstatistik mit den letzten 10 Spielen aufgefuellt (aus
                              # derselben lastx-Abfrage, die schon fuer die Form geholt wird -
@@ -204,7 +208,9 @@ def quoten_da(m):
                ['odds_ft_1','odds_ft_x','odds_ft_2','odds_ft_over25','odds_ft_under25','odds_btts_yes','odds_btts_no'])
 
 def league(T):
-    def avg(k,w): return sum(t['stats'][k]*t['stats'][w] for t in T)/sum(t['stats'][w] for t in T)
+    def avg(k,w):
+        n = sum(t['stats'][w] for t in T)
+        return sum(t['stats'][k]*t['stats'][w] for t in T)/n if n else 0.0
     return dict(home=avg('seasonScoredAVG_home','seasonMatchesPlayed_home'),away=avg('seasonScoredAVG_away','seasonMatchesPlayed_away'),
                 xhome=avg('xg_for_avg_home','seasonMatchesPlayed_home'),xaway=avg('xg_for_avg_away','seasonMatchesPlayed_away'))
 
@@ -242,8 +248,16 @@ def berechne(mid, args):
 
     nh = T[m['homeID']]['stats']['seasonMatchesPlayed_overall']
     na = T[m['awayID']]['stats']['seasonMatchesPlayed_overall']
-    if min(nh, na) < MIN_SAISONSPIELE and not args.trotzdem:
-        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na)
+    # KEINE SPERRE NACH SPIELZAHL MEHR (vom Nutzer am 04.10.2026 verlangt: "keine Sperre
+    # wieviel Spiele sie hatten"). Vorher gab es unter MIN_SAISONSPIELE = 3 keine Prognose.
+    # Die Daempfung uebernimmt das jetzt allein: shrink(x, n, 5) zieht einen Wert aus n
+    # Spielen um 5/(n+5) zum Liga-Durchschnitt - bei 2 Spielen also um 71 %, bei 20 um 20 %.
+    # Das ist ein stufenloser Uebergang statt eines Sprungs. Die Spielzahl steht in der
+    # Ausgabe und gehoert in die Begruendung; sie entscheidet nicht mehr ueber Ja/Nein.
+    if min(L['home'], L['away']) <= 0 or min(L['xhome'], L['xaway']) <= 0:
+        return dict(gesperrt=True, match=m, sid=sid, nh=nh, na=na,
+                    grund=f"Liga-Durchschnitt ist 0 - Saison {sid} hat noch keine "
+                          f"gespielten Spiele. Kein Rechnen moeglich, keine Ermessensfrage.")
 
     def block(tid, num):
         """Ein lastx-Block. Alle drei (5/6/10) stehen in derselben Antwort,
@@ -283,16 +297,14 @@ def analysiere(mid, args):
     r = berechne(mid, args); m = r['match']
     print('='*70); print(m['home_name'],'-',m['away_name'], f"(Spiel {mid}, Saison {r['sid']})")
     if r['gesperrt']:
-        print(f"  KEINE PROGNOSE. Saisonspiele: {m['home_name']} {r['nh']}, {m['away_name']} {r['na']}"
-              f" (noetig: {MIN_SAISONSPIELE}).")
-        print("  Darunter ersetzt das Modell die Teamstaerke durch den Liga-Durchschnitt und")
-        print("  liefert fuer jedes Spiel fast dieselben Zahlen. Nicht als Tipp verwendbar.")
-        print("  Nur zur Ansicht erzwingbar mit --trotzdem.")
+        print(f"  KEINE PROGNOSE. {r.get('grund', 'Grund unbekannt')}")
         return
     L=r['L']; p=r['p']
     pct = lambda d: {k: round(float(v)*100,1) for k,v in d.items()}
     print(f" Liga-Schnitt: Heim {L['home']:.2f} Tore / {L['xhome']:.2f} xG, Auswärts {L['away']:.2f} Tore / {L['xaway']:.2f} xG")
     print(f" Stärken: Heim Att {r['ah']:.2f} Def {r['dh']:.2f} | Ausw Att {r['aa']:.2f} Def {r['da']:.2f}")
+    duenn = ' <-- duenne Datenlage' if min(r['nh'], r['na']) < MIN_SAISONSPIELE else ''
+    print(f" Saisonspiele: Heim {r['nh']} | Ausw {r['na']}{duenn}")
     if r['fen_h'] or r['fen_a']:
         print(f" Fenster: Heim {r['fen_h']:.0%} aus den letzten 10 Spielen ({r['nh']} Saisonspiele)"
               f" | Ausw {r['fen_a']:.0%} ({r['na']} Saisonspiele)")
