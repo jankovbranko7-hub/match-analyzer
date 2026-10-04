@@ -95,6 +95,20 @@ def hole(endpoint, params, datei, args):
     return daten
 
 
+def hole_direkt(endpoint, params):
+    """Zweite, unabhaengige Abfrage - geht IMMER zur API, nie an den Zwischenspeicher.
+
+    Nur fuer die Gegenprobe. Sie prueft, ob die Zahl richtig angekommen ist, nicht nur,
+    ob sie richtig gelesen wurde. Kostet eine zusaetzliche Abfrage je Endpunkt.
+    """
+    url = f"{BASE}/{endpoint}?" + urllib.parse.urlencode({**params, "key": api_key()})
+    with urllib.request.urlopen(url, timeout=60) as r:
+        daten = json.load(r)
+    if not daten.get("success", True):
+        raise RuntimeError(f"API-Fehler bei {endpoint}: {daten.get('message')}")
+    return daten
+
+
 def liste(datum, args):
     for m in hole("todays-matches", {"date": datum}, f"tag_{datum}.json", args)['data']:
         print(m['id'], m['competition_id'],
@@ -195,13 +209,16 @@ def rechne(mid, args):
         zeig('Ausw ' + k, werte['A.' + k], 'league-teams')
 
     # ---------------------------------------------------- 2. Lesung, Gegenprobe
-    print("\n  GEGENPROBE: gespeicherte API-Antwort ein zweites Mal frisch gelesen")
-    with open(os.path.join(args.daten, f"match_{mid}.json")) as f:
-        m2 = json.load(f)['data']
-    if isinstance(m2, list):
-        m2 = m2[0]
-    with open(os.path.join(args.daten, f"teams_{sid}.json")) as f:
-        T2 = json.load(f)['data']
+    print("\n  GEGENPROBE: zweite, unabhaengige Abfrage derselben Endpunkte")
+    try:
+        m2 = hole_direkt("match", {"match_id": mid})['data']
+        if isinstance(m2, list):
+            m2 = m2[0]
+        T2 = hole_direkt("league-teams", {"season_id": sid, "include": "stats"})['data']
+    except Exception as e:
+        print(f"    Die zweite Abfrage ist fehlgeschlagen: {type(e).__name__}: {e}")
+        print("    Ohne Gegenprobe gibt es keinen Tipp.")
+        return
     th2 = next((t for t in T2 if t['id'] == m2['homeID']), None)
     ta2 = next((t for t in T2 if t['id'] == m2['awayID']), None)
 

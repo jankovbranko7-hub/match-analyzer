@@ -60,9 +60,11 @@ keinen Tipp** – auch keinen geschätzten:
    Anstoß und `status` stehen in der Ausgabe.
 2. **Jedes benutzte Feld mit Rohwert.** Fehlt eines, steht `FEHLT`. Es wird **nie**
    ersetzt und **nie** geschätzt.
-3. **Gegenprobe.** Die gespeicherte API-Antwort wird ein zweites Mal frisch von der
-   Platte gelesen und Feld für Feld gegen die erste Lesung gehalten. Weicht ein Wert ab:
-   kein Tipp.
+3. **Gegenprobe: eine zweite, unabhängige Abfrage** derselben Endpunkte, am
+   Zwischenspeicher vorbei, Feld für Feld gegen die erste Lesung gehalten. Weicht ein
+   Wert ab: **kein Tipp**. Schlägt die zweite Abfrage fehl (Stundenlimit): **kein Tipp**.
+   Das kostet eine zusätzliche Abfrage je Endpunkt und Spiel – das ist der Preis dafür,
+   dass die Zahl geprüft ist und nicht nur richtig abgeschrieben.
 4. **Platzhalter erkennen.** Stehen `btts_potential`, `o25_potential` und
    `u25_potential` alle drei auf **50**, ist das der Platzhalter der API und keine
    Messung. Sie gehen dann nicht in den Fit, und das steht in der Ausgabe – und in der
@@ -81,8 +83,27 @@ Keine Schwelle, kein Vorrang, keine Ausnahme. Der Preis entscheidet nicht mit.
 
 ## Ausgabe pro Spiel
 
+**Jedes gelesene Feld steht im Chat**, nicht nur im Terminal. Die Tabelle der Eingaben
+wird aus der Ausgabe von `modell.py` übernommen, Wert für Wert, inklusive `FEHLT`.
+
 ```
 ## N. Heim – Auswärts
+Spiel-id 8419375 · Heim-id 702 · Ausw-id 743 · Saison 16571 · Anstoß 02.10. 22:15 UTC
+
+| Eingabe | Wert |
+|---|---|
+| team_a_xg_prematch | 1,36 |
+| team_b_xg_prematch | 1,66 |
+| btts_potential | 50 |
+| o25_potential | 43 |
+| u25_potential | 57 |
+| Heim xg_for_avg_home | 1,36 |
+| Heim xg_against_avg_home | 1,46 |
+| Ausw xg_for_avg_away | 1,66 |
+| Ausw xg_against_avg_away | 1,64 |
+
+Gegenprobe: zweite Abfrage, 20 Werte, identisch.
+
 Erwartete Tore: **1,64 : 1,56**
 
 | Wette | Wahrscheinlichkeit |
