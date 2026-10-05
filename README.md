@@ -49,8 +49,8 @@ lam = Mittel(lam_xg, lam_pot)
 ```
 
 Beide Schritte liefern dieselbe Größe in derselben Einheit. Das Mittel ist eine
-Zusammenfassung, keine Abwägung. Fehlt eine Seite, wird die andere allein genommen –
-und das steht in der Ausgabe.
+Zusammenfassung, keine Abwägung. Fehlt eines der benutzten Felder, gibt es keinen Tipp –
+es wird nicht mit den übrigen weitergerechnet.
 
 ## Verteilung
 
@@ -70,7 +70,8 @@ faire Quote = 1 / Wahrscheinlichkeit
 ## Prüfung vor jedem Tipp
 
 1. Spiel und Teams über die `id`, mit Namen, Team-`id`s, Liga, Anstoß und `status`.
-2. Jedes benutzte Feld mit Rohwert; fehlt eines, steht `FEHLT`. Nie ersetzt, nie geschätzt.
+2. Jedes benutzte Feld mit Rohwert; fehlt eines, steht `FEHLT` und es gibt keinen Tipp.
+   Nie ersetzt, nie geschätzt, nie mit den übrigen Feldern weitergerechnet.
 3. Eine **zweite, unabhängige Abfrage** derselben Endpunkte, am Zwischenspeicher vorbei,
    Feld für Feld gegen die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
    Schlägt die zweite Abfrage fehl (Stundenlimit): kein Tipp. Das kostet eine

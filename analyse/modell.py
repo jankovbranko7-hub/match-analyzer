@@ -35,8 +35,8 @@ DER RECHENWEG, in zwei Schritten, beide ohne Gewicht
   nichts darueber, wer sie schiesst. Die Seitenverteilung - und damit Heimsieg gegen
   Auswaertssieg - stammt deshalb vollstaendig aus Schritt 1. Schritt 2 wirkt allein auf
   das Torniveau. Das ist keine Schwaeche des Fits, sondern der Informationsgehalt der
-  drei Potentiale. Fehlt eine Seite, wird die andere allein
-  genommen und das in der Ausgabe gesagt - nichts wird ersetzt oder geschaetzt.
+  drei Potentiale. Fehlt eines der benutzten Felder, gibt es keinen Tipp - es wird
+  nicht mit den uebrigen weitergerechnet, nichts wird ersetzt oder geschaetzt.
 
   Verteilung: reine, unabhaengige Poisson. Keine Dixon-Coles-Korrektur - rho waere
   eine aus der alten Datei geliehene Zahl.
@@ -146,12 +146,7 @@ def wetten(lh, la):
 
 def fit_potentiale(btts, o25, u25, start):
     """Die beiden Lambda, deren Poisson die drei Potentiale am besten trifft."""
-    ziel = {}
-    if btts is not None: ziel['BTTS'] = btts / 100
-    if o25 is not None: ziel['O25'] = o25 / 100
-    if u25 is not None: ziel['U25'] = u25 / 100
-    if not ziel:
-        return None, None
+    ziel = dict(BTTS=btts / 100, O25=o25 / 100, U25=u25 / 100)
     def loss(v):
         p, _ = wetten(*np.exp(v))
         return sum((p[k] - z) ** 2 for k, z in ziel.items())
@@ -217,6 +212,14 @@ def rechne(mid, args):
         werte['A.' + k] = feld(ta['stats'], k)
         zeig('Ausw ' + k, werte['A.' + k], 'league-teams')
 
+    # Fehlt eines der benutzten Felder: kein Tipp. Es wird nicht mit dem Rest gerechnet.
+    benutzt = MATCHFELDER + ['H.xg_for_avg_home', 'H.xg_against_avg_home',
+                             'A.xg_for_avg_away', 'A.xg_against_avg_away']
+    fehlend = [k for k in benutzt if werte[k] is None]
+    if fehlend:
+        print(f"\n  FEHLT: {', '.join(fehlend)}. Kein Tipp.")
+        return
+
     # ---------------------------------------------------- 2. Lesung, Gegenprobe
     print("\n  GEGENPROBE: zweite, unabhaengige Abfrage derselben Endpunkte")
     try:
@@ -261,22 +264,12 @@ def rechne(mid, args):
     ff_h, ff_a = werte['H.xg_for_avg_home'], werte['A.xg_for_avg_away']
     gg_h, gg_a = werte['H.xg_against_avg_home'], werte['A.xg_against_avg_away']
 
-    def mittel(xs):
-        xs = [x for x in xs if x is not None]
-        return sum(xs) / len(xs) if xs else None
-
-    staerke_h = mittel([ff_h, gg_a])          # Heim-Angriff gegen Ausw-Abwehr
-    staerke_a = mittel([ff_a, gg_h])          # Ausw-Angriff gegen Heim-Abwehr
-    print(f"    Pre-Match-xG                 {pre_h if pre_h is not None else 'FEHLT'} : "
-          f"{pre_a if pre_a is not None else 'FEHLT'}")
-    print(f"    Angriff gegen Abwehr         "
-          f"{'FEHLT' if staerke_h is None else f'{staerke_h:.3f}'} : "
-          f"{'FEHLT' if staerke_a is None else f'{staerke_a:.3f}'}"
+    staerke_h = (ff_h + gg_a) / 2             # Heim-Angriff gegen Ausw-Abwehr
+    staerke_a = (ff_a + gg_h) / 2             # Ausw-Angriff gegen Heim-Abwehr
+    print(f"    Pre-Match-xG                 {pre_h} : {pre_a}")
+    print(f"    Angriff gegen Abwehr         {staerke_h:.3f} : {staerke_a:.3f}"
           f"   (({ff_h} + {gg_a})/2 bzw. ({ff_a} + {gg_h})/2)")
-    lam_xg = (mittel([pre_h, staerke_h]), mittel([pre_a, staerke_a]))
-    if None in lam_xg:
-        print("    ABBRUCH: aus der Tor-Skala laesst sich kein Lambda bilden. Kein Tipp.")
-        return
+    lam_xg = ((pre_h + staerke_h) / 2, (pre_a + staerke_a) / 2)
     print(f"    lam_xg                       {lam_xg[0]:.3f} : {lam_xg[1]:.3f}")
 
     # ---------------------------------------------------- Schritt 2: Potentiale
@@ -286,23 +279,18 @@ def rechne(mid, args):
     # exakt 50 galten als ungesetzter Standard der API und gingen nicht in den Fit.
     # Der Nutzer hat sie gestrichen - sie war von mir erfunden und nicht verlangt.
     # Jeder Wert, den die API liefert, geht unveraendert in den Fit, die 50 auch.
-    if o25 is not None and u25 is not None and abs(o25 + u25 - 100) > 1:
+    if abs(o25 + u25 - 100) > 1:
         print(f"    HINWEIS: o25 + u25 = {o25 + u25}, nicht 100. Beide Werte gehen "
               f"trotzdem unveraendert in den Fit.")
     lam_pot, rest = fit_potentiale(btts, o25, u25, np.array(lam_xg))
-    if lam_pot is None:
-        print("    kein Fit moeglich - die Potentiale fehlen alle drei.")
-        lam = lam_xg
-        print(f"\n  lam = lam_xg allein           {lam[0]:.3f} : {lam[1]:.3f}")
-    else:
-        p_fit, _ = wetten(*lam_pot)
-        print(f"    Ziel      BTTS {btts} %   Ueber 2,5 {o25} %   Unter 2,5 {u25} %")
-        print(f"    erreicht  BTTS {p_fit['BTTS']*100:.1f} %   Ueber 2,5 {p_fit['O25']*100:.1f} %"
-              f"   Unter 2,5 {p_fit['U25']*100:.1f} %   (Restfehler {rest:.5f})")
-        print(f"    lam_pot                      {lam_pot[0]:.3f} : {lam_pot[1]:.3f}"
-              f"   (symmetrisch - die Potentiale kennen nur die Summe, nicht die Seite)")
-        lam = ((lam_xg[0] + lam_pot[0]) / 2, (lam_xg[1] + lam_pot[1]) / 2)
-        print(f"\n  SCHRITT 3 - Mittel beider      {lam[0]:.3f} : {lam[1]:.3f}")
+    p_fit, _ = wetten(*lam_pot)
+    print(f"    Ziel      BTTS {btts} %   Ueber 2,5 {o25} %   Unter 2,5 {u25} %")
+    print(f"    erreicht  BTTS {p_fit['BTTS']*100:.1f} %   Ueber 2,5 {p_fit['O25']*100:.1f} %"
+          f"   Unter 2,5 {p_fit['U25']*100:.1f} %   (Restfehler {rest:.5f})")
+    print(f"    lam_pot                      {lam_pot[0]:.3f} : {lam_pot[1]:.3f}"
+          f"   (symmetrisch - die Potentiale kennen nur die Summe, nicht die Seite)")
+    lam = ((lam_xg[0] + lam_pot[0]) / 2, (lam_xg[1] + lam_pot[1]) / 2)
+    print(f"\n  SCHRITT 3 - Mittel beider      {lam[0]:.3f} : {lam[1]:.3f}")
 
     # ---------------------------------------------------- Ergebnis
     p, Mx = wetten(*lam)
