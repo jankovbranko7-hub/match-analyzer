@@ -71,16 +71,13 @@ faire Quote = 1 / Wahrscheinlichkeit
 
 1. Spiel und Teams über die `id`, mit Namen, Team-`id`s, Liga, Anstoß und `status`.
 2. Jedes benutzte Feld mit Rohwert; fehlt eines, steht `FEHLT`. Nie ersetzt, nie geschätzt.
-   **Eine exakte Null gilt als fehlend**, nicht als Messung: ein Pre-Match-xG von 0,00
-   oder eine Over-Chance von 0 % gibt es für ein angesetztes Spiel nicht.
 3. Eine **zweite, unabhängige Abfrage** derselben Endpunkte, am Zwischenspeicher vorbei,
    Feld für Feld gegen die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
    Schlägt die zweite Abfrage fehl (Stundenlimit): kein Tipp. Das kostet eine
    zusätzliche Abfrage je Endpunkt und Spiel.
-4. `btts/o25/u25` alle drei auf 50 ist der ungesetzte Standard der API, keine Messung –
-   die Werte gehen dann nicht in den Fit. BTTS und Über 2,5 sind verschiedene Größen und
-   haben nie denselben Wert, außer zufällig. Eine **einzelne** 50 ist dagegen ein
-   möglicher Wert und wird nicht angetastet.
+4. **Jeder Wert, den die API liefert, geht unverändert in den Fit.** Es gibt keine
+   Platzhalter-Erkennung und keine Prüfung, ob eine Zahl plausibel aussieht. `FEHLT`
+   heißt: das Feld ist nicht da. Eine Null ist eine Zahl.
 
 ## Tipp
 

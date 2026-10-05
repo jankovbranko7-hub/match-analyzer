@@ -161,20 +161,15 @@ def fit_potentiale(btts, o25, u25, start):
 
 
 def feld(d, k):
-    """Rohwert oder None. Es wird nichts ersetzt und nichts geschaetzt.
+    """Rohwert oder None. Es wird nichts ersetzt, nichts geschaetzt, nichts bewertet.
 
-    EINE EXAKTE NULL GILT ALS FEHLEND, nicht als Messung. Das ist keine Schwelle und
-    keine Erfahrung, sondern folgt aus der Bedeutung der fuenf Felder: ein angesetztes
-    Spiel hat kein Pre-Match-xG von 0,00 und keine Over-Chance von 0 %. Wo FootyStats
-    zu einem Spiel nichts hat, steht in allen Feldern eine Null - und eine Null, die
-    durch den Fit laeuft, ergibt lam 0,000 und damit einen Tipp aus nichts.
-    Steht sie als FEHLT da, gibt es keinen Tipp. Das ist der Auftrag:
-    "ein fehlendes Feld als fehlt markieren und nie schaetzen".
+    FEHLT heisst: das Feld ist nicht da oder keine Zahl. Eine Null ist eine Zahl und
+    geht als Null weiter - auch wenn daraus lam 0,000 wird. Es ist NICHT meine Aufgabe
+    zu entscheiden, welche Zahl der API glaubwuerdig ist; dafuer braeuchte es eine
+    Regel, und Regeln erfindet dieses Repo nicht.
     """
     v = d.get(k, None)
-    if not isinstance(v, (int, float)) or v == 0:
-        return None
-    return v
+    return v if isinstance(v, (int, float)) else None
 
 
 def zeig(k, v, quelle):
@@ -287,24 +282,16 @@ def rechne(mid, args):
     # ---------------------------------------------------- Schritt 2: Potentiale
     print("\n  SCHRITT 2 - aus den Potentialen")
     btts, o25, u25 = werte['btts_potential'], werte['o25_potential'], werte['u25_potential']
-    platzhalter = (btts == 50 and o25 == 50 and u25 == 50)
-    if platzhalter:
-        # BTTS und Ueber 2,5 sind zwei verschiedene Groessen - "beide treffen" und
-        # "mehr als zwei Tore" haben nie dieselbe Wahrscheinlichkeit, ausser zufaellig.
-        # Stehen sie beide auf exakt 50 und Unter 2,5 ebenfalls, ist das kein Spiel,
-        # das zufaellig dreimal in der Mitte liegt, sondern ein ungesetztes Feld.
-        # Eine EINZELNE 50 ist dagegen ein moeglicher Wert und wird nicht angetastet.
-        print("    btts/o25/u25 stehen alle drei auf 50 - drei verschiedene Groessen auf")
-        print("    demselben Wert ist der ungesetzte Standard der API, keine Messung.")
-        print("    Sie gehen NICHT in die Rechnung ein.")
-        lam_pot, rest = None, None
-    else:
-        if o25 is not None and u25 is not None and abs(o25 + u25 - 100) > 1:
-            print(f"    HINWEIS: o25 + u25 = {o25 + u25}, nicht 100. Beide Werte gehen "
-                  f"trotzdem unveraendert in den Fit.")
-        lam_pot, rest = fit_potentiale(btts, o25, u25, np.array(lam_xg))
+    # KEINE PLATZHALTER-REGEL. Am 05.10.2026 hatte ich eine eingebaut: alle drei auf
+    # exakt 50 galten als ungesetzter Standard der API und gingen nicht in den Fit.
+    # Der Nutzer hat sie gestrichen - sie war von mir erfunden und nicht verlangt.
+    # Jeder Wert, den die API liefert, geht unveraendert in den Fit, die 50 auch.
+    if o25 is not None and u25 is not None and abs(o25 + u25 - 100) > 1:
+        print(f"    HINWEIS: o25 + u25 = {o25 + u25}, nicht 100. Beide Werte gehen "
+              f"trotzdem unveraendert in den Fit.")
+    lam_pot, rest = fit_potentiale(btts, o25, u25, np.array(lam_xg))
     if lam_pot is None:
-        print("    kein Fit moeglich - die Potentiale fehlen oder sind Platzhalter.")
+        print("    kein Fit moeglich - die Potentiale fehlen alle drei.")
         lam = lam_xg
         print(f"\n  lam = lam_xg allein           {lam[0]:.3f} : {lam[1]:.3f}")
     else:

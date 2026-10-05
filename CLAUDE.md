@@ -41,9 +41,8 @@ Berührung mit dem alten System, in jeder Form:
 steht `FEHLT` und es gibt keinen Tipp – es wird nichts aus einer alten Datei ergänzt.
 
 **Am 05.10.2026 ist genau das passiert und wurde zurückgenommen:** Die Begründung für
-den 50er-Standard war mit 143 Spielen aus dem Zwischenspeicher des alten Repos belegt
-(„im Mittel 15,1 Punkte Abweichung"). Die Regel selbst war richtig, die Herkunft der
-Zahlen nicht. Sie steht jetzt auf dem, was in den Feldern selbst steht. **Wer eine Zahl
+eine selbst erfundene 50er-Regel war mit 143 Spielen aus dem Zwischenspeicher des alten
+Repos belegt. Der Nutzer hat die Regel gestrichen und die Zahlen dazu. **Wer eine Zahl
 in diese Dateien schreibt, muss sagen können, aus welcher frischen API-Antwort sie
 kommt.**
 
@@ -103,30 +102,24 @@ keinen Tipp** – auch keinen geschätzten:
 1. **Spiel und Teams über die `id`**, nie über den Namen. Namen, Team-`id`s, Liga,
    Anstoß und `status` stehen in der Ausgabe.
 2. **Jedes benutzte Feld mit Rohwert.** Fehlt eines, steht `FEHLT`. Es wird **nie**
-   ersetzt und **nie** geschätzt. **Eine exakte Null gilt als fehlend**, nicht als
-   Messung – keines der fünf Felder kann für ein angesetztes Spiel echt null sein:
-   ein Pre-Match-xG von 0,00 und eine Over-Chance von 0 % gibt es nicht. Wo FootyStats
-   zu einem Spiel nichts hat, stehen alle Felder auf Null; läuft die durch den Fit,
-   kommt λ 0,000 heraus und damit ein Tipp aus nichts. Das ist keine Schwelle, sondern
-   dein Satz: *„ein fehlendes Feld als fehlt markieren und nie schätzen"*.
+   ersetzt und **nie** geschätzt. `FEHLT` heißt: **das Feld ist nicht da oder keine
+   Zahl.** Eine Null ist eine Zahl und geht als Null weiter. Es wird **nicht** bewertet,
+   ob ein Wert plausibel aussieht – dafür bräuchte es eine Regel, und Regeln werden hier
+   nicht erfunden.
 3. **Gegenprobe: eine zweite, unabhängige Abfrage** derselben Endpunkte, am
    Zwischenspeicher vorbei, Feld für Feld gegen die erste Lesung gehalten. Weicht ein
    Wert ab: **kein Tipp**. Schlägt die zweite Abfrage fehl (Stundenlimit): **kein Tipp**.
    Das kostet eine zusätzliche Abfrage je Endpunkt und Spiel – das ist der Preis dafür,
    dass die Zahl geprüft ist und nicht nur richtig abgeschrieben.
-4. **Ungesetzten Standard erkennen.** Stehen `btts_potential`, `o25_potential` und
-   `u25_potential` alle drei auf **50**, ist das der ungesetzte Standard der API und
-   keine Messung. Sie gehen dann nicht in den Fit, und das steht in der Ausgabe – und
-   in der Begründung.
+4. **Keine Platzhalter-Erkennung, keine Plausibilitätsprüfung.** Jeder Wert, den die
+   API liefert, geht unverändert in den Fit.
 
-   **Die Begründung steht in den Feldern selbst, nicht in einer Auswertung.** BTTS und
-   Über 2,5 sind zwei verschiedene Größen – „beide treffen" und „mehr als zwei Tore"
-   haben nie dieselbe Wahrscheinlichkeit, außer zufällig. Drei verschiedene Größen auf
-   exakt demselben Wert ist kein Spiel, das dreimal in der Mitte liegt. Eine
-   **einzelne** 50 ist dagegen ein möglicher Wert und wird nicht angetastet.
-
-   **Das ist eine Regel, die ich hinzugefügt habe, nicht eine vom Nutzer verlangte.**
-   Sie bleibt zur Entscheidung offen – siehe „Keine eigenen Auswahlregeln erfinden".
+   **Am 05.10.2026 hatte ich hier eine Regel eingebaut**, die ich nicht einbauen
+   durfte: stehen `btts_potential`, `o25_potential` und `u25_potential` alle drei auf
+   exakt 50, galt das als ungesetzter Standard und ging nicht in den Fit. Dazu eine
+   zweite: eine exakte Null galt als fehlendes Feld. **Beide waren von mir erfunden und
+   nicht verlangt.** Der Nutzer hat sie gestrichen. Nicht wieder einbauen – auch nicht
+   gemessen, auch nicht gut gemeint, auch nicht in Prosa.
 
 **Anstoßzeit gegen die Uhr halten.** `date -u` laufen lassen. Ist ein Spiel schon
 angepfiffen, ist es keine Prognose – das offen sagen.
@@ -177,7 +170,7 @@ Faire Mindestquote: **1,57**.
 ```
 
 Die Wahrscheinlichkeit des Tipps **fett**. Genau diese fünf Zeilen. Einschränkungen
-(fehlendes Feld, Platzhalter, angepfiffenes Spiel) gehören in den Tipp-Satz, nie in
+(fehlendes Feld, angepfiffenes Spiel) gehören in den Tipp-Satz, nie in
 einen eigenen Abschnitt.
 
 **Keine Zahl, die nicht aus der Ausgabe von `modell.py` stammt.** Im Zweifel nachsehen
