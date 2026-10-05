@@ -39,8 +39,16 @@ minimiere (P_BTTS − btts)² + (P_Over − o25)² + (P_Under − u25)²
 Drei Gleichungen, zwei Unbekannte, kleinste Quadrate. Alle drei Residuen stehen auf
 derselben Skala (0 bis 1) – deshalb braucht es **keine** Gewichtung.
 
-**Dieser Fit liefert immer λ_heim = λ_ausw.** Die Potentiale kennen nur die Summe der
-Tore, nicht die Seite.
+**Die Potentiale kennen die Seite nicht.** Der Fit liefert oft zwei verschiedene Werte,
+aber die vertauschte Zuordnung trifft die Potentiale genauso gut – welche Seite den
+größeren bekäme, hinge nur vom Startpunkt der Suche ab. Beide Zuordnungen werden
+deshalb gleich behandelt:
+
+```
+lam_pot = (Fit_heim + Fit_ausw) / 2, für beide Seiten
+```
+
+Die Torsumme bleibt dabei unverändert. **λ_pot ist damit immer für beide Seiten gleich.**
 
 ## Schritt 3
 

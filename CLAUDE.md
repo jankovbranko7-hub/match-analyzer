@@ -83,14 +83,18 @@ python3 analyse/modell.py 8419375 8469639        diese Spiele rechnen
 2. **Wahrscheinlichkeits-Skala.** Die beiden λ, deren Poisson die drei Potentiale am
    besten trifft – drei Gleichungen, zwei Unbekannte, kleinste Quadrate. Alle Residuen
    stehen auf derselben 0-bis-1-Skala, deshalb braucht es keine Gewichtung.
+   Die vertauschte Lösung trifft die Potentiale genauso gut, deshalb werden beide
+   Zuordnungen gleich behandelt: λ_pot = Mittel der beiden Fit-Werte, für beide Seiten.
 3. λ = Mittel aus beiden.
 
 Reine unabhängige Poisson. **Keine gesetzte Zahl im ganzen Rechenweg** – keine Gewichte,
 keine Dämpfung, keine Schwelle, keine Sperre, kein Dixon-Coles, kein Liga-Mittel, keine
 Form, kein H2H.
 
-**Der Fit aus Schritt 2 liefert immer λ_heim = λ_ausw.** Die drei Potentiale kennen nur
-die Summe der Tore, nicht die Seite. Heimsieg gegen Auswärtssieg stammt deshalb
+**λ_pot aus Schritt 2 ist immer für beide Seiten gleich.** Die drei Potentiale kennen die
+Seite nicht. Der Fit selbst liefert oft zwei verschiedene Werte, aber vertauscht trifft er
+genauso – ohne das Mitteln entschiede der Startpunkt der Suche, wer den größeren bekommt.
+(Am 05.10.2026 bei Córdoba – Tenerife aufgefallen und vom Nutzer so entschieden.) Heimsieg gegen Auswärtssieg stammt deshalb
 vollständig aus Schritt 1, Schritt 2 wirkt allein auf das Torniveau. Das gehört in die
 Begründung, wenn der Tipp Heimsieg oder Auswärtssieg ist.
 

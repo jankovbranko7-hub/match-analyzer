@@ -23,16 +23,20 @@ DER RECHENWEG, in zwei Schritten, beide ohne Gewicht
        minimiere (P_BTTS - btts)^2 + (P_Over - o25)^2 + (P_Under - u25)^2
      Drei Gleichungen, zwei Unbekannte, kleinste Quadrate. Alle drei Residuen stehen
      auf derselben Skala (0 bis 1), deshalb braucht es keine Gewichtung.
-     lam_pot = Ergebnis des Fits
+     Die Potentiale kennen die Seite nicht: die vertauschte Loesung trifft sie genauso
+     gut. Welche Seite den groesseren Wert bekaeme, haengt nur vom Startpunkt der Suche
+     ab. Beide Zuordnungen werden deshalb gleich behandelt:
+     lam_pot = Mittel beider Zuordnungen = (Fit_1 + Fit_2) / 2, fuer beide Seiten gleich
 
   3. lam = Mittel(lam_xg, lam_pot)
 
   Beide Schritte liefern dieselbe Groesse in derselben Einheit, also ist das Mittel
   eine Zusammenfassung und keine Abwaegung.
 
-  WICHTIG, an echten Spielen beobachtet: der Fit aus Schritt 2 liefert IMMER
-  lam_heim = lam_ausw. BTTS, Over und Under sagen nur etwas ueber die SUMME der Tore,
-  nichts darueber, wer sie schiesst. Die Seitenverteilung - und damit Heimsieg gegen
+  WICHTIG: lam_pot ist fuer beide Seiten gleich. BTTS, Over und Under sagen nichts
+  darueber, wer die Tore schiesst. Der Fit selbst liefert zwar oft zwei verschiedene
+  Werte (am 05.10.2026 bei Cordoba - Tenerife 1,902 : 1,549), aber die vertauschte
+  Zuordnung trifft die Potentiale genauso. Die Seitenverteilung - und damit Heimsieg gegen
   Auswaertssieg - stammt deshalb vollstaendig aus Schritt 1. Schritt 2 wirkt allein auf
   das Torniveau. Das ist keine Schwaeche des Fits, sondern der Informationsgehalt der
   drei Potentiale. Fehlt eines der benutzten Felder, gibt es keinen Tipp - es wird
@@ -282,13 +286,17 @@ def rechne(mid, args):
     if abs(o25 + u25 - 100) > 1:
         print(f"    HINWEIS: o25 + u25 = {o25 + u25}, nicht 100. Beide Werte gehen "
               f"trotzdem unveraendert in den Fit.")
-    lam_pot, rest = fit_potentiale(btts, o25, u25, np.array(lam_xg))
-    p_fit, _ = wetten(*lam_pot)
+    lam_fit, rest = fit_potentiale(btts, o25, u25, np.array(lam_xg))
+    p_fit, _ = wetten(*lam_fit)
     print(f"    Ziel      BTTS {btts} %   Ueber 2,5 {o25} %   Unter 2,5 {u25} %")
     print(f"    erreicht  BTTS {p_fit['BTTS']*100:.1f} %   Ueber 2,5 {p_fit['O25']*100:.1f} %"
           f"   Unter 2,5 {p_fit['U25']*100:.1f} %   (Restfehler {rest:.5f})")
-    print(f"    lam_pot                      {lam_pot[0]:.3f} : {lam_pot[1]:.3f}"
-          f"   (symmetrisch - die Potentiale kennen nur die Summe, nicht die Seite)")
+    print(f"    Fit                          {lam_fit[0]:.3f} : {lam_fit[1]:.3f}"
+          f"   (vertauscht {lam_fit[1]:.3f} : {lam_fit[0]:.3f} trifft genauso)")
+    # Die Potentiale kennen die Seite nicht. Beide Zuordnungen gleich behandeln.
+    s = (lam_fit[0] + lam_fit[1]) / 2
+    lam_pot = (s, s)
+    print(f"    lam_pot, Mittel beider       {lam_pot[0]:.3f} : {lam_pot[1]:.3f}")
     lam = ((lam_xg[0] + lam_pot[0]) / 2, (lam_xg[1] + lam_pot[1]) / 2)
     print(f"\n  SCHRITT 3 - Mittel beider      {lam[0]:.3f} : {lam[1]:.3f}")
 
