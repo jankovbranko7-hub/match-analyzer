@@ -1,5 +1,19 @@
 # Regeln
 
+## Der Auftrag, wörtlich
+
+> Rechne ein eigenes Python-Modell, nicht die 70/30-Datei. Eingabe nur Pre-Match-xG,
+> xG für und dagegen, BTTS-Potential, Over-Potential, Under-Potential. Die API-Zahlen
+> müssen fehlerfrei sein: Spiel und Teams exakt prüfen, jedes Feld hier hinschreiben,
+> ein fehlendes Feld als fehlt markieren und nie schätzen, die gelesenen Werte ein
+> zweites Mal gegen die API-Antwort halten. Erst wenn beides übereinstimmt, kommt der
+> Tipp. Ein Tipp pro Spiel: Heimsieg, Auswärtssieg, BTTS Ja, Over 2,5 oder Under 2,5.
+> Keine Schwelle aus einer alten Datei.
+
+Das ist die Vorgabe. Alles Folgende setzt sie nur um. **Steht etwas weiter unten im
+Widerspruch dazu, gilt der Auftrag** – und das ist zu melden, nicht stillschweigend
+aufzulösen.
+
 Der Nutzer schickt ein Datum und Paarungen. Du analysierst **nur diese Spiele** und
 antwortest auf **Deutsch**.
 
