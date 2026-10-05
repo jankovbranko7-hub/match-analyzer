@@ -49,9 +49,12 @@ DIE PRUEFUNG, bevor ueberhaupt ein Tipp erscheint
   1. Spiel und Teams werden ueber die id gefuehrt und mit Namen, Team-ids, Liga und
      Anstosszeit ausgeschrieben.
   2. Jedes benutzte Feld wird mit seinem Rohwert gezeigt. Fehlt es, steht FEHLT.
-  3. Gegenprobe: die gespeicherte API-Antwort wird ein zweites Mal frisch von der
-     Platte gelesen und Feld fuer Feld gegen die erste Lesung gehalten.
-  4. Nur wenn beide Lesungen identisch sind, wird der Tipp ausgegeben.
+  3. Gegenprobe: eine ZWEITE, UNABHAENGIGE Abfrage derselben Endpunkte (hole_direkt),
+     am Zwischenspeicher vorbei, Feld fuer Feld gegen die erste Lesung gehalten.
+     Das prueft, ob die Zahl richtig angekommen ist - nicht nur, ob sie richtig
+     gelesen wurde. Kostet eine zusaetzliche Abfrage je Endpunkt und Spiel.
+  4. Nur wenn beide Abfragen identisch sind, wird der Tipp ausgegeben. Weicht ein
+     Wert ab oder schlaegt die zweite Abfrage fehl (Stundenlimit): kein Tipp.
 
     python3 analyse/modell.py --liste 2026-10-05        Spiele des Tages mit id
     python3 analyse/modell.py 8419375 8469639           diese Spiele rechnen

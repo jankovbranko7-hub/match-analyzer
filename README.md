@@ -67,8 +67,10 @@ faire Quote = 1 / Wahrscheinlichkeit
 
 1. Spiel und Teams über die `id`, mit Namen, Team-`id`s, Liga, Anstoß und `status`.
 2. Jedes benutzte Feld mit Rohwert; fehlt eines, steht `FEHLT`. Nie ersetzt, nie geschätzt.
-3. Die gespeicherte Antwort wird ein zweites Mal frisch gelesen und Feld für Feld gegen
-   die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
+3. Eine **zweite, unabhängige Abfrage** derselben Endpunkte, am Zwischenspeicher vorbei,
+   Feld für Feld gegen die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
+   Schlägt die zweite Abfrage fehl (Stundenlimit): kein Tipp. Das kostet eine
+   zusätzliche Abfrage je Endpunkt und Spiel.
 4. `btts/o25/u25` alle drei auf 50 ist der Platzhalter der API, keine Messung – die Werte
    gehen dann nicht in den Fit.
 
