@@ -73,16 +73,33 @@ keinen Tipp** – auch keinen geschätzten:
 1. **Spiel und Teams über die `id`**, nie über den Namen. Namen, Team-`id`s, Liga,
    Anstoß und `status` stehen in der Ausgabe.
 2. **Jedes benutzte Feld mit Rohwert.** Fehlt eines, steht `FEHLT`. Es wird **nie**
-   ersetzt und **nie** geschätzt.
+   ersetzt und **nie** geschätzt. **Eine exakte Null gilt als fehlend**, nicht als
+   Messung – keines der fünf Felder kann für ein angesetztes Spiel echt null sein.
+   Am 05.10.2026 an 143 zwischengespeicherten Spielen gefunden: 10 Spiele führen
+   `btts = o25 = u25 = 0` **und** xG 0:0, alles Länderspiele, zu denen FootyStats
+   nichts hat. Vorher ging diese Null als echter Wert in den Fit und ergab
+   λ 0,000 : 2,674 – Unsinn bis in den Tipp.
 3. **Gegenprobe: eine zweite, unabhängige Abfrage** derselben Endpunkte, am
    Zwischenspeicher vorbei, Feld für Feld gegen die erste Lesung gehalten. Weicht ein
    Wert ab: **kein Tipp**. Schlägt die zweite Abfrage fehl (Stundenlimit): **kein Tipp**.
    Das kostet eine zusätzliche Abfrage je Endpunkt und Spiel – das ist der Preis dafür,
    dass die Zahl geprüft ist und nicht nur richtig abgeschrieben.
-4. **Platzhalter erkennen.** Stehen `btts_potential`, `o25_potential` und
-   `u25_potential` alle drei auf **50**, ist das der Platzhalter der API und keine
+4. **Standardwert erkennen.** Stehen `btts_potential`, `o25_potential` und
+   `u25_potential` alle drei auf **50**, ist das der Standardwert der API und keine
    Messung. Sie gehen dann nicht in den Fit, und das steht in der Ausgabe – und in der
    Begründung.
+
+   **Am 05.10.2026 nachgemessen, weil der Nutzer gefragt hat, warum dort 50 steht.**
+   An 143 zwischengespeicherten Spielen: **8 mit allen drei auf 50 (6 %)**. Bei ihnen
+   weicht der Over-Wert, den ihr **eigenes** Pre-Match-xG ergibt, im Mittel **15,1
+   Punkte** von den 50 ab, im Extremfall 32,3 (Roma W – Barcelona W: xG 1,84 : 2,63
+   ergibt 82,3 %, die API sagt 50). Eine **einzelne** 50 ist dagegen normal und wird
+   nicht angetastet: 9 Spiele haben ein echtes 50/50 bei Over/Under, 12 ein echtes
+   BTTS von 50. Nur alle drei zugleich sind der Standardwert.
+
+   **Das ist eine Regel, die ich hinzugefügt habe, nicht eine vom Nutzer verlangte.**
+   Sie ist jetzt gemessen, aber sie bleibt zur Entscheidung offen – siehe
+   „Keine eigenen Auswahlregeln erfinden".
 
 **Anstoßzeit gegen die Uhr halten.** `date -u` laufen lassen. Ist ein Spiel schon
 angepfiffen, ist es keine Prognose – das offen sagen.

@@ -67,12 +67,17 @@ faire Quote = 1 / Wahrscheinlichkeit
 
 1. Spiel und Teams über die `id`, mit Namen, Team-`id`s, Liga, Anstoß und `status`.
 2. Jedes benutzte Feld mit Rohwert; fehlt eines, steht `FEHLT`. Nie ersetzt, nie geschätzt.
+   **Eine exakte Null gilt als fehlend**, nicht als Messung: ein Pre-Match-xG von 0,00
+   oder eine Over-Chance von 0 % gibt es für ein angesetztes Spiel nicht.
 3. Eine **zweite, unabhängige Abfrage** derselben Endpunkte, am Zwischenspeicher vorbei,
    Feld für Feld gegen die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
    Schlägt die zweite Abfrage fehl (Stundenlimit): kein Tipp. Das kostet eine
    zusätzliche Abfrage je Endpunkt und Spiel.
-4. `btts/o25/u25` alle drei auf 50 ist der Platzhalter der API, keine Messung – die Werte
-   gehen dann nicht in den Fit.
+4. `btts/o25/u25` alle drei auf 50 ist der Standardwert der API, keine Messung – die
+   Werte gehen dann nicht in den Fit. An 143 zwischengespeicherten Spielen geprüft:
+   8 betroffen, und bei ihnen weicht der Over-Wert, den ihr eigenes Pre-Match-xG ergibt,
+   im Mittel 15,1 Punkte von den 50 ab. Eine **einzelne** 50 ist dagegen normal
+   (9 echte 50/50 bei Over/Under, 12 echte BTTS von 50) und wird nicht angetastet.
 
 ## Tipp
 
