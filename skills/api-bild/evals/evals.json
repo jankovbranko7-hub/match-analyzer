@@ -1,0 +1,20 @@
+{
+  "skill": "api-bild",
+  "test_cases": [
+    {
+      "name": "greece_germany_under",
+      "input": "Griechenland gegen Deutschland, Potentials 50, 34, 67, xG 1.48 zu 2.07",
+      "assertions": ["Tipp ist Under 2.5", "beide Abrufe werden verglichen", "70/30 wird nicht gerechnet"]
+    },
+    {
+      "name": "wales_denmark_side",
+      "input": "Wales gegen Dänemark, alle Potentiale 50, xG 1.08 zu 1.72",
+      "assertions": ["Tipp ist Auswärtssieg", "fehlende Gleichheit der Potentiale führt zur xG-Seite"]
+    },
+    {
+      "name": "mismatch_blocks_tip",
+      "input": "Zweiter Abruf weicht beim Heimnamen ab",
+      "assertions": ["kein Tipp", "Fehler wird hingeschrieben"]
+    }
+  ]
+}
