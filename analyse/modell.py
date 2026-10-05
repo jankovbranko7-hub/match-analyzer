@@ -163,13 +163,13 @@ def fit_potentiale(btts, o25, u25, start):
 def feld(d, k):
     """Rohwert oder None. Es wird nichts ersetzt und nichts geschaetzt.
 
-    EINE EXAKTE NULL GILT ALS FEHLEND, nicht als Messung. Keines dieser fuenf Felder
-    kann fuer ein angesetztes Spiel echt null sein: ein Pre-Match-xG von 0,00 oder eine
-    Over-Chance von 0 % gibt es nicht. An 143 zwischengespeicherten Spielen gemessen:
-    10 Spiele fuehren btts = o25 = u25 = 0 UND xG = 0:0, alles Laenderspiele, zu denen
-    FootyStats nichts hat. Vorher ging diese Null als echter Wert in die Rechnung -
-    fit_potentiale(0, 0, 0) liefert lam 0,000 : 2,674, also Unsinn bis in den Tipp.
-    Gefunden am 05.10.2026.
+    EINE EXAKTE NULL GILT ALS FEHLEND, nicht als Messung. Das ist keine Schwelle und
+    keine Erfahrung, sondern folgt aus der Bedeutung der fuenf Felder: ein angesetztes
+    Spiel hat kein Pre-Match-xG von 0,00 und keine Over-Chance von 0 %. Wo FootyStats
+    zu einem Spiel nichts hat, steht in allen Feldern eine Null - und eine Null, die
+    durch den Fit laeuft, ergibt lam 0,000 und damit einen Tipp aus nichts.
+    Steht sie als FEHLT da, gibt es keinen Tipp. Das ist der Auftrag:
+    "ein fehlendes Feld als fehlt markieren und nie schaetzen".
     """
     v = d.get(k, None)
     if not isinstance(v, (int, float)) or v == 0:
@@ -289,15 +289,14 @@ def rechne(mid, args):
     btts, o25, u25 = werte['btts_potential'], werte['o25_potential'], werte['u25_potential']
     platzhalter = (btts == 50 and o25 == 50 and u25 == 50)
     if platzhalter:
-        # Gemessen am 05.10.2026 an 143 zwischengespeicherten Spielen: 8 Spiele fuehren
-        # alle drei auf exakt 50. Bei ihnen weicht der Over-Wert, den ihr EIGENES
-        # Pre-Match-xG ergibt, im Mittel 15,1 Punkte von den 50 ab, im Extremfall 32,3
-        # (Roma W - Barcelona W: xG 1,84:2,63 ergibt 82,3 %, die API sagt 50).
-        # Ausserdem sind BTTS und Ueber 2,5 nie derselbe Wert, ausser zufaellig.
-        # Eine 50 ALLEIN ist dagegen normal: 9 Spiele haben echte 50/50 bei Over/Under,
-        # 12 ein echtes BTTS von 50. Nur alle drei zugleich sind der Standardwert.
-        print("    btts/o25/u25 stehen alle drei auf 50 - das ist der Standardwert der API,")
-        print("    keine Messung (an 143 Spielen geprueft). Sie gehen NICHT in die Rechnung ein.")
+        # BTTS und Ueber 2,5 sind zwei verschiedene Groessen - "beide treffen" und
+        # "mehr als zwei Tore" haben nie dieselbe Wahrscheinlichkeit, ausser zufaellig.
+        # Stehen sie beide auf exakt 50 und Unter 2,5 ebenfalls, ist das kein Spiel,
+        # das zufaellig dreimal in der Mitte liegt, sondern ein ungesetztes Feld.
+        # Eine EINZELNE 50 ist dagegen ein moeglicher Wert und wird nicht angetastet.
+        print("    btts/o25/u25 stehen alle drei auf 50 - drei verschiedene Groessen auf")
+        print("    demselben Wert ist der ungesetzte Standard der API, keine Messung.")
+        print("    Sie gehen NICHT in die Rechnung ein.")
         lam_pot, rest = None, None
     else:
         if o25 is not None and u25 is not None and abs(o25 + u25 - 100) > 1:

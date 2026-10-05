@@ -17,6 +17,36 @@ aufzulösen.
 Der Nutzer schickt ein Datum und Paarungen. Du analysierst **nur diese Spiele** und
 antwortest auf **Deutsch**.
 
+## Nichts Altes. Strikt verboten.
+
+**Vom Nutzer am 05.10.2026 noch einmal ausdrücklich eingeschärft.** Verboten ist jede
+Berührung mit dem alten System, in jeder Form:
+
+- **Die alten Dateien.** `modell.py` mit den 14 Konstanten (die „70/30-Datei"),
+  `modell2.py`, `bilanz.py`, `bilanz.json`, `rueckschau.py`, `pruefung.py`,
+  `pruefung2.py`, `bild.py`, `SOLLBRUCHSTELLEN.md`, das alte `CLAUDE.md` und
+  `README.md`. Nicht lesen, nicht kopieren, nicht zitieren, nicht hierher holen.
+- **Backtesting in jeder Form.** Kein Walk-forward, keine Rückschau, keine
+  Ligen-Hälften, keine Log-Likelihood, kein Brier, keine Trefferquote über vergangene
+  Spieltage. Dieses System wird nicht an der Vergangenheit gemessen.
+- **Jede gesetzte oder angepasste Zahl.** Keine Gewichte, keine Dämpfung, kein
+  xG-Anteil, kein Formanteil, kein H2H, kein Dixon-Coles, kein Markt-Anteil, keine
+  Schranke, keine Schwelle, keine Sperre.
+- **Fremde Repos**, insbesondere `value-bet-screener`.
+- **Der Zwischenspeicher des alten Systems.** Die JSON-Dateien unter dessen
+  `analyse/daten/` sind alte Dateien, auch wenn darin API-Antworten stehen. Dieses
+  System füllt seinen eigenen Zwischenspeicher aus eigenen Abfragen.
+
+**Der einzige Eingang sind die fünf Felder aus der API, frisch geholt.** Fehlt etwas,
+steht `FEHLT` und es gibt keinen Tipp – es wird nichts aus einer alten Datei ergänzt.
+
+**Am 05.10.2026 ist genau das passiert und wurde zurückgenommen:** Die Begründung für
+den 50er-Standard war mit 143 Spielen aus dem Zwischenspeicher des alten Repos belegt
+(„im Mittel 15,1 Punkte Abweichung"). Die Regel selbst war richtig, die Herkunft der
+Zahlen nicht. Sie steht jetzt auf dem, was in den Feldern selbst steht. **Wer eine Zahl
+in diese Dateien schreibt, muss sagen können, aus welcher frischen API-Antwort sie
+kommt.**
+
 ## Datenquelle
 
 **Ausschließlich die FootyStats-API.** Key in der Umgebungsvariablen `FOOTYSTATS_API_KEY`
@@ -74,32 +104,29 @@ keinen Tipp** – auch keinen geschätzten:
    Anstoß und `status` stehen in der Ausgabe.
 2. **Jedes benutzte Feld mit Rohwert.** Fehlt eines, steht `FEHLT`. Es wird **nie**
    ersetzt und **nie** geschätzt. **Eine exakte Null gilt als fehlend**, nicht als
-   Messung – keines der fünf Felder kann für ein angesetztes Spiel echt null sein.
-   Am 05.10.2026 an 143 zwischengespeicherten Spielen gefunden: 10 Spiele führen
-   `btts = o25 = u25 = 0` **und** xG 0:0, alles Länderspiele, zu denen FootyStats
-   nichts hat. Vorher ging diese Null als echter Wert in den Fit und ergab
-   λ 0,000 : 2,674 – Unsinn bis in den Tipp.
+   Messung – keines der fünf Felder kann für ein angesetztes Spiel echt null sein:
+   ein Pre-Match-xG von 0,00 und eine Over-Chance von 0 % gibt es nicht. Wo FootyStats
+   zu einem Spiel nichts hat, stehen alle Felder auf Null; läuft die durch den Fit,
+   kommt λ 0,000 heraus und damit ein Tipp aus nichts. Das ist keine Schwelle, sondern
+   dein Satz: *„ein fehlendes Feld als fehlt markieren und nie schätzen"*.
 3. **Gegenprobe: eine zweite, unabhängige Abfrage** derselben Endpunkte, am
    Zwischenspeicher vorbei, Feld für Feld gegen die erste Lesung gehalten. Weicht ein
    Wert ab: **kein Tipp**. Schlägt die zweite Abfrage fehl (Stundenlimit): **kein Tipp**.
    Das kostet eine zusätzliche Abfrage je Endpunkt und Spiel – das ist der Preis dafür,
    dass die Zahl geprüft ist und nicht nur richtig abgeschrieben.
-4. **Standardwert erkennen.** Stehen `btts_potential`, `o25_potential` und
-   `u25_potential` alle drei auf **50**, ist das der Standardwert der API und keine
-   Messung. Sie gehen dann nicht in den Fit, und das steht in der Ausgabe – und in der
-   Begründung.
+4. **Ungesetzten Standard erkennen.** Stehen `btts_potential`, `o25_potential` und
+   `u25_potential` alle drei auf **50**, ist das der ungesetzte Standard der API und
+   keine Messung. Sie gehen dann nicht in den Fit, und das steht in der Ausgabe – und
+   in der Begründung.
 
-   **Am 05.10.2026 nachgemessen, weil der Nutzer gefragt hat, warum dort 50 steht.**
-   An 143 zwischengespeicherten Spielen: **8 mit allen drei auf 50 (6 %)**. Bei ihnen
-   weicht der Over-Wert, den ihr **eigenes** Pre-Match-xG ergibt, im Mittel **15,1
-   Punkte** von den 50 ab, im Extremfall 32,3 (Roma W – Barcelona W: xG 1,84 : 2,63
-   ergibt 82,3 %, die API sagt 50). Eine **einzelne** 50 ist dagegen normal und wird
-   nicht angetastet: 9 Spiele haben ein echtes 50/50 bei Over/Under, 12 ein echtes
-   BTTS von 50. Nur alle drei zugleich sind der Standardwert.
+   **Die Begründung steht in den Feldern selbst, nicht in einer Auswertung.** BTTS und
+   Über 2,5 sind zwei verschiedene Größen – „beide treffen" und „mehr als zwei Tore"
+   haben nie dieselbe Wahrscheinlichkeit, außer zufällig. Drei verschiedene Größen auf
+   exakt demselben Wert ist kein Spiel, das dreimal in der Mitte liegt. Eine
+   **einzelne** 50 ist dagegen ein möglicher Wert und wird nicht angetastet.
 
    **Das ist eine Regel, die ich hinzugefügt habe, nicht eine vom Nutzer verlangte.**
-   Sie ist jetzt gemessen, aber sie bleibt zur Entscheidung offen – siehe
-   „Keine eigenen Auswahlregeln erfinden".
+   Sie bleibt zur Entscheidung offen – siehe „Keine eigenen Auswahlregeln erfinden".
 
 **Anstoßzeit gegen die Uhr halten.** `date -u` laufen lassen. Ist ein Spiel schon
 angepfiffen, ist es keine Prognose – das offen sagen.

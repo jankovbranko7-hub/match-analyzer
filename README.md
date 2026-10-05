@@ -2,6 +2,10 @@
 
 Ein Tipp je Spiel, aus fünf Zahlen der FootyStats-API. Keine gesetzte Konstante.
 
+**Nichts Altes.** Keine Datei des alten Systems, kein Backtesting, keine Rückschau,
+keine gesetzte oder angepasste Zahl, kein fremdes Repo, nicht dessen Zwischenspeicher.
+Jede Zahl hier muss aus einer frischen API-Antwort kommen. Siehe `CLAUDE.md`.
+
 ## Eingaben
 
 | Größe | Feld | Endpunkt |
@@ -73,11 +77,10 @@ faire Quote = 1 / Wahrscheinlichkeit
    Feld für Feld gegen die erste Lesung gehalten (20 Werte). Weicht einer ab: kein Tipp.
    Schlägt die zweite Abfrage fehl (Stundenlimit): kein Tipp. Das kostet eine
    zusätzliche Abfrage je Endpunkt und Spiel.
-4. `btts/o25/u25` alle drei auf 50 ist der Standardwert der API, keine Messung – die
-   Werte gehen dann nicht in den Fit. An 143 zwischengespeicherten Spielen geprüft:
-   8 betroffen, und bei ihnen weicht der Over-Wert, den ihr eigenes Pre-Match-xG ergibt,
-   im Mittel 15,1 Punkte von den 50 ab. Eine **einzelne** 50 ist dagegen normal
-   (9 echte 50/50 bei Over/Under, 12 echte BTTS von 50) und wird nicht angetastet.
+4. `btts/o25/u25` alle drei auf 50 ist der ungesetzte Standard der API, keine Messung –
+   die Werte gehen dann nicht in den Fit. BTTS und Über 2,5 sind verschiedene Größen und
+   haben nie denselben Wert, außer zufällig. Eine **einzelne** 50 ist dagegen ein
+   möglicher Wert und wird nicht angetastet.
 
 ## Tipp
 
