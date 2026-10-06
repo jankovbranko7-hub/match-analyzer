@@ -26,7 +26,7 @@ eines erfunden (acht Sichten aus Angriff plus gegnerischer Abwehr geteilt durch 
 Wette nur wenn alle acht übereinstimmen, BTTS erst ab 1 je Seite). Der Nutzer hat es
 gestrichen. Nicht wieder einbauen.
 
-**Tragen die Teamfelder zwei Wetten, werden beide genannt.** (Vom Nutzer bestätigt.)
+**Genau eine Wette oder keine.** Nie zwei. (Vom Nutzer am 06.10.2026 so festgelegt.)
 
 **Gegenprobe:** Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je
 Team) und Wert für Wert verglichen. Weicht einer ab: keine Wette.
