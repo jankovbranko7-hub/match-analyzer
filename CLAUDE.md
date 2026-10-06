@@ -17,23 +17,19 @@ unten regelt nur den Rahmen. Steht etwas hier im Widerspruch zu `SYSTEM.md`, gil
 > keinen Tipp. Das ist der skeptische Teil: nicht jedes Spiel bekommt eine Wette, nur
 > weil eine Zahl größer ist.
 
-Zu jeder Wette steht im Chat, welche Teamfelder sie tragen, damit der Nutzer sie
-nachprüfen kann.
+**Ausgabe genau wie in `SYSTEM.md`:** Tabelle je Team, das Bild in **genau einem Satz**,
+eine Wette oder keine. Keine Zusätze – kein „Warum nicht die anderen", keine Hinweise
+zur Datenbasis, keine eigene Herleitung.
 
-**Vorgehen, vom Nutzer am 06.10.2026 bestätigt („Das passt so"):**
+**Kein festes Verfahren zum Zusammenführen, keine Schwelle.** Am 06.10.2026 hatte ich
+eines erfunden (acht Sichten aus Angriff plus gegnerischer Abwehr geteilt durch zwei,
+Wette nur wenn alle acht übereinstimmen, BTTS erst ab 1 je Seite). Der Nutzer hat es
+gestrichen. Nicht wieder einbauen.
 
-- **Zusammenführen.** Vier Spaltenpaare: gesamt / gesamt · Heim zu Hause / Gast
-  auswärts · letzte 6 gesamt / letzte 6 gesamt · letzte 6 Heim zu Hause / letzte 6 Gast
-  auswärts. Je Paar und Seite: (eigene Tore pro Spiel + Gegentore des Gegners pro Spiel)
-  / 2, ebenso (eigenes xG für + xG dagegen des Gegners) / 2. Das ergibt acht Sichten
-  (vier Paare, je Tore und xG). Diese Tabelle steht im Chat.
-- **Eine Wette ist getragen, wenn alle acht Sichten dasselbe sagen:** Heimsieg bzw.
-  Auswärtssieg – die Seite liegt überall vorn. Over 2,5 bzw. Under 2,5 – die Summe liegt
-  überall über bzw. unter 2,5. BTTS Ja – jede Seite kommt überall auf mindestens 1.
-  Sagt eine Sicht etwas anderes: keine Wette.
-- **Tragen zwei Wetten, werden beide genannt.** Es wird keine ausgewählt.
-- Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je Team) und Wert
-  für Wert verglichen. Weicht einer ab: keine Wette.
+**Tragen die Teamfelder zwei Wetten, werden beide genannt.** (Vom Nutzer bestätigt.)
+
+**Gegenprobe:** Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je
+Team) und Wert für Wert verglichen. Weicht einer ab: keine Wette.
 
 Der Nutzer schickt ein Datum und Paarungen. Du analysierst **nur diese Spiele** und
 antwortest auf **Deutsch**.
