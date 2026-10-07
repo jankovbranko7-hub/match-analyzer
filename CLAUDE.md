@@ -28,6 +28,11 @@ gestrichen. Nicht wieder einbauen.
 
 **Genau eine Wette oder keine.** Nie zwei. (Vom Nutzer am 06.10.2026 so festgelegt.)
 
+**Widerspricht eine Spalte – auch Tore gegen xG –, gibt es keine Wette.** Alle Spalten
+beider Teams (gesamt, zu Hause bzw. auswärts, letzte 6) müssen in dieselbe Richtung
+zeigen, bei Toren und bei xG. Vom Nutzer am 07.10.2026 so bestätigt („das passt alles so"),
+auch wenn dadurch nur wenige Spiele eine Wette bekommen.
+
 **Gegenprobe:** Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je
 Team) und Wert für Wert verglichen. Weicht einer ab: keine Wette.
 
