@@ -53,6 +53,10 @@ umrechnen. Die Tabelle hat sieben Zeilen: Spiele, Tore, Gegentore (Summen der AP
 xG; vom Nutzer am 09.10.2026 so beschlossen, weil Summen und Schnitte nebeneinander zu
 falschen Vergleichen führten), xG für, xG dagegen (Schnitt pro Spiel laut API). Verglichen
 wird immer pro Spiel. Bei 0 Spielen steht in „pro Spiel" fehlt.
+Unter jeder Teamtabelle steht das **Datum des letzten Spiels der „letzten 6"** (Feld
+`last_updated_match_timestamp` aus `lastx`) und dass sie laut API aus allen Wettbewerben
+stammen (`competition_id: -1`). Vom Nutzer am 09.10.2026 so beschlossen. Ob und wann die
+„letzten 6" als veraltet gelten, ist **nicht** entschieden – nicht selbst auslegen.
 
 **Gegenprobe:** Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je
 Team) und Wert für Wert verglichen. Weicht einer ab: keine Wette.

@@ -65,6 +65,8 @@ def teamwerte(teams, lastx, tid):
         for sp in SPALTEN:
             w[(name, sp)] = zahl(t and t.get('stats'), muster.format(sp))
             w[(name, 'L6' + sp)] = zahl(l6 and l6.get('stats'), muster.format(sp))
+    w['L6 letztes Spiel'] = zahl(l6, 'last_updated_match_timestamp')
+    w['L6 competition_id'] = zahl(l6, 'competition_id')
     return (t or {}).get('name'), w
 
 
@@ -84,6 +86,10 @@ def tabelle(name, w):
               ('xG für', [f(w[('xG für', s)]) for s in sp6]),
               ('xG dagegen', [f(w[('xG dagegen', s)]) for s in sp6])]
     z += [f"| {n} | " + ' | '.join(v) + ' |' for n, v in reihen]
+    ts = w['L6 letztes Spiel']
+    datum = time.strftime('%d.%m.%Y', time.gmtime(ts)) if ts else 'fehlt'
+    quelle = 'alle Wettbewerbe' if w['L6 competition_id'] == -1 else f"Wettbewerb {f(w['L6 competition_id'])}"
+    z.append(f"\nLetzte 6: letztes Spiel am **{datum}** ({quelle}, laut API).")
     return '\n'.join(z)
 
 
