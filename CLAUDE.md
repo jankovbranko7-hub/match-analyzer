@@ -46,6 +46,14 @@ beider Teams (gesamt, zu Hause bzw. auswärts, letzte 6) müssen in dieselbe Ric
 zeigen, bei Toren und bei xG. Vom Nutzer am 07.10.2026 so bestätigt („das passt alles so"),
 auch wenn dadurch nur wenige Spiele eine Wette bekommen.
 
+**Tabellen kommen aus `system/tabellen.py`** (`FOOTYSTATS_KEY="$APIKEY" python3
+system/tabellen.py <Spiel-ids>`, Spielliste mit `--liste <Datum>`). Nichts per Auge
+umrechnen. Die Tabelle hat sieben Zeilen: Spiele, Tore, Gegentore (Summen der API),
+**Tore pro Spiel, Gegentore pro Spiel** (Summe geteilt durch Spiele – dieselbe Einheit wie
+xG; vom Nutzer am 09.10.2026 so beschlossen, weil Summen und Schnitte nebeneinander zu
+falschen Vergleichen führten), xG für, xG dagegen (Schnitt pro Spiel laut API). Verglichen
+wird immer pro Spiel. Bei 0 Spielen steht in „pro Spiel" fehlt.
+
 **Gegenprobe:** Die Daten werden zweimal abgefragt (Spiel, `league-teams`, `lastx` je
 Team) und Wert für Wert verglichen. Weicht einer ab: keine Wette.
 
