@@ -23,8 +23,21 @@ zur Datenbasis, keine eigene Herleitung.
 
 **Kein festes Verfahren zum Zusammenführen, keine Schwelle.** Am 06.10.2026 hatte ich
 eines erfunden (acht Sichten aus Angriff plus gegnerischer Abwehr geteilt durch zwei,
-Wette nur wenn alle acht übereinstimmen, BTTS erst ab 1 je Seite). Der Nutzer hat es
-gestrichen. Nicht wieder einbauen.
+Wette nur wenn alle acht übereinstimmen). Der Nutzer hat es gestrichen. Nicht wieder
+einbauen.
+
+**BTTS Ja ist eine der fünf Wetten wie jede andere** (so steht es in `SYSTEM.md`). Sie
+wird an der Linie gelesen, die die Wette selbst vorgibt – wie Over/Under an 2,5:
+„beide treffen" heißt, in **jeder** Spalte schießt jedes Team mindestens 1 Tor pro Spiel
+und der Gegner kassiert mindestens 1, bei Toren und bei xG (xG für und xG dagegen
+jeweils mindestens 1). Bis 09.10.2026 hatte ich BTTS ohne Lesart faktisch
+ausgeschlossen – mein Fehler, vom Nutzer so festgestellt.
+
+**Tragen die Teamfelder mehrere Wetten, gilt die mit den stärksten Daten** – Nutzer am
+09.10.2026: „du sollst immer die stärksten Daten aus den APIs, so wie es im System
+steht, wählen und daraus soll dann die Wette entstehen, falls alles dafür spricht."
+Stärker ist die Wette, deren schwächste Spalte weiter von ihrer Linie bzw. vom Gegner
+entfernt ist.
 
 **Genau eine Wette oder keine.** Nie zwei. (Vom Nutzer am 06.10.2026 so festgelegt.)
 
