@@ -37,6 +37,15 @@ ausgeschlossen – mein Fehler, vom Nutzer so festgestellt.
 Liegt eine Spalte genau auf 2,50, trägt sie weder Over noch Under. Nicht nachfragen, nicht
 auslegen (Nutzer am 10.10.2026: „halte dich an das System").
 
+**Welche Spalten in die Wette eingehen – für alle fünf Wetten gleich** (Nutzer am
+10.10.2026, „Dann nehmen wir 2"): beim **Heimteam** gesamt, zu Hause, L6 gesamt,
+L6 zu Hause; beim **Gastteam** gesamt, auswärts, L6 gesamt, L6 auswärts. Das gilt für
+Heimsieg und Auswärtssieg genauso wie für BTTS Ja, Over 2,5 und Under 2,5. Heimteam
+auswärts und Gastteam zu Hause stehen weiter in der Tabelle (`SYSTEM.md` verlangt alle
+drei Spalten je Team), gehen aber in keine Wette ein. Bis 10.10.2026 hatte ich BTTS und
+Over/Under in allen sechs Spalten beider Teams gelesen, Heim-/Auswärtssieg nur in den
+passenden – das war uneinheitlich, vom Nutzer so entschieden.
+
 **Tragen die Teamfelder mehrere Wetten, gilt die mit den stärksten Daten** – Nutzer am
 09.10.2026: „du sollst immer die stärksten Daten aus den APIs, so wie es im System
 steht, wählen und daraus soll dann die Wette entstehen, falls alles dafür spricht."
