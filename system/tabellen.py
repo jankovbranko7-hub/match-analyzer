@@ -10,7 +10,8 @@ Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen 
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
 Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen, BTTS %, ohne Tor %,
-ohne Gegentor % - die Werte so, wie die API sie liefert. Fehlt ein Feld, steht "fehlt".
+ohne Gegentor %, Sieg %, Niederlage %, Over 2,5 %, Under 2,5 % - die Werte so, wie die API
+sie liefert. Fehlt ein Feld, steht "fehlt".
 
 Der Key kommt aus FOOTYSTATS_KEY und wird nie ausgegeben.
 """
@@ -21,7 +22,9 @@ SPALTEN = ['overall', 'home', 'away']
 FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonScoredNum_{}'),
           ('Gegentore', 'seasonConcededNum_{}'), ('xG für', 'xg_for_avg_{}'),
           ('xG dagegen', 'xg_against_avg_{}'), ('BTTS %', 'seasonBTTSPercentage_{}'),
-          ('ohne Tor %', 'seasonFTSPercentage_{}'), ('ohne Gegentor %', 'seasonCSPercentage_{}')]
+          ('ohne Tor %', 'seasonFTSPercentage_{}'), ('ohne Gegentor %', 'seasonCSPercentage_{}'),
+          ('Sieg %', 'winPercentage_{}'), ('Niederlage %', 'losePercentage_{}'),
+          ('Over 2,5 %', 'seasonOver25Percentage_{}'), ('Under 2,5 %', 'seasonUnder25Percentage_{}')]
 KONTEXT = ['team_a_xg_prematch', 'team_b_xg_prematch', 'btts_potential', 'o25_potential', 'u25_potential']
 KOPF_FELDER = ['id', 'homeID', 'awayID', 'home_name', 'away_name', 'competition_id', 'date_unix']
 
