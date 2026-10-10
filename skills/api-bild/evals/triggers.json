@@ -1,9 +1,0 @@
-{
-  "skill": "api-bild",
-  "test_cases": [
-    {"input": "Lies das API-Bild und gib einen Tipp", "should_trigger": true},
-    {"input": "FootyStats Potentiale, ein Tipp, kein 70/30", "should_trigger": true},
-    {"input": "Wales gegen Dänemark nur aus der API", "should_trigger": true},
-    {"input": "Schreib ein Gedicht über Regen", "should_trigger": false}
-  ]
-}
