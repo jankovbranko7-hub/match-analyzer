@@ -33,6 +33,10 @@ und der Gegner kassiert mindestens 1, bei Toren und bei xG (xG für und xG dageg
 jeweils mindestens 1). Bis 09.10.2026 hatte ich BTTS ohne Lesart faktisch
 ausgeschlossen – mein Fehler, vom Nutzer so festgestellt.
 
+**Over 2,5 heißt mehr als 2,5, Under 2,5 heißt weniger als 2,5** – wörtlich wie die Wette.
+Liegt eine Spalte genau auf 2,50, trägt sie weder Over noch Under. Nicht nachfragen, nicht
+auslegen (Nutzer am 10.10.2026: „halte dich an das System").
+
 **Tragen die Teamfelder mehrere Wetten, gilt die mit den stärksten Daten** – Nutzer am
 09.10.2026: „du sollst immer die stärksten Daten aus den APIs, so wie es im System
 steht, wählen und daraus soll dann die Wette entstehen, falls alles dafür spricht."
