@@ -9,8 +9,8 @@ und Wert fuer Wert verglichen. Ausgabe als Markdown: Tabelle je Team (Heim, dann
 Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen aus dem
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
-Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen - die Werte so,
-wie die API sie liefert. Fehlt ein Feld, steht "fehlt".
+Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen, BTTS %, ohne Tor %,
+ohne Gegentor % - die Werte so, wie die API sie liefert. Fehlt ein Feld, steht "fehlt".
 
 Der Key kommt aus FOOTYSTATS_KEY und wird nie ausgegeben.
 """
@@ -20,7 +20,8 @@ BASE = "https://api.football-data-api.com/"
 SPALTEN = ['overall', 'home', 'away']
 FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonScoredNum_{}'),
           ('Gegentore', 'seasonConcededNum_{}'), ('xG für', 'xg_for_avg_{}'),
-          ('xG dagegen', 'xg_against_avg_{}')]
+          ('xG dagegen', 'xg_against_avg_{}'), ('BTTS %', 'seasonBTTSPercentage_{}'),
+          ('ohne Tor %', 'seasonFTSPercentage_{}'), ('ohne Gegentor %', 'seasonCSPercentage_{}')]
 KONTEXT = ['team_a_xg_prematch', 'team_b_xg_prematch', 'btts_potential', 'o25_potential', 'u25_potential']
 KOPF_FELDER = ['id', 'homeID', 'awayID', 'home_name', 'away_name', 'competition_id', 'date_unix']
 
