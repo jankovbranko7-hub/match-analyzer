@@ -9,10 +9,8 @@ und Wert fuer Wert verglichen. Ausgabe als Markdown: Tabelle je Team (Heim, dann
 Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen aus dem
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
-Zeilen: Spiele, Tore, Gegentore (Summen der API), Tore pro Spiel, Gegentore pro Spiel
-(Summe geteilt durch Spiele, damit sie dieselbe Einheit haben wie xG), xG fuer, xG dagegen
-(Schnitt pro Spiel laut API). Fehlt ein Feld, steht "fehlt". Bei 0 Spielen laesst sich
-"pro Spiel" nicht bilden, dort steht ebenfalls "fehlt".
+Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen - die Werte so,
+wie die API sie liefert. Fehlt ein Feld, steht "fehlt".
 
 Der Key kommt aus FOOTYSTATS_KEY und wird nie ausgegeben.
 """
@@ -49,11 +47,9 @@ def zahl(d, k):
     return v if isinstance(v, (int, float)) else None
 
 
-def f(v, stellen=None):
+def f(v):
     if v is None:
         return 'fehlt'
-    if stellen is not None:
-        return f"{v:.{stellen}f}".replace('.', ',')
     return str(v).replace('.', ',')
 
 
@@ -65,8 +61,6 @@ def teamwerte(teams, lastx, tid):
         for sp in SPALTEN:
             w[(name, sp)] = zahl(t and t.get('stats'), muster.format(sp))
             w[(name, 'L6' + sp)] = zahl(l6 and l6.get('stats'), muster.format(sp))
-    w['L6 letztes Spiel'] = zahl(l6, 'last_updated_match_timestamp')
-    w['L6 competition_id'] = zahl(l6, 'competition_id')
     return (t or {}).get('name'), w
 
 
@@ -75,21 +69,7 @@ def tabelle(name, w):
     z = [f"**{name}**",
          "| | gesamt | zu Hause | auswärts | L6 gesamt | L6 zu Hause | L6 auswärts |",
          "|---|---|---|---|---|---|---|"]
-    def pro_spiel(feld, sp):
-        n, s = w[('Spiele', sp)], w[(feld, sp)]
-        return s / n if n and s is not None else None
-    reihen = [('Spiele', [f(w[('Spiele', s)]) for s in sp6]),
-              ('Tore', [f(w[('Tore', s)]) for s in sp6]),
-              ('Gegentore', [f(w[('Gegentore', s)]) for s in sp6]),
-              ('Tore pro Spiel', [f(pro_spiel('Tore', s), 2) for s in sp6]),
-              ('Gegentore pro Spiel', [f(pro_spiel('Gegentore', s), 2) for s in sp6]),
-              ('xG für', [f(w[('xG für', s)]) for s in sp6]),
-              ('xG dagegen', [f(w[('xG dagegen', s)]) for s in sp6])]
-    z += [f"| {n} | " + ' | '.join(v) + ' |' for n, v in reihen]
-    ts = w['L6 letztes Spiel']
-    datum = time.strftime('%d.%m.%Y', time.gmtime(ts)) if ts else 'fehlt'
-    quelle = 'alle Wettbewerbe' if w['L6 competition_id'] == -1 else f"Wettbewerb {f(w['L6 competition_id'])}"
-    z.append(f"\nLetzte 6: letztes Spiel am **{datum}** ({quelle}, laut API).")
+    z += [f"| {n} | " + ' | '.join(f(w[(n, s)]) for s in sp6) + ' |' for n, _ in FELDER]
     return '\n'.join(z)
 
 
