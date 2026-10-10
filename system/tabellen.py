@@ -9,9 +9,10 @@ und Wert fuer Wert verglichen. Ausgabe als Markdown: Tabelle je Team (Heim, dann
 Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen aus dem
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
-Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen, BTTS %, ohne Tor %,
-ohne Gegentor %, Sieg %, Niederlage %, Over 2,5 %, Under 2,5 % - die Werte so, wie die API
-sie liefert. Fehlt ein Feld, steht "fehlt".
+Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen und die Varianz-Felder
+(Tore Ø, Gegentore Ø, BTTS & Niederlage %, BTTS & Sieg %, Tore 2. HZ Ø) - die Felder aus SYSTEM.md,
+so wie die API sie liefert. Liefert die API bei Tore/Gegentore eine Liste (eine Torminute je
+Tor), zaehlt die Anzahl der Eintraege. Fehlt ein Feld, steht "fehlt".
 
 Der Key kommt aus FOOTYSTATS_KEY und wird nie ausgegeben.
 """
@@ -19,12 +20,11 @@ import json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 BASE = "https://api.football-data-api.com/"
 SPALTEN = ['overall', 'home', 'away']
-FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonScoredNum_{}'),
-          ('Gegentore', 'seasonConcededNum_{}'), ('xG für', 'xg_for_avg_{}'),
-          ('xG dagegen', 'xg_against_avg_{}'), ('BTTS %', 'seasonBTTSPercentage_{}'),
-          ('ohne Tor %', 'seasonFTSPercentage_{}'), ('ohne Gegentor %', 'seasonCSPercentage_{}'),
-          ('Sieg %', 'winPercentage_{}'), ('Niederlage %', 'losePercentage_{}'),
-          ('Over 2,5 %', 'seasonOver25Percentage_{}'), ('Under 2,5 %', 'seasonUnder25Percentage_{}')]
+FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonGoals_{}'),
+          ('Gegentore', 'seasonConceded_{}'), ('xG für', 'xg_for_avg_{}'),
+          ('xG dagegen', 'xg_against_avg_{}'), ('Tore Ø', 'seasonScoredAVG_{}'),
+          ('Gegentore Ø', 'seasonConcededAVG_{}'), ('BTTS & Niederlage %', 'BTTS_and_lose_percentage_{}'),
+          ('BTTS & Sieg %', 'BTTS_and_win_percentage_{}'), ('Tore 2. HZ Ø', 'AVG_2hg_{}')]
 KONTEXT = ['team_a_xg_prematch', 'team_b_xg_prematch', 'btts_potential', 'o25_potential', 'u25_potential']
 KOPF_FELDER = ['id', 'homeID', 'awayID', 'home_name', 'away_name', 'competition_id', 'date_unix']
 
@@ -48,6 +48,8 @@ def hole(endpoint, **params):
 
 def zahl(d, k):
     v = (d or {}).get(k)
+    if isinstance(v, list):  # seasonGoals_home/away usw.: ein Eintrag (Torminute) je Tor
+        return len(v)
     return v if isinstance(v, (int, float)) else None
 
 
