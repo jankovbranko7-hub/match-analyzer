@@ -5,10 +5,8 @@ zusätzliche Regel, Lesart, Schwelle, Linie, Rechnung oder Spaltenauswahl, die n
 `SYSTEM.md` steht. Alle früheren Zusatzregeln in dieser Datei hat der Nutzer am
 10.10.2026 gestrichen („alles raus was nicht im System steht").
 
-**Vom Nutzer danach festgelegt:**
-- 10.10.2026: Tragen die Teamfelder zwei Wetten, wird die stärkere getippt („soll die
-  stärke getippt werden ganz einfach"). Stärker ist die Wette, deren schwächste Spalte
-  weiter über bzw. unter ihrer Linie liegt.
+Die vom Nutzer bestätigten Lesarten stehen in `SYSTEM.md` unter „Lesart". Was dort nicht
+steht, wird nicht angewendet; fehlt etwas, wird gefragt.
 
 ## Technik (nicht Teil des Systems)
 
