@@ -10,11 +10,21 @@ Die früheren Lesarten 1–5 gelten nicht mehr.
 **Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
 Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
 
-**Gefahr immer markiert** (Nutzer 11.10.: „sollte ab jetzt immer markiert sein, weil man den
-Überblick schnell verliert"): Zu jeder Wette steht direkt darunter eine eigene Zeile
-`⚠️ **Gefahr:** …` mit dem stärksten Gegensignal aus den Teamfeldern, mit Zahl. Ganz oben
-steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr (kurz). Bei „keine“ steht dort
-der Grund. Das ist nur die Darstellung – an der Wahl der Wette ändert es nichts.
+**Gefahr nur, wo sie sicher da ist** (Nutzer 11.10.: erst „immer markiert, weil man den
+Überblick schnell verliert", dann „nur pro Spiel, wo es auch zu 100 % eine Gefahr gibt"):
+Ganz oben steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr. Die Zeile
+`⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) gibt es **nur**, wenn ein
+Teamfeld direkt das Gegenteil der Wette zeigt – in den Spalten, die für das Spiel zählen:
+Heimteam gesamt / zu Hause / L6 gesamt, Gast gesamt / auswärts / L6 gesamt.
+- Heimsieg / Auswärtssieg: Der Gegner hat in einer dieser Spalten die bessere Tor- oder
+  xG-Bilanz (für minus gegen pro Spiel), oder das gewettete Team ist dort im Minus.
+- Over 2.5: In einer dieser Spalten fallen im Schnitt weniger als 2,5 Tore pro Spiel
+  (Tore + Gegentore). Under 2.5: mehr als 2,5.
+- BTTS Ja: Ein Team trifft in einer dieser Spalten im Schnitt unter 1 Tor pro Spiel, oder
+  der Gegner kassiert dort im Schnitt unter 1.
+Sonst keine ⚠️-Zeile, in der Übersicht „–“. Schwächen, die nicht direkt dagegen sprechen,
+gehören in die Begründung, nicht in die Gefahr-Zeile. Bei „keine“ steht in der Übersicht der
+Grund. Das ist nur die Darstellung – an der Wahl der Wette ändert es nichts.
 
 ## Technik (nicht Teil des Systems)
 
