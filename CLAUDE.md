@@ -10,6 +10,12 @@ Die früheren Lesarten 1–5 gelten nicht mehr.
 **Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
 Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
 
+**Gefahr immer markiert** (Nutzer 11.10.: „sollte ab jetzt immer markiert sein, weil man den
+Überblick schnell verliert"): Zu jeder Wette steht direkt darunter eine eigene Zeile
+`⚠️ **Gefahr:** …` mit dem stärksten Gegensignal aus den Teamfeldern, mit Zahl. Ganz oben
+steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr (kurz). Bei „keine“ steht dort
+der Grund. Das ist nur die Darstellung – an der Wahl der Wette ändert es nichts.
+
 ## Technik (nicht Teil des Systems)
 
 `SYSTEM.md` nennt `FOOTYSTATS_KEY`. In dieser Umgebung ist der Key als `APIKEY`
