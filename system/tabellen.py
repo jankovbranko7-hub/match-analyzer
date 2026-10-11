@@ -10,7 +10,8 @@ Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen 
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
 Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen und die Varianz-Felder
-(Tore Ø, Gegentore Ø, BTTS & Niederlage %, BTTS & Sieg %, Tore 2. HZ Ø) - die Felder aus SYSTEM.md,
+(seasonScoredAVG, seasonConcededAVG, BTTS_and_lose_percentage, BTTS_and_win_percentage, AVG_2hg) -
+die Felder und Bezeichnungen genau wie in SYSTEM.md,
 so wie die API sie liefert. Liefert die API bei Tore/Gegentore eine Liste (eine Torminute je
 Tor), zaehlt die Anzahl der Eintraege. Fehlt ein Feld, steht "fehlt".
 
@@ -22,9 +23,9 @@ BASE = "https://api.football-data-api.com/"
 SPALTEN = ['overall', 'home', 'away']
 FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonGoals_{}'),
           ('Gegentore', 'seasonConceded_{}'), ('xG für', 'xg_for_avg_{}'),
-          ('xG dagegen', 'xg_against_avg_{}'), ('Tore Ø', 'seasonScoredAVG_{}'),
-          ('Gegentore Ø', 'seasonConcededAVG_{}'), ('BTTS & Niederlage %', 'BTTS_and_lose_percentage_{}'),
-          ('BTTS & Sieg %', 'BTTS_and_win_percentage_{}'), ('Tore 2. HZ Ø', 'AVG_2hg_{}')]
+          ('xG dagegen', 'xg_against_avg_{}'), ('seasonScoredAVG', 'seasonScoredAVG_{}'),
+          ('seasonConcededAVG', 'seasonConcededAVG_{}'), ('BTTS_and_lose_percentage', 'BTTS_and_lose_percentage_{}'),
+          ('BTTS_and_win_percentage', 'BTTS_and_win_percentage_{}'), ('AVG_2hg', 'AVG_2hg_{}')]
 KONTEXT = ['team_a_xg_prematch', 'team_b_xg_prematch', 'btts_potential', 'o25_potential', 'u25_potential']
 KOPF_FELDER = ['id', 'homeID', 'awayID', 'home_name', 'away_name', 'competition_id', 'date_unix']
 
