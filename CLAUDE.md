@@ -10,21 +10,25 @@ Die früheren Lesarten 1–5 gelten nicht mehr.
 **Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
 Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
 
-**Gefahr nur, wo sie sicher da ist** (Nutzer 11.10.: erst „immer markiert, weil man den
-Überblick schnell verliert", dann „nur pro Spiel, wo es auch zu 100 % eine Gefahr gibt"):
-Ganz oben steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr. Die Zeile
-`⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) gibt es **nur**, wenn ein
-Teamfeld direkt das Gegenteil der Wette zeigt – in den Spalten, die für das Spiel zählen:
-Heimteam gesamt / zu Hause / L6 gesamt, Gast gesamt / auswärts / L6 gesamt.
-- Heimsieg / Auswärtssieg: Der Gegner hat in einer dieser Spalten die bessere Tor- oder
-  xG-Bilanz (für minus gegen pro Spiel), oder das gewettete Team ist dort im Minus.
-- Over 2.5: In einer dieser Spalten fallen im Schnitt weniger als 2,5 Tore pro Spiel
-  (Tore + Gegentore). Under 2.5: mehr als 2,5.
-- BTTS Ja: Ein Team trifft in einer dieser Spalten im Schnitt unter 1 Tor pro Spiel, oder
-  der Gegner kassiert dort im Schnitt unter 1.
-Sonst keine ⚠️-Zeile, in der Übersicht „–“. Schwächen, die nicht direkt dagegen sprechen,
-gehören in die Begründung, nicht in die Gefahr-Zeile. Bei „keine“ steht in der Übersicht der
-Grund. Das ist nur die Darstellung – an der Wahl der Wette ändert es nichts.
+**Warnsignal ⚠️** (Nutzer 11.10., gilt ab dem Batch nach dieser Änderung; ersetzt die
+frühere feste Regel): Ganz oben steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr.
+Die Zeile `⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) kommt bei jeder
+Wette, aber **nur**, wenn ein echtes Warnsignal in den Teamfeldern steckt – qualitativ
+gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
+- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist oder die Heim-Stärke nicht
+  extrem ist.
+- Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
+  seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
+- BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
+  widersprüchlich ist. Under 2.5 sinngemäß: eine Seite offensiv zu stark oder Varianz
+  widersprüchlich.
+- Weitere echte Warnsignale (seltener): sehr enge xG-Differenz trotz leichtem Vorteil; hohe
+  Varianz oder widersprüchliche letzte 6 bei sonst klarem Bild; beide Teams sehr stark und
+  das Spiel eng (Top-Spiel).
+Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei solider
+Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
+Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
+an der Wahl der Wette ändert es nichts.
 
 ## Technik (nicht Teil des Systems)
 
