@@ -30,6 +30,10 @@ Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; d
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
 an der Wahl der Wette ändert es nichts.
 
+**Auswerten** (Nutzer 14.10.): Sagt der Nutzer „auswerten“, sind nur die freigegebenen
+Wetten gemeint – die ohne ⚠️ (und nicht „keine“) –, aus dem Zeitraum, den er nennt. Andere
+nur, wenn er es ausdrücklich sagt.
+
 ## Technik (nicht Teil des Systems)
 
 `SYSTEM.md` nennt `FOOTYSTATS_KEY`. In dieser Umgebung ist der Key als `APIKEY`
