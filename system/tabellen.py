@@ -10,7 +10,9 @@ Kontextzeile, Gegenprobe. Bild und Wette schreibt das Skript NICHT - die kommen 
 Lesen der Tabellen nach SYSTEM.md und CLAUDE.md.
 
 Zeilen wie in SYSTEM.md: Spiele, Tore, Gegentore, xG fuer, xG dagegen und die Varianz-Felder
-(seasonScoredAVG, seasonConcededAVG, BTTS_and_lose_percentage, BTTS_and_win_percentage, AVG_2hg) -
+(seasonScoredAVG, seasonConcededAVG, BTTS_and_lose_percentage, BTTS_and_win_percentage, AVG_2hg),
+Haeufigkeiten und Ergebnisse (seasonCSPercentage, seasonFTSPercentage, seasonOver25Percentage,
+seasonBTTSPercentage, winPercentage, drawPercentage, seasonPPG, shotsOnTargetAVG) -
 die Felder und Bezeichnungen genau wie in SYSTEM.md,
 so wie die API sie liefert. Liefert die API bei Tore/Gegentore eine Liste (eine Torminute je
 Tor), zaehlt die Anzahl der Eintraege. Fehlt ein Feld, steht "fehlt".
@@ -25,7 +27,11 @@ FELDER = [('Spiele', 'seasonMatchesPlayed_{}'), ('Tore', 'seasonGoals_{}'),
           ('Gegentore', 'seasonConceded_{}'), ('xG für', 'xg_for_avg_{}'),
           ('xG dagegen', 'xg_against_avg_{}'), ('seasonScoredAVG', 'seasonScoredAVG_{}'),
           ('seasonConcededAVG', 'seasonConcededAVG_{}'), ('BTTS_and_lose_percentage', 'BTTS_and_lose_percentage_{}'),
-          ('BTTS_and_win_percentage', 'BTTS_and_win_percentage_{}'), ('AVG_2hg', 'AVG_2hg_{}')]
+          ('BTTS_and_win_percentage', 'BTTS_and_win_percentage_{}'), ('AVG_2hg', 'AVG_2hg_{}'),
+          ('seasonCSPercentage', 'seasonCSPercentage_{}'), ('seasonFTSPercentage', 'seasonFTSPercentage_{}'),
+          ('seasonOver25Percentage', 'seasonOver25Percentage_{}'), ('seasonBTTSPercentage', 'seasonBTTSPercentage_{}'),
+          ('winPercentage', 'winPercentage_{}'), ('drawPercentage', 'drawPercentage_{}'),
+          ('seasonPPG', 'seasonPPG_{}'), ('shotsOnTargetAVG', 'shotsOnTargetAVG_{}')]
 KONTEXT = ['team_a_xg_prematch', 'team_b_xg_prematch', 'btts_potential', 'o25_potential', 'u25_potential']
 KOPF_FELDER = ['id', 'homeID', 'awayID', 'home_name', 'away_name', 'competition_id', 'date_unix']
 

@@ -22,3 +22,18 @@
 ## 2026-10-10
 - Initial skill creation for FootyStats Bild und Wette analysis.
 - Added workflow, API key, field mapping reference, and basic fetch script.
+
+## 2026-10-11 (Update 4)
+- Spiele kommen als nummerierter Batch; Antwort in derselben Nummerierung.
+- Übersicht ganz oben: Nr. | Anpfiff | Spiel | Wette | ⚠️ Gefahr, darunter die freigegebenen Wetten.
+- Warnsignal ⚠️ nach Vorgabe des Nutzers: qualitativ, ohne Grenzwerte, Schwerpunkt Heim-Anfälligkeit; Kriterien je Wette (Heimsieg, Auswärtssieg, BTTS/Over, Under) und seltenere Signale. Nur Darstellung, ändert die Wette nicht.
+
+## 2026-10-14
+- „Auswerten“ heißt: nur die freigegebenen Wetten (ohne ⚠️, nicht „keine“) aus dem genannten Zeitraum.
+
+## 2026-10-15
+- Freigabe-Check in drei Durchgängen vor jeder Wette ohne ⚠️: Spalte für Spalte (auch L6 zu Hause/auswärts), gleiche Signale gleich behandeln, jede Zahl gegen die Tabelle prüfen. Anlass: Bodø/Glimt – Dortmund (1:0), wo Dortmunds stabile Auswärtsabwehr (0,67 Gegentore) nicht wie bei Feyenoord markiert wurde.
+- Ohne Saisondaten (v. a. Conference League) keine Freigabe.
+- `scripts/tabellen.py`: Tabellen je Spiel mit doppelter Lesung und Gegenprobe.
+- `references/api_hinweise.md`: Spiele finden über `/league-matches`, Saison-IDs, Namensvarianten, Europapokal-Besonderheiten.
+- Häufigkeiten und Ergebnisse als Teamfelder aufgenommen (Nutzer 15.10., „ohne irgendwelche Schwellen“): `seasonCSPercentage`, `seasonFTSPercentage`, `seasonOver25Percentage`, `seasonBTTSPercentage`, `winPercentage`, `drawPercentage`, `seasonPPG`, `shotsOnTargetAVG` – je gesamt/zu Hause/auswärts und für die letzten 6. Sie fließen qualitativ ins Bild und in die Wette ein, ohne Grenzwerte. `tabellen.py` zeigt sie als zusätzliche Zeilen (Gegenprobe jetzt 228 Werte je Spiel).

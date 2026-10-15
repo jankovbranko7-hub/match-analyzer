@@ -32,3 +32,18 @@ Kontext-Felder (nicht für Wette):
 - PPG: `pre_match_home_ppg`, `pre_match_away_ppg`
 
 Immer „fehlt“ schreiben, wenn Feld nicht vorhanden.
+
+## Häufigkeiten und Ergebnisse (ab 15.10.2026)
+
+Unter `stats` in `/league-teams` und unter dem Eintrag mit `last_x_match_num: 6` in `/lastx`, jeweils mit `_overall`, `_home`, `_away`:
+
+| Bedeutung                         | Feld                     |
+|-----------------------------------|--------------------------|
+| Spiele ohne Gegentor (%)          | seasonCSPercentage       |
+| Spiele ohne eigenes Tor (%)       | seasonFTSPercentage      |
+| Spiele mit über 2,5 Toren (%)     | seasonOver25Percentage   |
+| Spiele, in denen beide trafen (%) | seasonBTTSPercentage     |
+| Siege (%)                         | winPercentage            |
+| Unentschieden (%)                 | drawPercentage           |
+| Punkte pro Spiel                  | seasonPPG                |
+| Schüsse aufs Tor pro Spiel        | shotsOnTargetAVG         |

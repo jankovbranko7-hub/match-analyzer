@@ -5,7 +5,9 @@
 `SKILL.md`, dazu `references/`, `scripts/`, `evals/`, `CHANGELOG.md`), vom Nutzer als
 „komplettes neues System" eingesetzt, „so ausführen ohne Widerrede". Es verlangt die
 freiere, qualitative Gewichtung von Bild und Verlauf ohne Schwellen – genau so anwenden.
-Die früheren Lesarten 1–5 gelten nicht mehr.
+Die früheren Lesarten 1–5 gelten nicht mehr. Am 15.10. hat der Nutzer das System um
+Häufigkeiten und Ergebnisse erweitert (CS-, FTS-, Over-2.5-, BTTS-, Sieg-, Remis-Anteil,
+Punkte pro Spiel, Schüsse aufs Tor) – „ohne irgendwelche Schwellen".
 
 **Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
 Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
