@@ -47,3 +47,9 @@ Unter `stats` in `/league-teams` und unter dem Eintrag mit `last_x_match_num: 6`
 | Unentschieden (%)                 | drawPercentage           |
 | Punkte pro Spiel                  | seasonPPG                |
 | Schüsse aufs Tor pro Spiel        | shotsOnTargetAVG         |
+
+## Heimische Liga bei Pokal- und Europapokalspielen (ab 15.10.2026)
+
+`/team?team_id=...&include=stats` liefert je Wettbewerb und Saison einen Eintrag mit `competition_id`, `season`, `season_format` und `stats`. Für die Saisonspalten zählt der Eintrag mit `season_format` „Domestic League“ und der jüngsten Saison (mit mindestens einem Spiel).
+
+In diesen Einträgen fehlen `seasonGoals_home/away` und `seasonConceded_home/away`. Dieselben Zahlen stehen unter `seasonScoredNum_*` und `seasonConcededNum_*` (geprüft gegen `/league-teams`: identisch). Diese Felder liefern auch in `/lastx` die Tore der letzten 6 zu Hause/auswärts.

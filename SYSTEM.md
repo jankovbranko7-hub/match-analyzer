@@ -21,6 +21,7 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
 
 2. **Heimteam komplett, dann Gastteam komplett.**  
    Hole Teamdaten mit `/league-teams?season_id=...&include=stats` (season_id aus Match oder Liga).  
+   Bei Pokal- und Europapokalspielen kommen die Saisonspalten aus der **aktuellen Saison der heimischen Liga** des Teams (`/team?team_id=...&include=stats`, Eintrag mit `season_format` „Domestic League“), weil der Wettbewerb selbst oft erst 0 bis 3 Spiele hat. Die Quelle wird je Team angegeben. Gibt es keine Ligadaten, bleibt es beim Wettbewerb.  
    Für jedes Team die Spalten **Gesamt / zu Hause / auswärts**:  
    - Spiele (`seasonMatchesPlayed_overall/home/away`)  
    - Tore (`seasonGoals_overall/home/away`)  
