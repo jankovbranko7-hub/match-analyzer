@@ -30,6 +30,16 @@ Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; d
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
 an der Wahl der Wette ändert es nichts.
 
+**Freigabe-Check** (Nutzer 15.10.: „bevor die Freigabe erteilt wird, doppelt und dreifach
+prüfen"): Bevor eine Wette ohne ⚠️ rausgeht, drei Durchgänge:
+1. Jedes ⚠️-Kriterium oben Spalte für Spalte prüfen – gesamt, zu Hause/auswärts, L6 gesamt
+   **und** L6 zu Hause/auswärts.
+2. Gleiche Signale gleich behandeln: Was im selben Batch oder am selben Tag bei einem Spiel
+   ein ⚠️ bekommt (z. B. eine Abwehr mit wenig Gegentoren bei Over/BTTS), bekommt es bei
+   jedem anderen Spiel mit demselben Signal auch.
+3. Jede Zahl im Text gegen die Tabelle prüfen.
+Auch das ist nur Darstellung – an der Wahl der Wette ändert es nichts.
+
 **Auswerten** (Nutzer 14.10.): Sagt der Nutzer „auswerten“, sind nur die freigegebenen
 Wetten gemeint – die ohne ⚠️ (und nicht „keine“) –, aus dem Zeitraum, den er nennt. Andere
 nur, wenn er es ausdrücklich sagt.
