@@ -21,6 +21,11 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
   extrem ist.
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
+- Siegwette (Heim- oder Auswärtssieg) zusätzlich → ⚠️ (Nutzer 16.10., ohne Schwellen),
+  wenn eines der Teams in den passenden Spalten auffällig oft unentschieden spielt
+  (`drawPercentage`), oder wenn das Team, gegen das gewettet wird, klar bessere Ergebnisse
+  holt, als seine xG erwarten lassen – bei Heimsieg das Gastteam auswärts, bei
+  Auswärtssieg sinngemäß das Heimteam zu Hause.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
   widersprüchlich ist. Under 2.5 sinngemäß: eine Seite offensiv zu stark oder Varianz
   widersprüchlich.
