@@ -6,7 +6,8 @@
 „komplettes neues System" eingesetzt, „so ausführen ohne Widerrede". Es verlangt die
 freiere, qualitative Gewichtung von Bild und Verlauf ohne Schwellen – genau so anwenden.
 Die früheren Lesarten 1–5 gelten nicht mehr. Am 17.10. hat der Nutzer das System auf
-den Stand vom 14.10. zurückgesetzt („zum System zurück, wo 100 % Trefferquote war“): ohne
+den Stand vom 13.10. zurückgesetzt („zum System zurück, wo 100 % Trefferquote war“, „laut
+den Spielen vom 13.10.“; bis 14.10. kam nur die Auswerten-Regel dazu, die keine Wette ändert): ohne
 Freigabe-Check, ohne die Häufigkeits- und Ergebnisfelder, ohne Ligadaten im Europapokal und
 ohne die Zusatzregel für Siegwetten vom 16.10.
 
