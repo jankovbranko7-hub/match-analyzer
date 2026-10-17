@@ -1,6 +1,6 @@
 ---
 name: footystats-bild-wette
-description: "Analysiere Fußballspiele mit der FootyStats-API: extrahiere Teamfelder (Spiele, Tore, Gegentore, xG für/dagegen gesamt/zu Hause/auswärts + letzte 6 + Varianz-Felder + Häufigkeiten und Ergebnisse), bilde ein Bild in einem Satz aus den Teamfeldern und schlage eine Wette nur daraus vor (Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5, Under 2.5) oder keine. Nutze wenn der Nutzer Spiele für Bild und Wette schickt."
+description: "Analysiere Fußballspiele mit der FootyStats-API: extrahiere Teamfelder (Spiele, Tore, Gegentore, xG für/dagegen gesamt/zu Hause/auswärts + letzte 6 + Varianz-Felder), bilde ein Bild in einem Satz aus den Teamfeldern und schlage eine Wette nur daraus vor (Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5, Under 2.5) oder keine. Nutze wenn der Nutzer Spiele für Bild und Wette schickt."
 type: workflow
 lifecycle: active
 ---
@@ -21,7 +21,6 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
 
 2. **Heimteam komplett, dann Gastteam komplett.**  
    Hole Teamdaten mit `/league-teams?season_id=...&include=stats` (season_id aus Match oder Liga).  
-   Bei Pokal- und Europapokalspielen kommen die Saisonspalten aus der **aktuellen Saison der heimischen Liga** des Teams (`/team?team_id=...&include=stats`, Eintrag mit `season_format` „Domestic League“), weil der Wettbewerb selbst oft erst 0 bis 3 Spiele hat. Die Quelle wird je Team angegeben. Gibt es keine Ligadaten, bleibt es beim Wettbewerb.  
    Für jedes Team die Spalten **Gesamt / zu Hause / auswärts**:  
    - Spiele (`seasonMatchesPlayed_overall/home/away`)  
    - Tore (`seasonGoals_overall/home/away`)  
@@ -32,16 +31,11 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
      - `seasonScoredAVG_overall` / `seasonConcededAVG_overall`  
      - `BTTS_and_lose_percentage_overall` / `BTTS_and_win_percentage_overall`  
      - `AVG_2hg_overall` (Tore in der 2. Halbzeit)
-   - Zusätzlich Häufigkeiten und Ergebnisse (gesamt/zu Hause/auswärts):  
-     - `seasonCSPercentage` (Spiele ohne Gegentor, %) / `seasonFTSPercentage` (Spiele ohne eigenes Tor, %)  
-     - `seasonOver25Percentage` (Spiele mit über 2,5 Toren, %) / `seasonBTTSPercentage` (Spiele, in denen beide trafen, %)  
-     - `winPercentage` / `drawPercentage` (Siege / Unentschieden, %) / `seasonPPG` (Punkte pro Spiel)  
-     - `shotsOnTargetAVG` (Schüsse aufs Tor pro Spiel)
 
    Gesamt, zu Hause und auswärts sind **Spalten**, keine eigene Regel. Eine Spalte wird nicht gewählt, nur weil dort eine Zahl steht.
 
 3. **Letzte 6.**  
-   `/lastx?team_id=...` — bevorzuge `last_x_match_num=6`. Dieselben Zeilen (Spiele, Tore, Gegentore, xG für, xG dagegen, Varianz-Felder, Häufigkeiten und Ergebnisse gesamt/home/away). Oder Form fehlt.
+   `/lastx?team_id=...` — bevorzuge `last_x_match_num=6`. Dieselben Zeilen (Spiele, Tore, Gegentore, xG für, xG dagegen gesamt/home/away). Oder Form fehlt.
 
 4. **Gemeinsam, nur als Kontext.**  
    Aus `/match?match_id=`:  
@@ -63,9 +57,6 @@ Die Zahlen werden **freier gewichtet und interpretiert**:
 - Home/Away-Splits werden qualitativ stärker oder schwächer gelesen, ohne feste Grenzen.
 - Absolute und relative Differenzen in Tore/xG werden im Zusammenhang mit den Varianz-Feldern beurteilt.
 - Widersprüche zwischen Saisonbild und Verlauf werden freier abgewogen (z. B. gute xG-Bilanz + hohe BTTS_and_lose → Verlauf gewinnt; klare Stärke + niedrige Varianz → Sieg).
-- Häufigkeiten (CS-, FTS-, Over-2.5-, BTTS-Anteil) zeigen, **wie oft** etwas eintritt, und werden neben den Durchschnitten gelesen: Ein Durchschnitt kann von einzelnen hohen Ergebnissen getragen sein, eine Häufigkeit nicht.
-- Sieg- und Remis-Anteil und Punkte pro Spiel ergänzen die Stärke aus Tore/xG um die Ergebnisse; viele Unentschieden sprechen gegen eine Siegwette.
-- Schüsse aufs Tor ergänzen die xG als zweites Maß für Chancen.
 - Es gibt **keine Schwellen oder festen Grenzwerte**. Die Interpretation bleibt qualitativ und begründet.
 
 Mögliche Ausgänge bleiben:
@@ -78,7 +69,7 @@ Es wird immer nur die **eine stärkste** Wette ausgegeben, die aus der freieren 
 
 ## Ausgabe
 
-- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder + Häufigkeiten und Ergebnisse. Danach letzte 6 analog.
+- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder. Danach letzte 6 analog.
 - Danach das **Bild in einem Satz** aus den Teamfeldern (nicht aus gemeinsamen Feldern).
 - Danach eine **Wette nur aus den Teamfeldern**: Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5 oder Under 2.5.  
   Tragen die Teamfelder keine Wette, steht dort **keine**.  
@@ -108,7 +99,7 @@ Nutze `bash` mit `curl` oder `browser_execute` zum Abrufen. Parsen mit Python in
 - Heim komplett, dann Gast komplett.
 - Keine Schätzung. Fehlt = „fehlt“.
 - Gesamt/zu Hause/auswärts = Spalten.
-- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + Häufigkeiten und Ergebnisse + letzte 6), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
+- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + letzte 6), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
 - Gemeinsame Felder (Pre-Match-xG, BTTS, Over/Under) = Kontext only.
 - Zweimal lesen. Abweichung → keine Wette.
 - Ausgabe: Tabellen → Bild-Satz (mit freierer Begründung) → eine Wette oder „keine“.

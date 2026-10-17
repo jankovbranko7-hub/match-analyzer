@@ -5,9 +5,10 @@
 `SKILL.md`, dazu `references/`, `scripts/`, `evals/`, `CHANGELOG.md`), vom Nutzer als
 „komplettes neues System" eingesetzt, „so ausführen ohne Widerrede". Es verlangt die
 freiere, qualitative Gewichtung von Bild und Verlauf ohne Schwellen – genau so anwenden.
-Die früheren Lesarten 1–5 gelten nicht mehr. Am 15.10. hat der Nutzer das System um
-Häufigkeiten und Ergebnisse erweitert (CS-, FTS-, Over-2.5-, BTTS-, Sieg-, Remis-Anteil,
-Punkte pro Spiel, Schüsse aufs Tor) – „ohne irgendwelche Schwellen".
+Die früheren Lesarten 1–5 gelten nicht mehr. Am 17.10. hat der Nutzer das System auf
+den Stand vom 14.10. zurückgesetzt („zum System zurück, wo 100 % Trefferquote war“): ohne
+Freigabe-Check, ohne die Häufigkeits- und Ergebnisfelder, ohne Ligadaten im Europapokal und
+ohne die Zusatzregel für Siegwetten vom 16.10.
 
 **Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
 Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
@@ -21,11 +22,6 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
   extrem ist.
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
-- Siegwette (Heim- oder Auswärtssieg) zusätzlich → ⚠️ (Nutzer 16.10., ohne Schwellen),
-  wenn eines der Teams in den passenden Spalten auffällig oft unentschieden spielt
-  (`drawPercentage`), oder wenn das Team, gegen das gewettet wird, klar bessere Ergebnisse
-  holt, als seine xG erwarten lassen – bei Heimsieg das Gastteam auswärts, bei
-  Auswärtssieg sinngemäß das Heimteam zu Hause.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
   widersprüchlich ist. Under 2.5 sinngemäß: eine Seite offensiv zu stark oder Varianz
   widersprüchlich.
@@ -36,16 +32,6 @@ Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei 
 Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
 an der Wahl der Wette ändert es nichts.
-
-**Freigabe-Check** (Nutzer 15.10.: „bevor die Freigabe erteilt wird, doppelt und dreifach
-prüfen"): Bevor eine Wette ohne ⚠️ rausgeht, drei Durchgänge:
-1. Jedes ⚠️-Kriterium oben Spalte für Spalte prüfen – gesamt, zu Hause/auswärts, L6 gesamt
-   **und** L6 zu Hause/auswärts.
-2. Gleiche Signale gleich behandeln: Was im selben Batch oder am selben Tag bei einem Spiel
-   ein ⚠️ bekommt (z. B. eine Abwehr mit wenig Gegentoren bei Over/BTTS), bekommt es bei
-   jedem anderen Spiel mit demselben Signal auch.
-3. Jede Zahl im Text gegen die Tabelle prüfen.
-Auch das ist nur Darstellung – an der Wahl der Wette ändert es nichts.
 
 **Auswerten** (Nutzer 14.10.): Sagt der Nutzer „auswerten“, sind nur die freigegebenen
 Wetten gemeint – die ohne ⚠️ (und nicht „keine“) –, aus dem Zeitraum, den er nennt. Andere
@@ -60,9 +46,7 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Bei Pokal- und
-Europapokalspielen nimmt das Skript für die Saisonspalten die heimische Liga jedes Teams (Nutzer
-15.10.) und nennt die Quelle über der Tabelle. Liefert die API
+Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Liefert die API
 bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
 der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
 

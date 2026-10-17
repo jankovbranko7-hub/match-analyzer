@@ -41,3 +41,6 @@
 
 ## 2026-10-16
 - Warnsignal bei Siegwetten erweitert (Nutzer 16.10., „ohne Schwellen“): ⚠️ auch, wenn eines der Teams in den passenden Spalten auffällig oft unentschieden spielt, oder wenn das Team, gegen das gewettet wird, klar bessere Ergebnisse holt, als seine xG erwarten lassen (bei Heimsieg das Gastteam auswärts, bei Auswärtssieg sinngemäß das Heimteam zu Hause). Anlass: Sparta Praha – Lillestrøm und Hearts – Nordsjælland, beide freigegebene Heimsiege, beide 1:1.
+
+## 2026-10-17
+- Zurück auf den Stand vom 14.10. (Nutzer 17.10.: „zum System zurück, wo 100 % Trefferquote war“). `SYSTEM.md`, `CLAUDE.md`, `system/tabellen.py` und `references/field_mapping.md` sind wieder wie am 14.10.: Warnregel vom 11.10., kein Freigabe-Check, keine Häufigkeits- und Ergebnisfelder, im Europapokal die Saisondaten aus dem Wettbewerb selbst, keine Zusatzregel für Siegwetten. Die Einträge vom 15. und 16.10. oben bleiben als Verlauf stehen. `references/api_hinweise.md` bleibt (Saison-IDs, Namensvarianten; ändert keine Wette).
