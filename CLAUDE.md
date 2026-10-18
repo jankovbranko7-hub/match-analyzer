@@ -14,12 +14,13 @@ ohne die Zusatzregel für Siegwetten vom 16.10.
 Am 18.10. wurden „alle über 1000 Felder“ und eine neue Spielbild-Philosophie getestet
 (blind an den 13 freigegebenen Spielen vom 17.10.: keine höhere Trefferquote). Der Nutzer
 hat entschieden: „wir lassen alles beim Alten“ – es gilt weiter der Stand vom 13.10.
-Danach hat er die Verbesserung des Spielbilds je Team in Auftrag gegeben („mach dich auf
-die Suche“, Bericht `reports/Spielbild je Team verbessern.md`) und die Auswahl übertragen
-(„Du bist hier der Spezialist“). Übernommen wurde, was im Blindtest an allen 65 Spielen
-vom 17.10. besser war: System vom 13.10. plus „Gewichtung nach Belastbarkeit“, Vorsaison,
-Liga-Grundwerte und letzte 6 nur aus Ligaspielen (freigegeben 12/20 statt 10/24). Die zehn
-Zeilen und alles Übrige vom 13.10. bleiben.
+Die danach am 18.10. eingebauten Änderungen (Gewichtung, Vorsaison, Liga-Grundwerte,
+Remis-Check, Profil-Checks) sind wieder entfernt – Nutzer: „Du hast das gesamte System
+durcheinander gebracht“. Es gilt der Stand vom 13.10.
+
+**Keine Backtests** (Nutzer 18.10., ausdrücklich): Keine alten Spiele nachrechnen, um daraus
+Regeln, Grenzwerte oder Systemänderungen abzuleiten. Auswerten heißt weiter nur: die
+freigegebenen Wetten eines genannten Zeitraums gegen die echten Ergebnisse prüfen.
 
 **Spiele kommen als Batch:** Der Nutzer schickt Batches zu je 5 Spielen, nummeriert, oft
 mehrere Batches auf einmal (bis 20–30 Spiele). Jedes Spiel heißt „Batch X · Nr. Y“ – jede
@@ -31,42 +32,16 @@ frühere feste Regel): Ganz oben steht eine Übersicht je Nummer: Spiel | Wette 
 Die Zeile `⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) kommt bei jeder
 Wette, aber **nur**, wenn ein echtes Warnsignal in den Teamfeldern steckt – qualitativ
 gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
-- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist (vor allem niedrige xG
-  dagegen) oder der Stärkeunterschied insgesamt nicht klar ist (Gesamtspalte; früh in der
-  Saison mit der Vorsaison). Seit 18.10. statt „die Heim-Stärke nicht extrem ist“: Die
-  Heimwerte eines Teams aus wenigen Spielen sind meist Zufall.
-  **Remis-Gefahr** (Nutzer 18.10.: „wieso und warum … das musst du erkennen“): Heimsieg nur
-  ohne ⚠️, wenn das Bild sauber ist – Heimteam angriffsstark (xG für), klarer xG-Abstand
-  gesamt, klarer Punkteabstand, der Gast hat gegen diese Abwehr wenig zu erwarten
-  (erwartete Gasttore = Gast xG für und Heim xG dagegen gemittelt), das Heimteam trifft
-  mindestens seine xG. Fehlt einer dieser Punkte, ⚠️ „Remis-Gefahr: …“ mit Feld und Zahl.
-  Die Zeile „Remis-Check“ aus `system/tabellen.py` zeigt die fünf Werte mit Anhaltspunkten
-  aus 6.264 Ligaspielen (keine festen Grenzen, knappe Werte qualitativ abwägen). Belegt:
-  Heimfavoriten ohne Hinweis gewannen zu 77 % (Remis 14 %), mit einem zu 65 %, mit zwei
-  und mehr zu 54 % (Remis 25 %).
+- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist oder die Heim-Stärke nicht
+  extrem ist.
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
   widersprüchlich ist. Under 2.5 sinngemäß: eine Seite offensiv zu stark oder Varianz
   widersprüchlich.
-- **Profil-Checks für alle Wettarten** (Nutzer 18.10.: „Und wie sieht es mit den anderen
-  Wettarten aus“): Jede Wette braucht ihr sauberes Profil, sonst ⚠️ mit dem fehlenden
-  Merkmal. Die Zeilen aus `system/tabellen.py` zeigen Werte und Anhaltspunkte (keine
-  festen Grenzen, knappe Werte qualitativ abwägen):
-  - Auswärtssieg: klarer xG-Abstand und klarer Punkteabstand zugunsten des Gastes, der Gast
-    trifft mindestens seine xG.
-  - Over 2.5: viele erwartete Tore (xG beider Seiten gegeneinander), viele Tore in den
-    Spielen beider Teams, torreiche Liga.
-  - Under 2.5: wenige erwartete Tore, wenige Tore in den Spielen beider Teams, torarme Liga.
-  - BTTS Ja: auch die schwächere Seite hat Tore zu erwarten, keins der Teams bleibt oft
-    ohne Tor, Liga mit vielen Over-Spielen.
-  Belegte Obergrenzen bei sauberem Profil: Heimsieg 76 %, Over 64 %, BTTS 64 %,
-  Auswärtssieg 58 %, Under 53 %. Torwetten bleiben auch sauber nahe 60 %, Under ist am
-  schwächsten – das in der Übersicht ehrlich so sagen.
 - Weitere echte Warnsignale (seltener): sehr enge xG-Differenz trotz leichtem Vorteil; hohe
   Varianz oder widersprüchliche letzte 6 bei sonst klarem Bild; beide Teams sehr stark und
-  das Spiel eng (Top-Spiel); ein Wert, der die Wette trägt, beruht nur auf wenigen Spielen
-  oder einem Ausreißer.
+  das Spiel eng (Top-Spiel).
 Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei solider
 Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
@@ -85,10 +60,8 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`: Saisonspalten aus
-`/league-teams`, letzte 6 aus den Ligaspielen (`/league-matches`), Vorsaison aus `/team`,
-Liga-Grundwerte aus `/league-matches` der Vorsaison; alles zweimal gelesen. Liefert die API
+Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Liefert die API
 bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
-der Einträge die Torzahl. Fehlt ein Feld, steht „fehlt".
+der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
 
 Antworten auf Deutsch.
