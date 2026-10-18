@@ -35,6 +35,15 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
   dagegen) oder der Stärkeunterschied insgesamt nicht klar ist (Gesamtspalte; früh in der
   Saison mit der Vorsaison). Seit 18.10. statt „die Heim-Stärke nicht extrem ist“: Die
   Heimwerte eines Teams aus wenigen Spielen sind meist Zufall.
+  **Remis-Gefahr** (Nutzer 18.10.: „wieso und warum … das musst du erkennen“): Heimsieg nur
+  ohne ⚠️, wenn das Bild sauber ist – Heimteam angriffsstark (xG für), klarer xG-Abstand
+  gesamt, klarer Punkteabstand, der Gast hat gegen diese Abwehr wenig zu erwarten
+  (erwartete Gasttore = Gast xG für und Heim xG dagegen gemittelt), das Heimteam trifft
+  mindestens seine xG. Fehlt einer dieser Punkte, ⚠️ „Remis-Gefahr: …“ mit Feld und Zahl.
+  Die Zeile „Remis-Check“ aus `system/tabellen.py` zeigt die fünf Werte mit Anhaltspunkten
+  aus 6.264 Ligaspielen (keine festen Grenzen, knappe Werte qualitativ abwägen). Belegt:
+  Heimfavoriten ohne Hinweis gewannen zu 77 % (Remis 14 %), mit einem zu 65 %, mit zwei
+  und mehr zu 54 % (Remis 25 %).
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz

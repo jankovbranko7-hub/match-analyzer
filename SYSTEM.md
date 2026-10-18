@@ -92,6 +92,9 @@ von Spiel zu Spiel wiederholen und andere überwiegend Zufall sind:
    Spiel), mehr als die eigene Abwehr. Auch klare Favoriten kassieren oft ein Tor.
 8. **Ein Remis ist nie der klare Ausgang**, aber bei gleich starken, torarmen Teams spricht es gegen eine
    Siegwette (dann eher Under oder keine).
+9. **Ein sauberer Heimsieg hat fünf Merkmale:** angriffsstarkes Heimteam (xG für), klarer xG-Abstand gesamt,
+   klarer Punkteabstand, wenig erwartete Tore für den Gast (Gast xG für gegen Heim xG dagegen) und ein Heimteam,
+   das mindestens seine xG trifft. Jedes fehlende Merkmal macht ein Remis wahrscheinlicher.
 
 ## Ausgabe
 

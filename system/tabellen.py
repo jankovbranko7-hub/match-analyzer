@@ -98,8 +98,27 @@ def teamwerte(teams, spiele, tid, vor):
     for name, muster in FELDER:
         for sp in SPALTEN:
             w[(name, sp)] = zahl(t and t.get('stats'), muster.format(sp))
+    w[('Punkte pro Spiel', 'overall')] = zahl(t and t.get('stats'), 'seasonPPG_overall')  # nur fuer den Remis-Check
     w.update(l6_werte(spiele, tid, vor))
     return (t or {}).get('name'), w
+
+
+# Remis-Check beim Heimsieg: Anhaltspunkte aus 6.264 Ligaspielen (Heimfavoriten, 18.10.2026), keine festen Grenzen.
+# Mit keinem Hinweis gewannen Heimfavoriten zu 77 % (Remis 14 %), mit einem zu 65 %, mit zwei und mehr zu 54 % (Remis 25 %).
+def remis_check(h, a):
+    g = lambda w, n: w.get((n, 'overall'))
+    werte = [g(h, 'xG für'), g(h, 'xG dagegen'), g(a, 'xG für'), g(a, 'xG dagegen'), g(h, 'Punkte pro Spiel'), g(a, 'Punkte pro Spiel'), g(h, 'seasonScoredAVG')]
+    if any(v is None for v in werte):
+        return "Remis-Check (bei Heimsieg): fehlt"
+    hxf, hxa, axf, axa, hppg, appg, htore = werte
+    punkte = [("Heim-Angriff xG für", hxf, "1,5", hxf < 1.5),
+              ("xG-Abstand gesamt", (hxf - hxa) - (axf - axa), "+0,45", (hxf - hxa) - (axf - axa) < 0.45),
+              ("Punkteabstand", hppg - appg, "+0,25", hppg - appg < 0.25),
+              ("erwartete Gasttore", (axf + hxa) / 2, "1,35", (axf + hxa) / 2 > 1.35),
+              ("Heim Tore − xG", htore - hxf, "0", htore - hxf < 0)]
+    zeig = lambda n, v: f"{v:+.2f}".replace('.', ',') if n in ("xG-Abstand gesamt", "Punkteabstand", "Heim Tore − xG") else f(round(v, 2))
+    teile = [f"{n} {zeig(n, v)} (Anhalt {anh}){' ✗' if hin else ''}" for n, v, anh, hin in punkte]
+    return f"Remis-Check (bei Heimsieg): {' · '.join(teile)} → {sum(p[3] for p in punkte)} Hinweis(e)"
 
 
 def vorsaison(eintraege, sid, ligen, vorsaison_id):
@@ -199,6 +218,7 @@ def spiele(ids):
                   f"Over 2.5 {lg[2]} % · BTTS {lg[3]} % · Remis {lg[4]} % · Heimsieg {lg[5]} %")
         else:
             print("Liga-Grundwerte Vorsaison: fehlt")
+        print(remis_check(h[1], a[1]))
         print("Kontext: Pre-Match-xG " + f(zahl(m, 'team_a_xg_prematch')) + " : " + f(zahl(m, 'team_b_xg_prematch'))
               + " · BTTS " + f(zahl(m, 'btts_potential')) + " · Over " + f(zahl(m, 'o25_potential'))
               + " · Under " + f(zahl(m, 'u25_potential')))
