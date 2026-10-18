@@ -31,6 +31,11 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
      - `seasonScoredAVG_overall` / `seasonConcededAVG_overall`  
      - `BTTS_and_lose_percentage_overall` / `BTTS_and_win_percentage_overall`  
      - `AVG_2hg_overall` (Tore in der 2. Halbzeit)
+   - Zusätzlich (Nutzer 18.10.), je gesamt/zu Hause/auswärts:
+     - Schüsse aufs Tor pro Spiel für (`shotsOnTargetAVG_*`) und gegen (aus den Ligaspielen der Saison gezählt, `team_a_shotsOnTarget`/`team_b_shotsOnTarget`)
+     - Punkte pro Spiel (`seasonPPG_*`) und Tabellenplatz (`leaguePosition_*`)
+     - Erstes Tor erzielt % (`firstGoalScoredPercentage_*`) und Führung zur Pause % (`leadingAtHTPercentage_*`)
+   - Je Spiel das **Torniveau der Liga**: Ø Tore und Over-2.5-Quote der laufenden Saison (Spiele vor dem Anpfiff) und der Vorsaison (`/league-matches`).
 
    Gesamt, zu Hause und auswärts sind **Spalten**, keine eigene Regel. Eine Spalte wird nicht gewählt, nur weil dort eine Zahl steht.
 
@@ -58,6 +63,12 @@ Die Zahlen werden **freier gewichtet und interpretiert**:
 - Absolute und relative Differenzen in Tore/xG werden im Zusammenhang mit den Varianz-Feldern beurteilt.
 - Widersprüche zwischen Saisonbild und Verlauf werden freier abgewogen (z. B. gute xG-Bilanz + hohe BTTS_and_lose → Verlauf gewinnt; klare Stärke + niedrige Varianz → Sieg).
 - Es gibt **keine Schwellen oder festen Grenzwerte**. Die Interpretation bleibt qualitativ und begründet.
+- Was die präzisen Daten über das nächste Spiel sagen (Nutzer 18.10.):
+  1. **xG und Schüsse aufs Tor, für und gegen**, zeigen, wie viele und wie gute Chancen ein Team herausspielt und zulässt; sie wiederholen sich am stärksten und gehen Toren und Gegentoren vor.
+  2. **Tore pro Spiel:** Der Angriff zeigt sich schneller und beständiger als die Abwehr.
+  3. **Das Torniveau der Liga** ist der Ausgangspunkt für Over/Under – in einer torarmen Liga fallen weniger Tore, egal welche Teams spielen.
+  4. **Punkte und Tabellenplatz** sind ein echter Stärkewert, früh in der Saison aber noch stark vom Glück geprägt.
+  5. **Erstes Tor erzielt und Führung zur Pause** messen vor allem Stärke und bestätigen das Bild eher, als dass sie etwas Neues zeigen.
 
 Mögliche Ausgänge bleiben:
 - Heimsieg oder Auswärtssieg (wenn Stärke und Verlauf zusammen klar darauf hindeuten).
@@ -69,7 +80,7 @@ Es wird immer nur die **eine stärkste** Wette ausgegeben, die aus der freieren 
 
 ## Ausgabe
 
-- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder. Danach letzte 6 analog.
+- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder + Schüsse aufs Tor für/gegen, Punkte pro Spiel, Tabellenplatz, erstes Tor erzielt %, Führung zur Pause %. Danach letzte 6 analog. Nach beiden Tabellen das Torniveau der Liga.
 - Danach das **Bild in einem Satz** aus den Teamfeldern (nicht aus gemeinsamen Feldern).
 - Danach eine **Wette nur aus den Teamfeldern**: Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5 oder Under 2.5.  
   Tragen die Teamfelder keine Wette, steht dort **keine**.  
@@ -99,7 +110,7 @@ Nutze `bash` mit `curl` oder `browser_execute` zum Abrufen. Parsen mit Python in
 - Heim komplett, dann Gast komplett.
 - Keine Schätzung. Fehlt = „fehlt“.
 - Gesamt/zu Hause/auswärts = Spalten.
-- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + letzte 6), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
+- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + Schüsse aufs Tor, Punkte, Tabellenplatz, erstes Tor, Führung zur Pause + letzte 6; das Torniveau der Liga als Ausgangspunkt für Over/Under), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
 - Gemeinsame Felder (Pre-Match-xG, BTTS, Over/Under) = Kontext only.
 - Zweimal lesen. Abweichung → keine Wette.
 - Ausgabe: Tabellen → Bild-Satz (mit freierer Begründung) → eine Wette oder „keine“.

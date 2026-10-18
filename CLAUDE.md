@@ -22,6 +22,12 @@ durcheinander gebracht“. Es gilt der Stand vom 13.10.
 Regeln, Grenzwerte oder Systemänderungen abzuleiten. Auswerten heißt weiter nur: die
 freigegebenen Wetten eines genannten Zeitraums gegen die echten Ergebnisse prüfen.
 
+Danach, am 18.10. (Nutzer: „Ja“): Zum Stand vom 13.10. kommen fünf Punkte dazu, die aus
+den präzisen Daten am meisten über das nächste Spiel sagen – xG und Schüsse aufs Tor für
+und gegen (vor Toren/Gegentoren), Tore pro Spiel, Torniveau der Liga (Ausgangspunkt für
+Over/Under), Punkte und Tabellenplatz, erstes Tor erzielt und Führung zur Pause. Weiter
+ohne Schwellen, ohne Backtests; die ⚠️-Regel vom 11.10. bleibt unverändert.
+
 **Spiele kommen als Batch:** Der Nutzer schickt Batches zu je 5 Spielen, nummeriert, oft
 mehrere Batches auf einmal (bis 20–30 Spiele). Jedes Spiel heißt „Batch X · Nr. Y“ – jede
 Nummer genau ihr Spiel, nichts vertauschen. Im Chat: Übersicht aller Spiele und die Liste
@@ -60,7 +66,7 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Liefert die API
+Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Dazu die Zeilen Schüsse aufs Tor für/gegen (gegen aus `/league-matches` gezählt, L6 „fehlt“), Punkte pro Spiel, Tabellenplatz (nur Saison), erstes Tor %, Führung zur Pause % und die Zeile „Torniveau der Liga“. Liefert die API
 bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
 der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
 
