@@ -55,8 +55,11 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
     torarmen Spiele eines Teams liegen vor allem in der anderen Spalte;
   - die Wette auf der Seite steht, die nur die Tore und nicht die xG tragen (z. B.
     Siegwette gegen ein Team, das deutlich unter seinen xG trifft; Under, obwohl beide
-    Teams unter ihren xG treffen; Over/BTTS, obwohl ein Team deutlich über seinen xG trifft
-    oder unter seinen xG dagegen kassiert);
+    Teams unter ihren xG treffen; Over/BTTS, obwohl ein Team deutlich über seinen xG trifft).
+    Lesart (Nutzer 18.10.: „Bleibt bei der Lesart“): Bei Over/BTTS ⚠️ nur, wenn die Wette
+    allein von den Toren getragen wird; tragen die xG-Summen sie auch ohne den
+    Torüberschuss, kein ⚠️. Weniger Gegentore als xG dagegen spricht nicht gegen Over/BTTS
+    (wie `SYSTEM.md`: ein solches Team kassiert eher wieder);
   - die tragenden Werte nur auf wenigen Spielen stehen.
   Beispiel Carrarese – Modena (17.10., 2:1): Modenas xG 2,95 zu Hause, aber nur 1,49
   auswärts; Carrarese zu Hause 0,33 Tore bei 1,17 xG; nur 3 Spiele je Spalte.
