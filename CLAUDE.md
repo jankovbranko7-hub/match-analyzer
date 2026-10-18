@@ -14,6 +14,12 @@ ohne die Zusatzregel für Siegwetten vom 16.10.
 Am 18.10. wurden „alle über 1000 Felder“ und eine neue Spielbild-Philosophie getestet
 (blind an den 13 freigegebenen Spielen vom 17.10.: keine höhere Trefferquote). Der Nutzer
 hat entschieden: „wir lassen alles beim Alten“ – es gilt weiter der Stand vom 13.10.
+Danach hat er die Verbesserung des Spielbilds je Team in Auftrag gegeben („mach dich auf
+die Suche“, Bericht `reports/Spielbild je Team verbessern.md`) und die Auswahl übertragen
+(„Du bist hier der Spezialist“). Übernommen wurde, was im Blindtest an allen 65 Spielen
+vom 17.10. besser war: System vom 13.10. plus „Gewichtung nach Belastbarkeit“, Vorsaison,
+Liga-Grundwerte und letzte 6 nur aus Ligaspielen (freigegeben 12/20 statt 10/24). Die zehn
+Zeilen und alles Übrige vom 13.10. bleiben.
 
 **Spiele kommen als Batch:** Der Nutzer schickt Batches zu je 5 Spielen, nummeriert, oft
 mehrere Batches auf einmal (bis 20–30 Spiele). Jedes Spiel heißt „Batch X · Nr. Y“ – jede
@@ -25,8 +31,10 @@ frühere feste Regel): Ganz oben steht eine Übersicht je Nummer: Spiel | Wette 
 Die Zeile `⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) kommt bei jeder
 Wette, aber **nur**, wenn ein echtes Warnsignal in den Teamfeldern steckt – qualitativ
 gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
-- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist oder die Heim-Stärke nicht
-  extrem ist.
+- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist (vor allem niedrige xG
+  dagegen) oder der Stärkeunterschied insgesamt nicht klar ist (Gesamtspalte; früh in der
+  Saison mit der Vorsaison). Seit 18.10. statt „die Heim-Stärke nicht extrem ist“: Die
+  Heimwerte eines Teams aus wenigen Spielen sind meist Zufall.
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
@@ -34,7 +42,8 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
   widersprüchlich.
 - Weitere echte Warnsignale (seltener): sehr enge xG-Differenz trotz leichtem Vorteil; hohe
   Varianz oder widersprüchliche letzte 6 bei sonst klarem Bild; beide Teams sehr stark und
-  das Spiel eng (Top-Spiel).
+  das Spiel eng (Top-Spiel); ein Wert, der die Wette trägt, beruht nur auf wenigen Spielen
+  oder einem Ausreißer.
 Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei solider
 Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
@@ -53,8 +62,10 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Liefert die API
+Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`: Saisonspalten aus
+`/league-teams`, letzte 6 aus den Ligaspielen (`/league-matches`), Vorsaison aus `/team`,
+Liga-Grundwerte aus `/league-matches` der Vorsaison; alles zweimal gelesen. Liefert die API
 bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
-der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
+der Einträge die Torzahl. Fehlt ein Feld, steht „fehlt".
 
 Antworten auf Deutsch.

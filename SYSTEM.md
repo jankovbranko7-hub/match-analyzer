@@ -35,7 +35,11 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
    Gesamt, zu Hause und auswärts sind **Spalten**, keine eigene Regel. Eine Spalte wird nicht gewählt, nur weil dort eine Zahl steht.
 
 3. **Letzte 6.**  
-   `/lastx?team_id=...` — bevorzuge `last_x_match_num=6`. Dieselben Zeilen (Spiele, Tore, Gegentore, xG für, xG dagegen gesamt/home/away). Oder Form fehlt.
+   Die letzten 6 **Ligaspiele** vor dem Anpfiff, gezählt aus `/league-matches?season_id=...` (`/lastx` mischt Pokal und Europapokal hinein). Dieselben Zeilen (Spiele, Tore, Gegentore, xG für, xG dagegen + Varianz-Felder, gesamt/home/away). Oder Form fehlt.
+
+3a. **Vorsaison und Liga-Grundwerte.**  
+   - Je Team die abgeschlossene Vorsaison aus `/team?team_id=...&include=stats` (Wettbewerb mit den meisten Spielen der Vorsaison): Spiele, xG für, xG dagegen, Tore und Gegentore pro Spiel – mit Vermerk, ob gleiche oder andere Liga.  
+   - Je Spiel die Liga-Grundwerte der Vorsaison aus `/league-matches` der Vorsaison: Ø Tore, Over 2.5 %, BTTS %, Remis %, Heimsieg %.
 
 4. **Gemeinsam, nur als Kontext.**  
    Aus `/match?match_id=`:  
@@ -67,9 +71,31 @@ Mögliche Ausgänge bleiben:
 
 Es wird immer nur die **eine stärkste** Wette ausgegeben, die aus der freieren Gewichtung von Bild + Verlauf hervorgeht.
 
+## Gewichtung nach Belastbarkeit
+
+Weiter qualitativ und ohne Schwellen – aber mit dieser Reihenfolge des Vertrauens, weil sich manche Zahlen
+von Spiel zu Spiel wiederholen und andere überwiegend Zufall sind:
+
+1. **xG für / xG dagegen tragen mehr als Tore und Gegentore.** Gegentore schwanken am stärksten; eine Abwehr
+   wird zuerst an xG dagegen gemessen, erst dann an den Gegentoren.
+2. **Die Gesamtspalte ist die Basis, zu Hause / auswärts nur die Korrektur.** Aus 3–5 Heim- oder
+   Auswärtsspielen sind die Werte meist Zufall. Der Heimvorteil kommt aus der Liga (Liga-Grundwerte), nicht
+   aus der Heimtabelle eines einzelnen Teams.
+3. **Früh in der Saison wiegt die Vorsaison mit** – je weniger Saisonspiele, desto mehr. Kommt die Vorsaison
+   aus einer anderen (tieferen) Liga, wird sie entsprechend abgewertet.
+4. **Letzte 6 sind ein Hinweis auf Veränderung, kein eigenes Signal.**
+5. **Die Varianz-Felder (BTTS_and_lose/win, AVG_2hg) sind aus Ergebnissen gezählt und schwanken stark.** Sie
+   färben den Verlauf, tragen eine Wette aber nur, wenn Tore und xG beider Seiten in dieselbe Richtung zeigen.
+6. **Torzahl und BTTS: Ausgangspunkt sind die Liga-Grundwerte.** Davon weicht das Bild ab, wenn Angriff gegen
+   Abwehr beider Seiten (eigene xG für gegen xG dagegen des Gegners, und umgekehrt) klar höher oder niedriger liegen.
+7. **Sieg zu Null und Under:** Entscheidend ist, wie harmlos der Angriff des Gegners ist (xG für, Tore pro
+   Spiel), mehr als die eigene Abwehr. Auch klare Favoriten kassieren oft ein Tor.
+8. **Ein Remis ist nie der klare Ausgang**, aber bei gleich starken, torarmen Teams spricht es gegen eine
+   Siegwette (dann eher Under oder keine).
+
 ## Ausgabe
 
-- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder. Danach letzte 6 analog.
+- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder. Danach letzte 6 analog. Unter jeder Tabelle die Vorsaison-Zeile, nach beiden Tabellen die Liga-Grundwerte.
 - Danach das **Bild in einem Satz** aus den Teamfeldern (nicht aus gemeinsamen Feldern).
 - Danach eine **Wette nur aus den Teamfeldern**: Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5 oder Under 2.5.  
   Tragen die Teamfelder keine Wette, steht dort **keine**.  
@@ -87,8 +113,11 @@ curl "https://api.football-data-api.com/match?key=$FOOTYSTATS_KEY&match_id=MATCH
 # Team Stats
 curl "https://api.football-data-api.com/league-teams?key=$FOOTYSTATS_KEY&season_id=SEASON_ID&include=stats"
 
-# Last 6
-curl "https://api.football-data-api.com/lastx?key=$FOOTYSTATS_KEY&team_id=TEAM_ID"
+# Ligaspiele der Saison (letzte 6) bzw. der Vorsaison (Liga-Grundwerte)
+curl "https://api.football-data-api.com/league-matches?key=$FOOTYSTATS_KEY&season_id=SEASON_ID&max_per_page=1000"
+
+# Team mit allen Saisons (Vorsaison)
+curl "https://api.football-data-api.com/team?key=$FOOTYSTATS_KEY&team_id=TEAM_ID&include=stats"
 ```
 
 Nutze `bash` mit `curl` oder `browser_execute` zum Abrufen. Parsen mit Python in `/tmp` falls nötig. Speichere Zwischenergebnisse nicht dauerhaft.
@@ -99,7 +128,7 @@ Nutze `bash` mit `curl` oder `browser_execute` zum Abrufen. Parsen mit Python in
 - Heim komplett, dann Gast komplett.
 - Keine Schätzung. Fehlt = „fehlt“.
 - Gesamt/zu Hause/auswärts = Spalten.
-- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + letzte 6), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
+- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + letzte 6 + Vorsaison), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen) nach der Gewichtung nach Belastbarkeit; die Liga-Grundwerte sind der Ausgangspunkt für Torzahl und BTTS.
 - Gemeinsame Felder (Pre-Match-xG, BTTS, Over/Under) = Kontext only.
 - Zweimal lesen. Abweichung → keine Wette.
 - Ausgabe: Tabellen → Bild-Satz (mit freierer Begründung) → eine Wette oder „keine“.
