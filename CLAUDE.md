@@ -48,6 +48,18 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
 - Weitere echte Warnsignale (seltener): sehr enge xG-Differenz trotz leichtem Vorteil; hohe
   Varianz oder widersprüchliche letzte 6 bei sonst klarem Bild; beide Teams sehr stark und
   das Spiel eng (Top-Spiel).
+- **Für jede Wettart** (Nutzer 18.10.: „Diese Punkte, die übersehen worden sind, sollen auf
+  die ganzen Wettarten einfließen“) ⚠️, wenn:
+  - die Stärke eines Teams vor allem aus der anderen Spalte kommt (Gast stark nur zu
+    Hause, Heimteam stark nur auswärts) – bei Torwetten sinngemäß: die torreichen bzw.
+    torarmen Spiele eines Teams liegen vor allem in der anderen Spalte;
+  - die Wette auf der Seite steht, die nur die Tore und nicht die xG tragen (z. B.
+    Siegwette gegen ein Team, das deutlich unter seinen xG trifft; Under, obwohl beide
+    Teams unter ihren xG treffen; Over/BTTS, obwohl ein Team deutlich über seinen xG trifft
+    oder unter seinen xG dagegen kassiert);
+  - die tragenden Werte nur auf wenigen Spielen stehen.
+  Beispiel Carrarese – Modena (17.10., 2:1): Modenas xG 2,95 zu Hause, aber nur 1,49
+  auswärts; Carrarese zu Hause 0,33 Tore bei 1,17 xG; nur 3 Spiele je Spalte.
 Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei solider
 Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –

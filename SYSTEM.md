@@ -69,6 +69,10 @@ Die Zahlen werden **freier gewichtet und interpretiert**:
   3. **Das Torniveau der Liga** ist der Ausgangspunkt für Over/Under – in einer torarmen Liga fallen weniger Tore, egal welche Teams spielen.
   4. **Punkte und Tabellenplatz** sind ein echter Stärkewert, früh in der Saison aber noch stark vom Glück geprägt.
   5. **Erstes Tor erzielt und Führung zur Pause** messen vor allem Stärke und bestätigen das Bild eher, als dass sie etwas Neues zeigen.
+- Drei Prüfpunkte für **jede** Wettart (Nutzer 18.10., aus dem Fall Carrarese – Modena):
+  1. **Passende Spalte gegen Gesamtbild:** Kommt die Stärke eines Teams vor allem aus der anderen Spalte (Gast stark nur zu Hause, Heimteam stark nur auswärts), wiegt sie für dieses Spiel weniger. Das gilt für Siegwetten genauso wie für Torwetten (torreiche Spiele eines Teams nur in der anderen Spalte).
+  2. **Tore gegen xG:** Liegen Tore und xG eines Teams deutlich auseinander, ist ein Teil davon Glück oder Pech und gleicht sich eher aus. Ein Team, das weniger trifft als seine Chancen hergeben, trifft eher wieder; eines, das weniger kassiert als seine xG dagegen, kassiert eher wieder. Steht die Wette auf der Seite, die nur die Tore und nicht die xG tragen, ist das ein Warnzeichen – bei Sieg, Over, Under und BTTS.
+  3. **Wenige Spiele:** Stehen die tragenden Werte nur auf wenigen Spielen (z. B. 3 Heim- oder Auswärtsspiele), ist das Bild unsicher.
 
 Mögliche Ausgänge bleiben:
 - Heimsieg oder Auswärtssieg (wenn Stärke und Verlauf zusammen klar darauf hindeuten).
