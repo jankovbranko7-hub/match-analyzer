@@ -95,6 +95,10 @@ von Spiel zu Spiel wiederholen und andere überwiegend Zufall sind:
 9. **Ein sauberer Heimsieg hat fünf Merkmale:** angriffsstarkes Heimteam (xG für), klarer xG-Abstand gesamt,
    klarer Punkteabstand, wenig erwartete Tore für den Gast (Gast xG für gegen Heim xG dagegen) und ein Heimteam,
    das mindestens seine xG trifft. Jedes fehlende Merkmal macht ein Remis wahrscheinlicher.
+10. **Jede Wettart hat ihr sauberes Profil** (Auswärtssieg: klarer xG- und Punkteabstand für den Gast, Gast trifft
+    mindestens seine xG; Over: viele erwartete Tore, torreiche Teams und Liga; Under: das Gegenteil; BTTS: auch die
+    schwächere Seite hat Tore zu erwarten, keins der Teams bleibt oft ohne Tor, Liga mit vielen Over-Spielen).
+    Torwetten erreichen auch mit sauberem Profil selten mehr als 60–65 %, der saubere Heimsieg am meisten.
 
 ## Ausgabe
 

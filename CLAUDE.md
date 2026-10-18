@@ -49,6 +49,20 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
   widersprüchlich ist. Under 2.5 sinngemäß: eine Seite offensiv zu stark oder Varianz
   widersprüchlich.
+- **Profil-Checks für alle Wettarten** (Nutzer 18.10.: „Und wie sieht es mit den anderen
+  Wettarten aus“): Jede Wette braucht ihr sauberes Profil, sonst ⚠️ mit dem fehlenden
+  Merkmal. Die Zeilen aus `system/tabellen.py` zeigen Werte und Anhaltspunkte (keine
+  festen Grenzen, knappe Werte qualitativ abwägen):
+  - Auswärtssieg: klarer xG-Abstand und klarer Punkteabstand zugunsten des Gastes, der Gast
+    trifft mindestens seine xG.
+  - Over 2.5: viele erwartete Tore (xG beider Seiten gegeneinander), viele Tore in den
+    Spielen beider Teams, torreiche Liga.
+  - Under 2.5: wenige erwartete Tore, wenige Tore in den Spielen beider Teams, torarme Liga.
+  - BTTS Ja: auch die schwächere Seite hat Tore zu erwarten, keins der Teams bleibt oft
+    ohne Tor, Liga mit vielen Over-Spielen.
+  Belegte Obergrenzen bei sauberem Profil: Heimsieg 76 %, Over 64 %, BTTS 64 %,
+  Auswärtssieg 58 %, Under 53 %. Torwetten bleiben auch sauber nahe 60 %, Under ist am
+  schwächsten – das in der Übersicht ehrlich so sagen.
 - Weitere echte Warnsignale (seltener): sehr enge xG-Differenz trotz leichtem Vorteil; hohe
   Varianz oder widersprüchliche letzte 6 bei sonst klarem Bild; beide Teams sehr stark und
   das Spiel eng (Top-Spiel); ein Wert, der die Wette trägt, beruht nur auf wenigen Spielen

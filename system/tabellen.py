@@ -98,27 +98,56 @@ def teamwerte(teams, spiele, tid, vor):
     for name, muster in FELDER:
         for sp in SPALTEN:
             w[(name, sp)] = zahl(t and t.get('stats'), muster.format(sp))
-    w[('Punkte pro Spiel', 'overall')] = zahl(t and t.get('stats'), 'seasonPPG_overall')  # nur fuer den Remis-Check
+    w[('Punkte pro Spiel', 'overall')] = zahl(t and t.get('stats'), 'seasonPPG_overall')  # nur fuer die Profil-Checks
+    w[('Ohne-Tor-Quote', 'overall')] = zahl(t and t.get('stats'), 'seasonFTSPercentage_overall')
     w.update(l6_werte(spiele, tid, vor))
     return (t or {}).get('name'), w
 
 
-# Remis-Check beim Heimsieg: Anhaltspunkte aus 6.264 Ligaspielen (Heimfavoriten, 18.10.2026), keine festen Grenzen.
-# Mit keinem Hinweis gewannen Heimfavoriten zu 77 % (Remis 14 %), mit einem zu 65 %, mit zwei und mehr zu 54 % (Remis 25 %).
-def remis_check(h, a):
+def zeig(v, vorzeichen=False):
+    return f"{v:+.2f}".replace('.', ',') if vorzeichen else f(round(v, 2))
+
+
+def check(titel, punkte):
+    """punkte: (Name, Wert, Anhalt-Text, Merkmal fehlt?, mit Vorzeichen?)"""
+    teile = [f"{n} {zeig(v, vz)} (Anhalt {anh}){' ✗' if fehlt else ''}" for n, v, anh, fehlt, vz in punkte]
+    return f"{titel}: {' · '.join(teile)} → {sum(p[3] for p in punkte)} fehlt"
+
+
+# Profil-Checks je Wettart: Anhaltspunkte aus rund 6.300 Ligaspielen (19 Ligen, nur Daten vor dem Anpfiff, 18.10.2026),
+# keine festen Grenzen. Treffer bei sauberem Profil (nichts fehlt) gegenüber der Grundrate: Heimsieg 76 % (Heimfavoriten 61 %),
+# Auswärtssieg 58 % (Auswärtsfavoriten 46 %), Over 2.5 64 % (55 %), BTTS 64 % (57 %), Under 2.5 53 % (45 %).
+def profil_checks(h, a, lg):
     g = lambda w, n: w.get((n, 'overall'))
-    werte = [g(h, 'xG für'), g(h, 'xG dagegen'), g(a, 'xG für'), g(a, 'xG dagegen'), g(h, 'Punkte pro Spiel'), g(a, 'Punkte pro Spiel'), g(h, 'seasonScoredAVG')]
-    if any(v is None for v in werte):
-        return "Remis-Check (bei Heimsieg): fehlt"
-    hxf, hxa, axf, axa, hppg, appg, htore = werte
-    punkte = [("Heim-Angriff xG für", hxf, "1,5", hxf < 1.5),
-              ("xG-Abstand gesamt", (hxf - hxa) - (axf - axa), "+0,45", (hxf - hxa) - (axf - axa) < 0.45),
-              ("Punkteabstand", hppg - appg, "+0,25", hppg - appg < 0.25),
-              ("erwartete Gasttore", (axf + hxa) / 2, "1,35", (axf + hxa) / 2 > 1.35),
-              ("Heim Tore − xG", htore - hxf, "0", htore - hxf < 0)]
-    zeig = lambda n, v: f"{v:+.2f}".replace('.', ',') if n in ("xG-Abstand gesamt", "Punkteabstand", "Heim Tore − xG") else f(round(v, 2))
-    teile = [f"{n} {zeig(n, v)} (Anhalt {anh}){' ✗' if hin else ''}" for n, v, anh, hin in punkte]
-    return f"Remis-Check (bei Heimsieg): {' · '.join(teile)} → {sum(p[3] for p in punkte)} Hinweis(e)"
+    hxf, hxa, axf, axa = g(h, 'xG für'), g(h, 'xG dagegen'), g(a, 'xG für'), g(a, 'xG dagegen')
+    hppg, appg, htor, hgeg, ator, ageg = (g(h, 'Punkte pro Spiel'), g(a, 'Punkte pro Spiel'), g(h, 'seasonScoredAVG'),
+                                         g(h, 'seasonConcededAVG'), g(a, 'seasonScoredAVG'), g(a, 'seasonConcededAVG'))
+    hfts, afts = g(h, 'Ohne-Tor-Quote'), g(a, 'Ohne-Tor-Quote')
+    if any(v is None for v in (hxf, hxa, axf, axa, hppg, appg, htor, hgeg, ator, ageg)):
+        return ["Profil-Checks: fehlt"]
+    gap, pgap = (hxf - hxa) - (axf - axa), hppg - appg
+    e_h, e_a = (hxf + axa) / 2, (axf + hxa) / 2
+    e_tot, e_min, tore_teams = e_h + e_a, min(e_h, e_a), (htor + hgeg + ator + ageg) / 2
+    z = [check("Remis-Check (bei Heimsieg)", [
+            ("Heim-Angriff xG für", hxf, "1,5", hxf < 1.5, False), ("xG-Abstand gesamt", gap, "+0,45", gap < 0.45, True),
+            ("Punkteabstand", pgap, "+0,25", pgap < 0.25, True), ("erwartete Gasttore", e_a, "1,35", e_a > 1.35, False),
+            ("Heim Tore − xG", htor - hxf, "0", htor - hxf < 0, True)]),
+         check("Auswärtssieg-Check", [
+            ("xG-Abstand gesamt (Heim − Gast)", gap, "−0,75", gap > -0.75, True), ("Punkteabstand (Heim − Gast)", pgap, "−0,75", pgap > -0.75, True),
+            ("Gast Tore − xG", ator - axf, "0", ator - axf < 0, True)])]
+    if lg:
+        z.append(check("Over-Check", [
+            ("erwartete Tore gesamt", e_tot, "3,0", e_tot < 3.0, False), ("Tore in Spielen beider Teams", tore_teams, "3,0", tore_teams < 3.0, False),
+            ("Liga Ø Tore", lg[1], "2,9", lg[1] < 2.9, False)]))
+        z.append(check("Under-Check", [
+            ("erwartete Tore gesamt", e_tot, "2,8", e_tot > 2.8, False), ("Tore in Spielen beider Teams", tore_teams, "2,6", tore_teams > 2.6, False),
+            ("Liga Ø Tore", lg[1], "2,6", lg[1] > 2.6, False)]))
+        if hfts is not None and afts is not None:
+            z.append(check("BTTS-Check", [
+                ("erwartete Tore der schwächeren Seite", e_min, "1,4", e_min < 1.4, False),
+                ("höchste Ohne-Tor-Quote (%)", max(hfts, afts), "27", max(hfts, afts) > 27, False),
+                ("Liga Over-Quote (%)", lg[2], "56", lg[2] < 56, False)]))
+    return z
 
 
 def vorsaison(eintraege, sid, ligen, vorsaison_id):
@@ -218,7 +247,7 @@ def spiele(ids):
                   f"Over 2.5 {lg[2]} % · BTTS {lg[3]} % · Remis {lg[4]} % · Heimsieg {lg[5]} %")
         else:
             print("Liga-Grundwerte Vorsaison: fehlt")
-        print(remis_check(h[1], a[1]))
+        print('\n'.join(profil_checks(h[1], a[1], lg)))
         print("Kontext: Pre-Match-xG " + f(zahl(m, 'team_a_xg_prematch')) + " : " + f(zahl(m, 'team_b_xg_prematch'))
               + " · BTTS " + f(zahl(m, 'btts_potential')) + " · Over " + f(zahl(m, 'o25_potential'))
               + " · Under " + f(zahl(m, 'u25_potential')))

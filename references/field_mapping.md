@@ -18,7 +18,7 @@ Unter `stats` (oder top-level je nach Response):
 
 Averages existieren zusätzlich (`xg_for_avg_*`, `seasonScoredAVG_*` etc.), aber nutze die Totals für die Tabelle, wenn vorhanden. Sonst Avg und vermerke.
 
-Für den Remis-Check zusätzlich `seasonPPG_overall` (Punkte pro Spiel).
+Für die Profil-Checks zusätzlich `seasonPPG_overall` (Punkte pro Spiel) und `seasonFTSPercentage_overall` (ohne eigenes Tor, %).
 
 ## Letzte 6 (`/league-matches`)
 
