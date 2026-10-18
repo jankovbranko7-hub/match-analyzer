@@ -1,107 +1,111 @@
 ---
 name: footystats-bild-wette
-description: "Analysiere Fußballspiele mit der FootyStats-API: extrahiere Teamfelder (Spiele, Tore, Gegentore, xG für/dagegen gesamt/zu Hause/auswärts + letzte 6 + Varianz-Felder), bilde ein Bild in einem Satz aus den Teamfeldern und schlage eine Wette nur daraus vor (Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5, Under 2.5) oder keine. Nutze wenn der Nutzer Spiele für Bild und Wette schickt."
+description: "Analysiere Fußballspiele mit der FootyStats-API: lies je Team alle Felder (gesamt/zu Hause/auswärts + letzte 6), baue daraus mit offenem Kopf die Geschichte des Spiels – wer hat es in der Hand, wie beginnt es, was passiert nach dem ersten Tor, trifft der Schwächere, wie nah ist ein Remis, wie belastbar sind die Zahlen – und schlage eine Wette daraus vor (Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5, Under 2.5) oder keine. Nutze wenn der Nutzer Spiele für Bild und Wette schickt."
 type: workflow
 lifecycle: active
 ---
 
-# FootyStats Bild und Wette
+# FootyStats Spielbild und Wette
 
-Extrahiere exakte Teamdaten aus der FootyStats-API, zeige Tabellen je Team, bilde ein Bild in einem Satz aus den Teamfeldern und schlage eine Wette nur aus diesen Feldern vor. Gemeinsame Felder sind nur Kontext.
+Lies je Team **alle Felder**, die die API liefert, baue daraus die **Geschichte des Spiels** und schlage
+eine Wette nur aus dieser Geschichte vor. Nicht starr Zahlen ablesen: Die Zahlen sind das Material,
+das Spielbild entsteht aus ihrem Zusammenspiel und aus Erfahrung. Gemeinsame Felder sind nur Kontext.
 
 **API Key:** aus der Umgebungsvariable `FOOTYSTATS_KEY` (nicht in Dateien)  
 **Base:** `https://api.football-data-api.com`  
-Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
+Kein Schätzen fehlender Felder — schreibe „fehlt“.
 
 ## Workflow (immer in dieser Reihenfolge)
 
 1. **Spiel exakt zuordnen.**  
-   Nutze `/todays-matches` (mit `date=YYYY-MM-DD` falls gegeben) oder `/match?match_id=`.  
-   Ein ähnlicher Name ist das falsche Spiel. Nur exakte Zuordnung (Name + Datum/Liga wenn möglich). Sonst keine Analyse.
+   Über `/league-matches?season_id=…` oder `/match?match_id=`. Ein ähnlicher Name ist das falsche Spiel.
+   Nur exakte Zuordnung (Name + Datum/Liga). Sonst keine Analyse.
 
-2. **Heimteam komplett, dann Gastteam komplett.**  
-   Hole Teamdaten mit `/league-teams?season_id=...&include=stats` (season_id aus Match oder Liga).  
-   Für jedes Team die Spalten **Gesamt / zu Hause / auswärts**:  
-   - Spiele (`seasonMatchesPlayed_overall/home/away`)  
-   - Tore (`seasonGoals_overall/home/away`)  
-   - Gegentore (`seasonConceded_overall/home/away`)  
-   - xG für (`xg_for_avg_overall/home/away` — Avg, da Totals oft leer)  
-   - xG dagegen (`xg_against_avg_overall/home/away`)  
-   - Zusätzlich für Verlauf:  
-     - `seasonScoredAVG_overall` / `seasonConcededAVG_overall`  
-     - `BTTS_and_lose_percentage_overall` / `BTTS_and_win_percentage_overall`  
-     - `AVG_2hg_overall` (Tore in der 2. Halbzeit)
-
-   Gesamt, zu Hause und auswärts sind **Spalten**, keine eigene Regel. Eine Spalte wird nicht gewählt, nur weil dort eine Zahl steht.
+2. **Heimteam komplett, dann Gastteam komplett – alle Felder.**  
+   `/league-teams?season_id=...&include=stats`: je Team über 1.000 Felder, jeweils in den Spalten
+   **gesamt / zu Hause / auswärts**. Alle werden gelesen. Ecken, Karten, Abseits, Fouls, Teamnamen in
+   anderen Sprachen und Verwaltungsfelder betreffen keine der fünf Wetten; sie werden mitgelesen, aber
+   nicht für das Bild verwendet.
 
 3. **Letzte 6.**  
-   `/lastx?team_id=...` — bevorzuge `last_x_match_num=6`. Dieselben Zeilen (Spiele, Tore, Gegentore, xG für, xG dagegen gesamt/home/away). Oder Form fehlt.
+   `/lastx?team_id=...`, Eintrag `last_x_match_num=6`, dieselben Felder. Die API zählt dabei alle
+   Wettbewerbe (auch Pokal und Europapokal) – das beim Lesen berücksichtigen.
 
 4. **Gemeinsam, nur als Kontext.**  
-   Aus `/match?match_id=`:  
-   - Pre-Match-xG Heim, Pre-Match-xG Gast (oder `avg_potential` als Proxy)  
-   - BTTS (`btts_potential`)  
-   - Over / Under (`o25_potential`, `u25_potential` oder Odds)  
-   Diese Felder **nicht zur Wette** verwenden.
+   Aus `/match?match_id=`: Pre-Match-xG, `btts_potential`, `o25_potential`, `u25_potential`, Quoten.
+   Der direkte Vergleich (`h2h`) ist Hintergrund. Diese Felder entscheiden die Wette **nicht**.
 
-5. **Dieselbe Antwort ein zweites Mal lesen.** Weicht sie ab, keine Wette.
+5. **Dieselbe Antwort ein zweites Mal lesen.** Weicht ein Wert ab, keine Wette.
 
-Ein fehlendes Feld heißt **fehlt** und wird nie geschätzt.
+## Die Philosophie: erst die Geschichte des Spiels, dann die Wette
 
-## Bild und Verlauf bestimmen die Wette
+Für jedes Spiel werden sechs Fragen beantwortet, jede aus den passenden Feldern beider Teams
+(Heimteam vor allem zu Hause, Gastteam vor allem auswärts, gesamt und letzte 6 dazu):
 
-Das **Spiel-Bild** (Stärke aus Tore/xG, Home/Away-Splits, Last 6) und der **Spielverlauf** (Varianz-Felder wie BTTS_and_lose, AVG_2hg, Scored/ConcededAVG und deren Zusammenspiel) bestimmen gemeinsam die eine Wette.
+1. **Wer hat das Spiel in der Hand?** – Stärke, Kontrolle, Form: xG für/dagegen, Tore, Gegentore,
+   Schüsse und Schüsse aufs Tor, Ballbesitz, (gefährliche) Angriffe, Punkte pro Spiel, Siege/Niederlagen,
+   Tabellenplatz, Heimvorteil.
+2. **Wie beginnt das Spiel?** – Wer schießt das erste Tor, wer führt oder liegt zur Pause hinten,
+   Tore der 1. Halbzeit, in welchen Minuten die Tore fallen.
+3. **Was passiert nach dem ersten Tor?** – Verwaltet der Führende oder öffnet sich das Spiel:
+   2. Halbzeit (Tore, Siege, Punkte, zu Null), BTTS_and_win/lose, Tore in beiden Halbzeiten.
+4. **Trifft der Schwächere, hält der Starke die Null?** – Spiele zu Null, Spiele ohne eigenes Tor,
+   BTTS-Anteil, Anteile Over/Under.
+5. **Wie nah ist ein Remis?** – Remis-Anteil, Remis zur Pause, Remis mit beiderseitigen Toren.
+6. **Wie belastbar sind die Zahlen?** – Wie viele Spiele dahinterstehen, Ausreißer, Saison gegen
+   letzte 6, Pokal- und Europaspiele in den letzten 6, direkter Vergleich als Hintergrund.
 
-Die Zahlen werden **freier gewichtet und interpretiert**:
-- Last 6 kann stärker oder schwächer gegenüber der Saison gewichtet werden, je nachdem wie klar und konsistent sie sind.
-- Home/Away-Splits werden qualitativ stärker oder schwächer gelesen, ohne feste Grenzen.
-- Absolute und relative Differenzen in Tore/xG werden im Zusammenhang mit den Varianz-Feldern beurteilt.
-- Widersprüche zwischen Saisonbild und Verlauf werden freier abgewogen (z. B. gute xG-Bilanz + hohe BTTS_and_lose → Verlauf gewinnt; klare Stärke + niedrige Varianz → Sieg).
-- Es gibt **keine Schwellen oder festen Grenzwerte**. Die Interpretation bleibt qualitativ und begründet.
+**Mit offenem Kopf gewichten – ohne Schwellen und feste Grenzwerte.**
+- Eine Zahl aus wenigen Spielen oder mit einem Ausreißer wiegt weniger als ein Muster, das sich durch
+  viele Felder und Spalten zieht.
+- Widersprüche werden abgewogen, nicht mechanisch aufgelöst.
+- Erfahrung und Einschätzung, wie solche Spiele typischerweise laufen, gehören ausdrücklich dazu –
+  begründet, nicht geraten.
 
-Mögliche Ausgänge bleiben:
-- Heimsieg oder Auswärtssieg (wenn Stärke und Verlauf zusammen klar darauf hindeuten).
-- Over 2.5 oder BTTS Ja (wenn der Verlauf/Varianz dominiert oder beide Seiten offensiv).
-- Under 2.5 (wenn beide Seiten niedrig treffen und kassieren).
-- **keine**, wenn nichts klar dominiert oder die Signale zu widersprüchlich sind.
+**Die Geschichte in einem Satz bestimmt die Wette.** Zum Beispiel:
+- Favorit kontrolliert, trifft früh, der Gegner kommt kaum zu Chancen → **Heimsieg / Auswärtssieg**.
+- Beide spielen offen, beide treffen, das Spiel kippt hin und her → **Over 2.5 / BTTS Ja**.
+- Zähes Spiel, wenige Chancen, beide oft ohne Tor oder zu Null → **Under 2.5**.
+- Die Geschichte passt nicht zusammen → **keine**.
 
-Es wird immer nur die **eine stärkste** Wette ausgegeben, die aus der freieren Gewichtung von Bild + Verlauf hervorgeht.
+Es wird immer nur die **eine** Wette ausgegeben, die am besten zur Geschichte passt.
 
 ## Ausgabe
 
-- Tabelle je Team (Heim zuerst, dann Gast). Spalten: Gesamt | zu Hause | auswärts. Zeilen: Spiele, Tore, Gegentore, xG für, xG dagegen + die Varianz-Felder. Danach letzte 6 analog.
-- Danach das **Bild in einem Satz** aus den Teamfeldern (nicht aus gemeinsamen Feldern).
-- Danach eine **Wette nur aus den Teamfeldern**: Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5 oder Under 2.5.  
-  Tragen die Teamfelder keine Wette, steht dort **keine**.  
-  Die gemeinsamen Felder werden nicht zur Wette.
+- Je Team (Heim zuerst, dann Gast) die Tabellen mit allen spielbezogenen Feldern, gegliedert nach den
+  sechs Fragen. Spalten: gesamt | zu Hause | auswärts | L6 gesamt | L6 zu Hause | L6 auswärts.
+- Danach Kontext und direkter Vergleich (nicht zur Wette).
+- Danach die **Geschichte des Spiels in einem Satz** aus den Teamfeldern.
+- Danach **eine Wette**: Heimsieg, Auswärtssieg, BTTS Ja, Over 2.5 oder Under 2.5. Trägt die Geschichte
+  keine Wette, steht dort **keine**.
 
 ## API-Aufrufe (Beispiele)
 
 ```bash
-# Heutige Spiele
-curl "https://api.football-data-api.com/todays-matches?key=$FOOTYSTATS_KEY"
+# Spiele einer Saison (zum Finden)
+curl "https://api.football-data-api.com/league-matches?key=$FOOTYSTATS_KEY&season_id=SEASON_ID&max_per_page=1000"
 
-# Match Details
+# Match Details (Kontext, direkter Vergleich)
 curl "https://api.football-data-api.com/match?key=$FOOTYSTATS_KEY&match_id=MATCH_ID"
 
-# Team Stats
+# Team Stats (alle Felder)
 curl "https://api.football-data-api.com/league-teams?key=$FOOTYSTATS_KEY&season_id=SEASON_ID&include=stats"
 
-# Last 6
+# Letzte 6
 curl "https://api.football-data-api.com/lastx?key=$FOOTYSTATS_KEY&team_id=TEAM_ID"
 ```
 
-Nutze `bash` mit `curl` oder `browser_execute` zum Abrufen. Parsen mit Python in `/tmp` falls nötig. Speichere Zwischenergebnisse nicht dauerhaft.
+Tabellen erzeugt `system/tabellen.py` (doppelte Lesung, Gegenprobe über alle Felder).
 
 ## Regeln (strikt)
 
 - Exakte Spielzuordnung. Ähnlicher Name = falsches Spiel.
-- Heim komplett, dann Gast komplett.
+- Heim komplett, dann Gast komplett – alle Felder.
 - Keine Schätzung. Fehlt = „fehlt“.
-- Gesamt/zu Hause/auswärts = Spalten.
-- Wette **nur** aus Teamfeldern (Spiele/Tore/Gegentore/xG + Varianz-Felder + letzte 6), mit freierer Gewichtung und Interpretation der Zahlen (keine Schwellen).
-- Gemeinsame Felder (Pre-Match-xG, BTTS, Over/Under) = Kontext only.
+- Gesamt/zu Hause/auswärts/letzte 6 = Spalten.
+- Wette **nur** aus den Teamfeldern, über die Geschichte des Spiels, mit offener Gewichtung (keine Schwellen).
+- Gemeinsame Felder (Pre-Match-xG, Potentiale, Quoten, direkter Vergleich) = Kontext/Hintergrund.
 - Zweimal lesen. Abweichung → keine Wette.
-- Ausgabe: Tabellen → Bild-Satz (mit freierer Begründung) → eine Wette oder „keine“.
+- Ausgabe: Tabellen → Geschichte in einem Satz → eine Wette oder „keine“.
 
-Siehe `references/field_mapping.md` für exakte Feldnamen.
+Siehe `references/field_mapping.md` für Feldnamen und Zuordnung zu den sechs Fragen.

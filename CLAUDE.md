@@ -11,16 +11,30 @@ den Spielen vom 13.10.“; bis 14.10. kam nur die Auswerten-Regel dazu, die kein
 Freigabe-Check, ohne die Häufigkeits- und Ergebnisfelder, ohne Ligadaten im Europapokal und
 ohne die Zusatzregel für Siegwetten vom 16.10.
 
-**Spiele kommen als Batch:** Der Nutzer schickt künftig immer 5 Spiele, nummeriert.
-Geantwortet wird in derselben Nummerierung – jede Nummer genau ihr Spiel, nichts vertauschen.
+Am 18.10. (nach den 65 Spielen vom 17.10.) hat der Nutzer das Spielbild neu ausgerichtet:
+„je Team alle über 1000 Felder lesen“, „nicht starr nur Daten ablesen“, „offenes Hirn sowie
+eine starke Philosophie, um ein perfektes Spielbild je Spiel zu erstellen“, Erfahrung und
+Bauchgefühl dürfen einfließen. Seitdem steht in `SYSTEM.md` die Philosophie „erst die
+Geschichte des Spiels, dann die Wette“ mit den sechs Fragen; die Tabellen zeigen alle
+spielbezogenen Felder. Quoten und Rechenmodelle hat der Nutzer dafür nicht gewollt – sie
+bleiben Kontext.
+
+**Spiele kommen als Batch:** Der Nutzer schickt Batches zu je 5 Spielen, nummeriert, oft
+mehrere Batches auf einmal (bis 20–30 Spiele). Jedes Spiel heißt „Batch X · Nr. Y“ – jede
+Nummer genau ihr Spiel, nichts vertauschen. Im Chat: Übersicht aller Spiele und die Liste
+der freigegebenen Wetten; die vollständige Analyse je Spiel als Datei.
 
 **Warnsignal ⚠️** (Nutzer 11.10., gilt ab dem Batch nach dieser Änderung; ersetzt die
 frühere feste Regel): Ganz oben steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr.
 Die Zeile `⚠️ **Gefahr:** …` (direkt unter der Wette, mit Feld und Zahl) kommt bei jeder
 Wette, aber **nur**, wenn ein echtes Warnsignal in den Teamfeldern steckt – qualitativ
 gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
-- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist oder die Heim-Stärke nicht
-  extrem ist.
+- Heimsieg → ⚠️, wenn das Gastteam defensiv sehr stabil ist. (Die frühere Bedingung „oder
+  die Heim-Stärke nicht extrem ist“ ist am 18.10. entfallen – laut Nutzer das „Hindernis im
+  System“, das am 17.10. 18 von 19 Heimsiegen gesperrt hat.)
+- Jede Wette → ⚠️, wenn die Geschichte des Spiels einen echten Bruch hat, z. B. der Favorit
+  kontrolliert, kassiert aber fast in jedem Spiel; oder der Schwächere trifft kaum, hält aber
+  oft die Null.
 - Auswärtssieg → ⚠️, wenn das Heimteam zu Hause klar anfällig ist (hohe Gegentore, hohe
   seasonConcededAVG oder hohe xG dagegen zu Hause). So vom Nutzer bestätigt.
 - BTTS Ja / Over 2.5 → ⚠️, wenn eine Seite defensiv zu stabil ist oder die Varianz
@@ -47,8 +61,10 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Liefert die API
-bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
-der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
+Tabellen kommen aus `system/tabellen.py`: alle Felder je Team, gegliedert nach den sechs
+Fragen aus `SYSTEM.md`; Ecken, Karten, Abseits, Fouls, Namen und Verwaltung werden nur
+mitgelesen und mitverglichen. `--roh datei.json` schreibt alle Felder ungekürzt in eine
+Datei (enthält keinen Key). Liefert die API bei einem Feld eine Liste (eine Torminute je
+Tor), ist die Anzahl der Einträge der Wert. Fehlt das Feld, steht „fehlt".
 
 Antworten auf Deutsch.
