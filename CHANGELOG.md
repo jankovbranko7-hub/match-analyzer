@@ -65,3 +65,10 @@
 
 ## 2026-10-18 (wörtliche Regel Over/BTTS)
 - Prüfpunkt „Tore gegen xG“ bei Over/BTTS wird wörtlich angewendet (Nutzer: „Wir stellen auf wörtlich um sofort“): ⚠️, sobald ein Team in der passenden Spalte deutlich über seinen xG trifft oder deutlich unter seinen xG dagegen kassiert – auch wenn die xG-Summen die Wette tragen. Ersetzt die Lesart von kurz zuvor. Wahl der Wette unverändert.
+
+## 2026-10-18 (Kombination + Kandidat A)
+- Prüfpunkt „Tore gegen xG“ bei Over/BTTS: Kombination beider Lesarten (Nutzer: „Ja“). Trifft ein Team deutlich über seinen xG → ⚠️ nur, wenn die xG-Summen die Wette ohne den Überschuss nicht tragen. Kassiert es deutlich unter seinen xG dagegen → die Schüsse aufs Tor gegen entscheiden (am Ligaschnitt): wenige → ⚠️, sonst kein ⚠️. Ersetzt die wörtliche Regel.
+- Kandidat A: BTTS Ja zusätzlich ⚠️, wenn eine Seite wenige Schüsse aufs Tor hat oder der Gegner wenige zulässt (am Ligaschnitt). Nur BTTS.
+- Torniveau der Liga mit Ø Schüsse aufs Tor je Team (`system/tabellen.py`, `SYSTEM.md` Schritt 2).
+- Reihenfolge festgehalten: erst die Wette aus Bild und Verlauf, dann ⚠️ (Fehler Twente – Utrecht).
+- Analyse-Datei: je Spiel Prüfung je Feldgruppe, dafür/dagegen.

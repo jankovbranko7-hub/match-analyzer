@@ -36,6 +36,7 @@ Keine Prüfsumme. Kein Schätzen fehlender Felder — schreibe „fehlt“.
      - Punkte pro Spiel (`seasonPPG_*`) und Tabellenplatz (`leaguePosition_*`)
      - Erstes Tor erzielt % (`firstGoalScoredPercentage_*`) und Führung zur Pause % (`leadingAtHTPercentage_*`)
    - Je Spiel das **Torniveau der Liga**: Ø Tore und Over-2.5-Quote der laufenden Saison (Spiele vor dem Anpfiff) und der Vorsaison (`/league-matches`).
+     Dazu Ø Schüsse aufs Tor je Team und Spiel als Ligaschnitt – der Maßstab dafür, ob ein Team wenige oder viele Schüsse aufs Tor hat oder zulässt.
 
    Gesamt, zu Hause und auswärts sind **Spalten**, keine eigene Regel. Eine Spalte wird nicht gewählt, nur weil dort eine Zahl steht.
 

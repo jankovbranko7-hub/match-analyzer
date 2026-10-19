@@ -106,7 +106,10 @@ def torniveau(spiele, vor=None):
     if not fertig:
         return None
     tore = [m['homeGoalCount'] + m['awayGoalCount'] for m in fertig]
-    return len(fertig), round(sum(tore) / len(tore), 2), round(100 * sum(x >= 3 for x in tore) / len(tore))
+    sot = [x for m in fertig for x in (m.get('team_a_shotsOnTarget'), m.get('team_b_shotsOnTarget'))
+           if isinstance(x, (int, float)) and x >= 0]
+    return (len(fertig), round(sum(tore) / len(tore), 2), round(100 * sum(x >= 3 for x in tore) / len(tore)),
+            round(sum(sot) / len(sot), 2) if sot else None)
 
 
 def tabelle(name, w):
@@ -162,7 +165,7 @@ def spiele(ids):
         print(f"API-Teamnamen: {hn or 'fehlt'} / {an or 'fehlt'}\n")
         print(tabelle(m['home_name'], hw) + "\n")
         print(tabelle(m['away_name'], aw) + "\n")
-        teile = [f"{lab} ({x[0]} Spiele): Ø Tore {f(x[1])} · Over 2.5 {x[2]} %" if x else f"{lab}: fehlt"
+        teile = [f"{lab} ({x[0]} Spiele): Ø Tore {f(x[1])} · Over 2.5 {x[2]} % · Ø Schüsse aufs Tor je Team {f(x[3])}" if x else f"{lab}: fehlt"
                  for lab, x in (('laufende Saison', liga[0]), ('Vorsaison', liga[1]))]
         print("Torniveau der Liga: " + " | ".join(teile))
         print("Kontext: Pre-Match-xG " + f(zahl(m, 'team_a_xg_prematch')) + " : " + f(zahl(m, 'team_b_xg_prematch'))

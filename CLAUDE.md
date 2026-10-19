@@ -31,7 +31,10 @@ ohne Schwellen, ohne Backtests; die ⚠️-Regel vom 11.10. bleibt unverändert.
 **Spiele kommen als Batch:** Der Nutzer schickt Batches zu je 5 Spielen, nummeriert, oft
 mehrere Batches auf einmal (bis 20–30 Spiele). Jedes Spiel heißt „Batch X · Nr. Y“ – jede
 Nummer genau ihr Spiel, nichts vertauschen. Im Chat: Übersicht aller Spiele und die Liste
-der freigegebenen Wetten; die vollständige Analyse je Spiel als Datei.
+der freigegebenen Wetten; die vollständige Analyse je Spiel als Datei. In der Datei steht je
+Spiel vor der Wette die Prüfung je Feldgruppe – xG, Schüsse aufs Tor (am Ligaschnitt), Tore
+gegen xG, Verlaufsfelder, letzte 6, Punkte/Platz, erstes Tor/Führung zur Pause, Torniveau –
+jeweils dafür/dagegen (Nutzer 18.10.: „Ja“), damit nichts übersehen wird.
 
 **Warnsignal ⚠️** (Nutzer 11.10., gilt ab dem Batch nach dieser Änderung; ersetzt die
 frühere feste Regel): Ganz oben steht eine Übersicht je Nummer: Spiel | Wette | ⚠️ Gefahr.
@@ -56,17 +59,27 @@ gelesen, ohne feste Grenzwerte. Schwerpunkt ist die Heim-Anfälligkeit.
   - die Wette auf der Seite steht, die nur die Tore und nicht die xG tragen (z. B.
     Siegwette gegen ein Team, das deutlich unter seinen xG trifft; Under, obwohl beide
     Teams unter ihren xG treffen; Over/BTTS, obwohl ein Team deutlich über seinen xG trifft
-    oder unter seinen xG dagegen kassiert). Wörtlich anwenden (Nutzer 18.10.: „Wir stellen
-    auf wörtlich um sofort“): Bei Over/BTTS ⚠️, sobald ein Team in der passenden Spalte
-    (Heimteam zu Hause, Gast auswärts) deutlich über seinen xG trifft oder deutlich unter
-    seinen xG dagegen kassiert – auch wenn die xG-Summen die Wette tragen;
+    oder unter seinen xG dagegen kassiert). Bei Over/BTTS gilt die Kombination beider
+    Lesarten (Nutzer 18.10.: „Kombination + Kandidat A … Ja“), je Team in der passenden
+    Spalte (Heimteam zu Hause, Gast auswärts):
+    - trifft es deutlich über seinen xG → ⚠️ nur, wenn die xG-Summen die Wette ohne diesen
+      Überschuss nicht tragen;
+    - kassiert es deutlich unter seinen xG dagegen → die Schüsse aufs Tor gegen entscheiden,
+      gemessen am Ligaschnitt: lässt es wenige zu, ist die Abwehr echt stabil → ⚠️; lässt es
+      durchschnittlich viele oder mehr zu, war es Glück → kein ⚠️;
   - die tragenden Werte nur auf wenigen Spielen stehen.
+- **BTTS Ja** zusätzlich ⚠️ (Kandidat A, Nutzer 18.10., aus Lorient – Monaco 1:0), wenn eine
+  Seite in der passenden Spalte (oder zuletzt) wenige Schüsse aufs Tor hat oder der Gegner in
+  seiner passenden Spalte wenige zulässt – gemessen am Ligaschnitt. Gilt nur für BTTS, weil
+  dort beide Teams treffen müssen.
   Beispiel Carrarese – Modena (17.10., 2:1): Modenas xG 2,95 zu Hause, aber nur 1,49
   auswärts; Carrarese zu Hause 0,33 Tore bei 1,17 xG; nur 3 Spiele je Spalte.
 Kein ⚠️ bei klarer, sauberer Stärke-Differenz ohne Heim-Anfälligkeit, bei solider
 Heim-Abwehr des Gegners und wenn in den Teamfeldern kein Risiko erkennbar ist; dann in der
 Übersicht „–“. Bei „keine“ steht in der Übersicht der Grund. Das ist nur die Darstellung –
-an der Wahl der Wette ändert es nichts.
+an der Wahl der Wette ändert es nichts. Reihenfolge: erst die Wette nur aus Bild und Verlauf
+wählen, dann das ⚠️ setzen. Nie eine Wette wählen, weil sie kein ⚠️ hat (Fehler bei Twente –
+Utrecht, 18.10.: nach Bild und Verlauf war Over 2.5 die Wette, nicht der Heimsieg).
 
 **Auswerten** (Nutzer 14.10.): Sagt der Nutzer „auswerten“, sind nur die freigegebenen
 Wetten gemeint – die ohne ⚠️ (und nicht „keine“) –, aus dem Zeitraum, den er nennt. Andere
@@ -81,7 +94,7 @@ Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen.
 
 Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
 
-Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Dazu die Zeilen Schüsse aufs Tor für/gegen (gegen aus `/league-matches` gezählt, L6 „fehlt“), Punkte pro Spiel, Tabellenplatz (nur Saison), erstes Tor %, Führung zur Pause % und die Zeile „Torniveau der Liga“. Liefert die API
+Tabellen kommen aus `system/tabellen.py` mit den Feldern aus `SYSTEM.md`. Dazu die Zeilen Schüsse aufs Tor für/gegen (gegen aus `/league-matches` gezählt, L6 „fehlt“), Punkte pro Spiel, Tabellenplatz (nur Saison), erstes Tor %, Führung zur Pause % und die Zeile „Torniveau der Liga“ (mit Ø Schüsse aufs Tor je Team als Ligaschnitt). Liefert die API
 bei `seasonGoals_*`/`seasonConceded_*` eine Liste (eine Torminute je Tor), ist die Anzahl
 der Einträge die Torzahl. Fehlt das Feld (z. B. letzte 6 zu Hause/auswärts), steht „fehlt".
 
