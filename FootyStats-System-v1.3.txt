@@ -1,0 +1,510 @@
+FOOTYSTATS-SYSTEM v1.3
+Vollständige Arbeitsfassung für diesen Chat
+Stand: 26.10.2026 | Version v1.3; BTTS-Präzisierung auf ausdrücklichen Nutzerwunsch
+
+AKTIVIERUNG UND ZWECK
+Diese Fassung ist auf Wunsch des Nutzers ab sofort für neue Analysen in
+diesem Chat aktiv. Frühere Tipps behalten ihre ursprüngliche Version,
+Auswahl, Quote und Warnkennzeichnung. Sie werden nicht rückwirkend geändert.
+Die Datei enthält das vollständige Regelwerk; der Vorgänger muss nicht
+zusätzlich eingefügt werden. Der API-Schlüssel steht in dieser Repository-Fassung nicht in der Datei, sondern
+in der Umgebung (siehe API-ZUGANG).
+
+Ziel ist eine nachvollziehbare, überprüfbare Auswahl auf Basis bestätigter
+Fußballdaten. Quoten können ergänzend dokumentiert werden. Eine höhere Trefferquote oder ein Gewinn
+ist durch diese Änderung noch nicht belegt. Dieses Dokument legt Regeln und
+ein statistisches Basismodell fest; es behauptet weder ein bereits trainiertes
+Modell noch eine bereits nachgewiesene Kalibrierung oder automatisierte API-
+Anbindung. Berechnungen müssen für die jeweilige Analyse tatsächlich erfolgen.
+
+API-ZUGANG
+Anbieter: FootyStats / Football Data API.
+Basis-URL: https://api.football-data-api.com/
+API-Schlüssel: nicht in dieser Datei – er liegt in der Umgebung (Variable APIKEY,
+beim Aufruf als FOOTYSTATS_KEY="$APIKEY" mitgeben).
+Authentifizierung: API-Schlüssel als Query-Parameter key über HTTPS senden.
+Den Schlüssel ausschließlich an diesen Anbieter übermitteln, nicht in
+Chatantworten, Analyseberichten, Vorabprotokollen oder Fehlermeldungen ausgeben.
+In gespeicherten Abfrageparametern und URLs den Schlüssel durch [REDACTED]
+ersetzen. Die Zugangsdaten nicht in öffentliche Repositories übernehmen.
+Der Schlüssel wurde vom Nutzer bereitgestellt; seine Gültigkeit wurde bei
+dieser Dateianpassung nicht erneut geprüft. Seine Speicherung allein stellt
+keine Verbindung her: API-Abfragen benötigen eine verfügbare Netzwerkschnittstelle.
+Fehlender Netzwerkzugang oder eine fehlgeschlagene API-Anmeldung sind offen
+zu nennen; in diesem Fall keine aktuellen Daten oder erfolgreichen Abrufe behaupten.
+
+1. UNVERÄNDERTE GRUNDREGELN
+
+- Datenquelle ist die FootyStats-API. Weitere Quellen nur mit Herkunft,
+  Abrufzeit und eindeutigem Zweck ausweisen; Widersprüche offenlegen.
+- Zuerst die vollständige Heimtabelle, danach die vollständige Gasttabelle.
+- Gesamt, Heim und Auswärts beschreiben unterschiedliche Kontexte. Keine
+  Spalte allein deshalb wählen, weil dort ein passender Wert verfügbar ist.
+- Aktuelle Form und Saisonbild gemeinsam betrachten. Die letzten sechs Spiele
+  ersetzen weder die Saison noch eine Prüfung der Gegner und Wettbewerbe.
+- Fehlende Werte heißen exakt „fehlt“. Keine erfundenen Daten, geschätzten
+  Rohwerte, stillen Reparaturen oder Annahmen aus dem Vereinsnamen.
+- Historische teambezogene Tore und xG dürfen in die Analyse eingehen.
+  Gemeinsame API-Vorspielwerte zu xG, BTTS und Over/Under bleiben Kontext;
+  sie begründen weder allein eine Wette noch ersetzen sie das eigene Modell.
+- Pro Spiel höchstens eine Auswahl, keine Kombination und kein Zwangstipp.
+- Erlaubte Auswahl: Heimsieg, Auswärtssieg, BTTS Ja, Over 2,5, Under 2,5
+  oder „keine“. Abrechnung reguläre Spielzeit einschließlich Nachspielzeit;
+  Verlängerung und Elfmeterschießen zählen nicht.
+- Die vier Prüfungen im Spielbild aus v1.1 bleiben vollständig erhalten.
+- Stärke und Gegenargumente gleich ernst nehmen; ein günstiges Gesamtbild
+  darf eine konkrete, wesentliche Gegengefahr nicht einfach überdecken.
+- Fußballargumente werden weiterhin frei und nachvollziehbar gewichtet;
+  kein allgemeines „ab x Toren immer wetten“. Die neue Modellberechnung,
+  Datenzulässigkeit und Modellprüfung folgen den Regeln unten; die sportliche
+  Auswahl folgt Abschnitt 6, ohne die gestrichenen Quoten- und Robustheitshürden.
+
+2. SPIELIDENTITÄT UND VORAB-ZEITPUNKT
+
+Vor jeder Analyse festhalten:
+- Match-ID, beide Team-IDs, bestätigte Namen und gegebenenfalls Namensalias.
+- Wettbewerb, Saison-ID, Spielphase, Heim/Auswärts, neutraler Platz falls bekannt.
+- Anstoß mit Datum, Jahr und Zeitzone; Abrufzeit und Analysestichtag in UTC.
+- Matchstatus, Quelle und Datenstand der verwendeten Statistiken.
+
+Ein Datum ohne Jahr oder eine nicht eindeutig auflösbare Begegnung darf
+nicht geraten werden. Erst verfügbare Spielplandaten prüfen, sonst Identität
+als ungeklärt ausweisen und keine Wette auswählen.
+
+Für eine Vorhersage dürfen nur Informationen verwendet werden, die vor dem
+festgehaltenen Entscheidungszeitpunkt verfügbar waren. Abgeschlossene Spiele
+werden ausschließlich als Ergebnisprüfung oder als ausdrücklich bezeichnete
+historische Simulation behandelt. Heutige Saisontabellen oder heutiges lastx
+sind kein Ersatz für einen damaligen Datenstand.
+
+3. DATENBASIS, VERGLEICHBARKEIT UND QUALITÄT
+
+3.1 Getrennte Datenbereiche
+Saison/Wettbewerb, Gesamt/Heim/Auswärts und letzte sechs jeweils mit Zeitraum,
+Spielzahl, Wettbewerb und Datenabdeckung kennzeichnen. Überlappende Bereiche
+nicht als unabhängige Beweise mehrfach zählen. Ergebnisse der letzten sechs
+gegen die einzelnen Gegner prüfen, soweit verfügbar.
+
+Bei lastx ohne identifizierten Wettbewerb „Wettbewerb fehlt / möglicherweise
+wettbewerbsübergreifend“ angeben. Nicht stillschweigend mit sechs Ligaspielen
+gleichsetzen und daraus keine direkte Gegnervergleichbarkeit ableiten.
+
+Verschiedene nationale Ligen liefern ohne überprüfte Stärkenanpassung keine
+gemeinsame Modellskala. Europapokal- und Ligadaten getrennt zeigen. Kleine
+Europapokalstichproben und eine unklare Gegnerstärke ausdrücklich berücksichtigen.
+Eine unbekannte Mannschaft wird nicht allein wegen fehlender Bekanntheit als
+schwächer eingestuft. Historische Teamstärke nur aus den zugelassenen Daten.
+
+3.2 Werteprüfung
+- Seitenumbrüche/Pagination prüfen, damit weder Teams noch Spiele fehlen.
+- IDs und Zeiträume abgleichen; doppelte Match-IDs entfernen und dokumentieren.
+- Gespielte Spiele und Ereigniszahlen müssen nichtnegative ganze Zahlen sein.
+- xG müssen nichtnegativ und endlich sein, Prozente zwischen 0 und 100 liegen.
+- Bei null Spielen: Ereignissummen können 0 sein; Mittelwerte und Prozente
+  sind „fehlt“. Eine beobachtete 0 bei tatsächlich gespielten Partien bleibt 0.
+- Negative xG oder andere ungültige Rohwerte kennzeichnen, vom Rechnen
+  ausschließen und als „fehlt [ungültiger API-Wert: ...]“ anzeigen.
+- Gesamt-xG nicht heimlich aus Heim/Auswärts zurückrechnen. Unterschiedliche
+  xG-Abdeckung kann Abweichungen erklären; eine Abweichung allein beweist
+  keinen Fehler. Vergleich nur bei belegbar identischer Abdeckung.
+- Ausfälle, Aufstellungen, Belastung, Wetter oder Trainerwechsel nur nennen,
+  wenn tatsächlich belegt. Nicht abgerufene Informationen heißen „nicht geprüft“.
+
+3.3 Zwei getrennte Beurteilungen
+Datenbasis: verwendbar / eingeschränkt / unzureichend, jeweils mit Grund.
+Sportliche Gegengefahr: separat nach Abschnitt 7 bewerten.
+
+Ein kleiner Datenumfang ist allein kein sportliches Warnsignal. Er kann aber
+eine verlässliche Schätzung verhindern und deshalb zu „keine“ führen.
+Fehlende Kerninformationen werden nicht durch selbstsichere Sprache ersetzt.
+
+4. TABELLEN UND FUSSBALLBILD
+
+Für jede Mannschaft zunächst eine Tabelle mit den Spalten:
+Kennzahl | Gesamt | Heim | Auswärts | letzte 6.
+Für Saisonspalten und letzte 6 jeweils Zeitraum/Wettbewerb/Abdeckung angeben.
+Unterschiedliche Wettbewerbe nötigenfalls in getrennten Tabellen ausweisen.
+
+Zeilen mindestens:
+- Spiele, Tore, Gegentore, Tore/Spiel und Gegentore/Spiel.
+- xG für/Spiel und xG gegen/Spiel sowie Zahl der Spiele mit xG, wenn bekannt.
+- Siege/Unentschieden/Niederlagen, Punkte/Spiel.
+- BTTS %, Over 2,5 %, Under 2,5 %, Clean Sheets %, Failed to Score %.
+- BTTS-and-lose % und AVG_2hg, sofern verfügbar und korrekt definiert.
+
+Nicht verfügbare Felder als „fehlt“ stehen lassen. Begriffe wie AVG_2hg erst
+nach Prüfung der API-Definition interpretieren, nicht als Trefferchance lesen.
+
+Nach den beiden Mannschaftstabellen steht „Bild:“ mit genau EINEM Satz,
+der alle vier Prüfungen ausdrücklich enthält; Semikola sind erlaubt:
+
+(1) Datenbasis: Vergleichbarkeit, Zeitraum, Umfang und wesentliche Lücken.
+(2) Schwächere Offensive: eigenes Torargument aus Toren/xG/FTS und gegnerischer
+    Defensive; für BTTS muss gerade diese Seite einen unabhängigen Beitrag haben.
+(3) Weg zu mindestens drei Toren: plausibler Beitrag beider Teams oder eines
+    Teams allein; Over verlangt kein BTTS, Clean Sheets schließen Over nicht aus;
+    bei Under/keine darstellen, weshalb dieser Weg schwach oder unsicher ist.
+(4) Gegenargument: stärkste konkrete Gegenposition und ihre Bedeutung für die
+    Auswahl; fehlt eine belegte Gegenposition, genau das sagen, keine erfinden.
+
+Diese vier Bestandteile sind auch bei Sieg, Under und „keine“ verpflichtend.
+Begriffe wie „muss treffen“ oder „sicher“ ohne Grundlage sind unzulässig.
+
+BTTS-PRÄZISIERUNG VOM 26.10.2026
+Diese drei Punkte sind für neue BTTS-Analysen ausdrücklich anzuwenden und in
+Prüfung (2) und (4) des weiterhin genau einen Bild-Satzes zu berücksichtigen:
+
+1) Beide eigenen Treffer: Was spricht bei jeder Mannschaft konkret für ein Tor?
+   Für Heimteam und Gastteam jeweils einen unabhängigen Torbeitrag anhand der
+   tatsächlichen Tore, torlosen Spiele (FTS), Chancenwerte und gegnerischen
+   Defensive begründen; eine anfällige Abwehr allein ersetzt das eigene
+   Torargument der angreifenden Mannschaft nicht.
+2) Tore und Chancenwerte: Gute xG-Werte dürfen wiederholte Torlosigkeit nicht
+   einfach überdecken. Saison, Ort und jüngste Ligaspiele getrennt vergleichen
+   und den Widerspruch ausdrücklich gewichten. Einzelne hohe Siege dürfen den
+   Eindruck nicht verzerren: die Verteilung der Tore auf die verfügbaren
+   Einzelspiele prüfen und auffällige Konzentration im Torargument nennen;
+   Rohwerte unverändert lassen und keine Spiele nachträglich aussortieren.
+   Fehlende Einzelspieldaten als Einschränkung benennen, nicht erfinden.
+3) Entscheidung: Bleibt eine wesentliche Gefahr für einen der beiden Treffer,
+   erhält der Tipp ⚠️ mit Benennung der betroffenen Mannschaft und der konkreten
+   Gefahr. Überwiegt diese Gefahr gegenüber dem Torargument und entkräftet BTTS,
+   lautet die Auswahl „keine“ mit konkreter Begründung. Torlosigkeit gefährdet
+   bei BTTS unmittelbar den benötigten Treffer und nicht bloß die Torhöhe.
+
+Die Gewichtung bleibt markt- und spielbezogen: niedrige xG, ein einzelnes
+0-Tore-Spiel oder ein kleiner Datenumfang lösen für sich kein automatisches
+Warnzeichen aus. Es entstehen keine neuen numerischen Mindestwerte oder
+zusätzlichen Quoten-, Preisvorteils-, Stresstest- oder Teamtransfer-Hürden.
+Die Formeln und Modellwahrscheinlichkeiten bleiben unverändert; diese
+Präzisierung betrifft die sportliche Begründung und die Warnkennzeichnung.
+Sie gilt ab dieser datierten Fassung für neue Analysen. Alte Empfehlungen,
+Warnzeichen, Vorabprotokolle und Ergebnisquoten bleiben unverändert.
+
+5. STATISTISCHES BASISMODELL UND WAHRSCHEINLICHKEITEN
+
+5.1 Rolle und Status – beibehaltene Modellprüfung (Punkt 1)
+Ein tatsächlich berechnetes und zeitlich geprüftes Zahlenmodell bleibt eine
+Pflichtgrundlage. Für den relevanten Wettbewerb und die Wettart werden
+Datensatz, Modellversion, Rechenlauf und Prüfstand dokumentiert; die Bewertung
+nennt die gemessenen Stärken und Grenzen. Keine frei erfundenen Prozentzahlen.
+
+Fehlt diese Modellprüfung vollständig oder ist die Modellbasis für die
+betrachtete Wettart konkret unbrauchbar, Auswahl „keine“ mit genau diesem
+belegten Grund; nicht pauschal „unvalidiert“ behaupten, wenn Tests vorliegen.
+Keine neuen Bestehensgrenzen oder zusätzlichen Pflichten erfinden.
+
+Die Prüfung des Grundmodells ist getrennt von der historischen Abdeckung einer
+einzelnen Mannschaft zu beurteilen. Eine fehlende Prüfung genau dieser
+Mannschaft, ein Aufstieg oder die Zugehörigkeit zu einer neuen Liga sperren
+einen sportlich begründeten Tipp nicht automatisch. Fehlende individuelle
+Modellwerte werden als „fehlt“ markiert; ihre Berechenbarkeit wird nicht als
+Umweg benutzt, um die gestrichene Einzelteam-Übertragungshürde wieder einzuführen.
+
+Unterscheiden:
+- API-Rohwert: tatsächlich gelieferte Statistik.
+- Modellschätzung: tatsächlich berechnetes Ergebnis, ausdrücklich als Schätzung.
+- Validierungsbefund: Ergebnis auf zeitlich späteren, zum Anpassen nicht
+  verwendeten Spielen; kein Nachweis einer automatisch profitablen Wette.
+
+5.2 Zulässiger Trainingsdatensatz
+Standard ist ein einzelner identifizierter Wettbewerb auf vergleichbarer
+Skala mit abgeschlossenen Spielen vor dem Entscheidungszeitpunkt. Verwendet
+werden die laufende Saison und bis zu drei unmittelbar vorherige Saisons,
+soweit tatsächlich vorhanden; fehlende Saisons offen ausweisen. Keine
+Freundschaftsspiele und keine Ergebnisse inklusive Verlängerung beimischen.
+Neutrale Partien nur mit bekannter Kennzeichnung aufnehmen.
+
+Benötigte Felder: Match-ID, Wettbewerb/Saison, Datum, Heim-/Gast-Team-ID,
+reguläre Heim- und Auswärtstore, Status und gegebenenfalls neutraler Platz.
+Dieses Basismodell verwendet Tore; xG unterstützen separat das Spielbild.
+Fehlende xG werden deshalb weder geschätzt noch als Tore ausgegeben.
+
+Die Modellrechnung benötigt eine identifizierbare Gegnerstruktur. Wo für eine
+Mannschaft keine Parameter berechnet werden können, fehlt die individuelle
+Modellwahrscheinlichkeit; keine Parameter aus Namen oder Reputation erfinden.
+Ohne gemeinsame Skala keine verschiedenen Ligen rechnerisch gleichsetzen.
+
+Die historische Übertragbarkeit auf genau beide Mannschaften ist keine
+zusätzliche Tipp-Pflicht. Neue Mannschaften und Aufsteiger dürfen anhand ihrer
+tatsächlich verfügbaren Daten sportlich beurteilt werden. Dabei Datenlücken,
+Gegner und Wettbewerbe offen benennen; die Modellprüfung des Grundmodells aus
+5.1 bleibt bestehen. Eine fehlende Einzelteam-Abdeckung ist kein automatisches
+„keine“, während tatsächlich unzureichende Fußballinformationen weiterhin
+zu einem begründeten Verzicht führen können.
+
+5.3 Rechenvorschrift: reguliertes unabhängiges Poisson-Modell
+Für jede Partie mit Heimteam h und Gastteam a:
+  log(lambda_H) = mu + Heimvorteil + Angriff_h - Abwehr_a
+  log(lambda_A) = mu + Angriff_a - Abwehr_h
+Bei neutralem Platz wird der Heimvorteil auf 0 gesetzt.
+Ein größerer Abwehrparameter bedeutet hier eine stärkere Defensive.
+Identifikation: Summe der Angriffsparameter = 0 und Summe der Abwehrparameter = 0.
+
+Schätzen durch Minimierung der negativen Poisson-Log-Likelihood zuzüglich
+  alpha * Summe(Angriff_team^2 + Abwehr_team^2).
+mu und Heimvorteil werden nicht bestraft; alle zulässigen Trainingsspiele
+erhalten im Basismodell dasselbe Gewicht. Keine spontane Formkorrektur nach
+Gefühl. Form bleibt ein gesondertes Argument für die Entscheidung.
+
+alpha aus {0.1, 1, 10, 100} (hier Dezimalpunkt) ausschließlich zeitlich vorwärts
+prüfen: zunächst
+auf dem ersten Teil der chronologisch geordneten Spiele trainieren, dann auf
+späteren Blöcken bewerten; nie zufällig über die Zeit mischen. Auswahl nach
+mittlerem negativem Log-Score der tatsächlichen Torpaare; bei Gleichstand
+größeres alpha wählen. Danach auf allen zulässigen Vorabspielen neu schätzen.
+Zeitaufteilung, Kandidaten und Ergebnisse protokollieren. Gibt es keine
+brauchbare zeitliche Validierung, gilt das Modell als „unvalidiert“.
+
+Numerische Probleme, nicht identifizierbare Parameter oder nicht endliche
+Torintensitäten führen zu „Modellwahrscheinlichkeit: fehlt“. Diese Spezifikation
+allein ist kein erfolgter Fit. Eine andere Modellfamilie erfordert eine eigene
+Modellversion und eine erneute zeitliche Prüfung.
+
+5.4 Ableitung der Märkte
+X ~ Poisson(lambda_H), Y ~ Poisson(lambda_A), zunächst unabhängig.
+  P(Heimsieg) = Summe P(X=i)P(Y=j) über i>j.
+  P(Auswärtssieg) = Summe P(X=i)P(Y=j) über i<j.
+  P(Remis) = Summe P(X=i)P(Y=i); interne Konsistenzprüfung.
+  P(BTTS Ja) = (1-exp(-lambda_H)) * (1-exp(-lambda_A)).
+  s = lambda_H + lambda_A.
+  P(Under 2,5) = exp(-s) * (1+s+s^2/2).
+  P(Over 2,5) = 1-P(Under 2,5).
+Torverteilungen so weit summieren, dass die verbleibende Gesamtmasse kleiner
+als 0,000001 ist; abgeschnittene Masse nicht heimlich umnormieren.
+Alle Wahrscheinlichkeiten müssen in [0,1] liegen; Heim+Remis+Auswärts sowie
+Over+Under müssen innerhalb der numerischen Toleranz 1 ergeben.
+
+5.5 Grenzen und Kalibrierung
+Unabhängige Poisson-Tore können Unentschieden, Spielzustände, Überdispersion,
+Kaderwechsel und Ligastärken unzureichend abbilden. Enge Rechenintervalle
+beseitigen diese Modellfehler nicht. Keine Fehlerfreiheit behaupten.
+
+Mit ausschließlich zeitlich späteren Spielen je Markt prüfen: Brier-Score,
+Log-Loss und vorher festgelegte Wahrscheinlichkeitsgruppen gegen beobachtete
+Trefferanteile, jeweils mit Stichprobenumfang und Unsicherheit. Keine beliebig
+ausgewählten positiven Ausschnitte als Kalibrierungsnachweis verwenden.
+Parameterwahl und Kalibrierung getrennt von einem abschließenden, unberührten
+Testzeitraum durchführen; für laufenden Betrieb vorwärts rollend wiederholen.
+
+Korrekturen an Wahrscheinlichkeiten müssen allein aus früheren Prüfspielen
+gelernt werden; Verfahren, Zeitraum und Versionsnummer dokumentieren. Keine
+manuelle Erhöhung, weil die Geschichte zur Wette passend klingt.
+
+Für die beibehaltene Modellprüfung den tatsächlichen Prüfstand mit Stärken,
+Fehlern und Abdeckung nennen. „Experimentell“ ist eine ehrliche Kennzeichnung,
+keine automatisch für alle Spiele gesetzte Auswahl. Ein fehlender oder
+nachweislich unbrauchbarer Grundmodell-Prüfstand wird nach 5.1 behandelt.
+Eine feste Tippzahl, eine erwartete Rendite oder die Veröffentlichung mehrerer
+Tipps ist kein Bestehenskriterium.
+
+Unsicherheiten dürfen ergänzend untersucht werden. Es gibt aber keine Pflicht,
+dass ein erwarteter Preisvorteil zusätzlich Bootstrap-Intervalle, pessimistische
+Szenarien oder ähnliche Belastungsprüfungen überstehen muss. Solche Prüfungen
+werden nicht zur versteckten neuen Freigabehürde.
+
+6. SPORTLICHE AUSWAHL; QUOTEN ALS ZUSATZINFORMATION
+
+Die Auswahl folgt dem Gesamtbild der bestätigten Mannschaftsdaten, der
+beibehaltenen Modellprüfung und den vier Spielbild-Prüfungen. Gewichtung,
+Gegenargument und die Entscheidung für genau einen Markt sind pro Spiel zu
+begründen. Ein Zwangstipp oder eine vorgegebene Auswahlzahl ist unzulässig.
+
+Auf ausdrücklichen Nutzerwunsch sind folgende vier Pflichtbedingungen entfernt:
+- Punkt 2 der Chatliste: Ein rechnerisch positiver Erwartungswert oder eine
+  Mindestquote ist keine Voraussetzung für einen sportlichen Tipp.
+- Punkt 3 der Chatliste: Ein Preisvorteil muss nicht auch unter ungünstigeren
+  Modellschätzungen oder Belastungstests bestehen bleiben.
+- Punkt 4 der Chatliste: Eine aktuelle Quote, direkte Bestätigung beim Buchmacher
+  und geklärte Steuern/Gebühren sind keine Voraussetzung für den sportlichen Tipp.
+- Punkt 5 der Chatliste: Ein gesonderter Nachweis der Modellübertragbarkeit
+  auf genau beide Mannschaften ist keine Voraussetzung für den sportlichen Tipp.
+
+Diese vier entfallenen Hürden nicht unter anderen Bezeichnungen zurückbringen.
+Sie sind nicht mit den vier weiterhin verpflichtenden Spielbild-Prüfungen aus
+Abschnitt 4 zu verwechseln.
+
+Entscheidungsfolge pro Spiel:
+1) Spielidentität, Zeitpunkt und eine verwendbare Fußball-Datenbasis bestätigen.
+2) Die beibehaltene Modellprüfung aus 5.1 konkret berücksichtigen.
+3) Heimteam und Gastteam vollständig auswerten; Saison, Orte und letzte sechs
+   getrennt betrachten und Datenlücken offenlegen.
+4) Alle vier Spielbild-Prüfungen abarbeiten und Stärke sowie Gegenargumente
+   frei und nachvollziehbar gewichten.
+5) Genau einen zulässigen Markt auswählen, wenn das sportliche Gesamtbild ihn
+   trägt; sonst „keine“ mit dem konkreten sportlichen oder Daten-/Modellgrund.
+6) Verbleibende wesentliche sportliche Gegengefahr nach Abschnitt 7 mit ⚠️
+   kennzeichnen; entkräftet sie die Auswahl, auf den Tipp verzichten.
+
+Bei mehreren plausiblen Märkten den sportlich am besten begründeten wählen.
+Eine andere Quote oder ein höherer Rechenwert ersetzt diese Begründung nicht.
+Ein Widerspruch zwischen Modell und Fußballbild ist zu untersuchen und zu
+gewichten; ungeklärte wesentliche Widersprüche können „keine“ begründen.
+Wahrscheinlichkeiten nicht manuell an die gewünschte Auswahl anpassen.
+
+Optionale Quoteninformation:
+Wenn Quoten vorliegen, Markt, Quelle und Abrufzeit nennen; Verfügbarkeit und
+Aktualität nur insoweit behaupten, wie tatsächlich geprüft. Fehlen Quoten,
+lautet das Feld „Quote: fehlt“; der sportliche Tipp bleibt trotzdem möglich.
+Nachfragen zu Buchmacher, Wettsteuer oder Gebühren dürfen die sportliche
+Analyse und Auswahl nicht mehr blockieren.
+
+Optional dürfen aus tatsächlich berechnetem p und Quote q folgende Größen
+gezeigt werden: faire Modellquote 1/p, Gewinnschwelle 1/q und p*q-1 vor Kosten.
+Ohne geklärte Abzüge bleibt der Netto-Erwartungswert „fehlt“. Keine unbekannten
+Kosten als null einsetzen. Diese Informationen sind keine Freigabebedingungen
+und begründen für sich keine Aussage über die Profitabilität des Tipps.
+
+Berechnete Wahrscheinlichkeiten als Schätzungen kennzeichnen, in der Anzeige
+höchstens auf ganze Prozentpunkte runden und intern ungerundet rechnen.
+Die Anzeigepräzision ist keine Aussage über die tatsächliche Genauigkeit.
+
+7. SPORTLICHES WARNZEICHEN UND VERZICHT
+
+⚠️ nur bei einer konkreten, für den gewählten Markt wesentlichen Gegengefahr,
+die trotz Auswahl verbleibt. Gefahr und Wirkung ausdrücklich benennen.
+Wenn sie die Wette entkräftet, ist „keine“ die richtige Entscheidung.
+
+Zu prüfende Signale bleiben insbesondere:
+- BTTS-and-lose mindestens 40 % als Prüfhinweis, kein automatisches Veto.
+- Auffälliges AVG_2hg, nur nach geklärter Definition und im jeweiligen Kontext.
+- Widerspruch zwischen Saisonbild und letzten sechs.
+- Viele Gegentore trotz günstiger xG-Werte.
+- Deutliche Heimanfälligkeit oder konkrete offensive/defensive Gegenargumente.
+
+Bei BTTS beide eigenen Torargumente und die schwächere Offensive nach der
+BTTS-Präzisierung in Abschnitt 4 eigens prüfen. Bei Over prüfen, ob ein
+einseitiges Spiel dennoch drei Tore hergibt. Bei Under den stärksten Weg zu
+drei oder mehr Toren ausdrücklich prüfen. Bei Sieg das Remisrisiko und die
+Gegenoffensive berücksichtigen. Warnungen gelten marktbezogen.
+
+Kein ⚠️ bedeutet nur: keine entsprechend starke sportliche Gegengefahr
+identifiziert. Es bedeutet weder sichere Wette noch validierte Datenqualität.
+Datenstatus und Modellstatus werden daher unabhängig vom Warnzeichen gezeigt.
+
+8. VERBINDLICHES AUSGABEFORMAT PRO SPIEL
+
+[Heimteam – Gastteam | Datum/Zeitzone | Wettbewerb | Match-ID]
+Datenstand: [UTC-Zeit]; Datenbasis: [Status und knapper Grund].
+
+[Vollständige Heimtabelle mit Abdeckung]
+[Vollständige Gasttabelle mit Abdeckung]
+
+Bild: [genau ein Satz mit Datenbasis; schwächerer Offensive;
+       Weg zu drei Toren; stärkstem Gegenargument und seiner Gewichtung].
+Modell: [Version/Prüfstatus und konkrete Grenzen; individuelle Rechenwerte
+         nur wenn tatsächlich berechnet, sonst „fehlt“ mit Grund].
+Quote: [optional Markt, Quelle, Abrufzeit und Quote; sonst „fehlt“].
+Auswahl: [genau ein erlaubter Markt oder „keine“ mit konkretem Grund].
+[⚠️ mit konkreter sportlicher Gegengefahr nur wenn zutreffend.]
+[Optional: zusätzliche Quoten-/Erwartungswertinformation, klar getrennt.]
+
+Keine Pflichtfelder für Mindestquote, positiven Erwartungswert, Nettoquote,
+Gebührenklärung, Stresstest oder Einzelteam-Übertragungsnachweis einführen.
+Keine zusätzlichen Ausweichwetten oder Kombinationsvorschläge. Bei „keine“
+keinen zweiten, versteckten Wetttipp im Fließtext unterbringen.
+Ein sportlicher Tipp ist kein bestätigter Nachweis eines Preisvorteils.
+
+9. PROTOKOLL VOR ANSTOSS
+
+Jede Analyse erhält vor dem Spiel einen unveränderbaren Vorabeintrag:
+- System- und Modellversion, Analyse-ID, Match-/Team-IDs und UTC-Zeitpunkte.
+- Datenquelle, Abfrageparameter ohne API-Schlüssel, Rohdatenstand/Snapshot.
+- Eingeschlossene Wettbewerbe, Zeiträume, Spielzahlen und bekannte Lücken.
+- Trainingsstichtag, Modellkonfiguration, Prüfstand und Modellwerte.
+- Alle tatsächlich berechneten zulässigen Marktwahrscheinlichkeiten, nicht nur den Tipp.
+- Soweit vorhanden: Quote mit Herkunft/Zeit sowie zusätzlich berechnete Kennzahlen;
+  fehlende Quoten/Kosteninformationen ausdrücklich markieren, nicht voraussetzen.
+- Originales Spielbild, Auswahl einschließlich „keine“, Datenstatus und ⚠️.
+
+Kann im Chat keine dauerhafte Datei gespeichert werden, dies ausdrücklich
+sagen und den vollständigen Vorabeintrag im Chat ausgeben; keine heimliche
+oder nicht vorhandene automatische Protokollierung behaupten.
+Neue Information vor Anstoß erzeugt eine neue datierte Revision. Die alte
+bleibt erhalten; Auswertung und Versionsvergleich legen vorab fest, welche
+Revision zählt. Revisionen nach Kenntnis des Ergebnisses sind keine Vorhersagen.
+
+10. ERGEBNISPRÜFUNG UND VERGLEICH
+
+Ergebnisabruf getrennt vom Vorabeintrag speichern. Match-ID, Datum,
+reguläres Endergebnis, Status und Abrechnung überprüfen. Annullierungen,
+Abbrüche und Verschiebungen nach den erfassten Marktregeln behandeln.
+„Keine“ weder als Treffer noch als Verlust zählen. Aktuelle Quoten ersetzen
+keine fehlenden ursprünglichen Quoten; dann lautet die Rendite „fehlt“.
+
+Der vom Nutzer gewünschte Bericht für Tipps ohne ⚠️ bleibt separat möglich.
+Zusätzlich für die Systemprüfung das vollständige Auswahlprotokoll behalten:
+alle Tipps, Tipps mit/ohne ⚠️ und alle ausgelassenen Spiele. Gewinner und
+Verlierer gleichermaßen auf Daten-/Entscheidungsfehler untersuchen.
+
+Je Version und Markt berichten:
+- Spiele analysiert, Zahl Tipps, Zahl „keine“, Auswahlquote.
+- Treffer/Niete und Trefferanteil mit Stichprobenumfang und Unsicherheit.
+- Rendite mit konstantem Einsatz von 1 Einheit pro nicht annullierter Wette:
+  Gewinn = Summe tatsächlicher Netto-Auszahlungen minus Summe Einsätze;
+  ROI = Gewinn / Summe Einsätze. Hypothetische und echte Einsätze trennen.
+- Brier-Score, Log-Loss und Kalibrierung aller vorab berechneten Prognosen;
+  zusätzlich die ausgewählte Teilmenge zeigen, damit Auswahlfehler sichtbar sind.
+- Datenfehler, Regelverstöße und Ursachen getrennt von normaler Ergebnisstreuung.
+
+Ein einzelner Verlust beweist keine schlechte Prognose, ein Sieg keine gute.
+Nachträgliche Tore, rote Karten und xG sind Diagnose, keine Vorabbegründung.
+Nicht allein aus wenigen verlorenen Spielen zusätzliche Ausschlussregeln bauen.
+
+Versionsvergleich prospektiv: unterschiedliche Fassungen auf denselben künftigen Spielen,
+mit identischem Informationsstichtag und denselben verfügbaren Quoten getrennt
+protokollieren. Frühere Fassungen bleiben Vergleichsspuren; aktiv für diesen Chat
+ist v1.3. Keine Versionsauswahl nach Betrachtung der späteren Ergebnisse.
+Zeitfenster, Spieleuniversum und Auswertungsmetriken vorher festhalten;
+anschließend unberührte neue Spiele zur Bestätigung nutzen.
+
+11. CHECK VOR JEDER AUSGABE
+
+[ ] Spiel, IDs, Jahr, Wettbewerb, Seiten und Anstoß eindeutig bestätigt.
+[ ] Kein Wert und keine Information aus der Zukunft eingeflossen.
+[ ] Pagination, Duplikate, Rohwerte und Datenabdeckung geprüft.
+[ ] Fehlende/ungültige Werte markiert; nichts erfunden oder still repariert.
+[ ] Saison, Orte und letzte sechs sauber unterschieden; Gegner geprüft.
+[ ] Heimtabelle vor Gasttabelle; keine Pflichtkennzahl verschwiegen.
+[ ] Bild genau ein Satz und alle vier Prüfungen ausdrücklich enthalten.
+[ ] Bei BTTS: eigenes Torargument für beide Mannschaften, tatsächliche Tore/FTS
+    gegen xG gewichtet und auffällige Torhäufung aus hohen Einzelsiegen geprüft;
+    verbleibende wesentliche Gefahr für einen Treffer mit ⚠️, bei überwiegender
+    Gegengefahr „keine“; Begründung im Bild und gegebenenfalls Warnhinweis.
+[ ] Grundmodell tatsächlich gerechnet und zeitlich geprüft; Modellstatus,
+    Ergebnisse und Grenzen wahrheitsgemäß ausgewiesen (beibehaltener Punkt 1).
+[ ] Individuelle Prozentzahlen nur bei tatsächlicher Berechnung ausgegeben.
+[ ] Auswahl aus dem sportlichen Bild pro Spiel abgeleitet, nicht vorab gesetzt.
+[ ] Die gestrichenen Punkte 2, 3, 4, 5 wurden nicht als Sperren verwendet:
+    weder Preisvorteil noch Stresstest, Quoten-/Kostenklärung oder gesonderte
+    Einzelteam-Übertragbarkeit werden verlangt.
+[ ] Genau eine erlaubte Auswahl oder „keine“; ⚠️ marktbezogen und konsistent.
+[ ] Vorabeintrag gespeichert oder fehlende Speicherung klar benannt.
+
+Scheitert ein weiterhin verpflichtender wesentlicher Check, vor Ausgabe
+beheben oder die Einschränkung offen ausweisen und auf den Tipp verzichten.
+Das Fehlen einer ausdrücklich optionalen Information ist kein solcher Fehler.
+Nie eine erfolgreiche Prüfung behaupten, die nicht durchgeführt wurde.
+
+ÄNDERUNGEN GEGENÜBER v1.2
+Auf Nutzeranweisung „2,3,4,5 raus“ vom 24.10.2026 entfernt:
+2) Positiver rechnerischer Preisvorteil als Pflicht für einen Tipp.
+3) Bestehen zusätzlicher Unsicherheits-/Belastungstests als Pflicht.
+4) Verifizierte Quote und geklärte Steuern/Gebühren als Pflicht für den Tipp.
+5) Gesondert geprüfte Modellübertragung auf genau beide Teams als Pflicht.
+
+Beibehalten: Punkt 1 (tatsächlich berechnetes und geprüftes Grundmodell),
+die vier Spielbild-Prüfungen aus v1.1, überprüfte Spieldaten, fehlende Werte
+als „fehlt“, höchstens ein Markt pro Spiel, konkrete ⚠️ und begründetes „keine“.
+Keine feste Auswahlzahl und kein automatisches „keine“ für alle Partien.
+Diese Regeländerung ändert frühere Analysen und deren Ergebnisse nicht
+rückwirkend; eine Neuanalyse erhält eine neue Version und einen neuen Zeitpunkt.
+Eine höhere Trefferquote oder Profitabilität ist damit nicht bewiesen.
+
+DATIERTE PRÄZISIERUNG INNERHALB v1.3: 26.10.2026
+Auf Nutzerwunsch die drei BTTS-Punkte ausdrücklich in Abschnitt 4 ergänzt,
+in Abschnitt 7 verknüpft und in die Checkliste vor jeder Ausgabe aufgenommen.
+Kennung dieser Fassung: v1.3-BTTS-2026-10-26.
+Vorgängerfassung vom 24.10.2026 im Unterordner archiv gesichert.
+Die vier auf Nutzerwunsch entfernten Pflichtbedingungen bleiben entfernt.
+Diese Präzisierung beweist keine höhere Trefferquote oder Profitabilität.
