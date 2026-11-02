@@ -1,6 +1,6 @@
 {
-  "version": "1.3",
-  "file": "FootyStats-System-v1.3.txt",
+  "version": "1.3-OA",
+  "file": "OddAlerts-System-v1.3-OA.txt",
   "activated_by": "Nutzer: 2,3,4,5 raus",
   "removed_mandatory_gates": [
     "positive_expected_value",
@@ -15,13 +15,25 @@
     "one_market_per_match",
     "market_specific_warning"
   ],
-  "revision": "v1.3-BTTS-2026-10-26",
-  "updated_utc": "2026-10-26T09:41:09.618717+00:00",
-  "revision_authorized_by": "Nutzer: drei ausdrücklich zitierte BTTS-Punkte ins System übernehmen",
+  "revision": "v1.3-OA-2026-11-02",
+  "updated_utc": "2026-11-02T00:00:00+00:00",
+  "revision_authorized_by": "Nutzer: gleiches System mit Odd-Alerts-APIs auf eigenem Repository/Branch",
   "btts_clarification": [
     "independent_goal_argument_for_each_team",
     "weigh_actual_goals_and_fts_against_xg_and_single_game_outliers",
     "material_goal_risk_warning_or_no_selection"
   ],
-  "previous_revision_archive": "/workspace/footystats/archiv/v1.3-vor-BTTS-Praezisierung-2026-10-26"
+  "data_source": "Odd Alerts (https://data.oddalerts.com/api/)",
+  "derived_from": {
+    "file": "FootyStats-System-v1.3.txt",
+    "branch": "system-v1.3",
+    "revision": "v1.3-BTTS-2026-10-26"
+  },
+  "oddalerts_adaptations": [
+    "last6_from_fixture_list_last_x_is_all_comps",
+    "btts_and_lose_counted_from_results",
+    "goals_2h_instead_of_avg_2hg",
+    "xg_coverage_from_coverage_field",
+    "oddalerts_predictions_not_a_model"
+  ]
 }

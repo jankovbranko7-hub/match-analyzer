@@ -1,6 +1,8 @@
-FOOTYSTATS-SYSTEM v1.3
+ODDALERTS-SYSTEM v1.3-OA
 Vollständige Arbeitsfassung für diesen Chat
-Stand: 26.10.2026 | Version v1.3; BTTS-Präzisierung auf ausdrücklichen Nutzerwunsch
+Stand: 02.11.2026 | Version v1.3-OA; Regeln aus FootyStats-System v1.3
+(Fassung v1.3-BTTS-2026-10-26) unverändert übernommen, einzige Datenquelle
+Odd Alerts; Anpassungen auf ausdrücklichen Nutzerwunsch, siehe Schluss der Datei
 
 AKTIVIERUNG UND ZWECK
 Diese Fassung ist auf Wunsch des Nutzers ab sofort für neue Analysen in
@@ -18,11 +20,12 @@ Modell noch eine bereits nachgewiesene Kalibrierung oder automatisierte API-
 Anbindung. Berechnungen müssen für die jeweilige Analyse tatsächlich erfolgen.
 
 API-ZUGANG
-Anbieter: FootyStats / Football Data API.
-Basis-URL: https://api.football-data-api.com/
-API-Schlüssel: nicht in dieser Datei – er liegt in der Umgebung (Variable APIKEY,
-beim Aufruf als FOOTYSTATS_KEY="$APIKEY" mitgeben).
-Authentifizierung: API-Schlüssel als Query-Parameter key über HTTPS senden.
+Anbieter: Odd Alerts (Data API).
+Basis-URL: https://data.oddalerts.com/api/
+API-Schlüssel: nicht in dieser Datei – er liegt in der Umgebung (Variable
+ODDALERTS_KEY).
+Authentifizierung: API-Schlüssel als Query-Parameter api_token über HTTPS senden.
+Getestete Endpunkte und Felder: ODDALERTS-API.md im selben Verzeichnis.
 Den Schlüssel ausschließlich an diesen Anbieter übermitteln, nicht in
 Chatantworten, Analyseberichten, Vorabprotokollen oder Fehlermeldungen ausgeben.
 In gespeicherten Abfrageparametern und URLs den Schlüssel durch [REDACTED]
@@ -35,7 +38,7 @@ zu nennen; in diesem Fall keine aktuellen Daten oder erfolgreichen Abrufe behaup
 
 1. UNVERÄNDERTE GRUNDREGELN
 
-- Datenquelle ist die FootyStats-API. Weitere Quellen nur mit Herkunft,
+- Datenquelle ist die Odd-Alerts-API. Weitere Quellen nur mit Herkunft,
   Abrufzeit und eindeutigem Zweck ausweisen; Widersprüche offenlegen.
 - Zuerst die vollständige Heimtabelle, danach die vollständige Gasttabelle.
 - Gesamt, Heim und Auswärts beschreiben unterschiedliche Kontexte. Keine
@@ -88,6 +91,10 @@ gegen die einzelnen Gegner prüfen, soweit verfügbar.
 Bei lastx ohne identifizierten Wettbewerb „Wettbewerb fehlt / möglicherweise
 wettbewerbsübergreifend“ angeben. Nicht stillschweigend mit sechs Ligaspielen
 gleichsetzen und daraus keine direkte Gegnervergleichbarkeit ableiten.
+Odd Alerts: stats/...?last_x=6_overall meldet all_comps: true und ist daher
+wettbewerbsübergreifend. Vorrangig die letzten sechs Spiele aus der Spielliste
+(fixtures/between) mit Datum, Gegner, Wettbewerb und Ergebnis selbst
+zusammenstellen; wird last_x verwendet, die obige Kennzeichnung angeben.
 
 Verschiedene nationale Ligen liefern ohne überprüfte Stärkenanpassung keine
 gemeinsame Modellskala. Europapokal- und Ligadaten getrennt zeigen. Kleine
@@ -130,10 +137,17 @@ Zeilen mindestens:
 - xG für/Spiel und xG gegen/Spiel sowie Zahl der Spiele mit xG, wenn bekannt.
 - Siege/Unentschieden/Niederlagen, Punkte/Spiel.
 - BTTS %, Over 2,5 %, Under 2,5 %, Clean Sheets %, Failed to Score %.
-- BTTS-and-lose % und AVG_2hg, sofern verfügbar und korrekt definiert.
+- BTTS-and-lose % und Tore 2. Halbzeit/Spiel, sofern verfügbar und korrekt definiert.
+  Odd Alerts liefert BTTS-and-lose nicht als Feld: nur aus den tatsächlich
+  abgerufenen Einzelergebnissen (beide Teams treffen und die Mannschaft verliert)
+  auszählen, mit Spielzahl; sonst „fehlt“. Anstelle von AVG_2hg (FootyStats)
+  die Odd-Alerts-Felder goals_2h (Tore beider Teams in der 2. Halbzeit),
+  goals_for_2h und goals_against_2h, jeweils als Mittelwert pro Spiel.
 
-Nicht verfügbare Felder als „fehlt“ stehen lassen. Begriffe wie AVG_2hg erst
+Nicht verfügbare Felder als „fehlt“ stehen lassen. Begriffe wie goals_2h erst
 nach Prüfung der API-Definition interpretieren, nicht als Trefferchance lesen.
+Die xG-Abdeckung aus dem Feld coverage.xg angeben; bei Abdeckung 0 sind xG „fehlt“,
+nicht 0.
 
 Nach den beiden Mannschaftstabellen steht „Bild:“ mit genau EINEM Satz,
 der alle vier Prüfungen ausdrücklich enthält; Semikola sind erlaubt:
@@ -260,6 +274,9 @@ Numerische Probleme, nicht identifizierbare Parameter oder nicht endliche
 Torintensitäten führen zu „Modellwahrscheinlichkeit: fehlt“. Diese Spezifikation
 allein ist kein erfolgter Fit. Eine andere Modellfamilie erfordert eine eigene
 Modellversion und eine erneute zeitliche Prüfung.
+Eigene Vorhersagen, Wahrscheinlichkeiten oder Value-Angaben von Odd Alerts
+(z. B. probability, competition_predictability) sind kein Modell im Sinne
+dieses Abschnitts; höchstens als gekennzeichneter Kontext.
 
 5.4 Ableitung der Märkte
 X ~ Poisson(lambda_H), Y ~ Poisson(lambda_A), zunächst unabhängig.
@@ -367,7 +384,8 @@ Wenn sie die Wette entkräftet, ist „keine“ die richtige Entscheidung.
 
 Zu prüfende Signale bleiben insbesondere:
 - BTTS-and-lose mindestens 40 % als Prüfhinweis, kein automatisches Veto.
-- Auffälliges AVG_2hg, nur nach geklärter Definition und im jeweiligen Kontext.
+- Auffällige Tore 2. Halbzeit (goals_2h), nur nach geklärter Definition und im
+  jeweiligen Kontext.
 - Widerspruch zwischen Saisonbild und letzten sechs.
 - Viele Gegentore trotz günstiger xG-Werte.
 - Deutliche Heimanfälligkeit oder konkrete offensive/defensive Gegenargumente.
@@ -454,7 +472,7 @@ Nicht allein aus wenigen verlorenen Spielen zusätzliche Ausschlussregeln bauen.
 Versionsvergleich prospektiv: unterschiedliche Fassungen auf denselben künftigen Spielen,
 mit identischem Informationsstichtag und denselben verfügbaren Quoten getrennt
 protokollieren. Frühere Fassungen bleiben Vergleichsspuren; aktiv für diesen Chat
-ist v1.3. Keine Versionsauswahl nach Betrachtung der späteren Ergebnisse.
+ist v1.3-OA. Keine Versionsauswahl nach Betrachtung der späteren Ergebnisse.
 Zeitfenster, Spieleuniversum und Auswertungsmetriken vorher festhalten;
 anschließend unberührte neue Spiele zur Bestätigung nutzen.
 
@@ -508,3 +526,15 @@ Kennung dieser Fassung: v1.3-BTTS-2026-10-26.
 Vorgängerfassung vom 24.10.2026 im Unterordner archiv gesichert.
 Die vier auf Nutzerwunsch entfernten Pflichtbedingungen bleiben entfernt.
 Diese Präzisierung beweist keine höhere Trefferquote oder Profitabilität.
+
+ÜBERTRAGUNG AUF ODD ALERTS: v1.3-OA, 02.11.2026
+Auf ausdrücklichen Nutzerwunsch das Regelwerk v1.3-BTTS-2026-10-26 als eigene
+Fassung mit Odd Alerts als einziger Datenquelle angelegt. Geändert sind nur:
+API-Zugang; Datenquelle in Abschnitt 1; Hinweis zu last_x in 3.1; BTTS-and-lose
+aus Einzelergebnissen, goals_2h statt AVG_2hg und xG-Abdeckung in Abschnitt 4
+und 7; Odd-Alerts-Prognosen kein Modell in 5.3; aktive Fassung in Abschnitt 10.
+Alle übrigen Regeln, Formeln, Prüfungen und die vier entfernten Pflicht-
+bedingungen sind unverändert. Das FootyStats-System v1.3 bleibt auf dem Branch
+system-v1.3 bestehen; beide Systeme werden nicht vermischt.
+Kennung dieser Fassung: v1.3-OA-2026-11-02.
+Diese Übertragung beweist keine höhere Trefferquote oder Profitabilität.
