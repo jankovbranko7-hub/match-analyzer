@@ -12,6 +12,12 @@ in der Umgebung (siehe Technik).
 
 ## Arbeitsweise (nicht Teil des Systems)
 
+- **Das System strikt befolgen** (Nutzeranweisung vom 02.11.2026): genau nach Wortlaut, keine
+  eigenen Maßstäbe, Schwellen, Hürden oder Ersatzregeln einführen. Lässt das System eine Frage
+  offen, sie dem Nutzer vorlegen statt selbst zu entscheiden. Scheitert ein Pflichtcheck
+  (Abschnitt 11): beheben oder auf den Tipp verzichten – nie nur vermerken und trotzdem tippen.
+  Einschränkungen von Anfang an offen nennen.
+
 - Spiele kommen meist als Batches zu je 5, nummeriert („Batch X · Nr. Y“). Jede Nummer
   genau ihr Spiel, nichts vertauschen.
 - Vorabeinträge nach Abschnitt 9 des Systems kommen vor dem Anpfiff als Datei nach
