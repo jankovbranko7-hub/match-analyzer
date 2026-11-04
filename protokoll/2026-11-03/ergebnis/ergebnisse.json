@@ -1,0 +1,391 @@
+{
+ "abruf_utc_von": "2026-11-04T06:38:57.592504+00:00",
+ "abruf_utc_bis": "2026-11-04T06:39:07.808097+00:00",
+ "quelle": "FootyStats API, Endpunkt match",
+ "ergebnisse": {
+  "1.2": {
+   "match_id": 8409599,
+   "home": "Chapecoense",
+   "away": "Mirassol",
+   "status": "complete",
+   "date_unix": 1793745000,
+   "hg": 1,
+   "ag": 2,
+   "ht": [
+    1,
+    1
+   ],
+   "no_home_away": 0,
+   "homeID": 623,
+   "awayID": 2721
+  },
+  "1.3": {
+   "match_id": 8714468,
+   "home": "Mushuc Runa SC",
+   "away": "Manta FC",
+   "status": "complete",
+   "date_unix": 1793737800,
+   "hg": 2,
+   "ag": 3,
+   "ht": [
+    1,
+    1
+   ],
+   "no_home_away": 1,
+   "homeID": 4330,
+   "awayID": 4334
+  },
+  "1.4": {
+   "match_id": 8566286,
+   "home": "Portsmouth",
+   "away": "Swansea City",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 3,
+   "ag": 1,
+   "ht": [
+    1,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 272,
+   "awayID": 154
+  },
+  "1.5": {
+   "match_id": 8566287,
+   "home": "Preston North End",
+   "away": "Sheffield United",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 2,
+   "ag": 3,
+   "ht": [
+    1,
+    3
+   ],
+   "no_home_away": 0,
+   "homeID": 210,
+   "awayID": 251
+  },
+  "2.1": {
+   "match_id": 8566312,
+   "home": "Watford",
+   "away": "Lincoln City",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 1,
+   "ag": 0,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 155,
+   "awayID": 1021
+  },
+  "2.2": {
+   "match_id": 8566349,
+   "home": "Blackburn Rovers",
+   "away": "Stoke City",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 1,
+   "ag": 2,
+   "ht": [
+    0,
+    1
+   ],
+   "no_home_away": 0,
+   "homeID": 216,
+   "awayID": 141
+  },
+  "2.3": {
+   "match_id": 8566566,
+   "home": "Queens Park Rangers",
+   "away": "Burnley",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 1,
+   "ag": 1,
+   "ht": [
+    0,
+    1
+   ],
+   "no_home_away": 0,
+   "homeID": 160,
+   "awayID": 145
+  },
+  "2.4": {
+   "match_id": 8566607,
+   "home": "Derby County",
+   "away": "Norwich City",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 0,
+   "ag": 4,
+   "ht": [
+    0,
+    3
+   ],
+   "no_home_away": 0,
+   "homeID": 213,
+   "awayID": 159
+  },
+  "2.5": {
+   "match_id": 8566634,
+   "home": "Charlton Athletic",
+   "away": "Bolton Wanderers",
+   "status": "complete",
+   "date_unix": 1793735100,
+   "hg": 0,
+   "ag": 1,
+   "ht": [
+    0,
+    1
+   ],
+   "no_home_away": 0,
+   "homeID": 225,
+   "awayID": 226
+  },
+  "3.1": {
+   "match_id": 8566291,
+   "home": "Birmingham City",
+   "away": "Millwall",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 3,
+   "ag": 0,
+   "ht": [
+    3,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 206,
+   "awayID": 229
+  },
+  "3.2": {
+   "match_id": 8566645,
+   "home": "West Bromwich Albion",
+   "away": "Southampton",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 1,
+   "ag": 1,
+   "ht": [
+    1,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 142,
+   "awayID": 146
+  },
+  "3.3": {
+   "match_id": 8700616,
+   "home": "Galatasaray",
+   "away": "Stuttgart",
+   "status": "complete",
+   "date_unix": 1793727900,
+   "hg": 2,
+   "ag": 0,
+   "ht": [
+    2,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 187,
+   "awayID": 51
+  },
+  "3.4": {
+   "match_id": 8700784,
+   "home": "Shakhtar Donetsk",
+   "away": "Sporting CP",
+   "status": "complete",
+   "date_unix": 1793727900,
+   "hg": 0,
+   "ag": 1,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 80,
+   "awayID": 114
+  },
+  "3.5": {
+   "match_id": 8700183,
+   "home": "FC Barcelona",
+   "away": "Aston Villa",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 3,
+   "ag": 0,
+   "ht": [
+    1,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 83,
+   "awayID": 158
+  },
+  "4.1": {
+   "match_id": 8700136,
+   "home": "Atlético Madrid",
+   "away": "Bayern München",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 0,
+   "ag": 2,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 117,
+   "awayID": 38
+  },
+  "4.2": {
+   "match_id": 8700172,
+   "home": "Manchester United",
+   "away": "Roma",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 3,
+   "ag": 2,
+   "ht": [
+    0,
+    2
+   ],
+   "no_home_away": 1,
+   "homeID": 149,
+   "awayID": 113
+  },
+  "4.3": {
+   "match_id": 8700158,
+   "home": "Villarreal",
+   "away": "PSG",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 0,
+   "ag": 6,
+   "ht": [
+    0,
+    4
+   ],
+   "no_home_away": 1,
+   "homeID": 76,
+   "awayID": 68
+  },
+  "4.4": {
+   "match_id": 8700596,
+   "home": "Feyenoord",
+   "away": "Inter Milan",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 0,
+   "ag": 3,
+   "ht": [
+    0,
+    2
+   ],
+   "no_home_away": 1,
+   "homeID": 367,
+   "awayID": 470
+  },
+  "4.5": {
+   "match_id": 8700709,
+   "home": "LASK Linz",
+   "away": "Slovan Bratislava",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 4,
+   "ag": 0,
+   "ht": [
+    3,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 595,
+   "awayID": 982
+  },
+  "5.1": {
+   "match_id": 8700812,
+   "home": "FK Bodo - Glimt",
+   "away": "Lille",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 0,
+   "ag": 0,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 332,
+   "awayID": 441
+  },
+  "5.2": {
+   "match_id": 8592513,
+   "home": "Pogoń Siedlce",
+   "away": "Ruch Chorzów",
+   "status": "complete",
+   "date_unix": 1793725200,
+   "hg": 1,
+   "ag": 1,
+   "ht": [
+    1,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 776,
+   "awayID": 1064
+  },
+  "5.3": {
+   "match_id": 8592692,
+   "home": "Chrobry Głogów",
+   "away": "Arka Gdynia",
+   "status": "complete",
+   "date_unix": 1793725200,
+   "hg": 0,
+   "ag": 0,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 0,
+   "homeID": 780,
+   "awayID": 795
+  },
+  "5.4": {
+   "match_id": 8581483,
+   "home": "2 de Mayo",
+   "away": "Sportivo Trinidense",
+   "status": "complete",
+   "date_unix": 1793736000,
+   "hg": 0,
+   "ag": 0,
+   "ht": [
+    0,
+    0
+   ],
+   "no_home_away": 1,
+   "homeID": 6696,
+   "awayID": 6684
+  },
+  "5.5": {
+   "match_id": 8581468,
+   "home": "Nacional Asunción",
+   "away": "Sportivo San Lorenzo",
+   "status": "complete",
+   "date_unix": 1793745000,
+   "hg": 0,
+   "ag": 2,
+   "ht": [
+    0,
+    1
+   ],
+   "no_home_away": 1,
+   "homeID": 6676,
+   "awayID": 6691
+  }
+ }
+}

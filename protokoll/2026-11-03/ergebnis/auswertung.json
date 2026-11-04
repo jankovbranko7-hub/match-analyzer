@@ -1,0 +1,377 @@
+{
+ "ohne_warn": {
+  "n": 5,
+  "treffer": 3,
+  "quote": 0.6,
+  "wilson": [
+   0.23071993220883708,
+   0.8823817688407467
+  ],
+  "gewinn": -1.15,
+  "roi": -0.22999999999999998,
+  "n_quote": 5,
+  "brier": 0.1978506003757748,
+  "logloss": 0.5726349957961114
+ },
+ "mit_warn": {
+  "n": 11,
+  "treffer": 8,
+  "quote": 0.7272727272727273,
+  "wilson": [
+   0.4343497069897537,
+   0.9025411942607853
+  ],
+  "gewinn": 2.8199999999999994,
+  "roi": 0.2563636363636363,
+  "n_quote": 11,
+  "brier": 0.2515243979117413,
+  "logloss": 0.6989317734007272
+ },
+ "alle_tipps": {
+  "n": 16,
+  "treffer": 11,
+  "quote": 0.6875,
+  "wilson": [
+   0.4440393186673406,
+   0.8583556494803894
+  ],
+  "gewinn": 1.6699999999999997,
+  "roi": 0.10437499999999998,
+  "n_quote": 16,
+  "brier": 0.23475133618175179,
+  "logloss": 0.6594640303992848
+ },
+ "keine": 9,
+ "rows": [
+  {
+   "nr": "1.1",
+   "spiel": "Aurora – Independiente Petrolero",
+   "match_id": null,
+   "ergebnis": "–",
+   "status": "Identität ungeklärt",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "1.2",
+   "spiel": "Chapecoense – Mirassol",
+   "match_id": 8409599,
+   "ergebnis": "1:2",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.5696725101741925,
+   "quote": 1.67,
+   "res": "Treffer"
+  },
+  {
+   "nr": "1.3",
+   "spiel": "Mushuc Runa SC – Manta FC",
+   "match_id": 8714468,
+   "ergebnis": "2:3",
+   "status": "complete",
+   "auswahl": "Heimsieg",
+   "warn": true,
+   "p": 0.538163731158063,
+   "quote": 1.52,
+   "res": "Niete"
+  },
+  {
+   "nr": "1.4",
+   "spiel": "Portsmouth – Swansea City",
+   "match_id": 8566286,
+   "ergebnis": "3:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "1.5",
+   "spiel": "Preston North End – Sheffield United",
+   "match_id": 8566287,
+   "ergebnis": "2:3",
+   "status": "complete",
+   "auswahl": "Auswärtssieg",
+   "warn": true,
+   "p": 0.40880113081166447,
+   "quote": 1.93,
+   "res": "Treffer"
+  },
+  {
+   "nr": "2.1",
+   "spiel": "Watford – Lincoln City",
+   "match_id": 8566312,
+   "ergebnis": "1:0",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "2.2",
+   "spiel": "Blackburn Rovers – Stoke City",
+   "match_id": 8566349,
+   "ergebnis": "1:2",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.45200297638072046,
+   "quote": 1.75,
+   "res": "Treffer"
+  },
+  {
+   "nr": "2.3",
+   "spiel": "Queens Park Rangers – Burnley",
+   "match_id": 8566566,
+   "ergebnis": "1:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "2.4",
+   "spiel": "Derby County – Norwich City",
+   "match_id": 8566607,
+   "ergebnis": "0:4",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": true,
+   "p": 0.5490356837287607,
+   "quote": 1.65,
+   "res": "Treffer"
+  },
+  {
+   "nr": "2.5",
+   "spiel": "Charlton Athletic – Bolton Wanderers",
+   "match_id": 8566634,
+   "ergebnis": "0:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "3.1",
+   "spiel": "Birmingham City – Millwall",
+   "match_id": 8566291,
+   "ergebnis": "3:0",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "3.2",
+   "spiel": "West Bromwich Albion – Southampton",
+   "match_id": 8566645,
+   "ergebnis": "1:1",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.5583596240582609,
+   "quote": 1.55,
+   "res": "Treffer"
+  },
+  {
+   "nr": "3.3",
+   "spiel": "Galatasaray – Stuttgart",
+   "match_id": 8700616,
+   "ergebnis": "2:0",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": false,
+   "p": 0.6337071327215692,
+   "quote": 1.36,
+   "res": "Niete"
+  },
+  {
+   "nr": "3.4",
+   "spiel": "Shakhtar Donetsk – Sporting CP",
+   "match_id": 8700784,
+   "ergebnis": "0:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "3.5",
+   "spiel": "FC Barcelona – Aston Villa",
+   "match_id": 8700183,
+   "ergebnis": "3:0",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": false,
+   "p": 0.7437235599247942,
+   "quote": 1.18,
+   "res": "Treffer"
+  },
+  {
+   "nr": "4.1",
+   "spiel": "Atlético Madrid – Bayern München",
+   "match_id": 8700136,
+   "ergebnis": "0:2",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.702635662591809,
+   "quote": 1.4,
+   "res": "Niete"
+  },
+  {
+   "nr": "4.2",
+   "spiel": "Manchester United – Roma",
+   "match_id": 8700172,
+   "ergebnis": "3:2",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "4.3",
+   "spiel": "Villarreal – PSG",
+   "match_id": 8700158,
+   "ergebnis": "0:6",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": false,
+   "p": 0.6922338736975666,
+   "quote": 1.31,
+   "res": "Treffer"
+  },
+  {
+   "nr": "4.4",
+   "spiel": "Feyenoord – Inter Milan",
+   "match_id": 8700596,
+   "ergebnis": "0:3",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "4.5",
+   "spiel": "LASK Linz – Slovan Bratislava",
+   "match_id": 8700709,
+   "ergebnis": "4:0",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": false,
+   "p": 0.8046733227766681,
+   "quote": 1.36,
+   "res": "Treffer"
+  },
+  {
+   "nr": "5.1",
+   "spiel": "FK Bodo - Glimt – Lille",
+   "match_id": 8700812,
+   "ergebnis": "0:0",
+   "status": "complete",
+   "auswahl": "Heimsieg",
+   "warn": true,
+   "p": 0.44166984190080183,
+   "quote": 1.84,
+   "res": "Niete"
+  },
+  {
+   "nr": "5.2",
+   "spiel": "Pogoń Siedlce – Ruch Chorzów",
+   "match_id": 8592513,
+   "ergebnis": "1:1",
+   "status": "complete",
+   "auswahl": "Under 2,5",
+   "warn": true,
+   "p": 0.5513267124752067,
+   "quote": 1.95,
+   "res": "Treffer"
+  },
+  {
+   "nr": "5.3",
+   "spiel": "Chrobry Głogów – Arka Gdynia",
+   "match_id": 8592692,
+   "ergebnis": "0:0",
+   "status": "complete",
+   "auswahl": "Under 2,5",
+   "warn": true,
+   "p": 0.5673868606426181,
+   "quote": 1.68,
+   "res": "Treffer"
+  },
+  {
+   "nr": "5.4",
+   "spiel": "2 de Mayo – Sportivo Trinidense",
+   "match_id": 8581483,
+   "ergebnis": "0:0",
+   "status": "complete",
+   "auswahl": "Under 2,5",
+   "warn": true,
+   "p": 0.5919514991023268,
+   "quote": 1.64,
+   "res": "Treffer"
+  },
+  {
+   "nr": "5.5",
+   "spiel": "Nacional Asunción – Sportivo San Lorenzo",
+   "match_id": 8581468,
+   "ergebnis": "0:2",
+   "status": "complete",
+   "auswahl": "Heimsieg",
+   "warn": false,
+   "p": 0.6237933622160048,
+   "quote": 1.28,
+   "res": "Niete"
+  }
+ ],
+ "alle_prognosen": {
+  "H": {
+   "n": 24,
+   "brier": 0.1807636797108866,
+   "logloss": 0.5461291283925208,
+   "beobachtet": 0.2916666666666667,
+   "mittel_p": 0.4100364016519109
+  },
+  "A": {
+   "n": 24,
+   "brier": 0.2602735615153038,
+   "logloss": 0.7246078830159431,
+   "beobachtet": 0.4583333333333333,
+   "mittel_p": 0.34678463462428666
+  },
+  "BTTS": {
+   "n": 24,
+   "brier": 0.30336843978827605,
+   "logloss": 0.8053160481567514,
+   "beobachtet": 0.375,
+   "mittel_p": 0.5594420853479948
+  },
+  "O25": {
+   "n": 24,
+   "brier": 0.24411188959760147,
+   "logloss": 0.6798867511592278,
+   "beobachtet": 0.5,
+   "mittel_p": 0.5419702000395635
+  }
+ }
+}
