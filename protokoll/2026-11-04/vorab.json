@@ -2,7 +2,7 @@
  "system": "FootyStats-System v1.3 (Fassung v1.3-BTTS-2026-10-26)",
  "model": "Poisson-v1.3-reg (reguliertes unabhängiges Poisson nach Abschnitt 5.3, Tore, 4 Saisons, gleiche Gewichte)",
  "snapshot_utc": "2026-11-04 16:19 UTC",
- "created_utc": "2026-11-04 16:21:29 UTC",
+ "created_utc": "2026-11-04 16:22:05 UTC",
  "matches": {
   "1.1": {
    "analysis_id": "A-20261104-8562287-r1",
@@ -257,8 +257,8 @@
    }
   },
   "2.2": {
-   "home": "Aurora",
-   "away": "Independiente Petrolero",
+   "home": "Oxford United",
+   "away": "Reading",
    "match_id": null,
    "selection": "keine",
    "warning": null,
