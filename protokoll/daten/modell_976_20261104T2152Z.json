@@ -1,0 +1,331 @@
+{
+ "modellversion": "OA-Poisson-1",
+ "rechenlauf_utc": "2026-11-04T21:52:22Z",
+ "trainingsstichtag_utc": "2026-10-22T19:00:00Z",
+ "wettbewerb_id": 976,
+ "saison_ids": [
+  2244248,
+  667778,
+  6205,
+  4352
+ ],
+ "saisons": [
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "trainingsspiele": 1411,
+ "teams": 329,
+ "ausgeschlossen": {
+  "AET": 61,
+  "FT_PEN": 54
+ },
+ "duplikate_entfernt": 3,
+ "erstes_spiel": "2023-07-12T17:30:00Z",
+ "letztes_spiel": "2026-10-22T19:00:00Z",
+ "zeitliche_pruefung": {
+  "aufteilung": {
+   "training": [
+    1689183000,
+    1753380000,
+    846
+   ],
+   "auswahl": [
+    1753380000,
+    1773942300,
+    282
+   ],
+   "test": [
+    1773942300,
+    1792695600,
+    283
+   ]
+  },
+  "alpha_kandidaten_logscore": {
+   "0.1": 3.5685,
+   "1.0": 3.1522,
+   "10.0": 3.0204,
+   "100.0": 3.0289
+  },
+  "alpha": 10.0,
+  "test_je_markt": {
+   "heim": {
+    "n": 283,
+    "brier": 0.2404,
+    "brier_grundrate": 0.2498,
+    "logloss": 0.6737,
+    "logloss_grundrate": 0.6927,
+    "trefferanteil_test": 48.1,
+    "se_brier": 0.0046,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 36,
+      "prognose": 35.7,
+      "beobachtet": 22.2
+     },
+     {
+      "bereich": "40-60",
+      "n": 223,
+      "prognose": 49.3,
+      "beobachtet": 50.7
+     },
+     {
+      "bereich": "60-80",
+      "n": 24,
+      "prognose": 64.9,
+      "beobachtet": 62.5
+     }
+    ]
+   },
+   "auswaerts": {
+    "n": 283,
+    "brier": 0.194,
+    "brier_grundrate": 0.2017,
+    "logloss": 0.573,
+    "logloss_grundrate": 0.5933,
+    "trefferanteil_test": 27.9,
+    "se_brier": 0.0122,
+    "gruppen": [
+     {
+      "bereich": "0-20",
+      "n": 37,
+      "prognose": 16.7,
+      "beobachtet": 13.5
+     },
+     {
+      "bereich": "20-40",
+      "n": 235,
+      "prognose": 27.4,
+      "beobachtet": 29.4
+     },
+     {
+      "bereich": "40-60",
+      "n": 11,
+      "prognose": 43.5,
+      "beobachtet": 45.5
+     }
+    ]
+   },
+   "btts": {
+    "n": 283,
+    "brier": 0.2527,
+    "brier_grundrate": 0.2504,
+    "logloss": 0.6987,
+    "logloss_grundrate": 0.6939,
+    "trefferanteil_test": 51.9,
+    "se_brier": 0.0034,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 2,
+      "prognose": 38.3,
+      "beobachtet": 0.0
+     },
+     {
+      "bereich": "40-60",
+      "n": 263,
+      "prognose": 52.6,
+      "beobachtet": 52.9
+     },
+     {
+      "bereich": "60-80",
+      "n": 18,
+      "prognose": 62.3,
+      "beobachtet": 44.4
+     }
+    ]
+   },
+   "over25": {
+    "n": 283,
+    "brier": 0.2571,
+    "brier_grundrate": 0.2469,
+    "logloss": 0.7077,
+    "logloss_grundrate": 0.6869,
+    "trefferanteil_test": 56.2,
+    "se_brier": 0.0041,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 15,
+      "prognose": 37.3,
+      "beobachtet": 73.3
+     },
+     {
+      "bereich": "40-60",
+      "n": 238,
+      "prognose": 50.7,
+      "beobachtet": 55.0
+     },
+     {
+      "bereich": "60-80",
+      "n": 30,
+      "prognose": 63.2,
+      "beobachtet": 56.7
+     }
+    ]
+   },
+   "under25": {
+    "n": 283,
+    "brier": 0.2571,
+    "brier_grundrate": 0.2469,
+    "logloss": 0.7077,
+    "logloss_grundrate": 0.6869,
+    "trefferanteil_test": 43.8,
+    "se_brier": 0.0041,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 30,
+      "prognose": 36.8,
+      "beobachtet": 43.3
+     },
+     {
+      "bereich": "40-60",
+      "n": 238,
+      "prognose": 49.3,
+      "beobachtet": 45.0
+     },
+     {
+      "bereich": "60-80",
+      "n": 15,
+      "prognose": 62.7,
+      "beobachtet": 26.7
+     }
+    ]
+   }
+  }
+ },
+ "alpha_final": 10.0,
+ "mu": 0.1275,
+ "heimvorteil": 0.3615,
+ "neutraler_platz": "Kennzeichnung in der API fehlt; alle Spiele mit Heimvorteil gerechnet",
+ "vorhersagen": {
+  "420684515": {
+   "heim": "Trabzonspor",
+   "gast": "SC Freiburg",
+   "spiele_im_training": {
+    "heim": 3,
+    "gast": 4
+   },
+   "modell": {
+    "heim": 0.515191,
+    "remis": 0.229197,
+    "auswaerts": 0.255611,
+    "btts": 0.592397,
+    "over25": 0.588183,
+    "under25": 0.411817,
+    "lambda_heim": 1.82713,
+    "lambda_gast": 1.224073,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.0793,
+    "abwehr_heim": 0.1027,
+    "angriff_gast": 0.1774,
+    "abwehr_gast": -0.0345
+   }
+  },
+  "420684558": {
+   "heim": "FC Midtjylland",
+   "gast": "Ajax",
+   "spiele_im_training": {
+    "heim": 11,
+    "gast": 11
+   },
+   "modell": {
+    "heim": 0.562591,
+    "remis": 0.201643,
+    "auswaerts": 0.235764,
+    "btts": 0.670944,
+    "over25": 0.700714,
+    "under25": 0.299286,
+    "lambda_heim": 2.223978,
+    "lambda_gast": 1.395656,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.2659,
+    "abwehr_heim": 0.1031,
+    "angriff_gast": 0.3089,
+    "abwehr_gast": -0.0444
+   }
+  },
+  "420684592": {
+   "heim": "Atalanta",
+   "gast": "Kairat",
+   "spiele_im_training": {
+    "heim": 4,
+    "gast": 2
+   },
+   "modell": {
+    "heim": 0.559839,
+    "remis": 0.232899,
+    "auswaerts": 0.207261,
+    "btts": 0.519244,
+    "over25": 0.519891,
+    "under25": 0.480109,
+    "lambda_heim": 1.773786,
+    "lambda_gast": 0.981792,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": -0.0456,
+    "abwehr_heim": 0.1193,
+    "angriff_gast": -0.0266,
+    "abwehr_gast": -0.1297
+   }
+  },
+  "420684537": {
+   "heim": "Getafe",
+   "gast": "Brighton & Hove Albion",
+   "spiele_im_training": {
+    "heim": 4,
+    "gast": 4
+   },
+   "modell": {
+    "heim": 0.374828,
+    "remis": 0.252571,
+    "auswaerts": 0.3726,
+    "btts": 0.568449,
+    "over25": 0.531617,
+    "under25": 0.468383,
+    "lambda_heim": 1.404704,
+    "lambda_gast": 1.399789,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.0721,
+    "abwehr_heim": -0.1113,
+    "angriff_gast": 0.0975,
+    "abwehr_gast": 0.2213
+   }
+  },
+  "420684597": {
+   "heim": "Monaco",
+   "gast": "Nordsjælland",
+   "spiele_im_training": {
+    "heim": 4,
+    "gast": 18
+   },
+   "modell": {
+    "heim": 0.359499,
+    "remis": 0.241511,
+    "auswaerts": 0.39899,
+    "btts": 0.607695,
+    "over25": 0.582778,
+    "under25": 0.417222,
+    "lambda_heim": 1.468291,
+    "lambda_gast": 1.558466,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.2164,
+    "abwehr_heim": 0.0664,
+    "angriff_gast": 0.3825,
+    "abwehr_gast": 0.3213
+   }
+  }
+ }
+}

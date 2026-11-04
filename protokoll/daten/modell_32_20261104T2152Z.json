@@ -1,0 +1,481 @@
+{
+ "modellversion": "OA-Poisson-1",
+ "rechenlauf_utc": "2026-11-04T21:52:22Z",
+ "trainingsstichtag_utc": "2026-11-04T15:30:00Z",
+ "wettbewerb_id": 32,
+ "saison_ids": [
+  2244250,
+  667779,
+  6207,
+  4623
+ ],
+ "saisons": [
+  "2023/2024",
+  "2024/2025",
+  "2025/2026",
+  "2026/2027"
+ ],
+ "trainingsspiele": 811,
+ "teams": 184,
+ "ausgeschlossen": {
+  "AET": 21,
+  "FT_PEN": 18
+ },
+ "duplikate_entfernt": 0,
+ "erstes_spiel": "2023-08-08T14:00:00Z",
+ "letztes_spiel": "2026-11-04T15:30:00Z",
+ "zeitliche_pruefung": {
+  "aufteilung": {
+   "training": [
+    1691503200,
+    1755801900,
+    486
+   ],
+   "auswahl": [
+    1755802800,
+    1771531200,
+    162
+   ],
+   "test": [
+    1771531200,
+    1793806200,
+    163
+   ]
+  },
+  "alpha_kandidaten_logscore": {
+   "0.1": 3.2018,
+   "1.0": 3.0377,
+   "10.0": 3.0009,
+   "100.0": 3.0181
+  },
+  "alpha": 10.0,
+  "test_je_markt": {
+   "heim": {
+    "n": 163,
+    "brier": 0.2478,
+    "brier_grundrate": 0.2501,
+    "logloss": 0.6886,
+    "logloss_grundrate": 0.6934,
+    "trefferanteil_test": 48.5,
+    "se_brier": 0.0054,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 18,
+      "prognose": 35.8,
+      "beobachtet": 38.9
+     },
+     {
+      "bereich": "40-60",
+      "n": 137,
+      "prognose": 48.9,
+      "beobachtet": 48.2
+     },
+     {
+      "bereich": "60-80",
+      "n": 8,
+      "prognose": 63.9,
+      "beobachtet": 75.0
+     }
+    ]
+   },
+   "auswaerts": {
+    "n": 163,
+    "brier": 0.2308,
+    "brier_grundrate": 0.2251,
+    "logloss": 0.6588,
+    "logloss_grundrate": 0.643,
+    "trefferanteil_test": 33.7,
+    "se_brier": 0.0171,
+    "gruppen": [
+     {
+      "bereich": "0-20",
+      "n": 12,
+      "prognose": 17.4,
+      "beobachtet": 50.0
+     },
+     {
+      "bereich": "20-40",
+      "n": 145,
+      "prognose": 28.0,
+      "beobachtet": 31.0
+     },
+     {
+      "bereich": "40-60",
+      "n": 6,
+      "prognose": 44.4,
+      "beobachtet": 66.7
+     }
+    ]
+   },
+   "btts": {
+    "n": 163,
+    "brier": 0.2658,
+    "brier_grundrate": 0.2551,
+    "logloss": 0.7253,
+    "logloss_grundrate": 0.7034,
+    "trefferanteil_test": 44.2,
+    "se_brier": 0.0061,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 1,
+      "prognose": 39.2,
+      "beobachtet": 0.0
+     },
+     {
+      "bereich": "40-60",
+      "n": 130,
+      "prognose": 54.9,
+      "beobachtet": 45.4
+     },
+     {
+      "bereich": "60-80",
+      "n": 32,
+      "prognose": 62.4,
+      "beobachtet": 40.6
+     }
+    ]
+   },
+   "over25": {
+    "n": 163,
+    "brier": 0.2551,
+    "brier_grundrate": 0.245,
+    "logloss": 0.7038,
+    "logloss_grundrate": 0.6832,
+    "trefferanteil_test": 57.1,
+    "se_brier": 0.006,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 4,
+      "prognose": 36.9,
+      "beobachtet": 100.0
+     },
+     {
+      "bereich": "40-60",
+      "n": 127,
+      "prognose": 53.3,
+      "beobachtet": 59.1
+     },
+     {
+      "bereich": "60-80",
+      "n": 32,
+      "prognose": 62.6,
+      "beobachtet": 43.8
+     }
+    ]
+   },
+   "under25": {
+    "n": 163,
+    "brier": 0.2551,
+    "brier_grundrate": 0.245,
+    "logloss": 0.7038,
+    "logloss_grundrate": 0.6832,
+    "trefferanteil_test": 42.9,
+    "se_brier": 0.006,
+    "gruppen": [
+     {
+      "bereich": "20-40",
+      "n": 32,
+      "prognose": 37.4,
+      "beobachtet": 56.2
+     },
+     {
+      "bereich": "40-60",
+      "n": 127,
+      "prognose": 46.7,
+      "beobachtet": 40.9
+     },
+     {
+      "bereich": "60-80",
+      "n": 4,
+      "prognose": 63.1,
+      "beobachtet": 0.0
+     }
+    ]
+   }
+  }
+ },
+ "alpha_final": 10.0,
+ "mu": 0.1581,
+ "heimvorteil": 0.3327,
+ "neutraler_platz": "Kennzeichnung in der API fehlt; alle Spiele mit Heimvorteil gerechnet",
+ "vorhersagen": {
+  "420684666": {
+   "heim": "Anderlecht",
+   "gast": "Salzburg",
+   "spiele_im_training": {
+    "heim": 22,
+    "gast": 15
+   },
+   "modell": {
+    "heim": 0.58922,
+    "remis": 0.218137,
+    "auswaerts": 0.192642,
+    "btts": 0.543393,
+    "over25": 0.563648,
+    "under25": 0.436352,
+    "lambda_heim": 1.933054,
+    "lambda_gast": 1.008757,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.129,
+    "abwehr_heim": 0.1637,
+    "angriff_gast": 0.0143,
+    "abwehr_gast": -0.0393
+   }
+  },
+  "420684677": {
+   "heim": "Crystal Palace",
+   "gast": "TSG Hoffenheim",
+   "spiele_im_training": {
+    "heim": 3,
+    "gast": 11
+   },
+   "modell": {
+    "heim": 0.560184,
+    "remis": 0.214142,
+    "auswaerts": 0.225674,
+    "btts": 0.609723,
+    "over25": 0.627109,
+    "under25": 0.372891,
+    "lambda_heim": 2.019798,
+    "lambda_gast": 1.214019,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.1666,
+    "abwehr_heim": 0.0196,
+    "angriff_gast": 0.0555,
+    "abwehr_gast": -0.0456
+   }
+  },
+  "420684683": {
+   "heim": "Real Sociedad",
+   "gast": "Olympique Lyonnais",
+   "spiele_im_training": {
+    "heim": 15,
+    "gast": 24
+   },
+   "modell": {
+    "heim": 0.44107,
+    "remis": 0.232865,
+    "auswaerts": 0.326065,
+    "btts": 0.630189,
+    "over25": 0.616104,
+    "under25": 0.383896,
+    "lambda_heim": 1.725062,
+    "lambda_gast": 1.455879,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.2564,
+    "abwehr_heim": 0.0681,
+    "angriff_gast": 0.2856,
+    "abwehr_gast": 0.2019
+   }
+  },
+  "420684742": {
+   "heim": "AC Milan",
+   "gast": "Ferencvárosi",
+   "spiele_im_training": {
+    "heim": 9,
+    "gast": 34
+   },
+   "modell": {
+    "heim": 0.491536,
+    "remis": 0.225993,
+    "auswaerts": 0.28247,
+    "btts": 0.628688,
+    "over25": 0.625307,
+    "under25": 0.374693,
+    "lambda_heim": 1.860323,
+    "lambda_gast": 1.364761,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.1949,
+    "abwehr_heim": 0.0203,
+    "angriff_gast": 0.1732,
+    "abwehr_gast": 0.0649
+   }
+  },
+  "420684744": {
+   "heim": "Sparta Praha",
+   "gast": "AFC Bournemouth",
+   "spiele_im_training": {
+    "heim": 15,
+    "gast": 3
+   },
+   "modell": {
+    "heim": 0.394321,
+    "remis": 0.237254,
+    "auswaerts": 0.368425,
+    "btts": 0.624773,
+    "over25": 0.604545,
+    "under25": 0.395455,
+    "lambda_heim": 1.593241,
+    "lambda_gast": 1.533254,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.1158,
+    "abwehr_heim": -0.1174,
+    "angriff_gast": 0.1519,
+    "abwehr_gast": 0.1408
+   }
+  },
+  "420684638": {
+   "heim": "AZ Alkmaar",
+   "gast": "Juventus",
+   "spiele_im_training": {
+    "heim": 15,
+    "gast": 3
+   },
+   "modell": {
+    "heim": 0.493089,
+    "remis": 0.228912,
+    "auswaerts": 0.277999,
+    "btts": 0.614381,
+    "over25": 0.608031,
+    "under25": 0.391969,
+    "lambda_heim": 1.823484,
+    "lambda_gast": 1.319316,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.1625,
+    "abwehr_heim": 0.0629,
+    "angriff_gast": 0.182,
+    "abwehr_gast": 0.0525
+   }
+  },
+  "420684651": {
+   "heim": "Sunderland",
+   "gast": "Dinamo Zagreb",
+   "spiele_im_training": {
+    "heim": 3,
+    "gast": 14
+   },
+   "modell": {
+    "heim": 0.590775,
+    "remis": 0.21469,
+    "auswaerts": 0.194534,
+    "btts": 0.558435,
+    "over25": 0.58198,
+    "under25": 0.41802,
+    "lambda_heim": 1.979089,
+    "lambda_gast": 1.044075,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": -0.0058,
+    "abwehr_heim": 0.1204,
+    "angriff_gast": 0.0054,
+    "abwehr_gast": -0.1977
+   }
+  },
+  "420684662": {
+   "heim": "Bayer 04 Leverkusen",
+   "gast": "Olympique Marseille",
+   "spiele_im_training": {
+    "heim": 16,
+    "gast": 16
+   },
+   "modell": {
+    "heim": 0.705408,
+    "remis": 0.163486,
+    "auswaerts": 0.131106,
+    "btts": 0.599745,
+    "over25": 0.703289,
+    "under25": 0.296711,
+    "lambda_heim": 2.588976,
+    "lambda_gast": 1.045377,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.3985,
+    "abwehr_heim": 0.2813,
+    "angriff_gast": 0.1676,
+    "abwehr_gast": -0.062
+   }
+  },
+  "420684664": {
+   "heim": "Celtic",
+   "gast": "Beşiktaş",
+   "spiele_im_training": {
+    "heim": 13,
+    "gast": 21
+   },
+   "modell": {
+    "heim": 0.385393,
+    "remis": 0.226931,
+    "auswaerts": 0.387676,
+    "btts": 0.665999,
+    "over25": 0.657669,
+    "under25": 0.342331,
+    "lambda_heim": 1.69056,
+    "lambda_gast": 1.696044,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.0394,
+    "abwehr_heim": -0.2049,
+    "angriff_gast": 0.1653,
+    "abwehr_gast": 0.0051
+   }
+  },
+  "420684670": {
+   "heim": "Benfica",
+   "gast": "Lech Poznań",
+   "spiele_im_training": {
+    "heim": 14,
+    "gast": 9
+   },
+   "modell": {
+    "heim": 0.688027,
+    "remis": 0.166741,
+    "auswaerts": 0.145232,
+    "btts": 0.629693,
+    "over25": 0.721918,
+    "under25": 0.278082,
+    "lambda_heim": 2.604546,
+    "lambda_gast": 1.139332,
+    "restmasse_1x2": 1e-06
+   },
+   "parameter": {
+    "angriff_heim": 0.3539,
+    "abwehr_heim": 0.2046,
+    "angriff_gast": 0.177,
+    "abwehr_gast": -0.1126
+   }
+  },
+  "420684700": {
+   "heim": "Celta de Vigo",
+   "gast": "Union Saint-Gilloise",
+   "spiele_im_training": {
+    "heim": 17,
+    "gast": 20
+   },
+   "modell": {
+    "heim": 0.453907,
+    "remis": 0.270201,
+    "auswaerts": 0.275892,
+    "btts": 0.479747,
+    "over25": 0.432401,
+    "under25": 0.567599,
+    "lambda_heim": 1.388908,
+    "lambda_gast": 1.019174,
+    "restmasse_1x2": 0.0
+   },
+   "parameter": {
+    "angriff_heim": 0.0629,
+    "abwehr_heim": 0.0746,
+    "angriff_gast": -0.0645,
+    "abwehr_gast": 0.2252
+   }
+  }
+ }
+}
