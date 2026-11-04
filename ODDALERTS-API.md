@@ -40,3 +40,20 @@ Lücken für das System:
 - Historie je Liga unterschiedlich tief (Premier League mindestens bis 2022/23).
 - `teams/{id}` lieferte keine Daten; `probability/{id}` antwortete „Invalid type provided“
   und ist ohnehin kein Modell im Sinne von Abschnitt 5.
+
+## Ergänzung 04.11.2026 (aus `https://data.oddalerts.com/llms.txt` und Tests)
+
+- `fixtures/{id|upcoming|popular|multiple}?include=probability,odds&bookmakers=1,2&markets=6,9,13&odds_type=opening|closing`
+  liefert je Spiel Odd-Alerts-Wahrscheinlichkeiten (u. a. `home_win`, `draw`, `away_win`,
+  `btts`, `o25`, `u25`) und Quoten verschachtelt `{pinnacle|bet365: {ft_result|btts|total_goals: {...}}}`.
+- `fixtures/popular` = kommende Spiele nach Seitenaufrufen sortiert, keine Empfehlung.
+- `fixtures/team/{id}`, `fixtures/season/{id}`, `fixtures/competition/{id}`: vollständige Spiellisten.
+- `fixtures/{id}?include=timings`: Torminuten (für Ergebnis nach 90 Minuten bei Verlängerung).
+- `probability/{btts|ft_result|double_chance|ht_result}`: Listen; mit `start`/`end` auch Vergangenheit.
+- `correctScores`: Ergebniswahrscheinlichkeiten.
+- `predictions/generate/{id}`: Simulation v1 (50.000 Läufe) verfügbar; `v=2` braucht Add-on
+  „Simulations Engine v2“ (HTTP 403, `add_on: predictions_v2`). Kein KI-Text in v1.
+- `value/you`, `value/you/alerts`: eigene Filter in der App und deren ausgelöste Alerts.
+- `odds/history/multiple?ids=…&markets=6,9,13&bookmakers=1,2`: Markt-IDs numerisch angeben
+  (`markets=ft_result` liefert hier leer). Marktnummern: 6 ft_result, 9 btts, 13 total_goals.
+- Alpha und KI-Textberichte: nicht per API.

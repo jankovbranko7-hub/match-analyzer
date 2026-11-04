@@ -15,6 +15,15 @@ nicht vermischt; Änderungen an einem der Systeme nur auf ausdrücklichen Wunsch
   `protokoll/` und werden committet und gepusht; Ergebnisprüfungen getrennt davon
   (Abschnitt 10).
 
+## Werkzeuge (nur auf Branch `system-v1.3-oa-werkzeuge`, nicht Teil des Systems)
+
+- `werkzeuge/scanner.py`: listet alle kommenden Spiele mit Odd-Alerts-Prozenten und Quoten,
+  **ohne Filter oder Grenzen**; Ausgabe in `scans/`. Nur Kandidatenliste – die Auswahl trifft
+  das System v1.3-OA.
+- `werkzeuge/tracker.py`: Tipps vor dem Anpfiff erfassen (`tracker/vorab.jsonl`), getrennt
+  abrechnen (`tracker/ergebnisse.jsonl`), Bericht und Kalibrierung. Jedes analysierte Spiel
+  erfassen, auch „keine“. Details: `werkzeuge/README.md`.
+
 ## Technik
 
 Der Odd-Alerts-Schlüssel liegt in der Umgebung als `ODDALERTS_KEY` und wird als
