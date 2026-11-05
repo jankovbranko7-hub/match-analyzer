@@ -16,7 +16,8 @@ import json
 import os
 import subprocess
 import sys
-from datetime import timedelta
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import oa_api as oa  # noqa: E402
@@ -25,6 +26,12 @@ import oap_modell as om  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = "OAP-2.0"
+TAGE = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+
+def mez(unix):
+    d = datetime.fromtimestamp(unix, ZoneInfo("Europe/Berlin"))
+    return f"{TAGE[d.weekday()]} {d:%d.%m. %H:%M}"
 PARAMS = {"w_xg": 1.0, "halbwertszeit": 120.0, "alpha": 2.0, "min_spiele": 6}
 P_MIN, EDGE_MIN, Q_MAX, ABW_MAX = 0.40, 0.10, 3.00, 0.05
 
@@ -118,12 +125,13 @@ def main():
          f"Odd-Alerts-Prognose, {len(alle)} mit eigenem Modellwert · **{len(tipps)} Tipps**", "",
          "Eigenes Modell entscheidet (p ≥ 40 %, Vorteil ≥ 10 %, Bet365 ≤ 3,00); Odd Alerts als Leitschiene "
          "(höchstens 5 Punkte Abweichung, OA sieht keinen Nachteil). **Status Testbetrieb – nur auf Papier.**", "",
-         "| Nr | Anstoß UTC | Wettbewerb | Spiel | Match-ID | Tipp | Modell % | OA % | Bet365 | Vorteil |",
-         "|---|---|---|---|---|---|---|---|---|---|"]
+         "| Nr | Datum/Zeit (dt. Zeit) | Land | Liga | Spiel | Tipp | Modell % | OA % | Bet365 | Vorteil | Match-ID |",
+         "|---|---|---|---|---|---|---|---|---|---|---|"]
     for i, t in enumerate(tipps, 1):
-        z.append(f"| {i} | {t['anstoss_utc'][:16].replace('T', ' ')} | {t['land']} · {t['wettbewerb']} | "
-                 f"{t['heim']} – {t['gast']} | {t['match_id']} | {oa.MAERKTE[t['markt']]['label']} | "
-                 f"{t['p_modell'] * 100:.0f} | {t['p_oa'] * 100:.0f} | {t['quote']:.2f} | {t['vorteil'] * 100:+.0f} % |")
+        z.append(f"| {i} | {mez(t['unix'])} | {t['land']} | {t['wettbewerb']} | "
+                 f"{t['heim']} – {t['gast']} | {oa.MAERKTE[t['markt']]['label']} | "
+                 f"{t['p_modell'] * 100:.0f} | {t['p_oa'] * 100:.0f} | {t['quote']:.2f} | {t['vorteil'] * 100:+.0f} % | "
+                 f"{t['match_id']} |")
     with open(os.path.join(ROOT, "scans", f"oap2_{stamp}.md"), "w", encoding="utf8") as fh:
         fh.write("\n".join(z) + "\n")
     print(f"{stat['ligaspiele']} Ligaspiele, {len(alle)} mit Modellwert, {len(tipps)} Tipps → scans/oap2_{stamp}.md")
