@@ -1,13 +1,43 @@
 {
-  "version": "2.0",
-  "revision": "OAP-2.0",
-  "file": "OA-Prognose-System-v2.0.txt",
-  "model": {"name": "OAP-M1", "w_xg": 1.0, "half_life_days": 120, "alpha": 2.0, "min_matches": 6},
-  "guide_rail": {"max_abs_diff_oa": 0.05, "oa_edge_min": 0.0},
-  "rule": {"min_probability": 0.40, "min_edge": 0.10, "max_odds": 3.0, "leagues_only": true, "one_per_match": "größter Vorteil"},
+  "version": "2.1",
+  "revision": "OAP-2.1",
+  "file": "OA-Prognose-System-v2.1.txt",
+  "models": {
+    "liga": {
+      "name": "OAP-M1",
+      "w_xg": 1.0,
+      "half_life_days": 120,
+      "alpha": 2.0,
+      "min_matches": 6
+    },
+    "pokal": {
+      "name": "OAP-M3",
+      "w_xg": 1.0,
+      "half_life_days": 120,
+      "alpha_team": 5.0,
+      "alpha_league": 0.2,
+      "window_days": 400,
+      "min_matches": 6
+    }
+  },
+  "guide_rail": {
+    "max_abs_diff_oa": 0.05,
+    "oa_edge_min": 0.0
+  },
+  "rule": {
+    "min_probability": 0.4,
+    "min_edge": 0.1,
+    "max_odds": 3.0,
+    "competitions": "alle außer Freundschaftsspiele",
+    "one_per_match": "größter Vorteil"
+  },
   "status": "Testbetrieb (Papier)",
-  "pass_criteria": {"min_settled": 300, "roi_min": 0.0, "clv_min_exclusive": 0.0},
+  "pass_criteria": {
+    "min_settled": 300,
+    "roi_min": 0.0,
+    "clv_min_exclusive": 0.0
+  },
   "created_utc": "2026-11-05",
-  "authorized_by": "Nutzer: Odd Alerts nur als Leitschiene, eigenes System soll die Tipps erzeugen",
-  "replaces": "OAP-1.0 (bleibt als Aufzeichnung)"
+  "authorized_by": "Nutzer: alle Ligen sowie Champions League, Europa League und Pokalspiele; Pokalmodell verbessern",
+  "replaces": "OAP-2.0 (bleibt als Aufzeichnung)"
 }

@@ -1,0 +1,107 @@
+OA-PROGNOSE-SYSTEM v2.1 (Kennung OAP-2.1)
+Eigenes Modell entscheidet – Odd Alerts als Leitschiene – alle Ligen, Pokale, Europapokal
+Stand: 05.11.2026 | auf ausdrücklichen Wunsch des Nutzers („alle Ligen sowie Champions
+League, Europa League und Pokalspiele mit dem neuen System“; Pokalmodell verbessern)
+Status: TESTBETRIEB (nur Papier, kein echtes Geld bis zum Bestehen nach Abschnitt 8)
+Ersetzt v2.0 als aktives System; v1.0 und v2.0 bleiben als Aufzeichnung erhalten.
+Änderung gegenüber v2.0: zusätzlich alle Nicht-Ligaspiele (Abschnitt 2b); Regel und
+Leitschiene unverändert.
+
+0. ABGRENZUNG
+Eigenständiges System. Keine Regel aus FootyStats-System v1.3 oder OddAlerts-System
+v1.3-OA, keine Vermischung. Änderungen nur auf ausdrücklichen Wunsch und nur als neue
+Version.
+
+1. DATEN
+- Odd Alerts API: Spiele je Wettbewerb (laufende + vorherige Saison) mit Ergebnis
+  und xG (fixtures/competition, include=stats), Prognosen (probability) und Quoten
+  (Bet365 aktuell, Pinnacle). Schlüssel aus ODDALERTS_KEY, nie speichern.
+- Alle Wettbewerbe mit Odd-Alerts-Prognose: Ligaspiele (competition_type League) und
+  alle übrigen Wettbewerbe (Champions League, Europa League, Conference League, nationale
+  Pokale und Ligapokale, internationale Wettbewerbe). Keine Freundschaftsspiele.
+
+2. EIGENE MODELLE
+2a) Ligaspiele – Modell OAP-M1 (unverändert aus v2.0)
+Je Liga ein gewichtetes Poisson-Stärkemodell:
+  log(λ_Heim) = μ + Heimvorteil + Angriff_Heim − Abwehr_Gast
+  log(λ_Gast) = μ + Angriff_Gast − Abwehr_Heim
+- Zielgröße: xG des Teams im Spiel (ohne xG: Tore).
+- Gewicht: 0,5 hoch (Alter in Tagen / 120) – neuere Spiele zählen mehr.
+- Strafe α = 2 auf Angriff/Abwehr (verhindert Ausreißer bei wenigen Spielen).
+- Nur Spiele, die vor dem Entscheidungszeitpunkt beendet waren.
+- Ein Team braucht mindestens 6 Spiele im Datenbestand, sonst kein Modellwert.
+- Märkte aus unabhängigen Poisson-Verteilungen: Heim, Remis, Auswärts, BTTS Ja,
+  BTTS Nein, Over 2,5, Under 2,5.
+Einstellungen (xG-Anteil, Halbwertszeit) allein auf der Entwicklung gewählt
+(geringster Log-Loss, siehe Abschnitt 9).
+
+2b) Pokal-, Europapokal- und andere Nicht-Ligaspiele – Modell OAP-M3
+Ein gemeinsames Poisson-Modell über alle gespeicherten Wettbewerbe (Ligen und Pokale der
+letzten 400 Tage), Stärke = Ligastärke + Teamabweichung:
+  Angriff_Team = Ligaangriff(Liga des Teams) + a_Team, Abwehr_Team = Ligaabwehr + d_Team
+- Liga eines Teams: Wettbewerb seines letzten Ligaspiels im Datenbestand (sonst Restgruppe).
+- Ligastärken werden aus Spielen zwischen Teams verschiedener Ligen gelernt (Pokale,
+  Europapokal); schwache Strafe 0,2 auf Ligastärken, Strafe 5 auf Teamabweichungen.
+- Zielgröße xG (ohne xG: Tore), Halbwertszeit 120 Tage, mindestens 6 Spiele je Team.
+- Schätzung: gemeinsames Newton-Verfahren mit konjugierten Gradienten.
+Variante allein auf der Entwicklung gewählt (geringster Log-Loss unter 4 Varianten).
+
+3. LEITSCHIENE ODD ALERTS
+Odd Alerts entscheidet nicht, sondern begrenzt: Ein Tipp ist nur erlaubt, wenn
+  a) die Odd-Alerts-Wahrscheinlichkeit p_OA höchstens 5 Prozentpunkte von der eigenen
+     Modellwahrscheinlichkeit p_M abweicht, und
+  b) Odd Alerts zum Tippzeitpunkt keinen Nachteil sieht: p_OA × q − 1 ≥ 0.
+Weicht Odd Alerts stärker ab oder fehlt p_OA, gibt es keinen Tipp.
+
+4. AUSWAHLREGEL (vorab festgelegt)
+Ein Markt ist ein Tipp, wenn alle Bedingungen erfüllt sind:
+  a) p_M ≥ 40 %
+  b) Vorteil e = p_M × q − 1 ≥ 10 % (q = aktuelle Bet365-Quote)
+  c) q ≤ 3,00
+  d) Leitschiene nach Abschnitt 3 erfüllt
+  e) kein Freundschaftsspiel, Status NS, Modellwert vorhanden
+Pro Spiel höchstens ein Tipp (größter Vorteil e). Keine Kombinationen, keine
+Ausnahmen, keine Auswahl nach Gefühl.
+
+5. EINSATZ
+Fester Einsatz 1 Einheit pro Tipp.
+
+6. ABLAUF
+werkzeuge/oap21_auswahl.py --erfassen: aktualisiert die benötigten Wettbewerbsdaten,
+rechnet M1 (je Liga) und M3 (gemeinsam) neu, wählt nach Abschnitt 4 und erfasst jeden
+Tipp vor Anpfiff in tracker/OAP-2.1/vorab.jsonl (Zeit, Art Liga/Pokal, Modell, p_M, p_OA,
+q, Vorteil, λ). Ein Spiel wird nur einmal erfasst. Danach committen und pushen.
+
+7. ERGEBNIS UND AUSWERTUNG
+Abrechnung nach regulärer Spielzeit inklusive Nachspielzeit, getrennt gespeichert
+(tracker.py abrechnen); Bericht mit Treffern, Gewinn/ROI bei 1 Einheit, CLV gegen
+Pinnacle-Schlussquote, je Markt und getrennt nach Liga- und Pokalspielen.
+Verschobene/abgebrochene Spiele: annulliert. Bei Pokalspielen zählt nur die reguläre
+Spielzeit (Verlängerung/Elfmeterschießen nicht).
+
+8. BESTEHENSKRITERIEN (vorab festgelegt)
+Nach mindestens 300 abgerechneten Tipps:
+  bestanden, wenn ROI ≥ 0 % UND mittlerer CLV gegen Pinnacle-Schluss > 0 %;
+  sonst nicht bestanden – dann keine nachträgliche Anpassung von v2.1, sondern nur
+  eine neue Version mit neuen, vorher festgelegten Regeln und neuem Testzeitraum.
+Vor dem Bestehen kein echtes Geld. Ein Gewinn ist auch danach nicht garantiert.
+
+9. ENTWICKLUNGSGRUNDLAGE
+Ligaspiele (Details: protokoll/OAP-2.0_entwicklung.md):
+11.110 Ligaspiele 06.10.–03.11.2026 (627 Ligen), Entwicklung 06.–23.10., unberührter
+Test 24.10.–03.11.; strikt zeitlich (nur vorher beendete Spiele im Modell).
+- Log-Loss Sieg/Remis/Niederlage: eigenes Modell 0,993 (Entw.) / 0,991 (Test) gegen
+  Odd Alerts 0,999 / 1,001 – eigenes Modell in beiden Zeiträumen genauer.
+- Over/Under und BTTS: Odd Alerts genauer (0,662/0,682 gegen 0,667/0,691).
+- Regel aus Abschnitt 4: Entwicklung 499 Tipps +13,0 % (Eröffnungsquote) / +8,3 %
+  (Schlussquote); Test 450 Tipps −1,0 % / −4,7 %. Ein Gewinn ist damit NICHT belegt.
+Pokal- und Europapokalspiele (Details: protokoll/OAP-2.1_entwicklung.md):
+- 1.525 Spiele aus 149 Wettbewerben; Log-Loss Spielausgang M3 0,954 (Entw.) / 0,967 (Test)
+  gegen Odd Alerts 0,988 / 0,987; Over/Under und BTTS weiterhin Odd Alerts genauer.
+- Regel unverändert: Entwicklung 122 Tipps +6,4 % / −0,3 %; Test 80 Tipps +20,8 % /
+  +11,6 %. Positiv, aber kleine Stichprobe – NICHT als Gewinn belegt.
+
+VERSIONSHISTORIE
+v1.0 (05.11.2026): Odd-Alerts-Prognosen direkt als Grundlage – vom Nutzer verworfen.
+v2.0 (05.11.2026): eigenes Modell OAP-M1, Odd Alerts als Leitschiene (nur Ligen).
+v2.1 (05.11.2026): zusätzlich Pokale/Europapokal mit Modell OAP-M3.
