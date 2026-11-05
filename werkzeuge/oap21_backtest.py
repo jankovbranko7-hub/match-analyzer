@@ -41,16 +41,46 @@ def main():
                        "oa": oa.wahrscheinlichkeiten(f["probability"]), "b365": b, "pin": Q.get((f["id"], 1), {})})
     print(f"Pokal-/Europapokalspiele mit Prognose, Ergebnis, Bet365: {len(spiele)}", flush=True)
     alle = G.alle_spiele()
+    typen = G.wettbewerbstypen()
+    varianten = {
+        "A M2 (bisher)": lambda tag: G.fit(alle, tag),
+        "B M3 Tore, Team-Strafe 5": lambda tag: G.fit_h2(alle, tag, w_xg=0.0, alpha_team=5.0, typen=typen),
+        "C M3 xG, Team-Strafe 5": lambda tag: G.fit_h2(alle, tag, w_xg=1.0, alpha_team=5.0, typen=typen),
+        "D M3 Tore, Team-Strafe 20": lambda tag: G.fit_h2(alle, tag, w_xg=0.0, alpha_team=20.0, typen=typen),
+    }
+    nur = sys.argv[1] if len(sys.argv) > 1 else None
+    dev = [s for s in spiele if not s["test"]]
+    tst = [s for s in spiele if s["test"]]
+    if nur is None:  # Modellwahl nur auf Entwicklung
+        res = {}
+        for name, fn in varianten.items():
+            Pv = {}
+            for tag in sorted({s["tag"] for s in dev}):
+                m = fn(tag)
+                for s in dev:
+                    if s["tag"] == tag:
+                        lam = G.lambdas(m, s["h"], s["a"], 6)
+                        if lam:
+                            Pv[s["id"]] = om.maerkte(*lam)
+            res[name] = Pv
+            print(name, "fertig", len(Pv), flush=True)
+        gemeinsam = set.intersection(*(set(v) for v in res.values()))
+        devg = [s for s in dev if s["id"] in gemeinsam]
+        for name, Pv in res.items():
+            L = B.logloss(devg, Pv, "modell")
+            print(f"{name:28} {L}  Summe {sum(v[0] for v in L.values()):.4f}")
+        print(f"{'Odd Alerts':28} {B.logloss(devg, res[name], 'oa')}")
+        return
+    fn = varianten[nur]
     P = {}
     for tag in sorted({s["tag"] for s in spiele}):
-        m = G.fit(alle, tag)
+        m = fn(tag)
         for s in spiele:
             if s["tag"] == tag:
                 lam = G.lambdas(m, s["h"], s["a"], 6)
                 if lam:
                     P[s["id"]] = om.maerkte(*lam)
-    dev = [s for s in spiele if not s["test"]]
-    tst = [s for s in spiele if s["test"]]
+    print("GEWÄHLT:", nur)
     print(f"mit Modellwert: {len(P)} von {len(spiele)}")
     for name, sel in (("Entwicklung", dev), ("Test", tst)):
         print(f"Log-Loss {name} – Modell M2: {B.logloss(sel, P, 'modell')} | Odd Alerts: {B.logloss(sel, P, 'oa')}")
