@@ -15,8 +15,8 @@
     "one_market_per_match",
     "market_specific_warning"
   ],
-  "revision": "v1.3-OA-2026-11-02",
-  "updated_utc": "2026-11-02T00:00:00+00:00",
+  "revision": "v1.3-OA-2026-11-05",
+  "updated_utc": "2026-11-05T00:00:00+00:00",
   "revision_authorized_by": "Nutzer: gleiches System mit Odd-Alerts-APIs auf eigenem Repository/Branch",
   "btts_clarification": [
     "independent_goal_argument_for_each_team",
@@ -35,5 +35,28 @@
     "goals_2h_instead_of_avg_2hg",
     "xg_coverage_from_coverage_field",
     "oddalerts_predictions_not_a_model"
-  ]
+  ],
+  "model_version": "OA-Poisson-L2-Zeitgewicht (Modellversion 2)",
+  "model_change_2026_11_05": {
+    "authorized_by": "Nutzer: ok mach weiter",
+    "change": "time_weight_w=exp(-xi*age_days)",
+    "xi_grid": [
+      0,
+      0.002,
+      0.004,
+      0.008
+    ],
+    "alpha_grid": [
+      0.1,
+      1,
+      10,
+      100
+    ],
+    "selection": "forward_validation_mean_neg_log_score",
+    "report": "protokoll/modellpruefung/2026-11-05_rueckblicktest.md",
+    "not_adopted": [
+      "market_odds_in_model"
+    ],
+    "previous_revision": "v1.3-OA-2026-11-02 (archiv/)"
+  }
 }

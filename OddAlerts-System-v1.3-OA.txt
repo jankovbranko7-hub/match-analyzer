@@ -1,8 +1,9 @@
 ODDALERTS-SYSTEM v1.3-OA
 Vollständige Arbeitsfassung für diesen Chat
-Stand: 02.11.2026 | Version v1.3-OA; Regeln aus FootyStats-System v1.3
-(Fassung v1.3-BTTS-2026-10-26) unverändert übernommen, einzige Datenquelle
-Odd Alerts; Anpassungen auf ausdrücklichen Nutzerwunsch, siehe Schluss der Datei
+Stand: 05.11.2026 | Version v1.3-OA, Fassung v1.3-OA-2026-11-05; Regeln aus
+FootyStats-System v1.3 (Fassung v1.3-BTTS-2026-10-26) übernommen, einzige
+Datenquelle Odd Alerts; Zeitgewichtung im Modell (5.3) seit 05.11.2026;
+Anpassungen auf ausdrücklichen Nutzerwunsch, siehe Schluss der Datei
 
 AKTIVIERUNG UND ZWECK
 Diese Fassung ist auf Wunsch des Nutzers ab sofort für neue Analysen in
@@ -255,18 +256,25 @@ Bei neutralem Platz wird der Heimvorteil auf 0 gesetzt.
 Ein größerer Abwehrparameter bedeutet hier eine stärkere Defensive.
 Identifikation: Summe der Angriffsparameter = 0 und Summe der Abwehrparameter = 0.
 
-Schätzen durch Minimierung der negativen Poisson-Log-Likelihood zuzüglich
+Schätzen durch Minimierung der zeitgewichteten negativen Poisson-Log-Likelihood
+  Summe über Trainingsspiele von w * (lambda - Tore * log(lambda))
+zuzüglich
   alpha * Summe(Angriff_team^2 + Abwehr_team^2).
-mu und Heimvorteil werden nicht bestraft; alle zulässigen Trainingsspiele
-erhalten im Basismodell dasselbe Gewicht. Keine spontane Formkorrektur nach
+Gewicht je Trainingsspiel: w = exp(-xi * Alter in Tagen), Alter gemessen vom
+Stichtag des jeweiligen Rechenlaufs (bei der Prüfung: Beginn des bewerteten
+Blocks). mu und Heimvorteil werden nicht bestraft. xi = 0 entspricht exakt dem
+gleichgewichteten Modell, das bis 04.11.2026 galt. Die Zeitgewichtung ist eine
+feste, zeitlich geprüfte Rechenvorschrift; keine spontane Formkorrektur nach
 Gefühl. Form bleibt ein gesondertes Argument für die Entscheidung.
 
-alpha aus {0.1, 1, 10, 100} (hier Dezimalpunkt) ausschließlich zeitlich vorwärts
-prüfen: zunächst
+alpha aus {0.1, 1, 10, 100} und xi aus {0, 0.002, 0.004, 0.008} pro Tag
+(Halbwertszeit unbegrenzt bzw. rund 347, 173 und 87 Tage; hier Dezimalpunkt)
+gemeinsam ausschließlich zeitlich vorwärts prüfen: zunächst
 auf dem ersten Teil der chronologisch geordneten Spiele trainieren, dann auf
 späteren Blöcken bewerten; nie zufällig über die Zeit mischen. Auswahl nach
 mittlerem negativem Log-Score der tatsächlichen Torpaare; bei Gleichstand
-größeres alpha wählen. Danach auf allen zulässigen Vorabspielen neu schätzen.
+größeres alpha, danach kleineres xi wählen. Danach mit den gewählten Werten
+auf allen zulässigen Vorabspielen neu schätzen.
 Zeitaufteilung, Kandidaten und Ergebnisse protokollieren. Gibt es keine
 brauchbare zeitliche Validierung, gilt das Modell als „unvalidiert“.
 
@@ -538,3 +546,24 @@ bedingungen sind unverändert. Das FootyStats-System v1.3 bleibt auf dem Branch
 system-v1.3 bestehen; beide Systeme werden nicht vermischt.
 Kennung dieser Fassung: v1.3-OA-2026-11-02.
 Diese Übertragung beweist keine höhere Trefferquote oder Profitabilität.
+
+DATIERTE MODELLÄNDERUNG INNERHALB v1.3-OA: 05.11.2026
+Nach Rückblick-Test und ausdrücklicher Zustimmung des Nutzers („ok mach
+weiter“) erhält das Modell in 5.3 eine Zeitgewichtung der Trainingsspiele
+(Modellversion 2: OA-Poisson-L2-Zeitgewicht). Geändert ist nur 5.3:
+Gewicht w = exp(-xi * Alter in Tagen), xi gemeinsam mit alpha zeitlich vorwärts
+gewählt. Alle übrigen Regeln, Formeln, Prüfungen, Märkte, Warnregeln und die
+vier entfernten Pflichtbedingungen sind unverändert.
+Grundlage: rollender Rückblick-Test auf 9.122 Spielen aus 28 Ligen (jeweils das
+letzte Jahr, Neuschätzung alle 28 Tage, Parameterwahl auf dem Jahr davor):
+mittlerer negativer Log-Score 2,898 (gleichgewichtet) gegen 2,892
+(zeitgewichtet), Unterschied 0,0063 bei Standardfehler 0,0015; besser in 17 von
+28 Ligen. Brier-Werte nahezu gleich, leicht besser bei BTTS. Bei BTTS und
+Over/Under war keine der beiden Varianten besser als die Grundrate; die
+Pinnacle-Schlussquote war in 6 geprüften Ligen in allen vier Märkten besser
+als beide Varianten. Die Marktquote wurde ausdrücklich nicht ins Modell
+übernommen. Bericht: protokoll/modellpruefung/2026-11-05_rueckblicktest.md.
+Vorgängerfassung im Unterordner archiv gesichert. Frühere Analysen, Tipps,
+Vorabeinträge und Ergebnisse bleiben unverändert.
+Kennung dieser Fassung: v1.3-OA-2026-11-05.
+Diese Änderung beweist keine höhere Trefferquote oder Profitabilität.

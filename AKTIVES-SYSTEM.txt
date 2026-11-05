@@ -1,6 +1,7 @@
-Aktiv für neue Analysen in diesem Chat: OddAlerts-System v1.3-OA, Stand 02.11.2026.
-Fassung: v1.3-OA-2026-11-02; Regeln aus FootyStats-System v1.3 (v1.3-BTTS-2026-10-26)
-unverändert übernommen, einzige Datenquelle Odd Alerts.
+Aktiv für neue Analysen in diesem Chat: OddAlerts-System v1.3-OA, Stand 05.11.2026.
+Fassung: v1.3-OA-2026-11-05; Regeln aus FootyStats-System v1.3 (v1.3-BTTS-2026-10-26)
+übernommen, einzige Datenquelle Odd Alerts. Seit 05.11.2026 Modellversion 2:
+zeitgewichtetes Poisson-Modell (5.3), xi und alpha zeitlich vorwärts gewählt.
 Vollständiges Regelwerk: OddAlerts-System-v1.3-OA.txt im selben Verzeichnis.
 Punkt 1 (Modellprüfung) und die vier Spielbild-Prüfungen bleiben bestehen.
 Preisvorteil, Stresstest, Quoten-/Kostenklärung und gesonderte Einzelteam-

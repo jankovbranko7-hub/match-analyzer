@@ -2,7 +2,7 @@
 
 **Das System ist `OddAlerts-System-v1.3-OA.txt` – genau so, wie es dort steht, und nichts
 sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json` (aktive Fassung
-v1.3-OA-2026-11-02). Am 02.11.2026 auf Wunsch des Nutzers aus dem FootyStats-System v1.3
+v1.3-OA-2026-11-05, Modellversion 2 mit Zeitgewichtung; Vorgänger in `archiv/`). Am 02.11.2026 auf Wunsch des Nutzers aus dem FootyStats-System v1.3
 (Branch `system-v1.3`) übertragen: gleiche Regeln, einzige Datenquelle Odd Alerts. Das
 FootyStats-System auf `system-v1.3` und das System auf `main` gelten hier nicht und werden
 nicht vermischt; Änderungen an einem der Systeme nur auf ausdrücklichen Wunsch des Nutzers.
