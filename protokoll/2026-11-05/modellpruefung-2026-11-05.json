@@ -1,0 +1,1333 @@
+{
+ "699": {
+  "model_version": "OA-Poisson-L2-Zeitgewicht, Modellversion 2, v1.3-OA-2026-11-05 (Abschnitt 5.3)",
+  "seasons": [
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "n_matches": 2115,
+  "duplicates_removed": 0,
+  "neutral": "nicht gekennzeichnet in Odd Alerts -> alle als Heimspiele behandelt",
+  "split": {
+   "train_until": "2025-03-11T00:15:00.000000Z",
+   "val": [
+    "2025-03-11T00:15:00.000000Z",
+    "2026-02-08T20:00:00.000000Z"
+   ],
+   "test": [
+    "2026-02-08T20:00:00.000000Z",
+    "2026-11-03T00:15:00.000000Z"
+   ],
+   "n": [
+    1269,
+    423,
+    423
+   ]
+  },
+  "alpha_candidates": [
+   {
+    "alpha": 0.1,
+    "xi": 0.0,
+    "val_mean_nls": 2.6052891188765086,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.002,
+    "val_mean_nls": 2.609409975699937,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.004,
+    "val_mean_nls": 2.620672817969247,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.008,
+    "val_mean_nls": 2.6553340040783833,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.0,
+    "val_mean_nls": 2.5961682506001704,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.002,
+    "val_mean_nls": 2.5981414003231467,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.004,
+    "val_mean_nls": 2.6057374782385936,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.008,
+    "val_mean_nls": 2.62763792689009,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.0,
+    "val_mean_nls": 2.5701121920847543,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.002,
+    "val_mean_nls": 2.5659144090626036,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.004,
+    "val_mean_nls": 2.5651437931899252,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.008,
+    "val_mean_nls": 2.566500040022958,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.0,
+    "val_mean_nls": 2.5593395837645923,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.002,
+    "val_mean_nls": 2.5610467265450247,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.004,
+    "val_mean_nls": 2.5624975244220907,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.008,
+    "val_mean_nls": 2.5638434413522484,
+    "n_scored": 417,
+    "fit_ok": 1.0
+   }
+  ],
+  "alpha": 100,
+  "xi": 0.0,
+  "test": {
+   "n_scored": 423,
+   "n_total": 423,
+   "mean_nls": 2.6604712272776228,
+   "home": {
+    "brier": 0.2391611906957511,
+    "logloss": 0.6711749317177848,
+    "brier_base": 0.243786990929363,
+    "base_rate_train": 0.4284869976359338,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 79,
+      "mean_p": 0.382,
+      "obs": 0.278,
+      "se": 0.05
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 344,
+      "mean_p": 0.442,
+      "obs": 0.453,
+      "se": 0.027
+     }
+    ]
+   },
+   "away": {
+    "brier": 0.20370805388325125,
+    "logloss": 0.5967684028030689,
+    "brier_base": 0.2078900709219858,
+    "base_rate_train": 0.25,
+    "calibration": [
+     {
+      "bin": "0.0-0.2",
+      "n": 6,
+      "mean_p": 0.191,
+      "obs": 0.333,
+      "se": 0.192
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 417,
+      "mean_p": 0.271,
+      "obs": 0.29,
+      "se": 0.022
+     }
+    ]
+   },
+   "btts": {
+    "brier": 0.25312517919089456,
+    "logloss": 0.6996512296517764,
+    "brier_base": 0.2520119712288114,
+    "base_rate_train": 0.40543735224586286,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 221,
+      "mean_p": 0.381,
+      "obs": 0.471,
+      "se": 0.034
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 202,
+      "mean_p": 0.416,
+      "obs": 0.455,
+      "se": 0.035
+     }
+    ]
+   },
+   "over25": {
+    "brier": 0.23759979763338568,
+    "logloss": 0.668230356971921,
+    "brier_base": 0.2384860056223418,
+    "base_rate_train": 0.33628841607565013,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 412,
+      "mean_p": 0.331,
+      "obs": 0.381,
+      "se": 0.024
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 11,
+      "mean_p": 0.408,
+      "obs": 0.455,
+      "se": 0.15
+     }
+    ]
+   }
+  },
+  "final_fit": {
+   "ok": 1.0,
+   "msg": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "n_teams": 34,
+   "n": 2115,
+   "mu": -0.12624043525714101,
+   "ha": 0.283184271308741,
+   "sum_att": 4.163336342344337e-17,
+   "sum_de": 6.938893903907228e-18,
+   "trained_until": "2026-11-03T00:15:00.000000Z"
+  }
+ },
+ "115": {
+  "model_version": "OA-Poisson-L2-Zeitgewicht, Modellversion 2, v1.3-OA-2026-11-05 (Abschnitt 5.3)",
+  "seasons": [
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "n_matches": 1475,
+  "duplicates_removed": 0,
+  "neutral": "nicht gekennzeichnet in Odd Alerts -> alle als Heimspiele behandelt",
+  "split": {
+   "train_until": "2025-07-16T22:00:00.000000Z",
+   "val": [
+    "2025-07-16T22:30:00.000000Z",
+    "2026-03-11T23:00:00.000000Z"
+   ],
+   "test": [
+    "2026-03-12T00:30:00.000000Z",
+    "2026-11-05T00:30:00.000000Z"
+   ],
+   "n": [
+    885,
+    295,
+    295
+   ]
+  },
+  "alpha_candidates": [
+   {
+    "alpha": 0.1,
+    "xi": 0.0,
+    "val_mean_nls": 2.8768664453852604,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.002,
+    "val_mean_nls": 2.876984804644555,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.004,
+    "val_mean_nls": 2.8871383333655607,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.008,
+    "val_mean_nls": 2.9300289797823535,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.0,
+    "val_mean_nls": 2.870807204279068,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.002,
+    "val_mean_nls": 2.8688165194738593,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.004,
+    "val_mean_nls": 2.874772963258864,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.008,
+    "val_mean_nls": 2.900500928624914,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.0,
+    "val_mean_nls": 2.8705957354406135,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.002,
+    "val_mean_nls": 2.8697409526916453,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.004,
+    "val_mean_nls": 2.8766162643250603,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.008,
+    "val_mean_nls": 2.8940385222788296,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.0,
+    "val_mean_nls": 2.8996409955892943,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.002,
+    "val_mean_nls": 2.911358465671054,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.004,
+    "val_mean_nls": 2.9207696723896266,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.008,
+    "val_mean_nls": 2.9338350966468516,
+    "n_scored": 288,
+    "fit_ok": 1.0
+   }
+  ],
+  "alpha": 1,
+  "xi": 0.002,
+  "test": {
+   "n_scored": 295,
+   "n_total": 295,
+   "mean_nls": 2.828978425156941,
+   "home": {
+    "brier": 0.23999157398696974,
+    "logloss": 0.6722660950827216,
+    "brier_base": 0.2500689457052571,
+    "base_rate_train": 0.47966101694915253,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 76,
+      "mean_p": 0.329,
+      "obs": 0.368,
+      "se": 0.055
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 169,
+      "mean_p": 0.499,
+      "obs": 0.521,
+      "se": 0.038
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 49,
+      "mean_p": 0.675,
+      "obs": 0.571,
+      "se": 0.071
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 1,
+      "mean_p": 0.807,
+      "obs": 1.0,
+      "se": 0.0
+     }
+    ]
+   },
+   "away": {
+    "brier": 0.17625417237817428,
+    "logloss": 0.5341538436207236,
+    "brier_base": 0.1862941683424303,
+    "base_rate_train": 0.2559322033898305,
+    "calibration": [
+     {
+      "bin": "0.0-0.2",
+      "n": 73,
+      "mean_p": 0.151,
+      "obs": 0.137,
+      "se": 0.04
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 184,
+      "mean_p": 0.282,
+      "obs": 0.239,
+      "se": 0.031
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 38,
+      "mean_p": 0.462,
+      "obs": 0.5,
+      "se": 0.081
+     }
+    ]
+   },
+   "btts": {
+    "brier": 0.2544221367957007,
+    "logloss": 0.7019798582605895,
+    "brier_base": 0.24965311692042516,
+    "base_rate_train": 0.502542372881356,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 8,
+      "mean_p": 0.385,
+      "obs": 0.875,
+      "se": 0.117
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 238,
+      "mean_p": 0.493,
+      "obs": 0.546,
+      "se": 0.032
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 49,
+      "mean_p": 0.671,
+      "obs": 0.633,
+      "se": 0.069
+     }
+    ]
+   },
+   "over25": {
+    "brier": 0.25884205900965435,
+    "logloss": 0.7125875619719176,
+    "brier_base": 0.25169850617638606,
+    "base_rate_train": 0.4635593220338983,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 46,
+      "mean_p": 0.37,
+      "obs": 0.674,
+      "se": 0.069
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 189,
+      "mean_p": 0.489,
+      "obs": 0.439,
+      "se": 0.036
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 57,
+      "mean_p": 0.683,
+      "obs": 0.596,
+      "se": 0.065
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 3,
+      "mean_p": 0.828,
+      "obs": 0.333,
+      "se": 0.272
+     }
+    ]
+   }
+  },
+  "final_fit": {
+   "ok": 1.0,
+   "msg": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "n_teams": 29,
+   "n": 1475,
+   "mu": 0.029768286358802697,
+   "ha": 0.3382767190437285,
+   "sum_att": -1.249000902703301e-16,
+   "sum_de": 0.0,
+   "trained_until": "2026-11-05T00:30:00.000000Z"
+  }
+ },
+ "206": {
+  "model_version": "OA-Poisson-L2-Zeitgewicht, Modellversion 2, v1.3-OA-2026-11-05 (Abschnitt 5.3)",
+  "seasons": [
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "n_matches": 1500,
+  "duplicates_removed": 0,
+  "neutral": "nicht gekennzeichnet in Odd Alerts -> alle als Heimspiele behandelt",
+  "split": {
+   "train_until": "2025-07-01T00:00:00.000000Z",
+   "val": [
+    "2025-07-04T00:35:00.000000Z",
+    "2026-04-27T22:00:00.000000Z"
+   ],
+   "test": [
+    "2026-05-02T19:00:00.000000Z",
+    "2026-11-02T23:30:00.000000Z"
+   ],
+   "n": [
+    900,
+    300,
+    300
+   ]
+  },
+  "alpha_candidates": [
+   {
+    "alpha": 0.1,
+    "xi": 0.0,
+    "val_mean_nls": 2.7196391777818394,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.002,
+    "val_mean_nls": 2.713029321089546,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.004,
+    "val_mean_nls": 2.713070604798898,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.008,
+    "val_mean_nls": 2.7220751919228037,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.0,
+    "val_mean_nls": 2.7119101505627756,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.002,
+    "val_mean_nls": 2.704053307423004,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.004,
+    "val_mean_nls": 2.7017544088236582,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.008,
+    "val_mean_nls": 2.7044449488348246,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.0,
+    "val_mean_nls": 2.6874437213059963,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.002,
+    "val_mean_nls": 2.67962773356879,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.004,
+    "val_mean_nls": 2.676569332730296,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.008,
+    "val_mean_nls": 2.6753095217743144,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.0,
+    "val_mean_nls": 2.676093443255455,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.002,
+    "val_mean_nls": 2.6762433397226437,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.004,
+    "val_mean_nls": 2.676650832930853,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.008,
+    "val_mean_nls": 2.6787051073072354,
+    "n_scored": 284,
+    "fit_ok": 1.0
+   }
+  ],
+  "alpha": 10,
+  "xi": 0.008,
+  "test": {
+   "n_scored": 300,
+   "n_total": 300,
+   "mean_nls": 2.7901283078489554,
+   "home": {
+    "brier": 0.24927698739120704,
+    "logloss": 0.6917082288100898,
+    "brier_base": 0.24879166666666663,
+    "base_rate_train": 0.475,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 140,
+      "mean_p": 0.378,
+      "obs": 0.414,
+      "se": 0.042
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 160,
+      "mean_p": 0.427,
+      "obs": 0.506,
+      "se": 0.04
+     }
+    ]
+   },
+   "away": {
+    "brier": 0.1993922483419773,
+    "logloss": 0.587781009406247,
+    "brier_base": 0.20326736111111113,
+    "base_rate_train": 0.23916666666666667,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 300,
+      "mean_p": 0.303,
+      "obs": 0.28,
+      "se": 0.026
+     }
+    ]
+   },
+   "btts": {
+    "brier": 0.251050628906814,
+    "logloss": 0.6953356274272497,
+    "brier_base": 0.24919513888888892,
+    "base_rate_train": 0.44916666666666666,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 50,
+      "mean_p": 0.386,
+      "obs": 0.48,
+      "se": 0.071
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 250,
+      "mean_p": 0.441,
+      "obs": 0.464,
+      "se": 0.032
+     }
+    ]
+   },
+   "over25": {
+    "brier": 0.2533664117986694,
+    "logloss": 0.7009928077976723,
+    "brier_base": 0.24910625,
+    "base_rate_train": 0.38083333333333336,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 240,
+      "mean_p": 0.353,
+      "obs": 0.425,
+      "se": 0.032
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 60,
+      "mean_p": 0.425,
+      "obs": 0.483,
+      "se": 0.065
+     }
+    ]
+   }
+  },
+  "final_fit": {
+   "ok": 1.0,
+   "msg": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "n_teams": 37,
+   "n": 1500,
+   "mu": -0.014162912947211007,
+   "ha": 0.30421567067853644,
+   "sum_att": -1.0668549377257364e-16,
+   "sum_de": -3.2959746043559335e-17,
+   "trained_until": "2026-11-02T23:30:00.000000Z"
+  }
+ },
+ "32": {
+  "model_version": "OA-Poisson-L2-Zeitgewicht, Modellversion 2, v1.3-OA-2026-11-05 (Abschnitt 5.3)",
+  "seasons": [
+   "2023/2024",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "n_matches": 811,
+  "duplicates_removed": 0,
+  "neutral": "nicht gekennzeichnet in Odd Alerts -> alle als Heimspiele behandelt",
+  "split": {
+   "train_until": "2025-08-21T18:45:00.000000Z",
+   "val": [
+    "2025-08-21T19:00:00.000000Z",
+    "2026-02-19T20:00:00.000000Z"
+   ],
+   "test": [
+    "2026-02-19T20:00:00.000000Z",
+    "2026-11-04T15:30:00.000000Z"
+   ],
+   "n": [
+    486,
+    162,
+    163
+   ]
+  },
+  "alpha_candidates": [
+   {
+    "alpha": 0.1,
+    "xi": 0.0,
+    "val_mean_nls": 3.2010511153932653,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.002,
+    "val_mean_nls": 3.2111283461875235,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.004,
+    "val_mean_nls": 3.263795740483213,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.008,
+    "val_mean_nls": 3.3824578070895273,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.0,
+    "val_mean_nls": 3.0987157091146367,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.002,
+    "val_mean_nls": 3.1408680278764303,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.004,
+    "val_mean_nls": 3.184258775606273,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.008,
+    "val_mean_nls": 3.2301882780192486,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.0,
+    "val_mean_nls": 3.0868859834836524,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.002,
+    "val_mean_nls": 3.1090791531423507,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.004,
+    "val_mean_nls": 3.119350584044731,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.008,
+    "val_mean_nls": 3.125434697146672,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.0,
+    "val_mean_nls": 3.109461539761609,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.002,
+    "val_mean_nls": 3.1083342219668038,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.004,
+    "val_mean_nls": 3.106257799631707,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.008,
+    "val_mean_nls": 3.102345182523715,
+    "n_scored": 86,
+    "fit_ok": 1.0
+   }
+  ],
+  "alpha": 10,
+  "xi": 0.0,
+  "test": {
+   "n_scored": 85,
+   "n_total": 163,
+   "mean_nls": 3.155149321483693,
+   "home": {
+    "brier": 0.25037678714906275,
+    "logloss": 0.6938630955077817,
+    "brier_base": 0.25005684772765985,
+    "base_rate_train": 0.5015432098765432,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 14,
+      "mean_p": 0.355,
+      "obs": 0.5,
+      "se": 0.134
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 66,
+      "mean_p": 0.491,
+      "obs": 0.47,
+      "se": 0.061
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 5,
+      "mean_p": 0.646,
+      "obs": 0.6,
+      "se": 0.219
+     }
+    ]
+   },
+   "away": {
+    "brier": 0.24146181323411958,
+    "logloss": 0.6822321311699358,
+    "brier_base": 0.2359626177860261,
+    "base_rate_train": 0.2993827160493827,
+    "calibration": [
+     {
+      "bin": "0.0-0.2",
+      "n": 9,
+      "mean_p": 0.175,
+      "obs": 0.556,
+      "se": 0.166
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 70,
+      "mean_p": 0.281,
+      "obs": 0.329,
+      "se": 0.056
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 6,
+      "mean_p": 0.438,
+      "obs": 0.5,
+      "se": 0.204
+     }
+    ]
+   },
+   "btts": {
+    "brier": 0.26543548783544263,
+    "logloss": 0.7243898911673352,
+    "brier_base": 0.2560066670701202,
+    "base_rate_train": 0.5324074074074074,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 1,
+      "mean_p": 0.392,
+      "obs": 0.0,
+      "se": 0.0
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 66,
+      "mean_p": 0.537,
+      "obs": 0.439,
+      "se": 0.061
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 18,
+      "mean_p": 0.63,
+      "obs": 0.389,
+      "se": 0.115
+     }
+    ]
+   },
+   "over25": {
+    "brier": 0.2628144356055263,
+    "logloss": 0.7194993373809137,
+    "brier_base": 0.24901871127966502,
+    "base_rate_train": 0.5679012345679012,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 4,
+      "mean_p": 0.366,
+      "obs": 1.0,
+      "se": 0.0
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 61,
+      "mean_p": 0.52,
+      "obs": 0.541,
+      "se": 0.064
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 20,
+      "mean_p": 0.63,
+      "obs": 0.45,
+      "se": 0.111
+     }
+    ]
+   }
+  },
+  "final_fit": {
+   "ok": 1.0,
+   "msg": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "n_teams": 184,
+   "n": 811,
+   "mu": 0.15804305026275856,
+   "ha": 0.3327181979956788,
+   "sum_att": -3.3306690738754696e-16,
+   "sum_de": 4.440892098500626e-16,
+   "trained_until": "2026-11-04T15:30:00.000000Z"
+  }
+ },
+ "976": {
+  "model_version": "OA-Poisson-L2-Zeitgewicht, Modellversion 2, v1.3-OA-2026-11-05 (Abschnitt 5.3)",
+  "seasons": [
+   "2023/2024",
+   "2024/2025",
+   "2025/2026",
+   "2026/2027"
+  ],
+  "n_matches": 1414,
+  "duplicates_removed": 0,
+  "neutral": "nicht gekennzeichnet in Odd Alerts -> alle als Heimspiele behandelt",
+  "split": {
+   "train_until": "2025-07-24T18:00:00.000000Z",
+   "val": [
+    "2025-07-24T18:00:00.000000Z",
+    "2026-03-19T17:45:00.000000Z"
+   ],
+   "test": [
+    "2026-03-19T20:00:00.000000Z",
+    "2026-10-22T19:00:00.000000Z"
+   ],
+   "n": [
+    848,
+    283,
+    283
+   ]
+  },
+  "alpha_candidates": [
+   {
+    "alpha": 0.1,
+    "xi": 0.0,
+    "val_mean_nls": 3.8550958469761842,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.002,
+    "val_mean_nls": 3.7291510905317313,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.004,
+    "val_mean_nls": 3.679174111981896,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 0.1,
+    "xi": 0.008,
+    "val_mean_nls": 3.596890089696041,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.0,
+    "val_mean_nls": 3.3059094184614404,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.002,
+    "val_mean_nls": 3.249834779242937,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.004,
+    "val_mean_nls": 3.2405183535774422,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 1,
+    "xi": 0.008,
+    "val_mean_nls": 3.244858945441419,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.0,
+    "val_mean_nls": 3.1296425400602406,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.002,
+    "val_mean_nls": 3.1345546756908256,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.004,
+    "val_mean_nls": 3.1412647548354973,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 10,
+    "xi": 0.008,
+    "val_mean_nls": 3.149685207656775,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.0,
+    "val_mean_nls": 3.1390601258036086,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.002,
+    "val_mean_nls": 3.142111673626204,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.004,
+    "val_mean_nls": 3.143952637125086,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   },
+   {
+    "alpha": 100,
+    "xi": 0.008,
+    "val_mean_nls": 3.146125882400677,
+    "n_scored": 186,
+    "fit_ok": 1.0
+   }
+  ],
+  "alpha": 10,
+  "xi": 0.0,
+  "test": {
+   "n_scored": 181,
+   "n_total": 283,
+   "mean_nls": 3.1958850048298943,
+   "home": {
+    "brier": 0.2342761092746584,
+    "logloss": 0.6612289201886575,
+    "brier_base": 0.24959974087987863,
+    "base_rate_train": 0.49248452696728556,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 27,
+      "mean_p": 0.359,
+      "obs": 0.185,
+      "se": 0.075
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 136,
+      "mean_p": 0.491,
+      "obs": 0.5,
+      "se": 0.043
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 18,
+      "mean_p": 0.653,
+      "obs": 0.667,
+      "se": 0.111
+     }
+    ]
+   },
+   "away": {
+    "brier": 0.19523132950800987,
+    "logloss": 0.5740563708475156,
+    "brier_base": 0.20718476722879234,
+    "base_rate_train": 0.3032714412024757,
+    "calibration": [
+     {
+      "bin": "0.0-0.2",
+      "n": 27,
+      "mean_p": 0.166,
+      "obs": 0.111,
+      "se": 0.06
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 147,
+      "mean_p": 0.278,
+      "obs": 0.313,
+      "se": 0.038
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 7,
+      "mean_p": 0.442,
+      "obs": 0.571,
+      "se": 0.187
+     }
+    ]
+   },
+   "btts": {
+    "brier": 0.2528533168364116,
+    "logloss": 0.6988462419829896,
+    "brier_base": 0.25058102980233404,
+    "base_rate_train": 0.4916003536693192,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 2,
+      "mean_p": 0.387,
+      "obs": 0.0,
+      "se": 0.0
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 164,
+      "mean_p": 0.522,
+      "obs": 0.543,
+      "se": 0.039
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 15,
+      "mean_p": 0.621,
+      "obs": 0.467,
+      "se": 0.129
+     }
+    ]
+   },
+   "over25": {
+    "brier": 0.2588096419750517,
+    "logloss": 0.7113185356380397,
+    "brier_base": 0.24554492924469165,
+    "base_rate_train": 0.5358090185676393,
+    "calibration": [
+     {
+      "bin": "0.2-0.4",
+      "n": 14,
+      "mean_p": 0.372,
+      "obs": 0.714,
+      "se": 0.121
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 143,
+      "mean_p": 0.505,
+      "obs": 0.566,
+      "se": 0.041
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 24,
+      "mean_p": 0.632,
+      "obs": 0.583,
+      "se": 0.101
+     }
+    ]
+   }
+  },
+  "final_fit": {
+   "ok": 1.0,
+   "msg": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "n_teams": 329,
+   "n": 1414,
+   "mu": 0.12766071682955163,
+   "ha": 0.3602442277371209,
+   "sum_att": 6.661338147750939e-16,
+   "sum_de": 0.0,
+   "trained_until": "2026-10-22T19:00:00.000000Z"
+  }
+ }
+}
