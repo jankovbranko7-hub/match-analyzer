@@ -1,0 +1,257 @@
+{
+ "ohne_warn": {
+  "n": 5,
+  "treffer": 4,
+  "quote": 0.8,
+  "wilson": [
+   0.3755282641185388,
+   0.9637768390302125
+  ],
+  "gewinn": 0.06000000000000005,
+  "roi": 0.01200000000000001,
+  "n_quote": 5,
+  "brier": 0.1580732064017286,
+  "logloss": 0.49944818653912615
+ },
+ "mit_warn": {
+  "n": 6,
+  "treffer": 2,
+  "quote": 0.3333333333333333,
+  "wilson": [
+   0.09676933255921683,
+   0.7000116786584712
+  ],
+  "gewinn": -3.27,
+  "roi": -0.545,
+  "n_quote": 6,
+  "brier": 0.23052193448800581,
+  "logloss": 0.6505981860873616
+ },
+ "alle_tipps": {
+  "n": 11,
+  "treffer": 6,
+  "quote": 0.5454545454545454,
+  "wilson": [
+   0.28008775568998817,
+   0.7872904245601196
+  ],
+  "gewinn": -3.21,
+  "roi": -0.2918181818181818,
+  "n_quote": 11,
+  "brier": 0.19759069444878888,
+  "logloss": 0.5818936408381638
+ },
+ "keine": 4,
+ "rows": [
+  {
+   "nr": "1.1",
+   "spiel": "KV Kortrijk – KV Mechelen",
+   "match_id": 8562287,
+   "ergebnis": "1:3",
+   "status": "complete",
+   "auswahl": "Under 2,5",
+   "warn": true,
+   "p": 0.5015176891232112,
+   "quote": 1.95,
+   "res": "Niete"
+  },
+  {
+   "nr": "1.2",
+   "spiel": "Atlético PR – Vasco da Gama",
+   "match_id": 8409594,
+   "ergebnis": "1:3",
+   "status": "complete",
+   "auswahl": "Heimsieg",
+   "warn": true,
+   "p": 0.5490171938411292,
+   "quote": 2.1,
+   "res": "Niete"
+  },
+  {
+   "nr": "1.3",
+   "spiel": "Flamengo – Grêmio",
+   "match_id": 8409608,
+   "ergebnis": "3:1",
+   "status": "complete",
+   "auswahl": "Heimsieg",
+   "warn": false,
+   "p": 0.6747320110807681,
+   "quote": 1.17,
+   "res": "Treffer"
+  },
+  {
+   "nr": "1.4",
+   "spiel": "Cúcuta Deportivo – Santa Fe",
+   "match_id": 8544015,
+   "ergebnis": "1:0",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.5228611112248925,
+   "quote": 1.73,
+   "res": "Niete"
+  },
+  {
+   "nr": "1.5",
+   "spiel": "Wrexham – Middlesbrough",
+   "match_id": 8566633,
+   "ergebnis": "2:0",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": false,
+   "p": 0.5567775681678726,
+   "quote": 1.6,
+   "res": "Niete"
+  },
+  {
+   "nr": "2.1",
+   "spiel": "Cardiff City – West Ham United",
+   "match_id": 8566637,
+   "ergebnis": "3:3",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": false,
+   "p": 0.5551473581952125,
+   "quote": 1.34,
+   "res": "Treffer"
+  },
+  {
+   "nr": "2.2",
+   "spiel": "Oxford United – Reading",
+   "match_id": null,
+   "ergebnis": "–",
+   "status": "Identität ungeklärt",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "2.3",
+   "spiel": "Fenerbahçe – Liverpool",
+   "match_id": 8700181,
+   "ergebnis": "3:2",
+   "status": "complete",
+   "auswahl": "Auswärtssieg",
+   "warn": true,
+   "p": 0.5888749985383424,
+   "quote": 1.5,
+   "res": "Niete"
+  },
+  {
+   "nr": "2.4",
+   "spiel": "AEK Athens – Real Madrid",
+   "match_id": 8700785,
+   "ergebnis": "2:3",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": false,
+   "p": 0.7420799712799836,
+   "quote": 1.28,
+   "res": "Treffer"
+  },
+  {
+   "nr": "2.5",
+   "spiel": "RB Leipzig – Manchester City",
+   "match_id": 8700165,
+   "ergebnis": "2:3",
+   "status": "complete",
+   "auswahl": "Over 2,5",
+   "warn": false,
+   "p": 0.6681131324645118,
+   "quote": 1.27,
+   "res": "Treffer"
+  },
+  {
+   "nr": "3.1",
+   "spiel": "Slavia Praha – Arsenal",
+   "match_id": 8700185,
+   "ergebnis": "1:2",
+   "status": "complete",
+   "auswahl": "Auswärtssieg",
+   "warn": true,
+   "p": 0.6975244443533746,
+   "quote": 1.23,
+   "res": "Treffer"
+  },
+  {
+   "nr": "3.2",
+   "spiel": "Borussia Dortmund – Real Betis",
+   "match_id": 8700594,
+   "ergebnis": "2:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "3.3",
+   "spiel": "Porto – Napoli",
+   "match_id": 8700606,
+   "ergebnis": "4:1",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  },
+  {
+   "nr": "3.4",
+   "spiel": "Lens – Como",
+   "match_id": 8700706,
+   "ergebnis": "1:9",
+   "status": "complete",
+   "auswahl": "BTTS Ja",
+   "warn": true,
+   "p": 0.655699596293057,
+   "quote": 1.5,
+   "res": "Treffer"
+  },
+  {
+   "nr": "3.5",
+   "spiel": "PSV – Club Brugge",
+   "match_id": 8700816,
+   "ergebnis": "1:2",
+   "status": "complete",
+   "auswahl": "keine",
+   "warn": false,
+   "p": null,
+   "quote": null,
+   "res": "keine (nicht gezählt)"
+  }
+ ],
+ "alle_prognosen": {
+  "H": {
+   "n": 14,
+   "brier": 0.2152874427392651,
+   "logloss": 0.6207783938911724,
+   "beobachtet": 0.42857142857142855,
+   "mittel_p": 0.4001909263789026
+  },
+  "A": {
+   "n": 14,
+   "brier": 0.23426229312429642,
+   "logloss": 0.6601254188472764,
+   "beobachtet": 0.5,
+   "mittel_p": 0.37787287100436034
+  },
+  "BTTS": {
+   "n": 14,
+   "brier": 0.18050659838227553,
+   "logloss": 0.5494300918056881,
+   "beobachtet": 0.8571428571428571,
+   "mittel_p": 0.5945961891911298
+  },
+  "O25": {
+   "n": 14,
+   "brier": 0.16321216131620694,
+   "logloss": 0.5128314103829282,
+   "beobachtet": 0.8571428571428571,
+   "mittel_p": 0.60358453551014
+  }
+ }
+}
