@@ -15,8 +15,9 @@ Beispiele:
   python3 werkzeuge/tracker.py kalibrierung
 
 Dateien:
-  tracker/vorab.jsonl       Vorabeinträge (nie geändert)
-  tracker/ergebnisse.jsonl  Ergebnisprüfungen (getrennt gespeichert)
+  tracker/<System>/vorab.jsonl       Vorabeinträge (nie geändert)
+  tracker/<System>/ergebnisse.jsonl  Ergebnisprüfungen (getrennt)
+  Anderes System: Umgebungsvariable TRACKER_SYSTEM=OAP-1.0
   scans/ergebnisse.jsonl    Ergebnisse der Scanner-Spiele (für die Kalibrierung)
 """
 
@@ -32,8 +33,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import oa_api as oa  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VORAB = os.path.join(ROOT, "tracker", "vorab.jsonl")
-ERGEB = os.path.join(ROOT, "tracker", "ergebnisse.jsonl")
+
 SCAN_ERGEB = os.path.join(ROOT, "scans", "ergebnisse.jsonl")
 QUELLEN = ("system", "oddalerts", "andere")
 try:
@@ -41,6 +41,9 @@ try:
         SYSTEM = json.load(_f).get("revision", "unbekannt")
 except (OSError, ValueError):
     SYSTEM = "unbekannt"
+SYSTEM = os.environ.get("TRACKER_SYSTEM", SYSTEM)  # z. B. OAP-1.0 für alte Einträge
+VORAB = os.path.join(ROOT, "tracker", SYSTEM, "vorab.jsonl")
+ERGEB = os.path.join(ROOT, "tracker", SYSTEM, "ergebnisse.jsonl")
 
 
 def lesen(pfad):

@@ -1,6 +1,7 @@
-Aktiv auf diesem Branch: OA-Prognose-System v1.0 (Kennung OAP-1.0), Stand 05.11.2026.
-Vollständiges Regelwerk: OA-Prognose-System-v1.0.txt.
-Eigenständiges System für das Prediction-Modul von Odd Alerts; keine Regel aus
-FootyStats-System v1.3 oder OddAlerts-System v1.3-OA.
-Regel: p ≥ 60 %, Vorteil p×q−1 ≥ 10 %, Bet365-Quote ≤ 3,00, ein Tipp pro Spiel.
-Status: Testbetrieb auf Papier bis mindestens 300 abgerechnete Tipps (Abschnitt 7).
+Aktiv auf diesem Branch: OA-Prognose-System v2.0 (Kennung OAP-2.0), Stand 05.11.2026.
+Vollständiges Regelwerk: OA-Prognose-System-v2.0.txt.
+Eigenes Modell (OAP-M1, Poisson-Stärkemodell je Liga auf xG) entscheidet; Odd Alerts ist
+nur Leitschiene (höchstens 5 Punkte Abweichung, Odd Alerts sieht keinen Nachteil).
+Regel: Modell ≥ 40 %, Vorteil ≥ 10 %, Bet365-Quote ≤ 3,00, nur Ligaspiele, ein Tipp pro Spiel.
+Status: Testbetrieb auf Papier bis mindestens 300 abgerechnete Tipps (Abschnitt 8).
+v1.0 (OA-Prognose-System-v1.0.txt) bleibt als Aufzeichnung, ist nicht mehr aktiv.

@@ -1,0 +1,1 @@
+{"params": {"w_xg": 1.0, "halbwertszeit": 120.0, "alpha": 2.0, "min_spiele": 6}, "regel": {"vorteil_min": 0.1, "p_min": 0.4, "abweichung_max": 0.05, "oa_wert_min_0": true, "quote_max": 3.0}}

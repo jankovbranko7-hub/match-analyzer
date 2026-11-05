@@ -64,7 +64,7 @@ def kandidaten(von, bis):
 
 
 def bereits_erfasst():
-    pfad = os.path.join(ROOT, "tracker", "vorab.jsonl")
+    pfad = os.path.join(ROOT, "tracker", VERSION, "vorab.jsonl")
     if not os.path.exists(pfad):
         return set()
     with open(pfad, encoding="utf8") as fh:
@@ -116,7 +116,7 @@ def main():
                                 "--match-id", str(t["match_id"]), "--markt", t["markt"], "--quelle", "system",
                                 "--analyse-id", f"OAP-{stamp}-{t['match_id']}",
                                 "--notiz", f"Auswahl: p={t['p']:.4f} q={t['quote']} Vorteil={t['vorteil']:.4f}"],
-                               capture_output=True, text=True)
+                               capture_output=True, text=True, env={**os.environ, "TRACKER_SYSTEM": VERSION})
             if r.returncode == 0:
                 neu += 1
             else:

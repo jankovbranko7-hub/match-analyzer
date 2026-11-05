@@ -1,13 +1,13 @@
 {
-  "version": "1.0",
-  "revision": "OAP-1.0",
-  "file": "OA-Prognose-System-v1.0.txt",
-  "data_source": "Odd Alerts API (Prediction-Modul + Bet365/Pinnacle-Quoten)",
+  "version": "2.0",
+  "revision": "OAP-2.0",
+  "file": "OA-Prognose-System-v2.0.txt",
+  "model": {"name": "OAP-M1", "w_xg": 1.0, "half_life_days": 120, "alpha": 2.0, "min_matches": 6},
+  "guide_rail": {"max_abs_diff_oa": 0.05, "oa_edge_min": 0.0},
+  "rule": {"min_probability": 0.40, "min_edge": 0.10, "max_odds": 3.0, "leagues_only": true, "one_per_match": "größter Vorteil"},
   "status": "Testbetrieb (Papier)",
-  "rule": {"min_probability": 0.60, "min_edge": 0.10, "max_odds": 3.0, "bookmaker": "Bet365 aktuell", "one_per_match": "größter Vorteil"},
-  "markets": ["heim", "remis", "auswaerts", "btts_ja", "btts_nein", "over25", "under25"],
   "pass_criteria": {"min_settled": 300, "roi_min": 0.0, "clv_min_exclusive": 0.0},
   "created_utc": "2026-11-05",
-  "authorized_by": "Nutzer: eigenes System für das Odd-Alerts-Prediction-Modul erfinden, nicht v1.3 nutzen",
-  "not_mixed_with": ["FootyStats-System v1.3 (system-v1.3)", "OddAlerts-System v1.3-OA (system-v1.3-oa)"]
+  "authorized_by": "Nutzer: Odd Alerts nur als Leitschiene, eigenes System soll die Tipps erzeugen",
+  "replaces": "OAP-1.0 (bleibt als Aufzeichnung)"
 }
