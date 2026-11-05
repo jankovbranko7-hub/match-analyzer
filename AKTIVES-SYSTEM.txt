@@ -1,14 +1,10 @@
-Aktiv für neue Analysen in diesem Chat: FootyStats-System v1.3, Stand 26.10.2026.
-Fassung: v1.3-BTTS-2026-10-26; BTTS-Präzisierung auf Nutzerwunsch.
-Vollständiges Regelwerk: FootyStats-System-v1.3.txt im selben Verzeichnis.
-Aktiviert durch Nutzeranweisung: „2,3,4,5 raus“.
-Punkt 1 (Modellprüfung) und die vier Spielbild-Prüfungen bleiben bestehen.
-Preisvorteil, Stresstest, Quoten-/Kostenklärung und gesonderte Einzelteam-
-Übertragbarkeit sind keine Pflichtbedingungen für sportliche Tipps mehr.
-Fehlende Quote oder Gebührenangaben sperren einen sportlichen Tipp nicht.
-Alte Auswertungsskripte zu v1.2 dürfen die neue Auswahl nicht bestimmen.
+Aktiv für neue Analysen in diesem Chat: FootyStats-System v1.4, Stand 05.11.2026.
+Fassung: v1.4-2026-11-05.
+Vollständiges Regelwerk: FootyStats-System-v1.4.txt im selben Verzeichnis.
+Vorgänger v1.3-BTTS-2026-10-26 im Ordner archiv/ (unverändert).
+Neu in v1.4: xG-Variante für BTTS/Over/Under (Abschnitt 5.6) und Marktgegenprobe
+als Transparenzangabe ohne Sperrwirkung (Abschnitte 6, 8–11).
+Weiterhin gilt alles aus v1.3: Punkt 1 (Modellprüfung), die vier Spielbild-
+Prüfungen, die BTTS-Präzisierung; Preisvorteil, Stresstest, Quoten-/Kostenklärung
+und gesonderte Einzelteam-Übertragbarkeit sind keine Pflichtbedingungen.
 Frühere Analysen und Ergebnisse werden nicht rückwirkend verändert.
-
-Die drei BTTS-Punkte in Abschnitt 4 sind ausdrücklich anzuwenden: eigenes
-Torargument beider Teams; tatsächliche Tore/FTS gegen xG und hohe Einzelsiege
-gewichten; wesentliche Treffergefahr mit ⚠️, bei überwiegender Gefahr „keine“.

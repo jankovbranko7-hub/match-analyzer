@@ -1,14 +1,15 @@
 # Regeln (Branch `system-v1.3`)
 
-**Das System ist `FootyStats-System-v1.3.txt` – genau so, wie es dort steht, und nichts
+**Das System ist `FootyStats-System-v1.4.txt` – genau so, wie es dort steht, und nichts
 sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json` (aktive Fassung
-v1.3-BTTS-2026-10-26). Vom Nutzer am 01.11.2026 aus der Datei `FootyStats-System-v1.3.zip`
-auf diesem eigenen Branch eingesetzt. Das System auf `main` (`SYSTEM.md`) gilt hier nicht
+v1.4-2026-11-05). v1.3 wurde vom Nutzer am 01.11.2026 aus `FootyStats-System-v1.3.zip`
+auf diesem Branch eingesetzt; auf seinen ausdrücklichen Wunsch vom 05.11.2026 entstand
+daraus v1.4 (xG-Variante, Marktgegenprobe). v1.3 liegt unverändert in `archiv/`; Analysen
+bis 04.11.2026 bleiben v1.3. Das System auf `main` (`SYSTEM.md`) gilt hier nicht
 und wird nicht vermischt; Änderungen an einem der beiden Systeme nur auf ausdrücklichen
 Wunsch des Nutzers.
 
-Einzige Abweichung von der ZIP-Datei: Der API-Schlüssel steht nicht im Regelwerk, sondern
-in der Umgebung (siehe Technik).
+Der API-Schlüssel steht nicht im Regelwerk, sondern in der Umgebung (siehe Technik).
 
 ## Arbeitsweise (nicht Teil des Systems)
 
@@ -31,6 +32,7 @@ Der FootyStats-Schlüssel liegt in der Umgebung als `APIKEY`; beim Aufruf als
 Umgebungseinstellungen hinterlegen soll. Den Schlüssel **nie** im Chat erfragen, ausgeben,
 loggen, in eine Datei schreiben oder committen; in gespeicherten URLs `[REDACTED]`.
 
-Ein `HTTP 417` ist das Stundenlimit der API – dann warten.
+Ein `HTTP 417` ist das Stundenlimit der API – dann warten. Ausnahme: Meldet die Antwort
+`request_limit: null`, ist die Liga nicht im API-Abo (andere Abrufe laufen weiter).
 
 Antworten auf Deutsch.
