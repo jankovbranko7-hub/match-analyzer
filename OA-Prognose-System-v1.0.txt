@@ -1,0 +1,72 @@
+OA-PROGNOSE-SYSTEM v1.0 (Kennung OAP-1.0)
+Eigenes System für das Prediction-Modul von Odd Alerts
+Stand: 05.11.2026 | auf ausdrücklichen Wunsch des Nutzers neu entworfen
+Status: TESTBETRIEB (nur Papier, kein echtes Geld bis zum Bestehen nach Abschnitt 7)
+
+0. ABGRENZUNG
+Dieses System ist eigenständig. Es übernimmt keine Regel aus FootyStats-System v1.3
+oder OddAlerts-System v1.3-OA und wird mit ihnen nicht vermischt. Es benutzt die
+Odd-Alerts-Wahrscheinlichkeiten ausdrücklich als Entscheidungsgrundlage. Änderungen
+nur auf ausdrücklichen Wunsch des Nutzers und nur als neue Version.
+
+1. DATENQUELLE
+- Odd Alerts API (https://data.oddalerts.com/api/), Schlüssel aus ODDALERTS_KEY,
+  nie ausgeben oder speichern; in gespeicherten Abfragen [REDACTED].
+- Wahrscheinlichkeit p: Odd-Alerts-Prediction-Modul, Feld probability je Spiel
+  (home_win, draw, away_win, btts, btts_no, o25, u25), zum Entscheidungszeitpunkt
+  abgerufen.
+- Quote q: aktuelle Bet365-Quote zum Entscheidungszeitpunkt (Odd Alerts,
+  odds_type=closing = aktueller Stand). Pinnacle-Schlussquote nur für die Auswertung.
+
+2. ERLAUBTE MÄRKTE (7)
+Heimsieg, Remis, Auswärtssieg, BTTS Ja, BTTS Nein, Over 2,5, Under 2,5.
+Abrechnung nach regulärer Spielzeit einschließlich Nachspielzeit; Verlängerung und
+Elfmeterschießen zählen nicht.
+
+3. AUSWAHLREGEL (vorab festgelegt, unverändert aus der Entwicklung übernommen)
+Ein Markt ist ein Tipp, wenn ALLE Bedingungen erfüllt sind:
+  a) p ≥ 60 %
+  b) Vorteil e = p × q − 1 ≥ 10 %
+  c) Quote q ≤ 3,00
+  d) kein Freundschaftsspiel, Spiel noch nicht angepfiffen (Status NS)
+  e) p und q sind vorhanden (fehlt eines: kein Tipp)
+Pro Spiel höchstens ein Tipp: erfüllen mehrere Märkte die Regel, zählt der mit dem
+größten Vorteil e. Keine Kombinationen. Keine weiteren Filter, keine Ausnahmen,
+keine Auswahl nach Gefühl. Erfüllt kein Markt die Regel: kein Tipp.
+
+4. EINSATZ
+Fester Einsatz 1 Einheit pro Tipp. Keine Erhöhung nach Verlusten.
+
+5. ENTSCHEIDUNGSZEITPUNKT
+Auswahl einmal pro Lauf mit Werkzeug werkzeuge/oap_auswahl.py. Jeder Tipp wird
+sofort mit Zeit, p, q, e und Pinnacle-Quote im Tracker erfasst (tracker/vorab.jsonl,
+Quelle „system“). Gezählt wird die Quote zum Erfassungszeitpunkt; wird tatsächlich
+gewettet, die erhaltene Quote. Ein späterer Lauf vor Anpfiff erzeugt keinen zweiten
+Tipp für dasselbe Spiel.
+
+6. ERGEBNIS UND AUSWERTUNG
+Ergebnisse getrennt abrufen (tracker.py abrechnen). Bericht: Tipps, Treffer,
+Gewinn und ROI bei 1 Einheit, CLV gegen Pinnacle-Schlussquote, je Markt.
+Verschobene oder abgebrochene Spiele: annulliert, ohne Wirkung auf den Gewinn.
+
+7. BESTEHENSKRITERIEN (vorab festgelegt)
+Bewertet wird nach mindestens 300 abgerechneten Tipps:
+  - bestanden: ROI ≥ 0 % UND mittlerer CLV gegen Pinnacle-Schluss > 0 %
+  - nicht bestanden: sonst. Dann keine Änderung an v1.0; eine neue Version darf nur
+    mit neuen, vorher festgelegten Regeln und neuem Testzeitraum entstehen.
+Vor dem Bestehen kein echtes Geld. Auch nach dem Bestehen ist ein Gewinn nicht
+garantiert.
+
+8. ENTWICKLUNGSGRUNDLAGE (Belege, siehe protokoll/OAP-1.0_entwicklung.md)
+Daten: Odd Alerts, Spiele 06.10.–03.11.2026, 12.675 Spiele mit Prognose, Ergebnis und
+Bet365-Quote. Entwicklung 06.–23.10., unberührter Test 24.10.–03.11.
+- Odd-Alerts-Wahrscheinlichkeiten waren gut kalibriert (z. B. 60–80 % → 66–68 %).
+- Allen Prognosen blind folgen verlor in jedem Markt (−1 % bis −17 %).
+- Regel aus Abschnitt 3: Entwicklung 655 Tipps, +9,5 % (Eröffnungsquote) / +3,5 %
+  (Schlussquote); Test 539 Tipps, +1,4 % / −2,2 %. Der Vorteil ist damit NICHT belegt.
+Einschränkung: Ob die historischen Odd-Alerts-Wahrscheinlichkeiten genau dem Stand
+vor dem Spiel entsprechen, ist unbekannt. Deshalb zählt nur der Testbetrieb mit vor
+Anpfiff gespeicherten Werten.
+
+VERSIONSHISTORIE
+v1.0 (05.11.2026): erste Fassung.

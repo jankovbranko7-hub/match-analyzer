@@ -1,38 +1,27 @@
-# Regeln (Branch `system-v1.3-oa`)
+# Regeln (Branch `system-oa-prognose`)
 
-**Das System ist `OddAlerts-System-v1.3-OA.txt` – genau so, wie es dort steht, und nichts
-sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json` (aktive Fassung
-v1.3-OA-2026-11-02). Am 02.11.2026 auf Wunsch des Nutzers aus dem FootyStats-System v1.3
-(Branch `system-v1.3`) übertragen: gleiche Regeln, einzige Datenquelle Odd Alerts. Das
-FootyStats-System auf `system-v1.3` und das System auf `main` gelten hier nicht und werden
-nicht vermischt; Änderungen an einem der Systeme nur auf ausdrücklichen Wunsch des Nutzers.
+**Das System ist `OA-Prognose-System-v1.0.txt` (Kennung OAP-1.0) – genau so, wie es dort
+steht, und nichts sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json`.
+Auf ausdrücklichen Wunsch des Nutzers am 05.11.2026 als eigenes System für das
+Prediction-Modul von Odd Alerts entworfen. FootyStats-System v1.3 (`system-v1.3`),
+OddAlerts-System v1.3-OA (`system-v1.3-oa`, `system-v1.3-oa-werkzeuge`) und `main`
+gelten hier nicht und werden nicht vermischt. Änderungen nur auf ausdrücklichen Wunsch
+des Nutzers und nur als neue Version.
 
 ## Arbeitsweise (nicht Teil des Systems)
 
-- Spiele kommen meist als Batches zu je 5, nummeriert („Batch X · Nr. Y“). Jede Nummer
-  genau ihr Spiel, nichts vertauschen.
-- Vorabeinträge nach Abschnitt 9 des Systems kommen vor dem Anpfiff als Datei nach
-  `protokoll/` und werden committet und gepusht; Ergebnisprüfungen getrennt davon
-  (Abschnitt 10).
-
-## Werkzeuge (nur auf Branch `system-v1.3-oa-werkzeuge`, nicht Teil des Systems)
-
-- `werkzeuge/scanner.py`: listet alle kommenden Spiele mit Odd-Alerts-Prozenten und Quoten,
-  **ohne Filter oder Grenzen**; Ausgabe in `scans/`. Nur Kandidatenliste – die Auswahl trifft
-  das System v1.3-OA.
-- `werkzeuge/tracker.py`: Tipps vor dem Anpfiff erfassen (`tracker/vorab.jsonl`), getrennt
-  abrechnen (`tracker/ergebnisse.jsonl`), Bericht und Kalibrierung. Jedes analysierte Spiel
-  erfassen, auch „keine“. Details: `werkzeuge/README.md`.
+- Auswahl: `python3 werkzeuge/oap_auswahl.py` (Liste) bzw. mit `--erfassen` (Tipps vor
+  Anpfiff in `tracker/vorab.jsonl`), danach committen und pushen.
+- Nach den Spielen: `python3 werkzeuge/tracker.py abrechnen` und `... bericht`.
+- Status Testbetrieb: dem Nutzer nicht zu echten Einsätzen raten, solange Abschnitt 7
+  nicht erfüllt ist.
 
 ## Technik
 
-Der Odd-Alerts-Schlüssel liegt in der Umgebung als `ODDALERTS_KEY` und wird als
-Query-Parameter `api_token` an `https://data.oddalerts.com/api/` gesendet. Fehlt er: dem
-Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen soll. Den Schlüssel
-**nie** im Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen; in
-gespeicherten URLs `[REDACTED]` (auch in `next_page_url` der API-Antworten).
+Odd-Alerts-Schlüssel in der Umgebung als `ODDALERTS_KEY`, als `api_token` an
+`https://data.oddalerts.com/api/`. Fehlt er: dem Nutzer sagen, dass er ihn in den
+Umgebungseinstellungen hinterlegen soll. Den Schlüssel **nie** im Chat erfragen,
+ausgeben, loggen, in eine Datei schreiben oder committen; in gespeicherten URLs
+`[REDACTED]`. Endpunkte: `ODDALERTS-API.md`.
 
-Endpunkte und Felder: `ODDALERTS-API.md`. Ein Stundenlimit der API ist nicht geprüft;
-bei HTTP 429 oder ähnlichem warten.
-
-Antworten auf Deutsch.
+Antworten auf Deutsch, einfach und kurz erklärt.

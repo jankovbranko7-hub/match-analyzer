@@ -19,16 +19,16 @@ BASE = "https://data.oddalerts.com/api/"
 BUCHMACHER = {"pinnacle": "pinnacle", "bet365": "bet365"}
 MARKT_IDS = "6,9,13"  # ft_result, btts, total_goals
 
-# Die fünf erlaubten Märkte des Systems v1.3-OA (Abschnitt 1)
+# Die sieben Märkte des OA-Prognose-Systems v1.0 (Abschnitt 2)
 MAERKTE = {
     "heim": {"label": "Heimsieg", "prob": "home_win", "odds": ("ft_result", "home")},
+    "remis": {"label": "Remis", "prob": "draw", "odds": ("ft_result", "draw")},
     "auswaerts": {"label": "Auswärtssieg", "prob": "away_win", "odds": ("ft_result", "away")},
     "btts": {"label": "BTTS Ja", "prob": "btts", "odds": ("btts", "yes")},
+    "btts_nein": {"label": "BTTS Nein", "prob": "btts_no", "odds": ("btts", "no")},
     "over25": {"label": "Over 2,5", "prob": "o25", "odds": ("total_goals", "over_25")},
     "under25": {"label": "Under 2,5", "prob": "u25", "odds": ("total_goals", "under_25")},
 }
-# Remis nur als Information (kein erlaubter Markt)
-REMIS = {"prob": "draw", "odds": ("ft_result", "draw")}
 
 ANNULLIERT = {"POSTPONED", "CANCELLED", "ABANDONED", "AWARDED", "SUSPENDED",
               "INTERRUPTED", "DELETED"}
@@ -121,7 +121,7 @@ def quoten_aus_fixture(odds):
     for buch in BUCHMACHER:
         m = (odds or {}).get(buch) or {}
         werte = {}
-        for name, info in list(MAERKTE.items()) + [("remis", REMIS)]:
+        for name, info in MAERKTE.items():
             mk, oc = info["odds"]
             v = (m.get(mk) or {}).get(oc)
             werte[name] = float(v) if v not in (None, "", 0) else None
@@ -134,7 +134,7 @@ def wahrscheinlichkeiten(prob):
     if not prob:
         return None
     out = {}
-    for name, info in list(MAERKTE.items()) + [("remis", REMIS)]:
+    for name, info in MAERKTE.items():
         v = prob.get(info["prob"])
         out[name] = float(v) if v is not None else None
     return out
@@ -169,8 +169,12 @@ def gewonnen(markt, h, a):
         return h > a
     if markt == "auswaerts":
         return a > h
+    if markt == "remis":
+        return h == a
     if markt == "btts":
         return h > 0 and a > 0
+    if markt == "btts_nein":
+        return h == 0 or a == 0
     if markt == "over25":
         return h + a >= 3
     if markt == "under25":

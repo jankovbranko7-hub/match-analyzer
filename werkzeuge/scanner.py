@@ -1,6 +1,6 @@
 """Spiele-Scanner: listet ALLE kommenden Spiele mit Odd-Alerts-Wahrscheinlichkeiten
-und Quoten – ohne Grenzen und ohne Vorauswahl. Die Entscheidung trifft das
-System v1.3-OA.
+und Quoten – ohne Grenzen und ohne Vorauswahl. Reine Übersicht; die Tipps des
+OA-Prognose-Systems wählt werkzeuge/oap_auswahl.py.
 
 Aufruf:
   python3 werkzeuge/scanner.py                 # nächste 24 Stunden
@@ -87,11 +87,9 @@ def markdown(meta, spiele):
          "Quelle: Odd Alerts API.",
          "",
          "**Keine Filter, keine Grenzen, keine Empfehlung.** Die Liste zeigt nur, was "
-         "Odd Alerts liefert. Ob und welcher Tipp gespielt wird, entscheidet allein das "
-         "System v1.3-OA nach vollständiger Analyse.",
+         "Odd Alerts liefert. Tipps nach OA-Prognose-System v1.0: werkzeuge/oap_auswahl.py.",
          "",
-         "OA % = Odd-Alerts-Wahrscheinlichkeit (Kontext, kein Modell im Sinne von "
-         "Abschnitt 5). Quoten: Bet365 Eröffnung / aktuell. „–“ = fehlt.",
+         "OA % = Odd-Alerts-Wahrscheinlichkeit. Quoten: Bet365 Eröffnung / aktuell. „–“ = fehlt.",
          "",
          "| Nr | Anstoß UTC | Wettbewerb | Spiel | Match-ID | OA % H/X/A | OA % BTTS | "
          "OA % O/U 2,5 | Bet365 H/X/A (Eröff.) | Bet365 BTTS | Bet365 O/U 2,5 | "
@@ -126,7 +124,7 @@ def main():
     except oa.OAError as e:
         sys.exit(f"Fehler: {e}")
     meta = {
-        "werkzeug": "scanner", "system": "v1.3-OA",
+        "werkzeug": "scanner", "system": "OAP-1.0",
         "abruf_utc": abruf.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "von_utc": oa.iso(von), "bis_utc": oa.iso(bis),
         "quelle": "Odd Alerts API, fixtures/upcoming",

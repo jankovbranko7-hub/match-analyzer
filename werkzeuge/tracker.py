@@ -1,4 +1,4 @@
-"""Erfolgs-Tracker für System v1.3-OA (Abschnitte 9 und 10).
+"""Erfolgs-Tracker (Vorabeinträge, getrennte Abrechnung, Bericht, Kalibrierung).
 
 Befehle:
   erfassen     Tipp VOR dem Anpfiff speichern (unveränderlich, nur anhängen)
@@ -36,6 +36,11 @@ VORAB = os.path.join(ROOT, "tracker", "vorab.jsonl")
 ERGEB = os.path.join(ROOT, "tracker", "ergebnisse.jsonl")
 SCAN_ERGEB = os.path.join(ROOT, "scans", "ergebnisse.jsonl")
 QUELLEN = ("system", "oddalerts", "andere")
+try:
+    with open(os.path.join(ROOT, "AKTIVES-SYSTEM.json"), encoding="utf8") as _f:
+        SYSTEM = json.load(_f).get("revision", "unbekannt")
+except (OSError, ValueError):
+    SYSTEM = "unbekannt"
 
 
 def lesen(pfad):
@@ -65,12 +70,12 @@ def erfassen(args):
     if f.get("status") != "NS" or f["unix"] <= jetzt.timestamp():
         sys.exit(f"Nicht erfasst: Spiel hat bereits begonnen oder ist beendet "
                  f"(Status {f.get('status')}, Anstoß {oa.iso(f['unix'])}). "
-                 "Nach dem Anpfiff ist es keine Vorhersage mehr (Abschnitt 9).")
+                 "Nach dem Anpfiff ist es keine Vorhersage mehr.")
     quoten = oa.quoten_aus_fixture(f.get("odds"))
     nr = len(lesen(VORAB)) + 1
     eintrag = {
         "eintrag_id": f"T{nr:05d}-{args.match_id}",
-        "system": "v1.3-OA",
+        "system": SYSTEM,
         "erfasst_utc": jetzt.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "quelle": args.quelle,
         "analyse_id": args.analyse_id,
@@ -192,11 +197,11 @@ def bericht(args):
         for schluessel in (("alle", v["quelle"]), (v["markt"], v["quelle"]),
                            ("mit ⚠️" if v["warnung"] else "ohne ⚠️", v["quelle"])):
             gruppen[schluessel].append((v, e))
-    print(f"Bericht System v1.3-OA · {len(vorab)} Einträge, {len(ergeb)} abgerechnet\n")
+    print(f"Bericht System {SYSTEM} · {len(vorab)} Einträge, {len(ergeb)} abgerechnet\n")
     print("Gruppe | Quelle | erfasst | keine | Tipps abgerechnet | Treffer | Trefferquote ± SE "
           "| Gewinn (1 E.) | ROI | CLV vs. Pinnacle-Schluss | Ø OA-% | Brier OA | offen/annull./manuell")
     print("---|---|---|---|---|---|---|---|---|---|---|---|---")
-    reihen = ["alle", "heim", "auswaerts", "btts", "over25", "under25", "keine",
+    reihen = ["alle", "heim", "remis", "auswaerts", "btts", "btts_nein", "over25", "under25", "keine",
               "mit ⚠️", "ohne ⚠️"]
     for g in reihen:
         for q in QUELLEN:
