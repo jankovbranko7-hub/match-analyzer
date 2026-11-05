@@ -71,11 +71,12 @@ for bi,b in enumerate(BATCH,1):
                         period=(U(rows[0]['date_unix'])[:10],U(rows[-1]['date_unix'])[:10]) if rows else None,
                         l6period=(U(l6[0]['date_unix'])[:10],U(l6[-1]['date_unix'])[:10]) if l6 else None)
     nat={}
-    if cur=='17128':
+    if cur in ('17128','17127','17130'):
         for side,tid in (('Heim',m['homeID']),('Gast',m['awayID'])):
             nat[side]=None
             for sid in NAT:
-                rr=fs.get('league-matches',season_id=sid,max_per_page=1000,page=1)['data']
+                try: rr=fs.get('league-matches',season_id=sid,max_per_page=1000,page=1)['data']
+                except LookupError: continue
                 KO2=ko_rounds(rr)
                 rows=sorted([x for x in rr if x['status']=='complete' and x['date_unix']<T_DEC and x['roundID'] not in KO2 and tid in (x['homeID'],x['awayID'])],key=lambda x:x['date_unix'])
                 if rows:

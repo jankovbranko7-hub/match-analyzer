@@ -1,0 +1,2168 @@
+{
+ "system": "FootyStats-System v1.4 (Fassung v1.4-2026-11-05)",
+ "model": "Poisson-v1.4 (reguliertes unabhängiges Poisson nach 5.3; 1X2 aus Tormodell, BTTS/Over/Under aus xG-Variante 5.6; 4 Saisons, gleiche Gewichte)",
+ "snapshot_utc": "2026-11-05 09:51 UTC",
+ "created_utc": "2026-11-05 09:56:12 UTC",
+ "matches": {
+  "1.1": {
+   "analysis_id": "A-20261105-8419139-r1",
+   "match_id": 8419139,
+   "home": "Aldosivi",
+   "away": "River Plate",
+   "home_id": 696,
+   "away_id": 718,
+   "season_id": "16571",
+   "league": "Argentinien Primera División",
+   "kickoff_utc": "2026-11-05 18:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Saison 2026 mit je 31 Ligaspielen und voller xG-Abdeckung ist verwendbar, K.-o.-Spiele ausgeschlossen; schwächere Offensive ist Aldosivi mit 0,71 Toren pro Spiel und 42 % torlosen Spielen, gegen River mit 35 % Clean Sheets; der Weg zu drei Toren ist widersprüchlich, weil Aldosivis Heim- und Rivers Auswärtsspiele jeweils zu 73 % Under endeten, die xG-Variante aber 52 % Over schätzt; stärkstes Gegenargument gegen den Auswärtssieg ist Rivers Auswärtstorlosigkeit in 40 % der Spiele bei 8 Remis Aldosivis in 15 Heimspielen, sodass weder Sieg- noch Torlinienmarkt widerspruchsfrei getragen wird.",
+   "lambda_home": 1.0337638941801028,
+   "lambda_away": 1.1308313128809366,
+   "probs": {
+    "H": 0.3285619511932778,
+    "D": 0.2936992101923693,
+    "A": 0.3777387900809288,
+    "BTTS": 0.5562465814612095,
+    "O25": 0.5159868700041288,
+    "U25": 0.48401312999587115
+   },
+   "probs_tormodell": {
+    "H": 0.3285619511932778,
+    "D": 0.2936992101923693,
+    "A": 0.3777387900809288,
+    "BTTS": 0.43636581783867057,
+    "O25": 0.36777821351076123,
+    "U25": 0.6322217864892388
+   },
+   "probs_xg": {
+    "H": 0.37026712599457007,
+    "D": 0.25601742935190264,
+    "A": 0.3737153929502167,
+    "BTTS": 0.5562465814612095,
+    "O25": 0.5159868700041288,
+    "U25": 0.48401312999587115
+   },
+   "markt": {
+    "H": 0.13421628949838355,
+    "D": 0.2087808947752633,
+    "A": 0.6570028157263531,
+    "BTTS": 0.452054794520548,
+    "O25": 0.5026041666666667,
+    "U25": 0.49739583333333326
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.365954810959726,
+    1.3734846979492599
+   ],
+   "odds": {
+    "odds_ft_1": 7,
+    "odds_ft_x": 4.5,
+    "odds_ft_2": 1.43,
+    "odds_btts_yes": 2,
+    "odds_btts_no": 1.65,
+    "odds_ft_over25": 1.91,
+    "odds_ft_under25": 1.93
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 100,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "1.2": {
+   "analysis_id": "A-20261105-8409606-r1",
+   "match_id": 8409606,
+   "home": "Palmeiras",
+   "away": "Remo",
+   "home_id": 619,
+   "away_id": 2594,
+   "season_id": "16544",
+   "league": "Brasilien Série A",
+   "kickoff_utc": "2026-11-05 22:30 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Saison 2026 mit je 33 Spielen und voller xG-Abdeckung ist verwendbar; schwächere Offensive ist Remo auswärts mit 14 Toren in 16 Spielen und 50 % torlosen Spielen, gegen Palmeiras mit 83 % Clean Sheets in den letzten sechs; der Weg zu drei Toren hängt fast allein an Palmeiras und wird nicht gewählt; stärkstes Gegenargument sind Palmeiras' zwei torlose Spiele in den letzten sechs, die aber auswärts entstanden, während Palmeiras daheim 12-3-1 und Remo auswärts 2-4-10 steht, sodass der Heimsieg (Modell 72 %) getragen wird.",
+   "lambda_home": 2.178338126870325,
+   "lambda_away": 0.6611268102764729,
+   "probs": {
+    "H": 0.7228974421629586,
+    "D": 0.17826785993333527,
+    "A": 0.09883457899179512,
+    "BTTS": 0.5664370096206043,
+    "O25": 0.594072295792566,
+    "U25": 0.40592770420743396
+   },
+   "probs_tormodell": {
+    "H": 0.7228974421629586,
+    "D": 0.17826785993333527,
+    "A": 0.09883457899179512,
+    "BTTS": 0.42895811912654735,
+    "O25": 0.5399003360316101,
+    "U25": 0.4600996639683899
+   },
+   "probs_xg": {
+    "H": 0.5958399421117587,
+    "D": 0.21145007077205816,
+    "A": 0.19270993633709374,
+    "BTTS": 0.5664370096206043,
+    "O25": 0.594072295792566,
+    "U25": 0.40592770420743396
+   },
+   "markt": {
+    "H": 0.7668663714508988,
+    "D": 0.14977858817400364,
+    "A": 0.08335504037509768,
+    "BTTS": 0.4186046511627907,
+    "O25": 0.6296296296296295,
+    "U25": 0.37037037037037046
+   },
+   "abweichung_modell_markt": -0.04396892928794016,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    2.0192144263824785,
+    1.0588596063988274
+   ],
+   "odds": {
+    "odds_ft_1": 1.25,
+    "odds_ft_x": 6.4,
+    "odds_ft_2": 11.5,
+    "odds_btts_yes": 2.25,
+    "odds_btts_no": 1.62,
+    "odds_ft_over25": 1.5,
+    "odds_ft_under25": 2.55
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "1.3": {
+   "analysis_id": "A-20261105-8469644-r1",
+   "match_id": 8469644,
+   "home": "Botafogo SP",
+   "away": "Londrina",
+   "home_id": 2598,
+   "away_id": 1055,
+   "season_id": "16783",
+   "league": "Brasilien Série B",
+   "kickoff_utc": "2026-11-05 22:30 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": "Botafogo SP verlor 7 von 18 Heimspielen.",
+   "bild": "Saison 2026 mit je 36 Spielen und voller xG-Abdeckung ist verwendbar; schwächere Offensive ist Londrina mit 1,25 Toren pro Spiel, gegen Botafogo SP mit 50 % Clean Sheets in den letzten sechs, während Londrina auswärts ohne Clean Sheet und mit 3-3-12 dasteht; der Weg zu drei Toren ist mit 56 % Over in Botafogo-Heimspielen möglich, aber Botafogo spielte in den letzten sechs nur zu 17 % Over und wird nicht gewählt; stärkstes Gegenargument sind Botafogos 7 Heimniederlagen in 18 Spielen, die als wesentliche Gefahr gewichtet werden, gegen Botafogos Form von 4-1-1 und Londrinas 1-1-4 den Heimsieg (Modell 46 %) aber nicht entkräften.",
+   "lambda_home": 1.318804791695421,
+   "lambda_away": 0.932268536696689,
+   "probs": {
+    "H": 0.45549353812609145,
+    "D": 0.2803959671864451,
+    "A": 0.2641104187631802,
+    "BTTS": 0.5323036982727378,
+    "O25": 0.4959887504380972,
+    "U25": 0.5040112495619028
+   },
+   "probs_tormodell": {
+    "H": 0.45549353812609145,
+    "D": 0.2803959671864451,
+    "A": 0.2641104187631802,
+    "BTTS": 0.4441717168226809,
+    "O25": 0.39094707110546423,
+    "U25": 0.6090529288945358
+   },
+   "probs_xg": {
+    "H": 0.4535646104549336,
+    "D": 0.2558120795568674,
+    "A": 0.29062319744481246,
+    "BTTS": 0.5323036982727378,
+    "O25": 0.4959887504380972,
+    "U25": 0.5040112495619028
+   },
+   "markt": {
+    "H": 0.5243902439024389,
+    "D": 0.26219512195121947,
+    "A": 0.21341463414634146,
+    "BTTS": 0.5081081081081081,
+    "O25": 0.4973544973544974,
+    "U25": 0.5026455026455026
+   },
+   "abweichung_modell_markt": -0.06889670577634749,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.505388297861236,
+    1.1524384698575696
+   ],
+   "odds": {
+    "odds_ft_1": 1.75,
+    "odds_ft_x": 3.5,
+    "odds_ft_2": 4.3,
+    "odds_btts_yes": 1.82,
+    "odds_btts_no": 1.88,
+    "odds_ft_over25": 1.9,
+    "odds_ft_under25": 1.88
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 100,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": false,
+    "O25": true
+   }
+  },
+  "1.4": {
+   "analysis_id": "A-20261105-8700985-r1",
+   "match_id": 8700985,
+   "home": "RSC Anderlecht",
+   "away": "Salzburg",
+   "home_id": 61,
+   "away_id": 100,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Salzburg mit 3 Toren in 3 Europa-League-Spielen, gegen Anderlechts Heimabwehr mit 60 % Liga-Clean-Sheets; ein Weg zu drei Toren ist mit 67 % Over beider Teams in drei Spielen unsicher belegt; stärkstes Gegenargument gegen den Modell-Heimsieg (57 %) ist Salzburgs ungeschlagene Ligabilanz (8-3-0) gegen Anderlechts 1-0-2 in der Europa League, sodass kein Markt getragen wird.",
+   "lambda_home": 1.9801511357807677,
+   "lambda_away": 1.1172214711136395,
+   "probs": {
+    "H": 0.5738533546584939,
+    "D": 0.21599443187509018,
+    "A": 0.21015215693945258,
+    "BTTS": 0.5727455378251739,
+    "O25": 0.5549300327694169,
+    "U25": 0.4450699672305831
+   },
+   "probs_tormodell": {
+    "H": 0.5738533546584939,
+    "D": 0.21599443187509018,
+    "A": 0.21015215693945258,
+    "BTTS": 0.5799317151984953,
+    "O25": 0.5982678583899683,
+    "U25": 0.4017321416100317
+   },
+   "probs_xg": {
+    "H": 0.4873884655767415,
+    "D": 0.23961202883655203,
+    "A": 0.2729994065018746,
+    "BTTS": 0.5727455378251739,
+    "O25": 0.5549300327694169,
+    "U25": 0.4450699672305831
+   },
+   "markt": {
+    "H": 0.47941375555490157,
+    "D": 0.25957208864298537,
+    "A": 0.26101415580211307,
+    "BTTS": 0.6161879895561357,
+    "O25": 0.6020408163265306,
+    "U25": 0.3979591836734694
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.6943880946338195,
+    1.2094747967430162
+   ],
+   "odds": {
+    "odds_ft_1": 1.96,
+    "odds_ft_x": 3.62,
+    "odds_ft_2": 3.6,
+    "odds_btts_yes": 1.47,
+    "odds_btts_no": 2.36,
+    "odds_ft_over25": 1.56,
+    "odds_ft_under25": 2.36
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "1.5": {
+   "analysis_id": "A-20261105-8700953-r1",
+   "match_id": 8700953,
+   "home": "NEC",
+   "away": "Omonia Nicosia",
+   "home_id": 379,
+   "away_id": 3741,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Omonia Nikosia im API-Abo fehlt; schwächere Offensive ist Omonia mit 1,22 xG in der Europa League, gegen NEC ohne Clean Sheet in Liga und Europa League; ein Weg zu drei Toren ist mit 67 % Over beider Teams in drei Spielen und NECs 83 % Over daheim sichtbar, aber ohne Ligabasis für Omonia unsicher; stärkstes Gegenargument gegen den Modell-Heimsieg (43 %) ist NECs sieglose Heimbilanz in der Liga (0-4-2), sodass die Datenbasis keinen Markt trägt.",
+   "lambda_home": 1.6711627036189667,
+   "lambda_away": 1.4284842454930688,
+   "probs": {
+    "H": 0.4341328344410465,
+    "D": 0.23668157678620302,
+    "A": 0.329185521076105,
+    "BTTS": 0.5730081549782038,
+    "O25": 0.5582883269893987,
+    "U25": 0.4417116730106013
+   },
+   "probs_tormodell": {
+    "H": 0.4341328344410465,
+    "D": 0.23668157678620302,
+    "A": 0.329185521076105,
+    "BTTS": 0.6173648617060395,
+    "O25": 0.5987604260029202,
+    "U25": 0.4012395739970798
+   },
+   "probs_xg": {
+    "H": 0.49705637195447167,
+    "D": 0.23757459062037636,
+    "A": 0.2653689388004653,
+    "BTTS": 0.5730081549782038,
+    "O25": 0.5582883269893987,
+    "U25": 0.4417116730106013
+   },
+   "markt": {
+    "H": 0.5342105263157895,
+    "D": 0.23684210526315794,
+    "A": 0.22894736842105262,
+    "BTTS": 0.5974025974025974,
+    "O25": 0.6015228426395939,
+    "U25": 0.3984771573604061
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.7222428825775313,
+    1.1961851891776323
+   ],
+   "odds": {
+    "odds_ft_1": 1.8,
+    "odds_ft_x": 4.06,
+    "odds_ft_2": 4.2,
+    "odds_btts_yes": 1.55,
+    "odds_btts_no": 2.3,
+    "odds_ft_over25": 1.57,
+    "odds_ft_under25": 2.37
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "2.1": {
+   "analysis_id": "A-20261105-8700955-r1",
+   "match_id": 8700955,
+   "home": "Crystal Palace",
+   "away": "Hoffenheim",
+   "home_id": 143,
+   "away_id": 49,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Crystal Palace mit 5 Toren in den letzten sechs Premier-League-Spielen (67 % torlos), das in der Europa League aber 8 Tore in 3 Spielen erzielte; ein Weg zu drei Toren ist mit Hoffenheims 88 % Over in der Bundesliga sichtbar, das Modell schätzt aber nur 51 % Over; stärkstes Gegenargument gegen den Modell-Heimsieg (56 %) ist Palaces Ligaform mit 1-1-4, und weil Liga- und Europa-League-Bild widersprüchlich bleiben, wird kein Markt getragen.",
+   "lambda_home": 2.0392824399277694,
+   "lambda_away": 1.250595873888208,
+   "probs": {
+    "H": 0.5561104073697678,
+    "D": 0.21306618525498977,
+    "A": 0.23082327665040023,
+    "BTTS": 0.5463123887148834,
+    "O25": 0.5068476807488678,
+    "U25": 0.4931523192511323
+   },
+   "probs_tormodell": {
+    "H": 0.5561104073697678,
+    "D": 0.21306618525498977,
+    "A": 0.23082327665040023,
+    "BTTS": 0.6208022081910082,
+    "O25": 0.6385367555487609,
+    "U25": 0.36146324445123906
+   },
+   "probs_xg": {
+    "H": 0.419418092042155,
+    "D": 0.25646626094196273,
+    "A": 0.32411550657787913,
+    "BTTS": 0.5463123887148834,
+    "O25": 0.5068476807488678,
+    "U25": 0.4931523192511323
+   },
+   "markt": {
+    "H": 0.5029969721312488,
+    "D": 0.2400667366990051,
+    "A": 0.2569362911697459,
+    "BTTS": 0.6375000000000001,
+    "O25": 0.6066838046272494,
+    "U25": 0.39331619537275064
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.4545734387756797,
+    1.247354557742394
+   ],
+   "odds": {
+    "odds_ft_1": 1.89,
+    "odds_ft_x": 3.96,
+    "odds_ft_2": 3.7,
+    "odds_btts_yes": 1.45,
+    "odds_btts_no": 2.55,
+    "odds_ft_over25": 1.53,
+    "odds_ft_under25": 2.36
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "2.2": {
+   "analysis_id": "A-20261105-8700956-r1",
+   "match_id": 8700956,
+   "home": "Lillestrøm",
+   "away": "Viktoria Plzeň",
+   "home_id": 339,
+   "away_id": 77,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Viktoria Plzeň im API-Abo fehlt; schwächere Offensive ist Lillestrøm mit 2 Toren in 3 Europa-League-Spielen, gegen Plzeň ohne Clean Sheet; ein Weg zu drei Toren ist mit 67 % bzw. 100 % Over in drei Spielen unsicher; stärkstes Gegenargument gegen jede Auswahl ist das ausgeglichene Modell (Heim 35 %, Auswärts 39 %) bei fehlender Ligabasis für Plzeň, sodass kein Markt getragen wird.",
+   "lambda_home": 1.2992498329765543,
+   "lambda_away": 1.377065527068037,
+   "probs": {
+    "H": 0.3523658832029507,
+    "D": 0.2592745569279509,
+    "A": 0.3883595178748893,
+    "BTTS": 0.5757475068793173,
+    "O25": 0.5520049545170803,
+    "U25": 0.4479950454829197
+   },
+   "probs_tormodell": {
+    "H": 0.3523658832029507,
+    "D": 0.2592745569279509,
+    "A": 0.3883595178748893,
+    "BTTS": 0.5437620488268565,
+    "O25": 0.5005559230717964,
+    "U25": 0.49944407692820353
+   },
+   "probs_xg": {
+    "H": 0.4629828142341294,
+    "D": 0.24323693281137387,
+    "A": 0.2937801345321406,
+    "BTTS": 0.5757475068793173,
+    "O25": 0.5520049545170803,
+    "U25": 0.4479950454829197
+   },
+   "markt": {
+    "H": 0.31036815151222347,
+    "D": 0.25934872934583053,
+    "A": 0.4302831191419461,
+    "BTTS": 0.6414634146341464,
+    "O25": 0.6015228426395939,
+    "U25": 0.3984771573604061
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.6359183515370004,
+    1.2553118588335175
+   ],
+   "odds": {
+    "odds_ft_1": 3.05,
+    "odds_ft_x": 3.65,
+    "odds_ft_2": 2.2,
+    "odds_btts_yes": 1.47,
+    "odds_btts_no": 2.63,
+    "odds_ft_over25": 1.57,
+    "odds_ft_under25": 2.37
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "2.3": {
+   "analysis_id": "A-20261105-8700984-r1",
+   "match_id": 8700984,
+   "home": "Real Sociedad",
+   "away": "Olympique Lyonnais",
+   "home_id": 290,
+   "away_id": 57,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Lyon in der Ligue 1 auswärts mit 3 Toren in 4 Spielen (50 % torlos), gegen Real Sociedad mit nur 9 % Liga-Clean-Sheets; der Weg zu drei Toren ist widersprüchlich, weil Real Sociedads letzte sechs Ligaspiele alle Over endeten, Lyons Liga-Auswärtsspiele aber nur zu 25 %; stärkstes Gegenargument gegen den Heimsieg (Modell 42 %) ist Lyons Europa-League-Bilanz von 2-0-1, sodass kein Markt widerspruchsfrei getragen wird.",
+   "lambda_home": 1.580054213564218,
+   "lambda_away": 1.3691211815900455,
+   "probs": {
+    "H": 0.42471415030323423,
+    "D": 0.24389318619415024,
+    "A": 0.3313926235325926,
+    "BTTS": 0.559936384723388,
+    "O25": 0.5238554328267779,
+    "U25": 0.4761445671732221
+   },
+   "probs_tormodell": {
+    "H": 0.42471415030323423,
+    "D": 0.24389318619415024,
+    "A": 0.3313926235325926,
+    "BTTS": 0.5920885798780395,
+    "O25": 0.5653271929619321,
+    "U25": 0.43467280703806793
+   },
+   "probs_xg": {
+    "H": 0.4186789680297016,
+    "D": 0.25284864236656995,
+    "A": 0.32847231501270213,
+    "BTTS": 0.559936384723388,
+    "O25": 0.5238554328267779,
+    "U25": 0.4761445671732221
+   },
+   "markt": {
+    "H": 0.5480783837156311,
+    "D": 0.23393589548837918,
+    "A": 0.21798572079598966,
+    "BTTS": 0.6076923076923076,
+    "O25": 0.606516290726817,
+    "U25": 0.393483709273183
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.4851871321955463,
+    1.2868552095253785
+   ],
+   "odds": {
+    "odds_ft_1": 1.75,
+    "odds_ft_x": 4.1,
+    "odds_ft_2": 4.4,
+    "odds_btts_yes": 1.53,
+    "odds_btts_no": 2.37,
+    "odds_ft_over25": 1.57,
+    "odds_ft_under25": 2.42
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "2.4": {
+   "analysis_id": "A-20261105-8700958-r1",
+   "match_id": 8700958,
+   "home": "Levski Sofia",
+   "away": "Jagiellonia Białystok",
+   "home_id": 3605,
+   "away_id": 1224,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": "Levski in der Europa League nur 0,89 xG pro Spiel und daheim 0:1 gegen Salzburg.",
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Jagiellonia mit 0,89 xG in der Europa League (0:3 daheim gegen Anderlecht), gegen Levski, das in der Liga daheim 5-0-0 bei 14:1 Toren steht, während Jagiellonia in der Liga auswärts ohne Clean Sheet ist; der Weg zu drei Toren ist mit Levskis 17 % Over in den letzten sechs Ligaspielen schwach und wird nicht gewählt; stärkstes Gegenargument ist Levskis schwacher Chancenwert in der Europa League (0,89 xG) und die Heimniederlage gegen Salzburg, was als wesentliche Gefahr für den Heimsieg (Modell 50 %) gewichtet wird.",
+   "lambda_home": 1.6792138235883465,
+   "lambda_away": 1.1198157982989068,
+   "probs": {
+    "H": 0.5043700390588275,
+    "D": 0.24180362949310974,
+    "A": 0.2538262714693507,
+    "BTTS": 0.5501693583184782,
+    "O25": 0.5194480926194598,
+    "U25": 0.4805519073805402
+   },
+   "probs_tormodell": {
+    "H": 0.5043700390588275,
+    "D": 0.24180362949310974,
+    "A": 0.2538262714693507,
+    "BTTS": 0.5480086420921186,
+    "O25": 0.5303149701586476,
+    "U25": 0.46968502984135235
+   },
+   "probs_xg": {
+    "H": 0.4595445554635902,
+    "D": 0.25019955849322717,
+    "A": 0.2902558159090746,
+    "BTTS": 0.5501693583184782,
+    "O25": 0.5194480926194598,
+    "U25": 0.4805519073805402
+   },
+   "markt": {
+    "H": 0.48642126494741394,
+    "D": 0.2585362339720501,
+    "A": 0.2550425010805359,
+    "BTTS": 0.5608465608465608,
+    "O25": 0.5263157894736842,
+    "U25": 0.4736842105263158
+   },
+   "abweichung_modell_markt": 0.017948774111413546,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5631927394185865,
+    1.190552225712063
+   ],
+   "odds": {
+    "odds_ft_1": 1.94,
+    "odds_ft_x": 3.65,
+    "odds_ft_2": 3.7,
+    "odds_btts_yes": 1.66,
+    "odds_btts_no": 2.12,
+    "odds_ft_over25": 1.8,
+    "odds_ft_under25": 2
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "2.5": {
+   "analysis_id": "A-20261105-8700990-r1",
+   "match_id": 8700990,
+   "home": "AC Milan",
+   "away": "Ferencváros",
+   "home_id": 461,
+   "away_id": 119,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Ferencváros im API-Abo fehlt; schwächere Offensive ist Milan in der Europa League mit 4 Toren in 3 Spielen und zwei torlosen Spielen, gegen Ferencváros ohne Clean Sheet; ein Weg zu drei Toren ist mit Ferencváros' 3 Over-Spielen sichtbar, aber unsicher; stärkstes Gegenargument gegen den Heimsieg (Modell 44 %) ist Ferencváros' Europa-League-Bilanz von 3-0-0 bei fehlender Ligabasis, und Milans wiederholte Torlosigkeit in diesem Wettbewerb, sodass kein Markt getragen wird.",
+   "lambda_home": 1.718880101086113,
+   "lambda_away": 1.443447404468646,
+   "probs": {
+    "H": 0.4422229500884294,
+    "D": 0.233525100218927,
+    "A": 0.3242518669015739,
+    "BTTS": 0.5493480353213913,
+    "O25": 0.5202703736802161,
+    "U25": 0.4797296263197839
+   },
+   "probs_tormodell": {
+    "H": 0.4422229500884294,
+    "D": 0.233525100218927,
+    "A": 0.3242518669015739,
+    "BTTS": 0.6269479343843243,
+    "O25": 0.6121784861588477,
+    "U25": 0.38782151384115227
+   },
+   "probs_xg": {
+    "H": 0.46674980847579517,
+    "D": 0.24918467419113155,
+    "A": 0.2840654516383491,
+    "BTTS": 0.5493480353213913,
+    "O25": 0.5202703736802161,
+    "U25": 0.4797296263197839
+   },
+   "markt": {
+    "H": 0.6962047913170767,
+    "D": 0.17940661930093899,
+    "A": 0.12438858938198437,
+    "BTTS": 0.5175202156334231,
+    "O25": 0.6155778894472362,
+    "U25": 0.38442211055276376
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5799409201993015,
+    1.1772108068682776
+   ],
+   "odds": {
+    "odds_ft_1": 1.34,
+    "odds_ft_x": 5.2,
+    "odds_ft_2": 7.5,
+    "odds_btts_yes": 1.79,
+    "odds_btts_no": 1.92,
+    "odds_ft_over25": 1.53,
+    "odds_ft_under25": 2.45
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "3.1": {
+   "analysis_id": "A-20261105-8700999-r1",
+   "match_id": 8700999,
+   "home": "Sparta Praha",
+   "away": "AFC Bournemouth",
+   "home_id": 86,
+   "away_id": 148,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Sparta Prag im API-Abo fehlt; schwächere Offensive ist Sparta mit 5 Toren in 3 Europa-League-Spielen, gegen Bournemouth mit 67 % Clean Sheets in diesem Wettbewerb; ein Weg zu drei Toren ist mit Bournemouths 3 Over-Spielen sichtbar, aber gegen Spartas 33 % Over unsicher; stärkstes Gegenargument gegen den Auswärtssieg ist das Modell mit nur 33 % bei fehlender Ligabasis für Sparta und Bournemouths Premier-League-Auswärtsbilanz von 1-1-2, sodass kein Markt getragen wird.",
+   "lambda_home": 1.4779223210242187,
+   "lambda_away": 1.3038717717929387,
+   "probs": {
+    "H": 0.41320195568702506,
+    "D": 0.2526655525178714,
+    "A": 0.33413241831463864,
+    "BTTS": 0.55851443179912,
+    "O25": 0.5235900001903497,
+    "U25": 0.4764099998096502
+   },
+   "probs_tormodell": {
+    "H": 0.41320195568702506,
+    "D": 0.2526655525178714,
+    "A": 0.33413241831463864,
+    "BTTS": 0.5623375140288628,
+    "O25": 0.526195230049984,
+    "U25": 0.47380476995001597
+   },
+   "probs_xg": {
+    "H": 0.4289579735298375,
+    "D": 0.2522066236570819,
+    "A": 0.31883532042113966,
+    "BTTS": 0.55851443179912,
+    "O25": 0.5235900001903497,
+    "U25": 0.4764099998096502
+   },
+   "markt": {
+    "H": 0.15446744068652196,
+    "D": 0.21453811206461385,
+    "A": 0.6309944472488642,
+    "BTTS": 0.5714285714285715,
+    "O25": 0.6015228426395939,
+    "U25": 0.3984771573604061
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5066035989967654,
+    1.2643341542481386
+   ],
+   "odds": {
+    "odds_ft_1": 6.25,
+    "odds_ft_x": 4.5,
+    "odds_ft_2": 1.53,
+    "odds_btts_yes": 1.65,
+    "odds_btts_no": 2.2,
+    "odds_ft_over25": 1.57,
+    "odds_ft_under25": 2.37
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "3.2": {
+   "analysis_id": "A-20261105-8700883-r1",
+   "match_id": 8700883,
+   "home": "Sturm Graz",
+   "away": "Celje",
+   "home_id": 582,
+   "away_id": 1970,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Celje im API-Abo fehlt; schwächere Offensive ist Sturm in der Europa League mit 1 Tor in 3 Spielen trotz Liga-Heimstärke (3-2-0), gegen Celje ohne Clean Sheet; ein Weg zu drei Toren ist mit Sturms Europa-League-Spielen (0, 3 und 1 Tor) unsicher; stärkstes Gegenargument gegen den Heimsieg ist das Modell mit nur 41 % bei Sturms Torarmut in diesem Wettbewerb und fehlender Ligabasis für Celje, sodass kein Markt getragen wird.",
+   "lambda_home": 1.2700343204086775,
+   "lambda_away": 1.067961396559052,
+   "probs": {
+    "H": 0.40991564904871525,
+    "D": 0.27911783864060147,
+    "A": 0.31096648140958233,
+    "BTTS": 0.5448653495688691,
+    "O25": 0.5033737406025425,
+    "U25": 0.49662625939745747
+   },
+   "probs_tormodell": {
+    "H": 0.40991564904871525,
+    "D": 0.27911783864060147,
+    "A": 0.31096648140958233,
+    "BTTS": 0.47199042700181854,
+    "O25": 0.41401122235567944,
+    "U25": 0.5859887776443206
+   },
+   "probs_xg": {
+    "H": 0.40604664924421097,
+    "D": 0.25799139924384495,
+    "A": 0.33596190229167594,
+    "BTTS": 0.5448653495688691,
+    "O25": 0.5033737406025425,
+    "U25": 0.49662625939745747
+   },
+   "markt": {
+    "H": 0.6140766443451429,
+    "D": 0.21353119678365196,
+    "A": 0.17239215887120524,
+    "BTTS": 0.5739795918367347,
+    "O25": 0.6076923076923076,
+    "U25": 0.39230769230769236
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.4198379370275842,
+    1.2679274914703962
+   ],
+   "odds": {
+    "odds_ft_1": 1.53,
+    "odds_ft_x": 4.4,
+    "odds_ft_2": 5.45,
+    "odds_btts_yes": 1.67,
+    "odds_btts_no": 2.25,
+    "odds_ft_over25": 1.53,
+    "odds_ft_under25": 2.37
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "3.3": {
+   "analysis_id": "A-20261105-8700948-r1",
+   "match_id": 8700948,
+   "home": "AZ",
+   "away": "Juventus",
+   "home_id": 378,
+   "away_id": 90,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist AZ mit 4 Toren in den letzten sechs Eredivisie-Spielen, gegen Juventus mit 50 % Serie-A-Clean-Sheets; der Weg zu drei Toren ist widersprüchlich, weil die Ligaspiele beider Teams überwiegend Under (AZ daheim 20 %, Juventus auswärts 20 % Over), alle drei Juventus-Spiele in der Europa League aber Over endeten; stärkstes Gegenargument gegen den Auswärtssieg ist das Modell mit nur 32 % bei Juventus' Liga-Auswärtsbilanz von 2-1-2, sodass kein Markt getragen wird.",
+   "lambda_home": 1.7036616895185035,
+   "lambda_away": 1.4104692431233496,
+   "probs": {
+    "H": 0.44558704036564933,
+    "D": 0.2352232462268185,
+    "A": 0.31918964416043877,
+    "BTTS": 0.5461748797201046,
+    "O25": 0.5082096521430731,
+    "U25": 0.4917903478569269
+   },
+   "probs_tormodell": {
+    "H": 0.44558704036564933,
+    "D": 0.2352232462268185,
+    "A": 0.31918964416043877,
+    "BTTS": 0.6183725274303602,
+    "O25": 0.6018879774140509,
+    "U25": 0.3981120225859491
+   },
+   "probs_xg": {
+    "H": 0.42928172281619825,
+    "D": 0.2554651591294496,
+    "A": 0.3152529805807869,
+    "BTTS": 0.5461748797201046,
+    "O25": 0.5082096521430731,
+    "U25": 0.4917903478569269
+   },
+   "markt": {
+    "H": 0.27754795035727714,
+    "D": 0.26212861978187285,
+    "A": 0.4603234298608499,
+    "BTTS": 0.5483028720626633,
+    "O25": 0.5249343832020998,
+    "U25": 0.47506561679790016
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.477923812034951,
+    1.2295708799560205
+   ],
+   "odds": {
+    "odds_ft_1": 3.4,
+    "odds_ft_x": 3.6,
+    "odds_ft_2": 2.05,
+    "odds_btts_yes": 1.73,
+    "odds_btts_no": 2.1,
+    "odds_ft_over25": 1.81,
+    "odds_ft_under25": 2
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "3.4": {
+   "analysis_id": "A-20261105-8700881-r1",
+   "match_id": 8700881,
+   "home": "Sunderland",
+   "away": "Dinamo Zagreb",
+   "home_id": 156,
+   "away_id": 122,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Dinamo Zagreb im API-Abo fehlt; schwächere Offensive ist Sunderland mit 1 Tor in 4 Premier-League-Heimspielen, das in der Europa League aber 4 Tore in 3 Spielen erzielte; ein Weg zu drei Toren ist mit Sunderlands 0 % Over daheim in der Liga schwach, aber Dinamos 2:4 gegen NEC zeigt Gegenbeispiele; stärkstes Gegenargument gegen den Heimsieg (Modell 56 %) ist Sunderlands Ligaform mit 0-1-5 bei fehlender Ligabasis für Dinamo, sodass kein Markt getragen wird.",
+   "lambda_home": 1.8545191078212444,
+   "lambda_away": 1.067734982004308,
+   "probs": {
+    "H": 0.5576995206357085,
+    "D": 0.22627838396550748,
+    "A": 0.21602198717828644,
+    "BTTS": 0.5567707619010416,
+    "O25": 0.5438252235139944,
+    "U25": 0.45617477648600563
+   },
+   "probs_tormodell": {
+    "H": 0.5576995206357085,
+    "D": 0.22627838396550748,
+    "A": 0.21602198717828644,
+    "BTTS": 0.5534977366558597,
+    "O25": 0.5591679490733061,
+    "U25": 0.4408320509266938
+   },
+   "probs_xg": {
+    "H": 0.5123332236029422,
+    "D": 0.2378781438890714,
+    "A": 0.2497885588479222,
+    "BTTS": 0.5567707619010416,
+    "O25": 0.5438252235139944,
+    "U25": 0.45617477648600563
+   },
+   "markt": {
+    "H": 0.6555897435897435,
+    "D": 0.20365128205128205,
+    "A": 0.14075897435897436,
+    "BTTS": 0.5333333333333333,
+    "O25": 0.5670103092783505,
+    "U25": 0.4329896907216495
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.7242161453105131,
+    1.1319452579587854
+   ],
+   "odds": {
+    "odds_ft_1": 1.46,
+    "odds_ft_x": 4.7,
+    "odds_ft_2": 6.8,
+    "odds_btts_yes": 1.75,
+    "odds_btts_no": 2,
+    "odds_ft_over25": 1.68,
+    "odds_ft_under25": 2.2
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "3.5": {
+   "analysis_id": "A-20261105-8700977-r1",
+   "match_id": 8700977,
+   "home": "Bayer Leverkusen",
+   "away": "Olympique Marseille",
+   "home_id": 40,
+   "away_id": 443,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Marseille mit 1 Tor in 3 Europa-League-Spielen und 50 % torlosen Liga-Auswärtsspielen, gegen Leverkusen ohne Gegentor in der Europa League; der Weg zu drei Toren hängt vor allem an Leverkusen (8 Europa-League-Tore) und wird nicht gewählt; stärkstes Gegenargument ist Leverkusens Liga-Abwehr mit 16 Gegentoren in 8 Spielen, die gegen Marseilles 0-0-3 in der Europa League den Heimsieg (Modell 70 %) aber nicht entkräftet.",
+   "lambda_home": 2.4923147838399156,
+   "lambda_away": 0.983877018551896,
+   "probs": {
+    "H": 0.7026853213433909,
+    "D": 0.16805569048322394,
+    "A": 0.12925882557237164,
+    "BTTS": 0.5605247264543125,
+    "O25": 0.5521293562444198,
+    "U25": 0.4478706437555801
+   },
+   "probs_tormodell": {
+    "H": 0.7026853213433909,
+    "D": 0.16805569048322394,
+    "A": 0.12925882557237164,
+    "BTTS": 0.574347857719231,
+    "O25": 0.6747267876294465,
+    "U25": 0.3252732123705535
+   },
+   "probs_xg": {
+    "H": 0.5222116077873259,
+    "D": 0.2345929082571078,
+    "A": 0.24319540005804996,
+    "BTTS": 0.5605247264543125,
+    "O25": 0.5521293562444198,
+    "U25": 0.4478706437555801
+   },
+   "markt": {
+    "H": 0.7174531964455181,
+    "D": 0.16607712880683287,
+    "A": 0.11646967474764902,
+    "BTTS": 0.5710526315789474,
+    "O25": 0.6642685851318946,
+    "U25": 0.3357314148681054
+   },
+   "abweichung_modell_markt": -0.014767875102127181,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.7629468166182591,
+    1.128819649902063
+   ],
+   "odds": {
+    "odds_ft_1": 1.25,
+    "odds_ft_x": 5.4,
+    "odds_ft_2": 7.7,
+    "odds_btts_yes": 1.63,
+    "odds_btts_no": 2.17,
+    "odds_ft_over25": 1.4,
+    "odds_ft_under25": 2.77
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "4.1": {
+   "analysis_id": "A-20261105-8700922-r1",
+   "match_id": 8700922,
+   "home": "Celtic",
+   "away": "Beşiktaş",
+   "home_id": 23,
+   "away_id": 109,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "BTTS Ja",
+   "warning": "Beşiktaş blieb in 2 von 5 Liga-Auswärtsspielen torlos – Gefahr für den Gästetreffer.",
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Celtic in der Europa League mit 3 Toren in 3 Spielen, das aber in jedem Spiel traf und in der Liga nur zu 17 % torlos blieb, gegen Beşiktaş ohne Clean Sheet in der Europa League und in 5 Liga-Auswärtsspielen, während Beşiktaş in allen 3 Europa-League-Spielen traf (9 Tore) gegen Celtic mit 9 Gegentoren in 3 Spielen; der Weg zu drei Toren ist mit 100 % Over in beiden Europa-League-Bilanzen ebenfalls plausibel, BTTS ist durch beide eigenen Torserien aber direkter belegt (Modell 60 %); stärkstes Gegenargument ist Beşiktaş' Torlosigkeit in 2 von 5 Liga-Auswärtsspielen, die als wesentliche Gefahr für den Gästetreffer gewichtet wird.",
+   "lambda_home": 1.8662732111323248,
+   "lambda_away": 1.6313637766679074,
+   "probs": {
+    "H": 0.4373959344310784,
+    "D": 0.22141108930594805,
+    "A": 0.3411928603116252,
+    "BTTS": 0.5978462810526192,
+    "O25": 0.571963235017293,
+    "U25": 0.42803676498270704
+   },
+   "probs_tormodell": {
+    "H": 0.4373959344310784,
+    "D": 0.22141108930594805,
+    "A": 0.3411928603116252,
+    "BTTS": 0.6799071527154985,
+    "O25": 0.6787155195091197,
+    "U25": 0.3212844804908803
+   },
+   "probs_xg": {
+    "H": 0.4193077116991007,
+    "D": 0.24287144859926676,
+    "A": 0.3378207934063259,
+    "BTTS": 0.5978462810526192,
+    "O25": 0.571963235017293,
+    "U25": 0.42803676498270704
+   },
+   "markt": {
+    "H": 0.3369690459070078,
+    "D": 0.23695951623941988,
+    "A": 0.4260714378535723,
+    "BTTS": 0.6414634146341464,
+    "O25": 0.5805626598465473,
+    "U25": 0.4194373401534527
+   },
+   "abweichung_modell_markt": -0.04361713358152719,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5816827266937883,
+    1.3967615822216322
+   ],
+   "odds": {
+    "odds_ft_1": 2.63,
+    "odds_ft_x": 3.74,
+    "odds_ft_2": 2.08,
+    "odds_btts_yes": 1.47,
+    "odds_btts_no": 2.63,
+    "odds_ft_over25": 1.64,
+    "odds_ft_under25": 2.27
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "4.2": {
+   "analysis_id": "A-20261105-8700951-r1",
+   "match_id": 8700951,
+   "home": "Benfica",
+   "away": "Lech Poznań",
+   "home_id": 78,
+   "away_id": 961,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Lech mit 1 Tor in 3 Europa-League-Spielen, gegen Benfica mit 50 % Liga-Clean-Sheets; der Weg zu drei Toren hängt vor allem an Benfica (10 Europa-League-Tore) und wird nicht gewählt; stärkstes Gegenargument ist Lechs starke Ligaform (10-1-1, auswärts in jedem Spiel getroffen), die gegen Benficas 3-0-0 in der Europa League und 8-1-1 in der Liga den Heimsieg (Modell 69 %) aber nicht entkräftet.",
+   "lambda_home": 2.4041007151382026,
+   "lambda_away": 0.9712412348038894,
+   "probs": {
+    "H": 0.690366228050824,
+    "D": 0.1747382551528339,
+    "A": 0.13489538934557865,
+    "BTTS": 0.6065295420139746,
+    "O25": 0.6045185866272433,
+    "U25": 0.3954814133727567
+   },
+   "probs_tormodell": {
+    "H": 0.690366228050824,
+    "D": 0.1747382551528339,
+    "A": 0.13489538934557865,
+    "BTTS": 0.5652469139725761,
+    "O25": 0.6554794909861046,
+    "U25": 0.3445205090138954
+   },
+   "probs_xg": {
+    "H": 0.5125192566488056,
+    "D": 0.22669414285529063,
+    "A": 0.26078649826142575,
+    "BTTS": 0.6065295420139746,
+    "O25": 0.6045185866272433,
+    "U25": 0.3954814133727567
+   },
+   "markt": {
+    "H": 0.8118234804329726,
+    "D": 0.11761032472939219,
+    "A": 0.07056619483763531,
+    "BTTS": 0.49333333333333335,
+    "O25": 0.7425742574257426,
+    "U25": 0.25742574257425743
+   },
+   "abweichung_modell_markt": -0.12145725238214855,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.8585871630775226,
+    1.2677847254650827
+   ],
+   "odds": {
+    "odds_ft_1": 1.13,
+    "odds_ft_x": 7.8,
+    "odds_ft_2": 13,
+    "odds_btts_yes": 1.9,
+    "odds_btts_no": 1.85,
+    "odds_ft_over25": 1.3,
+    "odds_ft_under25": 3.75
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "4.3": {
+   "analysis_id": "A-20261105-8700868-r1",
+   "match_id": 8700868,
+   "home": "Hapoel Be'er Sheva",
+   "away": "OFI",
+   "home_id": 58,
+   "away_id": 5130,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Hapoel Be’er Sheva im API-Abo fehlt; schwächere Offensive ist OFI mit 0,66 xG in der Europa League, aber auch Hapoel erzielte nur 1 Tor in 3 Spielen; ein Weg zu drei Toren ist bei beiden schwachen Offensiven unsicher; stärkstes Gegenargument gegen jede Auswahl ist das ausgeglichene Modell (Heim 40 %, Auswärts 33 %) bei fehlender Ligabasis für Hapoel, sodass kein Markt getragen wird.",
+   "lambda_home": 1.3908177853804864,
+   "lambda_away": 1.2418602651803434,
+   "probs": {
+    "H": 0.4041057628580662,
+    "D": 0.2611396757055821,
+    "A": 0.3347544436234944,
+    "BTTS": 0.5870808633168724,
+    "O25": 0.580054427803746,
+    "U25": 0.4199455721962539
+   },
+   "probs_tormodell": {
+    "H": 0.4041057628580662,
+    "D": 0.2611396757055821,
+    "A": 0.3347544436234944,
+    "BTTS": 0.5341676059961934,
+    "O25": 0.48974279382297603,
+    "U25": 0.510257206177024
+   },
+   "probs_xg": {
+    "H": 0.5105409862614444,
+    "D": 0.231429380170586,
+    "A": 0.2580294998999316,
+    "BTTS": 0.5870808633168724,
+    "O25": 0.580054427803746,
+    "U25": 0.4199455721962539
+   },
+   "markt": {
+    "H": 0.43958130183029437,
+    "D": 0.2466539526936652,
+    "A": 0.3137647454760405,
+    "BTTS": 0.6075949367088608,
+    "O25": 0.5670103092783505,
+    "U25": 0.4329896907216495
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.7987536201874892,
+    1.2157632711897832
+   ],
+   "odds": {
+    "odds_ft_1": 2.02,
+    "odds_ft_x": 3.6,
+    "odds_ft_2": 2.83,
+    "odds_btts_yes": 1.55,
+    "odds_btts_no": 2.4,
+    "odds_ft_over25": 1.68,
+    "odds_ft_under25": 2.2
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "4.4": {
+   "analysis_id": "A-20261105-8700886-r1",
+   "match_id": 8700886,
+   "home": "Celta de Vigo",
+   "away": "Union Saint-Gilloise",
+   "home_id": 281,
+   "away_id": 2572,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Europa League 2026/27 mit je 3 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Celta mit 10 Toren in 11 La-Liga-Spielen und 55 % torlosen Spielen, gegen Union Saint-Gilloise mit 67 % Clean Sheets in der Europa League; ein Weg zu drei Toren ist widersprüchlich (Celta 36 % Over in der Liga, Union auswärts 80 %); stärkstes Gegenargument ist der ungeklärte Widerspruch zwischen dem Modell, das Celta leicht vorn sieht (45 % zu 29 %), und Unions Form (8-2-0 in der Liga, 2-1-0 in der Europa League), sodass kein Markt getragen wird.",
+   "lambda_home": 1.460233647723179,
+   "lambda_away": 1.1172126979234769,
+   "probs": {
+    "H": 0.44996178202690734,
+    "D": 0.26060702959204524,
+    "A": 0.28943110654936377,
+    "BTTS": 0.5592469334537997,
+    "O25": 0.5199016898927847,
+    "U25": 0.48009831010721526
+   },
+   "probs_tormodell": {
+    "H": 0.44996178202690734,
+    "D": 0.26060702959204524,
+    "A": 0.28943110654936377,
+    "BTTS": 0.5165952287308956,
+    "O25": 0.475893831981437,
+    "U25": 0.524106168018563
+   },
+   "probs_xg": {
+    "H": 0.36521515197015564,
+    "D": 0.2551118859020453,
+    "A": 0.37967290669300646,
+    "BTTS": 0.5592469334537997,
+    "O25": 0.5199016898927847,
+    "U25": 0.48009831010721526
+   },
+   "markt": {
+    "H": 0.4146919431279621,
+    "D": 0.2701421800947867,
+    "A": 0.31516587677725116,
+    "BTTS": 0.5789473684210527,
+    "O25": 0.5231958762886597,
+    "U25": 0.4768041237113403
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.361984733087332,
+    1.3936391204176037
+   ],
+   "odds": {
+    "odds_ft_1": 2.28,
+    "odds_ft_x": 3.5,
+    "odds_ft_2": 3,
+    "odds_btts_yes": 1.6,
+    "odds_btts_no": 2.2,
+    "odds_ft_over25": 1.85,
+    "odds_ft_under25": 2.03
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "4.5": {
+   "analysis_id": "A-20261105-8700921-r1",
+   "match_id": 8700921,
+   "home": "Torreense",
+   "away": "FC Avan Academy",
+   "home_id": 4835,
+   "away_id": 1362,
+   "season_id": "17127",
+   "league": "UEFA Europa League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von FC Avan Academy (laut API; als Ararat-Armenia gemeldet, Alias nicht von der API bestätigt) im API-Abo fehlt; schwächere Offensive ist Torreense mit 0,81 xG in der Europa League und 3 Toren in den letzten sechs Ligaspielen (67 % torlos), während Avan Academy nur 2 Tore in 3 Spielen erzielte; ein Weg zu drei Toren ist durch alle sechs Over-Spiele beider Teams in der Europa League sichtbar, widerspricht aber Torreenses Liga-Bild mit 17 % Over in den letzten sechs; stärkstes Gegenargument gegen den Modell-Heimsieg (58 %) ist Torreenses negative xG-Bilanz (0,81 zu 2,17), sodass kein Markt getragen wird.",
+   "lambda_home": 2.125352284767879,
+   "lambda_away": 1.217523022103858,
+   "probs": {
+    "H": 0.5815661329495878,
+    "D": 0.20598606263654112,
+    "A": 0.21244767144332405,
+    "BTTS": 0.5774708751330389,
+    "O25": 0.548391915890234,
+    "U25": 0.4516080841097661
+   },
+   "probs_tormodell": {
+    "H": 0.5815661329495878,
+    "D": 0.20598606263654112,
+    "A": 0.21244767144332405,
+    "BTTS": 0.6199819587269184,
+    "O25": 0.6491113468009613,
+    "U25": 0.35088865319903867
+   },
+   "probs_xg": {
+    "H": 0.4348808695871217,
+    "D": 0.24661429641385363,
+    "A": 0.3185048052717458,
+    "BTTS": 0.5774708751330389,
+    "O25": 0.548391915890234,
+    "U25": 0.4516080841097661
+   },
+   "markt": {
+    "H": 0.5173659349819395,
+    "D": 0.2450680744651292,
+    "A": 0.2375659905529314,
+    "BTTS": 0.5026881720430109,
+    "O25": 0.47043701799485865,
+    "U25": 0.5295629820051413
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5680233355144961,
+    1.307670616938083
+   ],
+   "odds": {
+    "odds_ft_1": 1.8,
+    "odds_ft_x": 3.8,
+    "odds_ft_2": 3.92,
+    "odds_btts_yes": 1.85,
+    "odds_btts_no": 1.87,
+    "odds_ft_over25": 2.06,
+    "odds_ft_under25": 1.83
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": false,
+    "BTTS": true,
+    "O25": false
+   }
+  },
+  "5.1": {
+   "analysis_id": "A-20261105-8701007-r1",
+   "match_id": 8701007,
+   "home": "Trabzonspor",
+   "away": "Freiburg",
+   "home_id": 185,
+   "away_id": 42,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Freiburg mit 3 Toren in 2 Conference-League-Spielen, das in der Bundesliga aber in jedem Spiel traf, gegen Trabzonspor mit 80 % Clean Sheets in der Liga daheim; ein Weg zu drei Toren ist widersprüchlich (Freiburg 88 % Over in der Bundesliga, Trabzonspor daheim 60 %); stärkstes Gegenargument ist der ungeklärte Widerspruch zwischen Trabzonspors Heimstärke und Freiburgs Ligaform (5-1-2), bei dem auch das Modell stark vom Markt abweicht (Heimsieg 62 % zu 40 %), sodass kein Markt getragen wird.",
+   "lambda_home": 2.1170121739686776,
+   "lambda_away": 1.0502056299869924,
+   "probs": {
+    "H": 0.618111014630476,
+    "D": 0.20263273141006313,
+    "A": 0.17925617920473155,
+    "BTTS": 0.5550407612532106,
+    "O25": 0.5248606702547792,
+    "U25": 0.4751393297452208
+   },
+   "probs_tormodell": {
+    "H": 0.618111014630476,
+    "D": 0.20263273141006313,
+    "A": 0.17925617920473155,
+    "BTTS": 0.5718640256137689,
+    "O25": 0.6132125493307878,
+    "U25": 0.3867874506692122
+   },
+   "probs_xg": {
+    "H": 0.4569993385988467,
+    "D": 0.24936631962691852,
+    "A": 0.29363426235693985,
+    "BTTS": 0.5550407612532106,
+    "O25": 0.5248606702547792,
+    "U25": 0.4751393297452208
+   },
+   "markt": {
+    "H": 0.4036486873830279,
+    "D": 0.25340167596823415,
+    "A": 0.34294963664873795,
+    "BTTS": 0.6499999999999999,
+    "O25": 0.625,
+    "U25": 0.375
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.568492507167618,
+    1.2077361804134412
+   ],
+   "odds": {
+    "odds_ft_1": 2.26,
+    "odds_ft_x": 3.6,
+    "odds_ft_2": 2.66,
+    "odds_btts_yes": 1.4,
+    "odds_btts_no": 2.6,
+    "odds_ft_over25": 1.5,
+    "odds_ft_under25": 2.5
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "5.2": {
+   "analysis_id": "A-20261105-8701030-r1",
+   "match_id": 8701030,
+   "home": "Lincoln Red Imps",
+   "away": "Hajduk Split",
+   "home_id": 103,
+   "away_id": 1863,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesligen von Lincoln Red Imps und Hajduk Split im API-Abo fehlen und jedes Team nur 2 Conference-League-Spiele hat; schwächere Offensive ist Lincoln mit 0,66 xG und 2 Toren in 2 Spielen, gegen Hajduk mit einem Clean Sheet; ein Weg zu drei Toren ist mit Lincolns zwei Over-Spielen sichtbar, aber nicht belastbar; stärkstes Gegenargument gegen den naheliegenden Auswärtssieg ist das Modell mit nur 37 % bei fehlender Ligabasis beider Teams, sodass die Datenbasis keinen Markt trägt.",
+   "lambda_home": 1.4880705925480913,
+   "lambda_away": 1.4523659672974016,
+   "probs": {
+    "H": 0.3850441279246412,
+    "D": 0.2457560319670688,
+    "A": 0.36919972902628195,
+    "BTTS": 0.5929008465782671,
+    "O25": 0.5639799006638497,
+    "U25": 0.4360200993361503
+   },
+   "probs_tormodell": {
+    "H": 0.3850441279246412,
+    "D": 0.2457560319670688,
+    "A": 0.36919972902628195,
+    "BTTS": 0.5930187852582545,
+    "O25": 0.5633336584051778,
+    "U25": 0.4366663415948222
+   },
+   "probs_xg": {
+    "H": 0.3530297534583328,
+    "D": 0.24525862992436212,
+    "A": 0.40171149730270983,
+    "BTTS": 0.5929008465782671,
+    "O25": 0.5639799006638497,
+    "U25": 0.4360200993361503
+   },
+   "markt": {
+    "H": 0.1355357899195256,
+    "D": 0.17619652689538332,
+    "A": 0.688267683185091,
+    "BTTS": 0.4516971279373368,
+    "O25": 0.5544041450777203,
+    "U25": 0.4455958549222797
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.416735439076467,
+    1.526531298887311
+   ],
+   "odds": {
+    "odds_ft_1": 6.5,
+    "odds_ft_x": 5,
+    "odds_ft_2": 1.28,
+    "odds_btts_yes": 2.1,
+    "odds_btts_no": 1.73,
+    "odds_ft_over25": 1.72,
+    "odds_ft_under25": 2.14
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "5.3": {
+   "analysis_id": "A-20261105-8701047-r1",
+   "match_id": 8701047,
+   "home": "Thun",
+   "away": "Hearts",
+   "home_id": 888,
+   "away_id": 32,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Thun ohne Tor in 2 Conference-League-Spielen und mit 4 Toren in 5 Liga-Heimspielen (60 % torlos); ein Weg zu drei Toren ist mit 83 % bzw. 82 % Over in beiden Ligen sichtbar, widerspricht aber den torarmen Conference-League-Spielen beider Teams; stärkstes Gegenargument ist der ungeklärte Widerspruch zwischen dem Modell-Heimsieg (52 %) und Thuns Liga-Heimbilanz von 0-1-4, sodass kein Markt getragen wird.",
+   "lambda_home": 1.5310210123100707,
+   "lambda_away": 0.8878822578518969,
+   "probs": {
+    "H": 0.5236869000711968,
+    "D": 0.25792197604666006,
+    "A": 0.21839100154193844,
+    "BTTS": 0.5270963878182876,
+    "O25": 0.48640888762720647,
+    "U25": 0.5135911123727935
+   },
+   "probs_tormodell": {
+    "H": 0.5236869000711968,
+    "D": 0.25792197604666006,
+    "A": 0.21839100154193844,
+    "BTTS": 0.4611781621272934,
+    "O25": 0.4352221940619627,
+    "U25": 0.5647778059380373
+   },
+   "probs_xg": {
+    "H": 0.43923313187893026,
+    "D": 0.25937002668076886,
+    "A": 0.3013967460456239,
+    "BTTS": 0.5270963878182876,
+    "O25": 0.48640888762720647,
+    "U25": 0.5135911123727935
+   },
+   "markt": {
+    "H": 0.40334733077494933,
+    "D": 0.256374193807639,
+    "A": 0.34027847541741174,
+    "BTTS": 0.6521739130434782,
+    "O25": 0.6106870229007634,
+    "U25": 0.3893129770992366
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.457767533651473,
+    1.1615491245509848
+   ],
+   "odds": {
+    "odds_ft_1": 2.32,
+    "odds_ft_x": 3.65,
+    "odds_ft_2": 2.75,
+    "odds_btts_yes": 1.44,
+    "odds_btts_no": 2.7,
+    "odds_ft_over25": 1.53,
+    "odds_ft_under25": 2.4
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "5.4": {
+   "analysis_id": "A-20261105-8701050-r1",
+   "match_id": 8701050,
+   "home": "Midtjylland",
+   "away": "Ajax",
+   "home_id": 955,
+   "away_id": 120,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "verwendbar",
+   "selection": "BTTS Ja",
+   "warning": "Midtjylland blieb im einzigen Conference-League-Heimspiel torlos (0:1 gegen Sint-Truiden).",
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Midtjylland mit 1 Tor in 2 Conference-League-Spielen, das in der Superliga aber in allen 13 Spielen traf (daheim 14 Tore in 6) gegen Ajax mit 40 % Clean Sheets in Liga-Auswärtsspielen, während Ajax in allen Ligaspielen und in beiden Conference-League-Spielen traf (auswärts 18 Ligatore in 5) gegen Midtjylland mit nur 15 % Liga-Clean-Sheets; der Weg zu drei Toren ist mit 83 % Over in Midtjyllands Liga-Heimspielen ebenfalls plausibel, BTTS ist durch beide eigenen Torserien aber direkter belegt (Modell 57 %); stärkstes Gegenargument ist Midtjyllands torloses Conference-League-Heimspiel gegen Sint-Truiden, das als wesentliche Gefahr für den Heimtreffer gewichtet wird.",
+   "lambda_home": 1.5147259186041926,
+   "lambda_away": 1.0390019012472191,
+   "probs": {
+    "H": 0.48239595972867233,
+    "D": 0.2576947021488077,
+    "A": 0.2599092476472452,
+    "BTTS": 0.5681593797577793,
+    "O25": 0.5416219114638923,
+    "U25": 0.45837808853610773
+   },
+   "probs_tormodell": {
+    "H": 0.48239595972867233,
+    "D": 0.2576947021488077,
+    "A": 0.2599092476472452,
+    "BTTS": 0.5041150542902428,
+    "O25": 0.46989304367743756,
+    "U25": 0.5301069563225624
+   },
+   "probs_xg": {
+    "H": 0.45902443806394383,
+    "D": 0.24574002034763417,
+    "A": 0.2952354379318488,
+    "BTTS": 0.5681593797577793,
+    "O25": 0.5416219114638923,
+    "U25": 0.45837808853610773
+   },
+   "markt": {
+    "H": 0.3436754176610978,
+    "D": 0.26252983293556087,
+    "A": 0.39379474940334125,
+    "BTTS": 0.6610169491525424,
+    "O25": 0.6320987654320989,
+    "U25": 0.36790123456790114
+   },
+   "abweichung_modell_markt": -0.09285756939476308,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.6062683203996972,
+    1.2405099836454656
+   ],
+   "odds": {
+    "odds_ft_1": 2.75,
+    "odds_ft_x": 3.6,
+    "odds_ft_2": 2.4,
+    "odds_btts_yes": 1.4,
+    "odds_btts_no": 2.73,
+    "odds_ft_over25": 1.49,
+    "odds_ft_under25": 2.56
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "5.5": {
+   "analysis_id": "A-20261105-8701095-r1",
+   "match_id": 8701095,
+   "home": "Red Star Belgrade",
+   "away": "Inter Club d'Escaldes",
+   "home_id": 70,
+   "away_id": 3289,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 17:45 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Inter Club d’Escaldes im API-Abo fehlt; schwächere Offensive ist Inter d’Escaldes mit 1 Tor in 2 Conference-League-Spielen und 0,90 xG, gegen Roter Stern, das in der Liga daheim 7-0-0 bei 24:3 Toren steht; der Weg zu drei Toren hängt allein an Roter Stern und wird nicht gewählt; stärkstes Gegenargument sind Roter Sterns 5 Gegentore in 2 Conference-League-Spielen, die gegen Escaldes' schwache Offensive (0:2 bei Mjällby, 1:3 gegen Craiova) aber keine wesentliche Gefahr für den Heimsieg (Modell 58 %) begründen.",
+   "lambda_home": 1.944665184669511,
+   "lambda_away": 1.0708005115577421,
+   "probs": {
+    "H": 0.5770115931485839,
+    "D": 0.21828647538670434,
+    "A": 0.20470189064676386,
+    "BTTS": 0.5372651487127131,
+    "O25": 0.5128734894053055,
+    "U25": 0.4871265105946944
+   },
+   "probs_tormodell": {
+    "H": 0.5770115931485839,
+    "D": 0.21828647538670434,
+    "A": 0.20470189064676386,
+    "BTTS": 0.5632538496661144,
+    "O25": 0.580265934899304,
+    "U25": 0.419734065100696
+   },
+   "probs_xg": {
+    "H": 0.49152914375023216,
+    "D": 0.24729319325452062,
+    "A": 0.26117761583888377,
+    "BTTS": 0.5372651487127131,
+    "O25": 0.5128734894053055,
+    "U25": 0.4871265105946944
+   },
+   "markt": {
+    "H": 0.8818813468733299,
+    "D": 0.07642971672902192,
+    "A": 0.04168893639764833,
+    "BTTS": 0.379746835443038,
+    "O25": 0.7377049180327869,
+    "U25": 0.2622950819672131
+   },
+   "abweichung_modell_markt": -0.304869753724746,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.616978052902914,
+    1.1096406968586658
+   ],
+   "odds": {
+    "odds_ft_1": 1.04,
+    "odds_ft_x": 12,
+    "odds_ft_2": 22,
+    "odds_btts_yes": 2.45,
+    "odds_btts_no": 1.5,
+    "odds_ft_over25": 1.28,
+    "odds_ft_under25": 3.6
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "6.1": {
+   "analysis_id": "A-20261105-8701014-r1",
+   "match_id": 8701014,
+   "home": "Panathinaikos",
+   "away": "CSKA Sofia",
+   "home_id": 960,
+   "away_id": 3604,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": "CSKA Sofia ist in der Liga ungeschlagen (auswärts 3-3-0) – Remisrisiko.",
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist CSKA Sofia mit 3 Toren in 2 Conference-League-Spielen, gegen Panathinaikos, das in der Liga daheim 5-0-0 bei 16:3 Toren steht und in der Conference League beide Spiele gewann (7:2); der Weg zu drei Toren hängt vor allem an Panathinaikos und wird nicht gewählt; stärkstes Gegenargument ist CSKAs ungeschlagene Ligabilanz (9-4-0, auswärts 3-3-0), die als wesentliche Gefahr für den Heimsieg (Modell 61 %) gewichtet wird.",
+   "lambda_home": 2.052343617678344,
+   "lambda_away": 1.008858296005453,
+   "probs": {
+    "H": 0.6145614005243101,
+    "D": 0.20716182545521744,
+    "A": 0.17827672294992464,
+    "BTTS": 0.5471316700004119,
+    "O25": 0.5241892091187181,
+    "U25": 0.4758107908812818
+   },
+   "probs_tormodell": {
+    "H": 0.6145614005243101,
+    "D": 0.20716182545521744,
+    "A": 0.17827672294992464,
+    "BTTS": 0.5537627753505882,
+    "O25": 0.5903809336579959,
+    "U25": 0.40961906634200407
+   },
+   "probs_xg": {
+    "H": 0.4894295987558762,
+    "D": 0.2453370625496215,
+    "A": 0.2652332807511315,
+    "BTTS": 0.5471316700004119,
+    "O25": 0.5241892091187181,
+    "U25": 0.4758107908812818
+   },
+   "markt": {
+    "H": 0.6438969764837627,
+    "D": 0.20156774916013442,
+    "A": 0.15453527435610304,
+    "BTTS": 0.5,
+    "O25": 0.549738219895288,
+    "U25": 0.45026178010471196
+   },
+   "abweichung_modell_markt": -0.029335575959452576,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.6353374810259202,
+    1.138094341401764
+   ],
+   "odds": {
+    "odds_ft_1": 1.44,
+    "odds_ft_x": 4.6,
+    "odds_ft_2": 6,
+    "odds_btts_yes": 1.87,
+    "odds_btts_no": 1.87,
+    "odds_ft_over25": 1.72,
+    "odds_ft_under25": 2.1
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "6.2": {
+   "analysis_id": "A-20261105-8701029-r1",
+   "match_id": 8701029,
+   "home": "Getafe CF",
+   "away": "Brighton & Hove Albion",
+   "home_id": 293,
+   "away_id": 209,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Getafe mit 8 Toren in 11 La-Liga-Spielen, gegen Brighton mit 83 % Clean Sheets in den letzten sechs Premier-League-Spielen; der Weg zu drei Toren ist widersprüchlich, weil Getafes Liga-Heimspiele nur zu 17 % Over endeten, die xG-Variante aber 54 % Over schätzt; stärkstes Gegenargument gegen den Auswärtssieg ist das Modell mit nur 32 %, sodass weder Sieg- noch Torlinienmarkt widerspruchsfrei getragen wird.",
+   "lambda_home": 1.499438303565514,
+   "lambda_away": 1.2567224164661435,
+   "probs": {
+    "H": 0.42880648849509173,
+    "D": 0.25297150050901157,
+    "A": 0.31822184478389515,
+    "BTTS": 0.5747442374926188,
+    "O25": 0.5427056686681664,
+    "U25": 0.45729433133183367
+   },
+   "probs_tormodell": {
+    "H": 0.42880648849509173,
+    "D": 0.25297150050901157,
+    "A": 0.31822184478389515,
+    "BTTS": 0.555694451952076,
+    "O25": 0.5200312561745962,
+    "U25": 0.4799687438254038
+   },
+   "probs_xg": {
+    "H": 0.41987078877822154,
+    "D": 0.24881326424441186,
+    "A": 0.33131584766780825,
+    "BTTS": 0.5747442374926188,
+    "O25": 0.5427056686681664,
+    "U25": 0.45729433133183367
+   },
+   "markt": {
+    "H": 0.15902140672782872,
+    "D": 0.24464831804281348,
+    "A": 0.5963302752293578,
+    "BTTS": 0.49868766404199477,
+    "O25": 0.4921052631578948,
+    "U25": 0.5078947368421052
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5242652597089352,
+    1.327125084150704
+   ],
+   "odds": {
+    "odds_ft_1": 6,
+    "odds_ft_x": 3.9,
+    "odds_ft_2": 1.6,
+    "odds_btts_yes": 1.91,
+    "odds_btts_no": 1.9,
+    "odds_ft_over25": 1.93,
+    "odds_ft_under25": 1.87
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "6.3": {
+   "analysis_id": "A-20261105-8701033-r1",
+   "match_id": 8701033,
+   "home": "Twente",
+   "away": "Paphos",
+   "home_id": 375,
+   "away_id": 3743,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "eingeschränkt",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Die Datenbasis ist eingeschränkt, weil die Landesliga von Pafos im API-Abo fehlt; schwächere Offensive ist Pafos mit 2 Toren in 2 Conference-League-Spielen und 1,90 xG gegen, gegen Twente, das in der Eredivisie daheim 4-0-1 bei 2,59 xG steht und beide Conference-League-Spiele gewann (5:1); der Weg zu drei Toren hängt vor allem an Twente und wird nicht gewählt; stärkstes Gegenargument sind Pafos' Treffer in beiden Conference-League-Spielen bei fehlender Ligabasis, die gegen Twentes Heimbilanz aber keine wesentliche Gefahr für den Heimsieg (Modell 55 %) begründen.",
+   "lambda_home": 1.8011587299870122,
+   "lambda_away": 1.0397448405611192,
+   "probs": {
+    "H": 0.5521759271603518,
+    "D": 0.23086632991041892,
+    "A": 0.21695766424456883,
+    "BTTS": 0.5428370206271355,
+    "O25": 0.5142203762390389,
+    "U25": 0.485779623760961
+   },
+   "probs_tormodell": {
+    "H": 0.5521759271603518,
+    "D": 0.23086632991041892,
+    "A": 0.21695766424456883,
+    "BTTS": 0.5397205549628286,
+    "O25": 0.5402392869533372,
+    "U25": 0.45976071304666283
+   },
+   "probs_xg": {
+    "H": 0.4738418008314176,
+    "D": 0.24952907533478125,
+    "A": 0.27662906874532667,
+    "BTTS": 0.5428370206271355,
+    "O25": 0.5142203762390389,
+    "U25": 0.485779623760961
+   },
+   "markt": {
+    "H": 0.7204425575710793,
+    "D": 0.16878939920236716,
+    "A": 0.11076804322655345,
+    "BTTS": 0.5361930294906166,
+    "O25": 0.6537530266343825,
+    "U25": 0.3462469733656175
+   },
+   "abweichung_modell_markt": -0.16826663041072754,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5828253986788499,
+    1.1493343612890727
+   ],
+   "odds": {
+    "odds_ft_1": 1.23,
+    "odds_ft_x": 5.25,
+    "odds_ft_2": 8,
+    "odds_btts_yes": 1.73,
+    "odds_btts_no": 2,
+    "odds_ft_over25": 1.43,
+    "odds_ft_under25": 2.7
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "6.4": {
+   "analysis_id": "A-20261105-8701040-r1",
+   "match_id": 8701040,
+   "home": "Sint-Truiden",
+   "away": "Brann",
+   "home_id": 532,
+   "away_id": 336,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "keine",
+   "warning": null,
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Sint-Truiden mit 3 Toren in 2 Conference-League-Spielen, aber nur 6 Toren in 5 Liga-Heimspielen, gegen Brann mit 17 % Clean Sheets; ein Weg zu drei Toren ist mit 70 % bzw. 80 % Over beider Ligen sichtbar, widerspricht aber Sint-Truidens Conference-League-Spielen ohne Over; stärkstes Gegenargument gegen den Heimsieg (Modell 52 %) ist Sint-Truidens Ligaform mit 1-0-5 in den letzten sechs, sodass kein Markt widerspruchsfrei getragen wird.",
+   "lambda_home": 1.6562334133276646,
+   "lambda_away": 1.0434398156941862,
+   "probs": {
+    "H": 0.5168547635364162,
+    "D": 0.24435929744412868,
+    "A": 0.23878589910010983,
+    "BTTS": 0.5589765272826017,
+    "O25": 0.5303550925887848,
+    "U25": 0.46964490741121523
+   },
+   "probs_tormodell": {
+    "H": 0.5168547635364162,
+    "D": 0.24435929744412868,
+    "A": 0.23878589910010983,
+    "BTTS": 0.5241300199294043,
+    "O25": 0.5062954583795125,
+    "U25": 0.49370454162048755
+   },
+   "probs_xg": {
+    "H": 0.4595843896738395,
+    "D": 0.24795752175712887,
+    "A": 0.2924580038034689,
+    "BTTS": 0.5589765272826017,
+    "O25": 0.5303550925887848,
+    "U25": 0.46964490741121523
+   },
+   "markt": {
+    "H": 0.5509238051610934,
+    "D": 0.23246297144602232,
+    "A": 0.2166132233928844,
+    "BTTS": 0.6155778894472362,
+    "O25": 0.6140350877192983,
+    "U25": 0.38596491228070173
+   },
+   "abweichung_modell_markt": null,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.5848525019337907,
+    1.2143453934763286
+   ],
+   "odds": {
+    "odds_ft_1": 1.73,
+    "odds_ft_x": 4.1,
+    "odds_ft_2": 4.4,
+    "odds_btts_yes": 1.53,
+    "odds_btts_no": 2.45,
+    "odds_ft_over25": 1.54,
+    "odds_ft_under25": 2.45
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  },
+  "6.5": {
+   "analysis_id": "A-20261105-8701055-r1",
+   "match_id": 8701055,
+   "home": "Lugano",
+   "away": "Kauno Žalgiris",
+   "home_id": 894,
+   "away_id": 1231,
+   "season_id": "17130",
+   "league": "UEFA Conference League",
+   "kickoff_utc": "2026-11-05 20:00 UTC",
+   "data_status": "verwendbar",
+   "selection": "Heimsieg",
+   "warning": null,
+   "bild": "Conference League 2026/27 mit je 2 Spielen und Landesliga-Daten ist verwendbar, die Europapokal-Daten (2–3 Spiele je Team, Gegner unterschiedlich stark) sind klein und die Landesliga-Tabellen stammen aus verschiedenen Ligen ohne gemeinsame Skala; schwächere Offensive ist Žalgiris mit 1 Tor in 2 Conference-League-Spielen und 0,76 xG, gegen Lugano, das in der Liga 11-1-0 bei 36:10 Toren steht und beide Conference-League-Spiele gewann (8:4); der Weg zu drei Toren ist mit Luganos 92 % Over in der Liga plausibel, hängt aber vor allem an Lugano, weshalb der Heimsieg (Modell 66 %) besser belegt ist; stärkstes Gegenargument ist Luganos Abwehr mit 4 Gegentoren in 2 Conference-League-Spielen, die gegen Žalgiris' schwache Offensive keine wesentliche Gefahr begründet.",
+   "lambda_home": 2.3789496895997653,
+   "lambda_away": 1.1073447837187649,
+   "probs": {
+    "H": 0.6555533392445739,
+    "D": 0.18277032348090433,
+    "A": 0.1616762725489495,
+    "BTTS": 0.5614756859172427,
+    "O25": 0.5463039312395954,
+    "U25": 0.4536960687604046
+   },
+   "probs_tormodell": {
+    "H": 0.6555533392445739,
+    "D": 0.18277032348090433,
+    "A": 0.1616762725489495,
+    "BTTS": 0.6075310940703007,
+    "O25": 0.6766103945129153,
+    "U25": 0.32338960548708473
+   },
+   "probs_xg": {
+    "H": 0.5033134896609601,
+    "D": 0.23889049909548474,
+    "A": 0.2577959327284218,
+    "BTTS": 0.5614756859172427,
+    "O25": 0.5463039312395954,
+    "U25": 0.4536960687604046
+   },
+   "markt": {
+    "H": 0.8116189662537378,
+    "D": 0.1153353267834259,
+    "A": 0.07304570696283641,
+    "BTTS": 0.5333333333333333,
+    "O25": 0.695067264573991,
+    "U25": 0.30493273542600896
+   },
+   "abweichung_modell_markt": -0.15606562700916382,
+   "modell_ueber_markt": false,
+   "lambda_xg": [
+    1.7102623972822302,
+    1.1564865670347144
+   ],
+   "odds": {
+    "odds_ft_1": 1.08,
+    "odds_ft_x": 7.6,
+    "odds_ft_2": 12,
+    "odds_btts_yes": 1.75,
+    "odds_btts_no": 2,
+    "odds_ft_over25": 1.36,
+    "odds_ft_under25": 3.1
+   },
+   "odds_fetch_utc": "2026-11-05T09:50:31.177782+00:00",
+   "model_alpha": 10,
+   "market_usable": {
+    "H": true,
+    "A": true,
+    "BTTS": true,
+    "O25": true
+   }
+  }
+ }
+}
