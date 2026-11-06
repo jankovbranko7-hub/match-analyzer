@@ -11,10 +11,13 @@ Der Nutzer schreibt:
 
 ## Was der Nutzer schickt
 
-| Pflicht | Optional |
-|---|---|
-| Die Paarung(en), gern mit Datum und Liga | Screenshot oder Text von „How to play it“ / „Verdict“ (KI-Texte, nicht per API erreichbar) |
-| | Antworten von Odd Alerts Copilot auf die Fragen unten (dann werden sie gegengeprüft) |
+Der Nutzer schickt je Spiel nur:
+
+1. die **Paarung** (gern mit Datum und Liga),
+2. **„How to play it“** von der Odd-Alerts-Seite (Screenshot oder Text; nicht per API erreichbar).
+
+Alles andere holt Claude selbst. Die Copilot-Fragen unten sind nur ein Zusatz, falls der
+Nutzer sie doch einmal stellt.
 
 ## Was Claude selbst per API holt (Schlüssel `ODDALERTS_KEY`, nie ausgeben)
 
