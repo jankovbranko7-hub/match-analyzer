@@ -69,3 +69,18 @@ Erkenntnisse aus den Tests: Copilot sieht nur 5 Spiele je Team, wiederholt sonst
 „How to play it“, gibt bei „niedrig/mittel/hoch“ fast immer „mittel“ und liefert bei einer
 reinen Rangfolge-Frage im neuen Chat eine fast gleiche Schablone (BTTS, Over, …) — diese
 Fragen sind deshalb entfallen.
+
+## Forebet-Vorschau (vereinbart am 06.11.2026)
+
+Für ausgewählte Spiele schickt der Nutzer eine Forebet-Vorschau (Screenshot oder Text; Forebet ist
+für Claude nicht erreichbar). Claude gleicht sie mit den Odd-Alerts-Daten (API) ab und nennt das
+**stärkste Signal** aus Daten, Spielbild und Form — als einen Tipp mit Begründung.
+
+- **Keine Schwellen:** keine 7-von-10-Grenze, keine Value-Mindestgrenze, keine Pflicht zur
+  Übereinstimmung der Quellen.
+- Forebet und das Odd-Alerts-Modell müssen nicht übereinstimmen. Weichen sie ab, wägt Claude
+  selbst ab: welche Seite die Daten (letzte Spiele ohne Testspiele, Stats, Heim/Auswärts),
+  das Spielbild und die Form besser stützen.
+- Angaben aus der Vorschau, die die API nicht hat (Ausfälle, Aufstellung, Lage im Team), fließen
+  als Hinweis ein. Falsche Angaben in der Vorschau werden benannt.
+- Quote und Quotenbewegung (inkl. Pinnacle) werden genannt.
