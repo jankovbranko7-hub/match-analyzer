@@ -78,6 +78,8 @@ für Claude nicht erreichbar). Claude gleicht sie mit den Odd-Alerts-Daten (API)
 
 - **Keine Schwellen:** keine 7-von-10-Grenze, keine Value-Mindestgrenze, keine Pflicht zur
   Übereinstimmung der Quellen.
+- **Keine Spielcheck-Zählung** (letzte 5 je Team, „x von 10“): wird hier weder gezeigt noch als
+  Begründung verwendet, um die beiden Verfahren nicht zu vermischen (Wunsch des Nutzers, 06.11.2026).
 - Forebet und das Odd-Alerts-Modell müssen nicht übereinstimmen. Weichen sie ab, wägt Claude
   selbst ab: welche Seite die Daten (letzte Spiele ohne Testspiele, Stats, Heim/Auswärts),
   das Spielbild und die Form besser stützen.
