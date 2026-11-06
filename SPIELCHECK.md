@@ -37,8 +37,12 @@ Nicht erreichbar: Predictions (Verdict, How to play it, Bet Builder, Avoid), Tab
 
 ## Auswertung
 
-1. **Grundlage:** letzte 5 Spiele je Team, alle Wettbewerbe (Wunsch des Nutzers). Zusätzlich
+1. **Grundlage:** letzte 5 Spiele je Team, alle Pflichtwettbewerbe (Wunsch des Nutzers),
+   **ohne Testspiele** („Club Friendlies“, `is_friendly`; vereinbart am 06.11.2026). Zusätzlich
    zur Kontrolle die letzten 10 je Team und die Liga ohne Pokalspiele gegen unterklassige Gegner.
+   Copilot zählt Testspiele oft mit und nennt sie „Liga“ — solche Spiele sind echt, aber werden
+   ersetzt. Ein Spiel erst „erfunden“ nennen, wenn es auch unter allen Spielen des Zeitraums
+   (`fixtures/between` ohne Wettbewerbsfilter) nicht zu finden ist.
 2. **Zählen (von 10 Spielen):**
    - Over 2,5 · Under 2,5 · BTTS Ja · BTTS Nein
    - Heimsieg = Siege Heimteam + Niederlagen Auswärtsteam
