@@ -1,6 +1,7 @@
-# Spielcheck (Arbeitsweise, nicht Teil des Systems)
+# Spielcheck (System A · Arbeitsweise, nicht Teil des Systems)
 
-Eigenes Prüfverfahren des Nutzers, getrennt vom OddAlerts-System v1.3-OA. Vereinbart am
+Eigenes Prüfverfahren des Nutzers, getrennt vom OddAlerts-System v1.3-OA und vom
+Forebet-Check (System B, `FOREBET-CHECK.md`); beide werden nicht vermischt. Vereinbart am
 06.11.2026. Ändert nichts am System, an Vorabeinträgen oder Auswertungen.
 
 ## Auslöser
@@ -58,11 +59,11 @@ Nicht erreichbar: Predictions (Verdict, How to play it, Bet Builder, Avoid), Tab
 6. **Ergebnis je Spiel:** Tipp mit Zählung, Quote, nötiger Trefferquote und Bedenken —
    oder „auslassen“. Keine Kombiwetten. Keine Garantie.
 
-## Fragen für Odd Alerts Copilot (falls der Nutzer sie stellt)
+## Fragen für Odd Alerts Copilot (Stand 06.11.2026, falls der Nutzer sie stellt)
 
 1. „Liste die letzten 5 Spiele beider Teams: Gegner, Ergebnis, Heim oder Auswärts, Wettbewerb.“
-2. „Zähle in diesen 10 Spielen: Siege, Remis und Niederlagen je Team, Over 2,5, BTTS, Spiele ohne eigenes Tor.“
-3. „Welcher einzelne Markt wäre in diesen 10 Spielen am häufigsten aufgegangen, inklusive Under 2,5 und BTTS Nein? Nenne die Anzahl.“
+2. „Zähle in diesen 10 Spielen: Heimsiege des Heimteams, Auswärtssiege des Auswärtsteams, Remis, Over 2,5, BTTS, Spiele ohne eigenes Tor.“
+3. „Welcher einzelne Markt wäre in diesen 10 Spielen am häufigsten aufgegangen? Nenne die Anzahl.“
 4. „Welche Tatsache im kommenden Spiel könnte dieses Muster brechen? Gegnerstärke, Ausfälle, Wettbewerb?“
 
 Erkenntnisse aus den Tests: Copilot sieht nur 5 Spiele je Team, wiederholt sonst oft
@@ -70,19 +71,8 @@ Erkenntnisse aus den Tests: Copilot sieht nur 5 Spiele je Team, wiederholt sonst
 reinen Rangfolge-Frage im neuen Chat eine fast gleiche Schablone (BTTS, Over, …) — diese
 Fragen sind deshalb entfallen.
 
-## Forebet-Vorschau (vereinbart am 06.11.2026)
+## Tagesliste
 
-Für ausgewählte Spiele schickt der Nutzer eine Forebet-Vorschau (Screenshot oder Text; Forebet ist
-für Claude nicht erreichbar). Claude gleicht sie mit den Odd-Alerts-Daten (API) ab und nennt das
-**stärkste Signal** aus Daten, Spielbild und Form — als einen Tipp mit Begründung.
-
-- **Keine Schwellen:** keine 7-von-10-Grenze, keine Value-Mindestgrenze, keine Pflicht zur
-  Übereinstimmung der Quellen.
-- **Keine Spielcheck-Zählung** (letzte 5 je Team, „x von 10“): wird hier weder gezeigt noch als
-  Begründung verwendet, um die beiden Verfahren nicht zu vermischen (Wunsch des Nutzers, 06.11.2026).
-- Forebet und das Odd-Alerts-Modell müssen nicht übereinstimmen. Weichen sie ab, wägt Claude
-  selbst ab: welche Seite die Daten (letzte Spiele ohne Testspiele, Stats, Heim/Auswärts),
-  das Spielbild und die Form besser stützen.
-- Angaben aus der Vorschau, die die API nicht hat (Ausfälle, Aufstellung, Lage im Team), fließen
-  als Hinweis ein. Falsche Angaben in der Vorschau werden benannt.
-- Quote und Quotenbewegung (inkl. Pinnacle) werden genannt.
+Freigegebene Spiele (ab 7 von 10) kommen je Tag nach `tipps/spielcheck/JJJJ-MM-TT.md`
+(Spiel, Markt, Zählung, Quote) und werden dort nach Abpfiff ausgewertet. Getrennt von
+`tipps/forebet/` (System B).
