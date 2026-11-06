@@ -14,6 +14,8 @@ nicht vermischt; Änderungen an einem der Systeme nur auf ausdrücklichen Wunsch
 - Vorabeinträge nach Abschnitt 9 des Systems kommen vor dem Anpfiff als Datei nach
   `protokoll/` und werden committet und gepusht; Ergebnisprüfungen getrennt davon
   (Abschnitt 10).
+- Schreibt der Nutzer „Spielcheck: …“, gilt das eigene Prüfverfahren in `SPIELCHECK.md`
+  (nicht Teil des Systems; keine Vorabeinträge nötig).
 
 ## Technik
 
