@@ -30,13 +30,25 @@ für Claude nicht erreichbar (Cloudflare, HTTP 403), deshalb kommt die Vorschau 
 5. **Ausfälle, Sperren, Aufstellungen** aus der Vorschau gelten als gesetzt (API hat sie nicht).
 6. Angaben der Vorschau werden gegen die API geprüft; falsche Angaben werden benannt.
 7. Quote und Quotenbewegung (inkl. Pinnacle ohne Marge) werden genannt.
+8. **Warnungen nach Stärke ordnen** (vereinbart am 07.11.2026 nach der Auswertung vom 06.11.):
+   - **Stark** = konkrete Information zu genau diesem Spiel: Systemumstellung, Trainerwechsel,
+     Ausfälle, eine deutliche Quotenbewegung gegen den Tipp.
+   - **Schwach** = allgemeine Statistik aus der Vergangenheit (Saisonquote, Direktvergleiche).
+   - Spricht eine **starke** Warnung klar gegen den Tipp, nimmt Claude den nächststärkeren Markt,
+     gegen den keine starke Warnung spricht. Statistik aus der Vergangenheit überstimmt keine
+     konkrete Spielinformation.
+   - Bedenken werden als „stark“ oder „schwach“ gekennzeichnet.
+9. **Preis offen benennen:** Bei jedem Tipp steht, ob die Quote einen **Vorteil** bietet (Modell
+   **und** Pinnacle ohne Marge über der nötigen Trefferquote) oder nur **fair** ist. Keine Schwelle:
+   die Entscheidung, ob gespielt wird, bleibt beim Nutzer.
 
 ## Antwortaufbau je Spiel
 
 1. Forebet-Vorschau gegen die API (stimmt / falsch / nicht prüfbar)
 2. Daten (Saison, Heim/Auswärts, Direktvergleiche)
 3. Modell und Markt (Forebet · Odd-Alerts-Modell · Pinnacle ohne Marge, Quotenbewegung)
-4. ✅ **Tipp** mit Quote, Gründen und Bedenken — Einzelwette, keine Kombi, keine Garantie
+4. ✅ **Tipp** mit Quote, Preis (Vorteil oder fair), Gründen und Bedenken (stark/schwach) —
+   Einzelwette, keine Kombi, keine Garantie
 
 ## Tagesliste
 
