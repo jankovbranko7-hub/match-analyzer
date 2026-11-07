@@ -1,24 +1,18 @@
-# Regeln (Branch `tipps-system-a-b`, abgezweigt von `system-v1.3-oa` am 07.11.2026)
+# Regeln (Branch `forebet-system`)
 
-**Das System ist `OddAlerts-System-v1.3-OA.txt` – genau so, wie es dort steht, und nichts
-sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json` (aktive Fassung
-v1.3-OA-2026-11-05, Modellversion 2 mit Zeitgewichtung; Vorgänger in `archiv/`). Am 02.11.2026 auf Wunsch des Nutzers aus dem FootyStats-System v1.3
-(Branch `system-v1.3`) übertragen: gleiche Regeln, einzige Datenquelle Odd Alerts. Das
-FootyStats-System auf `system-v1.3` und das System auf `main` gelten hier nicht und werden
-nicht vermischt; Änderungen an einem der Systeme nur auf ausdrücklichen Wunsch des Nutzers.
+Dieser Branch enthält **nur den Forebet-Check (System B)** des Nutzers, eingerichtet am
+07.11.2026 (abgezweigt von `tipps-system-a-b`). Regeln: `FOREBET-CHECK.md`. Das
+OddAlerts-System v1.3-OA, der Spielcheck (System A) und alle anderen Systeme gelten hier nicht
+und werden nicht vermischt; sie liegen auf ihren eigenen Branches. Änderungen nur auf
+ausdrücklichen Wunsch des Nutzers.
 
-## Arbeitsweise (nicht Teil des Systems)
+## Arbeitsweise
 
-- Spiele kommen meist als Batches zu je 5, nummeriert („Batch X · Nr. Y“). Jede Nummer
-  genau ihr Spiel, nichts vertauschen.
-- Vorabeinträge nach Abschnitt 9 des Systems kommen vor dem Anpfiff als Datei nach
-  `protokoll/` und werden committet und gepusht; Ergebnisprüfungen getrennt davon
-  (Abschnitt 10).
-- Zwei eigene Prüfverfahren des Nutzers, getrennt voneinander und vom System (keine
-  Vorabeinträge nötig, nicht vermischen):
-  - **System A – Spielcheck:** „Spielcheck: …“ → `SPIELCHECK.md`, Tagesliste in `tipps/spielcheck/`.
-  - **System B – Forebet-Check:** eingefügte Forebet-Vorschau → `FOREBET-CHECK.md`, Tagesliste in
-    `tipps/forebet/`.
+- Der Nutzer fügt eine Forebet-Vorschau ein (Text oder Screenshot) → Forebet-Check nach
+  `FOREBET-CHECK.md`. Forebet selbst ist für Claude nicht erreichbar.
+- Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
+- Alle Tipps eines Tages in `tipps/forebet/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
+  committen und pushen.
 
 ## Technik
 
@@ -28,7 +22,7 @@ Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen soll. Den Sc
 **nie** im Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen; in
 gespeicherten URLs `[REDACTED]` (auch in `next_page_url` der API-Antworten).
 
-Endpunkte und Felder: `ODDALERTS-API.md`. Hilfsskripte: `werkzeuge/` (siehe README dort). Ein Stundenlimit der API ist nicht geprüft;
-bei HTTP 429 oder ähnlichem warten.
+Endpunkte und Felder: `ODDALERTS-API.md`. Hilfsskripte: `werkzeuge/` (siehe README dort).
+Bei HTTP 429 oder ähnlichem warten.
 
 Antworten auf Deutsch.

@@ -1,7 +1,7 @@
-# Forebet-Check (System B · Arbeitsweise, nicht Teil des Systems)
+# Forebet-Check (System B)
 
-Eigenes Prüfverfahren des Nutzers, vereinbart am 06.11.2026. Getrennt vom OddAlerts-System
-v1.3-OA und vom Spielcheck (System A, `SPIELCHECK.md`); die Verfahren werden nicht vermischt.
+Eigenes Prüfverfahren des Nutzers, vereinbart am 06.11.2026. Eigener Branch `forebet-system`;
+getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A), die nicht vermischt werden.
 
 ## Auslöser
 
@@ -53,4 +53,4 @@ für Claude nicht erreichbar (Cloudflare, HTTP 403), deshalb kommt die Vorschau 
 ## Tagesliste
 
 Alle Tipps eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` und werden dort nach Abpfiff
-ausgewertet. Getrennt von `tipps/spielcheck/` (System A).
+ausgewertet.
