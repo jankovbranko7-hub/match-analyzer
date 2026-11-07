@@ -10,7 +10,7 @@ ihn in jeder Ausgabe als `[REDACTED]`.
 - `auswertung.py <comp_ids> "Heim|Auswärts" ...` – Endergebnisse für die Auswertung
   (Zeitraum im Skript).
 
-Wettbewerbs-IDs (Auswahl): Bundesliga 477, 2. Bundesliga 471, DFB-Pokal 417, Premier League –,
+Wettbewerbs-IDs (Auswahl): Bundesliga 477, 2. Bundesliga 471, DFB-Pokal 417,
 Championship 418, FA Cup 327, Carabao Cup 268, La Liga 419, Serie A 499, Coppa Italia 531,
 Serie B 545, Ligue 1 200, Ligue 2 256, Eredivisie 437, KNVB Beker 251, Pro League (BEL) 198,
 Belgian Cup 258, Süper Lig 414, Turkish Cup 626, Allsvenskan 255, Svenska Cupen 34,
