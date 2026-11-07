@@ -1,4 +1,4 @@
-# Regeln (Branch `system-v1.3-oa`)
+# Regeln (Branch `tipps-system-a-b`, abgezweigt von `system-v1.3-oa` am 07.11.2026)
 
 **Das System ist `OddAlerts-System-v1.3-OA.txt` – genau so, wie es dort steht, und nichts
 sonst.** Dazu gehören `AKTIVES-SYSTEM.txt` und `AKTIVES-SYSTEM.json` (aktive Fassung
@@ -28,7 +28,7 @@ Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen soll. Den Sc
 **nie** im Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen; in
 gespeicherten URLs `[REDACTED]` (auch in `next_page_url` der API-Antworten).
 
-Endpunkte und Felder: `ODDALERTS-API.md`. Ein Stundenlimit der API ist nicht geprüft;
+Endpunkte und Felder: `ODDALERTS-API.md`. Hilfsskripte: `werkzeuge/` (siehe README dort). Ein Stundenlimit der API ist nicht geprüft;
 bei HTTP 429 oder ähnlichem warten.
 
 Antworten auf Deutsch.
