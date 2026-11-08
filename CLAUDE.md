@@ -9,8 +9,9 @@ ausdrücklichen Wunsch des Nutzers.
 ## Arbeitsweise
 
 - Der Nutzer fügt je Spiel die Forebet-Vorschau ein (Text oder Screenshot) → Forebet-Check
-  Version 2 nach `FOREBET-CHECK.md`: Forebet (sehr stark) + FootyStats (stark) zu einem Spielbild
-  zusammenführen, daraus ein Tipp. Forebet selbst ist für Claude nicht erreichbar.
+  Version 2.1 nach `FOREBET-CHECK.md`: Forebet-Vorschau + FootyStats nach fester Rangfolge
+  gewichten (Spielinfos > aktuelle Form > Forebet-Prognose > Saison > Direktvergleiche), daraus
+  ein Tipp. Forebet selbst ist für Claude nicht erreichbar.
 - **Keine Quoten** (seit 07.11.2026). Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
 - Alle Tipps eines Tages in `tipps/forebet/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen.
