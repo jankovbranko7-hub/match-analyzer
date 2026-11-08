@@ -1,7 +1,8 @@
-# Forebet-Check (System B) · Version 2.2
+# Forebet-Check (System B) · Version 2.3
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
-nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
+beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -54,13 +55,15 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus Forebet gelten als gese
 
 1. **Ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Forebet-Prognose.
 2. **Richtung aus Rang 1–2.** Rang 3 bestimmt die Richtung nur, wenn Rang 1–2 keine klare
-   Richtung zeigen. Rang 3 und 4 helfen bei der Wahl des Markts (Sieger, Doppelte Chance, Tore,
+   Richtung zeigen. Rang 3 und 4 helfen bei der Wahl des Markts (Sieger, Tore,
    beide treffen) und drehen eine klare Richtung aus Rang 1–2 nicht um.
 3. **Form vor Saison:** Ein Team mit **höchstens 1 Sieg aus den letzten 6** bekommt **keinen
    Sieg-Tipp**, auch als Heimteam oder Tabellenfavorit.
 4. **Kein Kompromiss-Markt** nur weil Informationen sich widersprechen; gewählt wird der Markt,
    den die Daten am klarsten tragen.
-5. Märkte: Sieg, Doppelte Chance, Über/Unter, beide treffen, Team trifft u. ä.
+5. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
+   Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. **Keine anderen Wettarten** (keine
+   Doppelte Chance, kein Remis, kein „Team trifft“, keine anderen Torlinien wie 1,5 oder 3,5).
 6. Keine Schwellen, keine Spielcheck-Zählung („x von 10“).
 7. **Bedenken nach Stärke:** stark = Information aus Rang 1 oder 2; schwach = Rang 3 und 4.
    Spricht eine starke Bedenke klar gegen den Tipp, nimmt Claude den nächststärkeren Markt.
