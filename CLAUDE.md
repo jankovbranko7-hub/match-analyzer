@@ -9,7 +9,7 @@ ausdrücklichen Wunsch des Nutzers.
 ## Arbeitsweise
 
 - Der Nutzer fügt je Spiel die Forebet-Vorschau ein – gibt es keine, die Odd-Alerts-Vorschau –
-  (Text oder Screenshot) → Forebet-Check Version 2.5 nach `FOREBET-CHECK.md`: Fakten aus der Vorschau + FootyStats + Odd-Alerts-API nach fester
+  (Text oder Screenshot) → Forebet-Check Version 2.6 nach `FOREBET-CHECK.md`: Fakten aus der Vorschau + FootyStats + Odd-Alerts-API nach fester
   Rangfolge gewichten (Spielinfos > aktuelle Form > Saison > Direktvergleiche), daraus ein eigener
   Tipp über den festen Entscheidungsweg Schritt 1–4 – nur Sieg, beide treffen Ja/Nein,
   über/unter 2,5. Prognosen (Forebet, Odd-Alerts-Vorschau, Odd-Alerts-Modell) fließen nicht ein,

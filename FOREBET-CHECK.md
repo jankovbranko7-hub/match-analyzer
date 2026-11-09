@@ -1,10 +1,11 @@
-# Forebet-Check (System B) · Version 2.5
+# Forebet-Check (System B) · Version 2.6
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
 beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3); fester Entscheidungsweg
 Schritt 1–4 am 09.11.2026 (Version 2.4); Odd-Alerts-Vorschau als Ersatz für fehlende
-Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Version 2.5). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Version 2.5); „klare Seite“ in Schritt 2 genau nach
+den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -71,9 +72,13 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als
 
 1. **Wer bekommt keinen Sieg-Tipp?** Jedes Team mit höchstens 1 Sieg aus den letzten 6
    Spielen aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3).
-2. **Zeigen Rang 1–2 klar auf eine Seite?** Ausfälle/Belastung (Rang 1) und aktuelle Form
-   (Rang 2) sprechen klar für ein Team, das nach Schritt 1 nicht ausgeschieden ist →
-   **Heimsieg** bzw. **Auswärtssieg** dieses Teams.
+2. **Gibt es eine klare Seite?** Ein Team ist die klare Seite, wenn **beides** gilt:
+   a) es hat **mindestens 3 Siege aus den letzten 6** Spielen aller Wettbewerbe, und
+   b) der **Gegner** ist nach Schritt 1 ausgeschieden (höchstens 1 Sieg in 6) **oder** in dieser
+      Saison auf diesem Platz sieglos (als Heimteam daheim bzw. als Gastteam auswärts).
+   Trifft das auf genau ein Team zu → **Heimsieg** bzw. **Auswärtssieg** dieses Teams.
+   Trifft es auf keines oder auf beide zu → weiter mit Schritt 3.
+   (So entstanden am 08.11. Sieg Brighton, Lorient, Nice, Villa, Freiburg, Hoffenheim.)
 3. **Keine klare Seite →** das klarste **Tor-Signal** aus Rang 1–3:
    - ein Team trifft kaum (Sturm fehlt, seit Spielen ohne Tor, hoher Anteil ohne Tor) →
      **Beide treffen – Nein**
