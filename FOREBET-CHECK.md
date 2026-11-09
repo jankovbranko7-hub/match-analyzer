@@ -1,8 +1,9 @@
-# Forebet-Check (System B) · Version 2.3
+# Forebet-Check (System B) · Version 2.4
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
-beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3); fester Entscheidungsweg
+Schritt 1–4 am 09.11.2026 (Version 2.4). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -51,6 +52,26 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus Forebet gelten als gese
 | 4 | Direktvergleiche und lange Trends (z. B. „16 der letzten 20“) | beide |
 | – | Forebet-Prognose | nur Vergleich, kein Einfluss |
 
+## Entscheidungsweg je Spiel (Schritt 1–4, immer in dieser Reihenfolge)
+
+1. **Wer bekommt keinen Sieg-Tipp?** Jedes Team mit höchstens 1 Sieg aus den letzten 6
+   Spielen aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3).
+2. **Zeigen Rang 1–2 klar auf eine Seite?** Ausfälle/Belastung (Rang 1) und aktuelle Form
+   (Rang 2) sprechen klar für ein Team, das nach Schritt 1 nicht ausgeschieden ist →
+   **Heimsieg** bzw. **Auswärtssieg** dieses Teams.
+3. **Keine klare Seite →** das klarste **Tor-Signal** aus Rang 1–3:
+   - ein Team trifft kaum (Sturm fehlt, seit Spielen ohne Tor, hoher Anteil ohne Tor) →
+     **Beide treffen – Nein**
+   - beide Teams treffen seit Wochen regelmäßig, Gegner selten zu null →
+     **Beide treffen – Ja**
+   - lange Serien mit vielen bzw. wenigen Toren, Torpotenzial →
+     **Über 2,5** bzw. **Unter 2,5**
+4. **Bedenken prüfen (Regel 7):** Spricht eine starke Bedenke (Rang 1–2) klar gegen den Tipp,
+   geht es mit dem nächsten Schritt bzw. dem nächstklaren Markt weiter.
+
+Am Ende steht genau einer der sechs erlaubten Märkte (Regel 5). In der Antwort wird genannt,
+in welchem Schritt der Tipp entstanden ist.
+
 ## Regeln für den Tipp
 
 1. **Ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Forebet-Prognose.
@@ -74,7 +95,7 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus Forebet gelten als gese
 
 1. Rang 1–2: Spielinformationen, aktuelle Form
 2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats und Forebet)
-3. ✅ **Tipp** mit Gründen und Bedenken (stark/schwach)
+3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach)
 4. Zum Vergleich: Forebet-Prognose (gleich oder abweichend)
 
 ## Tagesliste
