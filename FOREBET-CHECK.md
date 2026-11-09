@@ -1,27 +1,33 @@
-# Forebet-Check (System B) · Version 2.4
+# Forebet-Check (System B) · Version 2.5
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
 beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3); fester Entscheidungsweg
-Schritt 1–4 am 09.11.2026 (Version 2.4). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+Schritt 1–4 am 09.11.2026 (Version 2.4); Odd-Alerts-Vorschau als Ersatz für fehlende
+Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Version 2.5). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
 
 1. **Keine Quoten.** Quoten, Quotenbewegungen, nötige Trefferquote, Vorteil/fair und
    Buchmacher werden weder abgerufen noch genannt noch als Begründung verwendet.
-2. **Datenquelle ist FootyStats** (`https://api.football-data-api.com/`). Odd Alerts wird nicht
-   mehr verwendet.
-3. **Die Fakten aus der Forebet-Vorschau und die FootyStats-Daten** sind die Grundlage. Sie
+2. **Datenquellen sind FootyStats** (`https://api.football-data-api.com/`) **und die Odd-Alerts-API**
+   (`https://data.oddalerts.com/api/`). Von Odd Alerts werden nur Statistik, Ergebnisse und
+   Direktvergleiche genutzt – **keine Quoten-Endpunkte** (`odds/…`).
+3. **Die Fakten aus der Vorschau (Forebet oder Odd Alerts) und die Daten aus FootyStats und
+   Odd Alerts** sind die Grundlage. Sie
    werden **nicht auf Übereinstimmung** geprüft, sondern nach der **Rangfolge** unten
    gewichtet; daraus macht Claude **einen eigenen Tipp**.
-4. **Die Forebet-Prognose** (Wahrscheinlichkeit, erwartetes Ergebnis, Forebets Tipp wie „über
-   2,5“) fließt **nicht** in den Tipp ein. Sie wird erst nach dem Tipp **zum Vergleich**
+4. **Prognosen** – Forebet-Prognose, Prognose der Odd-Alerts-Vorschau und das Odd-Alerts-Modell
+   (Wahrscheinlichkeit, erwartetes Ergebnis, Tipp wie „über 2,5“) – fließen **nicht** in den
+   Tipp ein. Sie wird erst nach dem Tipp **zum Vergleich**
    genannt und in der Tagesliste mitgeführt, damit beide ausgewertet werden können.
 
-## Eingang je Spiel: Forebet-Vorschau
+## Eingang je Spiel: Forebet-Vorschau, sonst Odd-Alerts-Vorschau
 
-Der Nutzer schickt je Spiel, was Forebet in der Vorschau angibt. Die Abschnitte unterscheiden sich
+Der Nutzer schickt je Spiel, was Forebet in der Vorschau angibt. **Hat Forebet für ein Spiel oder
+eine Liga keine Vorschau, schickt er die Odd-Alerts-Vorschau**; sie wird genauso behandelt
+(Fakten nach Rangfolge, Prognose nur zum Vergleich). Die Abschnitte unterscheiden sich
 von Spiel zu Spiel; verwendet wird alles, was vorhanden ist:
 - Teamnews und voraussichtliche Aufstellungen
 - Prognose (Wahrscheinlichkeit, erwartetes Ergebnis) – nur zum Vergleich, nicht für den Tipp
@@ -31,7 +37,7 @@ von Spiel zu Spiel; verwendet wird alles, was vorhanden ist:
 - Direkte Duelle
 - Wichtigste Fakten
 
-Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus Forebet gelten als gesetzt.
+Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als gesetzt.
 
 ## FootyStats je Spiel (`werkzeuge/fs_spiel.py`)
 
@@ -42,15 +48,24 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus Forebet gelten als gese
 - Letzte 6 über **alle Wettbewerbe** (inkl. Europapokal und Pokal) und letzte 6 Ligaspiele
 - Direktvergleiche (Bilanz, Ø Tore, letzte Ergebnisse) und FootyStats-Trends
 
+## Odd Alerts je Spiel (`werkzeuge/oa_spiel.py`, `werkzeuge/ergebnisse.py`)
+
+- Saisonwerte gesamt und Heim/Auswärts (`stats/fixture`): S-U-N, Tore, über 2,5 %, beide
+  treffen %, zu null, ohne Tor, xG
+- Letzte 10 Pflichtspiele inkl. Pokal, Heim-/Auswärtsspiele und Direktvergleiche
+  (`fixtures/between`); Champions League ID 51
+- Odd-Alerts-Modell (`trends/btts` → `probability`): **nur zum Vergleich**
+- Zweite Quelle zur Gegenprüfung von FootyStats und Ersatz, wo FootyStats eine Liga nicht hat
+
 ## Rangfolge der Informationen
 
 | Rang | Information | Quelle |
 |---|---|---|
-| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal) | Forebet |
-| 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | Forebet („Aktuelle Form“, „Haupttrends“) + FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) |
-| 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats + Forebet („Gesamtbild in der Liga“) |
+| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal) | Vorschau (Forebet oder Odd Alerts) |
+| 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | Vorschau („Aktuelle Form“, „Haupttrends“) + FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) + Odd Alerts (letzte 10 inkl. Pokal) |
+| 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats + Odd Alerts + Vorschau („Gesamtbild in der Liga“) |
 | 4 | Direktvergleiche und lange Trends (z. B. „16 der letzten 20“) | beide |
-| – | Forebet-Prognose | nur Vergleich, kein Einfluss |
+| – | Prognosen: Forebet, Odd-Alerts-Vorschau, Odd-Alerts-Modell | nur Vergleich, kein Einfluss |
 
 ## Entscheidungsweg je Spiel (Schritt 1–4, immer in dieser Reihenfolge)
 
@@ -74,7 +89,7 @@ in welchem Schritt der Tipp entstanden ist.
 
 ## Regeln für den Tipp
 
-1. **Ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Forebet-Prognose.
+1. **Ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Prognosen.
 2. **Richtung aus Rang 1–2.** Rang 3 bestimmt die Richtung nur, wenn Rang 1–2 keine klare
    Richtung zeigen. Rang 3 und 4 helfen bei der Wahl des Markts (Sieger, Tore,
    beide treffen) und drehen eine klare Richtung aus Rang 1–2 nicht um.
@@ -88,19 +103,21 @@ in welchem Schritt der Tipp entstanden ist.
 6. Keine Schwellen, keine Spielcheck-Zählung („x von 10“).
 7. **Bedenken nach Stärke:** stark = Information aus Rang 1 oder 2; schwach = Rang 3 und 4.
    Spricht eine starke Bedenke klar gegen den Tipp, nimmt Claude den nächststärkeren Markt.
-8. Zahlen aus Forebet, die FootyStats widersprechen, werden kurz vermerkt; die Forebet-Angabe
-   wird dadurch nicht verworfen (Wettbewerbe können unterschiedlich gezählt sein).
+8. Zahlen aus der Vorschau, die FootyStats oder Odd Alerts widersprechen, werden kurz vermerkt;
+   widersprechen sich die Quellen, gilt die Zählung mit vollständigen Wettbewerben. Steht eine
+   Vorschau-Angabe im Widerspruch zu sich selbst oder zu beiden APIs, wird sie nicht verwendet.
 
 ## Antwortaufbau je Spiel
 
 1. Rang 1–2: Spielinformationen, aktuelle Form
-2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats und Forebet)
+2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats, Odd Alerts, Vorschau)
 3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach)
-4. Zum Vergleich: Forebet-Prognose (gleich oder abweichend)
+4. Zum Vergleich: Prognose der Vorschau und Odd-Alerts-Modell (gleich oder abweichend)
 
 ## Tagesliste
 
-Alle Tipps eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id` und
-Spalte „Forebet-Prognose“) und werden dort nach Abpfiff ausgewertet: Treffer je Tipp und
-Trefferquote, getrennt für Claudes Tipp und Forebets Prognose; keine Einheiten/Quoten.
+Alle Tipps eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
+Spalte „Vorschau“ = Forebet oder Odd Alerts, Spalte „Prognose (Vergleich)“) und werden dort nach
+Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, getrennt für Claudes Tipp und die
+Prognose; keine Einheiten/Quoten.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.

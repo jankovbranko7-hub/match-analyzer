@@ -8,25 +8,28 @@ ausdrücklichen Wunsch des Nutzers.
 
 ## Arbeitsweise
 
-- Der Nutzer fügt je Spiel die Forebet-Vorschau ein (Text oder Screenshot) → Forebet-Check
-  Version 2.4 nach `FOREBET-CHECK.md`: Fakten aus der Forebet-Vorschau + FootyStats nach fester
+- Der Nutzer fügt je Spiel die Forebet-Vorschau ein – gibt es keine, die Odd-Alerts-Vorschau –
+  (Text oder Screenshot) → Forebet-Check Version 2.5 nach `FOREBET-CHECK.md`: Fakten aus der Vorschau + FootyStats + Odd-Alerts-API nach fester
   Rangfolge gewichten (Spielinfos > aktuelle Form > Saison > Direktvergleiche), daraus ein eigener
   Tipp über den festen Entscheidungsweg Schritt 1–4 – nur Sieg, beide treffen Ja/Nein,
-  über/unter 2,5. Die Forebet-Prognose fließt nicht ein,
-  sie wird nur zum Vergleich genannt. Forebet selbst ist für Claude nicht erreichbar.
+  über/unter 2,5. Prognosen (Forebet, Odd-Alerts-Vorschau, Odd-Alerts-Modell) fließen nicht ein,
+  sie werden nur zum Vergleich genannt. Forebet selbst ist für Claude nicht erreichbar.
 - **Keine Quoten** (seit 07.11.2026). Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
 - Alle Tipps eines Tages in `tipps/forebet/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen.
 
 ## Technik
 
-Datenquelle ist **FootyStats** (`https://api.football-data-api.com/`), Odd Alerts wird nicht mehr
-verwendet. Der Schlüssel liegt in der Umgebung als `APIKEY` und wird als Query-Parameter `key`
-gesendet. Fehlt er: dem Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen soll.
-Den Schlüssel **nie** im Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder committen;
-in gespeicherten URLs `[REDACTED]`. Limit laut API: 1800 Abrufe pro Stunde.
+Zwei Datenquellen, beide ohne Quoten:
+- **FootyStats** (`https://api.football-data-api.com/`): Schlüssel in der Umgebung als `APIKEY`,
+  Query-Parameter `key`. Endpunkte, Felder, Saison-IDs: `FOOTYSTATS-API.md`. Limit 1800/Stunde.
+- **Odd Alerts** (`https://data.oddalerts.com/api/`): Schlüssel in der Umgebung als
+  `ODDALERTS_KEY`, Query-Parameter `api_token`. Endpunkte: `ODDALERTS-API.md`. Quoten-Endpunkte
+  (`odds/…`) werden nicht verwendet.
 
-Endpunkte, Felder, Saison-IDs: `FOOTYSTATS-API.md`. Hilfsskripte: `werkzeuge/` (README dort).
-Bei HTTP 429 oder ähnlichem warten.
+Fehlt ein Schlüssel: dem Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen
+soll. Schlüssel **nie** im Chat erfragen, ausgeben, loggen, in eine Datei schreiben oder
+committen; in gespeicherten URLs `[REDACTED]` (auch in `next_page_url`).
+Hilfsskripte: `werkzeuge/` (README dort). Bei HTTP 429 oder ähnlichem warten.
 
 Antworten auf Deutsch.
