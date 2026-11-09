@@ -17,6 +17,9 @@ ausdrücklichen Wunsch des Nutzers.
 - **Keine Quoten** (seit 07.11.2026). Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
 - Alle Tipps eines Tages in `tipps/forebet/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen.
+- **Branch `forebet-system` immer automatisch mitziehen** (Wunsch des Nutzers vom 09.11.2026):
+  Jede Regeländerung und jede Tagesliste nach dem Push auf den Arbeitsbranch auch nach
+  `forebet-system` pushen (nur als Vorspulen, nie überschreiben).
 
 ## Technik
 
