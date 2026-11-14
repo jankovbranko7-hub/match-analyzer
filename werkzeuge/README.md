@@ -1,4 +1,4 @@
-# Werkzeuge (FootyStats und Odd Alerts, ohne Schlüssel)
+# Werkzeuge (FootyStats; Odd-Alerts-Skripte seit Forebet-Check v2.8 nicht mehr verwendet)
 
 Alle Skripte lesen die Schlüssel nur aus der Umgebung (`APIKEY` für FootyStats, `ODDALERTS_KEY`
 für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.
