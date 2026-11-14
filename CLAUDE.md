@@ -9,7 +9,7 @@ ausdrücklichen Wunsch des Nutzers.
 ## Arbeitsweise
 
 - Der Nutzer fügt je Spiel die Forebet-Vorschau und die Forebet-Statistikseite ein
-  (PDF, Text oder Screenshot) → Forebet-Check Version 2.9 nach `FOREBET-CHECK.md`: Fakten aus der Vorschau + FootyStats nach fester
+  (PDF, Text oder Screenshot) → Forebet-Check Version 2.10 nach `FOREBET-CHECK.md`: Fakten aus der Vorschau + FootyStats nach fester
   Rangfolge gewichten (Spielinfos > aktuelle Form > Saison > Direktvergleiche), daraus ein eigener
   Tipp über den festen Entscheidungsweg Schritt 1–4 – nur Sieg, beide treffen Ja/Nein,
   über/unter 2,5. Die Forebet-Prognose fließt nicht ein,

@@ -1,4 +1,4 @@
-# Forebet-Check (System B) · Version 2.9
+# Forebet-Check (System B) · Version 2.10
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
@@ -8,7 +8,7 @@ Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Vers
 den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6); „stark“ nur noch, wenn wirklich
 alles Relevante gegen den Tipp spricht, festgelegt am 14.11.2026 (Version 2.7); FootyStats einzige Datenquelle, Odd-Alerts-API gestrichen am
 14.11.2026 (Version 2.8); Odd Alerts ganz gestrichen (auch die Vorschau), Auswertung je Wettart am
-14.11.2026 (Version 2.9). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+14.11.2026 (Version 2.9); Einstufung „klar“/„knapp“ je Tipp am 14.11.2026 (Version 2.10). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -112,7 +112,9 @@ in welchem Schritt der Tipp entstanden ist.
 
 1. Rang 1–2: Spielinformationen, aktuelle Form
 2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats, Vorschau)
-3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach)
+3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach) und einer klaren
+   **Einstufung: klar** (die Daten aus Rang 1–2 zeigen alle in Richtung des Tipps) oder **knapp**
+   (eine Angabe aus Rang 1–2 zeigt in die andere Richtung) – mit einem Satz, warum.
 4. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
 
 ## Tagesliste
