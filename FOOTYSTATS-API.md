@@ -33,3 +33,4 @@ werden im Forebet-Check v2 nicht verwendet.
 | Allsvenskan (2026) | 16576 | Eliteserien (2026) | 16558 |
 | Champions League | 17128 | Europa League | 17127 |
 | Conference League | 17130 | Griechenland | 17356 |
+| Nations League 2026/27 | 16808 | WM-Quali Europa (2026) | 13964 |

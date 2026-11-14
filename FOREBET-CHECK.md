@@ -1,11 +1,12 @@
-# Forebet-Check (System B) · Version 2.6
+# Forebet-Check (System B) · Version 2.7
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
 beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3); fester Entscheidungsweg
 Schritt 1–4 am 09.11.2026 (Version 2.4); Odd-Alerts-Vorschau als Ersatz für fehlende
 Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Version 2.5); „klare Seite“ in Schritt 2 genau nach
-den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6); „stark“ nur noch, wenn wirklich
+alles Relevante gegen den Tipp spricht, festgelegt am 14.11.2026 (Version 2.7). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -86,8 +87,8 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als
      **Beide treffen – Ja**
    - lange Serien mit vielen bzw. wenigen Toren, Torpotenzial →
      **Über 2,5** bzw. **Unter 2,5**
-4. **Bedenken prüfen (Regel 7):** Spricht eine starke Bedenke (Rang 1–2) klar gegen den Tipp,
-   geht es mit dem nächsten Schritt bzw. dem nächstklaren Markt weiter.
+4. **Bedenken prüfen (Regel 7):** Gibt es eine starke Bedenke – spricht also wirklich alles
+   Relevante gegen den Tipp –, geht es mit dem nächsten Schritt bzw. dem nächstklaren Markt weiter.
 
 Am Ende steht genau einer der sechs erlaubten Märkte (Regel 5). In der Antwort wird genannt,
 in welchem Schritt der Tipp entstanden ist.
@@ -106,8 +107,11 @@ in welchem Schritt der Tipp entstanden ist.
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. **Keine anderen Wettarten** (keine
    Doppelte Chance, kein Remis, kein „Team trifft“, keine anderen Torlinien wie 1,5 oder 3,5).
 6. Keine Schwellen, keine Spielcheck-Zählung („x von 10“).
-7. **Bedenken nach Stärke:** stark = Information aus Rang 1 oder 2; schwach = Rang 3 und 4.
-   Spricht eine starke Bedenke klar gegen den Tipp, nimmt Claude den nächststärkeren Markt.
+7. **Bedenken nach Stärke (seit Version 2.7):** **stark** nur, wenn wirklich alles Relevante gegen
+   den Tipp spricht – Vorschau, FootyStats und Odd Alerts zeigen in dieselbe Richtung und es gibt
+   keine gewichtige Gegenangabe aus Rang 1–2. Eine starke Bedenke spricht damit immer klar gegen
+   den Tipp: Claude nimmt den nächststärkeren Markt (Schritt 4). Alles andere ist **schwach** und
+   wird nur genannt. „Stark, aber nicht klar dagegen“ gibt es nicht mehr.
 8. Zahlen aus der Vorschau, die FootyStats oder Odd Alerts widersprechen, werden kurz vermerkt;
    widersprechen sich die Quellen, gilt die Zählung mit vollständigen Wettbewerben. Steht eine
    Vorschau-Angabe im Widerspruch zu sich selbst oder zu beiden APIs, wird sie nicht verwendet.
