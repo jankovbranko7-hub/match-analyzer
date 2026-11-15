@@ -86,7 +86,8 @@ führt FootyStats nicht – Paarungen beim Nutzer erfragt.
 
 Zusätzlich zum Haupttipp die beste Wettart aus dem jeweils anderen Weg (bei Sieg-Tipp das klarste
 Torsignal aus Schritt 3, bei Tor-Tipp der nächstklare Markt). Der Haupttipp bleibt unverändert;
-beide werden ausgewertet. Nr. 1 und 2 nach Anpfiff ergänzt (Spielstand unbekannt).
+beide werden ausgewertet. Nr. 1 und 2 nach Anpfiff ergänzt (Spielstand unbekannt). Alternativen nur
+für Spiele mit Sports-Mole-Vorschau (Wunsch des Nutzers) – bei Nr. 7–9 gestrichen.
 
 | Nr. | Spiel | Haupttipp | Einstufung | Alternative | Einstufung | Warum |
 |---|---|---|---|---|---|---|
@@ -96,8 +97,8 @@ beide werden ausgewertet. Nr. 1 und 2 nach Anpfiff ergänzt (Spielstand unbekann
 | 4 | Kroatien – Tschechien | Über 2,5 | knapp | Beide treffen – Ja | knapp | Kroatien 5 von 6 beide treffen, Duelle 80 %; Tschechien traf nur in 2 der letzten 6 |
 | 5 | Frankreich – Türkei | Sieg Frankreich | knapp | Beide treffen – Ja | knapp | Frankreich daheim 100 % beide treffen, ohne Saliba und Upamecano; Türkei in 2 von 5 Gruppenspielen ohne Tor |
 | 6 | Spanien – England | Über 2,5 | klar | Beide treffen – Ja | knapp | Spanien daheim 100 %, Duelle 83 %; England auswärts in der Gruppe immer zu null |
-| 7 | Eldense – Sabadell | Sieg Eldense | knapp | Unter 2,5 | knapp (ohne Vorschau) | Beide letzten 6 zu 67 % unter 2,5, Sabadell auswärts 71 %; Eldense ohne Tor in den letzten 3 |
-| 8 | Eibar – Cádiz | Beide treffen – Ja | knapp | Über 2,5 | knapp (ohne Vorschau) | Eibars letzte 9 Spiele je mindestens 2 Tore, Cádiz' letzte 6 zu 67 % über 2,5 |
-| 9 | Danubio – Liverpool Montevideo | Unter 2,5 | knapp | Sieg Liverpool | knapp (ohne Vorschau) | Liverpool 5-1-0, Tabellenführer, 7 Spiele ungeschlagen; Danubio aber 3 Siege aus 6 |
+| 7 | Eldense – Sabadell | Sieg Eldense | knapp | – | – | keine Alternative: keine Sports-Mole-Vorschau (Wunsch des Nutzers) |
+| 8 | Eibar – Cádiz | Beide treffen – Ja | knapp | – | – | keine Alternative: keine Sports-Mole-Vorschau (Wunsch des Nutzers) |
+| 9 | Danubio – Liverpool Montevideo | Unter 2,5 | knapp | – | – | keine Alternative: keine Sports-Mole-Vorschau (Wunsch des Nutzers) |
 | 10 | Panama – Curaçao | Sieg Curaçao | knapp | **Unter 2,5** | **klar** | Panama in 8 Spielen je höchstens 1 Tor, zuletzt 4-mal höchstens 1 Gegentor; Hinspiel 0:0; FootyStats über 2,5 nur 20 % |
 
