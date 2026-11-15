@@ -102,3 +102,16 @@ für Spiele mit Sports-Mole-Vorschau (Wunsch des Nutzers) – bei Nr. 7–9 gest
 | 9 | Danubio – Liverpool Montevideo | Unter 2,5 | knapp | – | – | keine Alternative: keine Sports-Mole-Vorschau (Wunsch des Nutzers) |
 | 10 | Panama – Curaçao | Sieg Curaçao | knapp | **Unter 2,5** | **klar** | Panama in 8 Spielen je höchstens 1 Tor, zuletzt 4-mal höchstens 1 Gegentor; Hinspiel 0:0; FootyStats über 2,5 nur 20 % |
 
+
+## 5er-Kombi (Wunsch des Nutzers, ca. 18:30)
+
+Aus Haupt- und Alternativtipps, nur Spiele mit Sports-Mole-Vorschau, die noch nicht begonnen haben
+(Belarus – Albanien und Finnland – San Marino liefen schon). Je Spiel die stärkere der beiden Wetten.
+
+| Spiel | Wette | Herkunft | Einstufung |
+|---|---|---|---|
+| Spanien – England | Über 2,5 | Haupttipp | klar |
+| Panama – Curaçao | Unter 2,5 | Alternative | klar |
+| Kroatien – Tschechien | Über 2,5 | Haupttipp | knapp |
+| Belgien – Italien | Beide treffen – Ja | Haupttipp | knapp |
+| Frankreich – Türkei | Sieg Frankreich | Haupttipp | knapp |
