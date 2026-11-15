@@ -115,3 +115,5 @@ Aus Haupt- und Alternativtipps, nur Spiele mit Sports-Mole-Vorschau, die noch ni
 | Kroatien – Tschechien | Über 2,5 | Haupttipp | knapp |
 | Belgien – Italien | Beide treffen – Ja | Haupttipp | knapp |
 | Frankreich – Türkei | Sieg Frankreich | Haupttipp | knapp |
+
+Vom Nutzer gespielt (Screenshot 18:52): die 5er-Kombi genau wie oben – alle 5 Wetten stimmen.
