@@ -14,6 +14,9 @@ Tipps ca. 15:38, alle vor Anpfiff.
 | 4 | 20:45 | Kroatien – Tschechien | 8474837 | 3 | Über 2,5 Tore | knapp | 2:1 | |
 | 5 | 20:45 | Frankreich – Türkei | 8474865 | 2 | Sieg Frankreich | knapp | 3:1 | |
 | 6 | 20:45 | Spanien – England | 8474817 | 3 | Über 2,5 Tore | klar | 3:1 | |
+| 7 | 18:30 | Eldense – Sabadell (Segunda) | 8584492 | 2 | Sieg Eldense | knapp (ohne Vorschau) | – | |
+| 8 | 18:30 | Eibar – Cádiz (Segunda) | 8584499 | 3 | Beide treffen – Ja | knapp (ohne Vorschau) | – | |
+| 9 | 20:30 | Danubio – Liverpool Montevideo (URU) | 8748734 | 3 | Unter 2,5 Tore | knapp (ohne Vorschau) | – | |
 
 ## Begründung
 
@@ -47,3 +50,23 @@ Tipps ca. 15:38, alle vor Anpfiff.
    daheim 100 % über 2,5; England in 6 Spielen in Folge mindestens 2 Tore; 5 der letzten 6 Duelle
    über 2,5 (zuletzt 2:3 in Wembley); Yamal, Oyarzabal, Williams zurück; FootyStats über 2,5:
    80 %. → **Über 2,5.** Klar: alle aktuellen Angaben zeigen auf Tore.
+
+### Nachtrag (Tipps ca. 16:04, vor Anpfiff): Spiele ohne Vorschau – nur FootyStats
+
+Sports Mole hat für diese Spiele keine Vorschau (Segunda nur vereinzelt, Uruguay gar nicht). Ohne
+Spielinfos (Rang 1) höchstens „knapp“. Argentinien Primera Nacional: die Spiele heute (Endrunde)
+führt FootyStats nicht – Paarungen beim Nutzer erfragt.
+
+7. **Eldense – Sabadell** – Schritt 1: Sabadell 1 Sieg aus 6 (1-3-2) scheidet aus. Schritt 2:
+   Eldense 3 Siege aus 6 (3-0-3) → klare Seite → **Sieg Eldense.** Schritt 4: nicht alles dagegen –
+   Sabadell auswärts 1-3-3, FootyStats xG 1,68 : 1,43. Knapp: Eldense verlor die letzten 3 ohne
+   eigenes Tor (0:2, 0:2, 0:2), die 3 Siege liegen davor.
+8. **Eibar – Cádiz** – Schritt 1/2: Eibar 2-2-2, Cádiz 2-0-4 → keine klare Seite. Schritt 3: Eibar
+   traf in jedem Heimspiel der Saison, in 4 der letzten 5 trafen beide; Cádiz auswärts nie zu null,
+   80 % beide treffen; FootyStats beide treffen 74 %. → **Beide treffen – Ja.** Knapp: ohne
+   Vorschau; die Duelle endeten meist torarm (beide treffen nur 1 von 6).
+9. **Danubio – Liverpool Montevideo** – Schritt 1/2: Danubio 3-1-2, Liverpool 5-1-0, Danubio daheim
+   nicht sieglos → keine klare Seite. Schritt 3: Liverpool in den letzten 6 Spielen 8:1 Tore, alle
+   6 unter 2,5, 3-mal zu null in den letzten 5; Danubio daheim 65 % unter 2,5; FootyStats über
+   2,5 nur 40 %. → **Unter 2,5.** Knapp: ohne Vorschau; Danubios letzte 6 zu 67 % über 2,5.
+
