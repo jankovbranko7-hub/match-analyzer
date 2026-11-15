@@ -17,6 +17,7 @@ Tipps ca. 15:38, alle vor Anpfiff.
 | 7 | 18:30 | Eldense – Sabadell (Segunda) | 8584492 | 2 | Sieg Eldense | knapp (ohne Vorschau) | – | |
 | 8 | 18:30 | Eibar – Cádiz (Segunda) | 8584499 | 3 | Beide treffen – Ja | knapp (ohne Vorschau) | – | |
 | 9 | 20:30 | Danubio – Liverpool Montevideo (URU) | 8748734 | 3 | Unter 2,5 Tore | knapp (ohne Vorschau) | – | |
+| 10 | 00:00 (16.11.) | Panama – Curaçao (CONCACAF Nations League, Viertelfinale Rückspiel) | 8732803 | 2 | Sieg Curaçao | knapp | 0:0 (Curaçao weiter i. E.) | |
 
 ## Begründung
 
@@ -69,4 +70,15 @@ führt FootyStats nicht – Paarungen beim Nutzer erfragt.
    nicht sieglos → keine klare Seite. Schritt 3: Liverpool in den letzten 6 Spielen 8:1 Tore, alle
    6 unter 2,5, 3-mal zu null in den letzten 5; Danubio daheim 65 % unter 2,5; FootyStats über
    2,5 nur 40 %. → **Unter 2,5.** Knapp: ohne Vorschau; Danubios letzte 6 zu 67 % über 2,5.
+
+### Nachtrag (Tipp ca. 18:01, vor Anpfiff): Panama – Curaçao – Sports Mole + FootyStats
+
+10. **Panama – Curaçao** (Hinspiel 0:0) – Schritt 1: Panama 0 Siege aus den letzten 6 (0-4-2), laut
+    Sports Mole seit 8 Länderspielen ohne Sieg nach 90 Minuten – scheidet aus. Schritt 2: Curaçao
+    3 Siege aus 6 (3-2-1) → klare Seite → **Sieg Curaçao.** Schritt 4: nicht alles dagegen –
+    Curaçao in der Nations League 10 Spiele ungeschlagen, in Mittelamerika nie verloren (4:3 in
+    Costa Rica); Panama traf in jedem der letzten 8 Spiele höchstens 1-mal; FootyStats Punkte pro
+    Spiel 1,0 : 2,2. Knapp: Panama verlor daheim noch nie in der K.-o.-Phase der Nations League und
+    seit 2024 nicht gegen ein Karibik-Team; Curaçao schlug Panama noch nie (2 Siege Panama, 2 Remis).
+    Team News: keine Ausfälle gemeldet, Curaçao mit Room im Tor (2 Spiele zu null).
 
