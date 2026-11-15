@@ -29,8 +29,9 @@ Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System
 
 ## Eingang je Spiel: Forebet-Vorschau und Forebet-Statistikseite
 
-Der Nutzer schickt je Spiel die Forebet-Vorschau und, wo vorhanden, die Seite „Prediction / Stats /
-H2H“ (als PDF, Text oder Screenshot). Ohne Forebet-Vorschau wird kein Spiel bewertet. Die Abschnitte unterscheiden sich
+Der Nutzer schickt je Spiel nur die Forebet-Vorschau (als PDF, Text oder Screenshot) – ohne die
+Seite „Prediction / Stats / H2H“ (Wunsch des Nutzers vom 15.11.2026); die Zahlen kommen aus
+FootyStats. Ohne Forebet-Vorschau wird kein Spiel bewertet. Die Abschnitte unterscheiden sich
 von Spiel zu Spiel; verwendet wird alles, was vorhanden ist:
 - Teamnews und voraussichtliche Aufstellungen
 - Prognose (Wahrscheinlichkeit, erwartetes Ergebnis) – nur zum Vergleich, nicht für den Tipp
