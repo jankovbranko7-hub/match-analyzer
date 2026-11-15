@@ -82,3 +82,22 @@ führt FootyStats nicht – Paarungen beim Nutzer erfragt.
     seit 2024 nicht gegen ein Karibik-Team; Curaçao schlug Panama noch nie (2 Siege Panama, 2 Remis).
     Team News: keine Ausfälle gemeldet, Curaçao mit Room im Tor (2 Spiele zu null).
 
+## Alternative je Spiel (Wunsch des Nutzers, ca. 18:25)
+
+Zusätzlich zum Haupttipp die beste Wettart aus dem jeweils anderen Weg (bei Sieg-Tipp das klarste
+Torsignal aus Schritt 3, bei Tor-Tipp der nächstklare Markt). Der Haupttipp bleibt unverändert;
+beide werden ausgewertet. Nr. 1 und 2 nach Anpfiff ergänzt (Spielstand unbekannt).
+
+| Nr. | Spiel | Haupttipp | Einstufung | Alternative | Einstufung | Warum |
+|---|---|---|---|---|---|---|
+| 1 | Belarus – Albanien | Beide treffen – Nein | knapp | Unter 2,5 | knapp | Belarus' Gruppenspiele 4 von 5 unter 2,5; Albaniens 3 von 5 über 2,5 |
+| 2 | Finnland – San Marino | Beide treffen – Nein | knapp | Sieg Finnland | knapp | San Marino 20 Spiele sieglos, 10 Auswärtsniederlagen in Folge; Finnland aber nur 2 Siege aus 6, in 3 der letzten 4 ohne Tor |
+| 3 | Belgien – Italien | Beide treffen – Ja | knapp | Über 2,5 | knapp | Belgiens letzte 6 zu 67 % über 2,5, FootyStats 60 %; Belgien daheim nur 50 % |
+| 4 | Kroatien – Tschechien | Über 2,5 | knapp | Beide treffen – Ja | knapp | Kroatien 5 von 6 beide treffen, Duelle 80 %; Tschechien traf nur in 2 der letzten 6 |
+| 5 | Frankreich – Türkei | Sieg Frankreich | knapp | Beide treffen – Ja | knapp | Frankreich daheim 100 % beide treffen, ohne Saliba und Upamecano; Türkei in 2 von 5 Gruppenspielen ohne Tor |
+| 6 | Spanien – England | Über 2,5 | klar | Beide treffen – Ja | knapp | Spanien daheim 100 %, Duelle 83 %; England auswärts in der Gruppe immer zu null |
+| 7 | Eldense – Sabadell | Sieg Eldense | knapp | Unter 2,5 | knapp (ohne Vorschau) | Beide letzten 6 zu 67 % unter 2,5, Sabadell auswärts 71 %; Eldense ohne Tor in den letzten 3 |
+| 8 | Eibar – Cádiz | Beide treffen – Ja | knapp | Über 2,5 | knapp (ohne Vorschau) | Eibars letzte 9 Spiele je mindestens 2 Tore, Cádiz' letzte 6 zu 67 % über 2,5 |
+| 9 | Danubio – Liverpool Montevideo | Unter 2,5 | knapp | Sieg Liverpool | knapp (ohne Vorschau) | Liverpool 5-1-0, Tabellenführer, 7 Spiele ungeschlagen; Danubio aber 3 Siege aus 6 |
+| 10 | Panama – Curaçao | Sieg Curaçao | knapp | **Unter 2,5** | **klar** | Panama in 8 Spielen je höchstens 1 Tor, zuletzt 4-mal höchstens 1 Gegentor; Hinspiel 0:0; FootyStats über 2,5 nur 20 % |
+
