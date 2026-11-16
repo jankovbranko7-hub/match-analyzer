@@ -8,16 +8,16 @@ Tipps ca. 15:38, alle vor Anpfiff.
 
 | Nr. | Anstoß | Spiel | match_id | Schritt | Tipp | Einstufung | Sports Mole „We say“ | Ergebnis |
 |---|---|---|---|---|---|---|---|---|
-| 1 | 18:00 | Belarus – Albanien | 8474848 | 3 | Beide treffen – Nein | knapp | 1:1 | |
-| 2 | 18:00 | Finnland – San Marino | 8474859 | 3 | Beide treffen – Nein | knapp | 4:0 | |
-| 3 | 20:45 | Belgien – Italien | 8474818 | 3 | Beide treffen – Ja | knapp | 2:2 | |
-| 4 | 20:45 | Kroatien – Tschechien | 8474837 | 3 | Über 2,5 Tore | knapp | 2:1 | |
-| 5 | 20:45 | Frankreich – Türkei | 8474865 | 2 | Sieg Frankreich | knapp | 3:1 | |
-| 6 | 20:45 | Spanien – England | 8474817 | 3 | Über 2,5 Tore | klar | 3:1 | |
-| 7 | 18:30 | Eldense – Sabadell (Segunda) | 8584492 | 2 | Sieg Eldense | knapp (ohne Vorschau) | – | |
-| 8 | 18:30 | Eibar – Cádiz (Segunda) | 8584499 | 3 | Beide treffen – Ja | knapp (ohne Vorschau) | – | |
-| 9 | 20:30 | Danubio – Liverpool Montevideo (URU) | 8748734 | 3 | Unter 2,5 Tore | knapp (ohne Vorschau) | – | |
-| 10 | 00:00 (16.11.) | Panama – Curaçao (CONCACAF Nations League, Viertelfinale Rückspiel) | 8732803 | 2 | Sieg Curaçao | knapp | 0:0 (Curaçao weiter i. E.) | |
+| 1 | 18:00 | Belarus – Albanien | 8474848 | 3 | Beide treffen – Nein | knapp | 1:1 || 0:2 ✅ |
+| 2 | 18:00 | Finnland – San Marino | 8474859 | 3 | Beide treffen – Nein | knapp | 4:0 || 7:2 ❌ |
+| 3 | 20:45 | Belgien – Italien | 8474818 | 3 | Beide treffen – Ja | knapp | 2:2 || 4:1 ✅ |
+| 4 | 20:45 | Kroatien – Tschechien | 8474837 | 3 | Über 2,5 Tore | knapp | 2:1 || 2:1 ✅ |
+| 5 | 20:45 | Frankreich – Türkei | 8474865 | 2 | Sieg Frankreich | knapp | 3:1 || 2:1 ✅ |
+| 6 | 20:45 | Spanien – England | 8474817 | 3 | Über 2,5 Tore | klar | 3:1 || 2:3 ✅ |
+| 7 | 18:30 | Eldense – Sabadell (Segunda) | 8584492 | 2 | Sieg Eldense | knapp (ohne Vorschau) | – || 2:0 ✅ |
+| 8 | 18:30 | Eibar – Cádiz (Segunda) | 8584499 | 3 | Beide treffen – Ja | knapp (ohne Vorschau) | – || 1:1 ✅ |
+| 9 | 20:30 | Danubio – Liverpool Montevideo (URU) | 8748734 | 3 | Unter 2,5 Tore | knapp (ohne Vorschau) | – || 1:2 ❌ |
+| 10 | 00:00 (16.11.) | Panama – Curaçao (CONCACAF Nations League, Viertelfinale Rückspiel) | 8732803 | 2 | Sieg Curaçao | knapp | 0:0 (Curaçao weiter i. E.) || 2:0 ❌ |
 
 ## Begründung
 
@@ -117,3 +117,29 @@ Aus Haupt- und Alternativtipps, nur Spiele mit Sports-Mole-Vorschau, die noch ni
 | Frankreich – Türkei | Sieg Frankreich | Haupttipp | knapp |
 
 Vom Nutzer gespielt (Screenshot 18:52): die 5er-Kombi genau wie oben – alle 5 Wetten stimmen.
+
+## Auswertung Testlauf 15./16.11.2026 (Ergebnisse aus FootyStats)
+
+| Nr. | Spiel | Ergebnis | Haupttipp | | Alternative | | Sports Mole „We say“ | |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Belarus – Albanien | 0:2 | Beide treffen – Nein (knapp) | ✅ | Unter 2,5 (knapp) | ✅ | 1:1 | ❌ |
+| 2 | Finnland – San Marino | 7:2 | Beide treffen – Nein (knapp) | ❌ | Sieg Finnland (knapp) | ✅ | 4:0 | ✅ |
+| 3 | Belgien – Italien | 4:1 | Beide treffen – Ja (knapp) | ✅ | Über 2,5 (knapp) | ✅ | 2:2 | ❌ |
+| 4 | Kroatien – Tschechien | 2:1 | Über 2,5 (knapp) | ✅ | Beide treffen – Ja (knapp) | ✅ | 2:1 | ✅ |
+| 5 | Frankreich – Türkei | 2:1 | Sieg Frankreich (knapp) | ✅ | Beide treffen – Ja (knapp) | ✅ | 3:1 | ✅ |
+| 6 | Spanien – England | 2:3 | Über 2,5 (klar) | ✅ | Beide treffen – Ja (knapp) | ✅ | 3:1 | ❌ |
+| 7 | Eldense – Sabadell | 2:0 | Sieg Eldense (ohne Vorschau) | ✅ | – | | – | |
+| 8 | Eibar – Cádiz | 1:1 | Beide treffen – Ja (ohne Vorschau) | ✅ | – | | – | |
+| 9 | Danubio – Liverpool | 1:2 | Unter 2,5 (ohne Vorschau) | ❌ | – | | – | |
+| 10 | Panama – Curaçao | 2:0 | Sieg Curaçao (knapp) | ❌ | Unter 2,5 (klar) | ✅ | 0:0 | ❌ |
+
+- Haupttipps: **7 von 10** – mit Sports-Mole-Vorschau 5 von 7, nur FootyStats 2 von 3.
+- Alternativen (nur mit Sports-Mole-Vorschau): **7 von 7**.
+- Klar eingestuft: Haupttipp Spanien – England ✅, Alternative Panama – Curaçao ✅ – 2 von 2.
+- 5er-Kombi des Nutzers (Kroatien über 2,5, Spanien über 2,5, Belgien beide treffen,
+  Frankreich Sieg, Panama unter 2,5): **5 von 5 – gewonnen.**
+- Sports Mole „We say“ (Sieger/Remis): 3 von 7.
+- Auffällig: Bei Panama – Curaçao war die Alternative (klar) richtig und der Haupttipp aus
+  Schritt 2 (knapp) falsch – genau der Fall, für den die Alternative gedacht ist. Kleine Stichprobe
+  (1 Tag), nicht Teil des Forebet-Checks.
+
