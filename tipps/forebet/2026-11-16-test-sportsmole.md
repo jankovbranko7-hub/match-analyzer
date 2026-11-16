@@ -8,20 +8,20 @@ Ist der Haupttipp knapp und eine Alternative klar, wird die Alternative der Tipp
 
 | Nr. | Anstoß | Spiel | match_id | Haupttipp (Schritt) | | Alternative | | **Endtipp** | Ergebnis |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 14:00 | Namibia – Kamerun (Afrika-Cup-Quali) | 8723213 | Sieg Kamerun (2) | knapp | Unter 2,5 | **klar** | **Unter 2,5** | |
-| 2 | 14:00 | Sudan – Senegal (Afrika-Cup-Quali) | 8723218 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja | |
-| 3 | 16:00 | Somalia – Ghana (Afrika-Cup-Quali) | 8723253 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** | |
-| 4 | 16:00 | Färöer – Moldau | 8474845 | Beide treffen – Ja (3) | knapp | Unter 2,5 | knapp | Beide treffen – Ja | |
-| 5 | 16:00 | Kasachstan – Slowakei | 8474858 | Sieg Slowakei (2) | knapp | Beide treffen – Ja | knapp | Sieg Slowakei | |
-| 6 | 17:00 | Zentralafrik. Rep. – Benin (Afrika-Cup-Quali) | 8723248 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja | |
-| 7 | 18:00 | Estland – Bulgarien | 8474847 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** | |
-| 8 | 18:00 | Island – Luxemburg | 8507029 | Beide treffen – Nein (3) | knapp | Sieg Island | knapp | Beide treffen – Nein | |
-| 9 | 18:00 | Litauen – Liechtenstein | 8474863 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** | |
-| 10 | 20:45 | Nordmazedonien – Slowenien | 8474843 | Beide treffen – Nein (3) | knapp | Sieg Slowenien | knapp | Beide treffen – Nein | |
-| 11 | 20:45 | Deutschland – Niederlande | 8474869 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja | |
-| 12 | 20:45 | Gibraltar – Malta | 8507032 | Sieg Malta (2) | knapp | Unter 2,5 | **klar** | **Unter 2,5** | |
-| 13 | 20:45 | Griechenland – Serbien | 8474836 | Über 2,5 (3) | knapp | Beide treffen – Ja | knapp | Über 2,5 | |
-| 14 | 20:45 | Schweiz – Schottland | 8474903 | Beide treffen – Nein (3) | knapp | Sieg Schweiz | knapp | Beide treffen – Nein | |
+| 1 | 14:00 | Namibia – Kamerun (Afrika-Cup-Quali) | 8723213 | Sieg Kamerun (2) | knapp | Unter 2,5 | **klar** | **Unter 2,5** || 0:3 ❌ |
+| 2 | 14:00 | Sudan – Senegal (Afrika-Cup-Quali) | 8723218 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja || 2:4 ✅ |
+| 3 | 16:00 | Somalia – Ghana (Afrika-Cup-Quali) | 8723253 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** || 0:1 ✅ |
+| 4 | 16:00 | Färöer – Moldau | 8474845 | Beide treffen – Ja (3) | knapp | Unter 2,5 | knapp | Beide treffen – Ja || 1:0 ❌ |
+| 5 | 16:00 | Kasachstan – Slowakei | 8474858 | Sieg Slowakei (2) | knapp | Beide treffen – Ja | knapp | Sieg Slowakei || 2:2 ❌ |
+| 6 | 17:00 | Zentralafrik. Rep. – Benin (Afrika-Cup-Quali) | 8723248 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja || 0:1 ❌ |
+| 7 | 18:00 | Estland – Bulgarien | 8474847 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** || 2:1 ❌ |
+| 8 | 18:00 | Island – Luxemburg | 8507029 | Beide treffen – Nein (3) | knapp | Sieg Island | knapp | Beide treffen – Nein || 3:0 ✅ |
+| 9 | 18:00 | Litauen – Liechtenstein | 8474863 | Beide treffen – Nein (3) | **klar** | Unter 2,5 | knapp | **Beide treffen – Nein** || 2:1 ❌ |
+| 10 | 20:45 | Nordmazedonien – Slowenien | 8474843 | Beide treffen – Nein (3) | knapp | Sieg Slowenien | knapp | Beide treffen – Nein || 0:3 ✅ |
+| 11 | 20:45 | Deutschland – Niederlande | 8474869 | Beide treffen – Ja (3) | knapp | Über 2,5 | knapp | Beide treffen – Ja || 5:0 ❌ |
+| 12 | 20:45 | Gibraltar – Malta | 8507032 | Sieg Malta (2) | knapp | Unter 2,5 | **klar** | **Unter 2,5** || 1:1 ✅ |
+| 13 | 20:45 | Griechenland – Serbien | 8474836 | Über 2,5 (3) | knapp | Beide treffen – Ja | knapp | Über 2,5 || 1:0 ❌ |
+| 14 | 20:45 | Schweiz – Schottland | 8474903 | Beide treffen – Nein (3) | knapp | Sieg Schweiz | knapp | Beide treffen – Nein || 4:0 ✅ |
 
 ## Begründung (kurz)
 
@@ -92,3 +92,35 @@ Nordmazedonien – Slowenien beide treffen – Nein · Schweiz – Schottland be
 - 6er-Kombi aus knappen Tipps wie oben (Zentralafrik. Rep. – Benin vom Nutzer auf „Ja“ korrigiert).
 - Vorschlag 7er-Schein (Wunsch des Nutzers, ca. 15:52): die 5 klaren Endtipps + die 2 stärksten knappen
   (Island – Luxemburg beide treffen – Nein, Zentralafrik. Rep. – Benin beide treffen – Ja).
+
+## Auswertung Testlauf 16.11.2026 (Ergebnisse aus FootyStats; Spalte „Ergebnis“ = Endtipp)
+
+| Nr. | Spiel | Ergebnis | Haupttipp | | Alternative | | Endtipp | |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Namibia – Kamerun | 0:3 | Sieg Kamerun (knapp) | ✅ | Unter 2,5 (klar) | ❌ | Unter 2,5 (klar) | ❌ |
+| 2 | Sudan – Senegal | 2:4 | Beide treffen – Ja (knapp) | ✅ | Über 2,5 | ✅ | Beide treffen – Ja | ✅ |
+| 3 | Somalia – Ghana | 0:1 | Beide treffen – Nein (klar) | ✅ | Unter 2,5 | ✅ | Beide treffen – Nein (klar) | ✅ |
+| 4 | Färöer – Moldau | 1:0 | Beide treffen – Ja (knapp) | ❌ | Unter 2,5 | ✅ | Beide treffen – Ja | ❌ |
+| 5 | Kasachstan – Slowakei | 2:2 | Sieg Slowakei (knapp) | ❌ | Beide treffen – Ja | ✅ | Sieg Slowakei | ❌ |
+| 6 | Zentralafrik. Rep. – Benin | 0:1 | Beide treffen – Ja (knapp) | ❌ | Über 2,5 | ❌ | Beide treffen – Ja | ❌ |
+| 7 | Estland – Bulgarien | 2:1 | Beide treffen – Nein (klar) | ❌ | Unter 2,5 | ❌ | Beide treffen – Nein (klar) | ❌ |
+| 8 | Island – Luxemburg | 3:0 | Beide treffen – Nein (knapp) | ✅ | Sieg Island | ✅ | Beide treffen – Nein | ✅ |
+| 9 | Litauen – Liechtenstein | 2:1 | Beide treffen – Nein (klar) | ❌ | Unter 2,5 | ❌ | Beide treffen – Nein (klar) | ❌ |
+| 10 | Nordmazedonien – Slowenien | 0:3 | Beide treffen – Nein (knapp) | ✅ | Sieg Slowenien | ✅ | Beide treffen – Nein | ✅ |
+| 11 | Deutschland – Niederlande | 5:0 | Beide treffen – Ja (knapp) | ❌ | Über 2,5 | ✅ | Beide treffen – Ja | ❌ |
+| 12 | Gibraltar – Malta | 1:1 | Sieg Malta (knapp) | ❌ | Unter 2,5 (klar) | ✅ | Unter 2,5 (klar) | ✅ |
+| 13 | Griechenland – Serbien | 1:0 | Über 2,5 (knapp) | ❌ | Beide treffen – Ja | ❌ | Über 2,5 | ❌ |
+| 14 | Schweiz – Schottland | 4:0 | Beide treffen – Nein (knapp) | ✅ | Sieg Schweiz | ✅ | Beide treffen – Nein | ✅ |
+
+- Haupttipps **6 von 14**, Endtipps (Regel des Nutzers) **6 von 14** – die Regel gewann Gibraltar –
+  Malta und verlor Namibia – Kamerun. Alternativen **9 von 14**.
+- Klare Endtipps **2 von 5** (Somalia, Gibraltar ✅; Namibia, Estland, Litauen ❌), knappe 4 von 9.
+- Scheine: 5er (klare Tipps) 2 von 5 – verloren; 6er (knappe Tipps) 4 von 6 – verloren;
+  7er-Vorschlag 3 von 7 – verloren.
+- Auffällig: drei „Team trifft kaum“-Tipps platzten am letzten Spieltag – Liechtenstein traf zum
+  ersten Mal in der Gruppe, Bulgarien traf in Estland, Kamerun schoss in Namibia 3 Tore.
+
+**Beide Testtage zusammen (15. und 16.11.):** Haupttipps 13 von 24 (54 %), Endtipps 14 von 24
+(58 %), klare Endtipps 4 von 7, Alternativen 16 von 21 (76 %). Zum Vergleich der Forebet-Check
+(Forebet + FootyStats) seit Version 2.3: 26 von 35 (74 %), am 14.11. klare Tipps 5 von 5.
+
