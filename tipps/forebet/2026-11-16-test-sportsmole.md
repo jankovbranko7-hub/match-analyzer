@@ -84,3 +84,9 @@ dort immer beide getroffen, FootyStats 80 %; knapp: Slowakei zuletzt 2-mal in 5 
 Endstand der 6er-Kombi: Kasachstan – Slowakei beide treffen – Ja · Färöer – Moldau beide treffen – Ja ·
 Zentralafrik. Rep. – Benin beide treffen – Ja · Island – Luxemburg beide treffen – Nein ·
 Nordmazedonien – Slowenien beide treffen – Nein · Schweiz – Schottland beide treffen – Nein.
+
+**Vom Nutzer gespielt (Screenshots 02:50/02:51):**
+- 5er-Kombi aus den 5 klaren Endtipps: Namibia – Kamerun unter 2,5 · Somalia – Ghana beide treffen –
+  Nein · Estland – Bulgarien beide treffen – Nein · Litauen – Liechtenstein beide treffen – Nein ·
+  Gibraltar – Malta unter 2,5.
+- 6er-Kombi aus knappen Tipps wie oben (Zentralafrik. Rep. – Benin vom Nutzer auf „Ja“ korrigiert).
