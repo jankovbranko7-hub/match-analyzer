@@ -90,3 +90,5 @@ Nordmazedonien – Slowenien beide treffen – Nein · Schweiz – Schottland be
   Nein · Estland – Bulgarien beide treffen – Nein · Litauen – Liechtenstein beide treffen – Nein ·
   Gibraltar – Malta unter 2,5.
 - 6er-Kombi aus knappen Tipps wie oben (Zentralafrik. Rep. – Benin vom Nutzer auf „Ja“ korrigiert).
+- Vorschlag 7er-Schein (Wunsch des Nutzers, ca. 15:52): die 5 klaren Endtipps + die 2 stärksten knappen
+  (Island – Luxemburg beide treffen – Nein, Zentralafrik. Rep. – Benin beide treffen – Ja).
