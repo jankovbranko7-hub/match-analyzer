@@ -77,3 +77,10 @@ beide treffen – Ja · Island – Luxemburg beide treffen – Nein · Nordmazed
 treffen – Nein · Schweiz – Schottland beide treffen – Nein. Nicht aufgenommen: Kasachstan – Slowakei
 (Rotation), Deutschland – Niederlande (Deutschland daheim nie beide getroffen), Griechenland –
 Serbien (Griechenland nur 50 % über 2,5).
+
+**Kombi geändert (Wunsch des Nutzers):** Sudan – Senegal (beide treffen – Ja, FootyStats 67 %) raus,
+dafür Kasachstan – Slowakei **beide treffen – Ja** (Alternative; Kasachstan traf in allen letzten 6,
+dort immer beide getroffen, FootyStats 80 %; knapp: Slowakei zuletzt 2-mal in 5 zu null).
+Endstand der 6er-Kombi: Kasachstan – Slowakei beide treffen – Ja · Färöer – Moldau beide treffen – Ja ·
+Zentralafrik. Rep. – Benin beide treffen – Ja · Island – Luxemburg beide treffen – Nein ·
+Nordmazedonien – Slowenien beide treffen – Nein · Schweiz – Schottland beide treffen – Nein.
