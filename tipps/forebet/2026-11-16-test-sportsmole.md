@@ -68,3 +68,12 @@ Ist der Haupttipp knapp und eine Alternative klar, wird die Alternative der Tipp
 14. **Schweiz – Schottland:** Schweiz 4-1-1, Schottland 2-1-3 und auswärts mit Sieg → keine klare
     Seite. Schweiz 80 % zu null, Schottland auswärts nie beide getroffen; FootyStats 30 %. Knapp:
     Schweiz daheim 2:1 gegen Slowenien; Manzambi fehlt.
+
+## 6er-Kombi aus knappen Tipps (Wunsch des Nutzers, ca. 02:35)
+
+Die 6 stärksten der 9 knappen Endtipps (am wenigsten Gegenangaben, FootyStats am deutlichsten):
+Sudan – Senegal beide treffen – Ja · Färöer – Moldau beide treffen – Ja · Zentralafrik. Rep. – Benin
+beide treffen – Ja · Island – Luxemburg beide treffen – Nein · Nordmazedonien – Slowenien beide
+treffen – Nein · Schweiz – Schottland beide treffen – Nein. Nicht aufgenommen: Kasachstan – Slowakei
+(Rotation), Deutschland – Niederlande (Deutschland daheim nie beide getroffen), Griechenland –
+Serbien (Griechenland nur 50 % über 2,5).
