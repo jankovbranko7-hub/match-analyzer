@@ -1,4 +1,4 @@
-# Forebet-Check (System B) · Version 2.10
+# Forebet-Check (System B) · Version 2.11
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
@@ -8,7 +8,8 @@ Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Vers
 den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6); „stark“ nur noch, wenn wirklich
 alles Relevante gegen den Tipp spricht, festgelegt am 14.11.2026 (Version 2.7); FootyStats einzige Datenquelle, Odd-Alerts-API gestrichen am
 14.11.2026 (Version 2.8); Odd Alerts ganz gestrichen (auch die Vorschau), Auswertung je Wettart am
-14.11.2026 (Version 2.9); Einstufung „klar“/„knapp“ je Tipp am 14.11.2026 (Version 2.10). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+14.11.2026 (Version 2.9); Einstufung „klar“/„knapp“ je Tipp am 14.11.2026 (Version 2.10); Alternative je Spiel als Information,
+nach dem Test mit Sports Mole am 16.11.2026 (Version 2.11; Sports Mole wird nicht verwendet). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -116,14 +117,22 @@ in welchem Schritt der Tipp entstanden ist.
 3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach) und einer klaren
    **Einstufung: klar** (die Daten aus Rang 1–2 zeigen alle in Richtung des Tipps) oder **knapp**
    (eine Angabe aus Rang 1–2 zeigt in die andere Richtung) – mit einem Satz, warum.
-4. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
+4. **Alternative** (seit Version 2.11, nur Information): die beste Wettart aus dem jeweils anderen
+   Weg – beim Sieg-Tipp das klarste Torsignal aus Schritt 3, beim Tor-Tipp der nächstklare der sechs
+   Märkte –, ebenfalls mit Einstufung klar/knapp. Sie **ändert den Tipp nicht**; sie wird mit
+   ausgewertet, um zu sehen, ob sie auf Dauer öfter trifft.
+5. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
+
+**Darstellung der Tagesübersicht** (Wunsch des Nutzers): Tabelle mit Anstoß, Spiel, Tipp und
+Alternative; die Einstufung steht unter der Wettart (✅ klar, ⚠️ knapp); darunter je Spiel eine
+Zeile mit der kurzen Begründung. In der Auswertung steht richtig/falsch in eigenen Spalten.
 
 ## Tagesliste
 
 Alle Tipps eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
 Spalte „Prognose (Vergleich)“) und werden dort nach
 Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, getrennt für Claudes Tipp und die
-Prognose, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein, über/unter 2,5) für den
+Prognose, getrennt für die Alternative und für klare/knappe Tipps, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein, über/unter 2,5) für den
 Tag und seit Version 2.3 gesamt; keine Einheiten/Quoten. Bleibt „Beide treffen – Ja“ die
 schwächste Wettart, schlägt Claude dem Nutzer vor, sie zu streichen.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.
