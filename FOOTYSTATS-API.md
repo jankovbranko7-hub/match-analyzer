@@ -34,3 +34,4 @@ werden im Forebet-Check v2 nicht verwendet.
 | Champions League | 17128 | Europa League | 17127 |
 | Conference League | 17130 | Griechenland | 17356 |
 | Nations League 2026/27 | 16808 | WM-Quali Europa (2026) | 13964 |
+| Brasilien Série A (2026) | 16544 | Brasilien Série B (2026) | 16783 |
