@@ -164,6 +164,26 @@ Tag und seit Version 2.3 gesamt; keine Einheiten/Quoten. Bleibt „Beide treffen
 schwächste Wettart, schlägt Claude dem Nutzer vor, sie zu streichen.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.
 
+**Häkchen für klar/knapp (seit 19.11.2026, Wunsch des Nutzers):** Die Häkchen „Form“ und
+„Saison am Spielort“ berechnet `werkzeuge/fs_haekchen.py` aus FootyStats nach festen Regeln
+(„zeigt zum Tipp“ = mindestens die Hälfte der Spiele in Richtung des Tipps; Saison erst ab 4
+Spielen am Spielort) – Claude beurteilt sie nicht selbst. Das Häkchen „Ausfälle/Motivation“
+setzt Claude aus der Vorschau und nennt den Grund. Klar = alle Häkchen ✓ (Saison „–“ zählt nicht
+dagegen). In der Tagesliste steht je Spiel die Häkchen-Zeile; in der Begründungszeile im Chat
+stehen die gelesenen Ausfälle je Team („Ausfälle: Heim: …, Gast: …“). Alle Zahlen kommen aus den
+FootyStats-Skripten.
+
+**Prüfzeile:** Unter jeder Analyse steht eine Zeile „Prüfung: …“ – wie viele Tipps regelkonform,
+Zahlen gegen FootyStats geprüft, was unsicher ist.
+
+**Kontrollfrage des Nutzers (seit 19.11.2026):** Nach jeder Analyse stellt der Nutzer diese eine
+Frage; Claude beantwortet jeden der fünf Punkte einzeln mit ✓ oder mit der Korrektur und ändert
+bei einem Fehler die Tagesliste:
+> „Kontrolle: Hast du bei jedem Spiel die Ausfälle richtig gelesen und dem richtigen Team
+> zugeordnet, alle Häkchen nach demselben Maßstab gesetzt, jede Zahl mit FootyStats belegt, mir
+> alles gezeigt, was gegen einen Tipp spricht, und jeden Tipp nach den Regeln von Version 2.12
+> gefunden?“
+
 **Prüfprotokoll (seit Version 2.12, wie am 08.11.):** Vor dem Abschicken wird jeder Tipp in der
 Tagesliste geprüft: erlaubter Markt (Regel 5) · Schritt 1 (Siege aus 6, Motivation) · Richtung
 aus Rang 1–2 inkl. Ausfälle (Regel 2, 9) · Saison am Spielort · Forebet-Prognose nicht verwendet ·
