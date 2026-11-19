@@ -1,4 +1,4 @@
-# Forebet-Check (System B) · Version 2.10
+# Forebet-Check (System B) · Version 2.12
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
@@ -10,7 +10,12 @@ alles Relevante gegen den Tipp spricht, festgelegt am 14.11.2026 (Version 2.7); 
 14.11.2026 (Version 2.8); Odd Alerts ganz gestrichen (auch die Vorschau), Auswertung je Wettart am
 14.11.2026 (Version 2.9); Einstufung „klar“/„knapp“ je Tipp am 14.11.2026 (Version 2.10). Die Alternative je Spiel
 (Version 2.11 vom 16.11.) am 17.11.2026 auf Wunsch des Nutzers wieder gestrichen: Es gilt Version 2.10
-– Forebet-Vorschau + FootyStats, Einstufung klar/knapp so angewendet wie am 14.11.2026. Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
+– Forebet-Vorschau + FootyStats, Einstufung klar/knapp so angewendet wie am 14.11.2026.
+Version 2.12 am 19.11.2026 auf Wunsch des Nutzers (Rückkehr zur Arbeitsweise vom 08.11.):
+Ausfälle bestimmen den Tipp mit, Motivation gehört zu Rang 1 (kein Sieg-Tipp für ein Team, für
+das es um nichts mehr geht), „klar“ nur wenn Ausfälle, Form und Saison am Spielort in dieselbe
+Richtung zeigen (gestützt durch die Datenanalyse `tipps/forebet/test-klar-datenanalyse.md`),
+Prüfprotokoll je Tag. Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
 Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
 
 ## Grundsätze
@@ -59,7 +64,7 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als
 
 | Rang | Information | Quelle |
 |---|---|---|
-| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal) | Forebet-Vorschau |
+| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal), **Motivation** (geht es für das Team noch um etwas?) | Forebet-Vorschau |
 | 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | Vorschau („Aktuelle Form“, „Haupttrends“) + Forebet-Statistikseite + FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) |
 | 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats + Vorschau („Gesamtbild in der Liga“) |
 | 4 | Direktvergleiche und lange Trends (z. B. „16 der letzten 20“) | beide |
@@ -68,7 +73,9 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als
 ## Entscheidungsweg je Spiel (Schritt 1–4, immer in dieser Reihenfolge)
 
 1. **Wer bekommt keinen Sieg-Tipp?** Jedes Team mit höchstens 1 Sieg aus den letzten 6
-   Spielen aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3).
+   Spielen aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3). Ebenso jedes Team, für
+   das es um nichts mehr geht – schon weiter, Gruppensieger, Meister oder abgestiegen
+   (Regel 9, seit Version 2.12).
 2. **Gibt es eine klare Seite?** Ein Team ist die klare Seite, wenn **beides** gilt:
    a) es hat **mindestens 3 Siege aus den letzten 6** Spielen aller Wettbewerbe, und
    b) der **Gegner** ist nach Schritt 1 ausgeschieden (höchstens 1 Sieg in 6) **oder** in dieser
@@ -111,25 +118,41 @@ in welchem Schritt der Tipp entstanden ist.
 8. Zahlen aus der Vorschau, die FootyStats widersprechen, werden kurz vermerkt; es gilt die Zählung
    mit vollständigen Wettbewerben (FootyStats „letzte 6 aller Wettbewerbe“). Steht eine
    Vorschau-Angabe im Widerspruch zu sich selbst oder zu FootyStats, wird sie nicht verwendet.
+9. **Ausfälle und Motivation bestimmen mit (seit Version 2.12, wie am 08.11.).** Ausfälle aus
+   der Vorschau sind nicht nur Bedenken, sie geben die Richtung mit vor:
+   - fehlt einem Team der Stürmer oder fehlen mehrere Angreifer → spricht für „Beide treffen –
+     Nein“ und gegen einen Sieg-Tipp dieses Teams, für den Gegner;
+   - fehlt einem Team die halbe Abwehr oder der Stammtorwart → spricht für Tore des Gegners und
+     für dessen Sieg;
+   - geht es für ein Team um nichts mehr → kein Sieg-Tipp für dieses Team (Schritt 1).
+   Beispiele 08.11.: Angers ohne Stürmer → Sieg Nice; Celta ohne Stürmer → beide treffen – Nein;
+   Le Havre ohne halbe Abwehr → Sieg Lorient.
 
 ## Antwortaufbau je Spiel
 
 1. Rang 1–2: Spielinformationen, aktuelle Form
 2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats, Vorschau)
 3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach) und einer klaren
-   **Einstufung: klar** (die Daten aus Rang 1–2 zeigen in Richtung des Tipps) oder **knapp**
-   (eine **gewichtige** Angabe aus Rang 1–2 zeigt in die andere Richtung) – mit einem Satz, warum.
+   **Einstufung (seit Version 2.12): klar**, wenn **Ausfälle/Motivation (Rang 1), Form (Rang 2)
+   und Saison am Spielort (Rang 3: Heimteam daheim, Gastteam auswärts)** in Richtung des Tipps
+   zeigen; **knapp**, wenn eine **gewichtige** Angabe aus einem dieser drei in die andere Richtung
+   zeigt – mit einem Satz, warum. Saisonwerte am Spielort zählen ab 4 Spielen am Spielort; bei
+   weniger (z. B. Nationalteams) entscheiden Rang 1–2 allein. Direktvergleiche (Rang 4) machen
+   einen Tipp nicht knapp, werden aber immer genannt.
    Gewichtig ist eine Angabe, die den Kern des Tipps trifft – z. B. das Team, das laut Tipp nicht
    treffen soll, traf zuletzt regelmäßig; dem Favoriten fehlen mehrere Stammspieler oder der Grund
    zu gewinnen; ein Team, auf dessen Toren der Über-Tipp beruht, ist ohne seinen Stürmer.
    **Nicht gewichtig** (nur als schwache Bedenke nennen, Einstufung bleibt klar): fragliche
    Spieler, ein einzelnes Gegenbeispiel, Serien gegen andere, stärkere Gegner, die der Gegner im
    Spiel gar nicht nachmachen kann (Maßstab: Tagesliste 14.11.2026).
+   Beim Saisonwert am Spielort ist gewichtig, was dem Tipp klar widerspricht (z. B. Unter 2,5,
+   aber das Gastteam spielt auswärts meist über 2,5).
 4. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
 
 **Darstellung der Tagesübersicht** (Wunsch des Nutzers): Tabelle mit Anstoß, Spiel und Tipp;
 die Einstufung steht unter der Wettart (✅ klar, ⚠️ knapp); darunter je Spiel eine
-Zeile mit der kurzen Begründung. In der Auswertung steht richtig/falsch in eigenen Spalten.
+Zeile mit der kurzen Begründung – auch bei klaren Tipps mit „schwach dagegen: …“, wenn etwas
+dagegen spricht (auch Direktvergleiche). In der Auswertung steht richtig/falsch in eigenen Spalten.
 
 ## Tagesliste
 
@@ -140,3 +163,8 @@ Prognose, getrennt für klare/knappe Tipps, dazu **Treffer je Wettart** (Sieg, b
 Tag und seit Version 2.3 gesamt; keine Einheiten/Quoten. Bleibt „Beide treffen – Ja“ die
 schwächste Wettart, schlägt Claude dem Nutzer vor, sie zu streichen.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.
+
+**Prüfprotokoll (seit Version 2.12, wie am 08.11.):** Vor dem Abschicken wird jeder Tipp in der
+Tagesliste geprüft: erlaubter Markt (Regel 5) · Schritt 1 (Siege aus 6, Motivation) · Richtung
+aus Rang 1–2 inkl. Ausfälle (Regel 2, 9) · Saison am Spielort · Forebet-Prognose nicht verwendet ·
+starke Bedenken (Regel 7) · jede genannte Zahl gegen FootyStats.
