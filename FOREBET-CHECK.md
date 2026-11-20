@@ -1,49 +1,34 @@
-# Forebet-Check (System B) · Version 2.10
+# Forebet-Check (System B) · Version 3.0 – Spielbild
 
-Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
-nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,
-beide treffen und über/unter 2,5 begrenzt am 08.11.2026 (Version 2.3); fester Entscheidungsweg
-Schritt 1–4 am 09.11.2026 (Version 2.4); Odd-Alerts-Vorschau als Ersatz für fehlende
-Forebet-Vorschauen und Odd-Alerts-API als zweite Datenquelle am 09.11.2026 (Version 2.5); „klare Seite“ in Schritt 2 genau nach
-den 6 neu gemachten Tipps vom 08.11. festgelegt am 09.11.2026 (Version 2.6); „stark“ nur noch, wenn wirklich
-alles Relevante gegen den Tipp spricht, festgelegt am 14.11.2026 (Version 2.7); FootyStats einzige Datenquelle, Odd-Alerts-API gestrichen am
-14.11.2026 (Version 2.8); Odd Alerts ganz gestrichen (auch die Vorschau), Auswertung je Wettart am
-14.11.2026 (Version 2.9); Einstufung „klar“/„knapp“ je Tipp am 14.11.2026 (Version 2.10). Ersetzt Version 1 (06.11.2026, Odd Alerts mit Quoten).
-Am 20.11.2026 auf Wunsch des Nutzers auf genau diesen Stand vom 14./15.11.2026 zurückgesetzt
-(Versionen 2.11 und 2.12 sowie die Ergänzungen vom 17.11. gelten nicht mehr).
-Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und vom Spielcheck (System A).
+Vom Nutzer festgelegt am 20.11.2026 als Hauptanalyse. Baut auf Version 2.10 auf (archiviert in
+`archiv/FOREBET-CHECK-2.10.md`): Aus der **Sports-Mole-Vorschau** und **FootyStats** entsteht je Spiel
+ein eigenes **Spielbild**; getippt wird nur ein Markt, der nach diesem Spielbild **klar** ist.
+Ist kein Markt klar, gibt es **keinen Tipp**.
+Versionsgeschichte bis 2.10 siehe Archiv. Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und
+vom Spielcheck (System A).
 
 ## Grundsätze
 
 1. **Keine Quoten.** Quoten, Quotenbewegungen, nötige Trefferquote, Vorteil/fair und
    Buchmacher werden weder abgerufen noch genannt noch als Begründung verwendet.
-2. **Einzige Datenquelle ist FootyStats** (`https://api.football-data-api.com/`), seit Version 2.8.
-   Odd Alerts wird überhaupt nicht mehr verwendet – weder API noch Vorschau (seit Version 2.9).
-   Keine Quotenfelder.
-3. **Die Fakten aus der Forebet-Vorschau und der Forebet-Statistikseite und die Daten aus
-   FootyStats** sind die Grundlage. Sie
-   werden **nicht auf Übereinstimmung** geprüft, sondern nach der **Rangfolge** unten
-   gewichtet; daraus macht Claude **einen eigenen Tipp**.
-4. **Prognosen** – Forebet-Prognose
-   (Wahrscheinlichkeit, erwartetes Ergebnis, Tipp wie „über 2,5“) – fließen **nicht** in den
-   Tipp ein. Sie wird erst nach dem Tipp **zum Vergleich**
-   genannt und in der Tagesliste mitgeführt, damit beide ausgewertet werden können.
+2. **Datenquellen:** Vorschau von **Sports Mole** und Zahlen aus **FootyStats**
+   (`https://api.football-data-api.com/`). Odd Alerts wird nicht verwendet. Keine Quotenfelder.
+3. Die Fakten aus der Vorschau und die Daten aus FootyStats werden nach der **Rangfolge** unten
+   gewichtet; daraus macht Claude ein **eigenes Spielbild** und daraus höchstens **einen Tipp**.
+4. **Prognosen** – „We say“ von Sports Mole (bzw. die Forebet-Prognose, wenn ersatzweise die
+   Forebet-Vorschau verwendet wird) – fließen **nicht** in Spielbild und Tipp ein. Sie werden erst
+   danach **zum Vergleich** genannt und in der Tagesliste mitgeführt.
 
-## Eingang je Spiel: Forebet-Vorschau und Forebet-Statistikseite
+## Eingang je Spiel
 
-Der Nutzer schickt je Spiel nur die Forebet-Vorschau (als PDF, Text oder Screenshot) – ohne die
-Seite „Prediction / Stats / H2H“ (Wunsch des Nutzers vom 15.11.2026); die Zahlen kommen aus
-FootyStats. Ohne Forebet-Vorschau wird kein Spiel bewertet. Die Abschnitte unterscheiden sich
-von Spiel zu Spiel; verwendet wird alles, was vorhanden ist:
-- Teamnews und voraussichtliche Aufstellungen
-- Prognose (Wahrscheinlichkeit, erwartetes Ergebnis) – nur zum Vergleich, nicht für den Tipp
-- Haupttrends
-- Gesamtbild in der Liga
-- Aktuelle Form
-- Direkte Duelle
-- Wichtigste Fakten
+Der Nutzer schickt je Spiel die **Sports-Mole-Vorschau** (PDF, Text oder Screenshot). Verwendet wird
+alles, was vorhanden ist: Team News (Ausfälle, Sperren, Rückkehrer), mögliche Aufstellungen,
+Formleiste, Trainer, Ausgangslage. Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der
+Vorschau gelten als gesetzt.
 
-Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als gesetzt.
+Hat Sports Mole für ein Spiel keine Vorschau (z. B. J-League, Saudi-Arabien, Argentinien), wird
+ersatzweise die **Forebet-Vorschau** auf demselben Weg verwendet; das wird in der Tagesliste
+vermerkt. Ohne Vorschau wird kein Spiel bewertet.
 
 ## FootyStats je Spiel (`werkzeuge/fs_spiel.py`)
 
@@ -58,76 +43,66 @@ Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der Vorschau gelten als
 
 | Rang | Information | Quelle |
 |---|---|---|
-| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal) | Forebet-Vorschau |
-| 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | Vorschau („Aktuelle Form“, „Haupttrends“) + Forebet-Statistikseite + FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) |
-| 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats + Vorschau („Gesamtbild in der Liga“) |
-| 4 | Direktvergleiche und lange Trends (z. B. „16 der letzten 20“) | beide |
-| – | Prognose: Forebet | nur Vergleich, kein Einfluss |
+| 1 | Konkrete Spielinformationen: Ausfälle, Sperren, Aufstellung, Trainer, Torwart, Belastung (Europapokal), Ausgangslage | Sports-Mole-Vorschau |
+| 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) + Formleiste der Vorschau |
+| 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats |
+| 4 | Direktvergleiche und lange Trends | FootyStats + Vorschau |
+| – | Prognose: „We say“ (bzw. Forebet) | nur Vergleich, kein Einfluss |
 
 ## Entscheidungsweg je Spiel (Schritt 1–4, immer in dieser Reihenfolge)
 
-1. **Wer bekommt keinen Sieg-Tipp?** Jedes Team mit höchstens 1 Sieg aus den letzten 6
-   Spielen aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3).
-2. **Gibt es eine klare Seite?** Ein Team ist die klare Seite, wenn **beides** gilt:
-   a) es hat **mindestens 3 Siege aus den letzten 6** Spielen aller Wettbewerbe, und
-   b) der **Gegner** ist nach Schritt 1 ausgeschieden (höchstens 1 Sieg in 6) **oder** in dieser
-      Saison auf diesem Platz sieglos (als Heimteam daheim bzw. als Gastteam auswärts).
-   Trifft das auf genau ein Team zu → **Heimsieg** bzw. **Auswärtssieg** dieses Teams.
-   Trifft es auf keines oder auf beide zu → weiter mit Schritt 3.
-   (So entstanden am 08.11. Sieg Brighton, Lorient, Nice, Villa, Freiburg, Hoffenheim.)
-3. **Keine klare Seite →** das klarste **Tor-Signal** aus Rang 1–3:
-   - ein Team trifft kaum (Sturm fehlt, seit Spielen ohne Tor, hoher Anteil ohne Tor) →
-     **Beide treffen – Nein**
-   - beide Teams treffen seit Wochen regelmäßig, Gegner selten zu null →
-     **Beide treffen – Ja**
-   - lange Serien mit vielen bzw. wenigen Toren, Torpotenzial →
-     **Über 2,5** bzw. **Unter 2,5**
-4. **Bedenken prüfen (Regel 7):** Gibt es eine starke Bedenke – spricht also wirklich alles
-   Relevante gegen den Tipp –, geht es mit dem nächsten Schritt bzw. dem nächstklaren Markt weiter.
-
-Am Ende steht genau einer der sechs erlaubten Märkte (Regel 5). In der Antwort wird genannt,
-in welchem Schritt der Tipp entstanden ist.
+1. **Wer bekommt keinen Sieg-Tipp?** Jedes Team mit **höchstens 1 Sieg aus den letzten 6** Spielen
+   aller Wettbewerbe scheidet für einen Sieg-Tipp aus (Regel 3) – auch wenn das Spielbild anders
+   aussieht.
+2. **Spielbild:** In 3–4 Sätzen, wie das Spiel voraussichtlich läuft:
+   - Wer bestimmt das Spiel, wer kommt zu Chancen?
+   - Trifft jedes der beiden Teams – oder kaum?
+   - Wird es offen (viele Tore) oder zäh (wenige Tore)?
+   - Was ändern Ausfälle, Sperren, Trainerwechsel, Ausgangslage?
+   Jeder Satz wird mit konkreten Angaben aus Rang 1–2 belegt; Rang 3–4 ergänzen nur.
+3. **Die sechs Märkte prüfen:** Für jeden der sechs erlaubten Märkte (Regel 5) kurz: passt er zum
+   Spielbild? Ein Markt ist **klar**, wenn alle Angaben aus Rang 1–2 zu ihm passen und es keine
+   gewichtige Gegenangabe aus Rang 1–2 gibt (Maßstab: die Tagesliste vom 14.11.2026 – Kleinigkeiten
+   machen einen Markt nicht unklar, sie werden als schwache Bedenke genannt). Ein Sieg-Markt kann nur
+   klar sein, wenn das Team nach Schritt 1 nicht ausgeschieden ist.
+4. **Tipp:**
+   - genau ein klarer Markt → das ist der **Tipp**;
+   - mehrere klare Märkte → der Markt, den die Daten am stärksten tragen (mit einem Satz, warum);
+   - **kein klarer Markt → kein Tipp.** Das Spiel steht mit Spielbild in der Tagesliste, ohne Tipp.
 
 ## Regeln für den Tipp
 
-1. **Ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Prognosen.
-2. **Richtung aus Rang 1–2.** Rang 3 bestimmt die Richtung nur, wenn Rang 1–2 keine klare
-   Richtung zeigen. Rang 3 und 4 helfen bei der Wahl des Markts (Sieger, Tore,
-   beide treffen) und drehen eine klare Richtung aus Rang 1–2 nicht um.
+1. **Höchstens ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Prognosen.
+2. **Richtung aus Rang 1–2.** Rang 3 und 4 ergänzen das Spielbild und drehen eine klare Richtung
+   aus Rang 1–2 nicht um.
 3. **Form vor Saison:** Ein Team mit **höchstens 1 Sieg aus den letzten 6** bekommt **keinen
    Sieg-Tipp**, auch als Heimteam oder Tabellenfavorit.
-4. **Kein Kompromiss-Markt** nur weil Informationen sich widersprechen; gewählt wird der Markt,
-   den die Daten am klarsten tragen.
+4. **Kein Kompromiss-Markt:** Gibt es keinen klaren Markt, wird nicht auf einen „sichereren“ Markt
+   ausgewichen, sondern nicht getippt.
 5. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. **Keine anderen Wettarten** (keine
    Doppelte Chance, kein Remis, kein „Team trifft“, keine anderen Torlinien wie 1,5 oder 3,5).
 6. Keine Schwellen, keine Spielcheck-Zählung („x von 10“).
-7. **Bedenken nach Stärke (seit Version 2.7):** **stark** nur, wenn wirklich alles Relevante gegen
-   den Tipp spricht – Vorschau und FootyStats zeigen in dieselbe Richtung und es gibt
-   keine gewichtige Gegenangabe aus Rang 1–2. Eine starke Bedenke spricht damit immer klar gegen
-   den Tipp: Claude nimmt den nächststärkeren Markt (Schritt 4). Alles andere ist **schwach** und
-   wird nur genannt. „Stark, aber nicht klar dagegen“ gibt es nicht mehr.
+7. **Bedenken:** Da nur klare Märkte getippt werden, werden beim Tipp nur schwache Bedenken genannt
+   (Kleinigkeiten). Eine gewichtige Gegenangabe aus Rang 1–2 macht den Markt unklar (Schritt 3).
 8. Zahlen aus der Vorschau, die FootyStats widersprechen, werden kurz vermerkt; es gilt die Zählung
    mit vollständigen Wettbewerben (FootyStats „letzte 6 aller Wettbewerbe“). Steht eine
    Vorschau-Angabe im Widerspruch zu sich selbst oder zu FootyStats, wird sie nicht verwendet.
 
 ## Antwortaufbau je Spiel
 
-1. Rang 1–2: Spielinformationen, aktuelle Form
-2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche (FootyStats, Vorschau)
-3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach) und einer klaren
-   **Einstufung: klar** (die Daten aus Rang 1–2 zeigen alle in Richtung des Tipps) oder **knapp**
-   (eine Angabe aus Rang 1–2 zeigt in die andere Richtung) – mit einem Satz, warum.
-   Maßstab für klar/knapp ist die Tagesliste vom 14.11.2026: Nur gewichtige Gegenangaben machen
-   einen Tipp knapp, Kleinigkeiten werden als schwache Bedenke genannt (ergänzt am 20.11.2026).
-4. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
+1. Rang 1–2: Spielinformationen (Sports Mole), aktuelle Form (FootyStats)
+2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche
+3. **Spielbild** (3–4 Sätze mit Belegen)
+4. Die sechs Märkte: je eine Zeile „klar“ oder „nicht klar – weil …“
+5. ✅ **Tipp** (mit Gründen und schwachen Bedenken) **oder „kein Tipp“** (mit einem Satz, warum)
+6. Zum Vergleich: „We say“ von Sports Mole (gleich oder abweichend)
 
 ## Tagesliste
 
-Alle Tipps eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
-Spalte „Prognose (Vergleich)“) und werden dort nach
-Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, getrennt für Claudes Tipp und die
-Prognose, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein, über/unter 2,5) für den
-Tag und seit Version 2.3 gesamt; keine Einheiten/Quoten. Bleibt „Beide treffen – Ja“ die
-schwächste Wettart, schlägt Claude dem Nutzer vor, sie zu streichen.
+Alle Spiele eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
+Vorschau-Quelle, Kurzfassung des Spielbilds, Tipp oder „kein Tipp“, Spalte „Prognose (Vergleich)“)
+und werden dort nach Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, Anzahl Spiele ohne Tipp,
+getrennt für Claudes Tipp und die Prognose, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein,
+über/unter 2,5) für den Tag und gesamt seit Version 3.0; keine Einheiten/Quoten.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.
