@@ -4,7 +4,8 @@ Vom Nutzer festgelegt am 20.11.2026. Ersetzt **alle** früheren Versionen des Fo
 (1 bis 3.1, archiviert in `archiv/`); von ihnen wird nichts mehr verwendet.
 Grundlage je Paarung ist **Sports Mole**, das Claude selbst abruft. **FootyStats dient nur dem
 Abgleich** der Daten, nicht als Grund für den Tipp. Je Paarung gibt es **immer genau einen Tipp**
-aus sechs Märkten. Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
+aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
+Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
 
 ## Ablauf eines Auftrags
 
@@ -27,10 +28,10 @@ Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“
    1. **Vorschau-Übersicht** (`sportsmole.co.uk/football/preview/`): Paarung finden.
    2. **Vorschau-Artikel:** Ausgangslage, Formleisten (Liga und alle Wettbewerbe), Teamnews
       (Ausfälle, Sperren, Rückkehrer, Wackelkandidaten), mögliche Aufstellungen, „We say“, Stand.
-   3. **Spielseite „Match Guide, Data Analysis“:** Formleisten, letztes Spiel, Tore und
-      Top-Torschütze je Team, Datenanalyse (Wahrscheinlichkeiten für Sieg/Remis/Niederlage, beide
-      treffen, über/unter 1,5–4,5, Tore je Team, erstes Tor, Halbzeit), Direktvergleiche,
-      letzte 6 Ergebnisse je Team mit Spielstand.
+   3. **Spielseite „Match Guide“:** Formleisten, letztes Spiel, Tore und Top-Torschütze je Team,
+      Direktvergleiche, letzte 6 Ergebnisse je Team mit Spielstand. **Die Datenanalyse
+      (Wahrscheinlichkeiten des Sports-Mole-Rechenmodells) wird nicht verwendet** – weder als
+      Grund noch zum Vergleich.
    4. **Tabelle und Torschützenliste** der Liga.
 3. **FootyStats nur zum Abgleich** (`werkzeuge/fs_spiel.py`): Anstoß, letzte Ergebnisse,
    Tabellenplatz, Direktvergleiche. FootyStats liefert **keinen** eigenen Grund für den Tipp.
@@ -45,7 +46,7 @@ Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“
 |---|---|---|
 | 1 | Teamnews: Ausfälle, Sperren, Rückkehrer, Aufstellungen, Trainer, Ausgangslage | Artikel |
 | 2 | Form: Formleisten (Liga, alle Wettbewerbe), letzte 6 Ergebnisse mit Spielstand, Serien | Artikel + Spielseite |
-| 3 | Datenanalyse (Wahrscheinlichkeiten), Tabelle, Tore, Torschützen | Spielseite + Tabelle |
+| 3 | Tabelle (Platz, Bilanz, Tore), Torschützen, Tore je Team | Tabelle + Spielseite |
 | 4 | Direktvergleiche | Spielseite |
 | – | „We say“ | nur zum Vergleich in der Tagesliste |
 
@@ -60,26 +61,24 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    Abweichungen vermerken (Grundsatz 3).
 3. **Spielbild je Team** aus Rang 1–2, in Worten: Angriff (trifft es?), Abwehr (bleibt es ohne
    Gegentor?), Form (gewinnt es?) – und was Ausfälle, Sperren, Trainer und Ausgangslage ändern.
-4. **Sechs Märkte ordnen** nach der Datenanalyse (Rang 3), höchste Wahrscheinlichkeit zuerst:
-   Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5.
-5. **Tipp:** Von oben nach unten der **erste Markt, gegen den Rang 1–2 nicht klar sprechen**.
-   „Klar dagegen“ heißt: eine konkrete Angabe aus Teamnews oder Form lässt direkt das Gegenteil
-   erwarten (z. B. Sieg-Tipp, aber das Team hat in den letzten 6 kaum gewonnen oder seine
-   wichtigsten Spieler fehlen; „Beide treffen – Ja“, aber ein Team blieb zuletzt mehrfach ohne Tor;
-   „Über 2,5“, aber beide Teams spielten zuletzt fast nur torarm). Kleinigkeiten zählen nicht.
-   Sprechen Rang 1–2 gegen alle sechs Märkte, ist der Tipp der Markt mit der höchsten
-   Wahrscheinlichkeit. **Es gibt immer genau einen Tipp.**
+4. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
+   Über 2,5, Unter 2,5 – je kurz: was spricht dafür, was dagegen (nach Rangfolge gewichtet).
+5. **Tipp:** Claude bestimmt **selbst** den Markt, der am besten zum Spielbild passt – ohne
+   Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3–4 helfen bei der Wahl
+   und drehen eine klare Richtung aus Rang 1–2 nicht um. Widersprechen sich die Angaben, wählt
+   Claude den Markt, den das Gesamtbild am stärksten trägt, und nennt, was dagegen spricht.
+   **Es gibt immer genau einen Tipp.**
 
 ## Regeln für den Tipp
 
-1. **Genau ein Tipp je Paarung**, deutlich als „Tipp“ markiert, mit dem Platz in der Reihenfolge
-   aus Schritt 4 (Platz 1 = höchste Wahrscheinlichkeit).
+1. **Genau ein Tipp je Paarung**, deutlich als „Tipp“ markiert, mit Gründen und dem, was dagegen
+   spricht.
 2. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. Keine anderen Wettarten (kein Remis,
    keine Doppelte Chance, keine Ecken, keine anderen Torlinien).
-3. Rang 3–4 drehen eine klare Angabe aus Rang 1–2 nicht um; Rang 1–2 können einen Markt nur
-   überspringen, nicht neu erfinden.
+3. Rang 3–4 drehen eine klare Angabe aus Rang 1–2 nicht um.
 4. Jede Aussage im Spielbild nennt ihre Sports-Mole-Quelle (Artikel, Spielseite, Tabelle).
+5. Kein Rechenmodell, keine Schwellen, keine Punkte, keine Zählung („x von 10“).
 
 ## Antwortaufbau je Paarung
 
@@ -87,14 +86,14 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 2. Rang 2: Form (Formleisten, letzte Ergebnisse)
 3. Abgleich FootyStats (übereinstimmend oder Abweichung)
 4. Spielbild je Team
-5. Die sechs Märkte in der Reihenfolge der Datenanalyse, je „passt“ oder „klar dagegen – weil …“
-6. ✅ **Tipp** mit Platz und Gründen
+5. Die sechs Märkte, je kurz dafür/dagegen
+6. ✅ **Tipp** mit Gründen und Gegenangaben
 7. Zum Vergleich: „We say“
 
 ## Tagesliste
 
 Alle Tipps eines Tages kommen nach `tipps/sportsmole/JJJJ-MM-TT.md` (Anstoß, Paarung, Liga,
-FootyStats-`match_id`, Tipp, Platz, „We say“) und werden dort nach Abpfiff mit den Ergebnissen aus
-FootyStats ausgewertet: Treffer und Trefferquote, Treffer je Wettart und je Platz, dazu „We say“
+FootyStats-`match_id`, Tipp, „We say“) und werden dort nach Abpfiff mit den Ergebnissen aus
+FootyStats ausgewertet: Treffer und Trefferquote, Treffer je Wettart, dazu „We say“
 zum Vergleich (Sieger/Remis); keine Einheiten, keine Quoten. Tipps möglichst vor Anpfiff; Tipps
 nach Anpfiff werden vermerkt.

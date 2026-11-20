@@ -3,8 +3,8 @@
 Sports-Mole-Check (seit 20.11.2026):
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
-- `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (Datenanalyse,
-  Direktvergleiche, Formdaten), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
+- `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:
+  Formleisten, Direktvergleiche, Formdaten), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
   (z. B. `barnsley sheff`). Ohne Quoten.
 
 FootyStats (nur Abgleich und Ergebnisse); Odd-Alerts-Skripte werden nicht mehr verwendet:
