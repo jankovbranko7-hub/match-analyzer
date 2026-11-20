@@ -19,6 +19,40 @@ Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“
 4. Alle Tipps kommen in die Tagesliste; Antwort an den Nutzer kurz und handytauglich (Listen statt
    breiter Tabellen).
 
+## Sorgfalt – keine Fehler, nichts vergessen (Pflicht, Wunsch des Nutzers vom 20.11.2026)
+
+Vor jeder Antwort mit Tipps geht Claude diese Prüfliste **vollständig** durch und schreibt am Ende
+der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korrigierten Fehlern.
+
+**Vollständigkeit**
+1. Alle Paarungen der genannten Liga an dem Tag erfasst – Sports-Mole-Übersicht **und**
+   FootyStats-Spielplan verglichen; jedes Spiel ohne Vorschau steht als „nicht bewertet“ in der Liste.
+2. Je Paarung alle vier Sports-Mole-Teile abgerufen (Übersicht, Artikel, Spielseite, Tabelle und
+   Torschützen); fehlt ein Teil, wird das genannt.
+3. Je Paarung genau ein Tipp aus den sechs erlaubten Märkten; alle sechs Märkte geprüft.
+
+**Richtigkeit**
+4. Vorschau gehört zu diesem Termin (Datum, Spieltag, Stand der Aktualisierung geprüft).
+5. Anstoß in deutscher Zeit, mit FootyStats abgeglichen.
+6. Jede Zahl und jedes Ergebnis im Spielbild gegen die Quelle geprüft (Wortlaut der Vorschau,
+   Spielseite, Tabelle); Formleisten in der richtigen Richtung gelesen (Artikel: alt → neu,
+   Spielseite: neu → alt).
+7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet.
+8. Abgleich mit FootyStats gemacht (letzte Ergebnisse, Tabellenplatz, Direktvergleiche);
+   Abweichungen vermerkt und die betroffene Angabe nicht als Grund verwendet.
+9. Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; was dagegen spricht,
+   ist genannt; Richtung aus Rang 1–2, Rang 3–4 drehen sie nicht um.
+10. Keine Quoten, kein Rechenmodell, keine Schwellen, keine Punkte verwendet.
+
+**Abschluss**
+11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
+    **und** `forebet-system` gepusht.
+12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
+
+Findet Claude später einen Fehler, wird er sofort offen benannt und in der Tagesliste mit Uhrzeit
+korrigiert (vor Anpfiff: Tipp darf neu bestimmt werden; nach Anpfiff: Tipp bleibt, Fehler wird
+vermerkt).
+
 ## Grundsätze
 
 1. **Keine Quoten.** Quoten (auch der Quotenbereich der Sports-Mole-Spielseite), Buchmacher und
