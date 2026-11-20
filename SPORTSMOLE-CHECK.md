@@ -49,7 +49,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz, Direktvergleiche);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
-9. Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
+9. Tipp ist der sicherste der sechs Märkte (gegen ihn spricht am wenigsten; bei den anderen
+   Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
    Ergebnisse unter einem neuen Trainer); Richtung aus Rang 1–2, Rang 3–4 drehen sie nicht um.
 10. Keine Quoten, kein Rechenmodell (weder Sports-Mole-Datenanalyse noch FootyStats-Vorab-Werte),
@@ -139,6 +140,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    tragen – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3–4 helfen
    bei der Wahl und drehen eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
    genannt. **Es gibt immer genau einen Tipp.**
+   **Immer der sicherste der sechs Märkte** (Wunsch des Nutzers vom 20.11.2026): Claude wählt in
+   jedem Spiel – ob „beide einig“ oder „geteilt“ – unter den sechs erlaubten Märkten den
+   **sichersten, also den, gegen den am wenigsten spricht** (nach Rangfolge gewichtet). In der
+   Begründung steht kurz, warum gegen die anderen Märkte mehr spricht. Es wird nie auf andere,
+   „sicherere“ Wettarten ausgewichen (keine Doppelte Chance, kein Über 1,5, kein Unter 3,5 o. Ä.).
 6. **Kennzeichnung:** „**beide einig**“ – Sports Mole und FootyStats zeigen beide zum Tipp;
    „**geteilt**“ – eine Quelle zeigt woandershin (welche und warum, in einem Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
@@ -146,7 +152,9 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 ## Regeln für den Tipp
 
 1. **Genau ein Tipp je Paarung**, deutlich als „Tipp“ markiert, mit Gründen, dem, was dagegen
-   spricht, und der Kennzeichnung „beide einig“ oder „geteilt“.
+   spricht, und der Kennzeichnung „beide einig“ oder „geteilt“. Der Tipp ist **immer der sicherste
+   der sechs Märkte** – der, gegen den am wenigsten spricht. Die Kennzeichnung sagt nur, wie sicher
+   er ist (beide einig = sicherer, geteilt = unsicherer); sie entscheidet nie, ob getippt wird.
 2. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. Keine anderen Wettarten (kein Remis,
    keine Doppelte Chance, keine Ecken, keine anderen Torlinien).
