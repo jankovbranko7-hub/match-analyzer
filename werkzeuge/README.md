@@ -7,7 +7,7 @@ Sports-Mole-Check (seit 20.11.2026):
   Formleisten, Direktvergleiche, Formdaten), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
   (z. B. `barnsley sheff`). Ohne Quoten.
 
-FootyStats (nur Abgleich und Ergebnisse); Odd-Alerts-Skripte werden nicht mehr verwendet:
+FootyStats (Zahlen, Abgleich und Ergebnisse; ohne Vorab-Werte); Odd-Alerts-Skripte werden nicht mehr verwendet:
 
 Alle Skripte lesen die Schlüssel nur aus der Umgebung (`APIKEY` für FootyStats, `ODDALERTS_KEY`
 für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.

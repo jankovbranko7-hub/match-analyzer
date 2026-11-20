@@ -13,12 +13,14 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   und ruft je Paarung **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite (Formleisten, letzte Ergebnisse, Direktvergleiche), Tabelle/Torschützen. Das ist die
   **Grundbasis**.
-- **FootyStats nur zum Abgleich** der Daten (und für die Ergebnisse nach Abpfiff), kein Grund für
-  den Tipp.
+- **Sports-Mole-Check Version 1.1** (seit 20.11.2026): **Sports Mole und FootyStats entscheiden
+  gemeinsam** – Sports Mole: Teamnews, Trainer, Ausgangslage; FootyStats: harte Zahlen (Form,
+  Heim/Auswärts, Anteile über 2,5/beide treffen/zu null/ohne Tor, Direktvergleiche),
+  ohne FootyStats-Vorab-Werte. Gegenseitige Kontrolle; jeder Tipp „beide einig“ oder „geteilt“.
 - Je Paarung **immer genau ein Tipp** aus sechs Märkten (Heimsieg, Auswärtssieg, beide treffen
   Ja/Nein, über/unter 2,5) nach dem Entscheidungsweg in `SPORTSMOLE-CHECK.md` – Claude bestimmt
-  ihn selbst aus dem Gesamtbild. **Kein Rechenmodell** (die Sports-Mole-Datenanalyse wird nicht
-  verwendet), **keine Schwellen, keine Punkte**. „We say“ nur zum
+  ihn selbst aus dem Gesamtbild. **Kein Rechenmodell** (weder Sports-Mole-Datenanalyse noch
+  FootyStats-Vorab-Werte), **keine Schwellen, keine Punkte**. „We say“ nur zum
   Vergleich. Forebet und Odd Alerts werden nicht verwendet.
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
@@ -39,7 +41,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 Datenquellen, ohne Quoten:
 - **Sports Mole** (`https://www.sportsmole.co.uk/`): öffentlich, ohne Schlüssel; Abruf mit
   `werkzeuge/sm_spiel.py` (Quotenbereich wird nicht ausgegeben).
-- **FootyStats** (`https://api.football-data-api.com/`), nur Abgleich und Ergebnisse: Schlüssel in
+- **FootyStats** (`https://api.football-data-api.com/`), Zahlen, Abgleich und Ergebnisse: Schlüssel in
   der Umgebung als `APIKEY`, Query-Parameter `key`. Endpunkte, Felder, Saison-IDs:
   `FOOTYSTATS-API.md`. Limit 1800/Stunde.
 - Forebet und Odd Alerts werden überhaupt nicht mehr verwendet.

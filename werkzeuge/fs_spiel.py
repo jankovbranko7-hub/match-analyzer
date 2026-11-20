@@ -1,6 +1,6 @@
 # FootyStats-Daten zu einem Spiel (Forebet-Check v2).
 # Aufruf: python3 -I werkzeuge/fs_spiel.py <season_id> "<Heim-Teilname>" "<Auswärts-Teilname>"
-# Gibt aus: Anstoß, Vorab-Werte, Saison (gesamt + Heim/Auswärts), letzte 6 aller Wettbewerbe,
+# Gibt aus: Anstoß, Saison (gesamt + Heim/Auswärts), letzte 6 aller Wettbewerbe,
 # letzte 6 Ligaspiele, Direktvergleiche, FootyStats-Trends. Keine Quoten.
 import json, sys, subprocess, os, datetime
 S = os.path.dirname(os.path.abspath(__file__))
@@ -29,10 +29,8 @@ mm = cand[0]
 mid, hid, aid = mm['id'], mm['homeID'], mm['awayID']
 m = get('match', match_id=mid)['data']
 print(f"## {m['home_name']} – {m['away_name']} · Anstoß {t(m['date_unix'])} · match_id {mid} · Status {m['status']}")
-print(f"Vorab: xG {g(m,'team_a_xg_prematch')} : {g(m,'team_b_xg_prematch')} (gesamt {g(m,'total_xg_prematch')}) · "
-      f"PPG Heim/Ausw. {g(m,'pre_match_home_ppg')} / {g(m,'pre_match_away_ppg')} · Ø Tore {g(m,'avg_potential')}")
-print(f"Potenzial %: o1.5 {g(m,'o15_potential')} · o2.5 {g(m,'o25_potential')} · o3.5 {g(m,'o35_potential')} · "
-      f"BTTS {g(m,'btts_potential')} · o0.5 HZ {g(m,'o05HT_potential')}")
+# Vorab-Werte (Vorab-xG, Torpotenzial) sind Modellwerte und werden seit dem Sports-Mole-Check
+# nicht mehr ausgegeben (kein Rechenmodell, Wunsch des Nutzers vom 20.11.2026).
 
 lt = {x['id']: x for x in get('league-teams', season_id=SEASON, include='stats')['data']}
 def saison(tid, side):
