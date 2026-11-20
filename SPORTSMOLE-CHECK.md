@@ -42,13 +42,13 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 6. Jede Zahl und jedes Ergebnis im Spielbild gegen die Quelle geprüft (Wortlaut der Vorschau,
    Spielseite, Tabelle, FootyStats); Formleisten in der richtigen Richtung gelesen (Artikel: alt → neu,
    Spielseite: neu → alt).
-6a. Bei jeder Serie, jedem Trend und jeder Bilanz steht, ob sie **Liga oder alle Wettbewerbe**
-    meint. FootyStats-Trends („seit X Spielen …“) zählen oft nur die Liga – vor Verwendung mit den
-    Ergebnislisten beider Quellen nachzählen (ergänzt nach der unabhängigen Kontrolle vom 20.11.2026).
+   - **6a:** Bei jeder Serie, jedem Trend und jeder Bilanz steht, ob sie **Liga oder alle
+     Wettbewerbe** meint. FootyStats-Trends („seit X Spielen …“) zählen oft nur die Liga – vor
+     Verwendung mit den Ergebnislisten beider Quellen nachzählen (ergänzt am 20.11.2026).
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet.
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz, Direktvergleiche);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
-8a. Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
+   - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
 9. Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
    Ergebnisse unter einem neuen Trainer); Richtung aus Rang 1–2, Rang 3–4 drehen sie nicht um.
