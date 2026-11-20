@@ -52,7 +52,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
     **und** `forebet-system` gepusht.
 12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
 
-**Zwei Kontrollstufen** (keine Garantie möglich, darum doppelt geprüft):
+**Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude
   jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
   FootyStats) und geht die Prüfliste durch. Erst danach gehen die Tipps an den Nutzer.
@@ -60,6 +60,14 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
   Gründe. Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
   „Kontrolle (Uhrzeit): …“ vermerkt.
+- **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026):** Schreibt der Nutzer **„unabhängige
+  Kontrolle“**, startet Claude einen zweiten, unabhängigen Prüfer (eigene Claude-Instanz, ohne die
+  Analyse aus dem Gespräch zu kennen). Er liest Regeln und Tagesliste, ruft alle Quellen selbst neu
+  ab (Sports Mole, FootyStats) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
+  den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt. Er ändert nichts;
+  Claude trägt jeden gefundenen Fehler korrigiert ein und vermerkt in der Tagesliste
+  „Unabhängige Kontrolle (Uhrzeit): …“. Ein Tipp wird nur neu bestimmt, wenn ein Fehler einen
+  Tipp-Grund betrifft und das Spiel noch nicht angepfiffen ist.
 
 Findet Claude später einen Fehler, wird er sofort offen benannt und in der Tagesliste mit Uhrzeit
 korrigiert (vor Anpfiff: Tipp darf neu bestimmt werden; nach Anpfiff: Tipp bleibt, Fehler wird

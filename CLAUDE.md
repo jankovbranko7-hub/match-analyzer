@@ -23,7 +23,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
-  Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2).
+  Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
+  schreibt er **„unabhängige Kontrolle“**, einen zweiten, unabhängigen Prüfer (Agent) starten,
+  der alle Quellen neu abruft und nur berichtet; Fehler danach korrigieren (Stufe 3).
 - **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen. (Ältere Listen in `tipps/forebet/` bleiben als Verlauf.)
