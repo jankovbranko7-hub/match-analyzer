@@ -1,9 +1,12 @@
-# Forebet-Check (System B) · Version 3.0 – Spielbild
+# Forebet-Check (System B) · Version 3.1 – Spielbild
 
 Vom Nutzer festgelegt am 20.11.2026 als Hauptanalyse. Baut auf Version 2.10 auf (archiviert in
 `archiv/FOREBET-CHECK-2.10.md`): Aus der **Sports-Mole-Vorschau** und **FootyStats** entsteht je Spiel
-ein eigenes **Spielbild**; getippt wird nur ein Markt, der nach diesem Spielbild **klar** ist.
-Ist kein Markt klar, gibt es **keinen Tipp**. Forebet wird nicht mehr verwendet (Wunsch des Nutzers vom
+ein eigenes **Spielbild**; daraus **immer genau ein Tipp** je Spiel: der klare Markt (Einstufung
+**klar**) oder, wenn keiner klar ist, der nächstbeste Markt (Einstufung **knapp**).
+Version 3.0 (20.11.2026: kein Tipp ohne klaren Markt) am selben Tag auf Wunsch des Nutzers zu
+Version 3.1 geändert: Gegenangabe aus Rang 1–2 → nächster Markt wird getippt, immer ein Tipp
+(wie in Version 2.3/2.10). Forebet wird nicht mehr verwendet (Wunsch des Nutzers vom
 20.11.2026); der Name „Forebet-Check“ bleibt nur als Name des Systems.
 Versionsgeschichte bis 2.10 siehe Archiv. Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und
 vom Spielcheck (System A).
@@ -68,23 +71,26 @@ wird kein Spiel bewertet; es gibt keinen Ersatz.
 4. **Tipp:**
    - genau ein klarer Markt → das ist der **Tipp**;
    - mehrere klare Märkte → der Markt, den die Daten am stärksten tragen (mit einem Satz, warum);
-   - **kein klarer Markt → kein Tipp.** Das Spiel steht mit Spielbild in der Tagesliste, ohne Tipp.
+   - **kein klarer Markt → der nächstbeste Markt** wird getippt: der Markt, gegen den am wenigsten
+     spricht (nach Rangfolge gewichtet), mit Einstufung **knapp** und einem Satz, welche
+     gewichtige Gegenangabe aus Rang 1–2 dagegen spricht. Es gibt immer genau einen Tipp.
 
 ## Regeln für den Tipp
 
-1. **Höchstens ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Prognosen.
+1. **Genau ein Tipp je Spiel**, deutlich als „Tipp“ markiert, aus Rang 1–4 – ohne Prognosen.
 2. **Richtung aus Rang 1–2.** Rang 3 und 4 ergänzen das Spielbild und drehen eine klare Richtung
    aus Rang 1–2 nicht um.
 3. **Form vor Saison:** Ein Team mit **höchstens 1 Sieg aus den letzten 6** bekommt **keinen
    Sieg-Tipp**, auch als Heimteam oder Tabellenfavorit.
-4. **Kein Kompromiss-Markt:** Gibt es keinen klaren Markt, wird nicht auf einen „sichereren“ Markt
-   ausgewichen, sondern nicht getippt.
+4. **Kein Kompromiss-Markt** nur weil Informationen sich widersprechen; gewählt wird der Markt,
+   den die Daten am klarsten tragen (auch beim knappen Tipp).
 5. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. **Keine anderen Wettarten** (keine
    Doppelte Chance, kein Remis, kein „Team trifft“, keine anderen Torlinien wie 1,5 oder 3,5).
 6. Keine Schwellen, keine Spielcheck-Zählung („x von 10“).
-7. **Bedenken:** Da nur klare Märkte getippt werden, werden beim Tipp nur schwache Bedenken genannt
-   (Kleinigkeiten). Eine gewichtige Gegenangabe aus Rang 1–2 macht den Markt unklar (Schritt 3).
+7. **Bedenken und Einstufung:** Eine gewichtige Gegenangabe aus Rang 1–2 macht einen Markt unklar
+   (Schritt 3); wird er trotzdem als nächstbester Markt getippt, ist der Tipp **knapp** und die
+   Gegenangabe wird genannt. Kleinigkeiten sind schwache Bedenken und ändern die Einstufung nicht.
 8. Zahlen aus der Vorschau, die FootyStats widersprechen, werden kurz vermerkt; es gilt die Zählung
    mit vollständigen Wettbewerben (FootyStats „letzte 6 aller Wettbewerbe“). Steht eine
    Vorschau-Angabe im Widerspruch zu sich selbst oder zu FootyStats, wird sie nicht verwendet.
@@ -95,14 +101,15 @@ wird kein Spiel bewertet; es gibt keinen Ersatz.
 2. Rang 3–4: Saison, Heim/Auswärts, Vorab-xG, Direktvergleiche
 3. **Spielbild** (3–4 Sätze mit Belegen)
 4. Die sechs Märkte: je eine Zeile „klar“ oder „nicht klar – weil …“
-5. ✅ **Tipp** (mit Gründen und schwachen Bedenken) **oder „kein Tipp“** (mit einem Satz, warum)
+5. ✅ **Tipp** mit Gründen, Bedenken und Einstufung **klar** oder **knapp** (bei knapp: welche
+   Gegenangabe aus Rang 1–2 dagegen spricht)
 6. Zum Vergleich: „We say“ von Sports Mole (gleich oder abweichend)
 
 ## Tagesliste
 
 Alle Spiele eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
-Kurzfassung des Spielbilds, Tipp oder „kein Tipp“, Spalte „Prognose (Vergleich)“)
-und werden dort nach Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, Anzahl Spiele ohne Tipp,
+Tipp, Einstufung klar/knapp, Spalte „Prognose (Vergleich)“)
+und werden dort nach Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, **getrennt nach klar und knapp**,
 getrennt für Claudes Tipp und die Prognose, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein,
-über/unter 2,5) für den Tag und gesamt seit Version 3.0; keine Einheiten/Quoten.
+über/unter 2,5) für den Tag und gesamt seit Version 3.0 (die Tipps nach 3.0 zählen als „klar“); keine Einheiten/Quoten.
 Vorschauen möglichst vor Anpfiff; Tipps nach Anpfiff werden in der Liste vermerkt.

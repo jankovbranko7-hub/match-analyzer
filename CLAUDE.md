@@ -9,10 +9,10 @@ ausdrücklichen Wunsch des Nutzers.
 ## Arbeitsweise
 
 - Der Nutzer fügt je Spiel die **Sports-Mole-Vorschau** ein (PDF, Text oder Screenshot) →
-  Forebet-Check **Version 3.0 – Spielbild** nach `FOREBET-CHECK.md` (seit 20.11.2026 Hauptanalyse):
+  Forebet-Check **Version 3.1 – Spielbild** nach `FOREBET-CHECK.md` (seit 20.11.2026 Hauptanalyse):
   Fakten aus der Vorschau + FootyStats nach fester Rangfolge gewichten (Spielinfos > aktuelle Form >
-  Saison > Direktvergleiche), daraus ein eigenes Spielbild; getippt wird nur ein Markt, der danach
-  klar ist – nur Sieg, beide treffen Ja/Nein, über/unter 2,5. Kein klarer Markt → kein Tipp.
+  Saison > Direktvergleiche), daraus ein eigenes Spielbild und immer genau ein Tipp – nur Sieg,
+  beide treffen Ja/Nein, über/unter 2,5. Klarer Markt → Tipp „klar“; sonst nächstbester Markt → „knapp“.
   Der Nutzer schickt nur Spiele mit Sports-Mole-Vorschau. **Forebet wird überhaupt nicht mehr
   verwendet** (Wunsch des Nutzers vom 20.11.2026). „We say“ nur zum Vergleich. Version 2.10 liegt in `archiv/FOREBET-CHECK-2.10.md`.
 - **Keine Quoten** (seit 07.11.2026). Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
