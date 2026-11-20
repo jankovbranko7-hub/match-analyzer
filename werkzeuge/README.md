@@ -1,4 +1,12 @@
-# Werkzeuge (FootyStats; Odd-Alerts-Skripte seit Forebet-Check v2.8 nicht mehr verwendet)
+# Werkzeuge
+
+Sports-Mole-Check (seit 20.11.2026):
+- `sm_spiel.py liste` – alle Vorschauen der Sports-Mole-Übersicht (URLs).
+- `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (Datenanalyse,
+  Direktvergleiche, Formdaten) einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
+  (z. B. `barnsley sheff`). Ohne Quoten.
+
+FootyStats (nur Abgleich und Ergebnisse); Odd-Alerts-Skripte werden nicht mehr verwendet:
 
 Alle Skripte lesen die Schlüssel nur aus der Umgebung (`APIKEY` für FootyStats, `ODDALERTS_KEY`
 für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.

@@ -1,6 +1,6 @@
 # Forebet-Check (System B) · Version 2.10
 
-> Archiv: Version 2.10 (Stand 14./15.11.2026 mit Satz vom 20.11.), gültig bis 20.11.2026. Abgelöst durch Version 3.0 (`FOREBET-CHECK.md`).
+> Archiv: Version 2.10 (Stand 14./15.11.2026 mit Satz vom 20.11.), gültig bis 20.11.2026. Gilt nicht mehr – abgelöst durch den Sports-Mole-Check (`SPORTSMOLE-CHECK.md`).
 
 Vom Nutzer festgelegt am 07.11.2026 (Version 2), Rangfolge ergänzt am 08.11.2026 (Version 2.1)
 nach der MLS-Auswertung; Forebet-Prognose aus der Tippfindung genommen am 08.11.2026 (Version 2.2); Märkte auf Sieg,

@@ -1,5 +1,7 @@
 # Forebet-Check (System B) · Version 3.1 – Spielbild
 
+> Archiv: Version 3.1 (20.11.2026). Gilt nicht mehr – abgelöst durch den Sports-Mole-Check (`SPORTSMOLE-CHECK.md`).
+
 Vom Nutzer festgelegt am 20.11.2026 als Hauptanalyse. Baut auf Version 2.10 auf (archiviert in
 `archiv/FOREBET-CHECK-2.10.md`): Aus der **Sports-Mole-Vorschau** und **FootyStats** entsteht je Spiel
 ein eigenes **Spielbild**; daraus **immer genau ein Tipp** je Spiel: der klare Markt (Einstufung
