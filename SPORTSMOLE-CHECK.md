@@ -49,6 +49,15 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
     **und** `forebet-system` gepusht.
 12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
 
+**Zwei Kontrollstufen** (keine Garantie möglich, darum doppelt geprüft):
+- **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude
+  jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
+  FootyStats) und geht die Prüfliste durch. Erst danach gehen die Tipps an den Nutzer.
+- **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
+  von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
+  Gründe. Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
+  „Kontrolle (Uhrzeit): …“ vermerkt.
+
 Findet Claude später einen Fehler, wird er sofort offen benannt und in der Tagesliste mit Uhrzeit
 korrigiert (vor Anpfiff: Tipp darf neu bestimmt werden; nach Anpfiff: Tipp bleibt, Fehler wird
 vermerkt).
