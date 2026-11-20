@@ -9,7 +9,7 @@ für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.
   einem Spiel für den Forebet-Check v2 (Vorab-xG, Saison, Heim/Auswärts, letzte 6 aller
   Wettbewerbe, letzte 6 Ligaspiele, Direktvergleiche, Trends). Keine Quoten.
 - `fs_ergebnis.py <match_id> ...` – Endergebnisse für die Auswertung.
-- `fs_haekchen.py <season_id> "<Heim>" "<Auswärts>" [heim|ausw|ja|nein|ueber|unter]` – Forebet-Check
+- (Gehört zu Version 2.12, seit dem 20.11.2026 nicht mehr Teil des Systems:) `fs_haekchen.py <season_id> "<Heim>" "<Auswärts>" [heim|ausw|ja|nein|ueber|unter]` – Forebet-Check
   v2.12: Schritt 1/2 mechanisch und die Häkchen „Form“ und „Saison am Spielort“ für die Einstufung
   klar/knapp, nach festen Regeln (im Kopf des Skripts); ohne Tipp eine Tabelle für alle sechs
   Märkte. Das Häkchen „Ausfälle/Motivation“ setzt Claude aus der Vorschau.
