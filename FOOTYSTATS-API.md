@@ -36,3 +36,4 @@ werden im Forebet-Check v2 nicht verwendet.
 | Nations League 2026/27 | 16808 | WM-Quali Europa (2026) | 13964 |
 | Brasilien Série A (2026) | 16544 | Brasilien Série B (2026) | 16783 |
 | Japan J1 League 2026/27 | 17115 | Argentinien Primera (2026) | 16571 |
+| Saudi Pro League 2026/27 | 17426 | | |
