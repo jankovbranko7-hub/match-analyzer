@@ -3,7 +3,8 @@
 Vom Nutzer festgelegt am 20.11.2026 als Hauptanalyse. Baut auf Version 2.10 auf (archiviert in
 `archiv/FOREBET-CHECK-2.10.md`): Aus der **Sports-Mole-Vorschau** und **FootyStats** entsteht je Spiel
 ein eigenes **Spielbild**; getippt wird nur ein Markt, der nach diesem Spielbild **klar** ist.
-Ist kein Markt klar, gibt es **keinen Tipp**.
+Ist kein Markt klar, gibt es **keinen Tipp**. Forebet wird nicht mehr verwendet (Wunsch des Nutzers vom
+20.11.2026); der Name „Forebet-Check“ bleibt nur als Name des Systems.
 Versionsgeschichte bis 2.10 siehe Archiv. Eigener Branch; getrennt vom OddAlerts-System v1.3-OA und
 vom Spielcheck (System A).
 
@@ -11,12 +12,12 @@ vom Spielcheck (System A).
 
 1. **Keine Quoten.** Quoten, Quotenbewegungen, nötige Trefferquote, Vorteil/fair und
    Buchmacher werden weder abgerufen noch genannt noch als Begründung verwendet.
-2. **Datenquellen:** Vorschau von **Sports Mole** und Zahlen aus **FootyStats**
-   (`https://api.football-data-api.com/`). Odd Alerts wird nicht verwendet. Keine Quotenfelder.
+2. **Datenquellen – nur diese zwei:** Vorschau von **Sports Mole** und Zahlen aus **FootyStats**
+   (`https://api.football-data-api.com/`). Forebet und Odd Alerts werden nicht verwendet – weder
+   Vorschau noch Prognose noch Statistikseite. Keine Quotenfelder.
 3. Die Fakten aus der Vorschau und die Daten aus FootyStats werden nach der **Rangfolge** unten
    gewichtet; daraus macht Claude ein **eigenes Spielbild** und daraus höchstens **einen Tipp**.
-4. **Prognosen** – „We say“ von Sports Mole (bzw. die Forebet-Prognose, wenn ersatzweise die
-   Forebet-Vorschau verwendet wird) – fließen **nicht** in Spielbild und Tipp ein. Sie werden erst
+4. **Prognosen** – „We say“ von Sports Mole – fließen **nicht** in Spielbild und Tipp ein. Sie werden erst
    danach **zum Vergleich** genannt und in der Tagesliste mitgeführt.
 
 ## Eingang je Spiel
@@ -26,9 +27,8 @@ alles, was vorhanden ist: Team News (Ausfälle, Sperren, Rückkehrer), mögliche
 Formleiste, Trainer, Ausgangslage. Ausfälle, Sperren, Trainerwechsel und Aufstellungen aus der
 Vorschau gelten als gesetzt.
 
-Hat Sports Mole für ein Spiel keine Vorschau (z. B. J-League, Saudi-Arabien, Argentinien), wird
-ersatzweise die **Forebet-Vorschau** auf demselben Weg verwendet; das wird in der Tagesliste
-vermerkt. Ohne Vorschau wird kein Spiel bewertet.
+Der Nutzer schickt nur Spiele, für die es eine Sports-Mole-Vorschau gibt. Ohne Sports-Mole-Vorschau
+wird kein Spiel bewertet; es gibt keinen Ersatz.
 
 ## FootyStats je Spiel (`werkzeuge/fs_spiel.py`)
 
@@ -47,7 +47,7 @@ vermerkt. Ohne Vorschau wird kein Spiel bewertet.
 | 2 | **Aktuelle Form:** letzte 6 Spiele, letzte 3 Heim- bzw. Auswärtsspiele, laufende Serien (Tore, ohne Tor, zu null) | FootyStats (letzte 6 aller Wettbewerbe, letzte 6 Ligaspiele, Trends) + Formleiste der Vorschau |
 | 3 | Saisonwerte: Heim/Auswärts-Bilanz, Tore, xG, Tabelle, Vorab-xG und Torpotenzial | FootyStats |
 | 4 | Direktvergleiche und lange Trends | FootyStats + Vorschau |
-| – | Prognose: „We say“ (bzw. Forebet) | nur Vergleich, kein Einfluss |
+| – | Prognose: „We say“ von Sports Mole | nur Vergleich, kein Einfluss |
 
 ## Entscheidungsweg je Spiel (Schritt 1–4, immer in dieser Reihenfolge)
 
@@ -101,7 +101,7 @@ vermerkt. Ohne Vorschau wird kein Spiel bewertet.
 ## Tagesliste
 
 Alle Spiele eines Tages kommen nach `tipps/forebet/JJJJ-MM-TT.md` (mit FootyStats-`match_id`,
-Vorschau-Quelle, Kurzfassung des Spielbilds, Tipp oder „kein Tipp“, Spalte „Prognose (Vergleich)“)
+Kurzfassung des Spielbilds, Tipp oder „kein Tipp“, Spalte „Prognose (Vergleich)“)
 und werden dort nach Abpfiff ausgewertet: Treffer je Tipp und Trefferquote, Anzahl Spiele ohne Tipp,
 getrennt für Claudes Tipp und die Prognose, dazu **Treffer je Wettart** (Sieg, beide treffen Ja/Nein,
 über/unter 2,5) für den Tag und gesamt seit Version 3.0; keine Einheiten/Quoten.

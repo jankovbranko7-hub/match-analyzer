@@ -13,8 +13,8 @@ ausdrücklichen Wunsch des Nutzers.
   Fakten aus der Vorschau + FootyStats nach fester Rangfolge gewichten (Spielinfos > aktuelle Form >
   Saison > Direktvergleiche), daraus ein eigenes Spielbild; getippt wird nur ein Markt, der danach
   klar ist – nur Sieg, beide treffen Ja/Nein, über/unter 2,5. Kein klarer Markt → kein Tipp.
-  Ohne Sports-Mole-Vorschau ersatzweise die Forebet-Vorschau. Prognosen („We say“, Forebet) nur zum
-  Vergleich. Version 2.10 liegt in `archiv/FOREBET-CHECK-2.10.md`.
+  Der Nutzer schickt nur Spiele mit Sports-Mole-Vorschau. **Forebet wird überhaupt nicht mehr
+  verwendet** (Wunsch des Nutzers vom 20.11.2026). „We say“ nur zum Vergleich. Version 2.10 liegt in `archiv/FOREBET-CHECK-2.10.md`.
 - **Keine Quoten** (seit 07.11.2026). Keine Spielcheck-Zählung („x von 10“), keine Schwellen.
 - Alle Tipps eines Tages in `tipps/forebet/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen.
