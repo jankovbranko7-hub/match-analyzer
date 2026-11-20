@@ -6,6 +6,18 @@ Grundlage je Paarung ist **Sports Mole**, das Claude selbst abruft. **FootyStats
 Abgleich** der Daten, nicht als Grund für den Tipp. Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten. Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
 
+## Ablauf eines Auftrags
+
+Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
+1. Claude holt aus der Sports-Mole-Vorschau-Übersicht alle Paarungen dieser Liga an diesem Tag
+   (`werkzeuge/sm_spiel.py tag "<Liga>" [Wochentag]`, Anstoß in deutscher Zeit).
+2. Claude gleicht mit FootyStats ab, welche Spiele der Liga an dem Tag angesetzt sind; Spiele ohne
+   Sports-Mole-Vorschau werden als „nicht bewertet (keine Vorschau)“ aufgeführt.
+3. Für jede Paarung holt Claude die vier Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`)
+   und geht den Entscheidungsweg unten durch – je Paarung genau ein Tipp.
+4. Alle Tipps kommen in die Tagesliste; Antwort an den Nutzer kurz und handytauglich (Listen statt
+   breiter Tabellen).
+
 ## Grundsätze
 
 1. **Keine Quoten.** Quoten (auch der Quotenbereich der Sports-Mole-Spielseite), Buchmacher und

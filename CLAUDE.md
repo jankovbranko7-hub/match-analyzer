@@ -8,15 +8,16 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 
 ## Arbeitsweise
 
-- Der Nutzer nennt die Paarungen (oder schickt Sports-Mole-Vorschauen). Claude ruft je Paarung
-  **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
+- Auftrag des Nutzers z. B. „Analyse der heutigen Spiele aus der Liga …“ → Claude holt alle
+  Paarungen dieser Liga an dem Tag aus der Sports-Mole-Übersicht (`werkzeuge/sm_spiel.py tag "<Liga>"`)
+  und ruft je Paarung **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite mit Datenanalyse, Tabelle/Torschützen. Das ist die **Grundbasis**.
 - **FootyStats nur zum Abgleich** der Daten (und für die Ergebnisse nach Abpfiff), kein Grund für
   den Tipp.
 - Je Paarung **immer genau ein Tipp** aus sechs Märkten (Heimsieg, Auswärtssieg, beide treffen
   Ja/Nein, über/unter 2,5) nach dem Entscheidungsweg in `SPORTSMOLE-CHECK.md`. „We say“ nur zum
   Vergleich. Forebet und Odd Alerts werden nicht verwendet.
-- **Keine Quoten** (seit 07.11.2026).
+- **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
   committen und pushen. (Ältere Listen in `tipps/forebet/` bleiben als Verlauf.)
 - **Branch `forebet-system` immer automatisch mitziehen** (Wunsch des Nutzers vom 09.11.2026):
