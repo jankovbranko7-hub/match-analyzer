@@ -46,15 +46,16 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      Wettbewerbe** meint. FootyStats-Trends („seit X Spielen …“) zählen oft nur die Liga – vor
      Verwendung mit den Ergebnislisten beider Quellen nachzählen (ergänzt am 20.11.2026).
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet.
-8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz, Direktvergleiche);
+8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
 9. Tipp ist der sicherste der sechs Märkte (gegen ihn spricht am wenigsten; bei den anderen
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
-   Ergebnisse unter einem neuen Trainer); Richtung aus Rang 1–2, Rang 3–4 drehen sie nicht um.
+   Ergebnisse unter einem neuen Trainer); Richtung aus Rang 1–2, Rang 3 dreht sie nicht um.
 10. Keine Quoten, kein Rechenmodell (weder Sports-Mole-Datenanalyse noch FootyStats-Vorab-Werte),
-    keine Schwellen, keine Punkte verwendet.
+    **keine Direktvergleiche (H2H)**, keine Schwellen, keine Punkte verwendet – auch nicht nebenbei
+    in Spielbild oder Gegenangaben.
 
 **Abschluss**
 
@@ -93,18 +94,18 @@ vermerkt).
    2. **Vorschau-Artikel:** Ausgangslage, Formleisten (Liga und alle Wettbewerbe), Teamnews
       (Ausfälle, Sperren, Rückkehrer, Wackelkandidaten), mögliche Aufstellungen, „We say“, Stand.
    3. **Spielseite „Match Guide“:** Formleisten, letztes Spiel, Tore und Top-Torschütze je Team,
-      Direktvergleiche, letzte 6 Ergebnisse je Team mit Spielstand. **Die Datenanalyse
-      (Wahrscheinlichkeiten des Sports-Mole-Rechenmodells) wird nicht verwendet** – weder als
+      letzte 6 Ergebnisse je Team mit Spielstand. **Direktvergleiche und die Datenanalyse
+      (Wahrscheinlichkeiten des Sports-Mole-Rechenmodells) werden nicht verwendet** – weder als
       Grund noch zum Vergleich.
    4. **Tabelle und Torschützenliste** der Liga.
 3. **FootyStats entscheidet mit** (`werkzeuge/fs_spiel.py`) – die harten Zahlen: letzte 6 Spiele
    aller Wettbewerbe und letzte 6 Ligaspiele; Bilanz des Heimteams daheim und des Gastteams
    auswärts; Tore, Punkte pro Spiel, xG der bisherigen Spiele; Anteile über 2,5, beide treffen,
-   zu null, ohne Tor; Direktvergleiche; Trends (Serien). **Nicht verwendet** werden die Vorab-Werte
+   zu null, ohne Tor; Trends (Serien). **Nicht verwendet** werden die Vorab-Werte
    (Vorab-xG, Torpotenzial) – das sind Modellwerte. Außerdem: Spielplan (Vollständigkeit),
    Anstoß, match_id und nach Abpfiff die Ergebnisse für die Auswertung.
-4. **Gegenseitige Kontrolle:** Wo beide dieselben Daten haben (Ergebnisse, Tabelle,
-   Direktvergleiche), müssen sie übereinstimmen. Abweichungen werden vermerkt; als Grund wird nur
+4. **Gegenseitige Kontrolle:** Wo beide dieselben Daten haben (Ergebnisse, Tabelle), müssen sie
+   übereinstimmen. Abweichungen werden vermerkt; als Grund wird nur
    verwendet, was beide gleich zeigen.
 5. **Nur Spiele mit Sports-Mole-Vorschau** werden bewertet. Die Vorschau muss zu diesem Termin
    gehören (Datum, Spieltag); eine veraltete Vorschau (z. B. zu einem verlegten Termin) zählt nicht.
@@ -116,9 +117,9 @@ vermerkt).
 | 1 | Teamnews: Ausfälle, Sperren, Rückkehrer, Aufstellungen, Trainer, Ausgangslage | Sports Mole (Artikel) |
 | 2 | Form: letzte 6 aller Wettbewerbe und letzte 6 Ligaspiele mit Ergebnissen, Serien (trifft seit …, ohne Tor seit …, zu null) | FootyStats + Sports Mole (Formleisten, Spielseite) |
 | 3 | Saison: Tabelle, Bilanz daheim bzw. auswärts, Tore, xG, Anteile über 2,5 / beide treffen / zu null / ohne Tor; Torschützen | FootyStats + Sports Mole (Tabelle, Torschützen) |
-| 4 | Direktvergleiche | beide |
 | – | „We say“ | nur zum Vergleich in der Tagesliste |
 | – | Sports-Mole-Datenanalyse, FootyStats-Vorab-Werte | nicht verwendet (Rechenmodelle) |
+| – | **Direktvergleiche (H2H)** – Bilanz, Ergebnisse, Ø Tore, Serien gegen diesen Gegner | **nicht verwendet** (Wunsch des Nutzers vom 20.11.2026) – weder als Grund noch als Gegenangabe |
 
 Hinweis: Im Artikel stehen die Formleisten vom ältesten zum neuesten Spiel, auf der Spielseite
 vom neuesten zum ältesten (letztes Spiel zuerst).
@@ -127,8 +128,8 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 1. **Abrufen und prüfen:** Artikel, Spielseite, Tabelle holen; prüfen, dass die Vorschau zu diesem
    Termin gehört und wann sie zuletzt aktualisiert wurde.
-2. **FootyStats holen und gegenseitig abgleichen:** Anstoß, letzte Ergebnisse, Tabellenplatz,
-   Direktvergleiche; Abweichungen vermerken (Grundsatz 4).
+2. **FootyStats holen und gegenseitig abgleichen:** Anstoß, letzte Ergebnisse, Tabellenplatz;
+   Abweichungen vermerken (Grundsatz 4).
 3. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
    kommen aus FootyStats (Rang 2–3), Sports Mole korrigiert mit den Teamnews (Rang 1): fehlt z. B.
    der Torjäger, zählt sein bisheriger Torschnitt weniger; fehlen Innenverteidiger, zählen die Gegentore mehr.
@@ -137,7 +138,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 4. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
    Über 2,5, Unter 2,5 – je kurz: was spricht dafür, was dagegen (nach Rangfolge gewichtet).
 5. **Tipp:** Claude bestimmt **selbst** den Markt, den **beide Quellen gemeinsam** am stärksten
-   tragen – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3–4 helfen
+   tragen – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
    bei der Wahl und drehen eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
    genannt. **Es gibt immer genau einen Tipp.**
    **Immer der sicherste der sechs Märkte** (Wunsch des Nutzers vom 20.11.2026): Claude wählt in
@@ -158,15 +159,16 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 2. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. Keine anderen Wettarten (kein Remis,
    keine Doppelte Chance, keine Ecken, keine anderen Torlinien).
-3. Rang 3–4 drehen eine klare Angabe aus Rang 1–2 nicht um.
+3. Rang 3 dreht eine klare Angabe aus Rang 1–2 nicht um.
 4. Jede Aussage im Spielbild nennt ihre Quelle (Sports Mole: Artikel, Spielseite, Tabelle;
    FootyStats).
-5. Kein Rechenmodell, keine Schwellen, keine Punkte, keine Zählung („x von 10“).
+5. Kein Rechenmodell, keine Direktvergleiche (H2H), keine Schwellen, keine Punkte, keine Zählung
+   („x von 10“).
 
 ## Antwortaufbau je Paarung
 
 1. Rang 1: Teamnews und Ausgangslage (Sports Mole)
-2. Rang 2–4: Form, Saison, Direktvergleiche (FootyStats + Sports Mole)
+2. Rang 2–3: Form, Saison (FootyStats + Sports Mole)
 3. Gegenseitiger Abgleich (übereinstimmend oder Abweichung)
 4. Spielbild je Team: trifft es? kassiert es? gewinnt es?
 5. Die sechs Märkte, je kurz dafür/dagegen

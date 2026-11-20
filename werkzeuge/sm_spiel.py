@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sports Mole je Paarung: Vorschau-Artikel + Spielseite (ohne Datenanalyse) + Tabelle/Torschützen.
+"""Sports Mole je Paarung: Vorschau-Artikel + Spielseite (ohne Datenanalyse, ohne Direktvergleiche) + Tabelle/Torschützen.
 
 Aufruf:
   sm_spiel.py liste                       – alle Vorschauen der Übersicht: Tag | Liga | Anstoß | Paarung | URL
@@ -83,11 +83,12 @@ def spielseite(z):
     # Datenanalyse (Rechenmodell) wird nicht verwendet und nicht ausgegeben (Wunsch des Nutzers)
     e = next((i for i, x in enumerate(z) if x == "Data analysis"), None)
     teil = z[a:e] if e else z[a:]
-    # Direktvergleiche und Formdaten (nach dem Quotenbereich) anhängen
+    # Nur die Formdaten (letzte Ergebnisse) anhängen. Direktvergleiche (Head to Head) werden nicht
+    # verwendet und nicht ausgegeben (Wunsch des Nutzers vom 20.11.2026).
     try:
-        h2h = z.index("Head to Head")
-        fe = next((i for i, x in enumerate(z) if x == "Football" and i > h2h), len(z))
-        teil += ["", "=== Direktvergleiche / Formdaten ==="] + z[h2h:fe]
+        fd = z.index("Form Data")
+        fe = next((i for i, x in enumerate(z) if x == "Football" and i > fd), len(z))
+        teil += ["", "=== Formdaten (letzte Ergebnisse, neuestes zuerst) ==="] + z[fd + 1:fe]
     except ValueError:
         pass
     # Zahlen, Pfeile und Prozentzeichen auf eine Zeile ziehen

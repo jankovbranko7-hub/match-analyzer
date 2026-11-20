@@ -1,7 +1,7 @@
 # FootyStats-Daten zu einem Spiel (Forebet-Check v2).
 # Aufruf: python3 -I werkzeuge/fs_spiel.py <season_id> "<Heim-Teilname>" "<Auswärts-Teilname>"
 # Gibt aus: Anstoß, Saison (gesamt + Heim/Auswärts), letzte 6 aller Wettbewerbe,
-# letzte 6 Ligaspiele, Direktvergleiche, FootyStats-Trends. Keine Quoten.
+# letzte 6 Ligaspiele, FootyStats-Trends. Keine Quoten, keine Direktvergleiche.
 import json, sys, subprocess, os, datetime
 S = os.path.dirname(os.path.abspath(__file__))
 SEASON, H, A = sys.argv[1], sys.argv[2].lower(), sys.argv[3].lower()
@@ -67,14 +67,7 @@ for tid, side, name in ((hid, 'home', m['home_name']), (aid, 'away', m['away_nam
     print(f"### {name}")
     saison(tid, side); letzte6(tid); liga6(tid)
 
-h = m.get('h2h') or {}
-r, b = h.get('previous_matches_results', {}), h.get('betting_stats', {})
-print(f"### Direktvergleiche: {r.get('totalMatches', 0)} Spiele · Siege {m['home_name']} {r.get('team_a_wins')} · "
-      f"Remis {r.get('draw')} · Siege {m['away_name']} {r.get('team_b_wins')} · Ø Tore {b.get('avg_goals')} · "
-      f"o2.5 {b.get('over25Percentage')}% · BTTS {b.get('bttsPercentage')}%")
-names = {hid: m['home_name'], aid: m['away_name']}
-for x in sorted(h.get('previous_matches_ids', []), key=lambda x: -x['date_unix'])[:6]:
-    print(f"  {t(x['date_unix'])[:10]} {names.get(x['team_a_id'], x['team_a_id'])} {x['team_a_goals']}-{x['team_b_goals']} {names.get(x['team_b_id'], x['team_b_id'])}")
+# Direktvergleiche (h2h) werden seit dem 20.11.2026 nicht verwendet und nicht ausgegeben.
 tr = m.get('trends') or {}
 for side in ('home', 'away'):
     for kind, text in tr.get(side, []) or []:

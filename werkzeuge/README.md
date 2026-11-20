@@ -4,7 +4,7 @@ Sports-Mole-Check (seit 20.11.2026):
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:
-  Formleisten, Direktvergleiche, Formdaten), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
+  Formleisten, Formdaten; ohne Direktvergleiche), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
   (z. B. `barnsley sheff`). Ohne Quoten.
 
 FootyStats (Zahlen, Abgleich und Ergebnisse; ohne Vorab-Werte); Odd-Alerts-Skripte werden nicht mehr verwendet:
@@ -16,7 +16,7 @@ für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.
   Letzte Zeile: `__HTTP <code>`.
 - `fs_spiel.py <season_id> "<Heim-Teilname>" "<Auswärts-Teilname>"` – alle FootyStats-Daten zu
   einem Spiel für den Forebet-Check v2 (Vorab-xG, Saison, Heim/Auswärts, letzte 6 aller
-  Wettbewerbe, letzte 6 Ligaspiele, Direktvergleiche, Trends). Keine Quoten.
+  Wettbewerbe, letzte 6 Ligaspiele, Trends). Keine Quoten, keine Vorab-Werte, keine Direktvergleiche.
 - `fs_ergebnis.py <match_id> ...` – Endergebnisse für die Auswertung.
 - (Gehört zu Version 2.12, seit dem 20.11.2026 nicht mehr Teil des Systems:) `fs_haekchen.py <season_id> "<Heim>" "<Auswärts>" [heim|ausw|ja|nein|ueber|unter]` – Forebet-Check
   v2.12: Schritt 1/2 mechanisch und die Häkchen „Form“ und „Saison am Spielort“ für die Einstufung
