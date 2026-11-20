@@ -1,11 +1,14 @@
-# Sports-Mole-Check (System B) · Version 1.1
+# Sports-Mole-Check (System B) · Version 1.2
 
 Vom Nutzer festgelegt am 20.11.2026. Ersetzt **alle** früheren Versionen des Forebet-Checks
 (1 bis 3.1, archiviert in `archiv/`); von ihnen wird nichts mehr verwendet.
 Version 1.0 am 20.11.2026; **Version 1.1** am selben Tag auf Wunsch des Nutzers: **Sports Mole und
 FootyStats entscheiden gemeinsam.** Sports Mole liefert, was in keiner Statistik steht (Teamnews,
 Trainer, Ausgangslage), FootyStats die harten Zahlen; beide kontrollieren sich gegenseitig. Jeder
-Tipp wird gekennzeichnet: „beide einig“ oder „geteilt“. Je Paarung gibt es **immer genau einen Tipp**
+Tipp wird gekennzeichnet: „beide einig“ oder „geteilt“. **Version 1.2** (20.11.2026, Wunsch des
+Nutzers): fester **Lage-Check je Team** – worum es geht, wie dringend die Punkte sind, Serien
+(letzter Sieg, letztes Tor), Schwächung, Besonderheiten; die Lage steht über den Saisonzahlen.
+Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
 
@@ -46,13 +49,16 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      Wettbewerbe** meint. FootyStats-Trends („seit X Spielen …“) zählen oft nur die Liga – vor
      Verwendung mit den Ergebnislisten beider Quellen nachzählen (ergänzt am 20.11.2026).
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet.
+   - **7a:** Lage-Check für **beide** Teams mit allen fünf Fragen gemacht (worum es geht,
+     Dringlichkeit, Serien mit Datum des letzten Siegs und Tors, Schwächung, Besonderheit).
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
 9. Tipp ist der sicherste der sechs Märkte (gegen ihn spricht am wenigsten; bei den anderen
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
-   Ergebnisse unter einem neuen Trainer); Richtung aus Rang 1–2, Rang 3 dreht sie nicht um.
+   Ergebnisse unter einem neuen Trainer, Lage beider Teams); Richtung aus Rang 1–2, Rang 3 dreht sie
+   nicht um.
 10. Keine Quoten, kein Rechenmodell (weder Sports-Mole-Datenanalyse noch FootyStats-Vorab-Werte),
     **keine Direktvergleiche (H2H)**, keine Schwellen, keine Punkte verwendet – auch nicht nebenbei
     in Spielbild oder Gegenangaben.
@@ -114,7 +120,7 @@ vermerkt).
 
 | Rang | Information | Quelle |
 |---|---|---|
-| 1 | Teamnews: Ausfälle, Sperren, Rückkehrer, Aufstellungen, Trainer, Ausgangslage | Sports Mole (Artikel) |
+| 1 | **Lage** (Lage-Check, Schritt 3): worum es geht, Dringlichkeit der Punkte, Serien (letzter Sieg, letztes Tor), Schwächung (Ausfälle, Sperren, Trainerwechsel, Belastung), Besonderheiten – dazu Teamnews und Aufstellungen | Sports Mole (Artikel, Tabelle) + Ergebnislisten beider Quellen |
 | 2 | Form: letzte 6 aller Wettbewerbe und letzte 6 Ligaspiele mit Ergebnissen, Serien (trifft seit …, ohne Tor seit …, zu null) | FootyStats + Sports Mole (Formleisten, Spielseite) |
 | 3 | Saison: Tabelle, Bilanz daheim bzw. auswärts, Tore, xG, Anteile über 2,5 / beide treffen / zu null / ohne Tor; Torschützen | FootyStats + Sports Mole (Tabelle, Torschützen) |
 | – | „We say“ | nur zum Vergleich in der Tagesliste |
@@ -130,14 +136,30 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    Termin gehört und wann sie zuletzt aktualisiert wurde.
 2. **FootyStats holen und gegenseitig abgleichen:** Anstoß, letzte Ergebnisse, Tabellenplatz;
    Abweichungen vermerken (Grundsatz 4).
-3. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
+3. **Lage-Check je Team** (Pflicht, nur Fakten, keine Vermutungen) – fünf Fragen:
+   1. **Worum geht es?** Titel, Europa, Aufstieg, Abstieg oder nichts mehr – Platz und
+      Punkteabstand nach oben und unten (Tabelle, Artikel).
+   2. **Wie dringend sind die Punkte?** z. B. „3 Punkte hinter dem rettenden Platz“, „kann die
+      Führung ausbauen“, „Mittelfeld ohne Druck“.
+   3. **Serien:** letzter Sieg (Datum, wie viele Spiele her), letztes Tor, Spiele ohne Sieg / ohne
+      Tor / ohne Gegentor / ohne Niederlage – aus den Ergebnislisten nachgezählt, mit Angabe Liga
+      oder alle Wettbewerbe.
+   4. **Schwächung:** wer genau fehlt (Torjäger, Stammtorwart, Abwehrkette, Kapitän), Sperren,
+      Trainerwechsel (neuer Trainer – wie viele Spiele?), Belastung (Europapokal/Pokal unter der
+      Woche, Reise).
+   5. **Besonderheit:** Derby, Kellerduell, Spitzenspiel, letztes Spiel vor einer Pause u. Ä.
+   **Wirkung:** Die Lage steht **über den Saisonzahlen** (Rang 3) und kann die Richtung aus den
+   Zahlen drehen – aber nur mit konkreten Fakten aus Artikel, Tabelle oder Ergebnislisten (z. B.:
+   Favorit mit vielen Ausfällen und zwei Remis in Folge gegen ein Team im Abstiegskampf, das tief
+   stehen wird → Sieg-Tipp wird zur Gegenangabe, ein Tormarkt kann der sicherere Tipp sein).
+4. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
    kommen aus FootyStats (Rang 2–3), Sports Mole korrigiert mit den Teamnews (Rang 1): fehlt z. B.
    der Torjäger, zählt sein bisheriger Torschnitt weniger; fehlen Innenverteidiger, zählen die Gegentore mehr.
    Bei einem Widerspruch geht eine **konkrete Nachricht aus Sports Mole** einer Zahl aus FootyStats
    vor (ein gesperrter Kapitän wiegt mehr als ein Saisonwert).
-4. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
+5. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
    Über 2,5, Unter 2,5 – je kurz: was spricht dafür, was dagegen (nach Rangfolge gewichtet).
-5. **Tipp:** Claude bestimmt **selbst** den Markt, den **beide Quellen gemeinsam** am stärksten
+6. **Tipp:** Claude bestimmt **selbst** den Markt, den **beide Quellen gemeinsam** am stärksten
    tragen – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
    bei der Wahl und drehen eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
    genannt. **Es gibt immer genau einen Tipp.**
@@ -146,7 +168,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    **sichersten, also den, gegen den am wenigsten spricht** (nach Rangfolge gewichtet). In der
    Begründung steht kurz, warum gegen die anderen Märkte mehr spricht. Es wird nie auf andere,
    „sicherere“ Wettarten ausgewichen (keine Doppelte Chance, kein Über 1,5, kein Unter 3,5 o. Ä.).
-6. **Kennzeichnung:** „**beide einig**“ – Sports Mole und FootyStats zeigen beide zum Tipp;
+7. **Kennzeichnung:** „**beide einig**“ – Sports Mole und FootyStats zeigen beide zum Tipp;
    „**geteilt**“ – eine Quelle zeigt woandershin (welche und warum, in einem Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
 
@@ -167,7 +189,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 ## Antwortaufbau je Paarung
 
-1. Rang 1: Teamnews und Ausgangslage (Sports Mole)
+1. **Lage-Check je Team** (fünf Fragen) und Teamnews (Sports Mole)
 2. Rang 2–3: Form, Saison (FootyStats + Sports Mole)
 3. Gegenseitiger Abgleich (übereinstimmend oder Abweichung)
 4. Spielbild je Team: trifft es? kassiert es? gewinnt es?

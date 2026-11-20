@@ -13,7 +13,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   und ruft je Paarung **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite (Formleisten, letzte Ergebnisse), Tabelle/Torschützen. Das ist die
   **Grundbasis**.
-- **Sports-Mole-Check Version 1.1** (seit 20.11.2026): **Sports Mole und FootyStats entscheiden
+- **Sports-Mole-Check Version 1.2** (seit 20.11.2026): fester **Lage-Check je Team** vor dem
+  Spielbild (worum es geht, Dringlichkeit der Punkte, Serien mit letztem Sieg/Tor, Schwächung,
+  Besonderheit) – die Lage steht über den Saisonzahlen. Grundlage aus 1.1: **Sports Mole und FootyStats entscheiden
   gemeinsam** – Sports Mole: Teamnews, Trainer, Ausgangslage; FootyStats: harte Zahlen (Form,
   Heim/Auswärts, Anteile über 2,5/beide treffen/zu null/ohne Tor),
   ohne FootyStats-Vorab-Werte. Gegenseitige Kontrolle; jeder Tipp „beide einig“ oder „geteilt“.
