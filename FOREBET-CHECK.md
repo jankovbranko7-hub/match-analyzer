@@ -118,8 +118,6 @@ in welchem Schritt der Tipp entstanden ist.
 3. ✅ **Tipp** mit Schritt (1–4), Gründen und Bedenken (stark/schwach) und einer klaren
    **Einstufung: klar** (die Daten aus Rang 1–2 zeigen alle in Richtung des Tipps) oder **knapp**
    (eine Angabe aus Rang 1–2 zeigt in die andere Richtung) – mit einem Satz, warum.
-   Maßstab für klar/knapp ist die Tagesliste vom 14.11.2026: Nur gewichtige Gegenangaben machen
-   einen Tipp knapp, Kleinigkeiten werden als schwache Bedenke genannt (ergänzt am 20.11.2026).
 4. Zum Vergleich: Prognose der Vorschau (gleich oder abweichend)
 
 ## Tagesliste
