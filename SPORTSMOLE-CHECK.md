@@ -25,6 +25,7 @@ Vor jeder Antwort mit Tipps geht Claude diese Prüfliste **vollständig** durch 
 der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korrigierten Fehlern.
 
 **Vollständigkeit**
+
 1. Alle Paarungen der genannten Liga an dem Tag erfasst – Sports-Mole-Übersicht **und**
    FootyStats-Spielplan verglichen; jedes Spiel ohne Vorschau steht als „nicht bewertet“ in der Liste.
 2. Je Paarung alle vier Sports-Mole-Teile abgerufen (Übersicht, Artikel, Spielseite, Tabelle und
@@ -32,6 +33,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 3. Je Paarung genau ein Tipp aus den sechs erlaubten Märkten; alle sechs Märkte geprüft.
 
 **Richtigkeit**
+
 4. Vorschau gehört zu diesem Termin (Datum, Spieltag, Stand der Aktualisierung geprüft).
 5. Anstoß in deutscher Zeit, mit FootyStats abgeglichen.
 6. Jede Zahl und jedes Ergebnis im Spielbild gegen die Quelle geprüft (Wortlaut der Vorschau,
@@ -45,6 +47,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 10. Keine Quoten, kein Rechenmodell, keine Schwellen, keine Punkte verwendet.
 
 **Abschluss**
+
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
