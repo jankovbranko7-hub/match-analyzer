@@ -17,7 +17,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Pflicht-**Datenblatt je Team** (Schritt 3: Tabelle, letzte Spiele mit Wettbewerb, letzter
   Sieg/Tor, jede Zahl mit Bezug Liga/alle Wb. · gesamt/daheim/auswärts · Team/Spiel, Teamnews nach
   dem Originalwort: fehlt/fraglich/gesperrt/zurück), automatischer Abgleich mit
-  `werkzeuge/abgleich.py`; alles Weitere nur aus dem Datenblatt. **„We say“ wird überhaupt nicht
+  `werkzeuge/abgleich.py`; alles Weitere nur aus dem Datenblatt. **Fehlerprotokoll**
+  (`FEHLERPROTOKOLL.md`): vor jeder Analyse lesen, in jeder Kontrolle jede Fehlerart prüfen, jeden
+  gefundenen Fehler sofort eintragen (Wunsch des Nutzers vom 21.11.2026: „aus Fehlern lernen“). **„We say“ wird überhaupt nicht
   verwendet.** Aus 1.2: fester **Lage-Check je Team** vor dem
   Spielbild (worum es geht, Dringlichkeit der Punkte, Serien mit letztem Sieg/Tor, Schwächung,
   Besonderheit) – die Lage steht über den Saisonzahlen. Grundlage aus 1.1: **Sports Mole und FootyStats entscheiden

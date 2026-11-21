@@ -11,8 +11,9 @@ Nutzers): fester **Lage-Check je Team** – worum es geht, wie dringend die Punk
 **Version 1.3** (21.11.2026, Wunsch des Nutzers): **Vorschau und Daten richtig lesen** – Pflicht-
 **Datenblatt je Team** (neuer Schritt 3), jede Zahl mit Bezug, Teamnews nach dem Originalwort,
 **automatischer Abgleich** Sports Mole ↔ FootyStats (`werkzeuge/abgleich.py`); **„We say“ wird
-überhaupt nicht mehr verwendet** – weder als Grund noch zum Vergleich. Version 1.2 liegt in
-`archiv/SPORTSMOLE-CHECK-1.2.md`.
+überhaupt nicht mehr verwendet** – weder als Grund noch zum Vergleich; **Fehlerprotokoll**
+(`FEHLERPROTOKOLL.md`): jeder gefundene Fehler wird eingetragen, vor jeder Analyse gelesen und in
+jeder Kontrolle Fehlerart für Fehlerart geprüft. Version 1.2 liegt in `archiv/SPORTSMOLE-CHECK-1.2.md`.
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -35,6 +36,8 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 ## Ablauf eines Auftrags
 
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
+0. Claude liest zuerst das **Fehlerprotokoll** (`FEHLERPROTOKOLL.md`) und achtet beim Schreiben auf
+   jede Fehlerart A–M (seit 1.3, Wunsch des Nutzers vom 21.11.2026).
 1. Claude holt aus der Sports-Mole-Vorschau-Übersicht alle Paarungen dieser Liga an diesem Tag
    (`werkzeuge/sm_spiel.py tag "<Liga>" [Wochentag]`, Anstoß in deutscher Zeit).
 2. Claude gleicht mit FootyStats ab, welche Spiele der Liga an dem Tag angesetzt sind; Spiele ohne
@@ -95,18 +98,20 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
 13. Verbindlichkeit eingehalten: jeder Punkt des Systems für jede Paarung erfüllt, nichts
     umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
+14. **Fehlerprotokoll:** vor der Analyse gelesen; jede Fehlerart A–M gezielt geprüft; jeder in
+    dieser Runde gefundene Fehler dort eingetragen (seit 1.3).
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude
   jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
-  FootyStats) und geht die Prüfliste durch. Erst danach gehen die Tipps an den Nutzer.
+  FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
 - **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
   Gründe. Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
   „Kontrolle (Uhrzeit): …“ vermerkt.
 - **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026):** Schreibt der Nutzer **„unabhängige
   Kontrolle“**, startet Claude einen zweiten, unabhängigen Prüfer (eigene Claude-Instanz, ohne die
-  Analyse aus dem Gespräch zu kennen). Er liest Regeln und Tagesliste, ruft alle Quellen selbst neu
+  Analyse aus dem Gespräch zu kennen). Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu
   ab (Sports Mole, FootyStats) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
   den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
   Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
