@@ -5,7 +5,12 @@ Sports-Mole-Check (seit 20.11.2026):
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:
   Formleisten, Formdaten; ohne Direktvergleiche), Tabelle und Torschützenliste einer Paarung als Text, Teilnamen in Sports-Mole-Schreibweise
-  (z. B. `barnsley sheff`). Ohne Quoten.
+  (z. B. `barnsley sheff`). Ohne Quoten, ohne „We say“ (seit Version 1.3). Formdaten je Team
+  neuestes zuerst, je Spiel mit Wettbewerb (Liga / anderer Wb.) und S/U/N aus Sicht des Teams.
+- `abgleich.py <season_id> "<SM-Heim>" "<SM-Gast>" ["<FS-Heim>" "<FS-Gast>"]` (seit Version 1.3) –
+  automatischer Abgleich Sports Mole ↔ FootyStats: Tabellenplatz, Ligaspiele (Heim/Auswärts,
+  Spielstand), S-U-N und Tore der letzten 6 aller Wettbewerbe; meldet jede „ABWEICHUNG“. Dazu
+  Tabellenstand mit Abständen nach oben/unten und zum Abstiegs-/Relegationsplatz (Datenblatt).
 
 FootyStats (Zahlen, Abgleich und Ergebnisse; ohne Vorab-Werte); Odd-Alerts-Skripte werden nicht mehr verwendet:
 

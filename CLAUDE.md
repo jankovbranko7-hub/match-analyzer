@@ -13,7 +13,12 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   und ruft je Paarung **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite (Formleisten, letzte Ergebnisse), Tabelle/Torschützen. Das ist die
   **Grundbasis**.
-- **Sports-Mole-Check Version 1.2** (seit 20.11.2026): fester **Lage-Check je Team** vor dem
+- **Sports-Mole-Check Version 1.3** (seit 21.11.2026): **Vorschau und Daten richtig lesen** –
+  Pflicht-**Datenblatt je Team** (Schritt 3: Tabelle, letzte Spiele mit Wettbewerb, letzter
+  Sieg/Tor, jede Zahl mit Bezug Liga/alle Wb. · gesamt/daheim/auswärts · Team/Spiel, Teamnews nach
+  dem Originalwort: fehlt/fraglich/gesperrt/zurück), automatischer Abgleich mit
+  `werkzeuge/abgleich.py`; alles Weitere nur aus dem Datenblatt. **„We say“ wird überhaupt nicht
+  verwendet.** Aus 1.2: fester **Lage-Check je Team** vor dem
   Spielbild (worum es geht, Dringlichkeit der Punkte, Serien mit letztem Sieg/Tor, Schwächung,
   Besonderheit) – die Lage steht über den Saisonzahlen. Grundlage aus 1.1: **Sports Mole und FootyStats entscheiden
   gemeinsam** – Sports Mole: Teamnews, Trainer, Ausgangslage; FootyStats: harte Zahlen (Form,
@@ -24,9 +29,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   ihn selbst aus dem Gesamtbild – **immer den sichersten der sechs Märkte, also den, gegen den am
   wenigsten spricht**, ob „beide einig“ oder „geteilt“ (die Kennzeichnung zeigt nur die Sicherheit). **Kein Rechenmodell** (weder Sports-Mole-Datenanalyse noch
   FootyStats-Vorab-Werte), **keine Direktvergleiche (H2H)** – weder als Grund noch als
-  Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**. „We say“ nur zum
-  Vergleich. Forebet und Odd Alerts werden nicht verwendet.
-- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Version 1.2 und alle ihre Punkte gelten
+  Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**, **kein „We say“**
+  (seit 1.3). Forebet und Odd Alerts werden nicht verwendet.
+- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Version 1.3 und alle ihre Punkte gelten
   **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
@@ -35,7 +40,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
   schreibt er **„unabhängige Kontrolle“**, einen zweiten, unabhängigen Prüfer (Agent) starten,
-  der alle Quellen neu abruft, auch den Entscheidungsweg Schritt 1–7 in seiner Reihenfolge prüft und
+  der alle Quellen neu abruft, auch den Entscheidungsweg Schritt 1–8 in seiner Reihenfolge prüft und
   nur berichtet; Fehler danach korrigieren (Stufe 3).
 - **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
