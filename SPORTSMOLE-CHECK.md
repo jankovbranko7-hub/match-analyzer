@@ -43,7 +43,8 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 - **Gruppen nach Anstoßzeit** (Wahl des Nutzers vom 21.11.2026): Die Paarungen werden in der
   Reihenfolge ihres Anstoßes bearbeitet und zu Gruppen mit derselben Anstoßzeit zusammengefasst.
   **Eine Gruppe geht erst an den Nutzer, wenn jede ihrer Paarungen fertig und geprüft ist**
-  (Prüfliste, Kontrolldurchgang) – auch wenn es länger dauert. Dann folgt die nächste Gruppe.
+  (Prüfliste, Kontrolldurchgang, **automatische unabhängige Kontrolle** mit Korrekturen) – auch wenn
+  es länger dauert. Dann folgt die nächste Gruppe.
 - **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
   statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
 
@@ -143,9 +144,16 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   aus Rang 1–2 gefunden, wird der Tipp **immer neu abgewogen** (vor Anpfiff; angeglichen an Stufe 3
   am 21.11.2026). Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
   „Kontrolle (Uhrzeit): …“ vermerkt.
-- **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026):** Schreibt der Nutzer **„unabhängige
-  Kontrolle“**, startet Claude einen zweiten, unabhängigen Prüfer (eigene Claude-Instanz, ohne die
-  Analyse aus dem Gespräch zu kennen). Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu
+- **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026; seit 21.11.2026 automatisch, Wunsch des
+  Nutzers):** Nach jeder Analyse – je Gruppe, nach Prüfliste und Kontrolldurchgang – startet Claude
+  **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer. Erst nach seinem Bericht
+  und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
+  Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
+  Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
+  Zeit bis zum Anpfiff dafür nicht, sagt Claude das vorher offen. Je Spieltag wird vermerkt, was die
+  Kontrolle gefunden hat (Erprobung von 1.3: findet sie über mehrere Spieltage nichts, was einen
+  Tipp betrifft, kann der Nutzer entscheiden, sie seltener zu verlangen). Der Prüfer ist eine eigene Claude-Instanz, die
+  die Analyse aus dem Gespräch nicht kennt. Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu
   ab (Sports Mole, FootyStats) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
   den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
   Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
