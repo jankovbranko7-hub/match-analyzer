@@ -4,10 +4,10 @@ Eingerichtet am 21.11.2026 auf Wunsch des Nutzers: **aus jedem Fehler lernen.** 
 gefundene Fehler mit Datum, Spiel, Fehlerart und Gegenmaßnahme.
 
 **So wird es verwendet (Pflicht, Teil von Version 1.3):**
-1. **Vor jeder Analyse** liest Claude dieses Protokoll und prüft beim Schreiben jede Fehlerart A–M
+1. **Vor jeder Analyse** liest Claude dieses Protokoll und prüft beim Schreiben jede Fehlerart
    gezielt mit.
 2. Der **Kontrolldurchgang** (Stufe 1), die **„Kontrolle“** (Stufe 2) und die **unabhängige
-   Kontrolle** (Stufe 3) gehen jede Fehlerart A–M einzeln durch; der unabhängige Prüfer bekommt
+   Kontrolle** (Stufe 3) gehen jede Fehlerart einzeln durch; der unabhängige Prüfer bekommt
    dieses Protokoll mit.
 3. **Jeder neu gefundene Fehler** – egal von wem gefunden (Claude, Prüfer, Nutzer) – wird sofort
    hier eingetragen: Datum, Spiel, was falsch war, Fehlerart, ob ein Tipp betroffen war.

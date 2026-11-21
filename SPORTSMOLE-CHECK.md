@@ -30,16 +30,20 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
   keine Schwellen oder Punkte, kein „We say“, keine Vermutung ohne Quelle).
 - Kann ein Schritt nicht vollständig erledigt werden (Quelle fehlt, Seite nicht erreichbar), sagt
   Claude das dem Nutzer offen und vermerkt es in der Tagesliste – nie stillschweigend übergehen.
-- Erst wenn die Prüfliste für alle Paarungen erfüllt ist, gehen die Tipps an den Nutzer. Ein
+- Erst wenn die Prüfliste für alle Paarungen einer Gruppe (gleiche Anstoßzeit) erfüllt ist, gehen
+  deren Tipps an den Nutzer. Ein
   Verstoß, der vorher auffällt, wird vor der Antwort behoben.
 - Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen.
 
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
-- **Jede Paarung einzeln, Schritt für Schritt:** Datenblatt, Lage, Spielbild, Märkte, Tipp –
-  erst wenn eine Paarung vollständig fertig ist, kommt die nächste. Keine Paarungen im Block
-  nebeneinander bearbeiten.
-- **Tipps erst, wenn alle Paarungen fertig und geprüft sind** – auch wenn es länger dauert.
+- **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
+  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung) – erst wenn eine Paarung vollständig
+  fertig ist, kommt die nächste. Keine Paarungen im Block nebeneinander bearbeiten.
+- **Gruppen nach Anstoßzeit** (Wahl des Nutzers vom 21.11.2026): Die Paarungen werden in der
+  Reihenfolge ihres Anstoßes bearbeitet und zu Gruppen mit derselben Anstoßzeit zusammengefasst.
+  **Eine Gruppe geht erst an den Nutzer, wenn jede ihrer Paarungen fertig und geprüft ist**
+  (Prüfliste, Kontrolldurchgang) – auch wenn es länger dauert. Dann folgt die nächste Gruppe.
 - **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
   statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
 
@@ -60,7 +64,7 @@ Ein PDF nur auf ausdrücklichen Wunsch. Tagesliste und Fehlerprotokoll bleiben a
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
 
 0. Claude liest zuerst das **Fehlerprotokoll** (`FEHLERPROTOKOLL.md`) und achtet beim Schreiben auf
-   jede Fehlerart A–M (seit 1.3, Wunsch des Nutzers vom 21.11.2026).
+   jede Fehlerart (seit 1.3, Wunsch des Nutzers vom 21.11.2026).
 1. Claude holt aus der Sports-Mole-Vorschau-Übersicht alle Paarungen dieser Liga an diesem Tag
    (`werkzeuge/sm_spiel.py tag "<Liga>" [Wochentag]`, Anstoß in deutscher Zeit).
 2. Claude gleicht mit FootyStats ab, welche Spiele der Liga an dem Tag angesetzt sind; Spiele ohne
@@ -75,7 +79,8 @@ Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“
 
 ## Sorgfalt – keine Fehler, nichts vergessen (Pflicht, Wunsch des Nutzers vom 20.11.2026)
 
-Vor jeder Antwort mit Tipps geht Claude diese Prüfliste **vollständig** durch und schreibt am Ende
+Vor jeder Antwort mit Tipps geht Claude diese Prüfliste **vollständig** durch (Punkt 12 gehört
+zur Auswertung nach Abpfiff und wird dort erledigt) und schreibt am Ende
 der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korrigierten Fehlern.
 
 **Vollständigkeit**
@@ -120,10 +125,10 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
-12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
+12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
 13. Verbindlichkeit eingehalten: jeder Punkt des Systems für jede Paarung erfüllt, nichts
     umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
-14. **Fehlerprotokoll:** vor der Analyse gelesen; jede Fehlerart A–M gezielt geprüft; jeder in
+14. **Fehlerprotokoll:** vor der Analyse gelesen; jede Fehlerart gezielt geprüft; jeder in
     dieser Runde gefundene Fehler dort eingetragen (seit 1.3).
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
@@ -133,7 +138,10 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
 - **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
-  Gründe. Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
+  Gründe, jede Fehlerart des Fehlerprotokolls, den Entscheidungsweg Schritt 1–8 und bei jeder
+  Paarung die Gegenangaben-Prüfung („dreht den Tipp: ja/nein, weil …“). Wird eine neue Gegenangabe
+  aus Rang 1–2 gefunden, wird der Tipp **immer neu abgewogen** (vor Anpfiff; angeglichen an Stufe 3
+  am 21.11.2026). Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
   „Kontrolle (Uhrzeit): …“ vermerkt.
 - **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026):** Schreibt der Nutzer **„unabhängige
   Kontrolle“**, startet Claude einen zweiten, unabhängigen Prüfer (eigene Claude-Instanz, ohne die
@@ -199,7 +207,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 ## Entscheidungsweg je Paarung (immer in dieser Reihenfolge)
 
-1. **Abrufen und prüfen:** Artikel, Spielseite, Tabelle holen; prüfen, dass die Vorschau zu diesem
+1. **Abrufen und prüfen:** Artikel, Spielseite, Tabelle und Torschützenliste holen; prüfen, dass die Vorschau zu diesem
    Termin gehört und wann sie zuletzt aktualisiert wurde.
 2. **FootyStats holen und gegenseitig abgleichen:** Anstoß, letzte Ergebnisse, Tabellenplatz –
    mit `werkzeuge/abgleich.py` (seit 1.3); jede „ABWEICHUNG“ von Hand klären und vermerken; als
@@ -224,6 +232,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
       - **zurück:** „back“, „returns“, „available again“, „back in training“
       Passt kein Wort eindeutig: „unklar (Wortlaut: …)“ – nie zu „fehlt“ verschärfen.
    6. **Abweichungen** aus dem Abgleich (Schritt 2).
+   7. **Weitere Fakten für den Lage-Check** (seit 21.11.2026): **Trainer** (seit wann, wie viele
+      Spiele – steht die Zahl nicht in der Quelle: „nicht in der Quelle“), **Spiele kurz davor und
+      danach** mit Datum und Wettbewerb (Belastung – nur mit Datum, sonst keine Belastung),
+      **Besonderheit** (Derby, Kellerduell, Spitzenspiel, letztes Spiel vor einer Pause) – je mit Quelle.
    **Wirkung:** Lage-Check, Spielbild, Märkte und Tipp (Schritt 4–8) verwenden **nur Angaben aus dem
    Datenblatt**; fehlt eine Angabe, wird sie zuerst mit Quelle ins Datenblatt eingetragen. Jede
    Angabe im Datenblatt wird einmal gegen den Wortlaut der Quelle gelesen (Prüfliste 6b). „We say“
@@ -251,9 +263,12 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    vor (ein gesperrter Kapitän wiegt mehr als ein Saisonwert).
 6. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
    Über 2,5, Unter 2,5 – je kurz: was spricht dafür, was dagegen (nach Rangfolge gewichtet).
-7. **Tipp:** Claude bestimmt **selbst** den Markt, den **beide Quellen gemeinsam** am stärksten
-   tragen – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
-   bei der Wahl und drehen eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
+   **Je Markt zuerst Rang 1–2** (Lage, Teamnews, aktuelle Form), **erst danach Rang 3**
+   (Saisonwerte); die Gegenangaben-Prüfung aus Schritt 7 gilt schon hier: Ein Markt, gegen den
+   Rang 1–2 sprechen, wird nicht durch Saisonwerte zum stärksten (seit 21.11.2026).
+7. **Tipp:** Claude bestimmt **selbst** den **sichersten der sechs Märkte** (Kriterium siehe unten)
+   – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
+   bei der Wahl und dreht eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
    genannt. **Es gibt immer genau einen Tipp.**
    **Immer der sicherste der sechs Märkte** (Wunsch des Nutzers vom 20.11.2026): Claude wählt in
    jedem Spiel – ob „beide einig“ oder „geteilt“ – unter den sechs erlaubten Märkten den
@@ -265,8 +280,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    aus Rang 1–2 steht ausdrücklich: **„dreht den Tipp: ja/nein, weil …“**. Bei „ja“ wird der Markt
    neu gewählt. Ein Tipp, der nur auf Rang 3 ruht, während Rang 1–2 dagegen sprechen, ist nicht
    erlaubt. (Anlass: Villa – Sunderland, Frankfurt – Hoffenheim, Elversberg – Freiburg am 21.11.)
-8. **Kennzeichnung:** „**beide einig**“ – Sports Mole und FootyStats zeigen beide zum Tipp;
-   „**geteilt**“ – eine Quelle zeigt woandershin (welche und warum, in einem Satz). Die
+8. **Kennzeichnung** (genau festgelegt am 21.11.2026): Die **Sports-Mole-Seite** ist Rang 1 –
+   Lage-Check und Teamnews (Artikel, Tabelle); die **FootyStats-Seite** sind die Zahlen aus Rang 2–3
+   (Form, Heim/Auswärts, Saisonanteile). „**beide einig**“ – beide Seiten zeigen zum Tipp;
+   „**geteilt**“ – eine Seite zeigt woandershin oder nicht eindeutig (welche und warum, in einem
+   Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
 
 ## Regeln für den Tipp
@@ -281,8 +299,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 3. Rang 3 dreht eine klare Angabe aus Rang 1–2 nicht um.
 4. Jede Aussage im Spielbild nennt ihre Quelle (Sports Mole: Artikel, Spielseite, Tabelle;
    FootyStats) und steht im Datenblatt (seit 1.3).
-5. Kein Rechenmodell, keine Direktvergleiche (H2H), keine Schwellen, keine Punkte, keine Zählung
-   („x von 10“).
+5. Kein Rechenmodell, keine Direktvergleiche (H2H), keine Schwellen, keine Punkte. Verboten ist das
+   **Zählen von Gründen oder Häkchen als Entscheidungsregel** („7 von 10 Punkten erfüllt“).
+   **Erlaubt und im Datenblatt Pflicht** sind Ergebniszählungen aus Formdaten („in 3 der letzten
+   5 Ligaspiele ohne Tor“), klargestellt am 21.11.2026.
 
 ## Antwortaufbau je Paarung
 

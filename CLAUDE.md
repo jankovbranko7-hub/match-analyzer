@@ -38,8 +38,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
 - **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026): Schritt für Schritt (Datenblatt,
-  Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Tipps erst, wenn alle Paarungen fertig und
-  geprüft sind, auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
+  Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Paarungen in Anstoß-Reihenfolge, Tipps
+  gruppenweise nach Anstoßzeit – eine Gruppe erst, wenn jede ihrer Paarungen fertig und geprüft ist,
+  auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
   abkürzen.
 - **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Je Paarung im
   Chat (Variante 1): Anstoß, Paarung, Tipp mit Kennzeichnung, Gründe und alle Gegenangaben (Rang 1–2
