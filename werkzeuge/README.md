@@ -15,7 +15,7 @@ für Odd Alerts) und schwärzen sie als `[REDACTED]`. Keine Quoten.
 - `fs.sh <pfad> [k=v ...]` – ein API-Abruf, z. B. `werkzeuge/fs.sh match match_id=8572478`.
   Letzte Zeile: `__HTTP <code>`.
 - `fs_spiel.py <season_id> "<Heim-Teilname>" "<Auswärts-Teilname>"` – alle FootyStats-Daten zu
-  einem Spiel für den Forebet-Check v2 (Vorab-xG, Saison, Heim/Auswärts, letzte 6 aller
+  einem Spiel für den Sports-Mole-Check 1.2 (Saison, Heim/Auswärts, letzte 6 aller
   Wettbewerbe, letzte 6 Ligaspiele, Trends). Keine Quoten, keine Vorab-Werte, keine Direktvergleiche.
 - `fs_ergebnis.py <match_id> ...` – Endergebnisse für die Auswertung.
 - (Gehört zu Version 2.12, seit dem 20.11.2026 nicht mehr Teil des Systems:) `fs_haekchen.py <season_id> "<Heim>" "<Auswärts>" [heim|ausw|ja|nein|ueber|unter]` – Forebet-Check
