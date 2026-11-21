@@ -192,10 +192,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 ## Antwortaufbau je Paarung
 
-1. **Lage-Check je Team** (fünf Fragen) und Teamnews (Sports Mole)
-2. Rang 2–3: Form, Saison (FootyStats + Sports Mole)
-3. Gegenseitiger Abgleich (übereinstimmend oder Abweichung)
-4. Spielbild je Team: trifft es? kassiert es? gewinnt es?
+Genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026):
+1. FootyStats (Rang 2–3: Form, Saison) und gegenseitiger Abgleich mit Sports Mole
+2. **Lage-Check je Team** (fünf Fragen) mit Teamnews (Sports Mole)
+3. Spielbild je Team: trifft es? kassiert es? gewinnt es? (mit Quelle, Teamnews eingearbeitet)
+4. Spielbild gesamt
 5. Die sechs Märkte, je kurz dafür/dagegen
 6. ✅ **Tipp** mit Gründen, Gegenangaben und „beide einig“ / „geteilt“
 7. Zum Vergleich: „We say“
