@@ -41,6 +41,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Tipps erst, wenn alle Paarungen fertig und
   geprüft sind, auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
   abkürzen.
+- **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Tipps mit
+  Gründen und allen Gegenangaben, Kontrollergebnisse, Fehlerprotokoll-Einträge und Auswertung immer
+  vollständig im Chat (Listen); PDF nur auf ausdrücklichen Wunsch.
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer

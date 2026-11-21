@@ -41,6 +41,14 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 - **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
   statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
 
+**Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest die Dateien nicht. Alles,
+was er wissen muss, steht **vollständig im Chat**, handytauglich als Liste:
+- je Paarung: Tipp mit Kennzeichnung, die Gründe und **alle Gegenangaben**;
+- Ergebnisse jeder Kontrolle mit jedem gefundenen Fehler und jeder Korrektur;
+- jeder neue Eintrag ins Fehlerprotokoll und was daraus folgt;
+- die Auswertung.
+Ein PDF nur auf ausdrücklichen Wunsch. Tagesliste und Fehlerprotokoll bleiben als Ablage.
+
 ## Ablauf eines Auftrags
 
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
