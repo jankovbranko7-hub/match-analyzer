@@ -161,7 +161,16 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Spielbild je Team ungenau (Paderborn, Leipzig, Dortmund) – C – UK2
 - Schalke „5 Spiele ohne Tor“ statt 4 (alle Wb.) / 3 (Liga) – H/A – UK2
 
+- **Grenzfall nach der Auswertung (ca. 23:10):** Napoli – Torino (1:0): „Beide treffen – Ja“; Rang 2
+  dagegen (Napoli 2 der letzten 5 Ligaspiele ohne Tor, Torino traf in Frosinone nicht) – C (Grenzfall).
+
 ### 21.11.2026 · Ligue 1 (Version 1.2)
+- **Nach der Auswertung gefunden (ca. 23:10, selbst):** Lens – Toulouse (1:1): „Über 2,5“ ruhte auf
+  Saisonanteilen (Rang 3: 80 %); Rang 1–2 dagegen (Toulouse 2 der letzten 5 Ligaspiele ohne Tor,
+  Messali fehlt, Jørgensen fraglich; bei Lens fehlen Édouard und Sima) nur im „Dagegen“ – C.
+- **Nach der Auswertung gefunden (ca. 23:10, selbst):** Strasbourg – Brest (0:1): „Beide treffen –
+  Ja“ auf Saisonwerten (Rang 3); Rang 2 dagegen (Brest letzte 2 Ligaspiele zu null, Strasbourg 0:3
+  in Rennes, Reyna und Balde fraglich) nur im „Dagegen“ – C.
 - Nice „Ausfälle vor allem Abwehr“ nur aus „We say“ – D – SK
 - PSG „Champions-League-Belastung“ nicht belegt – E – UK
 - Strasbourg „zwei Tage Training“ nur aus „We say“ – D – UK
@@ -178,9 +187,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 ## Lehren bisher
 
 - **Wichtigste Lehre aus der Auswertung 21.11.:** Eine Rang-1–2-Angabe ins „Dagegen“ zu schreiben
-  reicht nicht – es muss geprüft werden, ob sie den Tipp **umdreht**. Bei 3 von 7 Fehltipps des
-  21.11. stand der richtige Hinweis schon im „Dagegen“ (alle „Beide treffen – Ja“ auf
-  Spielort-Saisonwerten). Die Kontrollen haben Gegenangaben ergänzt, aber die Abwägung nicht neu
+  reicht nicht – es muss geprüft werden, ob sie den Tipp **umdreht**. Bei 5 von 10 Fehltipps des
+  21.11. stand der richtige Hinweis schon im „Dagegen“ (Villa, Frankfurt, Elversberg, Lens,
+  Strasbourg – alle Tormärkte auf Saisonwerten), dazu 2 Grenzfälle (Spurs, Napoli). Die Kontrollen haben Gegenangaben ergänzt, aber die Abwägung nicht neu
   geprüft. (Rückschaufehler beachten: das Ergebnis war bekannt, als es auffiel – der Fehler liegt in
   der Regelanwendung „Rang 3 dreht Rang 1–2 nicht um“, nicht im Ergebnis.)
 
