@@ -37,6 +37,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
+- **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026): Schritt für Schritt (Datenblatt,
+  Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Tipps erst, wenn alle Paarungen fertig und
+  geprüft sind, auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
+  abkürzen.
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer

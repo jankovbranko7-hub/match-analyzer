@@ -33,6 +33,14 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
   Verstoß, der vorher auffällt, wird vor der Antwort behoben.
 - Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen.
 
+**Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
+- **Jede Paarung einzeln, Schritt für Schritt:** Datenblatt, Lage, Spielbild, Märkte, Tipp –
+  erst wenn eine Paarung vollständig fertig ist, kommt die nächste. Keine Paarungen im Block
+  nebeneinander bearbeiten.
+- **Tipps erst, wenn alle Paarungen fertig und geprüft sind** – auch wenn es länger dauert.
+- **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
+  statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
+
 ## Ablauf eines Auftrags
 
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
