@@ -23,6 +23,7 @@ Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`for
 Dieses System und **alle seine Punkte** gelten **immer** und dürfen **nicht umgangen** werden:
 Ablauf, Prüfliste „Sorgfalt“, Grundsätze, Rangfolge, Entscheidungsweg Schritt 1–8 in seiner
 Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
+
 - Für **jede** Paarung, ohne Ausnahme – auch bei vielen Spielen, Zeitdruck oder kurz vor Anpfiff.
 - Kein Schritt wird ausgelassen, abgekürzt, zusammengelegt oder durch etwas anderes ersetzt.
 - Nichts außerhalb des Systems fließt ein (keine Quoten, kein Rechenmodell, keine Direktvergleiche,
@@ -34,6 +35,7 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 - Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen.
 
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
+
 - **Jede Paarung einzeln, Schritt für Schritt:** Datenblatt, Lage, Spielbild, Märkte, Tipp –
   erst wenn eine Paarung vollständig fertig ist, kommt die nächste. Keine Paarungen im Block
   nebeneinander bearbeiten.
@@ -43,15 +45,18 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 
 **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest die Dateien nicht. Alles,
 was er wissen muss, steht **vollständig im Chat**, handytauglich als Liste:
+
 - je Paarung: Tipp mit Kennzeichnung, die Gründe und **alle Gegenangaben**;
 - Ergebnisse jeder Kontrolle mit jedem gefundenen Fehler und jeder Korrektur;
 - jeder neue Eintrag ins Fehlerprotokoll und was daraus folgt;
 - die Auswertung.
+
 Ein PDF nur auf ausdrücklichen Wunsch. Tagesliste und Fehlerprotokoll bleiben als Ablage.
 
 ## Ablauf eines Auftrags
 
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
+
 0. Claude liest zuerst das **Fehlerprotokoll** (`FEHLERPROTOKOLL.md`) und achtet beim Schreiben auf
    jede Fehlerart A–M (seit 1.3, Wunsch des Nutzers vom 21.11.2026).
 1. Claude holt aus der Sports-Mole-Vorschau-Übersicht alle Paarungen dieser Liga an diesem Tag
@@ -119,6 +124,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
     dieser Runde gefundene Fehler dort eingetragen (seit 1.3).
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
+
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude
   jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
   FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
@@ -278,6 +284,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 ## Antwortaufbau je Paarung
 
 Genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026, Version 1.3):
+
 1. Abgleich Sports Mole ↔ FootyStats (Ergebnis von `abgleich.py`, Abweichungen)
 2. **Datenblatt je Team** (Tabelle, letzte Spiele, letzter Sieg/Tor, Zahlen mit Bezug, Teamnews
    nach Originalwort)
