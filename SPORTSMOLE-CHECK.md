@@ -46,7 +46,9 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest die Dateien nicht. Alles,
 was er wissen muss, steht **vollständig im Chat**, handytauglich als Liste:
 
-- je Paarung: Tipp mit Kennzeichnung, die Gründe und **alle Gegenangaben**;
+- je Paarung (Variante 1, Wahl des Nutzers vom 21.11.2026): **Anstoß, Paarung, Tipp mit
+  Kennzeichnung, die Gründe und alle Gegenangaben – jede aus Rang 1–2 mit „dreht den Tipp: ja/nein,
+  weil …“**. Datenblatt, Lage-Check und Spielbild stehen vollständig in der Tagesliste, nicht im Chat;
 - Ergebnisse jeder Kontrolle mit jedem gefundenen Fehler und jeder Korrektur;
 - jeder neue Eintrag ins Fehlerprotokoll und was daraus folgt;
 - die Auswertung.
@@ -67,8 +69,9 @@ Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“
    und die FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den
    automatischen Abgleich laufen (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das
    Datenblatt je Team an und geht den Entscheidungsweg unten durch – je Paarung genau ein Tipp.
-4. Alle Tipps kommen in die Tagesliste; Antwort an den Nutzer kurz und handytauglich (Listen statt
-   breiter Tabellen).
+4. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
+   was unter „Alles im Chat“ festgelegt ist (Variante 1), handytauglich als Liste statt breiter
+   Tabellen.
 
 ## Sorgfalt – keine Fehler, nichts vergessen (Pflicht, Wunsch des Nutzers vom 20.11.2026)
 
@@ -283,7 +286,8 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 ## Antwortaufbau je Paarung
 
-Genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026, Version 1.3):
+**In der Tagesliste** genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026,
+Version 1.3); **im Chat** nur Punkt 7 mit Anstoß und Paarung (Variante 1, siehe „Alles im Chat“):
 
 1. Abgleich Sports Mole ↔ FootyStats (Ergebnis von `abgleich.py`, Abweichungen)
 2. **Datenblatt je Team** (Tabelle, letzte Spiele, letzter Sieg/Tor, Zahlen mit Bezug, Teamnews

@@ -41,9 +41,11 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Tipps erst, wenn alle Paarungen fertig und
   geprüft sind, auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
   abkürzen.
-- **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Tipps mit
-  Gründen und allen Gegenangaben, Kontrollergebnisse, Fehlerprotokoll-Einträge und Auswertung immer
-  vollständig im Chat (Listen); PDF nur auf ausdrücklichen Wunsch.
+- **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Je Paarung im
+  Chat (Variante 1): Anstoß, Paarung, Tipp mit Kennzeichnung, Gründe und alle Gegenangaben (Rang 1–2
+  mit „dreht den Tipp: ja/nein, weil …“); Datenblatt, Lage-Check, Spielbild nur in der Tagesliste.
+  Kontrollergebnisse, Fehlerprotokoll-Einträge und Auswertung immer vollständig im Chat (Listen);
+  PDF nur auf ausdrücklichen Wunsch.
 - **Gegenangaben-Prüfung** (Wunsch des Nutzers vom 21.11.2026): erst Rang 1–2, dann Rang 3; für
   jede Rang-1–2-Gegenangabe „dreht den Tipp: ja/nein, weil …“, bei „ja“ Markt neu wählen. Findet
   eine Kontrolle eine neue Rang-1–2-Gegenangabe, wird der Tipp immer neu abgewogen (vor Anpfiff).
