@@ -35,7 +35,7 @@ Häufigkeit = Zahl der gefundenen Fälle am 20. und 21.11.2026.
 - Gegenmaßnahme: Prüfliste 9 („alle Rang-1–2-Gegenangaben“); Datenblatt-Teamnews in vier Listen
   (1.3) – vor dem Tipp jede Liste gegen den Tipp lesen.
 
-**C · Sicherster Markt falsch abgewogen** (5 Fälle, alle mit Tippänderung)
+**C · Sicherster Markt falsch abgewogen** (10 Fälle + 2 Grenzfälle: 5 vor Anpfiff gefunden und Tipp geändert, 5 erst nach der Auswertung gefunden – alle 5 Fehltipps)
 - Typisch: Tipp ruhte auf Saisonwerten (Rang 3), obwohl Form oder Lage (Rang 1–2) dagegen
   sprachen; Spielbild je Team passte nicht zum Tipp.
 - Gegenmaßnahme: Regel „Rang 3 dreht Rang 1–2 nicht um“; bei jedem Markt den Rang des Grundes
@@ -84,7 +84,7 @@ Häufigkeit = Zahl der gefundenen Fälle am 20. und 21.11.2026.
 **L · Direktvergleich (H2H) verwendet** (3 Fälle am 20.11., vor dem Verbot)
 - Gegenmaßnahme: H2H verboten (20.11.); H2H-Sätze im Artikeltext nie übernehmen (Prüfliste 10).
 
-**M · Eigene Werkzeug- und Formfehler** (4 Fälle)
+**M · Eigene Werkzeug- und Formfehler** (6 Fälle)
 - Typisch: Zusammenfassung las „Real“ als Real Madrid statt Real Betis; Werkzeug nahm den falschen
   Spielseiten-Link; Uhrzeit in der Liste geschätzt statt abgelesen.
 - Gegenmaßnahme: volle Teamnamen; Uhrzeit immer mit `date` ablesen; Werkzeuge nach jeder Änderung
@@ -131,6 +131,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Rayo: Heimsieg ruhte auf Rang 3, „Valencia gewinnt kaum“ widersprach den Zahlen – C – UK2 – **Tipp!** (→ Über 2,5)
 - Sevilla: „Derby“ als Grund, „Betis ohne Cucho“ (nur fraglich) – E/F – UK2 – **Tipp!** (→ Beide treffen – Ja)
 - Spurs: fehlende/fragliche Spurs-Angreifer nicht als Gegenangabe – B – UK2
+- **Grenzfall nach der Auswertung (ca. 23:10):** Spurs – Ipswich (2:0): „Beide treffen – Ja“ ruhte vor
+  allem auf Ipswichs Saisonwerten auswärts (Rang 3); die Rang-1-Gegenangabe (Spurs-Angreifer) wurde
+  nicht auf „dreht den Tipp“ geprüft – C (Grenzfall).
 - Bournemouth „kassiert selten“ = alle Wb. (Liga 7 in 6) – A – UK2
 - Newcastle „erste 4 Heimspiele 2+ Tore“ = alle Wb.; Märkte ohne Grund – A/C – UK2
 - Celta „ohne Druck“ trotz 3 Punkten über Platz 18 – J – UK2
@@ -163,6 +166,16 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 
 - **Grenzfall nach der Auswertung (ca. 23:10):** Napoli – Torino (1:0): „Beide treffen – Ja“; Rang 2
   dagegen (Napoli 2 der letzten 5 Ligaspiele ohne Tor, Torino traf in Frosinone nicht) – C (Grenzfall).
+
+### 21.11.2026 · Regeln und Werkzeuge (selbst gefunden)
+- Werkzeug-Beschreibung (`werkzeuge/README.md`) nannte bei `fs_spiel.py` noch „Vorab-xG“ aus einer
+  alten Version (das Werkzeug gab den Wert nicht aus) – M – beim Systemtest korrigiert.
+- Regel-PDF 1.3: mehrere Aufzählungen erschienen als Fließtext (fehlende Leerzeile vor Listen) – M –
+  vor dem Versand korrigiert.
+- Lücke in der Regel zur Stufe 3: Ein Tipp wurde nach einer Kontrolle nur neu bestimmt, wenn ein
+  Tipp-Grund falsch war – neu gefundene Rang-1–2-Gegenangaben lösten keine Neuabwägung aus (Ursache
+  der C-Fehler bei Villa, Frankfurt, Elversberg, Lens, Strasbourg) – C – nach der Auswertung (N),
+  Regel am 21.11. geändert.
 
 ### 21.11.2026 · Ligue 1 (Version 1.2)
 - **Nach der Auswertung gefunden (ca. 23:10, selbst):** Lens – Toulouse (1:1): „Über 2,5“ ruhte auf
