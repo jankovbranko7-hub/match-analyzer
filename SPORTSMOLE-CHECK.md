@@ -12,6 +12,21 @@ Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
 
+## Verbindlichkeit (Wunsch des Nutzers vom 21.11.2026)
+
+Dieses System und **alle seine Punkte** gelten **immer** und dürfen **nicht umgangen** werden:
+Ablauf, Prüfliste „Sorgfalt“, Grundsätze, Rangfolge, Entscheidungsweg Schritt 1–7 in seiner
+Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
+- Für **jede** Paarung, ohne Ausnahme – auch bei vielen Spielen, Zeitdruck oder kurz vor Anpfiff.
+- Kein Schritt wird ausgelassen, abgekürzt, zusammengelegt oder durch etwas anderes ersetzt.
+- Nichts außerhalb des Systems fließt ein (keine Quoten, kein Rechenmodell, keine Direktvergleiche,
+  keine Schwellen oder Punkte, kein „We say“ als Grund, keine Vermutung ohne Quelle).
+- Kann ein Schritt nicht vollständig erledigt werden (Quelle fehlt, Seite nicht erreichbar), sagt
+  Claude das dem Nutzer offen und vermerkt es in der Tagesliste – nie stillschweigend übergehen.
+- Erst wenn die Prüfliste für alle Paarungen erfüllt ist, gehen die Tipps an den Nutzer. Ein
+  Verstoß, der vorher auffällt, wird vor der Antwort behoben.
+- Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen.
+
 ## Ablauf eines Auftrags
 
 Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
@@ -68,6 +83,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. Nach Abpfiff: alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
+13. Verbindlichkeit eingehalten: jeder Punkt des Systems für jede Paarung erfüllt, nichts
+    umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude

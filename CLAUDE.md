@@ -26,6 +26,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   FootyStats-Vorab-Werte), **keine Direktvergleiche (H2H)** – weder als Grund noch als
   Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**. „We say“ nur zum
   Vergleich. Forebet und Odd Alerts werden nicht verwendet.
+- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Version 1.2 und alle ihre Punkte gelten
+  **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
+  abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
+  (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
