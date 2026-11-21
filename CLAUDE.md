@@ -44,6 +44,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Tipps mit
   Gründen und allen Gegenangaben, Kontrollergebnisse, Fehlerprotokoll-Einträge und Auswertung immer
   vollständig im Chat (Listen); PDF nur auf ausdrücklichen Wunsch.
+- **Gegenangaben-Prüfung** (Wunsch des Nutzers vom 21.11.2026): erst Rang 1–2, dann Rang 3; für
+  jede Rang-1–2-Gegenangabe „dreht den Tipp: ja/nein, weil …“, bei „ja“ Markt neu wählen. Findet
+  eine Kontrolle eine neue Rang-1–2-Gegenangabe, wird der Tipp immer neu abgewogen (vor Anpfiff).
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer

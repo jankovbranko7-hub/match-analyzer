@@ -39,7 +39,9 @@ Häufigkeit = Zahl der gefundenen Fälle am 20. und 21.11.2026.
 - Typisch: Tipp ruhte auf Saisonwerten (Rang 3), obwohl Form oder Lage (Rang 1–2) dagegen
   sprachen; Spielbild je Team passte nicht zum Tipp.
 - Gegenmaßnahme: Regel „Rang 3 dreht Rang 1–2 nicht um“; bei jedem Markt den Rang des Grundes
-  nennen; Spielbild je Team vor dem Tipp gegen den Tipp lesen.
+  nennen; Spielbild je Team vor dem Tipp gegen den Tipp lesen. **Seit 21.11. (nach der Auswertung):
+  Gegenangaben-Prüfung „dreht den Tipp: ja/nein, weil …“ bei jeder Rang-1–2-Gegenangabe; neue
+  Gegenangabe aus einer Kontrolle → Tipp immer neu abwägen.**
 
 **D · „We say“ als Tatsache verwendet** (3 Fälle)
 - Gegenmaßnahme: „We say“ seit 1.3 komplett gestrichen; `sm_spiel.py` gibt den Absatz nicht mehr aus.

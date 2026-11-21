@@ -102,7 +102,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
    Ergebnisse unter einem neuen Trainer, Lage beider Teams); Richtung aus Rang 1–2, Rang 3 dreht sie
-   nicht um.
+   nicht um. **Bei jeder Rang-1–2-Gegenangabe steht „dreht den Tipp: ja/nein, weil …“; bei „ja“
+   ist der Markt neu gewählt** (seit 21.11.2026).
 10. Keine Quoten, kein Rechenmodell (weder Sports-Mole-Datenanalyse noch FootyStats-Vorab-Werte),
     **keine Direktvergleiche (H2H)**, keine Schwellen, keine Punkte, **kein „We say“** verwendet –
     auch nicht nebenbei in Datenblatt, Spielbild oder Gegenangaben.
@@ -134,11 +135,15 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   (Schritt 1–8, Datenblatt je Team gegen die Quellen, Lage-Check mit fünf Fragen für beide Teams, Spielbild je Team mit „trifft es?
   kassiert es? gewinnt es?“, alle sechs Märkte mit Grund, Tipp, Kennzeichnung; ergänzt am 21.11.2026). Er ändert nichts;
   Claude trägt jeden gefundenen Fehler korrigiert ein und vermerkt in der Tagesliste
-  „Unabhängige Kontrolle (Uhrzeit): …“. Ein Tipp wird nur neu bestimmt, wenn ein Fehler einen
-  Tipp-Grund betrifft und das Spiel noch nicht angepfiffen ist.
+  „Unabhängige Kontrolle (Uhrzeit): …“. Ein Tipp wird neu bestimmt, wenn ein Fehler einen
+  Tipp-Grund betrifft **oder eine neue Gegenangabe aus Rang 1–2 gefunden wird** – dann wird der
+  Tipp **immer neu abgewogen** („dreht den Tipp: ja/nein, weil …“), solange das Spiel noch nicht
+  angepfiffen ist (seit 21.11.2026). Der Prüfer prüft bei jeder Paarung gesondert, ob eine
+  Rang-1–2-Gegenangabe den Tipp dreht.
 
 Findet Claude später einen Fehler, wird er sofort offen benannt und in der Tagesliste mit Uhrzeit
-korrigiert (vor Anpfiff: Tipp darf neu bestimmt werden; nach Anpfiff: Tipp bleibt, Fehler wird
+korrigiert (vor Anpfiff: Tipp darf neu bestimmt werden, bei einer neuen Rang-1–2-Gegenangabe wird
+er immer neu abgewogen; nach Anpfiff: Tipp bleibt, Fehler wird
 vermerkt).
 
 ## Grundsätze
@@ -246,6 +251,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    **sichersten, also den, gegen den am wenigsten spricht** (nach Rangfolge gewichtet). In der
    Begründung steht kurz, warum gegen die anderen Märkte mehr spricht. Es wird nie auf andere,
    „sicherere“ Wettarten ausgewichen (keine Doppelte Chance, kein Über 1,5, kein Unter 3,5 o. Ä.).
+   **Gegenangaben-Prüfung** (Pflicht seit 21.11.2026, Wunsch des Nutzers): Erst die Richtung aus
+   Rang 1–2 (Lage, Teamnews, aktuelle Form), dann Rang 3 (Saisonwerte). Für **jede** Gegenangabe
+   aus Rang 1–2 steht ausdrücklich: **„dreht den Tipp: ja/nein, weil …“**. Bei „ja“ wird der Markt
+   neu gewählt. Ein Tipp, der nur auf Rang 3 ruht, während Rang 1–2 dagegen sprechen, ist nicht
+   erlaubt. (Anlass: Villa – Sunderland, Frankfurt – Hoffenheim, Elversberg – Freiburg am 21.11.)
 8. **Kennzeichnung:** „**beide einig**“ – Sports Mole und FootyStats zeigen beide zum Tipp;
    „**geteilt**“ – eine Quelle zeigt woandershin (welche und warum, in einem Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
@@ -275,7 +285,8 @@ Genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026, Versi
 4. Spielbild je Team: trifft es? kassiert es? gewinnt es? (mit Quelle, Teamnews eingearbeitet)
 5. Spielbild gesamt
 6. Die sechs Märkte, je kurz dafür/dagegen
-7. ✅ **Tipp** mit Gründen, Gegenangaben und „beide einig“ / „geteilt“
+7. ✅ **Tipp** mit Gründen, Gegenangaben (jede aus Rang 1–2 mit „dreht den Tipp: ja/nein, weil …“)
+   und „beide einig“ / „geteilt“
 (Kein „We say“ – seit Version 1.3 nicht mehr verwendet.)
 
 ## Tagesliste
