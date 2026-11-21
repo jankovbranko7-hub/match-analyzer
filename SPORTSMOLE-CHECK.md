@@ -81,7 +81,10 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   Kontrolle“**, startet Claude einen zweiten, unabhängigen Prüfer (eigene Claude-Instanz, ohne die
   Analyse aus dem Gespräch zu kennen). Er liest Regeln und Tagesliste, ruft alle Quellen selbst neu
   ab (Sports Mole, FootyStats) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
-  den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt. Er ändert nichts;
+  den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
+  Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
+  (Schritt 1–7, Lage-Check mit fünf Fragen für beide Teams, Spielbild je Team mit „trifft es?
+  kassiert es? gewinnt es?“, alle sechs Märkte mit Grund, Tipp, Kennzeichnung; ergänzt am 21.11.2026). Er ändert nichts;
   Claude trägt jeden gefundenen Fehler korrigiert ein und vermerkt in der Tagesliste
   „Unabhängige Kontrolle (Uhrzeit): …“. Ein Tipp wird nur neu bestimmt, wenn ein Fehler einen
   Tipp-Grund betrifft und das Spiel noch nicht angepfiffen ist.
