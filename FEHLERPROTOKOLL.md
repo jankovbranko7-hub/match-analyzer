@@ -133,11 +133,22 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Newcastle „erste 4 Heimspiele 2+ Tore“ = alle Wb.; Märkte ohne Grund – A/C – UK2
 - Celta „ohne Druck“ trotz 3 Punkten über Platz 18 – J – UK2
 
+- **Nach der Auswertung gefunden (ca. 22:20, N):** Villa – Sunderland (0:0): „Beide treffen – Ja“
+  ruhte auf Saisonwerten am Spielort (Rang 3: „beide am Spielort nie zu null“); dagegen standen
+  Rang 1–2 – Sunderland in 3 der letzten 5 Ligaspiele ohne Tor, 2 der letzten 3 zu null, ohne
+  Brobbey und Xhaka – nur als Gegenangabe, ohne den Tipp umzudrehen – C – von UK1 und UK2 nicht
+  erkannt.
+
 ### 21.11.2026 · Serie A / Bundesliga (Version 1.2)
 - Stuttgart „2 der letzten 3 zu null“ = Liga und Pokal – A – SK
 - Paderborn Abstand falsch; Elversberg „3-1“ statt 3-0-1; Datum Como-Sieg nicht belegt – H/E – SK
 - Union „letzte 6 alle Wb.“ falsch übernommen (SM ≠ FS) – G – UK
 - Gegenangaben fehlten: Leverkusen, Napoli, Dortmund, Frankfurt/Hoffenheim – B – UK
+- **Nach der Auswertung gefunden (ca. 22:20, N):** Frankfurt – Hoffenheim (1:0) und Elversberg –
+  Freiburg (0:1): „Beide treffen – Ja“ ruhte auf Spielort-Saisonwerten (Rang 3: 75 %, „Liga daheim
+  immer“); Rang 2 dagegen (Frankfurt 2 der letzten 5 Ligaspiele ohne Tor, letzte 6 nur 50 % beide
+  treffen; Elversberg 3 der letzten 6 ohne Tor, Freiburg zweimal zu null) stand nur im „Dagegen“ –
+  C – von UK1 und UK2 nicht erkannt.
 - Abstände fehlten: Como, Cagliari, Napoli, Torino; Parma Trainer-Spielzahl – J – UK
 - Liga/alle Wb. fehlte: Cagliari, Lazio, Lecce, Leverkusen, Elversberg – A – UK
 - H2H-Beispiele in der Prüfliste – L – UK
@@ -163,6 +174,13 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 ---
 
 ## Lehren bisher
+
+- **Wichtigste Lehre aus der Auswertung 21.11.:** Eine Rang-1–2-Angabe ins „Dagegen“ zu schreiben
+  reicht nicht – es muss geprüft werden, ob sie den Tipp **umdreht**. Bei 3 von 7 Fehltipps des
+  21.11. stand der richtige Hinweis schon im „Dagegen“ (alle „Beide treffen – Ja“ auf
+  Spielort-Saisonwerten). Die Kontrollen haben Gegenangaben ergänzt, aber die Abwägung nicht neu
+  geprüft. (Rückschaufehler beachten: das Ergebnis war bekannt, als es auffiel – der Fehler liegt in
+  der Regelanwendung „Rang 3 dreht Rang 1–2 nicht um“, nicht im Ergebnis.)
 
 - Die meisten Fehler fand erst die **unabhängige Kontrolle**, oft erst die **zweite** – eine
   Kontrolle allein reicht nicht immer.
