@@ -257,6 +257,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Champions-League-Termine 25.11. als „nicht in der Quelle“, Villarreal „letzte 5“ statt 6 – E/J/H – UK2.
 - **Zeit:** Die zweite Kontrolle aller 7 Spiele dauerte bis ca. 17:20; die Berichte zu Gruppe 1–4 kamen
   nach Anpfiff (Tipps blieben laut Regel). Lehre: zusätzliche Runden früh starten.
+- Marseille/Le Mans: Gegenangabe mit falscher Annahme widerlegt („spielte schon ohne Palmieri“ – laut FS 9
+  von 10 Spielen dabei); „Tor in den letzten 8“ statt 6; EL-Termin übersehen; „formstärkstes Team“ –
+  E/H/J/C – UK. Lehre: SM-„still without“ heißt nicht „fehlte schon in den letzten Spielen“ – Einsätze in
+  FS-Spielerdaten prüfen.
 
 ---
 
