@@ -195,6 +195,27 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Reihenfolge Entscheidungsweg – K – N
 - Spielbild je Team ohne Quelle/Teamnews; Abstände fehlten; Lyon „EL-Belastung“ – K/J/E – UK2
 
+### 22.11.2026 (Version 1.3, erste Anwendung)
+- Uhrzeiten der Abrufe geschätzt statt mit `date` abgelesen („11:50“, „12:05“ – tatsächlich ca. 11:35,
+  11:37) – M – UK.
+- Burnley/Blackburn: nächstes Spiel (25.11.) als „nicht in der Quelle“ geführt, steht im FS-Spielplan;
+  Abstände zu den Nachbarn fehlten – J – UK.
+- Burnley/Blackburn: „Lancashire-Derby“/„Derby“ – Quelle sagt nur „fierce rivals“; Roberts' Position
+  angenommen – E – UK.
+- Burnley/Blackburn: Markt Über 2,5 falsch gelesen („2:2/1:2“ als Gegenangabe für Unter); Märkte ohne
+  „dafür“/Rang 3 – H/C – UK.
+- Burnley/Blackburn: „if … overcome injuries … bench at best“ als „fraglich“ statt „unklar“ – F – UK.
+- Barcelona: „ohne Sieg wäre Platz 1 weg“ falsch (Remis hält Platz 1) – Tipp-Grund – H/E – UK; Tipp
+  neu abgewogen, bleibt.
+- Barcelona/Villarreal: Vorschau heute aktualisiert, nicht vermerkt – H/G – UK.
+- Villarreal: „Torprobleme“ ohne „Liga“ (alle Wb. Tor in 4 der letzten 6) – A – UK.
+- Villarreal: Gegenangabe mit einem Spiel außerhalb der letzten 6 begründet, 3:4 Liverpool fehlte – H/B – UK.
+- Barcelona/Villarreal: „Ausfälle vorn“, „Stürmer Moreno“, „Innenverteidiger Koundé/Cubarsí“ nicht
+  belegt – F/E – UK.
+- Barcelona: Gegenangabe „19 Tore, 4 Siege“ falsch gezählt (richtig 16 Tore, 3 Siege) – H – SK.
+- Hull/Brighton: zwei Begründungen mit Vermutung („vor den Ausfällen“, „Gegner mit schwächerer
+  Abwehr“) – E – SK.
+
 ---
 
 ## Lehren bisher
