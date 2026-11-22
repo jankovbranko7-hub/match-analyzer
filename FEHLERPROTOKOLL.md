@@ -226,6 +226,11 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Racing: Form mit „letzten 5“ statt der letzten 6 Ligaspiele gezählt (0:5 Celta fehlte) – H/B – UK.
 - Racing: „mindestens 3 Tore“ ohne Kennzeichnung Spiel/Rang 3 – I – UK.
 - Man United: „Tor in 8 von 10 Ligaspielen“ (richtig 6 von 10) – H – SK.
+- Liverpool/United: Zahlen der letzten 6 ohne Bezug Liga/alle Wb.; die Liga sah anders aus (Liverpool
+  beide treffen 2 von 6, United über 2,5 2 von 6) – A/B – UK – **Tipp!** (Beide treffen – Ja → Unter
+  2,5, geteilt).
+- Liverpool/United: Remis-Serie und Trainer-Debüt-Fakt fehlten beim Heimsieg; Abstand zu Platz 20;
+  „Startelf“ statt „mögliche Startelf“; Bradley/Leoni als Grund überbewertet – B/J/F/E – UK.
 
 ---
 
