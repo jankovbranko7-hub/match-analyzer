@@ -241,6 +241,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   genommen (Hull/Brighton, Osasuna/Málaga, Getafe/Atlético) – E. Gegenmaßnahme (vom Nutzer am 22.11. ins
   System übernommen, Schritt 3 Feld 5, Schritt 5, Prüfliste 7b): Ausfälle nur mit Position aus der
   Quelle als Richtung verwenden; sonst „Position nicht in der Quelle – keine Richtung“.
+- Osasuna/Málaga (zweite Kontrolle): „je ein Spiel“ falsch gezählt (0:2 Sevilla fehlte); „Positionen nicht
+  in der Quelle“, obwohl die FS-Spielerdaten sie nennen; Status „spielt“ zu stark; Niño SM 4 / FS 5
+  nicht vermerkt – H/B/F/G – UK2. Lehre: Bei Regel 7b immer auch `fs.sh league-players` abrufen.
 
 ---
 
