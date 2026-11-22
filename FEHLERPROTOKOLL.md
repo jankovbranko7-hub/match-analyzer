@@ -264,6 +264,8 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Atalanta/Inter: Europapokal-Termine als „nicht in der Quelle“ (FS hat sie); Rückkehrer ohne Startelf als
   Grund; Vermutung „fehlten in Monza noch nicht“; Märkte ohne „dafür“ – J/E/F/C – UK. Lehre: Europapokal-
   Spielpläne (FS-Saisons 17127, 17128, 17130) immer mit abrufen.
+- Chicago/Charlotte: falsche SM-Artikelaussage („2 Heimniederlagen in Folge“) übernommen statt Spielseite;
+  fragliche Abwehrspieler außerhalb der möglichen Startelf als Grund – G/H/E/F – UK.
 
 ---
 
