@@ -238,8 +238,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   sprechen eher für Tore); Gegenangabe mit einem selbst über 2,5 liegenden Spiel widerlegt; Bezug alle
   Wb./Liga fehlte; „gemeinsam schwächster Angriff“ veraltet; Status „spielt“ zu stark – E/H/C/A/G/F – UK.
 - **Muster am 22.11.:** Ausfälle ohne belegte Position wurden mehrfach als Grund für „wenige Tore“
-  genommen (Hull/Brighton, Osasuna/Málaga, Getafe/Atlético) – E. Gegenmaßnahme: Ausfälle nur mit
-  Position aus der Quelle als Richtung verwenden; sonst „Position nicht in der Quelle – keine Richtung“.
+  genommen (Hull/Brighton, Osasuna/Málaga, Getafe/Atlético) – E. Gegenmaßnahme (vom Nutzer am 22.11. ins
+  System übernommen, Schritt 3 Feld 5, Schritt 5, Prüfliste 7b): Ausfälle nur mit Position aus der
+  Quelle als Richtung verwenden; sonst „Position nicht in der Quelle – keine Richtung“.
 
 ---
 

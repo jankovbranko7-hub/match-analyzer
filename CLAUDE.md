@@ -50,6 +50,9 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Gegenangaben-Prüfung** (Wunsch des Nutzers vom 21.11.2026): erst Rang 1–2, dann Rang 3; für
   jede Rang-1–2-Gegenangabe „dreht den Tipp: ja/nein, weil …“, bei „ja“ Markt neu wählen. Findet
   eine Kontrolle eine neue Rang-1–2-Gegenangabe, wird der Tipp immer neu abgewogen (vor Anpfiff).
+- **Ausfälle nur mit belegter Position als Richtung** (Wunsch des Nutzers vom 22.11.2026): Position aus
+  SM-Artikel, möglicher Startelf oder FootyStats-Spielerdaten; sonst „Position nicht in der Quelle –
+  keine Richtung“ – weder Grund noch Gegenangabe.
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer

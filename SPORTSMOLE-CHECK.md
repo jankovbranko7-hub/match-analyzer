@@ -107,6 +107,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      im Spielbild, in den Märkten und im Tipp steht nichts, was nicht im Datenblatt steht.
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet – mit Status nach
    dem **Originalwort** der Vorschau (fehlt / fraglich / gesperrt / zurück, siehe Schritt 3).
+   - **7b (seit 22.11.2026):** Kein Ausfall ohne belegte Position ist als Grund oder Gegenangabe für
+     mehr/weniger Tore oder Sieg/Niederlage verwendet; sonst steht „Position nicht in der Quelle –
+     keine Richtung“.
    - **7a:** Lage-Check für **beide** Teams mit allen fünf Fragen gemacht (worum es geht,
      Dringlichkeit, Serien mit Datum des letzten Siegs und Tors, Schwächung, Besonderheit).
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
@@ -239,6 +242,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
       - **gesperrt:** „suspended“, „banned“, „serving a ban“
       - **zurück:** „back“, „returns“, „available again“, „back in training“
       Passt kein Wort eindeutig: „unklar (Wortlaut: …)“ – nie zu „fehlt“ verschärfen.
+      **Position je Ausfall** (seit 22.11.2026, Wunsch des Nutzers): Die Position steht nur dabei, wenn
+      sie in der Quelle steht – SM-Artikel (z. B. „defensive duo“, „striker“), mögliche Startelf der
+      SM-Vorschau oder FootyStats-Spielerdaten (`fs.sh league-players season_id=…`). Sonst:
+      „Position nicht in der Quelle“.
    6. **Abweichungen** aus dem Abgleich (Schritt 2).
    7. **Weitere Fakten für den Lage-Check** (seit 21.11.2026): **Trainer** (seit wann, wie viele
       Spiele – steht die Zahl nicht in der Quelle: „nicht in der Quelle“), **Spiele kurz davor und
@@ -267,6 +274,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 5. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
    kommen aus FootyStats (Rang 2–3), Sports Mole korrigiert mit den Teamnews (Rang 1): fehlt z. B.
    der Torjäger, zählt sein bisheriger Torschnitt weniger; fehlen Innenverteidiger, zählen die Gegentore mehr.
+   **Ausfälle geben nur mit belegter Position eine Richtung** (seit 22.11.2026, Wunsch des Nutzers):
+   Ein Ausfall darf nur dann als Grund für mehr oder weniger Tore (oder für Sieg/Niederlage) dienen,
+   wenn seine Position in der Quelle steht. Steht sie nicht dort, gilt: **„Position nicht in der
+   Quelle – keine Richtung“**; der Ausfall wird genannt, aber weder als Grund noch als Gegenangabe
+   gewichtet. (Anlass: Hull – Brighton, Osasuna – Málaga, Getafe – Atlético am 22.11.)
    Bei einem Widerspruch geht eine **konkrete Nachricht aus Sports Mole** einer Zahl aus FootyStats
    vor (ein gesperrter Kapitän wiegt mehr als ein Saisonwert).
 6. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
