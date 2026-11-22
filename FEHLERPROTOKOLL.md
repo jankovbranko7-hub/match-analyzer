@@ -215,6 +215,13 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Barcelona: Gegenangabe „19 Tore, 4 Siege“ falsch gezählt (richtig 16 Tore, 3 Siege) – H – SK.
 - Hull/Brighton: zwei Begründungen mit Vermutung („vor den Ausfällen“, „Gegner mit schwächerer
   Abwehr“) – E – SK.
+- Hull/Brighton: Brightons 3+-Tore-Spiele falsch gezählt (3 statt 5); Gegenangabe „über 2,5 bräuchte
+  zwei Brighton-Gegentore“ falsch (ein 1:2 reicht; 0:2 in Liverpool übersehen) – H/C – UK – **Tipp!**
+  (Unter 2,5 → Beide treffen – Nein, Kennzeichnung geteilt).
+- Hull/Brighton: „vier Offensivspieler fehlen“ nicht belegt (Positionen nicht in der Quelle, wichtigste
+  Torbeteiligte verfügbar); Positionen von Rückkehrern und Hughes angenommen – E – UK.
+- Hull/Brighton: Bezug Liga/alle Wb. fehlte; Abstände, Trainer, nächstes Spiel fehlten; Märkte ohne
+  „dafür“ – A/J/C – UK.
 
 ---
 
