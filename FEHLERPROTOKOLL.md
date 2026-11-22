@@ -250,6 +250,13 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Hughes); SM-Artikelaussage „schlechteste Abwehr“ durch Tabelle überholt; Vorschau-Aktualisierung nicht
   vermerkt; fehlende Gegenangabe McBurnie – B/H/E/G/A/J – UK2. Lehre: Korrekturen immer im ganzen
   Abschnitt suchen und ersetzen, nicht nur an einer Stelle.
+- Getafe/Atlético (zweite Kontrolle): Formleiste falsch gelesen – „letzte 5 Spiele alle unter 2,5“, das letzte
+  (1:2 Barcelona) lag darüber; der Fehler entstand bei der Selbstkorrektur „letzte 4 → letzte 5“ und
+  wurde von der ersten Kontrolle nicht erkannt – H/C – UK2 (Tipp neu abgewogen, bleibt).
+- Barcelona/Villarreal und Liverpool/United (zweite Kontrolle): Positionen aus FS nicht genutzt,
+  Champions-League-Termine 25.11. als „nicht in der Quelle“, Villarreal „letzte 5“ statt 6 – E/J/H – UK2.
+- **Zeit:** Die zweite Kontrolle aller 7 Spiele dauerte bis ca. 17:20; die Berichte zu Gruppe 1–4 kamen
+  nach Anpfiff (Tipps blieben laut Regel). Lehre: zusätzliche Runden früh starten.
 
 ---
 
