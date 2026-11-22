@@ -234,6 +234,12 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Osasuna/Málaga: Osasuna letzte 6 Liga beide treffen 4 statt 3 von 6 gezählt; Rang-3-Wert als Rang 2;
   Ausfälle ohne Position und „Kellerduell“ als Grund für wenige Tore; Rang-2-Gegenangabe nur mit Rang 3
   widerlegt – H/C/E – UK – **Tipp!** (Unter 2,5 → Beide treffen – Ja, geteilt).
+- Getafe/Atlético: Ausfälle und Champions League als Grund für wenige Tore (laut FS Abwehrspieler –
+  sprechen eher für Tore); Gegenangabe mit einem selbst über 2,5 liegenden Spiel widerlegt; Bezug alle
+  Wb./Liga fehlte; „gemeinsam schwächster Angriff“ veraltet; Status „spielt“ zu stark – E/H/C/A/G/F – UK.
+- **Muster am 22.11.:** Ausfälle ohne belegte Position wurden mehrfach als Grund für „wenige Tore“
+  genommen (Hull/Brighton, Osasuna/Málaga, Getafe/Atlético) – E. Gegenmaßnahme: Ausfälle nur mit
+  Position aus der Quelle als Richtung verwenden; sonst „Position nicht in der Quelle – keine Richtung“.
 
 ---
 
