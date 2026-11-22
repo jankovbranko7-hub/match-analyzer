@@ -261,6 +261,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   von 10 Spielen dabei); „Tor in den letzten 8“ statt 6; EL-Termin übersehen; „formstärkstes Team“ –
   E/H/J/C – UK. Lehre: SM-„still without“ heißt nicht „fehlte schon in den letzten Spielen“ – Einsätze in
   FS-Spielerdaten prüfen.
+- Atalanta/Inter: Europapokal-Termine als „nicht in der Quelle“ (FS hat sie); Rückkehrer ohne Startelf als
+  Grund; Vermutung „fehlten in Monza noch nicht“; Märkte ohne „dafür“ – J/E/F/C – UK. Lehre: Europapokal-
+  Spielpläne (FS-Saisons 17127, 17128, 17130) immer mit abrufen.
 
 ---
 
