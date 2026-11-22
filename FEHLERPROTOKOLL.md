@@ -244,6 +244,12 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Osasuna/Málaga (zweite Kontrolle): „je ein Spiel“ falsch gezählt (0:2 Sevilla fehlte); „Positionen nicht
   in der Quelle“, obwohl die FS-Spielerdaten sie nennen; Status „spielt“ zu stark; Niño SM 4 / FS 5
   nicht vermerkt – H/B/F/G – UK2. Lehre: Bei Regel 7b immer auch `fs.sh league-players` abrufen.
+- Zweite Kontrolle 22.11. (Gruppen 1, 3, 4): Positionen als „nicht in der Quelle“ geführt, obwohl FS-
+  Spielerdaten sie nennen (Roberts, Jørgensen, Morishita, Mantilla, Andrés Martín, Barrenetxea, Yohanna,
+  Targett, Morita); Korrekturen der ersten Kontrolle nur teilweise umgesetzt (Racing „letzte 5“,
+  Hughes); SM-Artikelaussage „schlechteste Abwehr“ durch Tabelle überholt; Vorschau-Aktualisierung nicht
+  vermerkt; fehlende Gegenangabe McBurnie – B/H/E/G/A/J – UK2. Lehre: Korrekturen immer im ganzen
+  Abschnitt suchen und ersetzen, nicht nur an einer Stelle.
 
 ---
 
