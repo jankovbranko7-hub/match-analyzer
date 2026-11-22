@@ -231,6 +231,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   2,5, geteilt).
 - Liverpool/United: Remis-Serie und Trainer-Debüt-Fakt fehlten beim Heimsieg; Abstand zu Platz 20;
   „Startelf“ statt „mögliche Startelf“; Bradley/Leoni als Grund überbewertet – B/J/F/E – UK.
+- Osasuna/Málaga: Osasuna letzte 6 Liga beide treffen 4 statt 3 von 6 gezählt; Rang-3-Wert als Rang 2;
+  Ausfälle ohne Position und „Kellerduell“ als Grund für wenige Tore; Rang-2-Gegenangabe nur mit Rang 3
+  widerlegt – H/C/E – UK – **Tipp!** (Unter 2,5 → Beide treffen – Ja, geteilt).
 
 ---
 
