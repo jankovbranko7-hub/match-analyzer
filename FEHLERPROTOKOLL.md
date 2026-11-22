@@ -222,6 +222,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Torbeteiligte verfügbar); Positionen von Rückkehrern und Hughes angenommen – E – UK.
 - Hull/Brighton: Bezug Liga/alle Wb. fehlte; Abstände, Trainer, nächstes Spiel fehlten; Märkte ohne
   „dafür“ – A/J/C – UK.
+- Racing/Real Sociedad: „trifft immer“/„kassiert immer“ ohne Bezug Liga/alle Wb. – A – UK.
+- Racing: Form mit „letzten 5“ statt der letzten 6 Ligaspiele gezählt (0:5 Celta fehlte) – H/B – UK.
+- Racing: „mindestens 3 Tore“ ohne Kennzeichnung Spiel/Rang 3 – I – UK.
+- Man United: „Tor in 8 von 10 Ligaspielen“ (richtig 6 von 10) – H – SK.
 
 ---
 
