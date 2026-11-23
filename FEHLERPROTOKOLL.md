@@ -272,6 +272,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Spielen fehlten – E/F – UK. Lehre (erneut): bei jedem Ausfall den letzten Einsatz in FS prüfen.
 - Başakşehir/Çorum: Ränge falsch zugeordnet, Märkte zusammengelegt ohne „dafür“, Abstand nach unten fehlte –
   C/H/J – UK.
+- Monza/Fiorentina: SM-Artikelaussage („only Sassuolo conceded more“) durch den Spieltag überholt und als
+  Tipp-Grund verwendet; Njies Torbeteiligungen fehlten in der Gegenangabe – G/H/B – UK. Lehre (erneut):
+  Tabellenaussagen des Artikels immer gegen die aktuelle Tabelle prüfen.
 
 ---
 
