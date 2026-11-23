@@ -267,6 +267,12 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Chicago/Charlotte: falsche SM-Artikelaussage („2 Heimniederlagen in Folge“) übernommen statt Spielseite;
   fragliche Abwehrspieler außerhalb der möglichen Startelf als Grund – G/H/E/F – UK.
 
+### 23.11.2026
+- Başakşehir/Çorum: fragliche Spieler als neue Schwächung gewertet, obwohl sie laut FS schon in den letzten
+  Spielen fehlten – E/F – UK. Lehre (erneut): bei jedem Ausfall den letzten Einsatz in FS prüfen.
+- Başakşehir/Çorum: Ränge falsch zugeordnet, Märkte zusammengelegt ohne „dafür“, Abstand nach unten fehlte –
+  C/H/J – UK.
+
 ---
 
 ## Lehren bisher
