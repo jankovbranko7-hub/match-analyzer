@@ -63,7 +63,8 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
 - **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
-- Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten;
+- Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten (Platzverweise
+  mit Minute und Spielstand gesondert mitzählen, Wertung bleibt – Wunsch vom 24.11.2026);
   committen und pushen. (Ältere Listen in `tipps/forebet/` bleiben als Verlauf.)
 - **Branch `forebet-system` immer automatisch mitziehen** (Wunsch des Nutzers vom 09.11.2026):
   Jede Regeländerung und jede Tagesliste nach dem Push auf den Arbeitsbranch auch nach

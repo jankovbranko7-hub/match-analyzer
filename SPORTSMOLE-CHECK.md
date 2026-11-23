@@ -130,6 +130,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
+    Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
+    gesondert mitzählen (Wunsch des Nutzers vom 24.11.2026) – nur zur Beobachtung, die Wertung bleibt.
 13. Verbindlichkeit eingehalten: jeder Punkt des Systems für jede Paarung erfüllt, nichts
     umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
 14. **Fehlerprotokoll:** vor der Analyse gelesen; jede Fehlerart gezielt geprüft; jeder in
