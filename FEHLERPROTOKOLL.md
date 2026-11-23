@@ -275,6 +275,24 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Monza/Fiorentina: SM-Artikelaussage („only Sassuolo conceded more“) durch den Spieltag überholt und als
   Tipp-Grund verwendet; Njies Torbeteiligungen fehlten in der Gegenangabe – G/H/B – UK. Lehre (erneut):
   Tabellenaussagen des Artikels immer gegen die aktuelle Tabelle prüfen.
+- Brentford/Everton: Igor Thiago als „Torjäger“ aus dem Artikel („star striker“) übernommen, obwohl laut
+  SM-Spielseite und FS Schade bester Torschütze ist (Thiago 2 Ligatore) – Tipp-Grund falsch – G/H/E – UK.
+  Gegenangabe nur mit Rang 3 widerlegt, „Heimsiege zu null“ als Rang 1–2 gewertet, Daten aller Wb. fehlten,
+  Märkte zusammengelegt, Lage-Abstände – C/B/A/K/J – UK. **Tipp geändert** (Beide treffen – Nein → Unter 2,5;
+  beide einig → geteilt).
+- Levante/Elche: „auswärts zuletzt 2-mal zu null“ als Grund für Unter 2,5 (das 3:0 war über 2,5) – H/C; Elches 2
+  torlose Spiele ohne Bezug „daheim“ als Grund und zur Widerlegung einer Auswärts-Gegenangabe benutzt – A/C/B;
+  Kennzeichnung mit Saisonwert/Form auf der SM-Seite begründet – C/K; Boayar/Yago „fehlt“ statt „unklar“ – F –
+  UK. Tipp neu abgewogen, bleibt.
+- St. Louis/LAFC: Navarro (19 Tore) aus der SM-Torschützenliste als St.-Louis-Torjäger übernommen – laut FS
+  spielt er bei Colorado, die SM-Spielseite nennt Becher; der Abgleich prüft Torschützen nicht – G/H – UK, Tipp-
+  Grund. Long ohne Position, obwohl FS „Defender“ – 7b – H/B; Gegentor-Zahl falsch (5 statt 4 von 6) – H;
+  Ausfälle Shaffelburg/Tillman nicht gegen den letzten Einsatz geprüft – E/F (Lehre vom selben Tag nicht
+  angewandt!) – UK. Tipp ohne Navarro neu abgewogen, bleibt.
+- **Muster 23.11.:** In 3 von 5 Paarungen stammte ein falscher Tipp-Grund aus einer Spieler-/Tabellenangabe des
+  SM-Artikels oder der SM-Torschützenliste, die nicht gegen SM-Spielseite und FS-Spielerdaten geprüft wurde.
+  Lehre: **jeden Spieler, der als Grund dient (Torjäger, Ausfall), mit Team, Position, Toren und letztem Einsatz
+  in den FS-Spielerdaten belegen**, bevor er in den Tipp geht.
 
 ---
 
