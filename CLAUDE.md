@@ -40,7 +40,8 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026): Schritt für Schritt (Datenblatt,
   Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Paarungen in Anstoß-Reihenfolge, Tipps
   gruppenweise nach Anstoßzeit – eine Gruppe erst, wenn jede ihrer Paarungen fertig und geprüft ist,
-  auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
+  auch wenn es länger dauert (seit 24.11.2026: ein Prüfer je Analyse-Auftrag, Tipps gesammelt nach seiner
+  Kontrolle); reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
   abkürzen.
 - **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Je Paarung im
   Chat (Variante 1): Anstoß, Paarung, Tipp mit Kennzeichnung, Gründe und alle Gegenangaben (Rang 1–2
@@ -63,7 +64,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
   **Stufe 3 automatisch** (Wunsch des Nutzers vom 21.11.2026): nach jeder Analyse – je
   Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer (Agent) starten – genau
-  einen je Gruppe (Wunsch vom 24.11.2026),
+  einen je Analyse-Auftrag für alle Spiele des Auftrags, gleich wie viele Anstoßzeiten (Wunsch vom 24.11.2026),
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
