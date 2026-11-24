@@ -347,6 +347,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   H/B/7b – UK (**Lehre:** bei „nicht gefunden“ auch andere Schreibweisen suchen); Teamnews-Listen vermischt – F/6b;
   Passlack „schon länger“ – H/E; Abstände/Trainer-Spielzahl – J; Kennzeichnung mit Form statt Lage/Teamnews – C/K
   (Muster Levante 23.11.); fehlende Angreifer-Gegenangaben (Lowe, Murray, Wales) – B – UK. Tipp blieb.
+- Rangers/Aberdeen: **Direktvergleich in einer Widerlegung** („Aberdeen verlor den Ligapokal gegen Rangers“) –
+  L/C/E – UK (erster H2H-Fall seit dem Verbot; Lehre: auch Pokalspiele gegen denselben Gegner sind Direktvergleich,
+  nur als Formspiel zählen); Gegenangabe nur mit Rang 3 widerlegt – C/B (Muster Brentford); Bezug alle Wb./Liga – A;
+  Märkte unvollständig – K/C; Lage-Gegenangabe fehlte – B; Kennzeichnung beide einig → geteilt – C/K – UK. Tipp blieb.
 
 ---
 
