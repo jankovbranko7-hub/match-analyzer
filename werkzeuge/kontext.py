@@ -52,15 +52,15 @@ def main():
         return f"{dt(m):%d.%m} {m['home_name']} {m['homeGoalCount']}-{m['awayGoalCount']} {m['away_name']}"
 
     def stats(ms, label):
-        w = d = l = gf = ga = bt = ov = cs = fts = 0
+        w = d = l = gf = ga = bt = ov = cs = fts = drei = 0
         for m in ms:
             h = m["homeID"] == tid
             f, a = (m["homeGoalCount"], m["awayGoalCount"]) if h else (m["awayGoalCount"], m["homeGoalCount"])
             gf += f; ga += a; w += f > a; d += f == a; l += f < a
-            bt += f > 0 and a > 0; ov += f + a > 2; cs += a == 0; fts += f == 0
+            bt += f > 0 and a > 0; ov += f + a > 2; cs += a == 0; fts += f == 0; drei += f >= 3
         n = len(ms)
         print(f"  {label}: Sp {n} · {w}-{d}-{l} · {gf}:{ga} · über2,5 {ov}/{n} (Spiel) · beide treffen {bt}/{n} "
-              f"(Spiel) · zu null {cs}/{n} (Team) · ohne Tor {fts}/{n} (Team)")
+              f"(Spiel) · zu null {cs}/{n} (Team) · ohne Tor {fts}/{n} (Team) · 3+ eigene Tore {drei}/{n} (Team)")
 
     def table(ms):
         pts, gd, gf, nm, pl = {}, {}, {}, {}, {}

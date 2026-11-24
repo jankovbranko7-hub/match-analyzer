@@ -308,6 +308,11 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    **Je Markt zuerst Rang 1–2** (Lage, Teamnews, aktuelle Form), **erst danach Rang 3**
    (Saisonwerte); die Gegenangaben-Prüfung aus Schritt 7 gilt schon hier: Ein Markt, gegen den
    Rang 1–2 sprechen, wird nicht durch Saisonwerte zum stärksten (seit 21.11.2026).
+   **Unter 2,5 – feste Gegenangabe** (Wunsch des Nutzers vom 24.11.2026): Bei jedem Unter-Markt wird
+   ausdrücklich geprüft, ob eines der Teams in seinen letzten 6 Spielen (Bezug nennen) schon mehrfach
+   allein 3 oder mehr Tore geschossen hat – mit Spielständen. Trifft das zu, ist es eine Rang-2-Gegenangabe
+   mit „dreht den Tipp: ja/nein, weil …“. (Anlass: Auswertung 24.11. – alle 5 Unter-Fehltipps hatten ein
+   Team mit 3+ eigenen Toren.)
 7. **Tipp:** Claude bestimmt **selbst** den **sichersten der sechs Märkte** (Kriterium siehe unten)
    – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
    bei der Wahl und dreht eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird

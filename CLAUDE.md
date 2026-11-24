@@ -50,6 +50,8 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Gegenangaben-Prüfung** (Wunsch des Nutzers vom 21.11.2026): erst Rang 1–2, dann Rang 3; für
   jede Rang-1–2-Gegenangabe „dreht den Tipp: ja/nein, weil …“, bei „ja“ Markt neu wählen. Findet
   eine Kontrolle eine neue Rang-1–2-Gegenangabe, wird der Tipp immer neu abgewogen (vor Anpfiff).
+  Bei **Unter 2,5** feste Rang-2-Gegenangabe (Wunsch vom 24.11.2026): Hat ein Team in seinen letzten 6
+  Spielen mehrfach allein 3+ Tore geschossen (mit Spielständen)? → „dreht den Tipp: ja/nein, weil …“.
 - **Ausfälle nur mit belegter Position als Richtung** (Wunsch des Nutzers vom 22.11.2026): Position aus
   SM-Artikel, möglicher Startelf oder FootyStats-Spielerdaten; sonst „Position nicht in der Quelle –
   keine Richtung“ – weder Grund noch Gegenangabe.

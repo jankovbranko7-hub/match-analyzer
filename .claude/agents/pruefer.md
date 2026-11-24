@@ -44,7 +44,8 @@ nicht neu, sondern nur Einträge im Fehlerprotokoll, die seit deinem letzten Les
 - Lage-Check (5 Fragen), Spielbild je Team, alle sechs Märkte einzeln mit Rang 1–2 dafür/dagegen und Rang 3.
 - Gegenangaben-Prüfung („dreht den Tipp: ja/nein, weil …“): Fehlt eine Rang-1–2-Gegenangabe? Wird eine nur mit
   Rang 3 widerlegt? Wird „ohne Tor“ falsch gegen Über/Unter 2,5 benutzt (Spielstände prüfen)? Steckt ein
-  Direktvergleich in einer Widerlegung (auch Pokalspiele gegen denselben Gegner)?
+  Direktvergleich in einer Widerlegung (auch Pokalspiele gegen denselben Gegner)? Bei **Unter 2,5**: Ist die
+  feste Gegenangabe „Team mit mehrfach 3+ eigenen Toren in den letzten 6“ geprüft (mit Spielständen)?
 - Ist der Tipp der Markt, gegen den am wenigsten spricht? Stimmt die Kennzeichnung („beide einig“ nur, wenn die
   Sports-Mole-Seite = Rang 1 Lage/Teamnews und die FootyStats-Seite beide zum Tipp zeigen)?
 - Verboten im System: Quoten, Rechenmodelle (SM-Datenanalyse, FS-Vorab-Werte), Direktvergleiche (H2H) als Grund
