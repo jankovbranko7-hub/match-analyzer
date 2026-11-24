@@ -14,6 +14,8 @@ Nutzers): fester **Lage-Check je Team** – worum es geht, wie dringend die Punk
 überhaupt nicht mehr verwendet** – weder als Grund noch zum Vergleich; **Fehlerprotokoll**
 (`FEHLERPROTOKOLL.md`): jeder gefundene Fehler wird eingetragen, vor jeder Analyse gelesen und in
 jeder Kontrolle Fehlerart für Fehlerart geprüft. Version 1.2 liegt in `archiv/SPORTSMOLE-CHECK-1.2.md`.
+**Ergänzungen zu 1.3** (Wünsche des Nutzers): Regel 7b – Ausfälle nur mit belegter Position als Richtung
+(22.11.); Platzverweise in der Auswertung gesondert mitzählen (24.11.); Abschnitt **Europapokal** (24.11.).
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -249,6 +251,8 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    4. **Zahlen mit Bezug:** jede Zahl mit (a) Liga oder alle Wettbewerbe, (b) gesamt, daheim oder
       auswärts, (c) **Team oder Spiel** – z. B. „Rayo trifft daheim in 80 % seiner Spiele (Team)“
       ist etwas anderes als „in Rayo-Heimspielen treffen beide in 60 % (Spiel)“.
+      **Europapokal:** je Team immer alle drei Rang-2-Blöcke – letzte 6 aller Wb., alle Europapokal-Spiele,
+      letzte 6 der Heimliga (Abschnitt „Europapokal“ unter „Rangfolge“).
    5. **Teamnews nach dem Originalwort** der Vorschau, getrennt in vier Listen, je Spieler mit dem
       englischen Wortlaut in Klammern:
       - **fehlt:** „ruled out“, „out“, „sidelined“, „will miss“, „injured“ (ohne Einschränkung)
