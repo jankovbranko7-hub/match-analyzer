@@ -376,3 +376,11 @@ den Ergebnissen aus FootyStats ausgewertet: Treffer und Trefferquote, Treffer je
 (ältere Listen behalten ihre We-say-Spalte als Verlauf, sie wird ab dem 21.11.2026 nicht mehr
 ausgewertet). Tipps möglichst vor Anpfiff; Tipps
 nach Anpfiff werden vermerkt.
+
+## Vorschläge (nicht in Kraft – nur auf ausdrücklichen Wunsch des Nutzers)
+
+- **Zweite, kurze Prüfrunde für Grenzfälle** (festgehalten am 24.11.2026): Nach der automatischen unabhängigen
+  Kontrolle prüft eine zweite, kurze Runde nur die Paarungen, die als **Grenzfall** vermerkt sind (zwei Märkte
+  fast gleich stark), und dort nur die Tipp-Gründe und die Rang-1–2-Gegenangaben. Zweck: mehr Sicherheit genau
+  dort, wo die Wahl knapp ist, bei wenig Mehrverbrauch. Grenzen: verbessert die Herleitung, nicht den
+  Spielausgang; Prüfer können selbst irren.
