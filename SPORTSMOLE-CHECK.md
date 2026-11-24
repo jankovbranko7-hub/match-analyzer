@@ -46,10 +46,7 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
   Reihenfolge ihres Anstoßes bearbeitet und zu Gruppen mit derselben Anstoßzeit zusammengefasst.
   **Eine Gruppe geht erst an den Nutzer, wenn jede ihrer Paarungen fertig und geprüft ist**
   (Prüfliste, Kontrolldurchgang, **automatische unabhängige Kontrolle** mit Korrekturen) – auch wenn
-  es länger dauert. Dann folgt die nächste Gruppe. **Seit 24.11.2026 (Wunsch des Nutzers):** Die
-  unabhängige Kontrolle läuft **einmal je Analyse-Auftrag** (ein Prüfer für alle Spiele des Auftrags,
-  gleich wie viele Anstoßzeiten); die Tipps gehen dann gesammelt an den Nutzer, sobald alle Spiele des
-  Auftrags geprüft sind. Reicht die Zeit bis zum frühesten Anpfiff dafür nicht, sagt Claude das vorher.
+  es länger dauert. Dann folgt die nächste Gruppe.
 - **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
   statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
 
@@ -156,9 +153,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   „Kontrolle (Uhrzeit): …“ vermerkt.
 - **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026; seit 21.11.2026 automatisch, Wunsch des
   Nutzers):** Nach jeder Analyse – je Gruppe, nach Prüfliste und Kontrolldurchgang – startet Claude
-  **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer – **genau einen Prüfer je
-  Analyse-Auftrag**, für alle Spiele des Auftrags in einem Durchgang, gleich wie viele Anstoßzeiten (Wunsch des
-  Nutzers vom 24.11.2026, spart Nutzungslimit; dauert dafür länger, also früh starten). Erst nach seinem Bericht
+  **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer – **genau einen Prüfer je Gruppe**,
+  auch bei vielen Spielen (Wunsch des Nutzers vom 24.11.2026, spart Nutzungslimit; dauert dafür länger, also früh
+  starten). Erst nach seinem Bericht
   und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
   Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
