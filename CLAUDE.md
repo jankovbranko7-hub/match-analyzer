@@ -53,6 +53,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - **Ausfälle nur mit belegter Position als Richtung** (Wunsch des Nutzers vom 22.11.2026): Position aus
   SM-Artikel, möglicher Startelf oder FootyStats-Spielerdaten; sonst „Position nicht in der Quelle –
   keine Richtung“ – weder Grund noch Gegenangabe.
+- **Europapokal** (Wunsch des Nutzers vom 24.11.2026): „Liga“ = Ligaphase des Wettbewerbs; Rang 2 = letzte 6
+  aller Wb. + alle Europapokal-Spiele der Ligaphase + letzte 6 der Heimliga (im Datenblatt immer alle drei);
+  Rang 3 = Heimliga-Saisonwerte am Spielort; Tabelle notfalls aus FS berechnet (Abschnitt „Europapokal“ in
+  `SPORTSMOLE-CHECK.md`).
 - **Keine Fehler, nichts vergessen** (Wunsch des Nutzers vom 20.11.2026): vor jeder Antwort mit
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer

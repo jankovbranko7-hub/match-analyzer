@@ -218,6 +218,19 @@ vermerkt).
 Hinweis: Im Artikel stehen die Formleisten vom ältesten zum neuesten Spiel, auf der Spielseite
 vom neuesten zum ältesten (letztes Spiel zuerst).
 
+### Europapokal (Champions League, Europa League, Conference League) – Wunsch des Nutzers vom 24.11.2026
+
+- **„Liga“** meint den Wettbewerb des Spiels (Ligaphase des Europapokals); daneben stehen die **Heimliga**
+  (eigene FS-Saison) und die **letzten 6 aller Wettbewerbe**.
+- **Rang 2** = letzte 6 aller Wettbewerbe **+** alle Europapokal-Spiele der Ligaphase (auch Heim- und
+  Auswärtswerte darin) **+** letzte 6 der Heimliga – im Datenblatt (Feld 4) **immer alle drei Blöcke** je Team.
+- **Rang 3** = Saisonwerte der Heimliga am Spielort (daheim/auswärts).
+- **Tabelle:** Ist die SM-Tabelle der Ligaphase nicht abrufbar, wird sie aus allen FS-Spielen der Ligaphase
+  berechnet (Punkte, dann Tordifferenz, dann Tore; Hinweis, dass die UEFA-Reihenfolge abweichen kann).
+  Grenzen: Platz 1–8 Achtelfinale, 9–24 Play-offs, ab 25 ausgeschieden; dazu der Heimliga-Platz.
+- **Spielertore im Europapokal** nur aus der Ligaphase (FS-Zahlen enthalten die Qualifikation – kennzeichnen).
+- Alle übrigen Regeln (Datenblatt, Lage-Check, Gegenangaben-Prüfung, 7b, Kennzeichnung) gelten unverändert.
+
 ## Entscheidungsweg je Paarung (immer in dieser Reihenfolge)
 
 1. **Abrufen und prüfen:** Artikel, Spielseite, Tabelle und Torschützenliste holen; prüfen, dass die Vorschau zu diesem
