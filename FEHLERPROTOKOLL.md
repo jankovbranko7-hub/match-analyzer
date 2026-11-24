@@ -328,6 +328,20 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Tipps blieben in 2a–2d alle. **Offen an den Nutzer:** Häufung bei B/F/7b (Spieler-Angaben) trotz Lehre – Spielerdaten
   werden jetzt für jeden genannten Spieler mit dem Hilfsskript abgerufen, die Prüfung fand aber erst die Kontrolle.
 
+### 24.11.2026 · League One
+- **Werkzeugbefund (M):** Das FS-Feld `last_match_timestamp` (league-players) ist teils veraltet (Barry, Magennis,
+  Adeboyejo, Page, Leahy, Cook spielten später). Lehre: letzte Einsätze über die Aufstellungen im FS-`match`
+  prüfen.
+- Bradford/Barnsley: „letzte 6“ nur 5 Spiele, FS-Letzte-6 falsch beschrieben – H/G; „ohne Tor“ gegen Über 2,5 in
+  der Marktliste (0:3 lag darüber – **drittes Mal dieses Muster**) – H/C; Gegenangabe McGeehan fehlte – B – UK.
+- Stevenage/Sheffield: Widerlegung „2 davon Pokalspiele“ falsch – H; Rückkehrer als neu, obwohl sie schon spielten
+  (Werkzeugfeld) – E/F; Gegenangabe Magennis fehlte – B – UK. Tipp neu abgewogen, blieb.
+- Blackpool/Leicester: „unterklassig“ ohne Quelle – E; Märkte zusammengelegt – C/K; Lage als Gegenangabe fehlte – B
+  – UK.
+- Bromley/Wycombe: „startet“ statt „could hand a start“ – F/E (Tipp-Grund); Widerlegung mit Casey als Stammspieler
+  falsch – E/H (Tipp-Grund) – UK. Tipp neu abgewogen, blieb.
+- Alle 4: Teamnews ohne englischen Wortlaut, eigene Kategorie „voraussichtlich“ – F/6b.
+
 ---
 
 ## Lehren bisher
