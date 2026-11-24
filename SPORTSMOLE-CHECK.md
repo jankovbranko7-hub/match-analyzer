@@ -39,10 +39,6 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
-- **Umfang je Tag** (Wunsch des Nutzers vom 24.11.2026, wegen des Nutzungslimits): höchstens etwa 4–5 Spiele pro
-  Tag; Ligen mit guten Daten (Sports-Mole-Spielseite und FootyStats vollständig) bevorzugen. Bei größeren
-  Aufträgen weist Claude vorher auf den Limitverbrauch hin.
-
 - **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
   Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung) – erst wenn eine Paarung vollständig
   fertig ist, kommt die nächste. Keine Paarungen im Block nebeneinander bearbeiten.

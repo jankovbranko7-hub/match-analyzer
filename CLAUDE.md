@@ -68,8 +68,6 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
-- **Umfang** (Wunsch vom 24.11.2026): höchstens etwa 4–5 Spiele pro Tag, Ligen mit guten Daten bevorzugen; bei
-  größeren Aufträgen vorher auf den Limitverbrauch hinweisen.
 - **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten (Platzverweise
   mit Minute und Spielstand gesondert mitzählen, Wertung bleibt – Wunsch vom 24.11.2026);
