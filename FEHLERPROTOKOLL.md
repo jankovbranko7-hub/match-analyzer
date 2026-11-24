@@ -305,6 +305,16 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   blieben.
 - Lehre: Bei jedem Spieler – auch in Widerlegungen und bei Ersatzleuten – den letzten Einsatz in FS prüfen; bei
   Abweichungen SM-Spielseite/FS genau sagen, was welche Quelle belegt (Ausgang oder Spielstand).
+- Arsenal/Dortmund: Rückkehrer Guirassy ohne Startelf als Rang-1-Grund (wie Atalanta 22.11.) – E/F – UK;
+  Widerlegung „seither traf Dortmund immer“ falsch (0:0 Union) – H – UK; Gegenangabe Saka fehlte – B – UK.
+- Como/AEK: CL-Spielertore mit Qualifikation – A – UK; AEKs Lage als Gegenangabe fehlte – B – UK.
+- Leipzig/Lens: Édouard „Position nicht in der Quelle“, FS hat sie (7b – **dritte Wiederholung** der Lehre vom
+  22.11.) – B – UK; „Angriff komplett“ falsch – E/H – UK; „unklar“ als Grund – F – UK; „5 von 6“ statt 6 von 6 – H.
+- Feyenoord/Porto: „remains uncertain“ als unklar statt fraglich – F; Belastung Porto fehlte – J – UK.
+- Hilfsskript: Tabellen-Sortierung nur nach Tordifferenz, nicht nach Toren – Plätze Dortmund/Betis/AEK/Leipzig
+  falsch – M – UK.
+- Tipps blieben alle. **Offen an den Nutzer:** Häufung bei B/F/7b (Spieler-Angaben) trotz Lehre – Spielerdaten
+  werden jetzt für jeden genannten Spieler mit dem Hilfsskript abgerufen, die Prüfung fand aber erst die Kontrolle.
 
 ---
 
