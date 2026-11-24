@@ -294,6 +294,18 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Lehre: **jeden Spieler, der als Grund dient (Torjäger, Ausfall), mit Team, Position, Toren und letztem Einsatz
   in den FS-Spielerdaten belegen**, bevor er in den Tipp geht.
 
+### 24.11.2026 · Champions League
+- Galatasaray/Villa: Widerlegung „ohne Osimhen und Leão 4:3 und 2:1“ falsch – Leão spielte beim 4:3 noch
+  (FS letzter Einsatz 07.11.) – H/E – UK. Osimhen „unklar“ in Schritt 6/7 zu „fehlt“ verschärft – F – UK.
+  Rang-2-Gegenangabe „Villa PL 3 von 6 über 2,5“ fehlte – B – UK. Datenblatt ohne CL-Einzelspiele – K/H – UK.
+- Bodø/LASK: Spielstände, die nur FS belegt, als „Artikel und FS stimmen überein“ dargestellt – G – UK;
+  „Pokalspiel“ ohne Quelle – E – UK; CL-Spielertore mit Qualifikation gezählt – A – UK; letzte Einsätze von
+  Adeniran, Lang, Helmersen nicht geprüft (Lehre vom 23.11. erneut nicht vollständig angewandt!) – F/B – UK;
+  Rang-2-Gegenangabe (Bodøs CL-Heimspiele) als Rang 3 geführt – C – UK; Lage unvollständig – J – UK. Tipps
+  blieben.
+- Lehre: Bei jedem Spieler – auch in Widerlegungen und bei Ersatzleuten – den letzten Einsatz in FS prüfen; bei
+  Abweichungen SM-Spielseite/FS genau sagen, was welche Quelle belegt (Ausgang oder Spielstand).
+
 ---
 
 ## Lehren bisher
