@@ -313,7 +313,19 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Feyenoord/Porto: „remains uncertain“ als unklar statt fraglich – F; Belastung Porto fehlte – J – UK.
 - Hilfsskript: Tabellen-Sortierung nur nach Tordifferenz, nicht nach Toren – Plätze Dortmund/Betis/AEK/Leipzig
   falsch – M – UK.
-- Tipps blieben alle. **Offen an den Nutzer:** Häufung bei B/F/7b (Spieler-Angaben) trotz Lehre – Spielerdaten
+- Real/PSV: PSV-Abstand, Heimliga-letzte-6 fehlten, Asencio-Position (7b), Kapitän ohne Richtung in der
+  Kennzeichnung, Rotation ungenau widerlegt – H/J/K/7b/E/F – UK.
+- **Slovan/Betis: Gegenangabe gegen Über 2,5 falsch gelesen – „3-mal ohne Tor“, aber alle drei Spiele 0:3, 0:4, 0:4
+  über 2,5 (H/C – dasselbe Muster wie Levante 23.11.) – Tipp! (Auswärtssieg Betis → Über 2,5, beide einig →
+  geteilt).** Dazu Ligaserie falsch (A/H), Heimserie fehlte (J/B), Ceballos-Status (F), Artikel ungenau
+  wiedergegeben (E).
+- City/Napoli: Rang-2-Gegenangabe (Napoli SA letzte 6) als Rang 3 abgetan – C/B/K (Bodø-Muster); Artikelabweichung
+  nicht vermerkt – G; Nunes-Status – F – UK. Tipp neu geprüft, blieb.
+- **Muster 24.11.:** Die eigene CL-Anwendung (Heimliga-letzte-6 als Rang 2, CL-Spielorte als Rang 2) wurde nicht
+  einheitlich umgesetzt (Bodø, PSV, Betis, Napoli). Lehre: Datenblatt-Feld 4 je Team immer mit allen drei
+  Rang-2-Blöcken (alle Wb., CL, Heimliga) füllen; „ohne Tor“ nie als Gegenangabe gegen Über 2,5 ohne die
+  Spielstände.
+- Tipps blieben in 2a–2d alle. **Offen an den Nutzer:** Häufung bei B/F/7b (Spieler-Angaben) trotz Lehre – Spielerdaten
   werden jetzt für jeden genannten Spieler mit dem Hilfsskript abgerufen, die Prüfung fand aber erst die Kontrolle.
 
 ---
