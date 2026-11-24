@@ -156,7 +156,11 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer. Der Prüfer ist der Projekt-Agent
   `pruefer` (`.claude/agents/pruefer.md`, fester Prüfauftrag); weitere Gruppen desselben Tages gehen per
   Weiterführung an denselben Prüfer, geht das nicht (z. B. nach einem Neustart), startet ein neuer (Wunsch des
-  Nutzers vom 24.11.2026). Erst nach seinem Bericht
+  Nutzers vom 24.11.2026). **Zweite, kurze Runde für Grenzfälle** (eingeführt am 24.11.2026, Wunsch des
+  Nutzers): Nach den Korrekturen der ersten Runde prüft ein **neuer** Prüfer (Agent `pruefer`) nur die Paarungen,
+  die in Schritt 7 als **Grenzfall** vermerkt sind (zwei Märkte fast gleich stark), und dort nur die Tipp-Gründe,
+  die Rang-1–2-Gegenangaben und den sichersten Markt. Gibt es in einer Gruppe keinen Grenzfall, entfällt sie.
+  Ihr Ergebnis steht mit im Kontrollergebnis. Sie verbessert die Herleitung, nicht den Spielausgang. Erst nach seinem Bericht
   und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
   Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
@@ -376,11 +380,3 @@ den Ergebnissen aus FootyStats ausgewertet: Treffer und Trefferquote, Treffer je
 (ältere Listen behalten ihre We-say-Spalte als Verlauf, sie wird ab dem 21.11.2026 nicht mehr
 ausgewertet). Tipps möglichst vor Anpfiff; Tipps
 nach Anpfiff werden vermerkt.
-
-## Vorschläge (nicht in Kraft – nur auf ausdrücklichen Wunsch des Nutzers)
-
-- **Zweite, kurze Prüfrunde für Grenzfälle** (festgehalten am 24.11.2026): Nach der automatischen unabhängigen
-  Kontrolle prüft eine zweite, kurze Runde nur die Paarungen, die als **Grenzfall** vermerkt sind (zwei Märkte
-  fast gleich stark), und dort nur die Tipp-Gründe und die Rang-1–2-Gegenangaben. Zweck: mehr Sicherheit genau
-  dort, wo die Wahl knapp ist, bei wenig Mehrverbrauch. Grenzen: verbessert die Herleitung, nicht den
-  Spielausgang; Prüfer können selbst irren.

@@ -34,6 +34,10 @@ nicht neu, sondern nur Einträge im Fehlerprotokoll, die seit deinem letzten Les
   prüfen. FS schreibt Spieler teils anders → bei „nicht gefunden“ andere Schreibweisen suchen. SM rechnet die
   Uhrzeit auf deutsche Zeit um, das Datum nicht → Anstoß mit FS prüfen.
 
+**Zweite Runde (Grenzfälle):** Lautet der Auftrag „zweite Runde Grenzfall“, prüfe nur die genannten Paarungen
+und dort nur die Tipp-Gründe, alle Rang-1–2-Gegenangaben (fehlt eine? richtig widerlegt?) und ob der Tipp der
+sicherste Markt ist – Quellen dafür selbst neu abrufen; Formfehler nur nennen, wenn sie den Tipp betreffen.
+
 ## Was du prüfst (je Paarung in der Reihenfolge Schritt 1–8, für jede Fehlerart A–M)
 - Jede Zahl gegen die Quelle: Bezug (Liga / alle Wb. / Europapokal; gesamt / daheim / auswärts; Team / Spiel),
   „letzte 6“ wirklich 6, Daten und Ergebnisse, Tabelle und Abstände.

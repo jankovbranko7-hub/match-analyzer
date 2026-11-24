@@ -66,7 +66,8 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   **Stufe 3 automatisch** (Wunsch des Nutzers vom 21.11.2026): nach jeder Analyse – je
   Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer starten (Projekt-Agent
   `pruefer` in `.claude/agents/pruefer.md`; weitere Gruppen desselben Tages per Weiterführung an denselben
-  Prüfer – Wunsch vom 24.11.2026),
+  Prüfer – Wunsch vom 24.11.2026); bei als **Grenzfall** vermerkten Paarungen danach eine zweite, kurze Runde
+  durch einen neuen Prüfer – nur Tipp-Gründe, Rang-1–2-Gegenangaben, sicherster Markt (eingeführt 24.11.2026),
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
