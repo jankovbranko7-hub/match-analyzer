@@ -342,6 +342,12 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   falsch – E/H (Tipp-Grund) – UK. Tipp neu abgewogen, blieb.
 - Alle 4: Teamnews ohne englischen Wortlaut, eigene Kategorie „voraussichtlich“ – F/6b.
 
+### 24.11.2026 · Scottish Premiership
+- Hibernian/Dundee: Mayor „Position nicht in der Quelle“ – FS schreibt „Major“ (Suchfilter verfehlt Spieler) –
+  H/B/7b – UK (**Lehre:** bei „nicht gefunden“ auch andere Schreibweisen suchen); Teamnews-Listen vermischt – F/6b;
+  Passlack „schon länger“ – H/E; Abstände/Trainer-Spielzahl – J; Kennzeichnung mit Form statt Lage/Teamnews – C/K
+  (Muster Levante 23.11.); fehlende Angreifer-Gegenangaben (Lowe, Murray, Wales) – B – UK. Tipp blieb.
+
 ---
 
 ## Lehren bisher
