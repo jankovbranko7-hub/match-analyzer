@@ -63,10 +63,13 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
   **Stufe 3 automatisch** (Wunsch des Nutzers vom 21.11.2026): nach jeder Analyse – je
   Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer (Agent) starten – genau
-  einen je Gruppe (Wunsch vom 24.11.2026),
+  einen je Gruppe (Wunsch vom 24.11.2026), der zuerst alles Tipp-Relevante prüft (Tipp-Gründe, Rang-1–2-
+  Gegenangaben, sicherster Markt, Kennzeichnung), danach kurz die Formfehler;
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
+- **Umfang** (Wunsch vom 24.11.2026): höchstens etwa 4–5 Spiele pro Tag, Ligen mit guten Daten bevorzugen; bei
+  größeren Aufträgen vorher auf den Limitverbrauch hinweisen.
 - **Keine Quoten** (seit 07.11.2026). Antworten handytauglich: Listen statt breiter Tabellen.
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten (Platzverweise
   mit Minute und Spielstand gesondert mitzählen, Wertung bleibt – Wunsch vom 24.11.2026);

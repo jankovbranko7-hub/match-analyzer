@@ -39,6 +39,10 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
+- **Umfang je Tag** (Wunsch des Nutzers vom 24.11.2026, wegen des Nutzungslimits): höchstens etwa 4–5 Spiele pro
+  Tag; Ligen mit guten Daten (Sports-Mole-Spielseite und FootyStats vollständig) bevorzugen. Bei größeren
+  Aufträgen weist Claude vorher auf den Limitverbrauch hin.
+
 - **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
   Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung) – erst wenn eine Paarung vollständig
   fertig ist, kommt die nächste. Keine Paarungen im Block nebeneinander bearbeiten.
@@ -155,7 +159,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   Nutzers):** Nach jeder Analyse – je Gruppe, nach Prüfliste und Kontrolldurchgang – startet Claude
   **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer – **genau einen Prüfer je Gruppe**,
   auch bei vielen Spielen (Wunsch des Nutzers vom 24.11.2026, spart Nutzungslimit; dauert dafür länger, also früh
-  starten). Erst nach seinem Bericht
+  starten). **Reihenfolge der Prüfung** (Wunsch des Nutzers vom 24.11.2026): zuerst alles, was den Tipp
+  betrifft – Tipp-Gründe, alle Rang-1–2-Gegenangaben (fehlt eine? richtig widerlegt?), sicherster Markt,
+  Kennzeichnung; danach die Formfehler, diese kurz. Erst nach seinem Bericht
   und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
   Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
