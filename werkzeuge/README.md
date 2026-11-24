@@ -11,6 +11,11 @@ Sports-Mole-Check (seit 20.11.2026):
   automatischer Abgleich Sports Mole ↔ FootyStats: Tabellenplatz, Ligaspiele (Heim/Auswärts,
   Spielstand), S-U-N und Tore der letzten 6 aller Wettbewerbe; meldet jede „ABWEICHUNG“. Dazu
   Tabellenstand mit Abständen nach oben/unten und zum Abstiegs-/Relegationsplatz (Datenblatt).
+- `kontext.py <team_id> <liga_saison> ["Name1,Name2"] [<europapokal_saison>]` (seit 24.11.2026) – Kontext
+  eines Teams aus FootyStats: Tabelle aus den FS-Spielen mit Nachbarn, letzte Spiele, nicht ausgetragene
+  Spiele (nicht zählen), Kennzahlen (letzte 6, daheim/auswärts), nächste Spiele und Spieler mit Position,
+  Toren und letztem Einsatz (FS-Feld teils veraltet – im Zweifel Aufstellung im FS-`match` prüfen).
+  Wird auch vom Prüfer-Agenten `pruefer` (`.claude/agents/pruefer.md`) genutzt.
 
 FootyStats (Zahlen, Abgleich und Ergebnisse; ohne Vorab-Werte); Odd-Alerts-Skripte werden nicht mehr verwendet:
 

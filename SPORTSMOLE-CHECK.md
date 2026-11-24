@@ -153,7 +153,10 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   „Kontrolle (Uhrzeit): …“ vermerkt.
 - **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026; seit 21.11.2026 automatisch, Wunsch des
   Nutzers):** Nach jeder Analyse – je Gruppe, nach Prüfliste und Kontrolldurchgang – startet Claude
-  **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer. Erst nach seinem Bericht
+  **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer. Der Prüfer ist der Projekt-Agent
+  `pruefer` (`.claude/agents/pruefer.md`, fester Prüfauftrag); weitere Gruppen desselben Tages gehen per
+  Weiterführung an denselben Prüfer, geht das nicht (z. B. nach einem Neustart), startet ein neuer (Wunsch des
+  Nutzers vom 24.11.2026). Erst nach seinem Bericht
   und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
   Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
