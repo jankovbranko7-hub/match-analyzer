@@ -62,9 +62,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
   **Stufe 3 automatisch** (Wunsch des Nutzers vom 21.11.2026): nach jeder Analyse – je
-  Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer (Agent) starten – genau
-  einen je Gruppe (Wunsch vom 24.11.2026), der zuerst alles Tipp-Relevante prüft (Tipp-Gründe, Rang-1–2-
-  Gegenangaben, sicherster Markt, Kennzeichnung), danach kurz die Formfehler;
+  Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer (Agent) starten,
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der
   Nutzer zusätzlich „unabhängige Kontrolle“, eine weitere Runde.
