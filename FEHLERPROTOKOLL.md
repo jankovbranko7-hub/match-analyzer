@@ -366,6 +366,19 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Burnley/Birmingham (zweite Grenzfall-Runde): Gegenangabe „letzte 2 Auswärtsspiele je ohne Tor“ falsch gezählt –
   zuletzt 1:3 in Lincoln (3 Tore) – H – UK2. Kein Tipp-Grund, Tipp bleibt.
 
+### 25.11.2026 · Champions League
+- Slavia/Villarreal: Šturm (FS „Danijel Šturm“, Angriff, 2 CL-Tore, Startelf 04.11.) und Piták (FS Abwehr) als „Position nicht
+  in der Quelle“ geführt – Schreibweise mit Sonderzeichen nicht gesucht (wie Mayor/Major 24.11.); Šturm fehlte als neue
+  Rang-1-Gegenangabe – B/H/7b – UK. Tipp neu abgewogen (bleibt), Grenzfall.
+- Slavia/Villarreal: Chaloupek „letzter CL-Einsatz 10.09.“ aus dem veralteten FS-Feld (eingewechselt 04.11.) und als
+  Einwechselspieler als „Rang 1 dafür“ gewertet – H/E – UK.
+- Slavia/Villarreal: Provod „fehlte beim 1:2 gegen Arsenal“ – war ungenutzt auf der Bank – H/E – UK.
+- Slavia/Villarreal: Spielbild „trifft ja“ ohne die fehlenden/fraglichen Torschützen (3 von 5 CL-Toren) – B/C – UK.
+- Sabah/Barcelona: Christensen „19.09.“ (eingewechselt 08.11.), Rodri „31.10.“ (Startelf 03.11.) aus veralteten FS-Feldern –
+  H – UK. Kein Tipp betroffen.
+- Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
+  einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
+
 ---
 
 ## Lehren bisher
