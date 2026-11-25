@@ -95,4 +95,8 @@ soll. Schlüssel **nie** im Chat erfragen, ausgeben, loggen, in eine Datei schre
 committen; in gespeicherten URLs `[REDACTED]` (auch in `next_page_url`).
 Hilfsskripte: `werkzeuge/` (README dort). Bei HTTP 429 oder ähnlichem warten.
 
+Skill **`watch`** (`.claude/skills/watch`, Videos ansehen; Herkunft und Stand in `QUELLE.md` dort; Wunsch des
+Nutzers vom 24.11.2026): **nur lokal** – immer `--engine local --no-whisper`, nie Videos oder Ton an Gemini,
+Groq oder OpenAI; keine API-Schlüssel im Chat oder in einer Projekt-`.env`. Nicht Teil des Sports-Mole-Checks.
+
 Antworten auf Deutsch.
