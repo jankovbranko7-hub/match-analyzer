@@ -399,7 +399,7 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   startet“ statt mögliche Startelf – F – UK2; Lilles Zu-null-Spiele fehlten als Gegenangabe – B – UK2. Tipp bleibt.
 - Selbst gefunden: Suárez (2a) und Dembélé (2e) als Verstärkung, obwohl schon zuletzt dabei – E. Lehre (erneut, wie 22.11.): eine
   Korrektur immer in allen Abschnitten suchen, nicht nur an der genannten Stelle.
-- Rückblick Merkmale (nach der Auswertung): geänderte Tipps „3 von 9“ statt 4 von 9 gezählt (Sevilla übersehen) – H – selbst,
+- Rückblick Merkmale (nach der Auswertung): geänderte Tipps „3 von 9“ statt 4 von 9 gezählt (Treffer falsch addiert) – H – selbst,
   vor der Antwort an den Nutzer berichtigt.
 - Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
   einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
