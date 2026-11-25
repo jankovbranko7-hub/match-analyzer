@@ -390,6 +390,15 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - **Muster 25.11. (offen an den Nutzer):** Ausfälle oder Rückkehrer ohne Wirkung auf die letzten Spiele wurden in 4 Paarungen als
   Rang-1-Grund gewertet (Chaloupek, Ordóñez, Neuer/Davies, Bastoni). Gegenmaßnahme: Als Rang-1-Grund zählt nur, wer im letzten Spiel
   noch spielte (fehlt neu) bzw. im letzten Spiel fehlte und jetzt sicher zurück ist.
+- Schachtar/Fenerbahçe (zweite Runde): Abweichung SM ↔ FS mit falscher Erklärung zugunsten SM entschieden („6 von 6 unter“ nur SM,
+  aber Tipp-Grund) – G/H – UK2; Widerlegung „erst durch 2 Gegentore“ für 3:2/2:2 falsch – H/C – UK2; Pedrinho (nicht neu) als Grund –
+  E – UK2; feste Unter-Gegenangabe ohne Heimliga-Block (Süper Lig 3-mal 3+) – B/A – UK2. Tipp neu abgewogen, bleibt.
+- Atlético/Viking (zweite Runde): Tipp-Grund mit dem strittigen Tromsø-Spiel – G – UK2; Vikings 2:0 in Brann fehlte – B – UK2.
+- Inter/Stuttgart (zweite Runde): Lautaro weiter in Widerlegung/Spielbild – E – UK2; Stuttgarts Auswärtsbilanz nur teilweise – B – UK2.
+- Lille/Bayern (zweite Runde): Ueda/E. Mbappé (spielten am 21.11.) als Rang-1-Grund und in der Kennzeichnung – E/F – UK2; „Karl
+  startet“ statt mögliche Startelf – F – UK2; Lilles Zu-null-Spiele fehlten als Gegenangabe – B – UK2. Tipp bleibt.
+- Selbst gefunden: Suárez (2a) und Dembélé (2e) als Verstärkung, obwohl schon zuletzt dabei – E. Lehre (erneut, wie 22.11.): eine
+  Korrektur immer in allen Abschnitten suchen, nicht nur an der genannten Stelle.
 - Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
   einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
 
