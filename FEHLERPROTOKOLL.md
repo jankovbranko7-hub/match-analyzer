@@ -363,6 +363,8 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Lage-Abstand nach unten und Top-Torschützen Dykes/McGlynn fehlten – J/B – UK. Tipp (Heimsieg) nicht betroffen.
 - **Muster 25.11.:** „ohne Tor“ ohne Spielstände gegen Über/Unter ist zum vierten Mal aufgetreten (diesmal in der
   Marktliste, ohne Tippwirkung). Lehre erneut: bei „ohne Tor“ immer die Spielstände prüfen, ein 0:3 ist über 2,5.
+- Burnley/Birmingham (zweite Grenzfall-Runde): Gegenangabe „letzte 2 Auswärtsspiele je ohne Tor“ falsch gezählt –
+  zuletzt 1:3 in Lincoln (3 Tore) – H – UK2. Kein Tipp-Grund, Tipp bleibt.
 
 ---
 
