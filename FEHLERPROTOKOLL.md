@@ -376,6 +376,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Slavia/Villarreal: Spielbild „trifft ja“ ohne die fehlenden/fraglichen Torschützen (3 von 5 CL-Toren) – B/C – UK.
 - Sabah/Barcelona: Christensen „19.09.“ (eingewechselt 08.11.), Rodri „31.10.“ (Startelf 03.11.) aus veralteten FS-Feldern –
   H – UK. Kein Tipp betroffen.
+- Slavia/Villarreal (zweite Grenzfall-Runde): Widerlegung „zuletzt 2:0 und davor 1:1“ – davor lag ein 4:1 – H – UK2;
+  „seither 0:6, 2:0, 2:3“ galt nur für Moreno, nicht für Akhomach – H – UK2; Rang-2-Gegenangabe „Slavia letzte 6 alle Wb.
+  2-mal zu null“ fehlte unter Schritt 6/7 – B – UK2. Kein Tipp-Grund, Tipp bleibt.
 - Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
   einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
 
