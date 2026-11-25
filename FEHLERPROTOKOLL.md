@@ -379,6 +379,17 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Slavia/Villarreal (zweite Grenzfall-Runde): Widerlegung „zuletzt 2:0 und davor 1:1“ – davor lag ein 4:1 – H – UK2;
   „seither 0:6, 2:0, 2:3“ galt nur für Moreno, nicht für Akhomach – H – UK2; Rang-2-Gegenangabe „Slavia letzte 6 alle Wb.
   2-mal zu null“ fehlte unter Schritt 6/7 – B – UK2. Kein Tipp-Grund, Tipp bleibt.
+- Atlético/Viking: Kennzeichnung „beide einig“ mit nicht neuen Viking-Ausfällen und einseitiger Lage begründet (beide punktgleich
+  unter Druck) → geteilt – C/K – UK; Vikings Lage fehlte als Rang-1-Gegenangabe (dreht nein) – B/J – UK.
+- Brügge/Liverpool: Ordóñez „ob neu offen“ und als Tipp-Grund – laut FS-Aufstellungen seit 04.11. nicht im Kader – E/B – UK. Lehre:
+  auch Spieler, die FS nicht führt, über die Aufstellungen prüfen.
+- Inter/Stuttgart: „Lautaro und Bastoni zurück“ als Rang-1-Tipp-Grund (Bastoni spielte alle Ligaspiele, Lautaro nur eingewechselt,
+  „must vie“) – E/F – UK (Muster Atalanta 22.11., Guirassy 24.11.); als Grenzfall nachgetragen.
+- Lille/Bayern: Neuer und Davies „nicht neu“, aber als Rang-1- und Tipp-Grund – E – UK.
+- Atlético/Viking: SM „0:0“ in Tromsø gegen FS „3:2“ mit Aufstellungen und Torschützen – G (Hinweis; SM-Platzhalter).
+- **Muster 25.11. (offen an den Nutzer):** Ausfälle oder Rückkehrer ohne Wirkung auf die letzten Spiele wurden in 4 Paarungen als
+  Rang-1-Grund gewertet (Chaloupek, Ordóñez, Neuer/Davies, Bastoni). Gegenmaßnahme: Als Rang-1-Grund zählt nur, wer im letzten Spiel
+  noch spielte (fehlt neu) bzw. im letzten Spiel fehlte und jetzt sicher zurück ist.
 - Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
   einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
 
