@@ -129,7 +129,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 
 **Abschluss**
 
-11. Tagesliste vollständig (alle Spalten, Gründe je Paarung), committet und auf den Arbeitsbranch
+11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
     Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
@@ -380,3 +380,20 @@ den Ergebnissen aus FootyStats ausgewertet: Treffer und Trefferquote, Treffer je
 (ältere Listen behalten ihre We-say-Spalte als Verlauf, sie wird ab dem 21.11.2026 nicht mehr
 ausgewertet). Tipps möglichst vor Anpfiff; Tipps
 nach Anpfiff werden vermerkt.
+
+**Merkmale je Tipp** (Wunsch des Nutzers vom 25.11.2026): Zu jedem Tipp steht in der Tagesliste nach Schritt 8 eine
+feste Zeile „Merkmale“ – nur zur späteren Auswertung, sie **beeinflusst die Tippwahl nicht** (keine Punkte, keine
+Schwellen):
+1. Wettart (Heimsieg, Auswärtssieg, Beide treffen – Ja/Nein, Über/Unter 2,5).
+2. Kennzeichnung: beide einig / geteilt; ob sie vor Anpfiff geändert wurde.
+3. Grenzfall: ja / nein.
+4. Tipp vor Anpfiff geändert: ja (ursprünglicher Tipp nennen) / nein.
+5. Neue Rang-1-Gegenangabe gegen den Tipp (Spieler, der im letzten Spiel noch spielte und jetzt fehlt/fraglich ist,
+   oder neue Lage): ja (wer) / nein.
+6. Rang-2-Blöcke einig: zeigen alle Blöcke (letzte 6 alle Wb., letzte 6 Liga; im Europapokal zusätzlich alle CL-Spiele
+   und letzte 6 Heimliga) zum Tipp – ja / nein (welcher nicht).
+7. Gegensätzliche Profile (ein Team fast immer über, das andere fast immer unter 2,5 bzw. beide treffen): ja / nein.
+8. Datenlage vollständig: ja / nein (z. B. Heimliga nicht in FS, ungeklärte Abweichung SM ↔ FS).
+Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal); bei geänderten Tipps auch, ob der
+ursprüngliche Tipp getroffen hätte. Nach etwa 50 Tipps mit Merkmalen wird ausgewertet und dem Nutzer berichtet; ob ein
+Merkmal zum Aussortieren oder Kennzeichnen verwendet wird, entscheidet nur der Nutzer.
