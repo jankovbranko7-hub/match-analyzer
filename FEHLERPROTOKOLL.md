@@ -352,6 +352,18 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   nur als Formspiel zählen); Gegenangabe nur mit Rang 3 widerlegt – C/B (Muster Brentford); Bezug alle Wb./Liga – A;
   Märkte unvollständig – K/C; Lage-Gegenangabe fehlte – B; Kennzeichnung beide einig → geteilt – C/K – UK. Tipp blieb.
 
+### 25.11.2026 · Championship
+- Burnley/Birmingham: Saison-Heimwerte (BTTS 7/8, 88 %) und Rang 1 (Klarer gesperrt) in Schritt 6 als „Rang 2“
+  etikettiert; echter Rang 2 (letzte 6) ist gemischt (Birmingham BTTS 2/6 dagegen) – C/K – UK. Tipp bleibt (Grenzfall).
+- Watford/Blackburn: „Letztes Tor 31.10.“ falsch, Watford traf 03.11. – H/J – UK; Gegenangabe Atcheson (Abwehr,
+  fällt aus) gegen Unter fehlte – B/7b – UK. Tipp bleibt.
+- Bolton/West Brom: „Letzter Sieg 12.09.“ war nur der letzte Heimsieg (letzter Sieg 03.11.) – J/H – UK.
+- Stoke/Millwall: „Millwall 3-mal ohne Tor“ als Rang-2-Grund für Unter, obwohl 2 der 3 über 2,5 lagen – H/C
+  (**erneut dasselbe Muster** wie Levante 23.11., Slovan 24.11., Bradford 24.11.) – UK; Saisonwerte als Rang 2 (K);
+  Lage-Abstand nach unten und Top-Torschützen Dykes/McGlynn fehlten – J/B – UK. Tipp (Heimsieg) nicht betroffen.
+- **Muster 25.11.:** „ohne Tor“ ohne Spielstände gegen Über/Unter ist zum vierten Mal aufgetreten (diesmal in der
+  Marktliste, ohne Tippwirkung). Lehre erneut: bei „ohne Tor“ immer die Spielstände prüfen, ein 0:3 ist über 2,5.
+
 ---
 
 ## Lehren bisher
