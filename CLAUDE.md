@@ -75,7 +75,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - Alle Tipps eines Tages in `tipps/sportsmole/JJJJ-MM-TT.md`, nach Abpfiff dort auswerten (Platzverweise
   mit Minute und Spielstand gesondert mitzählen, Wertung bleibt – Wunsch vom 24.11.2026); je Tipp eine feste **Merkmale-Zeile**
   (Wettart, Kennzeichnung, Grenzfall, Tipp geändert, neue Rang-1-Gegenangabe, Rang-2-Blöcke einig, gegensätzliche Profile,
-  Datenlage) nur zur Auswertung, ohne Einfluss auf den Tipp – Abschnitt „Tagesliste“ in `SPORTSMOLE-CHECK.md`, Wunsch vom 25.11.2026);
+  Datenlage, zweitbester Markt – ergänzt 26.11.) nur zur Auswertung, ohne Einfluss auf den Tipp – Abschnitt „Tagesliste“ in `SPORTSMOLE-CHECK.md`, Wunsch vom 25.11.2026);
   committen und pushen. (Ältere Listen in `tipps/forebet/` bleiben als Verlauf.)
 - **Branch `forebet-system` immer automatisch mitziehen** (Wunsch des Nutzers vom 09.11.2026):
   Jede Regeländerung und jede Tagesliste nach dem Push auf den Arbeitsbranch auch nach

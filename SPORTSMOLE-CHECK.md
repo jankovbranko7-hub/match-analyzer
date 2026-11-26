@@ -394,6 +394,9 @@ Schwellen):
    und letzte 6 Heimliga) zum Tipp – ja / nein (welcher nicht).
 7. Gegensätzliche Profile (ein Team fast immer über, das andere fast immer unter 2,5 bzw. beide treffen): ja / nein.
 8. Datenlage vollständig: ja / nein (z. B. Heimliga nicht in FS, ungeklärte Abweichung SM ↔ FS).
+9. Zweitbester Markt: der Markt, gegen den nach dem Tipp am wenigsten spricht (ergänzt am 26.11.2026 auf Wunsch
+   des Nutzers) – bei der Auswertung wird mitgezählt, ob er getroffen hätte; so lässt sich ohne Rückschau prüfen, ob ein
+   Vorrang für Sieg / Beide treffen – Nein bei fast gleich starken Märkten mehr Treffer gebracht hätte.
 Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal); bei geänderten Tipps auch, ob der
-ursprüngliche Tipp getroffen hätte. Nach etwa 50 Tipps mit Merkmalen wird ausgewertet und dem Nutzer berichtet; ob ein
+ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt getroffen hätte. Nach etwa 50 Tipps mit Merkmalen wird ausgewertet und dem Nutzer berichtet; ob ein
 Merkmal zum Aussortieren oder Kennzeichnen verwendet wird, entscheidet nur der Nutzer.
