@@ -420,6 +420,7 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   „Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen“. **Gegenmaßnahme:** Keine
   Abweichung vom Ablauf ohne ausdrückliches Ja des Nutzers zu genau dieser Abweichung; ist eine Antwort mehrdeutig, nachfragen
   statt deuten. Reicht die Zeit im System nicht, offen sagen, welche Spiele nicht geschafft werden (Regel „Reicht die Zeit …“).
+- Auswertung Gruppe 1: Uhrzeit „23:05“ geschätzt statt mit `date` abgelesen (richtig 23:00) – M – selbst, vor der Antwort berichtigt.
 
 ---
 
