@@ -404,6 +404,16 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Lehre (erneut): letzte Einsätze immer über die FS-Aufstellungen beider Wettbewerbe prüfen; bei „nicht gefunden“ immer mit
   einer Suche ohne Sonderzeichen (Normalisierung) nachsuchen – Hilfssuche dafür ab Gruppe 2 benutzt.
 
+### 26.11.2026 · Europa League / Conference League (Ablauf)
+- **Neue Fehlerart N · Ablauf/Kapazität (selbst, 21:10):** 26 Paarungen an einem Abend, auf Wunsch des Nutzers („Alle Spiele“)
+  mit bis zu 20 parallelen Bearbeitern und 5 Prüfern. Das Nutzungslimit (5 Stunden) war zweimal erreicht (14:40, ca. 16:15 bis
+  21:00); **kein Tipp ging vor Anpfiff an den Nutzer**, keine unabhängige Kontrolle (Stufe 3) wurde fertig, 6 Paarungen (2i–2n)
+  blieben ohne Analyse. Die 20 fertigen Tipps stehen nur zur Auswertung in der Tagesliste. Kein Tipp falsch begründet gefunden –
+  der Fehler liegt in der Planung: Claude hat die Rückfrage nur zur Zeit, nicht zum Nutzungslimit gestellt.
+  **Vorschlag an den Nutzer (Regeländerung nur auf Wunsch):** Bei mehr als etwa 8–10 Paarungen an einem Abend vorab fragen, welche
+  Spiele Vorrang haben; Bearbeiter nicht alle gleichzeitig starten, sondern gruppenweise (erst 18:45 komplett inkl. Prüfer, dann
+  21:00); bei einem Limit-Abbruch sofort dem Nutzer Bescheid geben, welche Gruppe wann frühestens kommen kann.
+
 ---
 
 ## Lehren bisher
