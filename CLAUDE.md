@@ -8,6 +8,10 @@
 2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
    nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
    Kontrollergebnis; erst danach kommt der nächste Schritt.
+3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
+   5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
+   neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
+   Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
 
 Dieser Branch enthält **nur den Sports-Mole-Check (System B)** des Nutzers (bis 20.11.2026
 „Forebet-Check“, eingerichtet am 07.11.2026, abgezweigt von `tipps-system-a-b`). Regeln:
