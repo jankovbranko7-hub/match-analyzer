@@ -112,6 +112,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
    - **7b (seit 22.11.2026):** Kein Ausfall ohne belegte Position ist als Grund oder Gegenangabe für
      mehr/weniger Tore oder Sieg/Niederlage verwendet; sonst steht „Position nicht in der Quelle –
      keine Richtung“.
+   - **7c (seit 26.11.2026):** Als Rang-1-Grund oder -Gegenangabe nur Spieler, die neu fehlen (spielten im letzten
+     Pflichtspiel laut FS-Aufstellung) oder sicher zurück sind (fehlten im letzten Spiel, Quelle sagt klar „spielt“);
+     sonst im Datenblatt „nicht neu – keine Richtung“ (Schritt 5).
    - **7a:** Lage-Check für **beide** Teams mit allen fünf Fragen gemacht (worum es geht,
      Dringlichkeit, Serien mit Datum des letzten Siegs und Tors, Schwächung, Besonderheit).
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
@@ -271,7 +274,9 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
       **Position je Ausfall** (seit 22.11.2026, Wunsch des Nutzers): Die Position steht nur dabei, wenn
       sie in der Quelle steht – SM-Artikel (z. B. „defensive duo“, „striker“), mögliche Startelf der
       SM-Vorschau oder FootyStats-Spielerdaten (`fs.sh league-players season_id=…`). Sonst:
-      „Position nicht in der Quelle“.
+      „Position nicht in der Quelle“. **Neu oder nicht** (seit 26.11.2026, Regel 7c): je Ausfall/Rückkehrer der Einsatz im
+      letzten Pflichtspiel laut FS-Aufstellung (Startelf / eingewechselt / Bank / nicht im Kader) und „neu“ oder „nicht neu –
+      keine Richtung“.
    6. **Abweichungen** aus dem Abgleich (Schritt 2).
    7. **Weitere Fakten für den Lage-Check** (seit 21.11.2026): **Trainer** (seit wann, wie viele
       Spiele – steht die Zahl nicht in der Quelle: „nicht in der Quelle“), **Spiele kurz davor und
@@ -305,6 +310,13 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    wenn seine Position in der Quelle steht. Steht sie nicht dort, gilt: **„Position nicht in der
    Quelle – keine Richtung“**; der Ausfall wird genannt, aber weder als Grund noch als Gegenangabe
    gewichtet. (Anlass: Hull – Brighton, Osasuna – Málaga, Getafe – Atlético am 22.11.)
+   **Nur neue Änderungen sind Rang-1-Gründe** (seit 26.11.2026, Wunsch des Nutzers – Regel 7c): Ein Spieler zählt nur dann
+   als Grund oder Gegenangabe aus Rang 1, wenn er (a) im **letzten Pflichtspiel noch spielte** (Startelf oder eingewechselt)
+   und jetzt fehlt, gesperrt oder fraglich ist, oder (b) im **letzten Pflichtspiel fehlte** und jetzt **sicher zurück** ist
+   (Quelle sagt klar, dass er spielt/startet – nicht „could“, „may“, „in contention“, „must vie“). Geprüft wird das über die
+   FS-Aufstellungen des letzten Spiels (beide Wettbewerbe). Alle anderen Ausfälle/Rückkehrer stehen im Datenblatt mit
+   „nicht neu – keine Richtung“, weil sie schon in den Zahlen der letzten Spiele stecken. (Anlass: Chaloupek, Ordóñez,
+   Neuer/Davies, Bastoni, Pedrinho, Ueda/E. Mbappé am 25.11.)
    Bei einem Widerspruch geht eine **konkrete Nachricht aus Sports Mole** einer Zahl aus FootyStats
    vor (ein gesperrter Kapitän wiegt mehr als ein Saisonwert).
 6. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,

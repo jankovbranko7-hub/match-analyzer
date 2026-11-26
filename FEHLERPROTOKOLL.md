@@ -387,7 +387,7 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   „must vie“) – E/F – UK (Muster Atalanta 22.11., Guirassy 24.11.); als Grenzfall nachgetragen.
 - Lille/Bayern: Neuer und Davies „nicht neu“, aber als Rang-1- und Tipp-Grund – E – UK.
 - Atlético/Viking: SM „0:0“ in Tromsø gegen FS „3:2“ mit Aufstellungen und Torschützen – G (Hinweis; SM-Platzhalter).
-- **Muster 25.11. (offen an den Nutzer):** Ausfälle oder Rückkehrer ohne Wirkung auf die letzten Spiele wurden in 4 Paarungen als
+- **Muster 25.11. (vom Nutzer am 26.11. als Regel 7c übernommen):** Ausfälle oder Rückkehrer ohne Wirkung auf die letzten Spiele wurden in 4 Paarungen als
   Rang-1-Grund gewertet (Chaloupek, Ordóñez, Neuer/Davies, Bastoni). Gegenmaßnahme: Als Rang-1-Grund zählt nur, wer im letzten Spiel
   noch spielte (fehlt neu) bzw. im letzten Spiel fehlte und jetzt sicher zurück ist.
 - Schachtar/Fenerbahçe (zweite Runde): Abweichung SM ↔ FS mit falscher Erklärung zugunsten SM entschieden („6 von 6 unter“ nur SM,

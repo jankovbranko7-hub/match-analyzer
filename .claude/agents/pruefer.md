@@ -44,7 +44,9 @@ sicherste Markt ist – Quellen dafür selbst neu abrufen; Formfehler nur nennen
 - Jeder Spieler, der als Grund, Gegenangabe oder in einer Widerlegung vorkommt (auch Ersatzleute und Rückkehrer):
   Team, Position, Tore, letzter Einsatz. Teamnews-Status nach dem englischen Originalwort (fehlt / fraglich /
   gesperrt / zurück, sonst „unklar (Wortlaut: …)“; „could“ ist nicht sicher). „Neue Schwächung“ nur, wenn der
-  Spieler zuletzt noch spielte. Regel 7b: Ausfälle nur mit belegter Position als Richtung.
+  Spieler zuletzt noch spielte. Regel 7b: Ausfälle nur mit belegter Position als Richtung. Regel 7c (seit 26.11.): als Rang-1-Grund
+  oder -Gegenangabe nur Spieler, die neu fehlen (im letzten Pflichtspiel laut FS-Aufstellung noch dabei) oder sicher zurück
+  sind – sonst ist es ein Fehler (Fehlerart E).
 - Lage-Check (5 Fragen), Spielbild je Team, alle sechs Märkte einzeln mit Rang 1–2 dafür/dagegen und Rang 3.
 - Gegenangaben-Prüfung („dreht den Tipp: ja/nein, weil …“): Fehlt eine Rang-1–2-Gegenangabe? Wird eine nur mit
   Rang 3 widerlegt? Wird „ohne Tor“ falsch gegen Über/Unter 2,5 benutzt (Spielstände prüfen)? Steckt ein
