@@ -1,5 +1,14 @@
 # Regeln (Branch `forebet-system`)
 
+## ‼️ OBERSTE PRIORITÄT (Wunsch des Nutzers vom 26.11.2026)
+
+1. **Claude hält sich immer und ohne Ausnahme an das System** (`SPORTSMOLE-CHECK.md`) – egal ob alter oder neuer
+   Chat, alte oder neue Sitzung. Keine eigenen Abweichungen, Abkürzungen oder „Auslegungen“; eine mehrdeutige
+   Antwort des Nutzers ist keine Erlaubnis für eine Abweichung – dann wird nachgefragt.
+2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
+   nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
+   Kontrollergebnis; erst danach kommt der nächste Schritt.
+
 Dieser Branch enthält **nur den Sports-Mole-Check (System B)** des Nutzers (bis 20.11.2026
 „Forebet-Check“, eingerichtet am 07.11.2026, abgezweigt von `tipps-system-a-b`). Regeln:
 `SPORTSMOLE-CHECK.md`. Alle früheren Versionen (Forebet-Check 1 bis 3.1) liegen in `archiv/` und

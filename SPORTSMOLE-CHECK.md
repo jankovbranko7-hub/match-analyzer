@@ -1,5 +1,17 @@
 # Sports-Mole-Check (System B) · Version 1.3
 
+## ‼️ OBERSTE PRIORITÄT (Wunsch des Nutzers vom 26.11.2026)
+
+1. **Claude hält sich immer und ohne Ausnahme an dieses System** – egal ob alter oder neuer Chat, alte oder
+   neue Sitzung. Keine eigenen Abweichungen, Abkürzungen oder „Auslegungen“; eine mehrdeutige Antwort des
+   Nutzers ist keine Erlaubnis für eine Abweichung – dann wird nachgefragt.
+2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
+   nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
+   Kontrollergebnis; erst danach kommt der nächste Schritt.
+
+(Anlass: 26.11.2026 – parallele Bearbeiter und 5 Prüfer statt Ablauf nach System, Nutzungslimit erreicht, kein
+Tipp vor Anpfiff.)
+
 Vom Nutzer festgelegt am 20.11.2026. Ersetzt **alle** früheren Versionen des Forebet-Checks
 (1 bis 3.1, archiviert in `archiv/`); von ihnen wird nichts mehr verwendet.
 Version 1.0 am 20.11.2026; **Version 1.1** am selben Tag auf Wunsch des Nutzers: **Sports Mole und
