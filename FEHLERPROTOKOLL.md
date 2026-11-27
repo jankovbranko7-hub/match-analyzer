@@ -437,6 +437,13 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Forest/Chelsea: Artikel-„L“ für das 1:1 im EFL Cup als Quellenfehler (G) bezeichnet, obwohl ein Elfmeterschießen es erklären würde
   – richtig „nicht klärbar“ – G/E (Hinweis) – UK. Ohne Tippwirkung.
 - Stufe-1-Vermerke 1a/1b/1c/1e allgemein formuliert (nicht erkennbar, was einzeln geprüft wurde) – M (Hinweis) – UK; präzisiert.
+- Werder/Gladbach: Block „letzte 6 alle Wb.“ (Gladbach SM 2-1-3 / FS-lastx 3-1-2, nicht klärbar) als Tipp-Grund und als FS-Seite der
+  Kennzeichnung verwendet – gegen Grundsatz 4 – G/H – UK2. Gegenangabe gegen Über 2,5 ohne Spielort (3 der 4 Unter-Spiele Gladbach-
+  Heimspiele) – C (Hinweis) – UK2. Tipp bleibt.
+- **Southampton/Middlesbrough: Boros Auswärtsbilanz 3-3-2 (nur 2 Niederlagen in 8) als „Rang 3 dafür“ für den Heimsieg; Heimsieg ruhte
+  auf Spielort-Teilmengen (2+2 Spiele) und Rang 3, während der ganze Rang-2-Block zu Boro zeigte – C – UK2 – Tipp! (Heimsieg
+  Southampton → Beide treffen – Ja, geteilt, Grenzfall).** Dazu B (Hinweis): xG letzte 6 nicht genannt. Lehre: Spielort-Teilmengen der
+  letzten 6 (2–3 Spiele) sind kein Ersatz für den ganzen Rang-2-Block – erst den ganzen Block gegen den Tipp lesen.
 - Ablauf (M): Die Bearbeiter-Agenten legten Zwischendateien teils im gemeinsamen Scratchpad ab; eine Spielerdatei hatte fremden
   Inhalt (vom Bearbeiter 1c selbst bemerkt und neu abgerufen). Lehre: im Auftrag je Agent einen eigenen Datenordner nennen.
 
