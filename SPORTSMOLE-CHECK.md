@@ -14,13 +14,13 @@
    neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
    Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
 4. **Variante B „drei Augenpaare“** (Wahl des Nutzers vom 27.11.2026): Je 5er-Schritt bearbeitet je Spiel **ein**
-   Bearbeiter-Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
-   Entscheidungsweg 1–8. Die Bearbeiter werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
+   Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
+   Entscheidungsweg 1–8. Die Agenten werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
    **ohne Kopie des Chats**; höchstens 5 gleichzeitig (ein Schritt). Danach liest **Claude selbst** jede Aussage gegen die
    Quellen (Stufe 1), dann prüft **ein** Prüfer alle 5 (Punkt 3); erst danach gehen die Tipps an den Nutzer. Für die
-   Bearbeitung ersetzt das „erst eine Paarung, dann die nächste“: Jeder Bearbeiter bearbeitet genau eine Paarung einzeln.
+   Bearbeitung ersetzt das „erst eine Paarung, dann die nächste“: Jeder Agent bearbeitet genau eine Paarung einzeln.
 
-(Anlass: 26.11.2026 – parallele Bearbeiter und 5 Prüfer statt Ablauf nach System, Nutzungslimit erreicht, kein
+(Anlass: 26.11.2026 – parallele Agenten und 5 Prüfer statt Ablauf nach System, Nutzungslimit erreicht, kein
 Tipp vor Anpfiff.)
 
 Vom Nutzer festgelegt am 20.11.2026. Ersetzt **alle** früheren Versionen des Forebet-Checks
@@ -64,9 +64,9 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
 - **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
-  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung): Je Paarung arbeitet **ein eigener Bearbeiter**
+  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung): Je Paarung arbeitet **ein eigener Agent**
   (Oberste Priorität, Punkt 4) und geht den Entscheidungsweg für genau diese Paarung vollständig durch; ein
-  Bearbeiter bearbeitet nie mehrere Paarungen (angeglichen am 27.11.2026).
+  Agent bearbeitet nie mehrere Paarungen (angeglichen am 27.11.2026).
 - **5er-Schritte** (Wahl des Nutzers vom 27.11.2026, ersetzt die „Gruppen nach Anstoßzeit“ vom 21.11.2026):
   **Die 5 Tipps eines Schritts gehen erst zusammen an den Nutzer, wenn jede der 5 Paarungen fertig und geprüft ist**
   (Prüfliste, Kontrolldurchgang durch Claude, **automatische unabhängige Kontrolle** mit Korrekturen) – vor dem
@@ -97,12 +97,12 @@ League One. Schickt er mehr als 5 Spiele auf einmal, fragt Claude, welche 5 zuer
    (`werkzeuge/sm_spiel.py tag "<Liga>" [Wochentag]`, Anstoß in deutscher Zeit).
 2. Claude gleicht mit dem FootyStats-Spielplan ab (Anstoß, match_id); Spiele ohne Sports-Mole-Vorschau werden
    als „nicht bewertet (keine Vorschau)“ aufgeführt. Claude sagt mit Uhrzeit, ob die 5 bis zum ersten Anstoß fertig werden.
-3. Claude startet je Paarung **einen frischen Bearbeiter** (Agent `bearbeiter`, ohne Kopie des Chats). Er holt die vier
+3. Claude startet je Paarung **einen frischen Agenten** (`bearbeiter`, ohne Kopie des Chats). Er holt die vier
    Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`) und die FootyStats-Zahlen
    (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
    (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das Datenblatt je Team an und geht den
    Entscheidungsweg unten durch – je Paarung genau ein Tipp.
-4. Claude fügt die 5 Abschnitte der Bearbeiter in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3);
+4. Claude fügt die 5 Abschnitte der Agenten in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3);
    Korrekturen werden eingearbeitet; bei einem Grenzfall folgt danach die kurze Grenzfall-Runde (ein neuer Prüfer).
 5. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
    was unter „Alles im Chat“ festgelegt ist (Variante 1), mit dem Kontrollergebnis, handytauglich als Liste statt
@@ -173,7 +173,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude **selbst**
-  (nicht der Bearbeiter) jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
+  (nicht der Agent) jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
   FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
 - **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die

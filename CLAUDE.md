@@ -13,11 +13,11 @@
    neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
    Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
 4. **Variante B „drei Augenpaare“** (Wahl des Nutzers vom 27.11.2026): Je 5er-Schritt bearbeitet je Spiel **ein**
-   Bearbeiter-Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
-   Entscheidungsweg 1–8. Die Bearbeiter werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
+   Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
+   Entscheidungsweg 1–8. Die Agenten werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
    **ohne Kopie des Chats**; höchstens 5 gleichzeitig (ein Schritt). Danach liest **Claude selbst** jede Aussage gegen die
    Quellen (Stufe 1), dann prüft **ein** Prüfer alle 5 (Punkt 3); erst danach gehen die Tipps an den Nutzer. Für die
-   Bearbeitung ersetzt das „erst eine Paarung, dann die nächste“: Jeder Bearbeiter bearbeitet genau eine Paarung einzeln.
+   Bearbeitung ersetzt das „erst eine Paarung, dann die nächste“: Jeder Agent bearbeitet genau eine Paarung einzeln.
 
 Dieser Branch enthält **nur den Sports-Mole-Check (System B)** des Nutzers (bis 20.11.2026
 „Forebet-Check“, eingerichtet am 07.11.2026, abgezweigt von `tipps-system-a-b`). Regeln:
@@ -28,8 +28,8 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 ## Arbeitsweise
 
 - Auftrag des Nutzers: Spiele **in Schritten zu je 5** (Oberste Priorität). Claude sucht die Paarungen in der
-  Sports-Mole-Übersicht (`werkzeuge/sm_spiel.py tag "<Liga>"`); je Paarung ruft ein frischer Bearbeiter (Agent
-  `bearbeiter`) Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
+  Sports-Mole-Übersicht (`werkzeuge/sm_spiel.py tag "<Liga>"`); je Paarung ruft ein frischer Agent
+  (`bearbeiter`) Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite (Formleisten, letzte Ergebnisse), Tabelle/Torschützen. Das ist die
   **Grundbasis**. Mehr als 5 Spiele auf einmal → Claude fragt, welche 5 zuerst.
 - **Sports-Mole-Check Version 1.3** (seit 21.11.2026): **Vorschau und Daten richtig lesen** –
@@ -57,7 +57,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
 - **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026, angeglichen am 27.11.2026): je Paarung ein eigener
-  Bearbeiter, Schritt für Schritt (Datenblatt, Lage, Spielbild, Märkte, Tipp); die **5 Tipps eines Schritts kommen
+  Agent, Schritt für Schritt (Datenblatt, Lage, Spielbild, Märkte, Tipp); die **5 Tipps eines Schritts kommen
   zusammen**, wenn alle 5 fertig und geprüft sind, vor dem ersten Anstoß dieser 5 Spiele; reicht die Zeit nicht, gleich
   zu Beginn offen sagen statt abkürzen.
 - **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Je Paarung im
@@ -84,7 +84,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
-  **Stufe 1 liest Claude selbst** (nicht der Bearbeiter). **Stufe 3 automatisch** (Wunsch des Nutzers vom
+  **Stufe 1 liest Claude selbst** (nicht der Agent). **Stufe 3 automatisch** (Wunsch des Nutzers vom
   21.11.2026): nach jeder Analyse – je 5er-Schritt, vor dem Senden der Tipps – von selbst **einen** unabhängigen Prüfer
   starten (Projekt-Agent `pruefer` in `.claude/agents/pruefer.md`; weitere 5er-Schritte per Weiterführung an denselben
   Prüfer – Wunsch vom 24.11.2026; nie mehrere Prüfer gleichzeitig); bei als **Grenzfall** vermerkten Paarungen danach eine zweite, kurze Runde
