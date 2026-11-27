@@ -12,6 +12,8 @@
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
    neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
    Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
+4. **Keine Bearbeiter-Agenten** (Wahl des Nutzers vom 27.11.2026, Variante A): Claude analysiert jede Paarung **selbst**,
+   eine nach der anderen; Agenten gibt es nur als Prüfer nach Punkt 3.
 
 Dieser Branch enthält **nur den Sports-Mole-Check (System B)** des Nutzers (bis 20.11.2026
 „Forebet-Check“, eingerichtet am 07.11.2026, abgezweigt von `tipps-system-a-b`). Regeln:
