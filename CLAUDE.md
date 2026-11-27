@@ -12,6 +12,12 @@
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
    neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
    Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
+4. **Variante B „drei Augenpaare“** (Wahl des Nutzers vom 27.11.2026): Je 5er-Schritt bearbeitet je Spiel **ein**
+   Bearbeiter-Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
+   Entscheidungsweg 1–8. Die Bearbeiter werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
+   **ohne Kopie des Chats**; höchstens 5 gleichzeitig (ein Schritt). Danach liest **Claude selbst** jede Aussage gegen die
+   Quellen (Stufe 1), dann prüft **ein** Prüfer alle 5 (Punkt 3); erst danach gehen die Tipps an den Nutzer. Für die
+   Bearbeitung ersetzt das „erst eine Paarung, dann die nächste“: Jeder Bearbeiter bearbeitet genau eine Paarung einzeln.
 
 Dieser Branch enthält **nur den Sports-Mole-Check (System B)** des Nutzers (bis 20.11.2026
 „Forebet-Check“, eingerichtet am 07.11.2026, abgezweigt von `tipps-system-a-b`). Regeln:
