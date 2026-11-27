@@ -51,3 +51,5 @@ neue Lehre, kommt sie hier dazu (Stand: 27.11.2026).
 10. **Korrekturen immer im ganzen Abschnitt suchen und ersetzen**, nicht nur an der genannten Stelle (dreimal passiert).
 11. **Version 1.4:** Kräfteverhältnis (4b) vor dem Spielbild; bei „klarer Favorit“ kein Beide treffen – Ja, Über 2,5 nur, wenn der
     Favorit allein mehrfach 3+ Tore schoss; Vorrang Sieg-Markt; „Spielen: ja“ nur bei „beide einig“.
+    „Lage zeigt zu Team X“ = Lage-Fakten von X (Serien, keine neue Schwächung) sprechen für X und die des Gegners
+    (Serien, neue Schwächung) gegen ihn; Dringlichkeit allein reicht nicht.

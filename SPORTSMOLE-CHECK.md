@@ -417,6 +417,9 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    Kräfteverhältnis („klarer Favorit“, Schritt 4b) zum **selben Team** und dreht keine Rang-1–2-Gegenangabe dessen Sieg
    („dreht den Tipp: ja/nein, weil …“), ist **der Sieg dieses Teams der Tipp** – vor jedem Tor-Markt. Dreht eine Gegenangabe den
    Sieg, gilt wieder „sicherster Markt“ unter Beachtung der Ausschlüsse aus Schritt 4b.
+   **Wann der Lage-Check zu einem Team zeigt** (festgelegt vom Nutzer am 27.11.2026): Die Lage zeigt zu Team X, wenn die
+   Lage-Fakten von X (Serien, keine neue Schwächung) für X sprechen und die des Gegners (Serien, neue Schwächung) gegen den
+   Gegner. Die Dringlichkeit der Punkte allein reicht nicht.
 8. **Kennzeichnung** (genau festgelegt am 21.11.2026): Die **Sports-Mole-Seite** ist Rang 1 –
    Lage-Check und Teamnews (Artikel, Tabelle); die **FootyStats-Seite** sind die Zahlen aus Rang 2–3
    (Form, Heim/Auswärts, Saisonanteile). „**beide einig**“ – beide Seiten zeigen zum Tipp;
