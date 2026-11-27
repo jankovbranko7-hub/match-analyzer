@@ -45,6 +45,12 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   gemeinsam** – Sports Mole: Teamnews, Trainer, Ausgangslage; FootyStats: harte Zahlen (Form,
   Heim/Auswärts, Anteile über 2,5/beide treffen/zu null/ohne Tor),
   ohne FootyStats-Vorab-Werte. Gegenseitige Kontrolle; jeder Tipp „beide einig“ oder „geteilt“.
+- **Sports-Mole-Check Version 1.4** (seit 27.11.2026, Wunsch des Nutzers nach der Auswertung 20.–26.11.): (1) Pflicht-Schritt
+  **Kräfteverhältnis** (4b: Tabelle, Gegnerstärke der letzten 6, Einstufung „klarer Favorit“/„ausgeglichen“/„nicht eindeutig“) –
+  bei klarem Favoriten kein Beide treffen – Ja, Über 2,5 nur, wenn der Favorit allein mehrfach 3+ Tore schoss; (2) **gespielt wird
+  nur „beide einig“** – „geteilt“ = „Spielen: nein – nur Beobachtung“ (Tipp wird trotzdem bestimmt und ausgewertet);
+  (3) **Vorrang Sieg-Markt**, wenn Lage und Kräfteverhältnis zum selben Team zeigen und keine Gegenangabe den Sieg dreht.
+  Version 1.3 liegt in `archiv/SPORTSMOLE-CHECK-1.3.md`; Zahlen: `tipps/sportsmole/analyse-2026-11-27.md`.
 - Je Paarung **immer genau ein Tipp** aus sechs Märkten (Heimsieg, Auswärtssieg, beide treffen
   Ja/Nein, über/unter 2,5) nach dem Entscheidungsweg in `SPORTSMOLE-CHECK.md` – Claude bestimmt
   ihn selbst aus dem Gesamtbild – **immer den sichersten der sechs Märkte, also den, gegen den am

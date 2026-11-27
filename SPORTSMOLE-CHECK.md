@@ -1,4 +1,4 @@
-# Sports-Mole-Check (System B) · Version 1.3
+# Sports-Mole-Check (System B) · Version 1.4
 
 ## ‼️ OBERSTE PRIORITÄT (Wunsch des Nutzers vom 26.11.2026)
 
@@ -41,6 +41,10 @@ jeder Kontrolle Fehlerart für Fehlerart geprüft. Version 1.2 liegt in `archiv/
 (22.11.); Platzverweise in der Auswertung gesondert mitzählen (24.11.); Abschnitt **Europapokal** (24.11.);
 Merkmale-Zeile je Tipp (25.11.) mit zweitbestem Markt (26.11.); Regel 7c – nur neue Ausfälle/sichere Rückkehrer als
 Rang-1-Grund (26.11.); **Oberste Priorität** mit 5er-Schritten, einem Prüfer und Variante B „drei Augenpaare“ (26./27.11.).
+**Version 1.4** (27.11.2026, Wunsch des Nutzers nach der Auswertung aller Tipps vom 20.–26.11.): (1) Pflicht-Schritt
+**Kräfteverhältnis** (Schritt 4b) mit Ausschlussregeln für Tor-Märkte bei klarem Favoriten; (2) **gespielt wird nur „beide
+einig“** – „geteilt“ ist nur Beobachtung (Schritt 8); (3) **Vorrang Sieg-Markt**, wenn Lage und Kräfteverhältnis klar zum selben
+Team zeigen (Schritt 7). Anlass und Zahlen: `tipps/sportsmole/analyse-2026-11-27.md`.
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -78,7 +82,7 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 was er wissen muss, steht **vollständig im Chat**, handytauglich als Liste:
 
 - je Paarung (Variante 1, Wahl des Nutzers vom 21.11.2026): **Anstoß, Paarung, Tipp mit
-  Kennzeichnung, die Gründe und alle Gegenangaben – jede aus Rang 1–2 mit „dreht den Tipp: ja/nein,
+  Kennzeichnung, „Spielen: ja/nein“ (seit 1.4), das Kräfteverhältnis in einem Satz (seit 1.4), die Gründe und alle Gegenangaben – jede aus Rang 1–2 mit „dreht den Tipp: ja/nein,
   weil …“**. Datenblatt, Lage-Check und Spielbild stehen vollständig in der Tagesliste, nicht im Chat;
 - Ergebnisse jeder Kontrolle mit jedem gefundenen Fehler und jeder Korrektur;
 - jeder neue Eintrag ins Fehlerprotokoll und was daraus folgt;
@@ -145,15 +149,19 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
    - **7c (seit 26.11.2026):** Als Rang-1-Grund oder -Gegenangabe nur Spieler, die neu fehlen (spielten im letzten
      Pflichtspiel laut FS-Aufstellung) oder sicher zurück sind (fehlten im letzten Spiel, Quelle sagt klar „spielt“);
      sonst im Datenblatt „nicht neu – keine Richtung“ (Schritt 5).
+   - **7d (seit 1.4):** Kräfteverhältnis (Schritt 4b) gemacht – Tabellenabstand, Gegnerstärke der letzten 6 je Team,
+     Einstufung mit Begründung; die Ausschlussregeln bei „klarer Favorit“ beachtet.
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
+   - **8b (seit 1.4):** „Spielen: ja“ nur bei „beide einig“, sonst „Spielen: nein – nur Beobachtung“ (Tagesliste und Chat).
 9. Tipp ist der sicherste der sechs Märkte (gegen ihn spricht am wenigsten; bei den anderen
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
    Ergebnisse unter einem neuen Trainer, Lage beider Teams); Richtung aus Rang 1–2, Rang 3 dreht sie
    nicht um. **Bei jeder Rang-1–2-Gegenangabe steht „dreht den Tipp: ja/nein, weil …“; bei „ja“
-   ist der Markt neu gewählt** (seit 21.11.2026).
+   ist der Markt neu gewählt** (seit 21.11.2026). **Seit 1.4:** Vorrang Sieg-Markt geprüft (Schritt 7), bei „klarer Favorit“
+   kein Beide treffen – Ja und Über 2,5 nur mit der Favoriten-Bedingung (Schritt 4b).
 10. Keine Quoten, kein Rechenmodell (weder Sports-Mole-Datenanalyse noch FootyStats-Vorab-Werte),
     **keine Direktvergleiche (H2H)**, keine Schwellen, keine Punkte, **kein „We say“** verwendet –
     auch nicht nebenbei in Datenblatt, Spielbild oder Gegenangaben.
@@ -330,6 +338,23 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    Zahlen drehen – aber nur mit konkreten Fakten aus Artikel, Tabelle oder Ergebnislisten (z. B.:
    Favorit mit vielen Ausfällen und zwei Remis in Folge gegen ein Team im Abstiegskampf, das tief
    stehen wird → Sieg-Tipp wird zur Gegenangabe, ein Tormarkt kann der sicherere Tipp sein).
+4b. **Kräfteverhältnis** (Pflicht seit Version 1.4, Wunsch des Nutzers vom 27.11.2026) – nach dem Lage-Check, vor dem Spielbild,
+   nur Fakten aus dem Datenblatt (fehlt eine Angabe, wird sie zuerst mit Quelle eingetragen):
+   1. **Tabelle:** Platz, Punkte und Punkte pro Spiel beider Teams und der Abstand zwischen ihnen (Liga; im Europapokal
+      Ligaphase **und** Heimliga).
+   2. **Gegnerstärke der letzten 6** (alle Wettbewerbe) je Team: zu jedem Formspiel der aktuelle Tabellenplatz des Gegners
+      (Pokalgegner aus anderen Ligen: Liga laut Quelle, sonst „nicht in der Quelle“); daraus Ergebnisse, eigene Tore und
+      Gegentore gegen Gegner aus der oberen und aus der unteren Tabellenhälfte.
+   3. **Einstufung:** „**klarer Favorit: <Team>**“ nur, wenn Tabelle (1.), die Ergebnisse beider Rang-2-Blöcke und die
+      Gegnerstärke (2.) **alle zum selben Team** zeigen; sonst „**ausgeglichen**“ oder „**nicht eindeutig**“. Keine Schwellen,
+      keine Punkte – die Einstufung wird in einem Satz mit diesen Fakten begründet.
+   **Wirkung bei „klarer Favorit“** (Anlass: Auswertung 20.–26.11. – in 19 von 21 verfehlten Tipps auf Beide treffen – Ja,
+   Über 2,5 und Unter 2,5 blieb ein Team ohne Tor bzw. gewann ein Team deutlich):
+   - **Beide treffen – Ja ist nicht erlaubt.**
+   - **Über 2,5 nur**, wenn der Favorit in seinen letzten 6 (Bezug nennen) mehrfach **allein** 3 oder mehr Tore schoss (mit
+     Spielständen) – der Tipp darf nicht davon abhängen, dass der Außenseiter trifft.
+   - Bei **Unter 2,5** ist die feste Gegenangabe (3+ eigene Tore) für den Favoriten immer ausdrücklich zu nennen.
+   Die Einstufung selbst ist kein Rang-Grund; sie schließt Märkte aus und gibt den Vorrang aus Schritt 7.
 5. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
    kommen aus FootyStats (Rang 2–3), Sports Mole korrigiert mit den Teamnews (Rang 1): fehlt z. B.
    der Torjäger, zählt sein bisheriger Torschnitt weniger; fehlen Innenverteidiger, zählen die Gegentore mehr.
@@ -371,19 +396,27 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    aus Rang 1–2 steht ausdrücklich: **„dreht den Tipp: ja/nein, weil …“**. Bei „ja“ wird der Markt
    neu gewählt. Ein Tipp, der nur auf Rang 3 ruht, während Rang 1–2 dagegen sprechen, ist nicht
    erlaubt. (Anlass: Villa – Sunderland, Frankfurt – Hoffenheim, Elversberg – Freiburg am 21.11.)
+   **Vorrang Sieg-Markt** (seit Version 1.4, Wunsch des Nutzers vom 27.11.2026): Zeigen der Lage-Check (Rang 1) und das
+   Kräfteverhältnis („klarer Favorit“, Schritt 4b) zum **selben Team** und dreht keine Rang-1–2-Gegenangabe dessen Sieg
+   („dreht den Tipp: ja/nein, weil …“), ist **der Sieg dieses Teams der Tipp** – vor jedem Tor-Markt. Dreht eine Gegenangabe den
+   Sieg, gilt wieder „sicherster Markt“ unter Beachtung der Ausschlüsse aus Schritt 4b.
 8. **Kennzeichnung** (genau festgelegt am 21.11.2026): Die **Sports-Mole-Seite** ist Rang 1 –
    Lage-Check und Teamnews (Artikel, Tabelle); die **FootyStats-Seite** sind die Zahlen aus Rang 2–3
    (Form, Heim/Auswärts, Saisonanteile). „**beide einig**“ – beide Seiten zeigen zum Tipp;
    „**geteilt**“ – eine Seite zeigt woandershin oder nicht eindeutig (welche und warum, in einem
    Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
+   **Spielen nur bei „beide einig“** (seit Version 1.4, Wunsch des Nutzers vom 27.11.2026): Jede Paarung bekommt weiter genau
+   einen Tipp. „beide einig“ → **„Spielen: ja“**; „geteilt“ → **„Spielen: nein – nur Beobachtung“**. Die Auswertung zählt beide
+   Gruppen getrennt.
 
 ## Regeln für den Tipp
 
 1. **Genau ein Tipp je Paarung**, deutlich als „Tipp“ markiert, mit Gründen, dem, was dagegen
    spricht, und der Kennzeichnung „beide einig“ oder „geteilt“. Der Tipp ist **immer der sicherste
-   der sechs Märkte** – der, gegen den am wenigsten spricht. Die Kennzeichnung sagt nur, wie sicher
-   er ist (beide einig = sicherer, geteilt = unsicherer); sie entscheidet nie, ob getippt wird.
+   der sechs Märkte** – der, gegen den am wenigsten spricht. Die Kennzeichnung sagt, wie sicher
+   er ist (beide einig = sicherer, geteilt = unsicherer); sie entscheidet nicht, ob ein Tipp bestimmt wird (immer genau
+   einer), seit Version 1.4 aber, ob er **gespielt** wird (nur „beide einig“, Schritt 8).
 2. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. Keine anderen Wettarten (kein Remis,
    keine Doppelte Chance, keine Ecken, keine anderen Torlinien).
@@ -404,17 +437,18 @@ Version 1.3); **im Chat** nur Punkt 7 mit Anstoß und Paarung (Variante 1, siehe
 2. **Datenblatt je Team** (Tabelle, letzte Spiele, letzter Sieg/Tor, Zahlen mit Bezug, Teamnews
    nach Originalwort)
 3. **Lage-Check je Team** (fünf Fragen)
+3b. **Kräfteverhältnis** (Tabelle, Gegnerstärke der letzten 6, Einstufung mit Begründung – seit 1.4)
 4. Spielbild je Team: trifft es? kassiert es? gewinnt es? (mit Quelle, Teamnews eingearbeitet)
 5. Spielbild gesamt
 6. Die sechs Märkte, je kurz dafür/dagegen
 7. ✅ **Tipp** mit Gründen, Gegenangaben (jede aus Rang 1–2 mit „dreht den Tipp: ja/nein, weil …“)
-   und „beide einig“ / „geteilt“
+   und „beide einig“ / „geteilt“ sowie „Spielen: ja“ / „Spielen: nein – nur Beobachtung“ (seit 1.4)
 (Kein „We say“ – seit Version 1.3 nicht mehr verwendet.)
 
 ## Tagesliste
 
 Alle Tipps eines Tages kommen nach `tipps/sportsmole/JJJJ-MM-TT.md` (Anstoß, Paarung, Liga,
-FootyStats-`match_id`, Tipp, „beide einig“/„geteilt“) und werden dort nach Abpfiff mit
+FootyStats-`match_id`, Tipp, „beide einig“/„geteilt“, seit 1.4 „Spielen ja/nein“) und werden dort nach Abpfiff mit
 den Ergebnissen aus FootyStats ausgewertet: Treffer und Trefferquote, Treffer je Wettart,
 **Treffer „beide einig“ gegenüber „geteilt“**; keine Einheiten, keine Quoten, kein „We say“
 (ältere Listen behalten ihre We-say-Spalte als Verlauf, sie wird ab dem 21.11.2026 nicht mehr
@@ -437,6 +471,8 @@ Schwellen):
 9. Zweitbester Markt: der Markt, gegen den nach dem Tipp am wenigsten spricht (ergänzt am 26.11.2026 auf Wunsch
    des Nutzers) – bei der Auswertung wird mitgezählt, ob er getroffen hätte; so lässt sich ohne Rückschau prüfen, ob ein
    Vorrang für Sieg / Beide treffen – Nein bei fast gleich starken Märkten mehr Treffer gebracht hätte.
-Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal); bei geänderten Tipps auch, ob der
+10. Kräfteverhältnis: klarer Favorit (Team) / ausgeglichen / nicht eindeutig (seit 1.4).
+11. Spielen: ja / nein (seit 1.4).
+Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal; seit 1.4 immer getrennt nach „Spielen: ja“ und „nein“); bei geänderten Tipps auch, ob der
 ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt getroffen hätte. Nach etwa 50 Tipps mit Merkmalen wird ausgewertet und dem Nutzer berichtet; ob ein
 Merkmal zum Aussortieren oder Kennzeichnen verwendet wird, entscheidet nur der Nutzer.

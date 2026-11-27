@@ -52,6 +52,9 @@ sicherste Markt ist – Quellen dafür selbst neu abrufen; Formfehler nur nennen
   Rang 3 widerlegt? Wird „ohne Tor“ falsch gegen Über/Unter 2,5 benutzt (Spielstände prüfen)? Steckt ein
   Direktvergleich in einer Widerlegung (auch Pokalspiele gegen denselben Gegner)? Bei **Unter 2,5**: Ist die
   feste Gegenangabe „Team mit mehrfach 3+ eigenen Toren in den letzten 6“ geprüft (mit Spielständen)?
+- Seit Version 1.4: Kräfteverhältnis (Schritt 4b) vollständig und richtig eingestuft (Tabelle, Gegnerstärke der letzten 6 –
+  Tabellenplätze der Gegner selbst prüfen)? Bei „klarer Favorit“ kein Beide treffen – Ja, Über 2,5 nur mit der Favoriten-
+  Bedingung? Vorrang Sieg-Markt (Schritt 7) richtig angewandt? „Spielen: ja“ nur bei „beide einig“?
 - Ist der Tipp der Markt, gegen den am wenigsten spricht? Stimmt die Kennzeichnung („beide einig“ nur, wenn die
   Sports-Mole-Seite = Rang 1 Lage/Teamnews und die FootyStats-Seite beide zum Tipp zeigen)?
 - Verboten im System: Quoten, Rechenmodelle (SM-Datenanalyse, FS-Vorab-Werte), Direktvergleiche (H2H) als Grund
