@@ -454,6 +454,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Schritt 2 · UK1 (Hinweise, ohne Tippwirkung): Rizespor/Kasımpaşa „unveränderte Elf“ als Rang-1-Grund – E/K; Brest/Paris FC Widerlegung
   ohne „Brest hielt nach Lalas Auswechslung (27.) die Null“ – B/H; Marítimo/Nacional FS-lastx „stimmt genau“ trotz anderer Heim/Auswärts-
   Aufteilung – G/H. Alle eingearbeitet.
+- Schritt 2 · UK2 (Hinweise, ohne Tippwirkung): Rizespor/Kasımpaşa – UK1-Korrektur „unveränderte Elf“ nur an 2 von 5 Stellen umgesetzt
+  (E/K; Lehre 22.11./25.11. erneut: Korrektur im ganzen Abschnitt suchen – Claude hat nur die vom Prüfer genannten Stellen geändert),
+  Gegner-Tabellenplätze als Rang 2 (K/C). Brest/Paris FC: xG letzte 6 fehlte als Rang-2-Angabe (B). Marítimo/Nacional: Widerlegung mit
+  Nacionals Heim-Zu-null-Spielen ohne „daheim“ gegen eine Auswärts-Gegenangabe (A/C, Muster Levante 23.11.), xG gegen fehlte (B).
 
 ---
 
