@@ -421,6 +421,7 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Abweichung vom Ablauf ohne ausdrückliches Ja des Nutzers zu genau dieser Abweichung; ist eine Antwort mehrdeutig, nachfragen
   statt deuten. Reicht die Zeit im System nicht, offen sagen, welche Spiele nicht geschafft werden (Regel „Reicht die Zeit …“).
 - Auswertung Gruppe 1: Uhrzeit „23:05“ geschätzt statt mit `date` abgelesen (richtig 23:00) – M – selbst, vor der Antwort berichtigt.
+- 27.11.: „A ok“ als Wahl gedeutet und als Punkt 4 ins System eingetragen; der Nutzer hatte nichts gewählt – N (Deutung statt Nachfrage, trotz neuer Regel) – N, rückgängig gemacht.
 
 ---
 
