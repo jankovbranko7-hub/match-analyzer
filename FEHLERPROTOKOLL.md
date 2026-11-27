@@ -433,6 +433,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Southampton/Middlesbrough: Manning als „neu zurück“ (Regel 7c) und Rang-1-Grund für den Heimsieg geführt – laut FS-Aufstellung
   24.11. im Kader, ungenutzt auf der Bank, er fehlte nicht (Muster Provod 25.11.: Bank ≠ fehlte) – E/F – SK (Claude, Stufe 1),
   Tipp-Grund. An allen Stellen korrigiert; Tipp neu abgewogen, bleibt (Heimsieg, geteilt, Grenzfall).
+- Venezia/Bologna: „Grenzfall“ in Tabelle und Text, nicht in der Abschnittsüberschrift – M – UK. Kein Tipp betroffen.
+- Forest/Chelsea: Artikel-„L“ für das 1:1 im EFL Cup als Quellenfehler (G) bezeichnet, obwohl ein Elfmeterschießen es erklären würde
+  – richtig „nicht klärbar“ – G/E (Hinweis) – UK. Ohne Tippwirkung.
+- Stufe-1-Vermerke 1a/1b/1c/1e allgemein formuliert (nicht erkennbar, was einzeln geprüft wurde) – M (Hinweis) – UK; präzisiert.
 - Ablauf (M): Die Bearbeiter-Agenten legten Zwischendateien teils im gemeinsamen Scratchpad ab; eine Spielerdatei hatte fremden
   Inhalt (vom Bearbeiter 1c selbst bemerkt und neu abgerufen). Lehre: im Auftrag je Agent einen eigenen Datenordner nennen.
 
