@@ -429,6 +429,13 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Auswertung Gruppe 1: Uhrzeit „23:05“ geschätzt statt mit `date` abgelesen (richtig 23:00) – M – selbst, vor der Antwort berichtigt.
 - 27.11.: „A ok“ als Wahl gedeutet und als Punkt 4 ins System eingetragen; der Nutzer hatte nichts gewählt – N (Deutung statt Nachfrage, trotz neuer Regel) – N, rückgängig gemacht.
 
+### 27.11.2026 · Schritt 1 (PL, Championship, La Liga, Serie A, Bundesliga)
+- Southampton/Middlesbrough: Manning als „neu zurück“ (Regel 7c) und Rang-1-Grund für den Heimsieg geführt – laut FS-Aufstellung
+  24.11. im Kader, ungenutzt auf der Bank, er fehlte nicht (Muster Provod 25.11.: Bank ≠ fehlte) – E/F – SK (Claude, Stufe 1),
+  Tipp-Grund. An allen Stellen korrigiert; Tipp neu abgewogen, bleibt (Heimsieg, geteilt, Grenzfall).
+- Ablauf (M): Die Bearbeiter-Agenten legten Zwischendateien teils im gemeinsamen Scratchpad ab; eine Spielerdatei hatte fremden
+  Inhalt (vom Bearbeiter 1c selbst bemerkt und neu abgerufen). Lehre: im Auftrag je Agent einen eigenen Datenordner nennen.
+
 ---
 
 ## Lehren bisher
