@@ -447,6 +447,11 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
 - Ablauf (M): Die Bearbeiter-Agenten legten Zwischendateien teils im gemeinsamen Scratchpad ab; eine Spielerdatei hatte fremden
   Inhalt (vom Bearbeiter 1c selbst bemerkt und neu abgerufen). Lehre: im Auftrag je Agent einen eigenen Datenordner nennen.
 
+- Schritt 2 · Groningen/Willem II: Vaessen/Hateboer („will welcome back … from suspension“, nur mögliche Startelf) als „neu zurück“ und
+  Rang-1-Gegenangabe geführt – Quelle sagt nicht klar „startet“ – Regel 7c – F/E – SK (Claude, Stufe 1). Kein Tipp-Grund; korrigiert.
+- Schritt 2 · Ablauf (N): Nutzungslimit um ca. 09:30 erreicht, alle 5 Agenten brachen ab; Fortsetzung um 14:44 per Weiterführung, Vorschauen
+  neu abgerufen (unverändert). Kein Tipp nach Anpfiff.
+
 ---
 
 ## Lehren bisher
