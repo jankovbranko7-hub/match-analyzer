@@ -451,6 +451,9 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Rang-1-Gegenangabe geführt – Quelle sagt nicht klar „startet“ – Regel 7c – F/E – SK (Claude, Stufe 1). Kein Tipp-Grund; korrigiert.
 - Schritt 2 · Ablauf (N): Nutzungslimit um ca. 09:30 erreicht, alle 5 Agenten brachen ab; Fortsetzung um 14:44 per Weiterführung, Vorschauen
   neu abgerufen (unverändert). Kein Tipp nach Anpfiff.
+- Schritt 2 · UK1 (Hinweise, ohne Tippwirkung): Rizespor/Kasımpaşa „unveränderte Elf“ als Rang-1-Grund – E/K; Brest/Paris FC Widerlegung
+  ohne „Brest hielt nach Lalas Auswechslung (27.) die Null“ – B/H; Marítimo/Nacional FS-lastx „stimmt genau“ trotz anderer Heim/Auswärts-
+  Aufteilung – G/H. Alle eingearbeitet.
 
 ---
 
