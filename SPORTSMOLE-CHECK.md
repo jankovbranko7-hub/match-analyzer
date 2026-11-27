@@ -7,7 +7,8 @@
    Nutzers ist keine Erlaubnis für eine Abweichung – dann wird nachgefragt.
 2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
    nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
-   Kontrollergebnis; erst danach kommt der nächste Schritt.
+   Kontrollergebnis; erst danach kommt der nächste Schritt. **Alle 5 Tipps eines Schritts kommen zusammen**, fertig
+   und geprüft vor dem **ersten Anstoß** dieser 5 Spiele (Wahl des Nutzers vom 27.11.2026, Variante a).
 3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
    neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
@@ -37,7 +38,9 @@ Nutzers): fester **Lage-Check je Team** – worum es geht, wie dringend die Punk
 (`FEHLERPROTOKOLL.md`): jeder gefundene Fehler wird eingetragen, vor jeder Analyse gelesen und in
 jeder Kontrolle Fehlerart für Fehlerart geprüft. Version 1.2 liegt in `archiv/SPORTSMOLE-CHECK-1.2.md`.
 **Ergänzungen zu 1.3** (Wünsche des Nutzers): Regel 7b – Ausfälle nur mit belegter Position als Richtung
-(22.11.); Platzverweise in der Auswertung gesondert mitzählen (24.11.); Abschnitt **Europapokal** (24.11.).
+(22.11.); Platzverweise in der Auswertung gesondert mitzählen (24.11.); Abschnitt **Europapokal** (24.11.);
+Merkmale-Zeile je Tipp (25.11.) mit zweitbestem Markt (26.11.); Regel 7c – nur neue Ausfälle/sichere Rückkehrer als
+Rang-1-Grund (26.11.); **Oberste Priorität** mit 5er-Schritten, einem Prüfer und Variante B „drei Augenpaare“ (26./27.11.).
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -54,22 +57,21 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
   keine Schwellen oder Punkte, kein „We say“, keine Vermutung ohne Quelle).
 - Kann ein Schritt nicht vollständig erledigt werden (Quelle fehlt, Seite nicht erreichbar), sagt
   Claude das dem Nutzer offen und vermerkt es in der Tagesliste – nie stillschweigend übergehen.
-- Erst wenn die Prüfliste für alle Paarungen einer Gruppe (gleiche Anstoßzeit) erfüllt ist, gehen
-  deren Tipps an den Nutzer. Ein
-  Verstoß, der vorher auffällt, wird vor der Antwort behoben.
+- Erst wenn die Prüfliste für alle 5 Paarungen eines Schritts erfüllt ist, gehen deren Tipps an den Nutzer.
+  Ein Verstoß, der vorher auffällt, wird vor der Antwort behoben.
 - Ausnahmen oder Änderungen nur auf ausdrücklichen Wunsch des Nutzers; Claude macht keine eigenen.
 
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
 - **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
-  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung) – erst wenn eine Paarung vollständig
-  fertig ist, kommt die nächste. Keine Paarungen im Block nebeneinander bearbeiten.
-- **Gruppen nach Anstoßzeit** (Wahl des Nutzers vom 21.11.2026): Die Paarungen werden in der
-  Reihenfolge ihres Anstoßes bearbeitet und zu Gruppen mit derselben Anstoßzeit zusammengefasst.
-  **Eine Gruppe geht erst an den Nutzer, wenn jede ihrer Paarungen fertig und geprüft ist**
-  (Prüfliste, Kontrolldurchgang, **automatische unabhängige Kontrolle** mit Korrekturen) – auch wenn
-  es länger dauert. Dann folgt die nächste Gruppe.
-- **Reicht die Zeit bis zum Anpfiff nicht für alle Spiele**, sagt Claude das dem Nutzer offen,
+  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung): Je Paarung arbeitet **ein eigener Bearbeiter**
+  (Oberste Priorität, Punkt 4) und geht den Entscheidungsweg für genau diese Paarung vollständig durch; ein
+  Bearbeiter bearbeitet nie mehrere Paarungen (angeglichen am 27.11.2026).
+- **5er-Schritte** (Wahl des Nutzers vom 27.11.2026, ersetzt die „Gruppen nach Anstoßzeit“ vom 21.11.2026):
+  **Die 5 Tipps eines Schritts gehen erst zusammen an den Nutzer, wenn jede der 5 Paarungen fertig und geprüft ist**
+  (Prüfliste, Kontrolldurchgang durch Claude, **automatische unabhängige Kontrolle** mit Korrekturen) – vor dem
+  ersten Anstoß dieser 5 Spiele. Dann folgt der nächste Schritt.
+- **Reicht die Zeit bis zum ersten Anstoß nicht**, sagt Claude das dem Nutzer gleich zu Beginn offen,
   statt abzukürzen (welche Spiele nicht mehr vollständig geschafft werden).
 
 **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest die Dateien nicht. Alles,
@@ -86,21 +88,25 @@ Ein PDF nur auf ausdrücklichen Wunsch. Tagesliste und Fehlerprotokoll bleiben a
 
 ## Ablauf eines Auftrags
 
-Der Nutzer schreibt z. B. **„Analyse der heutigen Spiele aus der League One“** (Liga und Tag). Dann:
+Der Nutzer schickt die Spiele **in Schritten zu je 5** (Oberste Priorität, Punkt 2), z. B. fünf Paarungen der
+League One. Schickt er mehr als 5 Spiele auf einmal, fragt Claude, welche 5 zuerst. Dann:
 
 0. Claude liest zuerst das **Fehlerprotokoll** (`FEHLERPROTOKOLL.md`) und achtet beim Schreiben auf
    jede Fehlerart (seit 1.3, Wunsch des Nutzers vom 21.11.2026).
-1. Claude holt aus der Sports-Mole-Vorschau-Übersicht alle Paarungen dieser Liga an diesem Tag
+1. Claude sucht die 5 Paarungen in der Sports-Mole-Vorschau-Übersicht
    (`werkzeuge/sm_spiel.py tag "<Liga>" [Wochentag]`, Anstoß in deutscher Zeit).
-2. Claude gleicht mit FootyStats ab, welche Spiele der Liga an dem Tag angesetzt sind; Spiele ohne
-   Sports-Mole-Vorschau werden als „nicht bewertet (keine Vorschau)“ aufgeführt.
-3. Für jede Paarung holt Claude die vier Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`)
-   und die FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den
-   automatischen Abgleich laufen (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das
-   Datenblatt je Team an und geht den Entscheidungsweg unten durch – je Paarung genau ein Tipp.
-4. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
-   was unter „Alles im Chat“ festgelegt ist (Variante 1), handytauglich als Liste statt breiter
-   Tabellen.
+2. Claude gleicht mit dem FootyStats-Spielplan ab (Anstoß, match_id); Spiele ohne Sports-Mole-Vorschau werden
+   als „nicht bewertet (keine Vorschau)“ aufgeführt. Claude sagt mit Uhrzeit, ob die 5 bis zum ersten Anstoß fertig werden.
+3. Claude startet je Paarung **einen frischen Bearbeiter** (Agent `bearbeiter`, ohne Kopie des Chats). Er holt die vier
+   Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`) und die FootyStats-Zahlen
+   (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
+   (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das Datenblatt je Team an und geht den
+   Entscheidungsweg unten durch – je Paarung genau ein Tipp.
+4. Claude fügt die 5 Abschnitte der Bearbeiter in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3);
+   Korrekturen werden eingearbeitet; bei einem Grenzfall folgt danach die kurze Grenzfall-Runde (ein neuer Prüfer).
+5. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
+   was unter „Alles im Chat“ festgelegt ist (Variante 1), mit dem Kontrollergebnis, handytauglich als Liste statt
+   breiter Tabellen.
 
 ## Sorgfalt – keine Fehler, nichts vergessen (Pflicht, Wunsch des Nutzers vom 20.11.2026)
 
@@ -131,14 +137,14 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      im Spielbild, in den Märkten und im Tipp steht nichts, was nicht im Datenblatt steht.
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet – mit Status nach
    dem **Originalwort** der Vorschau (fehlt / fraglich / gesperrt / zurück, siehe Schritt 3).
+   - **7a:** Lage-Check für **beide** Teams mit allen fünf Fragen gemacht (worum es geht,
+     Dringlichkeit, Serien mit Datum des letzten Siegs und Tors, Schwächung, Besonderheit).
    - **7b (seit 22.11.2026):** Kein Ausfall ohne belegte Position ist als Grund oder Gegenangabe für
      mehr/weniger Tore oder Sieg/Niederlage verwendet; sonst steht „Position nicht in der Quelle –
      keine Richtung“.
    - **7c (seit 26.11.2026):** Als Rang-1-Grund oder -Gegenangabe nur Spieler, die neu fehlen (spielten im letzten
      Pflichtspiel laut FS-Aufstellung) oder sicher zurück sind (fehlten im letzten Spiel, Quelle sagt klar „spielt“);
      sonst im Datenblatt „nicht neu – keine Richtung“ (Schritt 5).
-   - **7a:** Lage-Check für **beide** Teams mit allen fünf Fragen gemacht (worum es geht,
-     Dringlichkeit, Serien mit Datum des letzten Siegs und Tors, Schwächung, Besonderheit).
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
@@ -166,8 +172,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 
-- **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude
-  jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
+- **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude **selbst**
+  (nicht der Bearbeiter) jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
   FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
 - **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
@@ -177,19 +183,19 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   am 21.11.2026). Antwort: „keine Fehler gefunden“ oder jeder Fehler mit Korrektur; in der Tagesliste wird
   „Kontrolle (Uhrzeit): …“ vermerkt.
 - **Stufe 3 – unabhängige Kontrolle (seit 20.11.2026; seit 21.11.2026 automatisch, Wunsch des
-  Nutzers):** Nach jeder Analyse – je Gruppe, nach Prüfliste und Kontrolldurchgang – startet Claude
+  Nutzers):** Nach jeder Analyse – je 5er-Schritt, nach Prüfliste und Kontrolldurchgang – startet Claude
   **von selbst, ohne Aufforderung**, einen zweiten, unabhängigen Prüfer. Der Prüfer ist der Projekt-Agent
-  `pruefer` (`.claude/agents/pruefer.md`, fester Prüfauftrag); weitere Gruppen desselben Tages gehen per
-  Weiterführung an denselben Prüfer, geht das nicht (z. B. nach einem Neustart), startet ein neuer (Wunsch des
-  Nutzers vom 24.11.2026). **Zweite, kurze Runde für Grenzfälle** (eingeführt am 24.11.2026, Wunsch des
+  `pruefer` (`.claude/agents/pruefer.md`, fester Prüfauftrag); weitere 5er-Schritte gehen per
+  Weiterführung an denselben Prüfer, geht das nicht (z. B. im neuen Chat oder nach einem Neustart), startet ein neuer
+  (Wunsch des Nutzers vom 24.11.2026, angeglichen am 27.11.2026). Nie mehrere Prüfer gleichzeitig. **Zweite, kurze Runde für Grenzfälle** (eingeführt am 24.11.2026, Wunsch des
   Nutzers): Nach den Korrekturen der ersten Runde prüft ein **neuer** Prüfer (Agent `pruefer`) nur die Paarungen,
   die in Schritt 7 als **Grenzfall** vermerkt sind (zwei Märkte fast gleich stark), und dort nur die Tipp-Gründe,
-  die Rang-1–2-Gegenangaben und den sichersten Markt. Gibt es in einer Gruppe keinen Grenzfall, entfällt sie.
+  die Rang-1–2-Gegenangaben und den sichersten Markt. Gibt es in einem Schritt keinen Grenzfall, entfällt sie.
   Ihr Ergebnis steht mit im Kontrollergebnis. Sie verbessert die Herleitung, nicht den Spielausgang. Erst nach seinem Bericht
-  und den Korrekturen gehen die Tipps der Gruppe an den Nutzer, im Chat zusammen mit dem
+  und den Korrekturen gehen die 5 Tipps des Schritts an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
   Schreibt der Nutzer zusätzlich **„unabhängige Kontrolle“**, folgt eine weitere Runde. Reicht die
-  Zeit bis zum Anpfiff dafür nicht, sagt Claude das vorher offen. Je Spieltag wird vermerkt, was die
+  Zeit bis zum ersten Anstoß dafür nicht, sagt Claude das vorher offen. Je Spieltag wird vermerkt, was die
   Kontrolle gefunden hat (Erprobung von 1.3: findet sie über mehrere Spieltage nichts, was einen
   Tipp betrifft, kann der Nutzer entscheiden, sie seltener zu verlangen). Der Prüfer ist eine eigene Claude-Instanz, die
   die Analyse aus dem Gespräch nicht kennt. Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu

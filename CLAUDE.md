@@ -27,11 +27,11 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 
 ## Arbeitsweise
 
-- Auftrag des Nutzers z. B. „Analyse der heutigen Spiele aus der Liga …“ → Claude holt alle
-  Paarungen dieser Liga an dem Tag aus der Sports-Mole-Übersicht (`werkzeuge/sm_spiel.py tag "<Liga>"`)
-  und ruft je Paarung **selbst** Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
+- Auftrag des Nutzers: Spiele **in Schritten zu je 5** (Oberste Priorität). Claude sucht die Paarungen in der
+  Sports-Mole-Übersicht (`werkzeuge/sm_spiel.py tag "<Liga>"`); je Paarung ruft ein frischer Bearbeiter (Agent
+  `bearbeiter`) Sports Mole ab (`werkzeuge/sm_spiel.py`): Vorschau-Übersicht, Vorschau-Artikel,
   Spielseite (Formleisten, letzte Ergebnisse), Tabelle/Torschützen. Das ist die
-  **Grundbasis**.
+  **Grundbasis**. Mehr als 5 Spiele auf einmal → Claude fragt, welche 5 zuerst.
 - **Sports-Mole-Check Version 1.3** (seit 21.11.2026): **Vorschau und Daten richtig lesen** –
   Pflicht-**Datenblatt je Team** (Schritt 3: Tabelle, letzte Spiele mit Wettbewerb, letzter
   Sieg/Tor, jede Zahl mit Bezug Liga/alle Wb. · gesamt/daheim/auswärts · Team/Spiel, Teamnews nach
@@ -56,11 +56,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
-- **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026): Schritt für Schritt (Datenblatt,
-  Lage, Spielbild, Märkte, Tipp), erst dann die nächste; Paarungen in Anstoß-Reihenfolge, Tipps
-  gruppenweise nach Anstoßzeit – eine Gruppe erst, wenn jede ihrer Paarungen fertig und geprüft ist,
-  auch wenn es länger dauert; reicht die Zeit bis zum Anpfiff nicht, offen sagen statt
-  abkürzen.
+- **Jede Paarung einzeln** (Wunsch des Nutzers vom 21.11.2026, angeglichen am 27.11.2026): je Paarung ein eigener
+  Bearbeiter, Schritt für Schritt (Datenblatt, Lage, Spielbild, Märkte, Tipp); die **5 Tipps eines Schritts kommen
+  zusammen**, wenn alle 5 fertig und geprüft sind, vor dem ersten Anstoß dieser 5 Spiele; reicht die Zeit nicht, gleich
+  zu Beginn offen sagen statt abkürzen.
 - **Alles im Chat** (Wunsch des Nutzers vom 21.11.2026): Der Nutzer liest keine Dateien. Je Paarung im
   Chat (Variante 1): Anstoß, Paarung, Tipp mit Kennzeichnung, Gründe und alle Gegenangaben (Rang 1–2
   mit „dreht den Tipp: ja/nein, weil …“); Datenblatt, Lage-Check, Spielbild nur in der Tagesliste.
@@ -85,10 +84,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   Tipps die Prüfliste „Sorgfalt“ in `SPORTSMOLE-CHECK.md` vollständig durchgehen und in der
   Tagesliste „Prüfliste erledigt“ vermerken. Vor jeder Antwort ein automatischer
   Kontrolldurchgang; schreibt der Nutzer **„Kontrolle“**, alles von vorn neu prüfen (Stufe 2);
-  **Stufe 3 automatisch** (Wunsch des Nutzers vom 21.11.2026): nach jeder Analyse – je
-  Gruppe, vor dem Senden der Tipps – von selbst einen zweiten, unabhängigen Prüfer starten (Projekt-Agent
-  `pruefer` in `.claude/agents/pruefer.md`; weitere Gruppen desselben Tages per Weiterführung an denselben
-  Prüfer – Wunsch vom 24.11.2026); bei als **Grenzfall** vermerkten Paarungen danach eine zweite, kurze Runde
+  **Stufe 1 liest Claude selbst** (nicht der Bearbeiter). **Stufe 3 automatisch** (Wunsch des Nutzers vom
+  21.11.2026): nach jeder Analyse – je 5er-Schritt, vor dem Senden der Tipps – von selbst **einen** unabhängigen Prüfer
+  starten (Projekt-Agent `pruefer` in `.claude/agents/pruefer.md`; weitere 5er-Schritte per Weiterführung an denselben
+  Prüfer – Wunsch vom 24.11.2026; nie mehrere Prüfer gleichzeitig); bei als **Grenzfall** vermerkten Paarungen danach eine zweite, kurze Runde
   durch einen neuen Prüfer – nur Tipp-Gründe, Rang-1–2-Gegenangaben, sicherster Markt (eingeführt 24.11.2026),
   der alle Quellen neu abruft, Fehlerprotokoll und Entscheidungsweg Schritt 1–8 in seiner Reihenfolge
   prüft und nur berichtet; Fehler korrigieren, dann Tipps mit Kontrollergebnis im Chat. Schreibt der

@@ -90,6 +90,12 @@ Häufigkeit = Zahl der gefundenen Fälle am 20. und 21.11.2026.
 - Gegenmaßnahme: volle Teamnamen; Uhrzeit immer mit `date` ablesen; Werkzeuge nach jeder Änderung
   an einem echten Spiel testen.
 
+**N · Ablauf nicht nach System / Abweichung ohne ausdrückliches Ja** (seit 26.11.2026)
+- Typisch: parallele Bearbeiter und mehrere Prüfer ohne Auftrag; mehrdeutige Antwort des Nutzers als Erlaubnis gedeutet;
+  Nutzungslimit nicht bedacht – kein Tipp vor Anpfiff.
+- Gegenmaßnahme: „Oberste Priorität“ ganz oben im System (immer nach System, 5er-Schritte, genau ein Prüfer, Variante B);
+  bei Mehrdeutigkeit nachfragen.
+
 ---
 
 ## Einzelne Fehler (chronologisch)
