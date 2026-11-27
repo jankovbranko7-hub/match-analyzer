@@ -72,7 +72,7 @@ Reihenfolge, Regeln für den Tipp, Antwortaufbau, Tagesliste und Kontrollstufen.
 **Arbeitsweise je Paarung** (Wunsch des Nutzers vom 21.11.2026):
 
 - **Jede Paarung einzeln, Schritt für Schritt** (Entscheidungsweg 1–8: Abrufen, Abgleich,
-  Datenblatt, Lage, Spielbild, Märkte, Tipp, Kennzeichnung): Je Paarung arbeitet **ein eigener Agent**
+  Datenblatt, Lage, Kräfteverhältnis (4b, seit 1.4), Spielbild, Märkte, Tipp, Kennzeichnung): Je Paarung arbeitet **ein eigener Agent**
   (Oberste Priorität, Punkt 4) und geht den Entscheidungsweg für genau diese Paarung vollständig durch; ein
   Agent bearbeitet nie mehrere Paarungen (angeglichen am 27.11.2026).
 - **5er-Schritte** (Wahl des Nutzers vom 27.11.2026, ersetzt die „Gruppen nach Anstoßzeit“ vom 21.11.2026):
@@ -143,7 +143,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      Wettbewerbe** meint (seit 1.3 zusätzlich: gesamt / daheim / auswärts und Team oder Spiel). FootyStats-Trends („seit X Spielen …“) zählen oft nur die Liga – vor
      Verwendung mit den Ergebnislisten beider Quellen nachzählen (ergänzt am 20.11.2026).
    - **6b (seit 1.3):** Datenblatt je Team vollständig angelegt; **jede Angabe darin einmal gegen den
-     Wortlaut der Quelle gelesen**; `abgleich.py` gelaufen, jede „ABWEICHUNG“ geklärt und vermerkt;
+     Wortlaut der Quelle gelesen** (Zahlen aus `werkzeuge/datenblatt.py` gelten als nachgezählt – seit 27.11.2026; Aussagen
+     des SM-Artikels weiter gegen den Wortlaut); `abgleich.py` gelaufen, jede „ABWEICHUNG“ geklärt und vermerkt;
      im Spielbild, in den Märkten und im Tipp steht nichts, was nicht im Datenblatt steht.
 7. Jeder Ausfall, jede Sperre, jeder Rückkehrer dem **richtigen Team** zugeordnet – mit Status nach
    dem **Originalwort** der Vorschau (fehlt / fraglich / gesperrt / zurück, siehe Schritt 3).
@@ -161,7 +162,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
    - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
    - **8b (seit 1.4):** „Spielen: ja“ nur bei „beide einig“, sonst „Spielen: nein – nur Beobachtung“ (Tagesliste und Chat).
-9. Tipp ist der sicherste der sechs Märkte (gegen ihn spricht am wenigsten; bei den anderen
+9. Tipp ist der sicherste der sechs Märkte (seit 1.4: unter den nach Schritt 4b erlaubten Märkten; Vorrang Sieg-Markt nach Schritt 7 geht vor) (gegen ihn spricht am wenigsten; bei den anderen
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
    Angaben aus Rang 1–2, die gegen den Tipp sprechen, sind genannt (auch Ausfälle beim Gegner und
    Ergebnisse unter einem neuen Trainer, Lage beider Teams); Richtung aus Rang 1–2, Rang 3 dreht sie
@@ -181,7 +182,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
     gesondert mitzählen (Wunsch des Nutzers vom 24.11.2026) – nur zur Beobachtung, die Wertung bleibt.
 13. Verbindlichkeit eingehalten: jeder Punkt des Systems für jede Paarung erfüllt, nichts
     umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
-14. **Fehlerprotokoll:** vor der Analyse gelesen; jede Fehlerart gezielt geprüft; jeder in
+14. **Fehlerprotokoll:** vor der Analyse gelesen (Claude und Prüfer die Vollfassung, Bearbeiter `FEHLERPROTOKOLL-KURZ.md`); jede Fehlerart gezielt geprüft; jeder in
     dieser Runde gefundene Fehler dort eingetragen (seit 1.3).
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
@@ -285,7 +286,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
   berechnet (Punkte, dann Tordifferenz, dann Tore; Hinweis, dass die UEFA-Reihenfolge abweichen kann).
   Grenzen: Platz 1–8 Achtelfinale, 9–24 Play-offs, ab 25 ausgeschieden; dazu der Heimliga-Platz.
 - **Spielertore im Europapokal** nur aus der Ligaphase (FS-Zahlen enthalten die Qualifikation – kennzeichnen).
-- Alle übrigen Regeln (Datenblatt, Lage-Check, Gegenangaben-Prüfung, 7b, Kennzeichnung) gelten unverändert.
+- Alle übrigen Regeln (Datenblatt, Lage-Check, Kräfteverhältnis 4b, Gegenangaben-Prüfung, 7b, Kennzeichnung, Spielen) gelten
+  unverändert. **Datenblatt-Werkzeug im Europapokal:** `datenblatt.py <Europapokal-Saison> … --sm …` liefert die Ligaphase
+  (Tabelle und Spiele ab 01.09., ohne Qualifikation) und die letzten 6 aller Wb.; den Block „letzte 6 der Heimliga“ liefert
+  `kontext.py <team_id> <Heimliga-Saison>` je Team. 4b im Europapokal: Tabelle = Ligaphase **und** Heimliga-Platz.
 
 ## Entscheidungsweg je Paarung (immer in dieser Reihenfolge)
 
@@ -394,7 +398,8 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    allein 3 oder mehr Tore geschossen hat – mit Spielständen. Trifft das zu, ist es eine Rang-2-Gegenangabe
    mit „dreht den Tipp: ja/nein, weil …“. (Anlass: Auswertung 24.11. – alle 5 Unter-Fehltipps hatten ein
    Team mit 3+ eigenen Toren.)
-7. **Tipp:** Claude bestimmt **selbst** den **sichersten der sechs Märkte** (Kriterium siehe unten)
+7. **Tipp:** Claude bestimmt **selbst** den **sichersten der sechs Märkte** (Kriterium siehe unten; seit 1.4 nur unter
+   den nach Schritt 4b erlaubten Märkten, und der **Vorrang Sieg-Markt** unten geht vor)
    – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
    bei der Wahl und dreht eine klare Richtung aus Rang 1–2 nicht um. Was dagegen spricht, wird
    genannt. **Es gibt immer genau einen Tipp.**
@@ -426,13 +431,14 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 
 1. **Genau ein Tipp je Paarung**, deutlich als „Tipp“ markiert, mit Gründen, dem, was dagegen
    spricht, und der Kennzeichnung „beide einig“ oder „geteilt“. Der Tipp ist **immer der sicherste
-   der sechs Märkte** – der, gegen den am wenigsten spricht. Die Kennzeichnung sagt, wie sicher
+   der sechs Märkte** – der, gegen den am wenigsten spricht (seit 1.4: unter den nach Schritt 4b erlaubten Märkten; Vorrang Sieg-Markt nach Schritt 7 geht vor). Die Kennzeichnung sagt, wie sicher
    er ist (beide einig = sicherer, geteilt = unsicherer); sie entscheidet nicht, ob ein Tipp bestimmt wird (immer genau
    einer), seit Version 1.4 aber, ob er **gespielt** wird (nur „beide einig“, Schritt 8).
 2. **Erlaubte Märkte – nur diese sechs:** Heimsieg, Auswärtssieg, Beide treffen – Ja,
    Beide treffen – Nein, Über 2,5 Tore, Unter 2,5 Tore. Keine anderen Wettarten (kein Remis,
    keine Doppelte Chance, keine Ecken, keine anderen Torlinien).
-3. Rang 3 dreht eine klare Angabe aus Rang 1–2 nicht um.
+3. Rang 3 dreht eine klare Angabe aus Rang 1–2 nicht um. (Die Ausschlüsse aus Schritt 4b widersprechen dem nicht: „klarer
+   Favorit“ setzt voraus, dass auch beide Rang-2-Blöcke zum Favoriten zeigen; die Tabelle allein schließt nichts aus.)
 4. Jede Aussage im Spielbild nennt ihre Quelle (Sports Mole: Artikel, Spielseite, Tabelle;
    FootyStats) und steht im Datenblatt (seit 1.3).
 5. Kein Rechenmodell, keine Direktvergleiche (H2H), keine Schwellen, keine Punkte. Verboten ist das
@@ -443,7 +449,8 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
 ## Antwortaufbau je Paarung
 
 **In der Tagesliste** genau in der Reihenfolge des Entscheidungswegs (angeglichen am 21.11.2026,
-Version 1.3); **im Chat** nur Punkt 7 mit Anstoß und Paarung (Variante 1, siehe „Alles im Chat“):
+Version 1.3); **im Chat** nur Punkt 7 mit Anstoß und Paarung, dazu seit 1.4 der Satz aus 3b und „Spielen: ja/nein“ (Variante 1, siehe
+„Alles im Chat“):
 
 1. Abgleich Sports Mole ↔ FootyStats (Ergebnis von `abgleich.py`, Abweichungen)
 2. **Datenblatt je Team** (Tabelle, letzte Spiele, letzter Sieg/Tor, Zahlen mit Bezug, Teamnews

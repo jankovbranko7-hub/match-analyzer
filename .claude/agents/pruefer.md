@@ -72,7 +72,8 @@ sicherste Markt ist – Quellen dafür selbst neu abrufen; Formfehler nur nennen
 - Kopfzeile mit Uhrzeit der Abrufe.
 - (a) Gefundene Fehler je Paarung: Fundstelle, Fehlerart (A–N), Quelle, ob ein Tipp-Grund betroffen ist.
 - (b) Neue oder falsch widerlegte Rang-1–2-Gegenangaben, je mit „dreht den Tipp: ja/nein, weil …“.
-- (c) Urteil je Paarung: regelkonform ja/nein; Tipp = sicherster Markt (ja/nein, sonst welcher und warum);
+- (c) Urteil je Paarung: regelkonform ja/nein; Tipp = sicherster der nach 4b erlaubten Märkte bzw. Vorrang Sieg-Markt richtig
+  angewandt (ja/nein, sonst welcher und warum);
   Kennzeichnung richtig?
 - (d) Nur wenn wirklich nichts gefunden wurde: „keine Fehler gefunden“.
 - Am Ende: Einträge fürs Fehlerprotokoll (Fehlerart je Fund).

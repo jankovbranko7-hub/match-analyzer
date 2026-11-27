@@ -32,6 +32,7 @@ S = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, S)
 BER = datetime.timezone(datetime.timedelta(hours=1))
 # erster Abstiegsplatz, Relegationsplatz je FS-Saison (sonst „nicht in der Quelle“)
+EUROPAPOKAL = {17127, 17128, 17130}  # EL, CL, ECL: Ligaphase ab 01.09. (Qualifikation nicht zählen)
 ABSTIEG = {17146: (18, None), 17199: (18, None), 17084: (18, None), 17210: (17, 16), 17212: (17, 16),
            17102: (17, 16), 17184: (22, None), 17180: (21, None), 17097: (17, 16), 17148: (12, 11)}
 
@@ -190,7 +191,11 @@ def team_teil(label, tid, name, ms, order, pts, gd, pl, nm_t, sid, sm_spiele, sp
     for lab, pl_ in (("Relegationsplatz", rel), ("erster Abstiegsplatz", ab)):
         if pl_:
             abst.append(f"{lab} {pl_}: {pts[order[pl_ - 1]] - pts[tid]:+d}")
-    if not ab:
+    if sid in EUROPAPOKAL and n_teams >= 25:
+        abst += [f"Platz 8 (letzter Achtelfinal-Platz): {pts[order[7]] - pts[tid]:+d}",
+                 f"Platz 24 (letzter Play-off-Platz): {pts[order[23]] - pts[tid]:+d}",
+                 f"Platz 25: {pts[order[24]] - pts[tid]:+d} · Heimliga-Platz mit kontext.py ergänzen"]
+    elif not ab:
         abst.append("Abstiegsplätze: nicht in der Quelle (Werkzeug kennt sie für diese Liga nicht)")
     z.append("   Abstände (Punkte des Platzes minus eigene): " + " · ".join(abst))
     out += z
@@ -358,6 +363,8 @@ def main():
         else:
             sys.exit(f"Unbekannte Option {a[i]}")
     ms = get("league-matches", season_id=sid, max_per_page=1000)["data"]
+    if sid in EUROPAPOKAL:
+        ms = [m for m in ms if dt(m) >= datetime.datetime(2026, 9, 1, tzinfo=BER)]
     th, nh = finde_team(ms, fh)
     tg, ng = finde_team(ms, fg)
     order, pts, gd, gf, nm_t, pl = tabelle(ms)

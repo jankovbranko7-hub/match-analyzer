@@ -58,7 +58,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
 - Je Paarung **immer genau ein Tipp** aus sechs Märkten (Heimsieg, Auswärtssieg, beide treffen
   Ja/Nein, über/unter 2,5) nach dem Entscheidungsweg in `SPORTSMOLE-CHECK.md` – Claude bestimmt
   ihn selbst aus dem Gesamtbild – **immer den sichersten der sechs Märkte, also den, gegen den am
-  wenigsten spricht**, ob „beide einig“ oder „geteilt“ (die Kennzeichnung zeigt nur die Sicherheit). **Kein Rechenmodell** (weder Sports-Mole-Datenanalyse noch
+  wenigsten spricht** (seit 1.4 unter den nach Schritt 4b erlaubten Märkten; Vorrang Sieg-Markt geht vor), ob „beide einig“ oder „geteilt“ (die Kennzeichnung zeigt nur die Sicherheit). **Kein Rechenmodell** (weder Sports-Mole-Datenanalyse noch
   FootyStats-Vorab-Werte), **keine Direktvergleiche (H2H)** – weder als Grund noch als
   Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**, **kein „We say“**
   (seit 1.3). Forebet und Odd Alerts werden nicht verwendet.
