@@ -51,6 +51,10 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   nur „beide einig“** – „geteilt“ = „Spielen: nein – nur Beobachtung“ (Tipp wird trotzdem bestimmt und ausgewertet);
   (3) **Vorrang Sieg-Markt**, wenn Lage und Kräfteverhältnis zum selben Team zeigen und keine Gegenangabe den Sieg dreht.
   Version 1.3 liegt in `archiv/SPORTSMOLE-CHECK-1.3.md`; Zahlen: `tipps/sportsmole/analyse-2026-11-27.md`.
+- **Sparplan** (27.11.2026, Wunsch des Nutzers: mehr Spiele bei höchster Qualität): (1) `werkzeuge/datenblatt.py` liefert die
+  Zahlen (Pflicht, wörtlich übernehmen); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` (Claude und Prüfer die Vollfassung; neue
+  Lehren dort nachtragen); (3) Grenzfall-Runde nur bei „Spielen: ja“; (4) Prüfer gleicht Zahlen mit dem Werkzeug ab und prüft vor
+  allem Teamnews, 7c, Gegenangaben, Kräfteverhältnis, Abwägung.
 - Je Paarung **immer genau ein Tipp** aus sechs Märkten (Heimsieg, Auswärtssieg, beide treffen
   Ja/Nein, über/unter 2,5) nach dem Entscheidungsweg in `SPORTSMOLE-CHECK.md` – Claude bestimmt
   ihn selbst aus dem Gesamtbild – **immer den sichersten der sechs Märkte, also den, gegen den am

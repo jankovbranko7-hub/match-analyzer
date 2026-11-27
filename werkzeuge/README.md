@@ -1,6 +1,11 @@
 # Werkzeuge
 
 Sports-Mole-Check (seit 20.11.2026):
+- `datenblatt.py <saison> "<FS-Heim>" "<FS-Gast>" [--sm "<sm-heim>" "<sm-gast>" | --sm-seite <URL>] [--spieler-heim "A,B"]
+  [--spieler-gast "C,D"] [--ep <saison>]` (seit 27.11.2026, Pflicht) – ein Aufruf liefert das gezählte Datenblatt beider Teams:
+  Tabelle mit Abständen, letzte 6 Liga und alle Wb. (SM-Formdaten, mit FS abgeglichen, Abweichungen gemeldet), Heim/Auswärts,
+  Serien, Gegnerstärke (Schritt 4b), Startelf des letzten Ligaspiels und Regel-7c-Status der Teamnews-Spieler.
+- `tippanalyse.py` – Auswertung aller Tipps (Wettart, Kennzeichnung, Grenzfall, zweitbester Markt, Liga, verfehlte Tor-Tipps).
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:

@@ -12,11 +12,16 @@ Antworte auf Deutsch. Du bearbeitest **genau eine Paarung** – die im Auftrag g
 1. `SPORTSMOLE-CHECK.md` – vor allem „Oberste Priorität“, Entscheidungsweg Schritt 1–8, Prüfliste, Rangfolge,
    Abschnitt „Europapokal“, Regeln 7b und 7c, feste Unter-2,5-Gegenangabe, Merkmale-Zeile; seit Version 1.4 Schritt 4b
    „Kräfteverhältnis“, „Vorrang Sieg-Markt“ (Schritt 7) und „Spielen nur bei beide einig“ (Schritt 8).
-2. `FEHLERPROTOKOLL.md` – jede Fehlerart A–N beim Schreiben gezielt beachten.
+2. `FEHLERPROTOKOLL-KURZ.md` – Fehlerarten A–N und die wichtigsten Lehren beim Schreiben gezielt beachten (die Vollfassung
+   `FEHLERPROTOKOLL.md` nur bei Bedarf nachschlagen).
 3. Als Vorlage für Aufbau und Ausführlichkeit einen vollständigen Abschnitt der letzten Tagesliste in `tipps/sportsmole/`.
 
 ## Arbeit
-- Quellen selbst abrufen (Uhrzeit nur mit `TZ=Europe/Berlin date`): `python3 werkzeuge/sm_spiel.py "<heim>" "<gast>"`,
+- **Zuerst das Datenblatt-Werkzeug** (Pflicht, spart Limit und Zählfehler): `python3 -I werkzeuge/datenblatt.py <saison>
+  "<FS-Heim>" "<FS-Gast>" --sm "<sm-heim>" "<sm-gast>" --spieler-heim "A,B" --spieler-gast "C,D"` (Spieler = alle Namen aus den
+  SM-Teamnews; dafür vorher den SM-Artikel lesen). Seine Zahlen, Serien, Gegnerstärke und 7c-Hinweise **wörtlich übernehmen**,
+  nicht neu zählen; nur ergänzen, was es nicht kann (Teamnews-Status nach Originalwort, Pokal-Aufstellungen, Spieler ohne FS-Eintrag).
+- Weitere Quellen nur bei Bedarf (Uhrzeit nur mit `TZ=Europe/Berlin date`): `python3 werkzeuge/sm_spiel.py "<heim>" "<gast>"`,
   `python3 -I werkzeuge/fs_spiel.py`, `python3 -I werkzeuge/abgleich.py`, `python3 -I werkzeuge/kontext.py`,
   `werkzeuge/fs.sh` (league-players, match mit Aufstellungen für Regel 7c, lastx). Saison-IDs: `FOOTYSTATS-API.md`.
 - Entscheidungsweg 1–8 (mit 4b) vollständig und in dieser Reihenfolge; je Paarung genau ein Tipp; Merkmale-Zeile mit allen

@@ -11,8 +11,8 @@
    und geprüft vor dem **ersten Anstoß** dieser 5 Spiele (Wahl des Nutzers vom 27.11.2026, Variante a).
 3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
-   neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
-   Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
+   neuer). Zusätzlich nur: bei einem Grenzfall mit „Spielen: ja“ (seit 27.11.2026) **ein** neuer Prüfer für die kurze
+   Grenzfall-Runde und eine weitere Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
 4. **Variante B „drei Augenpaare“** (Wahl des Nutzers vom 27.11.2026): Je 5er-Schritt bearbeitet je Spiel **ein**
    Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
    Entscheidungsweg 1–8. Die Agenten werden **frisch gestartet** – nur mit dem kurzen Auftrag und den Regel-Dateien,
@@ -45,6 +45,10 @@ Rang-1-Grund (26.11.); **Oberste Priorität** mit 5er-Schritten, einem Prüfer u
 **Kräfteverhältnis** (Schritt 4b) mit Ausschlussregeln für Tor-Märkte bei klarem Favoriten; (2) **gespielt wird nur „beide
 einig“** – „geteilt“ ist nur Beobachtung (Schritt 8); (3) **Vorrang Sieg-Markt**, wenn Lage und Kräfteverhältnis klar zum selben
 Team zeigen (Schritt 7). Anlass und Zahlen: `tipps/sportsmole/analyse-2026-11-27.md`.
+**Sparplan (27.11.2026, Wunsch des Nutzers – „mehr Spiele bei höchster Qualität“):** (1) **Datenblatt-Werkzeug**
+`werkzeuge/datenblatt.py` ist Pflicht für die Zahlen (Schritt 2–4b); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` statt der
+Vollfassung; (3) **Grenzfall-Runde nur für Paarungen mit „Spielen: ja“**; (4) der Prüfer gleicht die Zahlen mit dem Werkzeug ab
+und prüft vor allem Teamnews-Wortlaut, Regel 7c, Gegenangaben, Kräfteverhältnis und Abwägung.
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -102,12 +106,14 @@ League One. Schickt er mehr als 5 Spiele auf einmal, fragt Claude, welche 5 zuer
 2. Claude gleicht mit dem FootyStats-Spielplan ab (Anstoß, match_id); Spiele ohne Sports-Mole-Vorschau werden
    als „nicht bewertet (keine Vorschau)“ aufgeführt. Claude sagt mit Uhrzeit, ob die 5 bis zum ersten Anstoß fertig werden.
 3. Claude startet je Paarung **einen frischen Agenten** (`bearbeiter`, ohne Kopie des Chats). Er holt die vier
-   Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`) und die FootyStats-Zahlen
-   (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
+   Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`), das **Datenblatt-Werkzeug**
+   (`werkzeuge/datenblatt.py <season_id> "<FS-Heim>" "<FS-Gast>" --sm … --spieler-heim … --spieler-gast …`, seit 27.11.2026
+   Pflicht) und bei Bedarf weitere FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
    (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das Datenblatt je Team an und geht den
    Entscheidungsweg unten durch – je Paarung genau ein Tipp.
 4. Claude fügt die 5 Abschnitte der Agenten in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3);
-   Korrekturen werden eingearbeitet; bei einem Grenzfall folgt danach die kurze Grenzfall-Runde (ein neuer Prüfer).
+   Korrekturen werden eingearbeitet; bei einem Grenzfall mit „Spielen: ja“ folgt danach die kurze Grenzfall-Runde (ein neuer
+   Prüfer); Grenzfälle mit „Spielen: nein“ bekommen keine zweite Runde (seit 27.11.2026).
 5. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
    was unter „Alles im Chat“ festgelegt ist (Variante 1), mit dem Kontrollergebnis, handytauglich als Liste statt
    breiter Tabellen.
@@ -182,7 +188,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 
 - **Stufe 1 – Kontrolldurchgang (automatisch):** Nach der Analyse und vor der Antwort liest Claude **selbst**
   (nicht der Agent) jede Aussage der Tagesliste noch einmal gegen die Quelle (Vorschau, Spielseite, Tabelle,
-  FootyStats) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
+  FootyStats; seit 27.11.2026 die Zahlen durch einen eigenen Lauf von `werkzeuge/datenblatt.py` und den Vergleich mit dem
+  Datenblatt der Tagesliste) und geht die Prüfliste und jede Fehlerart des Fehlerprotokolls durch. Erst danach gehen die Tipps an den Nutzer.
 - **Stufe 2 – Prüffrage des Nutzers:** Schreibt der Nutzer **„Kontrolle“**, prüft Claude alles
   von vorn: Quellen neu abrufen, jede Zahl, jedes Ergebnis, jede Zuordnung, jeden Tipp gegen die
   Gründe, jede Fehlerart des Fehlerprotokolls, den Entscheidungsweg Schritt 1–8 und bei jeder
@@ -196,9 +203,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   `pruefer` (`.claude/agents/pruefer.md`, fester Prüfauftrag); weitere 5er-Schritte gehen per
   Weiterführung an denselben Prüfer, geht das nicht (z. B. im neuen Chat oder nach einem Neustart), startet ein neuer
   (Wunsch des Nutzers vom 24.11.2026, angeglichen am 27.11.2026). Nie mehrere Prüfer gleichzeitig. **Zweite, kurze Runde für Grenzfälle** (eingeführt am 24.11.2026, Wunsch des
-  Nutzers): Nach den Korrekturen der ersten Runde prüft ein **neuer** Prüfer (Agent `pruefer`) nur die Paarungen,
-  die in Schritt 7 als **Grenzfall** vermerkt sind (zwei Märkte fast gleich stark), und dort nur die Tipp-Gründe,
-  die Rang-1–2-Gegenangaben und den sichersten Markt. Gibt es in einem Schritt keinen Grenzfall, entfällt sie.
+  Nutzers; seit 27.11.2026 nur für „Spielen: ja“): Nach den Korrekturen der ersten Runde prüft ein **neuer** Prüfer (Agent
+  `pruefer`) nur die Paarungen mit „Spielen: ja“, die in Schritt 7 als **Grenzfall** vermerkt sind (zwei Märkte fast gleich stark), und dort nur die Tipp-Gründe,
+  die Rang-1–2-Gegenangaben und den sichersten Markt. Gibt es in einem Schritt keinen Grenzfall mit „Spielen: ja“, entfällt sie.
   Ihr Ergebnis steht mit im Kontrollergebnis. Sie verbessert die Herleitung, nicht den Spielausgang. Erst nach seinem Bericht
   und den Korrekturen gehen die 5 Tipps des Schritts an den Nutzer, im Chat zusammen mit dem
   Kontrollergebnis (gefundene Fehler, Korrekturen, geänderte Tipps – oder „keine Fehler gefunden“).
@@ -207,7 +214,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   Kontrolle gefunden hat (Erprobung von 1.3: findet sie über mehrere Spieltage nichts, was einen
   Tipp betrifft, kann der Nutzer entscheiden, sie seltener zu verlangen). Der Prüfer ist eine eigene Claude-Instanz, die
   die Analyse aus dem Gespräch nicht kennt. Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu
-  ab (Sports Mole, FootyStats) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
+  ab (Sports Mole, FootyStats; die Zahlen gleicht er seit 27.11.2026 mit einem eigenen Lauf von `werkzeuge/datenblatt.py` ab, statt
+  sie von Hand nachzuzählen – sein Schwerpunkt sind Teamnews-Wortlaut, Regel 7b/7c, Gegenangaben, Kräfteverhältnis und Abwägung) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
   den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
   Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
   (Schritt 1–8, Datenblatt je Team gegen die Quellen, Lage-Check mit fünf Fragen für beide Teams, Spielbild je Team mit „trifft es?
@@ -318,6 +326,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
       Spiele – steht die Zahl nicht in der Quelle: „nicht in der Quelle“), **Spiele kurz davor und
       danach** mit Datum und Wettbewerb (Belastung – nur mit Datum, sonst keine Belastung),
       **Besonderheit** (Derby, Kellerduell, Spitzenspiel, letztes Spiel vor einer Pause) – je mit Quelle.
+   **Datenblatt-Werkzeug** (Pflicht seit 27.11.2026): Die Zahlen der Felder 1–4, die Gegnerstärke für Schritt 4b, die Startelf des
+   letzten Ligaspiels und die Regel-7c-Prüfung der Teamnews-Spieler kommen aus `werkzeuge/datenblatt.py` und werden **wörtlich
+   übernommen** (nicht neu gezählt). Der Agent ergänzt den Teamnews-Status nach Originalwort (Feld 5), was das Werkzeug nicht
+   kann (Pokal-Aufstellungen, Spieler ohne FS-Eintrag), und klärt jede gemeldete Abweichung.
    **Wirkung:** Lage-Check, Spielbild, Märkte und Tipp (Schritt 4–8) verwenden **nur Angaben aus dem
    Datenblatt**; fehlt eine Angabe, wird sie zuerst mit Quelle ins Datenblatt eingetragen. Jede
    Angabe im Datenblatt wird einmal gegen den Wortlaut der Quelle gelesen (Prüfliste 6b). „We say“

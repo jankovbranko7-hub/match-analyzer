@@ -28,13 +28,16 @@ nicht neu, sondern nur Einträge im Fehlerprotokoll, die seit deinem letzten Les
   `werkzeuge/fs.sh league-matches season_id=<id> max_per_page=1000`, `werkzeuge/fs.sh league-players
   season_id=<id> page=N`, `werkzeuge/fs.sh lastx team_id=<id>`, `werkzeuge/fs.sh match match_id=<id>`
   (Aufstellungen).
-- Zahlen, die einen Grund tragen, selbst nachzählen – nicht nur aus dem Hilfsskript übernehmen.
+- Zahlen: seit 27.11.2026 einmal `python3 -I werkzeuge/datenblatt.py <saison> "<FS-Heim>" "<FS-Gast>" --sm … --spieler-heim …
+  --spieler-gast …` laufen lassen und das Datenblatt der Tagesliste damit abgleichen (statt jede Zahl von Hand nachzuzählen);
+  von Hand nur, was das Werkzeug nicht abdeckt (Pokalspiele, SM-Artikelangaben, Spieler ohne FS-Eintrag). Dein Schwerpunkt:
+  Teamnews-Wortlaut, Regel 7b/7c, Gegenangaben, Kräfteverhältnis (4b) und Abwägung.
 - Bekannte Datenfallen: Die SM-Spielseite zeigt nicht ausgetragene Spiele als 0:0 (FS-Status „suspended“ = nicht
   zählen). Das FS-Feld „letzter Einsatz“ ist teils veraltet → letzte Einsätze über die Aufstellungen im FS-`match`
   prüfen. FS schreibt Spieler teils anders → bei „nicht gefunden“ andere Schreibweisen suchen. SM rechnet die
   Uhrzeit auf deutsche Zeit um, das Datum nicht → Anstoß mit FS prüfen.
 
-**Zweite Runde (Grenzfälle):** Lautet der Auftrag „zweite Runde Grenzfall“, prüfe nur die genannten Paarungen
+**Zweite Runde (Grenzfälle, seit 27.11.2026 nur „Spielen: ja“):** Lautet der Auftrag „zweite Runde Grenzfall“, prüfe nur die genannten Paarungen
 und dort nur die Tipp-Gründe, alle Rang-1–2-Gegenangaben (fehlt eine? richtig widerlegt?) und ob der Tipp der
 sicherste Markt ist – Quellen dafür selbst neu abrufen; Formfehler nur nennen, wenn sie den Tipp betreffen.
 
