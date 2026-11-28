@@ -62,6 +62,9 @@ gespielten Tipps**, Abschnitt „Änderungen am System“; (7) Werkzeuge: `daten
 **Ergänzung zu 1.4.1 – Vorprüfung** (28.11.2026, Wunsch des Nutzers: „Ja einbauen“): Vor der Spielauswahl zählt
 `werkzeuge/vorpruefung.py` für alle Spiele einer Liga mit Vorschau die Zahlenseite; Claude nennt je Spiel, wohin die Zahlen zeigen;
 der Nutzer wählt seine 5; Merkmal 13 hält fest, ob ein Spiel aus der Vorprüfung gewählt wurde (Abschnitt „Vorprüfung“).
+**Ergänzung zu 1.4.1 – Zweitquelle Teamnews, Probelauf** (28.11.2026, Wunsch des Nutzers: frei zugängliche Quellen der jeweiligen
+Länder): `werkzeuge/teamnews2.py` stellt die Ausfall- und Sperrenlisten der Länderquellen neben die Sports-Mole-Teamnews – **nur als
+Abgleich, ohne Einfluss auf den Tipp**; Merkmal 14 hält das Ergebnis fest (Abschnitt „Zweitquelle Teamnews – Probelauf“).
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -131,6 +134,45 @@ der Auswahl, bei welchen Spielen wenigstens die Zahlenseite klar in eine Richtun
   die Tipps fertig und geprüft sind). Erst danach trägt Claude Merkmal 13 ein.
 - **Messen:** Merkmal 13 je Tipp („Vorprüfung: ja – Zahlen zeigten zu: … / nein“); `werkzeuge/tippanalyse.py` zählt getrennt,
   wie oft daraus „Spielen: ja“ wurde und wie die Tipps ausgingen. Die Vorprüfung ändert keine Tippregel.
+
+## Zweitquelle Teamnews – Probelauf (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026)
+
+Zweck: Für die Zahlen gibt es zwei Quellen, für Teamnews und Lage nur Sports Mole. Der Probelauf misst, wie oft frei zugängliche
+Listen der jeweiligen Länder von Sports Mole abweichen und ob das einen Tipp betroffen hätte. Test am 28.11. (Mainz – Union
+Berlin): 7 Ausfälle in allen Quellen gleich; die deutsche Liste führte einen Spieler „seit gestern“, der bei Sports Mole fehlte;
+die englische Sammelseite führte einen Spieler als gesperrt, den Sports Mole in der möglichen Startelf nennt.
+
+- **Quellen** (frei zugänglich, ohne Schlüssel; Stand 28.11.2026 von hier erreichbar):
+  - Deutschland (Bundesliga): **LigaInsider** – Spieler, Art, Grund, „fehlt seit“.
+  - Spanien (La Liga), dazu Champions League und Europa League: **FútbolFantasy** – Verletzte mit „desde“ (seit) und Einsatzchance
+    (die Sperrenliste dieser Seite ist nicht lesbar – Sperren dort nur über die Sammelseite).
+  - Italien (Serie A): **Fantacalcio** – Infortunati (verletzt), Squalificati (gesperrt), Diffidati (Sperre droht, kein Ausfall).
+  - England (Premier League): **offizielle Fantasy-Liste der Premier League** – Status, Position, Einsatzchance, Zeitpunkt der Meldung.
+  - Alle Ligen als Ergänzung, einzige Quelle für Frankreich, Niederlande, Portugal, Türkei, Schottland, Championship,
+    2. Bundesliga: **Sammelseite Sportsgambler** – im Test weniger verlässlich; was nur sie zeigt, ist kein Beleg.
+  - Gesperrt für automatischen Abruf und darum nicht verwendet: kicker, L'Équipe, Transfermarkt, UEFA.com. Sperren werden nicht umgangen.
+  - Von diesen Seiten werden **nur die Listen** gelesen – keine Quoten, Tipps, Vorhersagen, Direktvergleiche.
+- **Ablauf:** Nach Stufe 3 (und der Grenzfall-Runde), vor dem Senden der Tipps, lässt **Claude selbst** je Paarung
+  `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" --spieler-heim "…" --spieler-gast "…"` laufen (Namen = die Spieler aus den
+  Sports-Mole-Teamnews im Datenblatt). **Bearbeiter und Prüfer verwenden die Zweitquelle nicht.**
+- **Kein Einfluss auf den Tipp** (Probelauf): Was nur in der Zweitquelle steht, ist weder Grund noch Gegenangabe und ändert weder
+  Tipp noch Kennzeichnung noch „Spielen: ja/nein“.
+- **Einstufung durch Claude** (das Werkzeug zählt nur Namen): „**bestätigt**“ – die Länderquelle führt dieselben Ausfälle und Sperren
+  mit demselben Status, nichts Zusätzliches; „**weicht ab**“ – ein Spieler fehlt in einer der beiden Quellen oder der Status ist ein
+  anderer (wer, was, seit wann); „**nicht verfügbar**“ – keine Quelle für diese Liga, Seite nicht erreichbar oder Team nicht gefunden.
+  Abweichungen, die nur die Sammelseite zeigt, werden genannt, zählen aber nicht als „weicht ab“.
+  Dazu „**Rang 1 betroffen: ja/nein**“: ja, wenn die Abweichung – wäre sie belegt – nach Regel 7b/7c ein Rang-1-Grund oder eine
+  Rang-1-Gegenangabe gewesen wäre (neuer Ausfall oder sichere Rückkehr mit belegter Position, oder Sports Mole führt einen neuen
+  Ausfall, den die Länderquelle nicht kennt).
+- **Statuswörter der Quellen** bleiben im Original stehen: deutsch „Verletzung“ = fehlt, „angeschlagen“ = fehlt oder fraglich
+  (Wortlaut lesen), „Aufbautraining“ = unklar, „5. Gelbe Karte“/„Rote Karte“ = gesperrt; spanisch „baja“ = fehlt, „duda“ = fraglich,
+  Einsatzchance 0 % = fehlt; italienisch „infortunato“ = verletzt, „squalificato“ = gesperrt, „diffidato“ = Sperre droht (kein Ausfall),
+  „da valutare“/„in dubbio“ = fraglich; englisch „injured“ = fehlt, „doubtful“ = fraglich, „suspended“ = gesperrt.
+- **Im Chat** je Paarung eine Zeile „Zweitquelle: bestätigt / weicht ab (wer, was) / nicht verfügbar“. Bei „Rang 1 betroffen: ja“
+  deutlich hervorgehoben mit dem Zusatz „im Tipp nicht berücksichtigt (Probelauf)“ – was der Nutzer daraus macht, entscheidet er.
+- **Merkmal 14** je Tipp; `werkzeuge/tippanalyse.py` zählt mit. Nach etwa 50 Tipps mit Zweitquelle berichtet Claude, wie oft sie
+  abwich und wie oft Rang 1 betroffen war; ob die Zweitquelle dann mitentscheiden soll, entscheidet nur der Nutzer.
+- **Fällt eine Quelle aus** (gesperrt, Aufbau geändert), meldet das Werkzeug das; der Ablauf läuft unverändert mit Sports Mole weiter.
 
 ## Ablauf eines Auftrags
 
@@ -221,7 +263,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 **Abschluss**
 
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026; seit 1.4.1 mit den
-    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp; Punkt 13 „Vorprüfung“ von Claude nach der Kontrolle ergänzt), committet und auf den Arbeitsbranch
+    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp; Punkte 13 „Vorprüfung“ und 14 „Zweitquelle“ von Claude nach der Kontrolle ergänzt), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
     Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
@@ -584,8 +626,11 @@ Schwellen):
 13. **Vorprüfung** (seit 28.11.2026): „ja – Zahlen zeigten zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem“, wenn der Nutzer das
     Spiel nach einer Vorprüfung gewählt hat; sonst „nein“. **Dieses Merkmal trägt Claude ein, nicht der Bearbeiter** – erst wenn die
     Tipps fertig und geprüft sind (Abschnitt „Vorprüfung“).
+14. **Zweitquelle Teamnews** (Probelauf seit 28.11.2026): „bestätigt“ / „weicht ab (wer, was) – Rang 1 betroffen: ja/nein“ / „nicht
+    verfügbar“. **Auch dieses Merkmal trägt Claude ein**, nach der Kontrolle (Abschnitt „Zweitquelle Teamnews – Probelauf“).
 Schreibweise (fest, damit `werkzeuge/tippanalyse.py` sie liest): „(10) Kräfteverhältnis: … ; Tabellenhöher: Heim · (11) Spielen: ja ·
-(12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt · (13) Vorprüfung: ja – Zahlen zeigten zu: Heimsieg“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
+(12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt · (13) Vorprüfung: ja – Zahlen zeigten zu: Heimsieg ·
+(14) Zweitquelle: weicht ab (Mwene nur in LigaInsider, angeschlagen seit gestern) – Rang 1 betroffen: nein“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
 Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5).
 Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal; seit 1.4 immer getrennt nach „Spielen: ja“ und „nein“); bei geänderten Tipps auch, ob der
 ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt und der Schattentipp getroffen hätten. **Ausgewertet und dem

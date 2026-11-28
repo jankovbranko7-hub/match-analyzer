@@ -66,8 +66,9 @@ Tabellenzeile im Kopf der Tagesliste (Spalten seit 1.4.1):
 | 1a | 20:30 | <Heim> – <Gast> | <Liga> (<FS-Saison>) | <match_id> | **<Markt>** (Grenzfall; bis <Uhrzeit> <ursprünglicher Markt>) | beide einig | ja | |
 ```
 
-Merkmal **(13) Vorprüfung** trägt nicht der Bearbeiter ein, sondern Claude nach der Kontrolle: „· (13) Vorprüfung: ja – Zahlen
-zeigten zu: <Heimsieg / Auswärtssieg / Tor-Markt / keinem>“ oder „· (13) Vorprüfung: nein“.
+Die Merkmale **(13) Vorprüfung** und **(14) Zweitquelle** trägt nicht der Bearbeiter ein, sondern Claude nach der Kontrolle:
+„· (13) Vorprüfung: ja – Zahlen zeigten zu: <Heimsieg / Auswärtssieg / Tor-Markt / keinem>“ oder „· (13) Vorprüfung: nein“;
+„· (14) Zweitquelle: <bestätigt / weicht ab (wer, was) – Rang 1 betroffen: ja/nein / nicht verfügbar>“.
 
 Märkte immer mit ihren festen Namen: Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5
 (`werkzeuge/tippanalyse.py` liest genau diese Wörter).

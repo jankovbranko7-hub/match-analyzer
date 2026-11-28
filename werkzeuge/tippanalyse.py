@@ -9,7 +9,8 @@ Ergebnis) und die Merkmale-Zeile des Abschnitts. Gibt aus:
   2. getrennt „vor 1.4“ und „seit 1.4“,
   3. seit 1.4: „Spielen: ja/nein“, Zahl der gespielten Tipps (Auswertung an den Nutzer ab 50 gespielten),
      Kräfteverhältnis, Schattentipp (was ohne 4b-Ausschluss und ohne Vorrang Sieg-Markt getippt worden wäre),
-     Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13: aus Vorprüfung gewählt ja/nein).
+     Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13: aus Vorprüfung gewählt ja/nein),
+     Zweitquelle Teamnews (Merkmal 14: bestätigt / weicht ab / nicht verfügbar; Rang 1 betroffen ja/nein).
 Ein Tipp zählt als „seit 1.4“, wenn seine Merkmale-Zeile Punkt (11) „Spielen“ enthält oder die Liste ab dem 28.11.2026 datiert.
 Keine Quoten, kein Rechenmodell – nur Ergebnisse der eigenen Tipps.
 """
@@ -119,6 +120,11 @@ def lies():
         vp = re.search(r"Vorprüfung:\s*(ja|nein)", s13 or "")
         r["vp"] = vp.group(1) if vp else None
         r["vp_markt"] = (mk(s13) if s13 and "keinem" not in s13 else None) if r["vp"] == "ja" else None
+        s14 = seg(mm, 14) or ""
+        r["zq"] = ("nicht verfügbar" if "nicht verfügbar" in s14 else "weicht ab" if "weicht ab" in s14
+                   else "bestätigt" if "bestätigt" in s14 else None)
+        r1 = re.search(r"Rang 1 betroffen:\s*(ja|nein)", s14)
+        r["zq_rang1"] = r1.group(1) if r1 else None
         r["hit"] = out(r["h"], r["a"])[r["tip"]]
         del r["txt"]
     return rows
@@ -230,6 +236,18 @@ def auswertung_14(rows):
             g = [r for r in m if r["vp_markt"] == r["tip"]]
             print(f"  Tipp = Richtung der Vorprüfung: {len(g)} von {len(m)} (Treffer {q(g)}); Tipp anders: {len(m) - len(g)} "
                   f"(Treffer {q([r for r in m if r['vp_markt'] != r['tip']])})")
+    z = [r for r in rows if r["zq"]]
+    print(f"\nZweitquelle Teamnews (Merkmal 14, Probelauf): {len(z)} Tipps mit Angabe – Bericht an den Nutzer ab etwa 50")
+    if z:
+        for lab in ("bestätigt", "weicht ab", "nicht verfügbar"):
+            sub = [r for r in z if r["zq"] == lab]
+            print(f"  {lab}: {len(sub)} Tipps · Treffer {q(sub)} · gespielte {q([r for r in sub if r['spielen'] == 'ja'])}")
+        ab = [r for r in z if r["zq"] == "weicht ab"]
+        for lab in ("ja", "nein"):
+            sub = [r for r in ab if r["zq_rang1"] == lab]
+            print(f"  weicht ab, Rang 1 betroffen: {lab} – {len(sub)} Tipps · Treffer {q(sub)}")
+            for r in sub if lab == "ja" else []:
+                print(f"      {r['f']} {r['spiel']} {r['h']}:{r['a']} – Tipp {MK_NAME[r['tip']]} {'✅' if r['hit'] else '❌'}")
 
 
 def main():

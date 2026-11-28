@@ -65,6 +65,12 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem – weil …“ (im Zweifel „keinem“). **Kein Tipp**, keine Teamnews, keine Lage –
   das immer dazusagen. Der Nutzer wählt seine 5; dann volles System unverändert. Bearbeiter und Prüfer bekommen das Ergebnis der
   Vorprüfung **nicht** (kein Anker); Claude trägt nach der Kontrolle Merkmal 13 ein (Abschnitt „Vorprüfung“ in `SPORTSMOLE-CHECK.md`).
+- **Zweitquelle Teamnews – Probelauf** (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026): Nach Stufe 3, vor dem Senden der
+  Tipps, lässt **Claude selbst** je Paarung `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" --spieler-heim … --spieler-gast …`
+  laufen (frei zugängliche Länderquellen: LigaInsider, FútbolFantasy, Fantacalcio, offizielle Premier-League-Fantasy-Liste; sonst
+  Sammelseite Sportsgambler). **Nur Abgleich, kein Einfluss auf Tipp, Kennzeichnung oder „Spielen“**; Bearbeiter und Prüfer nutzen
+  sie nicht. Im Chat je Paarung „Zweitquelle: bestätigt / weicht ab / nicht verfügbar“ (bei „Rang 1 betroffen: ja“ hervorgehoben,
+  mit „im Tipp nicht berücksichtigt“); Merkmal 14; Bericht nach etwa 50 Tipps (Abschnitt in `SPORTSMOLE-CHECK.md`).
 - **Sparplan** (27.11.2026, Wunsch des Nutzers: mehr Spiele bei höchster Qualität): (1) `werkzeuge/datenblatt.py` liefert die
   Zahlen (Pflicht, wörtlich übernehmen); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` (Claude und Prüfer die Vollfassung; neue
   Lehren dort nachtragen); (3) Grenzfall-Runde nur bei „Spielen: ja“; (4) Prüfer gleicht Zahlen mit dem Werkzeug ab und prüft vor
@@ -140,6 +146,10 @@ Datenquellen, ohne Quoten:
 - **FootyStats** (`https://api.football-data-api.com/`), Zahlen, Abgleich und Ergebnisse: Schlüssel in
   der Umgebung als `APIKEY`, Query-Parameter `key`. Endpunkte, Felder, Saison-IDs:
   `FOOTYSTATS-API.md`. Limit 1800/Stunde.
+- **Zweitquelle Teamnews (nur Probelauf, nur Abgleich):** LigaInsider (`ligainsider.de`), FútbolFantasy (`futbolfantasy.com`),
+  Fantacalcio (`fantacalcio.it`), offizielle Fantasy-Liste der Premier League (`fantasy.premierleague.com`), Sammelseite
+  Sportsgambler (`sportsgambler.com/injuries`) – öffentlich, ohne Schlüssel; Abruf nur mit `werkzeuge/teamnews2.py`, nur die
+  Ausfall- und Sperrenlisten (keine Quoten, Tipps, Vorhersagen). Sperrt eine Seite den Abruf, wird sie nicht verwendet.
 - Forebet und Odd Alerts werden überhaupt nicht mehr verwendet.
 
 Fehlt ein Schlüssel: dem Nutzer sagen, dass er ihn in den Umgebungseinstellungen hinterlegen
