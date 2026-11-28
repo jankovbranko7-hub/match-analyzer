@@ -2,10 +2,17 @@
 
 Sports-Mole-Check (seit 20.11.2026):
 - `datenblatt.py <saison> "<FS-Heim>" "<FS-Gast>" [--sm "<sm-heim>" "<sm-gast>" | --sm-seite <URL>] [--spieler-heim "A,B"]
-  [--spieler-gast "C,D"] [--ep <saison>]` (seit 27.11.2026, Pflicht) – ein Aufruf liefert das gezählte Datenblatt beider Teams:
-  Tabelle mit Abständen, letzte 6 Liga und alle Wb. (SM-Formdaten, mit FS abgeglichen, Abweichungen gemeldet), Heim/Auswärts,
-  Serien, Gegnerstärke (Schritt 4b), Startelf des letzten Ligaspiels und Regel-7c-Status der Teamnews-Spieler.
-- `tippanalyse.py` – Auswertung aller Tipps (Wettart, Kennzeichnung, Grenzfall, zweitbester Markt, Liga, verfehlte Tor-Tipps).
+  [--spieler-gast "C,D"] [--ep <saison>] [--liga-heim <saison>] [--liga-gast <saison>]` (seit 27.11.2026, Pflicht) – ein Aufruf
+  liefert das gezählte Datenblatt beider Teams: Tabelle mit Abständen, letzte 6 Liga und alle Wb., Heim/Auswärts, Serien,
+  Gegnerstärke, Tabellen- und Spielort-Vergleich (Schritt 4b), „Tabellenhöher“ (Merkmal 10). Seit 28.11.2026 (1.4.1):
+  Startelf und Regel-7c-Status am **letzten Pflichtspiel laut FS** (Liga und Europapokal; im Europapokal mit `--liga-heim`/
+  `--liga-gast` auch die Heimliga) mit Warnung, wenn das neueste SM-Spiel ein nationales Pokalspiel war; Abgleich SM ↔ FS **in
+  beide Richtungen** (fehlt ein FS-Spiel in den SM-Formdaten, wird es gemeldet und in den Block aufgenommen; Zuordnung über
+  Spielort, ganzen Gegnernamen und Ergebnis; „Hinweise zur Zuordnung“ bei anders geschriebenen Namen); bei „3+ eigene Tore“ sind
+  nationale Pokalspiele einzeln genannt (unterklassige Gegner zählen nach 1.4.1 nicht).
+- `tippanalyse.py` – Auswertung aller Tipps aller Monate (Wettart, Kennzeichnung, Grenzfall, zweitbester Markt, geänderte Tipps,
+  Liga, verfehlte Tor-Tipps), getrennt vor/seit 1.4; seit 1.4: „Spielen: ja/nein“ mit Zählerstand der gespielten Tipps (Bericht an
+  den Nutzer ab 50), Kräfteverhältnis, Schattentipp, Vergleichswert „der Tabellenhöhere gewinnt“.
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:

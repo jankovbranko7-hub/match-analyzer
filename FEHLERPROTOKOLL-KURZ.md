@@ -1,8 +1,8 @@
-# Fehlerprotokoll – Kurzfassung für Bearbeiter-Agenten (Hebel 2, Version 1.4, Wunsch des Nutzers vom 27.11.2026)
+# Fehlerprotokoll – Kurzfassung für Bearbeiter-Agenten (Hebel 2, Version 1.4.1, Wunsch des Nutzers vom 27.11.2026)
 
 Die Bearbeiter-Agenten lesen statt des vollständigen `FEHLERPROTOKOLL.md` diese Kurzfassung (spart Limit). Claude und die
 Prüfer lesen weiter die Vollfassung. Neue Fehler werden immer zuerst in `FEHLERPROTOKOLL.md` eingetragen; ergibt sich daraus eine
-neue Lehre, kommt sie hier dazu (Stand: 27.11.2026).
+neue Lehre, kommt sie hier dazu (Stand: 28.11.2026).
 
 ## Fehlerarten (A–N) – beim Schreiben jede gezielt vermeiden
 
@@ -53,3 +53,13 @@ neue Lehre, kommt sie hier dazu (Stand: 27.11.2026).
     Favorit allein mehrfach 3+ Tore schoss; Vorrang Sieg-Markt; „Spielen: ja“ nur bei „beide einig“.
     „Lage zeigt zu Team X“ = Lage-Fakten von X (Serien, keine neue Schwächung) sprechen für X und die des Gegners
     (Serien, neue Schwächung) gegen ihn; Dringlichkeit allein reicht nicht.
+12. **Version 1.4.1 – feste Sätze:** In 4b je Baustein (Tabelle, letzte 6 alle Wb., letzte 6 Liga, Gegnerstärke) und für den
+    Spielort „zeigt zu: Heim / Gast / keinem – weil …“; im Zweifel „keinem“; „klarer Favorit“ nur, wenn alle vier zum selben Team
+    zeigen und der Spielort nicht zum anderen. In Schritt 8 „SM-Seite zeigt: … / FS-Seite zeigt: …“; „beide einig“ nur, wenn beide
+    „zum Tipp“ lauten – eine SM-Seite ohne Rang-1-Fakt zum Markt ist „nicht eindeutig“. Muster: `MUSTERFAELLE.md`.
+13. **Pokalspiele gegen Unterklassige** (z. B. 6:1 gegen einen Viertligisten) zählen nicht für „mehrfach 3+ eigene Tore“ – weder
+    für die Über-2,5-Bedingung des Favoriten noch für die feste Unter-2,5-Gegenangabe; Spielklasse mit Quelle belegen.
+14. **Werkzeug-Meldungen nie übergehen:** Jede Zeile „Abweichungen SM ↔ FS“, „Hinweise zur Zuordnung“ und „ACHTUNG Regel 7c“ aus
+    `datenblatt.py` klären und im Abschnitt vermerken. War das letzte Pflichtspiel ein nationales Pokalspiel, gilt für „neu oder
+    nicht“ der SM-Artikel, nicht die FS-Aufstellung des Spiels davor.
+15. **Schattentipp (Merkmal 12)** ist nur eine Auswertungszeile – er ändert den Tipp nicht und wird nicht als Grund verwendet.

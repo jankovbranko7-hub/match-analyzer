@@ -29,7 +29,7 @@ ABSTIEG = {
     "premier-league": (18, None), "la-liga": (18, None), "serie-a": (18, None),
     "bundesliga": (17, 16), "ligue-1": (17, 16), "championship": (22, None),
     "league-one": (21, None), "league-two": (23, None), "eredivisie": (17, 16),
-    "scottish-premiership": (12, 11),
+    "scottish-premiership": (12, 11), "primeira-liga": (17, 16),
 }
 
 

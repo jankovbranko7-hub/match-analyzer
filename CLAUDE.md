@@ -10,7 +10,7 @@
    Kontrollergebnis; erst danach kommt der nächste Schritt.
 3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
-   neuer). Zusätzlich nur: bei einem Grenzfall **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
+   neuer). Zusätzlich nur: bei einem Grenzfall mit „Spielen: ja“ **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
    Runde, wenn der Nutzer „unabhängige Kontrolle“ schreibt. **Nie mehrere Prüfer gleichzeitig.**
 4. **Variante B „drei Augenpaare“** (Wahl des Nutzers vom 27.11.2026): Je 5er-Schritt bearbeitet je Spiel **ein**
    Agent (`bearbeiter`, `.claude/agents/bearbeiter.md`) genau diese eine Paarung vollständig nach dem
@@ -51,6 +51,14 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   nur „beide einig“** – „geteilt“ = „Spielen: nein – nur Beobachtung“ (Tipp wird trotzdem bestimmt und ausgewertet);
   (3) **Vorrang Sieg-Markt**, wenn Lage und Kräfteverhältnis zum selben Team zeigen und keine Gegenangabe den Sieg dreht.
   Version 1.3 liegt in `archiv/SPORTSMOLE-CHECK-1.3.md`; Zahlen: `tipps/sportsmole/analyse-2026-11-27.md`.
+- **Sports-Mole-Check Version 1.4.1** (seit 28.11.2026, Wunsch des Nutzers nach der Systemprüfung): Tippregeln von 1.4 unverändert,
+  aber eindeutiger und messbar – (1) **feste Sätze** in Schritt 4b (je Baustein „zeigt zu: Heim / Gast / keinem“, Spielort als
+  Gegenprobe; „klarer Favorit“ nur, wenn alle vier Bausteine zum selben Team zeigen) und Schritt 8 (SM-Seite / FS-Seite „zeigt: zum
+  Tipp / woandershin / nicht eindeutig“); (2) Spiele gegen **unterklassige Pokalgegner** zählen nicht für die 3+-Tore-Regeln;
+  (3) `MUSTERFAELLE.md` und `VORLAGE-ABSCHNITT.md` für die Bearbeiter; (4) **Stichprobe von Hand** – der Prüfer zählt je Schritt
+  eine von Claude benannte Paarung ohne Werkzeug nach; (5) Merkmale 10–12 mit „Tabellenhöher“ und **Schattentipp**; **Auswertung an
+  den Nutzer erst nach 50 gespielten Tipps** (`werkzeuge/tippanalyse.py` zeigt den Zählerstand); Abschnitt „Änderungen am System“
+  (eine Änderung nach der anderen, nicht aus weniger als etwa 50 Fällen). Version 1.4 liegt in `archiv/SPORTSMOLE-CHECK-1.4.md`.
 - **Sparplan** (27.11.2026, Wunsch des Nutzers: mehr Spiele bei höchster Qualität): (1) `werkzeuge/datenblatt.py` liefert die
   Zahlen (Pflicht, wörtlich übernehmen); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` (Claude und Prüfer die Vollfassung; neue
   Lehren dort nachtragen); (3) Grenzfall-Runde nur bei „Spielen: ja“; (4) Prüfer gleicht Zahlen mit dem Werkzeug ab und prüft vor
@@ -62,7 +70,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   FootyStats-Vorab-Werte), **keine Direktvergleiche (H2H)** – weder als Grund noch als
   Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**, **kein „We say“**
   (seit 1.3). Forebet und Odd Alerts werden nicht verwendet.
-- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Version 1.3 und alle ihre Punkte gelten
+- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Das System in seiner aktuellen Version (1.4.1) und alle seine Punkte gelten
   **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).

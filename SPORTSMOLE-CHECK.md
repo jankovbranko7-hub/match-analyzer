@@ -1,4 +1,4 @@
-# Sports-Mole-Check (System B) · Version 1.4
+# Sports-Mole-Check (System B) · Version 1.4.1
 
 ## ‼️ OBERSTE PRIORITÄT (Wunsch des Nutzers vom 26.11.2026)
 
@@ -49,6 +49,15 @@ Team zeigen (Schritt 7). Anlass und Zahlen: `tipps/sportsmole/analyse-2026-11-27
 `werkzeuge/datenblatt.py` ist Pflicht für die Zahlen (Schritt 2–4b); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` statt der
 Vollfassung; (3) **Grenzfall-Runde nur für Paarungen mit „Spielen: ja“**; (4) der Prüfer gleicht die Zahlen mit dem Werkzeug ab
 und prüft vor allem Teamnews-Wortlaut, Regel 7c, Gegenangaben, Kräfteverhältnis und Abwägung.
+**Version 1.4.1** (28.11.2026, Wunsch des Nutzers nach der Systemprüfung – „1–3 umsetzen“): Die Tippregeln von 1.4 bleiben; sie
+werden eindeutiger und messbar. (1) **Feste Sätze** im Kräfteverhältnis (Schritt 4b: je Baustein „zeigt zu: Heim / Gast / keinem“)
+und bei der Kennzeichnung (Schritt 8: je Seite „zeigt: zum Tipp / woandershin / nicht eindeutig“); (2) **Spielort** als Gegenprobe
+in 4b; (3) **Spiele gegen unterklassige Pokalgegner** zählen nicht für die 3+-Tore-Regeln (4b und feste Unter-2,5-Gegenangabe);
+(4) **Musterfälle** (`MUSTERFAELLE.md`) und **Vorlage** für den Abschnitt (`VORLAGE-ABSCHNITT.md`); (5) **Stichprobe von Hand** durch
+den Prüfer (eine Paarung je Schritt); (6) **Schattentipp** und „Tabellenhöher“ in der Merkmale-Zeile, **Auswertung erst nach 50
+gespielten Tipps**, Abschnitt „Änderungen am System“; (7) Werkzeuge: `datenblatt.py` prüft Regel 7c am letzten Pflichtspiel
+(auch Europapokal) und gleicht SM ↔ FS in beide Richtungen ab; `tippanalyse.py` wertet 1.4 getrennt aus. Version 1.4 liegt in
+`archiv/SPORTSMOLE-CHECK-1.4.md`.
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -108,10 +117,12 @@ League One. Schickt er mehr als 5 Spiele auf einmal, fragt Claude, welche 5 zuer
 3. Claude startet je Paarung **einen frischen Agenten** (`bearbeiter`, ohne Kopie des Chats). Er holt die vier
    Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`), das **Datenblatt-Werkzeug**
    (`werkzeuge/datenblatt.py <season_id> "<FS-Heim>" "<FS-Gast>" --sm … --spieler-heim … --spieler-gast …`, seit 27.11.2026
-   Pflicht) und bei Bedarf weitere FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
+   Pflicht; im Europapokal zusätzlich `--liga-heim`/`--liga-gast` mit den Heimliga-Saisons) und bei Bedarf weitere FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
    (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das Datenblatt je Team an und geht den
-   Entscheidungsweg unten durch – je Paarung genau ein Tipp.
-4. Claude fügt die 5 Abschnitte der Agenten in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3);
+   Entscheidungsweg unten durch – je Paarung genau ein Tipp. Aufbau des Abschnitts: `VORLAGE-ABSCHNITT.md`; Einstufungen
+   (Kräfteverhältnis, Kennzeichnung) nach den festen Sätzen und den Musterfällen in `MUSTERFAELLE.md` (seit 1.4.1).
+4. Claude fügt die 5 Abschnitte der Agenten in die Tagesliste ein und liest jeden selbst gegen die Quellen (Stufe 1), danach prüft **ein** Prüfer alle 5 (Stufe 3) –
+   bei **einer** von Claude benannten Paarung zählt er die Zahlen von Hand nach (Stichprobe, seit 1.4.1);
    Korrekturen werden eingearbeitet; bei einem Grenzfall mit „Spielen: ja“ folgt danach die kurze Grenzfall-Runde (ein neuer
    Prüfer); Grenzfälle mit „Spielen: nein“ bekommen keine zweite Runde (seit 27.11.2026).
 5. Alle Tipps kommen mit dem vollständigen Antwortaufbau in die Tagesliste; im Chat steht je Paarung,
@@ -157,10 +168,15 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
      Pflichtspiel laut FS-Aufstellung) oder sicher zurück sind (fehlten im letzten Spiel, Quelle sagt klar „spielt“);
      sonst im Datenblatt „nicht neu – keine Richtung“ (Schritt 5).
    - **7d (seit 1.4):** Kräfteverhältnis (Schritt 4b) gemacht – Tabellenabstand, Gegnerstärke der letzten 6 je Team,
-     Einstufung mit Begründung; die Ausschlussregeln bei „klarer Favorit“ beachtet.
+     Einstufung mit Begründung; die Ausschlussregeln bei „klarer Favorit“ beachtet. **Seit 1.4.1:** die vier Bausteine und der
+     Spielort je mit dem festen Satz „zeigt zu: Heim / Gast / keinem – weil …“; „klarer Favorit“ nur, wenn alle vier Bausteine zum
+     selben Team zeigen und der Spielort nicht zum anderen; Spiele gegen unterklassige Pokalgegner bei den 3+-Tore-Regeln nicht
+     mitgezählt (Schritt 4b).
 8. Gegenseitiger Abgleich gemacht (letzte Ergebnisse, Tabellenplatz);
    Abweichungen vermerkt, nur übereinstimmende Angaben als Grund verwendet.
-   - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet.
+   - **8a:** Kennzeichnung „beide einig“ oder „geteilt“ gesetzt und bei „geteilt“ begründet – seit 1.4.1 mit den zwei festen
+     Sätzen (SM-Seite / FS-Seite „zeigt: zum Tipp / woandershin / nicht eindeutig – weil …“); „beide einig“ nur, wenn beide „zum
+     Tipp“ lauten (Schritt 8).
    - **8b (seit 1.4):** „Spielen: ja“ nur bei „beide einig“, sonst „Spielen: nein – nur Beobachtung“ (Tagesliste und Chat).
 9. Tipp ist der sicherste der sechs Märkte (seit 1.4: unter den nach Schritt 4b erlaubten Märkten; Vorrang Sieg-Markt nach Schritt 7 geht vor) (gegen ihn spricht am wenigsten; bei den anderen
    Märkten kurz gesagt, warum mehr dagegen spricht). Tipp passt zur Begründung: Die genannten Gründe tragen genau diesen Markt; **alle**
@@ -175,7 +191,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 
 **Abschluss**
 
-11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026), committet und auf den Arbeitsbranch
+11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026; seit 1.4.1 mit den
+    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
     Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
@@ -184,6 +201,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
     umgangen; was nicht erledigt werden konnte, ist offen genannt (ergänzt am 21.11.2026).
 14. **Fehlerprotokoll:** vor der Analyse gelesen (Claude und Prüfer die Vollfassung, Bearbeiter `FEHLERPROTOKOLL-KURZ.md`); jede Fehlerart gezielt geprüft; jeder in
     dieser Runde gefundene Fehler dort eingetragen (seit 1.3).
+15. **Stichprobe von Hand (seit 1.4.1):** Im Auftrag an den Prüfer ist eine Paarung des Schritts als Stichprobe benannt (bevorzugt
+    eine mit „Spielen: ja“, sonst wechselnd); ihr Ergebnis steht im Kontrollergebnis.
 
 **Drei Kontrollstufen** (keine Garantie möglich, darum mehrfach geprüft):
 
@@ -216,7 +235,11 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   Tipp betrifft, kann der Nutzer entscheiden, sie seltener zu verlangen). Der Prüfer ist eine eigene Claude-Instanz, die
   die Analyse aus dem Gespräch nicht kennt. Er liest Regeln, Fehlerprotokoll und Tagesliste, ruft alle Quellen selbst neu
   ab (Sports Mole, FootyStats; die Zahlen gleicht er seit 27.11.2026 mit einem eigenen Lauf von `werkzeuge/datenblatt.py` ab, statt
-  sie von Hand nachzuzählen – sein Schwerpunkt sind Teamnews-Wortlaut, Regel 7b/7c, Gegenangaben, Kräfteverhältnis und Abwägung) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
+  sie von Hand nachzuzählen – sein Schwerpunkt sind Teamnews-Wortlaut, Regel 7b/7c, Gegenangaben, Kräfteverhältnis und Abwägung;
+  **Stichprobe von Hand, seit 1.4.1:** bei **einer** von Claude benannten Paarung je Schritt – bevorzugt eine mit „Spielen: ja“, sonst
+  wechselnd – zählt der Prüfer die Zahlen des Datenblatts selbst aus den Rohdaten nach (FS-`league-matches`, SM-Spielseite), ohne das
+  Werkzeug, damit ein Fehler des Werkzeugs nicht an Bearbeiter, Claude und Prüfer zugleich vorbeigeht; weicht etwas ab, ist das ein
+  Werkzeugfehler: ins Fehlerprotokoll (M), dem Nutzer melden, alle 5 Paarungen des Schritts von Hand nachzählen) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
   den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
   Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
   (Schritt 1–8, Datenblatt je Team gegen die Quellen, Lage-Check mit fünf Fragen für beide Teams, Spielbild je Team mit „trifft es?
@@ -333,7 +356,12 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    **Datenblatt-Werkzeug** (Pflicht seit 27.11.2026): Die Zahlen der Felder 1–4, die Gegnerstärke für Schritt 4b, die Startelf des
    letzten Ligaspiels und die Regel-7c-Prüfung der Teamnews-Spieler kommen aus `werkzeuge/datenblatt.py` und werden **wörtlich
    übernommen** (nicht neu gezählt). Der Agent ergänzt den Teamnews-Status nach Originalwort (Feld 5), was das Werkzeug nicht
-   kann (Pokal-Aufstellungen, Spieler ohne FS-Eintrag), und klärt jede gemeldete Abweichung.
+   kann (Aufstellungen nationaler Pokalspiele, Spieler ohne FS-Eintrag), und klärt jede gemeldete Abweichung. **Seit 1.4.1:** Das
+   Werkzeug prüft Regel 7c am **letzten Pflichtspiel, das FS führt** (Liga und Europapokal; im Europapokal mit `--liga-heim`/
+   `--liga-gast` auch die Heimliga) und warnt, wenn das neueste Spiel der SM-Formdaten ein nationales Pokalspiel war (dann 7c laut
+   SM-Artikel prüfen). Es gleicht SM ↔ FS **in beide Richtungen** ab: Ein FS-Spiel, das in den SM-Formdaten fehlt, wird als
+   Abweichung gemeldet und in den Block „letzte 6 alle Wb.“ aufgenommen. Jede Zeile „Abweichungen“ und „Hinweise zur Zuordnung“
+   wird geklärt und vermerkt.
    **Wirkung:** Lage-Check, Spielbild, Märkte und Tipp (Schritt 4–8) verwenden **nur Angaben aus dem
    Datenblatt**; fehlt eine Angabe, wird sie zuerst mit Quelle ins Datenblatt eingetragen. Jede
    Angabe im Datenblatt wird einmal gegen den Wortlaut der Quelle gelesen (Prüfliste 6b). „We say“
@@ -354,22 +382,37 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    Zahlen drehen – aber nur mit konkreten Fakten aus Artikel, Tabelle oder Ergebnislisten (z. B.:
    Favorit mit vielen Ausfällen und zwei Remis in Folge gegen ein Team im Abstiegskampf, das tief
    stehen wird → Sieg-Tipp wird zur Gegenangabe, ein Tormarkt kann der sicherere Tipp sein).
-4b. **Kräfteverhältnis** (Pflicht seit Version 1.4, Wunsch des Nutzers vom 27.11.2026) – nach dem Lage-Check, vor dem Spielbild,
-   nur Fakten aus dem Datenblatt (fehlt eine Angabe, wird sie zuerst mit Quelle eingetragen):
-   1. **Tabelle:** Platz, Punkte und Punkte pro Spiel beider Teams und der Abstand zwischen ihnen (Liga; im Europapokal
-      Ligaphase **und** Heimliga).
-   2. **Gegnerstärke der letzten 6** (alle Wettbewerbe) je Team: zu jedem Formspiel der aktuelle Tabellenplatz des Gegners
-      (Pokalgegner aus anderen Ligen: Liga laut Quelle, sonst „nicht in der Quelle“); daraus Ergebnisse, eigene Tore und
-      Gegentore gegen Gegner aus der oberen und aus der unteren Tabellenhälfte.
-   3. **Einstufung:** „**klarer Favorit: <Team>**“ nur, wenn Tabelle (1.), die Ergebnisse beider Rang-2-Blöcke und die
-      Gegnerstärke (2.) **alle zum selben Team** zeigen; sonst „**ausgeglichen**“ oder „**nicht eindeutig**“. Keine Schwellen,
-      keine Punkte – die Einstufung wird in einem Satz mit diesen Fakten begründet.
+4b. **Kräfteverhältnis** (Pflicht seit Version 1.4, Wunsch des Nutzers vom 27.11.2026; feste Sätze seit 1.4.1) – nach dem
+   Lage-Check, vor dem Spielbild, nur Fakten aus dem Datenblatt (fehlt eine Angabe, wird sie zuerst mit Quelle eingetragen):
+   1. **Vier Bausteine, je mit dem festen Satz „zeigt zu: Heim / Gast / keinem – weil …“** (die Fakten in einem Halbsatz):
+      - **(a) Tabelle:** Platz, Punkte und Punkte je Spiel beider Teams und der Abstand zwischen ihnen (Liga; im Europapokal
+        Ligaphase **und** Heimliga).
+      - **(b) Letzte 6 aller Wettbewerbe** beider Teams (S-U-N, Tore).
+      - **(c) Letzte 6 Liga** beider Teams (S-U-N, Tore; im Europapokal alle Spiele der Ligaphase **und** die letzten 6 der
+        Heimliga – zeigt einer der beiden Blöcke woandershin, lautet der Satz „keinem“).
+      - **(d) Gegnerstärke der letzten 6** (alle Wettbewerbe) je Team: zu jedem Formspiel der aktuelle Tabellenplatz des Gegners
+        (Pokalgegner aus anderen Ligen: Spielklasse laut Quelle, sonst „nicht in der Quelle“); daraus Ergebnisse, eigene Tore und
+        Gegentore gegen Gegner aus der oberen und aus der unteren Tabellenhälfte.
+      Ein Baustein zeigt zu dem Team, das darin **deutlich** besser dasteht. Liegen beide nah beieinander oder lässt sich der
+      Baustein in beide Richtungen lesen, lautet der Satz „zeigt zu: keinem“ – **im Zweifel „keinem“**. Keine Schwellen, keine
+      Punkte: Der Halbsatz nennt die Fakten, der Prüfer liest sie nach (Musterfälle: `MUSTERFAELLE.md`).
+   2. **Spielort als Gegenprobe (seit 1.4.1):** Liga-Bilanz des Heimteams daheim und des Gastteams auswärts (Saison, Rang 3, aus
+      dem Werkzeug) mit dem Satz „Spielort zeigt zu: Heim / Gast / keinem – weil …“.
+   3. **Einstufung:** „**klarer Favorit: <Team>**“ nur, wenn **alle vier Bausteine (a–d) zum selben Team zeigen** und der
+      **Spielort nicht zum anderen Team** zeigt; „**ausgeglichen**“, wenn kein Baustein zu einem Team zeigt; sonst „**nicht
+      eindeutig**“. In der Tagesliste stehen die fünf Sätze und die Einstufung, im Chat ein Satz.
    **Wirkung bei „klarer Favorit“** (Anlass: Auswertung 20.–26.11. – in 19 von 21 verfehlten Tipps auf Beide treffen – Ja,
    Über 2,5 und Unter 2,5 blieb ein Team ohne Tor bzw. gewann ein Team deutlich):
    - **Beide treffen – Ja ist nicht erlaubt.**
    - **Über 2,5 nur**, wenn der Favorit in seinen letzten 6 (Bezug nennen) mehrfach **allein** 3 oder mehr Tore schoss (mit
      Spielständen) – der Tipp darf nicht davon abhängen, dass der Außenseiter trifft.
    - Bei **Unter 2,5** ist die feste Gegenangabe (3+ eigene Tore) für den Favoriten immer ausdrücklich zu nennen.
+   **Unterklassige Pokalgegner (seit 1.4.1, Wunsch des Nutzers vom 28.11.2026):** Ein Spiel gegen einen Gegner, der laut Quelle
+   (SM-Artikel, SM-Spielseite, FS) in einer **tieferen Spielklasse** spielt als das Team, zählt **nicht** für „Favorit schoss
+   mehrfach allein 3+ Tore“ und **nicht** für die feste Unter-2,5-Gegenangabe (Schritt 6); es wird genannt mit „unterklassiger
+   Gegner – zählt hier nicht“. Steht die Spielklasse des Pokalgegners nicht in der Quelle, gilt die vorsichtige Seite: Es zählt
+   **nicht** für die Favoriten-Bedingung (Über 2,5), aber **weiter** für die Unter-2,5-Gegenangabe. Europapokal-Gegner sind nicht
+   unterklassig. In den Rang-2-Blöcken bleibt das Spiel stehen (mit dem Hinweis), nur für diese zwei Regeln zählt es nicht.
    Die Einstufung selbst ist kein Rang-Grund; sie schließt Märkte aus und gibt den Vorrang aus Schritt 7.
 5. **Spielbild je Team** – drei Fragen: **Trifft es? Kassiert es? Gewinnt es?** Die Zahlen dazu
    kommen aus FootyStats (Rang 2–3), Sports Mole korrigiert mit den Teamnews (Rang 1): fehlt z. B.
@@ -397,7 +440,7 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    ausdrücklich geprüft, ob eines der Teams in seinen letzten 6 Spielen (Bezug nennen) schon mehrfach
    allein 3 oder mehr Tore geschossen hat – mit Spielständen. Trifft das zu, ist es eine Rang-2-Gegenangabe
    mit „dreht den Tipp: ja/nein, weil …“. (Anlass: Auswertung 24.11. – alle 5 Unter-Fehltipps hatten ein
-   Team mit 3+ eigenen Toren.)
+   Team mit 3+ eigenen Toren.) Spiele gegen laut Quelle unterklassige Pokalgegner zählen dabei nicht mit (seit 1.4.1, Schritt 4b).
 7. **Tipp:** Claude bestimmt **selbst** den **sichersten der sechs Märkte** (Kriterium siehe unten; seit 1.4 nur unter
    den nach Schritt 4b erlaubten Märkten, und der **Vorrang Sieg-Markt** unten geht vor)
    – ohne Rechenmodell, Schwellen oder Punkte. Rang 1–2 geben die Richtung, Rang 3 hilft
@@ -426,6 +469,12 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    „**geteilt**“ – eine Seite zeigt woandershin oder nicht eindeutig (welche und warum, in einem
    Satz). Die
    Kennzeichnung ist keine Schwelle, sondern dient der Auswertung.
+   **Feste Sätze (seit 1.4.1):** In der Tagesliste steht immer: „**SM-Seite** (Rang 1 – Lage, Teamnews) zeigt: zum Tipp /
+   woandershin (wohin) / nicht eindeutig – weil …“ und „**FS-Seite** (Rang 2–3 – Form, Spielort, Saison) zeigt: zum Tipp /
+   woandershin (wohin) / nicht eindeutig – weil …“. „beide einig“ nur, wenn **beide Sätze „zum Tipp“** lauten. Gibt Rang 1 für den
+   gewählten Markt keine Richtung (keine neue Änderung nach Regel 7c, Lage ohne Bezug zum Markt), lautet der SM-Satz „nicht
+   eindeutig“ – das ist „geteilt“. Zeigt ein Rang-2-Block gegen den Tipp, lautet der FS-Satz nicht „zum Tipp“ (Musterfälle:
+   `MUSTERFAELLE.md`).
    **Spielen nur bei „beide einig“** (seit Version 1.4, Wunsch des Nutzers vom 27.11.2026): Jede Paarung bekommt weiter genau
    einen Tipp. „beide einig“ → **„Spielen: ja“**; „geteilt“ → **„Spielen: nein – nur Beobachtung“**. Die Auswertung zählt beide
    Gruppen getrennt.
@@ -459,12 +508,16 @@ Version 1.3); **im Chat** nur Punkt 7 mit Anstoß und Paarung, dazu seit 1.4 der
 2. **Datenblatt je Team** (Tabelle, letzte Spiele, letzter Sieg/Tor, Zahlen mit Bezug, Teamnews
    nach Originalwort)
 3. **Lage-Check je Team** (fünf Fragen)
-3b. **Kräfteverhältnis** (Tabelle, Gegnerstärke der letzten 6, Einstufung mit Begründung – seit 1.4)
+3b. **Kräfteverhältnis** (vier Bausteine und Spielort je mit dem festen Satz „zeigt zu: …“, Einstufung – seit 1.4, feste Sätze
+    seit 1.4.1)
 4. Spielbild je Team: trifft es? kassiert es? gewinnt es? (mit Quelle, Teamnews eingearbeitet)
 5. Spielbild gesamt
 6. Die sechs Märkte, je kurz dafür/dagegen
 7. ✅ **Tipp** mit Gründen, Gegenangaben (jede aus Rang 1–2 mit „dreht den Tipp: ja/nein, weil …“)
-   und „beide einig“ / „geteilt“ sowie „Spielen: ja“ / „Spielen: nein – nur Beobachtung“ (seit 1.4)
+   und „beide einig“ / „geteilt“ (mit den zwei festen Sätzen, seit 1.4.1) sowie „Spielen: ja“ / „Spielen: nein – nur
+   Beobachtung“ (seit 1.4)
+8. **Merkmale-Zeile** (Punkte 1–12)
+Vorlage für den ganzen Abschnitt: `VORLAGE-ABSCHNITT.md` (seit 1.4.1).
 (Kein „We say“ – seit Version 1.3 nicht mehr verwendet.)
 
 ## Tagesliste
@@ -493,8 +546,27 @@ Schwellen):
 9. Zweitbester Markt: der Markt, gegen den nach dem Tipp am wenigsten spricht (ergänzt am 26.11.2026 auf Wunsch
    des Nutzers) – bei der Auswertung wird mitgezählt, ob er getroffen hätte; so lässt sich ohne Rückschau prüfen, ob ein
    Vorrang für Sieg / Beide treffen – Nein bei fast gleich starken Märkten mehr Treffer gebracht hätte.
-10. Kräfteverhältnis: klarer Favorit (Team) / ausgeglichen / nicht eindeutig (seit 1.4).
+10. Kräfteverhältnis: klarer Favorit (Team) / ausgeglichen / nicht eindeutig (seit 1.4); dazu seit 1.4.1 „Tabellenhöher: Heim /
+    Gast“ (aus dem Werkzeug) – Vergleichswert für die Auswertung („der Tabellenhöhere gewinnt“).
 11. Spielen: ja / nein (seit 1.4).
+12. **Schattentipp** (seit 1.4.1): der Markt, der **ohne** die Ausschlüsse aus Schritt 4b und **ohne** den Vorrang Sieg-Markt der
+    sicherste der sechs gewesen wäre – dazu „gleich“ oder „anders wegen 4b-Ausschluss“ bzw. „anders wegen Vorrang Sieg-Markt“. So
+    lassen sich die Regeln von 1.4 an denselben Spielen mit dem Stand davor vergleichen und voneinander trennen.
+Schreibweise (fest, damit `werkzeuge/tippanalyse.py` sie liest): „(10) Kräfteverhältnis: … ; Tabellenhöher: Heim · (11) Spielen: ja ·
+(12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
+Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5).
 Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal; seit 1.4 immer getrennt nach „Spielen: ja“ und „nein“); bei geänderten Tipps auch, ob der
-ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt getroffen hätte. Nach etwa 50 Tipps mit Merkmalen wird ausgewertet und dem Nutzer berichtet; ob ein
+ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt und der Schattentipp getroffen hätten. **Ausgewertet und dem
+Nutzer berichtet wird, sobald 50 gespielte Tipps („Spielen: ja“) seit 1.4 ein Ergebnis haben** (seit 1.4.1; vorher „nach etwa 50
+Tipps“ – das wären zu wenige gespielte gewesen); `werkzeuge/tippanalyse.py` zeigt den Zählerstand. Ob ein
 Merkmal zum Aussortieren oder Kennzeichnen verwendet wird, entscheidet nur der Nutzer.
+
+## Änderungen am System (seit 1.4.1, Wunsch des Nutzers vom 28.11.2026)
+
+- **Eine Änderung nach der anderen:** Claude schlägt neue Tippregeln einzeln vor, damit sich ihre Wirkung trennen lässt.
+- **Nicht aus zu wenigen Fällen:** Claude empfiehlt eine neue Tippregel erst, wenn etwa 50 Fälle dafür vorliegen, und sagt bei
+  jeder Zahl dazu, wie viele Fälle dahinterstehen.
+- **Messbar von Anfang an:** Jede neue Regel bekommt, wo es geht, eine Merkmale-Zeile, mit der sich an denselben Spielen
+  vergleichen lässt, was mit und ohne die Regel getippt worden wäre (wie der Schattentipp).
+- Über jede Änderung entscheidet allein der Nutzer; Reparaturen an Werkzeugen (Zählfehler, Abruffehler) werden sofort gemeldet,
+  ins Fehlerprotokoll eingetragen und behoben.

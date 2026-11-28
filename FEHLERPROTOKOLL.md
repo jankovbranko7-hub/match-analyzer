@@ -459,6 +459,31 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Gegner-Tabellenplätze als Rang 2 (K/C). Brest/Paris FC: xG letzte 6 fehlte als Rang-2-Angabe (B). Marítimo/Nacional: Widerlegung mit
   Nacionals Heim-Zu-null-Spielen ohne „daheim“ gegen eine Auswärts-Gegenangabe (A/C, Muster Levante 23.11.), xG gegen fehlte (B).
 
+### 28.11.2026 · Regeln und Werkzeuge (Systemprüfung auf Wunsch des Nutzers, selbst gefunden – vor dem ersten Einsatz von 1.4)
+- `datenblatt.py` prüfte Regel 7c am letzten **Ligaspiel** statt am letzten **Pflichtspiel** – bei Europapokal-Teilnehmern das
+  falsche Spiel (Test 28.11.: Manchester United, Real Madrid, Inter spielten am 24./25.11. Champions League, das Werkzeug zeigte
+  die Elf vom 22.11.) – M/E – kein Tipp betroffen (Werkzeug noch in keiner Analyse eingesetzt). Behoben: letztes Pflichtspiel laut
+  FS (Liga + Europapokal, im Europapokal mit `--liga-heim`/`--liga-gast`), Warnung „ACHTUNG Regel 7c“ bei nationalem Pokalspiel.
+- `datenblatt.py` glich nur SM → FS ab: Fehlte in den SM-Formdaten das neueste Spiel, kam keine Meldung; die Zuordnung nahm das
+  erste FS-Spiel mit einem gemeinsamen Namenswort („City“, „United“, „Real“) und konnte bei auseinanderlaufenden Quellen das
+  falsche Spiel treffen und dessen Ergebnis als „FS-Wert“ einsetzen – M/G – kein Tipp betroffen. Behoben: Abgleich in beide
+  Richtungen, Zuordnung über Spielort, ganzen Gegnernamen und Ergebnis; getestet mit nachgestellten Fällen (SM veraltet um 1 und 2
+  Spiele, Platzhalter 0:0, falsches SM-Ergebnis, anderer Kurzname, unbekannter Wettbewerbs-Link) und 37 Namenspaaren.
+- `tippanalyse.py` las nur Listen `2026-11-*` (ab 01.12. nichts Neues), wertete Kräfteverhältnis und „Spielen“ nicht aus, trennte
+  nicht vor/seit 1.4 und fand 0 geänderte Tipps, obwohl 3 in den Listen stehen (Schreibweise „zuvor: …“) – M/H – behoben. Die
+  Zahlen der Analyse vom 27.11. (80 Tipps, 47 Treffer, Wettarten, Kennzeichnung × Grenzfall) sind unverändert.
+- Alle drei Kontrollen (Bearbeiter, Stufe 1, Prüfer) stützen sich seit dem Sparplan auf dasselbe Werkzeug – ein Zählfehler dort
+  fiele keiner auf – M (Lücke im Ablauf). Gegenmaßnahme seit 1.4.1: Stichprobe von Hand durch den Prüfer (eine Paarung je Schritt).
+- Agenten-Aufträge `bearbeiter.md`/`pruefer.md` und der Absatz „Verbindlich“ in `CLAUDE.md` nannten noch „Version 1.3“; `CLAUDE.md`
+  Punkt 3 nannte die Grenzfall-Runde ohne „mit Spielen: ja“ – M – berichtigt. Als Vorlage lasen die Bearbeiter einen 1.3-Abschnitt
+  ohne 4b – jetzt `VORLAGE-ABSCHNITT.md` und `MUSTERFAELLE.md`.
+- Analyse vom 27.11. (Grundlage von 1.4), Hinweise zur Aussagekraft – E/H (Hinweis, keine Regel deshalb geändert): (a) „in 19 von 21
+  verfehlten Tor-Tipps blieb ein Team ohne Tor bzw. gewann deutlich“ folgt zum Teil aus der Definition (ein verfehltes Beide treffen
+  – Ja hat immer ein Team ohne Tor) und belegt nicht, dass Schritt 4b diese Spiele vorher als „klarer Favorit“ erkannt hätte;
+  (b) der Abstand „beide einig“ 20 von 29 gegen „geteilt“ 26 von 49 kann bei so wenigen Tipps Zufall sein und liegt fast ganz bei
+  Über 2,5 (7 von 8 gegen 3 von 10; ohne Über 13 von 21 gegen 23 von 39). Gegenmaßnahme seit 1.4.1: Schattentipp (Merkmal 12),
+  Bericht erst nach 50 gespielten Tipps, Abschnitt „Änderungen am System“.
+
 ---
 
 ## Lehren bisher
@@ -474,5 +499,10 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Kontrolle allein reicht nicht immer.
 - Am häufigsten: **A (Liga/alle Wb.)**, **B (Gegenangaben)**, **E (Vermutungen)** – darauf beim
   Schreiben zuerst achten.
+- **Werkzeuge sind eine gemeinsame Fehlerquelle** (28.11.): Was das Werkzeug falsch zählt, sehen Bearbeiter, Claude und Prüfer
+  gleich falsch – darum je Schritt eine Stichprobe von Hand; neue oder geänderte Werkzeuge an echten Spielen **und** an
+  nachgestellten Fehlerfällen testen, bevor sie in einer Analyse laufen.
+- **Zahlen aus der Auswertung immer mit Fallzahl** (28.11.): Ein Muster aus wenigen Dutzend Tipps ist eine Richtung, kein Beleg;
+  was aus der Definition des Marktes folgt, ist gar kein Muster.
 - **Alle Tippänderungen** kamen aus **B, C, E, F**: Gegenangaben und Abwägung sind die Stellen, an
   denen Fehler den Tipp kosten.
