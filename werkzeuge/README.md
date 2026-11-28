@@ -10,9 +10,13 @@ Sports-Mole-Check (seit 20.11.2026):
   beide Richtungen** (fehlt ein FS-Spiel in den SM-Formdaten, wird es gemeldet und in den Block aufgenommen; Zuordnung über
   Spielort, ganzen Gegnernamen und Ergebnis; „Hinweise zur Zuordnung“ bei anders geschriebenen Namen); bei „3+ eigene Tore“ sind
   nationale Pokalspiele einzeln genannt (unterklassige Gegner zählen nach 1.4.1 nicht).
+- `vorpruefung.py "<Liga wie in der SM-Übersicht>" [Wochentag] [--saison <FS-Saison>]` (seit 28.11.2026) – Vorprüfung vor der
+  Spielauswahl: für alle Spiele der Liga mit SM-Vorschau nur die Zahlenseite (vier Bausteine aus Schritt 4b, Spielort, Tor-Zahlen
+  der letzten 6), ohne Agenten, ohne Teamnews – kein Tipp. Den Satz „Zahlen zeigen zu: …“ schreibt Claude, die 5 Spiele wählt der
+  Nutzer (Abschnitt „Vorprüfung“ in `SPORTSMOLE-CHECK.md`).
 - `tippanalyse.py` – Auswertung aller Tipps aller Monate (Wettart, Kennzeichnung, Grenzfall, zweitbester Markt, geänderte Tipps,
   Liga, verfehlte Tor-Tipps), getrennt vor/seit 1.4; seit 1.4: „Spielen: ja/nein“ mit Zählerstand der gespielten Tipps (Bericht an
-  den Nutzer ab 50), Kräfteverhältnis, Schattentipp, Vergleichswert „der Tabellenhöhere gewinnt“.
+  den Nutzer ab 50), Kräfteverhältnis, Schattentipp, Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13).
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:

@@ -7,7 +7,8 @@
    Antwort des Nutzers ist keine Erlaubnis für eine Abweichung – dann wird nachgefragt.
 2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
    nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
-   Kontrollergebnis; erst danach kommt der nächste Schritt.
+   Kontrollergebnis; erst danach kommt der nächste Schritt. Auf Wunsch des Nutzers läuft davor eine **Vorprüfung**
+   (seit 28.11.2026) – die 5 Spiele wählt weiter der Nutzer.
 3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
    neuer). Zusätzlich nur: bei einem Grenzfall mit „Spielen: ja“ **ein** neuer Prüfer für die kurze Grenzfall-Runde und eine weitere
@@ -59,6 +60,11 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   eine von Claude benannte Paarung ohne Werkzeug nach; (5) Merkmale 10–12 mit „Tabellenhöher“ und **Schattentipp**; **Auswertung an
   den Nutzer erst nach 50 gespielten Tipps** (`werkzeuge/tippanalyse.py` zeigt den Zählerstand); Abschnitt „Änderungen am System“
   (eine Änderung nach der anderen, nicht aus weniger als etwa 50 Fällen). Version 1.4 liegt in `archiv/SPORTSMOLE-CHECK-1.4.md`.
+- **Vorprüfung** (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026): Schreibt der Nutzer „Vorprüfung <Liga> [Tag]“, lässt
+  Claude `werkzeuge/vorpruefung.py` laufen (ohne Agenten, nur Zahlenseite) und nennt im Chat je Spiel den festen Satz „Zahlen zeigen
+  zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem – weil …“ (im Zweifel „keinem“). **Kein Tipp**, keine Teamnews, keine Lage –
+  das immer dazusagen. Der Nutzer wählt seine 5; dann volles System unverändert. Bearbeiter und Prüfer bekommen das Ergebnis der
+  Vorprüfung **nicht** (kein Anker); Claude trägt nach der Kontrolle Merkmal 13 ein (Abschnitt „Vorprüfung“ in `SPORTSMOLE-CHECK.md`).
 - **Sparplan** (27.11.2026, Wunsch des Nutzers: mehr Spiele bei höchster Qualität): (1) `werkzeuge/datenblatt.py` liefert die
   Zahlen (Pflicht, wörtlich übernehmen); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` (Claude und Prüfer die Vollfassung; neue
   Lehren dort nachtragen); (3) Grenzfall-Runde nur bei „Spielen: ja“; (4) Prüfer gleicht Zahlen mit dem Werkzeug ab und prüft vor

@@ -37,6 +37,7 @@ Antworte auf Deutsch. Du bearbeitest **genau eine Paarung** – die im Auftrag g
   laut Quelle unterklassige Pokalgegner zählen nicht für die 3+-Tore-Regeln („unterklassiger Gegner – zählt hier nicht“).
 - **Schritt 8:** die zwei festen Sätze (SM-Seite / FS-Seite „zeigt: zum Tipp / woandershin / nicht eindeutig – weil …“); „beide
   einig“ und „Spielen: ja“ nur, wenn beide „zum Tipp“ lauten.
+- Merkmal 13 („Vorprüfung“) trägt Claude später ein – lass es weg.
 - **Schattentipp (Merkmal 12):** der Markt, der ohne die 4b-Ausschlüsse und ohne den Vorrang Sieg-Markt der sicherste gewesen wäre
   – „gleich“ oder „anders wegen 4b-Ausschluss“ / „anders wegen Vorrang Sieg-Markt“. Er ändert den Tipp nicht.
 - Am Ende eigener Kontrolldurchgang (jede Aussage gegen die Quelle, jede Fehlerart) mit Vermerk und Uhrzeit.

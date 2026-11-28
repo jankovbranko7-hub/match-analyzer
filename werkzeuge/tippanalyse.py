@@ -9,7 +9,7 @@ Ergebnis) und die Merkmale-Zeile des Abschnitts. Gibt aus:
   2. getrennt „vor 1.4“ und „seit 1.4“,
   3. seit 1.4: „Spielen: ja/nein“, Zahl der gespielten Tipps (Auswertung an den Nutzer ab 50 gespielten),
      Kräfteverhältnis, Schattentipp (was ohne 4b-Ausschluss und ohne Vorrang Sieg-Markt getippt worden wäre),
-     Vergleichswert „der Tabellenhöhere gewinnt“.
+     Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13: aus Vorprüfung gewählt ja/nein).
 Ein Tipp zählt als „seit 1.4“, wenn seine Merkmale-Zeile Punkt (11) „Spielen“ enthält oder die Liste ab dem 28.11.2026 datiert.
 Keine Quoten, kein Rechenmodell – nur Ergebnisse der eigenen Tipps.
 """
@@ -115,6 +115,10 @@ def lies():
         r["schatten"] = mk(s12) if s12 else None
         r["schatten_grund"] = ("4b-Ausschluss" if s12 and "4b" in s12 else "Vorrang Sieg-Markt" if s12 and "Vorrang" in s12
                                else None)
+        s13 = seg(mm, 13)
+        vp = re.search(r"Vorprüfung:\s*(ja|nein)", s13 or "")
+        r["vp"] = vp.group(1) if vp else None
+        r["vp_markt"] = (mk(s13) if s13 and "keinem" not in s13 else None) if r["vp"] == "ja" else None
         r["hit"] = out(r["h"], r["a"])[r["tip"]]
         del r["txt"]
     return rows
@@ -209,6 +213,23 @@ def auswertung_14(rows):
         print(f"  nur Spiele mit Sieg-Tipp: Tipp {q(sieg)} | Tabellenhöherer gewinnt {q(sieg, 'thit')}")
         sj = [r for r in sieg if r["spielen"] == "ja"]
         print(f"  nur gespielte Sieg-Tipps: Tipp {q(sj)} | Tabellenhöherer gewinnt {q(sj, 'thit')}")
+    v = [r for r in rows if r["vp"]]
+    print(f"\nVorprüfung (Merkmal 13): {len(v)} Tipps mit Angabe")
+    if v:
+        def anteil(sub):
+            j = sum(r["spielen"] == "ja" for r in sub)
+            return f"{j}/{len(sub)} = {j / len(sub):.0%}" if sub else "–"
+        gruppen = (("aus Vorprüfung, Zahlen zeigten zu einem Markt", [r for r in v if r["vp"] == "ja" and r["vp_markt"]]),
+                   ("aus Vorprüfung, Zahlen zeigten zu keinem", [r for r in v if r["vp"] == "ja" and not r["vp_markt"]]),
+                   ("ohne Vorprüfung", [r for r in v if r["vp"] == "nein"]))
+        for lab, sub in gruppen:
+            print(f"  {lab}: {len(sub)} Tipps – davon „Spielen: ja“ {anteil(sub)} · Treffer alle {q(sub)} · "
+                  f"Treffer gespielte {q([r for r in sub if r['spielen'] == 'ja'])}")
+        m = gruppen[0][1]
+        if m:
+            g = [r for r in m if r["vp_markt"] == r["tip"]]
+            print(f"  Tipp = Richtung der Vorprüfung: {len(g)} von {len(m)} (Treffer {q(g)}); Tipp anders: {len(m) - len(g)} "
+                  f"(Treffer {q([r for r in m if r['vp_markt'] != r['tip']])})")
 
 
 def main():

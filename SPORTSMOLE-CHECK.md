@@ -8,7 +8,8 @@
 2. **Der Nutzer schickt die Spiele in Schritten zu je 5 Spielen.** Claude bearbeitet jeden Schritt vollständig
    nach dem System (jede Paarung einzeln, Prüfliste, Kontrollstufen 1–3) und schickt die Tipps mit dem
    Kontrollergebnis; erst danach kommt der nächste Schritt. **Alle 5 Tipps eines Schritts kommen zusammen**, fertig
-   und geprüft vor dem **ersten Anstoß** dieser 5 Spiele (Wahl des Nutzers vom 27.11.2026, Variante a).
+   und geprüft vor dem **ersten Anstoß** dieser 5 Spiele (Wahl des Nutzers vom 27.11.2026, Variante a). Auf Wunsch des Nutzers
+   läuft davor eine **Vorprüfung** (Abschnitt „Vorprüfung“, seit 28.11.2026) – die 5 Spiele wählt weiter der Nutzer.
 3. **Prüfer: genau einer.** Für die unabhängige Kontrolle (Stufe 3) gibt es **einen** Prüfer; jeder weitere
    5er-Schritt geht per Weiterführung an **denselben** Prüfer (nur wenn das nicht geht, z. B. im neuen Chat, startet ein
    neuer). Zusätzlich nur: bei einem Grenzfall mit „Spielen: ja“ (seit 27.11.2026) **ein** neuer Prüfer für die kurze
@@ -58,6 +59,9 @@ den Prüfer (eine Paarung je Schritt); (6) **Schattentipp** und „Tabellenhöhe
 gespielten Tipps**, Abschnitt „Änderungen am System“; (7) Werkzeuge: `datenblatt.py` prüft Regel 7c am letzten Pflichtspiel
 (auch Europapokal) und gleicht SM ↔ FS in beide Richtungen ab; `tippanalyse.py` wertet 1.4 getrennt aus. Version 1.4 liegt in
 `archiv/SPORTSMOLE-CHECK-1.4.md`.
+**Ergänzung zu 1.4.1 – Vorprüfung** (28.11.2026, Wunsch des Nutzers: „Ja einbauen“): Vor der Spielauswahl zählt
+`werkzeuge/vorpruefung.py` für alle Spiele einer Liga mit Vorschau die Zahlenseite; Claude nennt je Spiel, wohin die Zahlen zeigen;
+der Nutzer wählt seine 5; Merkmal 13 hält fest, ob ein Spiel aus der Vorprüfung gewählt wurde (Abschnitt „Vorprüfung“).
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -102,6 +106,31 @@ was er wissen muss, steht **vollständig im Chat**, handytauglich als Liste:
 - die Auswertung.
 
 Ein PDF nur auf ausdrücklichen Wunsch. Tagesliste und Fehlerprotokoll bleiben als Ablage.
+
+## Vorprüfung (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026)
+
+Zweck: mehr **gespielte** Tipps je Aufwand. Am 27.11. waren 9 von 10 Tipps „geteilt“ (nur Beobachtung); die Vorprüfung zeigt vor
+der Auswahl, bei welchen Spielen wenigstens die Zahlenseite klar in eine Richtung zeigt.
+
+- **Auslöser:** Der Nutzer schreibt „Vorprüfung <Liga oder Ligen> [Tag]“. Ohne diesen Wunsch gibt es keine Vorprüfung.
+- **Ablauf:** Claude lässt `werkzeuge/vorpruefung.py "<Liga>" [Wochentag]` laufen – **ohne Agenten** – für alle Spiele der Liga mit
+  Sports-Mole-Vorschau. Das Werkzeug zählt nur: die vier Bausteine aus Schritt 4b (Tabelle, letzte 6 alle Wb., letzte 6 Liga,
+  Gegnerstärke), den Spielort und die Tor-Zahlen der letzten 6 beider Teams.
+- **Im Chat je Spiel** (Liste, erst die Spiele mit Richtung): Anstoß, Paarung und **ein fester Satz „Zahlen zeigen zu: Heimsieg /
+  Auswärtssieg / <Tor-Markt> / keinem – weil …“**. „Heimsieg/Auswärtssieg“ nur, wenn alle vier Bausteine zum selben Team zeigen
+  und der Spielort nicht zum anderen (wie Schritt 4b). Ein Tor-Markt nur, wenn **alle** Rang-2-Blöcke **beider** Teams (letzte 6
+  Liga und letzte 6 alle Wb.) deutlich zu diesem Markt zeigen. **Im Zweifel „keinem“.** Keine Schwellen, keine Punkte – der
+  Halbsatz nennt die Zahlen. Jede Abweichung und jeder Hinweis des Werkzeugs wird mitgenannt.
+- **Was die Vorprüfung nicht ist:** kein Tipp und keine Empfehlung zu spielen. Sie sieht **nur die Zahlenseite** – keine Teamnews,
+  keine Lage, keine Regel 7c, keine Gegenangaben-Prüfung, keine Kontrolle. Ob auch die Sports-Mole-Seite passt („beide einig“),
+  zeigt erst die volle Analyse; der Tipp dort kann ein anderer Markt sein als die Richtung der Vorprüfung. Claude sagt das bei
+  jeder Vorprüfung dazu.
+- **Auswahl:** Die 5 Spiele wählt der Nutzer – auch Spiele mit „keinem“ oder Spiele außerhalb der Vorprüfung. Danach läuft der
+  Ablauf unten **unverändert und vollständig**.
+- **Kein Anker:** Bearbeiter und Prüfer bekommen das Ergebnis der Vorprüfung **nicht** (weder im Auftrag noch in der Tagesliste, bis
+  die Tipps fertig und geprüft sind). Erst danach trägt Claude Merkmal 13 ein.
+- **Messen:** Merkmal 13 je Tipp („Vorprüfung: ja – Zahlen zeigten zu: … / nein“); `werkzeuge/tippanalyse.py` zählt getrennt,
+  wie oft daraus „Spielen: ja“ wurde und wie die Tipps ausgingen. Die Vorprüfung ändert keine Tippregel.
 
 ## Ablauf eines Auftrags
 
@@ -192,7 +221,7 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 **Abschluss**
 
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026; seit 1.4.1 mit den
-    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp), committet und auf den Arbeitsbranch
+    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp; Punkt 13 „Vorprüfung“ von Claude nach der Kontrolle ergänzt), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
     Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
@@ -552,8 +581,11 @@ Schwellen):
 12. **Schattentipp** (seit 1.4.1): der Markt, der **ohne** die Ausschlüsse aus Schritt 4b und **ohne** den Vorrang Sieg-Markt der
     sicherste der sechs gewesen wäre – dazu „gleich“ oder „anders wegen 4b-Ausschluss“ bzw. „anders wegen Vorrang Sieg-Markt“. So
     lassen sich die Regeln von 1.4 an denselben Spielen mit dem Stand davor vergleichen und voneinander trennen.
+13. **Vorprüfung** (seit 28.11.2026): „ja – Zahlen zeigten zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem“, wenn der Nutzer das
+    Spiel nach einer Vorprüfung gewählt hat; sonst „nein“. **Dieses Merkmal trägt Claude ein, nicht der Bearbeiter** – erst wenn die
+    Tipps fertig und geprüft sind (Abschnitt „Vorprüfung“).
 Schreibweise (fest, damit `werkzeuge/tippanalyse.py` sie liest): „(10) Kräfteverhältnis: … ; Tabellenhöher: Heim · (11) Spielen: ja ·
-(12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
+(12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt · (13) Vorprüfung: ja – Zahlen zeigten zu: Heimsieg“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
 Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5).
 Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal; seit 1.4 immer getrennt nach „Spielen: ja“ und „nein“); bei geänderten Tipps auch, ob der
 ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt und der Schattentipp getroffen hätten. **Ausgewertet und dem
