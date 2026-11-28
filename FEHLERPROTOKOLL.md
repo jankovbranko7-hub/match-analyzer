@@ -484,6 +484,37 @@ Abkürzungen: SK = Kontrolldurchgang Stufe 1 · UK = unabhängige Kontrolle · N
   Über 2,5 (7 von 8 gegen 3 von 10; ohne Über 13 von 21 gegen 23 von 39). Gegenmaßnahme seit 1.4.1: Schattentipp (Merkmal 12),
   Bericht erst nach 50 gespielten Tipps, Abschnitt „Änderungen am System“.
 
+### 28.11.2026 · Schritt 1 (Premier League, Championship) – erste Anwendung von 1.5
+- Werkzeug (M), von Bearbeiter 1a gefunden, von Claude (Stufe 1) nachvollzogen: `datenblatt.py` ordnete den Suchnamen „Joseph“
+  (nur Nachname übergeben) dem Leeds-Verteidiger Joe Rodon zu (FS-Eintrag „Joseph Peter Rodon“ – der Suchname traf den Vornamen);
+  Mateo Joseph hat keinen FS-Eintrag. Im Abschnitt stand die richtige Zuordnung, kein Tipp betroffen. **Behoben (12:48):** Trifft ein
+  Suchname aus nur einem Wort nicht den Nachnamen des FS-Eintrags, schreibt das Werkzeug „ZUORDNUNG PRÜFEN“ dazu; getestet an Leeds –
+  Coventry („Joseph“ → Warnung, „Mateo Joseph“ → nicht gefunden, „Rodon“, „Thomas“ → Bobby Thomas ohne, Thomas-Asante mit Warnung),
+  Manchester United – Brentford („Bruno“, „Amad“, „Igor“, „Dango“ → Warnung; „Fernandes“, „Thiago“, volle Namen → keine) und am
+  unveränderten Lauf Derby – Watford. Lehre: Spieler immer mit vollem Namen übergeben.
+- Leeds/Coventry: „unveränderte / dieselbe Elf“ an vier Stellen als Rang-1-Grund (Quelle: „tempted to stick with“, mögliche
+  Startelf) – E/F/K – UK (**Wiederholung** Rizespor 27.11.; Lehre 1 der Kurzfassung nicht angewandt, Stufe 1 hat es nicht bemerkt).
+  Formulierung eines Tipp-Grunds betroffen; Tipp neu abgewogen, bleibt.
+- Birmingham/Bolton: Serien am Spielort ungleich eingestuft – Birminghams Heimserie als Rang 1, Boltons „letzte 3 Siege alle
+  auswärts“ nur als Rang 3; fehlende Rang-1-Gegenangabe – C/K/B – UK. Nachgetragen, dreht den Tipp nicht. Lehre: Serien beider
+  Teams mit demselben Rang führen.
+- Manchester United/Brentford: Widerlegung „die drei älteren Spiele des Blocks“ ungenau (dazwischen lag ein Über-Spiel) – H – UK;
+  Einordnung „zwei Über-Belege aus Spielen mit Platzverweis“ fehlte – B (Hinweis) – UK. Dreht den Tipp nicht.
+- Derby/Watford: 39 zugelassene Schüsse (SM-Artikel, FS) im Datenblatt, aber nicht bei den Gegenangaben gegen „Beide treffen –
+  Nein“ – B (Hinweis) – UK. Dreht den Tipp nicht.
+- Leeds/Coventry und Derby/Watford: „in the treatment room“ einmal als „fehlt“, einmal als „unklar“ – F (Hinweis) – UK; einheitlich
+  „unklar (Wortlaut …)“. Leeds/Coventry und Manchester United/Brentford: nicht neue Spieler unter dem Etikett „Rang 1“ in der
+  Gegenangabenliste – E/K (Formhinweis) – UK.
+- Ipswich/Aston Villa: Szmodics „in FS nicht gefunden“ – galt nur für die Premier League, FS führt ihn bei Derby (Championship) –
+  H/G (Hinweis) – UK. Manchester United/Brentford und Ipswich/Aston Villa: H2H-Wortlaut mit Zahlen in der Liste „nicht verwendet“ –
+  L (Formhinweis) – UK; nur noch benannt.
+- Ablauf (M): Der Prüfer legte vier Zwischendateien im Wurzelordner des Containers statt im genannten Scratchpad-Ordner ab
+  (Fehler im Shell-Aufruf); Repo nicht betroffen. Lehre: Zwischendateien nur mit vollem Pfad des genannten Ordners schreiben.
+- Kein Tipp, keine Kennzeichnung geändert; Stichprobe von Hand (Birmingham – Bolton): keine Abweichung vom Werkzeug.
+- **Offene Regelfrage (an den Nutzer, 28.11.):** Schritt 8 sagt nicht ausdrücklich, ob eine gültige Rang-1-Gegenangabe, die den
+  Tipp nicht dreht (neue Sperre beim klaren Favoriten, Birmingham – Bolton), die Teamnews-Seite auf „nicht eindeutig“ setzt. Heute
+  nach „im Zweifel nicht eindeutig“ und der Festlegung „keine neue Schwächung“ entschieden: geteilt, Spielen: nein.
+
 ---
 
 ## Lehren bisher

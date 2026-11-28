@@ -2,7 +2,7 @@
 
 Die Bearbeiter-Agenten lesen statt des vollständigen `FEHLERPROTOKOLL.md` diese Kurzfassung (spart Limit). Claude und die
 Prüfer lesen weiter die Vollfassung. Neue Fehler werden immer zuerst in `FEHLERPROTOKOLL.md` eingetragen; ergibt sich daraus eine
-neue Lehre, kommt sie hier dazu (Stand: 28.11.2026).
+neue Lehre, kommt sie hier dazu (Stand: 28.11.2026, nach Schritt 1).
 
 ## Fehlerarten (A–N) – beim Schreiben jede gezielt vermeiden
 
@@ -68,3 +68,11 @@ neue Lehre, kommt sie hier dazu (Stand: 28.11.2026).
     Die Sammelseite (Sportsgambler) bestätigt nichts und widerlegt nichts. Eine nicht bestätigte Angabe, die gegen den Tipp spräche
     → Teamnews-Seite „nicht eindeutig“ → „geteilt“ → „Spielen: nein – Teamnews nicht bestätigt“. Team-Zuordnung des Werkzeugs immer
     lesen („Team dort …“) – „Inter“ ist nicht „Milan“. Keine Länderquelle oder ausgefallen: nur Sports Mole, offen vermerken.
+17. **Lehren vom 28.11.:** (a) Spieler bei `datenblatt.py` und `teamnews2.py` immer mit **vollem Namen** übergeben – ein einzelner
+    Name kann einen Vornamen treffen („Joseph“ → Joe Rodon); jede Zeile „ZUORDNUNG PRÜFEN“ klären. (b) Eine **mögliche oder
+    unveränderte Startelf ist nie ein Rang-1-Grund** – auch nicht nebenbei im Spielbild, in Schritt 6, 7 oder 8 (zweimal passiert).
+    (c) **Serien beider Teams mit demselben Rang führen:** Zählt die Heimserie des einen als Rang 1, ist die Auswärtsserie des
+    anderen („letzte 3 Siege alle auswärts“) eine Rang-1-Gegenangabe mit „dreht den Tipp: ja/nein“. (d) „in the treatment room“
+    ist kein Listenwort → „unklar (Wortlaut: …)“. (e) Nicht neue Spieler stehen nicht unter „Rang 1“, sondern unter „nicht als
+    Gegenangabe gewertet“. (f) Spiele mit Platzverweis, die als Beleg für Über/Unter 2,5 dienen, mit Minute und Spielstand nennen.
+    (g) Zwischendateien nur in den im Auftrag genannten Ordner (voller Pfad).

@@ -9,7 +9,8 @@ Sports-Mole-Check (seit 20.11.2026):
   `--liga-gast` auch die Heimliga) mit Warnung, wenn das neueste SM-Spiel ein nationales Pokalspiel war; Abgleich SM ↔ FS **in
   beide Richtungen** (fehlt ein FS-Spiel in den SM-Formdaten, wird es gemeldet und in den Block aufgenommen; Zuordnung über
   Spielort, ganzen Gegnernamen und Ergebnis; „Hinweise zur Zuordnung“ bei anders geschriebenen Namen); bei „3+ eigene Tore“ sind
-  nationale Pokalspiele einzeln genannt (unterklassige Gegner zählen nach 1.4.1 nicht).
+  nationale Pokalspiele einzeln genannt (unterklassige Gegner zählen nach 1.4.1 nicht). Seit 28.11.2026 (nach Schritt 1): Trifft ein
+  Suchname aus nur einem Wort nicht den Nachnamen des FS-Eintrags, steht „ZUORDNUNG PRÜFEN“ dabei – Spieler mit vollem Namen übergeben.
 - `vorpruefung.py "<Liga wie in der SM-Übersicht>" [Wochentag] [--saison <FS-Saison>]` (seit 28.11.2026) – Vorprüfung vor der
   Spielauswahl: für alle Spiele der Liga mit SM-Vorschau nur die Zahlenseite (vier Bausteine aus Schritt 4b, Spielort, Tor-Zahlen
   der letzten 6), ohne Agenten, ohne Teamnews – kein Tipp. Den Satz „Zahlen zeigen zu: …“ schreibt Claude, die 5 Spiele wählt der

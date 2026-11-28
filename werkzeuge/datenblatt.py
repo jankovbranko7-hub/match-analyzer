@@ -357,8 +357,15 @@ def team_teil(label, tid, name, ms, order, pts, gd, pl, nm_t, sid, sm_spiele, sp
                            if neu.startswith(("Startelf", "eingewechselt"))
                            else "spielte im letzten Pflichtspiel laut FS nicht → bei fehlt/fraglich NICHT NEU; bei „zurück“ nur "
                                 "neu, wenn die Quelle klar „startet/spielt“ sagt (ungenutzt auf der Bank ≠ fehlte)")
+                # seit 28.11.2026: Ein Suchname aus nur einem Wort muss den Nachnamen treffen – sonst Warnung (Anlass:
+                # Suchname „Joseph“ traf den Vornamen von „Joseph Peter Rodon“, Leeds – Coventry 28.11.)
+                nach = {(norm(p_.get(k_) or "").split() or [""])[-1] for k_ in ("full_name", "known_as")} - {""}
+                q_ = set(norm(sp_name).split())
+                warn = ("" if len(q_) >= 2 or q_ & nach else
+                        f" · **ZUORDNUNG PRÜFEN:** Suchname „{sp_name}“ trifft nicht den Nachnamen dieses FS-Eintrags "
+                        f"(„{p_.get('full_name')}“) – evtl. anderer Spieler; mit vollem Namen erneut suchen")
                 out.append(f"   - {p_.get('known_as') or p_['full_name']}: {p_.get('position')}, {p_.get('appearances_overall')} Eins., "
-                           f"{p_.get('goals_overall')} Tore ({liga_label}) · " + " · ".join(stat) + f" → {hinweis}")
+                           f"{p_.get('goals_overall')} Tore ({liga_label}) · " + " · ".join(stat) + f" → {hinweis}{warn}")
         out.append("   Achtung: Nationale Pokalspiele und ihre Aufstellungen führt FS nicht – war das letzte Pflichtspiel ein "
                    "Pokalspiel, 7c dort laut SM prüfen.")
     return out
