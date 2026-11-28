@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Zweitquelle Teamnews – Probelauf (Ergänzung zu Sports-Mole-Check 1.4.1, Wunsch des Nutzers vom 28.11.2026).
+"""Zweitquelle Teamnews (Sports-Mole-Check 1.5, Regel 7e – Wunsch des Nutzers vom 28.11.2026).
 
 Holt für eine Paarung die frei zugänglichen Ausfall- und Sperrenlisten des Landes (ohne Schlüssel, ohne Bezahlung)
 und stellt sie neben die Spielernamen aus den Sports-Mole-Teamnews: bestätigt / nur Sports Mole / nur Zweitquelle.
-**Nur Abgleich – kein Einfluss auf den Tipp.** Das Werkzeug bewertet nichts.
+Seit Version 1.5 Teil der Entscheidung: Nur was Sports Mole und die Länderquelle beide führen, gibt eine Richtung (Regel 7e).
+Das Werkzeug bewertet nichts – „bestätigt / nicht bestätigt“ je Spieler und die Folgen trägt der Bearbeiter nach den Regeln ein.
 
 Aufruf (aus dem Repo-Wurzelordner):
   python3 -I werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" [--spieler-heim "A,B"] [--spieler-gast "C,D"]
@@ -286,11 +287,11 @@ def zeile(e):
 def bericht(liga, heim, gast, sp_heim, sp_gast):
     out = []
     jetzt = datetime.datetime.now(BER)
-    out.append(f"## Zweitquelle Teamnews (Probelauf – nur Abgleich, kein Einfluss auf den Tipp) · {liga} · {heim} – {gast} · "
+    out.append(f"## Zweitquelle Teamnews (Regel 7e) · {liga} · {heim} – {gast} · "
                f"abgerufen {jetzt:%d.%m.%Y %H:%M} (deutsche Zeit)")
     quellen = quellen_fuer(liga)
     if not quellen:
-        out.append(f"- Für die Liga „{liga}“ ist keine Zweitquelle eingerichtet – Merkmal 14: „nicht verfügbar“.")
+        out.append(f"- Für die Liga „{liga}“ ist keine Zweitquelle eingerichtet – nur Sports Mole wie bisher; Merkmal 14: „nicht verfügbar“.")
         return out
     geladen = []
     for qname, parser, par, land in quellen:
@@ -305,7 +306,8 @@ def bericht(liga, heim, gast, sp_heim, sp_gast):
         except (OSError, ValueError, KeyError) as e:
             out.append(f"- **{qname}: Abruf fehlgeschlagen ({type(e).__name__}) – hier nicht verwendet.**")
     if not any(land for *_, land in geladen):
-        out.append("- Hinweis: Für diese Liga gibt es keine Länderquelle, nur die Sammelseite (weniger verlässlich).")
+        out.append("- **Keine Länderquelle für diese Liga (oder ausgefallen): Es gilt nur Sports Mole wie bisher; die Sammelseite ist "
+                   "kein Beleg. Merkmal 14: „nicht verfügbar“.**")
     for label, team, sm_namen in (("Heim", heim, sp_heim), ("Gast", gast, sp_gast)):
         out.append(f"\n### {team} ({label})")
         alle = []  # (Quelle, Länderquelle?, Eintrag)
@@ -347,8 +349,9 @@ def bericht(liga, heim, gast, sp_heim, sp_gast):
         out.append("  - bestätigt: " + ("; ".join(best) or "–"))
         out.append("  - nur Sports Mole: " + (", ".join(nur_sm) or "–"))
         out.append("  - nur Zweitquelle: " + ("; ".join(f"{k} ({' | '.join(v)})" for k, v in nur_zq.items()) or "–"))
-    out.append("\n_Status „bestätigt“ heißt nur: Der Name steht in beiden Quellen – den Status (fehlt/fraglich/gesperrt) und „seit wann“ "
-               "vergleicht Claude. Sammelseite allein ist kein Beleg. Kein Einfluss auf den Tipp (Probelauf)._")
+    out.append("\n_„bestätigt“ heißt hier nur: Der Name steht in beiden Listen. Als bestätigt nach Regel 7e gilt ein Spieler nur, wenn ihn "
+               "Sports Mole und die **Länderquelle** führen (Sammelseite allein ist kein Beleg); Status (bei Unterschied der schwächere) "
+               "und „seit wann“ trägt der Bearbeiter ein._")
     return out
 
 

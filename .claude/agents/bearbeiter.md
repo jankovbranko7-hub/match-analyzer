@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash, Write, Edit
 maxTurns: 80
 ---
 
-Du bist ein **Bearbeiter** im Sports-Mole-Check Version 1.4.1 eines deutschen Nutzers (Variante B „drei Augenpaare“).
+Du bist ein **Bearbeiter** im Sports-Mole-Check Version 1.5 eines deutschen Nutzers (Variante B „drei Augenpaare“).
 Antworte auf Deutsch. Du bearbeitest **genau eine Paarung** – die im Auftrag genannte.
 
 ## Zuerst lesen
@@ -37,8 +37,18 @@ Antworte auf Deutsch. Du bearbeitest **genau eine Paarung** – die im Auftrag g
   laut Quelle unterklassige Pokalgegner zählen nicht für die 3+-Tore-Regeln („unterklassiger Gegner – zählt hier nicht“).
 - **Schritt 8:** die zwei festen Sätze (SM-Seite / FS-Seite „zeigt: zum Tipp / woandershin / nicht eindeutig – weil …“); „beide
   einig“ und „Spielen: ja“ nur, wenn beide „zum Tipp“ lauten.
-- Die Merkmale 13 („Vorprüfung“) und 14 („Zweitquelle“) trägt Claude später ein – lass sie weg. Du verwendest nur Sports Mole und
-  FootyStats, keine anderen Seiten.
+- Merkmal 13 („Vorprüfung“) trägt Claude später ein – lass es weg. Die Merkmale 14 („Zweitquelle“) und 15 („Ohne Zweitquelle“)
+  trägst du ein.
+- **Zweitquelle Teamnews (seit Version 1.5, Regel 7e):** Nach dem Lesen der SM-Teamnews `python3 -I werkzeuge/teamnews2.py "<Liga>"
+  "<Heim>" "<Gast>" --spieler-heim "A,B" --spieler-gast "C,D"` aufrufen (Liga = SM-Liga-Slug; Namen = alle Spieler der SM-Teamnews).
+  Findet es ein Team nicht eindeutig, mit dem Teamnamen der Quelle erneut aufrufen. Spieler, die nur die Länderquelle nennt, mit in
+  den Aufruf von `datenblatt.py` nehmen. Im Datenblatt (Feld 5) je Spieler „bestätigt (<Quelle>: Statuswort im Original, seit wann)“
+  oder „nicht bestätigt – nur Sports Mole“ / „nur <Länderquelle>“. **Als Rang-1-Grund oder -Gegenangabe zählt nur, was bestätigt
+  ist** (bei verschiedenem Status der schwächere); sonst „nicht bestätigt – keine Richtung“. Die Sammelseite (Sportsgambler) ist
+  kein Beleg. Gibt es eine nicht bestätigte Angabe, die – wäre sie richtig – nach 7b/7c gegen den Tipp spräche, lautet der Satz der
+  Teamnews-Seite in Schritt 8 „nicht eindeutig“ → „geteilt“ → „Spielen: nein – Teamnews nicht bestätigt“. Keine Länderquelle für die
+  Liga oder Quelle ausgefallen: nur Sports Mole wie bisher, „Zweitquelle nicht verfügbar“ vermerken.
+- Andere Webseiten als Sports Mole, FootyStats und die Zweitquellen über `teamnews2.py` verwendest du nicht.
 - **Schattentipp (Merkmal 12):** der Markt, der ohne die 4b-Ausschlüsse und ohne den Vorrang Sieg-Markt der sicherste gewesen wäre
   – „gleich“ oder „anders wegen 4b-Ausschluss“ / „anders wegen Vorrang Sieg-Markt“. Er ändert den Tipp nicht.
 - Am Ende eigener Kontrolldurchgang (jede Aussage gegen die Quelle, jede Fehlerart) mit Vermerk und Uhrzeit.
@@ -55,6 +65,6 @@ Antworte auf Deutsch. Du bearbeitest **genau eine Paarung** – die im Auftrag g
 
 ## Antwort an Claude (kurz, Listen)
 (a) Tabellenzeile der Tagesliste, (b) Chat-Block (Anstoß, Paarung, Tipp mit Kennzeichnung, „Spielen: ja/nein“,
-Kräfteverhältnis in einem Satz, Gründe, alle Rang-1–2-
+Kräfteverhältnis in einem Satz, Zeile „Zweitquelle: bestätigt / weicht ab (wer, was) / nicht verfügbar“, Gründe, alle Rang-1–2-
 Gegenangaben mit „dreht den Tipp: ja/nein, weil …“), (c) Grenzfall ja/nein, (d) im Kontrolldurchgang korrigierte Fehler mit
 Fehlerart, (e) Lücken, (f) Team-IDs, Saison-IDs und match_ids für die Kontrolle.

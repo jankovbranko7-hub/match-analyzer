@@ -65,12 +65,17 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem – weil …“ (im Zweifel „keinem“). **Kein Tipp**, keine Teamnews, keine Lage –
   das immer dazusagen. Der Nutzer wählt seine 5; dann volles System unverändert. Bearbeiter und Prüfer bekommen das Ergebnis der
   Vorprüfung **nicht** (kein Anker); Claude trägt nach der Kontrolle Merkmal 13 ein (Abschnitt „Vorprüfung“ in `SPORTSMOLE-CHECK.md`).
-- **Zweitquelle Teamnews – Probelauf** (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026): Nach Stufe 3, vor dem Senden der
-  Tipps, lässt **Claude selbst** je Paarung `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" --spieler-heim … --spieler-gast …`
-  laufen (frei zugängliche Länderquellen: LigaInsider, FútbolFantasy, Fantacalcio, offizielle Premier-League-Fantasy-Liste; sonst
-  Sammelseite Sportsgambler). **Nur Abgleich, kein Einfluss auf Tipp, Kennzeichnung oder „Spielen“**; Bearbeiter und Prüfer nutzen
-  sie nicht. Im Chat je Paarung „Zweitquelle: bestätigt / weicht ab / nicht verfügbar“ (bei „Rang 1 betroffen: ja“ hervorgehoben,
-  mit „im Tipp nicht berücksichtigt“); Merkmal 14; Bericht nach etwa 50 Tipps (Abschnitt in `SPORTSMOLE-CHECK.md`).
+- **Sports-Mole-Check Version 1.5** (seit 28.11.2026, Wunsch des Nutzers: „ich möchte, dass es im System eingebaut wird, und die
+  Entscheidung, welcher Tipp gespielt wird, triffst du“): **Die Zweitquelle Teamnews entscheidet mit.** Der Bearbeiter ruft je
+  Paarung `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" --spieler-heim … --spieler-gast …` auf (Länderquellen: LigaInsider für
+  die Bundesliga, FútbolFantasy für La Liga/Champions League/Europa League, Fantacalcio für die Serie A, offizielle Fantasy-Liste
+  für die Premier League). **Regel 7e:** Ein Ausfall, eine Sperre oder ein fraglicher Spieler ist nur dann Rang-1-Grund oder
+  -Gegenangabe, wenn Sports Mole **und** die Länderquelle ihn führen – sonst „nicht bestätigt – keine Richtung“. Eine nicht
+  bestätigte Angabe, die gegen den Tipp spräche, macht ihn „geteilt“ → „Spielen: nein – Teamnews nicht bestätigt“. Die Sammelseite
+  Sportsgambler ist kein Beleg; Ligen ohne Länderquelle laufen wie bisher nur mit Sports Mole. **„Spielen: ja/nein“ entscheidet
+  Claude nach den Regeln und gibt die Entscheidung nicht an den Nutzer zurück.** Im Chat je Paarung „Zweitquelle: bestätigt / weicht
+  ab / nicht verfügbar“; Merkmale 14 und 15; Claude (Stufe 1) und der Prüfer rufen die Zweitquelle selbst neu ab. Version 1.4.1
+  liegt in `archiv/SPORTSMOLE-CHECK-1.4.1.md` (Abschnitt „Zweitquelle Teamnews“ in `SPORTSMOLE-CHECK.md`).
 - **Sparplan** (27.11.2026, Wunsch des Nutzers: mehr Spiele bei höchster Qualität): (1) `werkzeuge/datenblatt.py` liefert die
   Zahlen (Pflicht, wörtlich übernehmen); (2) Bearbeiter lesen `FEHLERPROTOKOLL-KURZ.md` (Claude und Prüfer die Vollfassung; neue
   Lehren dort nachtragen); (3) Grenzfall-Runde nur bei „Spielen: ja“; (4) Prüfer gleicht Zahlen mit dem Werkzeug ab und prüft vor
@@ -82,7 +87,7 @@ anderen Systeme gelten hier nicht. Änderungen nur auf ausdrücklichen Wunsch de
   FootyStats-Vorab-Werte), **keine Direktvergleiche (H2H)** – weder als Grund noch als
   Gegenangabe (Wunsch des Nutzers vom 20.11.2026), **keine Schwellen, keine Punkte**, **kein „We say“**
   (seit 1.3). Forebet und Odd Alerts werden nicht verwendet.
-- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Das System in seiner aktuellen Version (1.4.1) und alle seine Punkte gelten
+- **Verbindlich** (Wunsch des Nutzers vom 21.11.2026): Das System in seiner aktuellen Version (1.5) und alle seine Punkte gelten
   **immer**, für jede Paarung, und dürfen **nicht umgangen** werden – kein Schritt ausgelassen,
   abgekürzt oder ersetzt, auch nicht unter Zeitdruck; was nicht erledigt werden kann, offen sagen
   (Abschnitt „Verbindlichkeit“ in `SPORTSMOLE-CHECK.md`).
@@ -146,7 +151,7 @@ Datenquellen, ohne Quoten:
 - **FootyStats** (`https://api.football-data-api.com/`), Zahlen, Abgleich und Ergebnisse: Schlüssel in
   der Umgebung als `APIKEY`, Query-Parameter `key`. Endpunkte, Felder, Saison-IDs:
   `FOOTYSTATS-API.md`. Limit 1800/Stunde.
-- **Zweitquelle Teamnews (nur Probelauf, nur Abgleich):** LigaInsider (`ligainsider.de`), FútbolFantasy (`futbolfantasy.com`),
+- **Zweitquelle Teamnews (seit Version 1.5 Teil der Entscheidung, Regel 7e):** LigaInsider (`ligainsider.de`), FútbolFantasy (`futbolfantasy.com`),
   Fantacalcio (`fantacalcio.it`), offizielle Fantasy-Liste der Premier League (`fantasy.premierleague.com`), Sammelseite
   Sportsgambler (`sportsgambler.com/injuries`) – öffentlich, ohne Schlüssel; Abruf nur mit `werkzeuge/teamnews2.py`, nur die
   Ausfall- und Sperrenlisten (keine Quoten, Tipps, Vorhersagen). Sperrt eine Seite den Abruf, wird sie nicht verwendet.

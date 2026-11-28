@@ -10,7 +10,8 @@ Ergebnis) und die Merkmale-Zeile des Abschnitts. Gibt aus:
   3. seit 1.4: „Spielen: ja/nein“, Zahl der gespielten Tipps (Auswertung an den Nutzer ab 50 gespielten),
      Kräfteverhältnis, Schattentipp (was ohne 4b-Ausschluss und ohne Vorrang Sieg-Markt getippt worden wäre),
      Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13: aus Vorprüfung gewählt ja/nein),
-     Zweitquelle Teamnews (Merkmal 14: bestätigt / weicht ab / nicht verfügbar; Rang 1 betroffen ja/nein).
+     Zweitquelle Teamnews (Merkmal 14: bestätigt / weicht ab / nicht verfügbar; Rang 1 betroffen ja/nein),
+     Merkmal 15: Tipp und „Spielen“ ohne Zweitquelle (Vergleich Version 1.5 mit dem Stand davor an denselben Spielen).
 Ein Tipp zählt als „seit 1.4“, wenn seine Merkmale-Zeile Punkt (11) „Spielen“ enthält oder die Liste ab dem 28.11.2026 datiert.
 Keine Quoten, kein Rechenmodell – nur Ergebnisse der eigenen Tipps.
 """
@@ -54,8 +55,10 @@ def seg(mm, n):
     i = mm.find(f"({n})")
     if i < 0:
         return None
-    j = mm.find(f"({n + 1})", i)
-    return mm[i + len(f"({n})"):j if j > 0 else len(mm)].strip(" ·")
+    # Ende = der nächste höhere Marker (ein Merkmal kann fehlen, z. B. 13, das Claude erst später einträgt)
+    enden = [mm.find(f"({m})", i) for m in range(n + 1, 20)]
+    enden = [j for j in enden if j > 0]
+    return mm[i + len(f"({n})"):min(enden) if enden else len(mm)].strip(" ·")
 
 
 def lies():
@@ -125,6 +128,10 @@ def lies():
                    else "bestätigt" if "bestätigt" in s14 else None)
         r1 = re.search(r"Rang 1 betroffen:\s*(ja|nein)", s14)
         r["zq_rang1"] = r1.group(1) if r1 else None
+        s15 = seg(mm, 15) or ""
+        r["ohne_tip"] = mk(s15)
+        o = re.search(r"Spielen\s*(ja|nein)", s15)
+        r["ohne_spielen"] = o.group(1) if o else None
         r["hit"] = out(r["h"], r["a"])[r["tip"]]
         del r["txt"]
     return rows
@@ -237,7 +244,7 @@ def auswertung_14(rows):
             print(f"  Tipp = Richtung der Vorprüfung: {len(g)} von {len(m)} (Treffer {q(g)}); Tipp anders: {len(m) - len(g)} "
                   f"(Treffer {q([r for r in m if r['vp_markt'] != r['tip']])})")
     z = [r for r in rows if r["zq"]]
-    print(f"\nZweitquelle Teamnews (Merkmal 14, Probelauf): {len(z)} Tipps mit Angabe – Bericht an den Nutzer ab etwa 50")
+    print(f"\nZweitquelle Teamnews (Merkmal 14): {len(z)} Tipps mit Angabe – Bericht an den Nutzer ab etwa 50 Tipps mit Länderquelle")
     if z:
         for lab in ("bestätigt", "weicht ab", "nicht verfügbar"):
             sub = [r for r in z if r["zq"] == lab]
@@ -248,6 +255,20 @@ def auswertung_14(rows):
             print(f"  weicht ab, Rang 1 betroffen: {lab} – {len(sub)} Tipps · Treffer {q(sub)}")
             for r in sub if lab == "ja" else []:
                 print(f"      {r['f']} {r['spiel']} {r['h']}:{r['a']} – Tipp {MK_NAME[r['tip']]} {'✅' if r['hit'] else '❌'}")
+    o = [r for r in rows if r["ohne_tip"] and r["ohne_spielen"]]
+    for r in o:
+        r["o_hit"] = out(r["h"], r["a"])[r["ohne_tip"]]
+    print(f"\nOhne Zweitquelle (Merkmal 15 – Tipp und „Spielen“ nach den Regeln vor 1.5): {len(o)} Tipps mit Angabe")
+    if o:
+        gleich = [r for r in o if r["ohne_tip"] == r["tip"] and r["ohne_spielen"] == r["spielen"]]
+        anders = [r for r in o if r not in gleich]
+        print(f"  gleich: {len(gleich)} · anders: {len(anders)}")
+        mit = [r for r in o if r["spielen"] == "ja"]
+        ohne = [r for r in o if r["ohne_spielen"] == "ja"]
+        print(f"  gespielt mit Zweitquelle (1.5): {q(mit)} | gespielt worden wären ohne Zweitquelle: {q(ohne, 'o_hit')}")
+        for r in anders:
+            print(f"      {r['f']} {r['spiel']} {r['h']}:{r['a']} – 1.5: {MK_NAME[r['tip']]}, Spielen {r['spielen']} {'✅' if r['hit'] else '❌'} · "
+                  f"ohne Zweitquelle: {MK_NAME[r['ohne_tip']]}, Spielen {r['ohne_spielen']} {'✅' if r['o_hit'] else '❌'}")
 
 
 def main():

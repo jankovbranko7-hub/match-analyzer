@@ -1,4 +1,4 @@
-# Musterfälle · Kräfteverhältnis und Kennzeichnung (Sports-Mole-Check 1.4.1)
+# Musterfälle · Kräfteverhältnis, Kennzeichnung und Zweitquelle (Sports-Mole-Check 1.5)
 
 Eingerichtet am 28.11.2026 (Wunsch des Nutzers nach der Systemprüfung): Die Wörter „klarer Favorit“ und „beide einig“ entscheiden
 seit Version 1.4 über erlaubte Märkte und über „Spielen: ja/nein“. Damit alle Bearbeiter, Claude und der Prüfer gleich einstufen,
@@ -87,6 +87,30 @@ Heim G (Platz 1) – Gast H (Platz 15).
   Unter 2,5 – gleich. (Wäre ohne den Ausschluss „Beide treffen – Ja“ der sicherste Markt gewesen, stünde hier: „Beide treffen – Ja
   – anders wegen 4b-Ausschluss“.)
 
+## Fall 5 · Zweitquelle Teamnews (Regel 7e, seit Version 1.5): bestätigt, nicht bestätigt, Folge für „Spielen“
+
+Heim J – Gast K (Liga mit Länderquelle).
+
+- **Datenblatt Feld 5 – Heim J**
+  - Stürmer P („ruled out“, Angriff, spielte im letzten Pflichtspiel → neu): **bestätigt** (Länderquelle: „Verletzung“, fehlt
+    seit 3 Tagen) → Rang-1-Angabe.
+  - Verteidiger Q („doubt“, Abwehr, neu): **nicht bestätigt – nur Sports Mole** → „nicht bestätigt – keine Richtung“.
+  - nur Länderquelle: Torwart R („angeschlagen“, seit gestern; Tor; spielte im letzten Pflichtspiel) → **nicht bestätigt – nur
+    Länderquelle** → „nicht bestätigt – keine Richtung“.
+- **Variante a – Tipp Unter 2,5:** Gründe: beide Rang-2-Blöcke unter 2,5; Rang 1: Stürmer P fehlt neu (**bestätigt**).
+  Nicht bestätigte Angaben: Q (Abwehr von J) und R (Torwart von J) – wären sie richtig, sprächen beide **gegen** Unter 2,5
+  (mehr Gegentore für J). → Teamnews-Seite zeigt: **nicht eindeutig** – weil eine nicht bestätigte Angabe gegen den Tipp steht.
+  → **geteilt → Spielen: nein – Teamnews nicht bestätigt.**
+  Merkmale: (14) Zweitquelle: weicht ab (Q nur Sports Mole; R nur Länderquelle) – Rang 1 betroffen: ja · (15) Ohne Zweitquelle:
+  Tipp Unter 2,5, Spielen ja – anders (ohne Zweitquelle wäre Torwart R unbekannt gewesen; Q hätte als fragliche Abwehr eine
+  Gegenangabe ergeben, die den Tipp in diesem Beispiel nicht gedreht hätte).
+- **Variante b – es gibt nur P (bestätigt), Q und R kommen in keiner Quelle vor:** Teamnews-Seite zeigt: **zum Tipp** – weil der
+  Ausfall von Stürmer P bestätigt ist. Zeigt auch die FS-Seite zum Tipp: **beide einig → Spielen: ja.**
+  Merkmale: (14) Zweitquelle: bestätigt · (15) Ohne Zweitquelle: Tipp Unter 2,5, Spielen ja – gleich.
+- **Variante c – Liga ohne Länderquelle (z. B. Ligue 1) oder Quelle ausgefallen:** alles wie vor Version 1.5, nur Sports Mole;
+  die Sammelseite wird genannt, ist aber kein Beleg. Merkmale: (14) Zweitquelle: nicht verfügbar · (15) Ohne Zweitquelle: Tipp
+  <derselbe>, Spielen <dasselbe> – gleich.
+
 ## Kurzregeln zum Lesen der Sätze
 
 - **Baustein „zeigt zu“:** nur bei einem deutlichen Unterschied; „keinem“, wenn die Werte nah beieinander liegen oder der Baustein
@@ -96,3 +120,5 @@ Heim G (Platz 1) – Gast H (Platz 15).
   Bezug zum Markt). Ohne solchen Fakt: „nicht eindeutig“.
 - **FS-Seite „zum Tipp“:** nur, wenn kein Rang-2-Block gegen den Tipp zeigt.
 - **„beide einig“** nur, wenn beide Sätze „zum Tipp“ lauten – nur dann „Spielen: ja“.
+- **Teamnews-Seite seit 1.5:** stützt sich nur auf bestätigte Angaben (Sports Mole + Länderquelle); eine nicht bestätigte Angabe,
+  die gegen den Tipp spräche, macht sie „nicht eindeutig“. Die Sammelseite zählt nie.

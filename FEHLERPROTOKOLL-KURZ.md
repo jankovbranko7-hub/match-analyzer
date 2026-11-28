@@ -1,4 +1,4 @@
-# Fehlerprotokoll – Kurzfassung für Bearbeiter-Agenten (Hebel 2, Version 1.4.1, Wunsch des Nutzers vom 27.11.2026)
+# Fehlerprotokoll – Kurzfassung für Bearbeiter-Agenten (Hebel 2, Version 1.5, Wunsch des Nutzers vom 27.11.2026)
 
 Die Bearbeiter-Agenten lesen statt des vollständigen `FEHLERPROTOKOLL.md` diese Kurzfassung (spart Limit). Claude und die
 Prüfer lesen weiter die Vollfassung. Neue Fehler werden immer zuerst in `FEHLERPROTOKOLL.md` eingetragen; ergibt sich daraus eine
@@ -63,3 +63,8 @@ neue Lehre, kommt sie hier dazu (Stand: 28.11.2026).
     `datenblatt.py` klären und im Abschnitt vermerken. War das letzte Pflichtspiel ein nationales Pokalspiel, gilt für „neu oder
     nicht“ der SM-Artikel, nicht die FS-Aufstellung des Spiels davor.
 15. **Schattentipp (Merkmal 12)** ist nur eine Auswertungszeile – er ändert den Tipp nicht und wird nicht als Grund verwendet.
+16. **Version 1.5 – Regel 7e (Zweitquelle Teamnews):** `teamnews2.py` aufrufen; Rang-1-Grund oder -Gegenangabe nur, wenn Sports Mole
+    **und** die Länderquelle den Spieler führen (bei verschiedenem Status der schwächere); sonst „nicht bestätigt – keine Richtung“.
+    Die Sammelseite (Sportsgambler) bestätigt nichts und widerlegt nichts. Eine nicht bestätigte Angabe, die gegen den Tipp spräche
+    → Teamnews-Seite „nicht eindeutig“ → „geteilt“ → „Spielen: nein – Teamnews nicht bestätigt“. Team-Zuordnung des Werkzeugs immer
+    lesen („Team dort …“) – „Inter“ ist nicht „Milan“. Keine Länderquelle oder ausgefallen: nur Sports Mole, offen vermerken.

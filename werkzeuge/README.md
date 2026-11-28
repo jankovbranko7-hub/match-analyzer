@@ -14,15 +14,16 @@ Sports-Mole-Check (seit 20.11.2026):
   Spielauswahl: für alle Spiele der Liga mit SM-Vorschau nur die Zahlenseite (vier Bausteine aus Schritt 4b, Spielort, Tor-Zahlen
   der letzten 6), ohne Agenten, ohne Teamnews – kein Tipp. Den Satz „Zahlen zeigen zu: …“ schreibt Claude, die 5 Spiele wählt der
   Nutzer (Abschnitt „Vorprüfung“ in `SPORTSMOLE-CHECK.md`).
-- `teamnews2.py "<Liga>" "<Heim>" "<Gast>" [--spieler-heim "A,B"] [--spieler-gast "C,D"]` (seit 28.11.2026, Probelauf) –
+- `teamnews2.py "<Liga>" "<Heim>" "<Gast>" [--spieler-heim "A,B"] [--spieler-gast "C,D"]` (seit 28.11.2026, Version 1.5, Regel 7e) –
   Zweitquelle Teamnews: holt die frei zugänglichen Ausfall- und Sperrenlisten des Landes (LigaInsider, FútbolFantasy, Fantacalcio,
   offizielle Premier-League-Fantasy-Liste; für alle Ligen zusätzlich die Sammelseite Sportsgambler) und stellt sie neben die
-  Spielernamen aus den Sports-Mole-Teamnews: bestätigt / nur Sports Mole / nur Zweitquelle. Nur Abgleich, kein Einfluss auf den
-  Tipp; läuft durch Claude nach der Kontrolle, nicht durch Bearbeiter oder Prüfer. Findet es ein Team nicht eindeutig, nennt es die
+  Spielernamen aus den Sports-Mole-Teamnews: bestätigt / nur Sports Mole / nur Zweitquelle. Seit Version 1.5 Teil der
+  Entscheidung: Nur was Sports Mole und die Länderquelle beide führen, gibt eine Richtung; der Bearbeiter ruft es je Paarung auf,
+  Claude und der Prüfer rufen es selbst neu ab. Die Sammelseite ist kein Beleg. Findet es ein Team nicht eindeutig, nennt es die
   Teamnamen der Quelle – dann mit diesem Namen erneut aufrufen.
 - `tippanalyse.py` – Auswertung aller Tipps aller Monate (Wettart, Kennzeichnung, Grenzfall, zweitbester Markt, geänderte Tipps,
   Liga, verfehlte Tor-Tipps), getrennt vor/seit 1.4; seit 1.4: „Spielen: ja/nein“ mit Zählerstand der gespielten Tipps (Bericht an
-  den Nutzer ab 50), Kräfteverhältnis, Schattentipp, Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13), Zweitquelle Teamnews (Merkmal 14).
+  den Nutzer ab 50), Kräfteverhältnis, Schattentipp, Vergleichswert „der Tabellenhöhere gewinnt“, Vorprüfung (Merkmal 13), Zweitquelle Teamnews (Merkmal 14), Tipp und „Spielen“ ohne Zweitquelle (Merkmal 15).
 - `sm_spiel.py liste` – alle Vorschauen der Übersicht: Tag | Liga | Anstoß (deutsche Zeit) | Paarung | URL.
 - `sm_spiel.py tag "<Liga>" [Wochentag]` – nur eine Liga, ohne Wochentag der erste Tag (heute).
 - `sm_spiel.py "<Heim-Teil>" "<Gast-Teil>"` – Vorschau-Artikel und Spielseite (ohne Datenanalyse:

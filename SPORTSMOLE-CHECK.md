@@ -1,4 +1,4 @@
-# Sports-Mole-Check (System B) · Version 1.4.1
+# Sports-Mole-Check (System B) · Version 1.5
 
 ## ‼️ OBERSTE PRIORITÄT (Wunsch des Nutzers vom 26.11.2026)
 
@@ -62,9 +62,14 @@ gespielten Tipps**, Abschnitt „Änderungen am System“; (7) Werkzeuge: `daten
 **Ergänzung zu 1.4.1 – Vorprüfung** (28.11.2026, Wunsch des Nutzers: „Ja einbauen“): Vor der Spielauswahl zählt
 `werkzeuge/vorpruefung.py` für alle Spiele einer Liga mit Vorschau die Zahlenseite; Claude nennt je Spiel, wohin die Zahlen zeigen;
 der Nutzer wählt seine 5; Merkmal 13 hält fest, ob ein Spiel aus der Vorprüfung gewählt wurde (Abschnitt „Vorprüfung“).
-**Ergänzung zu 1.4.1 – Zweitquelle Teamnews, Probelauf** (28.11.2026, Wunsch des Nutzers: frei zugängliche Quellen der jeweiligen
-Länder): `werkzeuge/teamnews2.py` stellt die Ausfall- und Sperrenlisten der Länderquellen neben die Sports-Mole-Teamnews – **nur als
-Abgleich, ohne Einfluss auf den Tipp**; Merkmal 14 hält das Ergebnis fest (Abschnitt „Zweitquelle Teamnews – Probelauf“).
+**Version 1.5** (28.11.2026, Wunsch des Nutzers: „ich möchte, dass es im System eingebaut wird, und die Entscheidung, welcher Tipp
+gespielt wird, triffst du“): Die **Zweitquelle Teamnews entscheidet mit.** (1) Für Ligen mit einer frei zugänglichen Länderquelle
+holt `werkzeuge/teamnews2.py` deren Ausfall- und Sperrenliste; (2) **Regel 7e:** Ein Ausfall, eine Sperre oder ein fraglicher
+Spieler gibt nur dann eine Richtung (Rang-1-Grund oder -Gegenangabe), wenn Sports Mole **und** die Länderquelle ihn führen –
+sonst „nicht bestätigt – keine Richtung“; (3) eine nicht bestätigte Angabe, die gegen den Tipp spräche, macht den Tipp „geteilt“
+→ „Spielen: nein“ (Schritt 8); (4) „Spielen: ja/nein“ entscheidet Claude nach diesen Regeln – die Entscheidung geht nicht an den
+Nutzer zurück; (5) Merkmal 14 (Zweitquelle) und Merkmal 15 (Tipp und „Spielen“ ohne Zweitquelle) zum Messen. Version 1.4.1 liegt
+in `archiv/SPORTSMOLE-CHECK-1.4.1.md` (Abschnitt „Zweitquelle Teamnews“).
 Je Paarung gibt es **immer genau einen Tipp**
 aus sechs Märkten, den Claude **selbst** aus dem Gesamtbild bestimmt – ohne Rechenmodell, ohne
 Schwellen, ohne Punkte (Wunsch des Nutzers vom 20.11.2026). Eigener Branch (`forebet-system`); getrennt von allen anderen Systemen.
@@ -135,44 +140,50 @@ der Auswahl, bei welchen Spielen wenigstens die Zahlenseite klar in eine Richtun
 - **Messen:** Merkmal 13 je Tipp („Vorprüfung: ja – Zahlen zeigten zu: … / nein“); `werkzeuge/tippanalyse.py` zählt getrennt,
   wie oft daraus „Spielen: ja“ wurde und wie die Tipps ausgingen. Die Vorprüfung ändert keine Tippregel.
 
-## Zweitquelle Teamnews – Probelauf (Ergänzung zu 1.4.1, Wunsch des Nutzers vom 28.11.2026)
+## Zweitquelle Teamnews (seit Version 1.5 Teil der Entscheidung, Wunsch des Nutzers vom 28.11.2026)
 
-Zweck: Für die Zahlen gibt es zwei Quellen, für Teamnews und Lage nur Sports Mole. Der Probelauf misst, wie oft frei zugängliche
-Listen der jeweiligen Länder von Sports Mole abweichen und ob das einen Tipp betroffen hätte. Test am 28.11. (Mainz – Union
-Berlin): 7 Ausfälle in allen Quellen gleich; die deutsche Liste führte einen Spieler „seit gestern“, der bei Sports Mole fehlte;
-die englische Sammelseite führte einen Spieler als gesperrt, den Sports Mole in der möglichen Startelf nennt.
+Zweck: Für die Zahlen gibt es zwei Quellen, die sich gegenseitig prüfen (Grundsatz 4). Dasselbe gilt seit Version 1.5 für die
+Teamnews: Sports Mole **und** eine frei zugängliche Liste des jeweiligen Landes. Test am 28.11. (Mainz – Union Berlin): 7 Ausfälle
+in allen Quellen gleich; die deutsche Liste führte einen Spieler „seit gestern“, der bei Sports Mole fehlte; die englische
+Sammelseite führte einen Spieler als gesperrt, den Sports Mole in der möglichen Startelf nennt.
 
-- **Quellen** (frei zugänglich, ohne Schlüssel; Stand 28.11.2026 von hier erreichbar):
+- **Länderquellen** (frei zugänglich, ohne Schlüssel; Stand 28.11.2026 von hier erreichbar) – **sie entscheiden mit:**
   - Deutschland (Bundesliga): **LigaInsider** – Spieler, Art, Grund, „fehlt seit“.
   - Spanien (La Liga), dazu Champions League und Europa League: **FútbolFantasy** – Verletzte mit „desde“ (seit) und Einsatzchance
-    (die Sperrenliste dieser Seite ist nicht lesbar – Sperren dort nur über die Sammelseite).
+    (die Sperrenliste dieser Seite ist nicht lesbar – Sperren stehen dort nicht; eine Sperre, die nur Sports Mole nennt, ist in
+    diesen Wettbewerben darum **nicht** „unbestätigt“, sondern zählt wie bisher).
   - Italien (Serie A): **Fantacalcio** – Infortunati (verletzt), Squalificati (gesperrt), Diffidati (Sperre droht, kein Ausfall).
   - England (Premier League): **offizielle Fantasy-Liste der Premier League** – Status, Position, Einsatzchance, Zeitpunkt der Meldung.
-  - Alle Ligen als Ergänzung, einzige Quelle für Frankreich, Niederlande, Portugal, Türkei, Schottland, Championship,
-    2. Bundesliga: **Sammelseite Sportsgambler** – im Test weniger verlässlich; was nur sie zeigt, ist kein Beleg.
-  - Gesperrt für automatischen Abruf und darum nicht verwendet: kicker, L'Équipe, Transfermarkt, UEFA.com. Sperren werden nicht umgangen.
-  - Von diesen Seiten werden **nur die Listen** gelesen – keine Quoten, Tipps, Vorhersagen, Direktvergleiche.
-- **Ablauf:** Nach Stufe 3 (und der Grenzfall-Runde), vor dem Senden der Tipps, lässt **Claude selbst** je Paarung
-  `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>" --spieler-heim "…" --spieler-gast "…"` laufen (Namen = die Spieler aus den
-  Sports-Mole-Teamnews im Datenblatt). **Bearbeiter und Prüfer verwenden die Zweitquelle nicht.**
-- **Kein Einfluss auf den Tipp** (Probelauf): Was nur in der Zweitquelle steht, ist weder Grund noch Gegenangabe und ändert weder
-  Tipp noch Kennzeichnung noch „Spielen: ja/nein“.
-- **Einstufung durch Claude** (das Werkzeug zählt nur Namen): „**bestätigt**“ – die Länderquelle führt dieselben Ausfälle und Sperren
-  mit demselben Status, nichts Zusätzliches; „**weicht ab**“ – ein Spieler fehlt in einer der beiden Quellen oder der Status ist ein
-  anderer (wer, was, seit wann); „**nicht verfügbar**“ – keine Quelle für diese Liga, Seite nicht erreichbar oder Team nicht gefunden.
-  Abweichungen, die nur die Sammelseite zeigt, werden genannt, zählen aber nicht als „weicht ab“.
-  Dazu „**Rang 1 betroffen: ja/nein**“: ja, wenn die Abweichung – wäre sie belegt – nach Regel 7b/7c ein Rang-1-Grund oder eine
-  Rang-1-Gegenangabe gewesen wäre (neuer Ausfall oder sichere Rückkehr mit belegter Position, oder Sports Mole führt einen neuen
-  Ausfall, den die Länderquelle nicht kennt).
+- **Sammelseite Sportsgambler** (englische Seite mit Listen für viele Ligen; im Test weniger verlässlich): wird mit angezeigt,
+  ist aber **kein Beleg** – was nur sie zeigt, bestätigt nichts und widerlegt nichts. Für Frankreich, Niederlande, Portugal, Türkei,
+  Schottland, Championship und 2. Bundesliga gibt es keine Länderquelle: Dort gilt **wie bisher nur Sports Mole** (Merkmal 14
+  „nicht verfügbar“).
+- Gesperrt für automatischen Abruf und darum nicht verwendet: kicker, L'Équipe, Transfermarkt, UEFA.com. Sperren werden nicht
+  umgangen. Von allen Seiten werden **nur die Listen** gelesen – keine Quoten, Tipps, Vorhersagen, Direktvergleiche.
+- **Ablauf:** Der Bearbeiter liest die Sports-Mole-Teamnews und ruft dann `werkzeuge/teamnews2.py "<Liga>" "<Heim>" "<Gast>"
+  --spieler-heim "…" --spieler-gast "…"` auf (Namen = alle Spieler aus den Sports-Mole-Teamnews). Spieler, die nur die Länderquelle
+  nennt, kommen mit in den Aufruf von `datenblatt.py` (Position, Einsatz im letzten Pflichtspiel). Findet das Werkzeug ein Team
+  nicht eindeutig, nennt es die Teamnamen der Quelle – dann mit diesem Namen erneut aufrufen. Claude (Stufe 1) und der Prüfer
+  (Stufe 3) rufen die Zweitquelle selbst neu ab.
+- **Einstufung je Spieler im Datenblatt (Feld 5):**
+  - „**bestätigt**“ – Sports Mole und die Länderquelle führen den Spieler beide als nicht sicher verfügbar (fehlt, fraglich,
+    gesperrt). Nennen sie einen verschiedenen Status, gilt der **schwächere** (fraglich vor fehlt/gesperrt); der Unterschied und
+    ein anderer Grund (z. B. Sperre statt Verletzung) werden vermerkt.
+  - „**nicht bestätigt – nur Sports Mole**“ bzw. „**nicht bestätigt – nur <Länderquelle>**“ – der Spieler steht nur in einer Quelle.
+  - Rückkehrer: bestätigt, wenn Sports Mole klar „spielt/startet“ sagt (Regel 7c) **und** die Länderquelle ihn nicht mehr als
+    Ausfall führt.
+- **Wirkung:** Regel 7e (Schritt 5) – nur bestätigte Teamnews geben eine Richtung; Schritt 8 – eine nicht bestätigte Angabe gegen
+  den Tipp macht ihn „geteilt“ → „Spielen: nein“.
 - **Statuswörter der Quellen** bleiben im Original stehen: deutsch „Verletzung“ = fehlt, „angeschlagen“ = fehlt oder fraglich
-  (Wortlaut lesen), „Aufbautraining“ = unklar, „5. Gelbe Karte“/„Rote Karte“ = gesperrt; spanisch „baja“ = fehlt, „duda“ = fraglich,
-  Einsatzchance 0 % = fehlt; italienisch „infortunato“ = verletzt, „squalificato“ = gesperrt, „diffidato“ = Sperre droht (kein Ausfall),
-  „da valutare“/„in dubbio“ = fraglich; englisch „injured“ = fehlt, „doubtful“ = fraglich, „suspended“ = gesperrt.
-- **Im Chat** je Paarung eine Zeile „Zweitquelle: bestätigt / weicht ab (wer, was) / nicht verfügbar“. Bei „Rang 1 betroffen: ja“
-  deutlich hervorgehoben mit dem Zusatz „im Tipp nicht berücksichtigt (Probelauf)“ – was der Nutzer daraus macht, entscheidet er.
-- **Merkmal 14** je Tipp; `werkzeuge/tippanalyse.py` zählt mit. Nach etwa 50 Tipps mit Zweitquelle berichtet Claude, wie oft sie
-  abwich und wie oft Rang 1 betroffen war; ob die Zweitquelle dann mitentscheiden soll, entscheidet nur der Nutzer.
-- **Fällt eine Quelle aus** (gesperrt, Aufbau geändert), meldet das Werkzeug das; der Ablauf läuft unverändert mit Sports Mole weiter.
+  (Wortlaut lesen; im Zweifel fraglich), „Aufbautraining“ = unklar, „5. Gelbe Karte“/„Rote Karte“ = gesperrt; spanisch „baja“ = fehlt,
+  „duda“ = fraglich, Einsatzchance 0 % = fehlt; italienisch „infortunato“ = verletzt, „squalificato“ = gesperrt, „diffidato“ = Sperre
+  droht (kein Ausfall), „da valutare“/„in dubbio“ = fraglich; englisch „injured“ = fehlt, „doubtful“ = fraglich, „suspended“ = gesperrt.
+- **Im Chat** je Paarung eine Zeile „Zweitquelle: bestätigt / weicht ab (wer, was) / nicht verfügbar“ – und die Entscheidung
+  „Spielen: ja/nein“ steht fest dabei; sie wird nicht an den Nutzer zurückgegeben.
+- **Fällt eine Länderquelle aus** (gesperrt, Aufbau geändert, Team nicht gefunden), meldet das Werkzeug das. Dann gilt für diese
+  Paarung wie bei Ligen ohne Länderquelle nur Sports Mole (Merkmal 14 „nicht verfügbar“); Claude sagt das im Chat dazu.
+- **Messen:** Merkmal 14 (Ergebnis des Abgleichs) und Merkmal 15 (welcher Tipp und welches „Spielen“ es **ohne** Zweitquelle
+  gewesen wäre); `werkzeuge/tippanalyse.py` zählt beides. Bericht an den Nutzer nach etwa 50 Tipps mit Länderquelle.
 
 ## Ablauf eines Auftrags
 
@@ -186,7 +197,8 @@ League One. Schickt er mehr als 5 Spiele auf einmal, fragt Claude, welche 5 zuer
 2. Claude gleicht mit dem FootyStats-Spielplan ab (Anstoß, match_id); Spiele ohne Sports-Mole-Vorschau werden
    als „nicht bewertet (keine Vorschau)“ aufgeführt. Claude sagt mit Uhrzeit, ob die 5 bis zum ersten Anstoß fertig werden.
 3. Claude startet je Paarung **einen frischen Agenten** (`bearbeiter`, ohne Kopie des Chats). Er holt die vier
-   Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`), das **Datenblatt-Werkzeug**
+   Sports-Mole-Teile (`werkzeuge/sm_spiel.py "<Heim>" "<Gast>"`), die **Zweitquelle Teamnews** (`werkzeuge/teamnews2.py`, seit
+   Version 1.5), das **Datenblatt-Werkzeug**
    (`werkzeuge/datenblatt.py <season_id> "<FS-Heim>" "<FS-Gast>" --sm … --spieler-heim … --spieler-gast …`, seit 27.11.2026
    Pflicht; im Europapokal zusätzlich `--liga-heim`/`--liga-gast` mit den Heimliga-Saisons) und bei Bedarf weitere FootyStats-Zahlen (`werkzeuge/fs_spiel.py <season_id> "<Heim>" "<Gast>"`), lässt den automatischen Abgleich laufen
    (`werkzeuge/abgleich.py <season_id> "<Heim>" "<Gast>"`), legt das Datenblatt je Team an und geht den
@@ -238,6 +250,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
    - **7c (seit 26.11.2026):** Als Rang-1-Grund oder -Gegenangabe nur Spieler, die neu fehlen (spielten im letzten
      Pflichtspiel laut FS-Aufstellung) oder sicher zurück sind (fehlten im letzten Spiel, Quelle sagt klar „spielt“);
      sonst im Datenblatt „nicht neu – keine Richtung“ (Schritt 5).
+   - **7e (seit 1.5):** Zweitquelle Teamnews abgerufen (`teamnews2.py`); jeder Spieler im Datenblatt mit „bestätigt“ oder „nicht
+     bestätigt – nur …“; als Rang-1-Grund oder -Gegenangabe nur bestätigte Angaben (wo es eine Länderquelle gibt); eine nicht
+     bestätigte Angabe gegen den Tipp → „geteilt“, „Spielen: nein“ (Schritt 8); Ausfall der Quelle offen genannt.
    - **7d (seit 1.4):** Kräfteverhältnis (Schritt 4b) gemacht – Tabellenabstand, Gegnerstärke der letzten 6 je Team,
      Einstufung mit Begründung; die Ausschlussregeln bei „klarer Favorit“ beachtet. **Seit 1.4.1:** die vier Bausteine und der
      Spielort je mit dem festen Satz „zeigt zu: Heim / Gast / keinem – weil …“; „klarer Favorit“ nur, wenn alle vier Bausteine zum
@@ -263,7 +278,8 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
 **Abschluss**
 
 11. Tagesliste vollständig (alle Spalten, Gründe je Paarung, **Merkmale-Zeile je Tipp** – seit 25.11.2026; seit 1.4.1 mit den
-    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp; Punkte 13 „Vorprüfung“ und 14 „Zweitquelle“ von Claude nach der Kontrolle ergänzt), committet und auf den Arbeitsbranch
+    Punkten 1–12, also auch „Tabellenhöher“ und Schattentipp; seit 1.5 mit den Punkten 14 „Zweitquelle“ und 15 „ohne Zweitquelle“; Punkt 13 „Vorprüfung“ von Claude nach der Kontrolle
+    ergänzt), committet und auf den Arbeitsbranch
     **und** `forebet-system` gepusht.
 12. **Nur bei der Auswertung:** nach Abpfiff alle Ergebnisse aus FootyStats eingetragen und ausgewertet – kein Spiel vergessen.
     Je Spiel auch Platzverweise aus FootyStats (`card_details`: Team, Minute, Spielstand) vermerken und
@@ -310,7 +326,9 @@ der Tagesliste eine Zeile „Prüfliste erledigt“ mit den gefundenen und korri
   **Stichprobe von Hand, seit 1.4.1:** bei **einer** von Claude benannten Paarung je Schritt – bevorzugt eine mit „Spielen: ja“, sonst
   wechselnd – zählt der Prüfer die Zahlen des Datenblatts selbst aus den Rohdaten nach (FS-`league-matches`, SM-Spielseite), ohne das
   Werkzeug, damit ein Fehler des Werkzeugs nicht an Bearbeiter, Claude und Prüfer zugleich vorbeigeht; weicht etwas ab, ist das ein
-  Werkzeugfehler: ins Fehlerprotokoll (M), dem Nutzer melden, alle 5 Paarungen des Schritts von Hand nachzählen) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
+  Werkzeugfehler: ins Fehlerprotokoll (M), dem Nutzer melden, alle 5 Paarungen des Schritts von Hand nachzählen;
+  **seit Version 1.5** ruft der Prüfer bei jeder Paarung auch die Zweitquelle Teamnews selbst neu ab (`teamnews2.py`) und prüft
+  „bestätigt / nicht bestätigt“ je Spieler, Regel 7e und die Folge für „Spielen: ja/nein“) und prüft Vollständigkeit, Anstoß, jede Aussage mit Teamzuordnung,
   den FootyStats-Abgleich und ob jeder Tipp regelkonform aus den Gründen folgt – **und ob der
   Entscheidungsweg je Paarung vollständig und in der vorgeschriebenen Reihenfolge eingehalten ist**
   (Schritt 1–8, Datenblatt je Team gegen die Quellen, Lage-Check mit fünf Fragen für beide Teams, Spielbild je Team mit „trifft es?
@@ -354,12 +372,15 @@ vermerkt).
    verwendet, was beide gleich zeigen.
 5. **Nur Spiele mit Sports-Mole-Vorschau** werden bewertet. Die Vorschau muss zu diesem Termin
    gehören (Datum, Spieltag); eine veraltete Vorschau (z. B. zu einem verlegten Termin) zählt nicht.
+6. **Teamnews aus zwei Quellen** (seit Version 1.5): Wo es eine Länderquelle gibt (Abschnitt „Zweitquelle Teamnews“), müssen
+   Sports Mole und die Länderquelle einen Ausfall, eine Sperre oder einen fraglichen Spieler beide führen, damit er als Grund
+   oder Gegenangabe zählt (Regel 7e) – so wie bei den Zahlen nur zählt, was Sports Mole und FootyStats gleich zeigen.
 
 ## Rangfolge
 
 | Rang | Information | Quelle |
 |---|---|---|
-| 1 | **Lage** (Lage-Check, Schritt 4): worum es geht, Dringlichkeit der Punkte, Serien (letzter Sieg, letztes Tor), Schwächung (Ausfälle, Sperren, Trainerwechsel, Belastung), Besonderheiten – dazu Teamnews und Aufstellungen | Sports Mole (Artikel, Tabelle) + Ergebnislisten beider Quellen |
+| 1 | **Lage** (Lage-Check, Schritt 4): worum es geht, Dringlichkeit der Punkte, Serien (letzter Sieg, letztes Tor), Schwächung (Ausfälle, Sperren, Trainerwechsel, Belastung), Besonderheiten – dazu Teamnews und Aufstellungen | Sports Mole (Artikel, Tabelle) + Länderquelle für Teamnews (seit 1.5) + Ergebnislisten beider Quellen |
 | 2 | Form: letzte 6 aller Wettbewerbe und letzte 6 Ligaspiele mit Ergebnissen, Serien (trifft seit …, ohne Tor seit …, zu null) | FootyStats + Sports Mole (Formleisten, Spielseite) |
 | 3 | Saison: Tabelle, Bilanz daheim bzw. auswärts, Tore, xG, Anteile über 2,5 / beide treffen / zu null / ohne Tor; Torschützen | FootyStats + Sports Mole (Tabelle, Torschützen) |
 | – | „We say“ | **nicht verwendet** (seit Version 1.3, Wunsch des Nutzers vom 21.11.2026) – weder als Grund noch zum Vergleich |
@@ -418,7 +439,10 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
       SM-Vorschau oder FootyStats-Spielerdaten (`fs.sh league-players season_id=…`). Sonst:
       „Position nicht in der Quelle“. **Neu oder nicht** (seit 26.11.2026, Regel 7c): je Ausfall/Rückkehrer der Einsatz im
       letzten Pflichtspiel laut FS-Aufstellung (Startelf / eingewechselt / Bank / nicht im Kader) und „neu“ oder „nicht neu –
-      keine Richtung“.
+      keine Richtung“. **Zweitquelle** (seit Version 1.5, Regel 7e): je Spieler „bestätigt (<Länderquelle>: Statuswort im Original,
+      seit wann)“ oder „nicht bestätigt – nur Sports Mole“; Spieler, die nur die Länderquelle nennt, stehen in einer eigenen Liste
+      „nur <Länderquelle>“ mit Statuswort, „seit wann“, Position und Einsatz im letzten Pflichtspiel. Gibt es für die Liga keine
+      Länderquelle oder fiel sie aus: „Zweitquelle nicht verfügbar – nur Sports Mole“.
    6. **Abweichungen** aus dem Abgleich (Schritt 2).
    7. **Weitere Fakten für den Lage-Check** (seit 21.11.2026): **Trainer** (seit wann, wie viele
       Spiele – steht die Zahl nicht in der Quelle: „nicht in der Quelle“), **Spiele kurz davor und
@@ -500,6 +524,15 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    FS-Aufstellungen des letzten Spiels (beide Wettbewerbe). Alle anderen Ausfälle/Rückkehrer stehen im Datenblatt mit
    „nicht neu – keine Richtung“, weil sie schon in den Zahlen der letzten Spiele stecken. (Anlass: Chaloupek, Ordóñez,
    Neuer/Davies, Bastoni, Pedrinho, Ueda/E. Mbappé am 25.11.)
+   **Nur bestätigte Teamnews geben eine Richtung** (seit Version 1.5, Wunsch des Nutzers vom 28.11.2026 – Regel 7e): Gibt es für
+   die Liga eine Länderquelle (Abschnitt „Zweitquelle Teamnews“), zählt ein Ausfall, eine Sperre oder ein fraglicher Spieler nur
+   dann als Grund oder Gegenangabe aus Rang 1, wenn **Sports Mole und die Länderquelle ihn beide führen** („bestätigt“; bei
+   verschiedenem Status gilt der schwächere). Steht er nur in einer der beiden Quellen: **„nicht bestätigt – keine Richtung“** – er
+   wird genannt, aber weder als Grund noch als Gegenangabe gewichtet. Ein Rückkehrer zählt nur, wenn Sports Mole klar „spielt/startet“
+   sagt (Regel 7c) und die Länderquelle ihn nicht mehr als Ausfall führt. Die Regeln 7b (Position belegt) und 7c (neu) gelten
+   zusätzlich; „neu oder nicht“ entscheidet weiter die FS-Aufstellung, das „fehlt seit“ der Länderquelle steht daneben, ein
+   Widerspruch wird vermerkt. Die Sammelseite ist kein Beleg. Ligen ohne Länderquelle und Paarungen, bei denen sie ausfiel:
+   wie bisher nur Sports Mole. (Was nicht bestätigt ist, kann den Tipp trotzdem auf „Spielen: nein“ setzen – Schritt 8.)
    Bei einem Widerspruch geht eine **konkrete Nachricht aus Sports Mole** einer Zahl aus FootyStats
    vor (ein gesperrter Kapitän wiegt mehr als ein Saisonwert).
 6. **Die sechs Märkte prüfen:** Heimsieg, Auswärtssieg, Beide treffen – Ja, Beide treffen – Nein,
@@ -546,6 +579,14 @@ vom neuesten zum ältesten (letztes Spiel zuerst).
    gewählten Markt keine Richtung (keine neue Änderung nach Regel 7c, Lage ohne Bezug zum Markt), lautet der SM-Satz „nicht
    eindeutig“ – das ist „geteilt“. Zeigt ein Rang-2-Block gegen den Tipp, lautet der FS-Satz nicht „zum Tipp“ (Musterfälle:
    `MUSTERFAELLE.md`).
+   **Nicht bestätigte Teamnews (seit Version 1.5):** Die SM-Seite heißt seitdem „Teamnews-Seite“ (Sports Mole + Länderquelle, Rang 1).
+   Ihr Satz lautet nur dann „zum Tipp“, wenn die Rang-1-Fakten, auf die er sich stützt, nach Regel 7e **bestätigt** sind (oder es
+   für die Liga keine Länderquelle gibt). Er lautet „**nicht eindeutig**“, wenn es eine **nicht bestätigte** Angabe gibt, die – wäre
+   sie richtig – nach Regel 7b/7c eine Rang-1-Gegenangabe gegen den Tipp wäre (neuer Ausfall oder fraglicher Spieler mit belegter
+   Position bei dem Team, das der Tipp braucht; sichere Rückkehr beim Gegner). Dann ist der Tipp „geteilt“ → „**Spielen: nein –
+   Teamnews nicht bestätigt**“. Nicht bestätigte Angaben ohne Bezug zum Tipp ändern nichts.
+   **Die Entscheidung „Spielen: ja/nein“ trifft Claude nach diesen Regeln** (Wunsch des Nutzers vom 28.11.2026); sie steht fest im
+   Chat und wird nicht an den Nutzer zurückgegeben.
    **Spielen nur bei „beide einig“** (seit Version 1.4, Wunsch des Nutzers vom 27.11.2026): Jede Paarung bekommt weiter genau
    einen Tipp. „beide einig“ → **„Spielen: ja“**; „geteilt“ → **„Spielen: nein – nur Beobachtung“**. Die Auswertung zählt beide
    Gruppen getrennt.
@@ -626,11 +667,17 @@ Schwellen):
 13. **Vorprüfung** (seit 28.11.2026): „ja – Zahlen zeigten zu: Heimsieg / Auswärtssieg / <Tor-Markt> / keinem“, wenn der Nutzer das
     Spiel nach einer Vorprüfung gewählt hat; sonst „nein“. **Dieses Merkmal trägt Claude ein, nicht der Bearbeiter** – erst wenn die
     Tipps fertig und geprüft sind (Abschnitt „Vorprüfung“).
-14. **Zweitquelle Teamnews** (Probelauf seit 28.11.2026): „bestätigt“ / „weicht ab (wer, was) – Rang 1 betroffen: ja/nein“ / „nicht
-    verfügbar“. **Auch dieses Merkmal trägt Claude ein**, nach der Kontrolle (Abschnitt „Zweitquelle Teamnews – Probelauf“).
+14. **Zweitquelle Teamnews** (seit 28.11.2026; seit Version 1.5 Teil der Entscheidung): „bestätigt“ (alle Sports-Mole-Angaben von der
+    Länderquelle gedeckt, nichts Zusätzliches) / „weicht ab (wer, was) – Rang 1 betroffen: ja/nein“ / „nicht verfügbar“ (keine
+    Länderquelle oder ausgefallen). „Rang 1 betroffen: ja“, wenn eine nicht bestätigte Angabe nach 7b/7c ein Rang-1-Grund oder eine
+    Rang-1-Gegenangabe gewesen wäre.
+15. **Ohne Zweitquelle** (seit Version 1.5): welcher Markt und welches „Spielen“ es nach den Regeln **ohne** Regel 7e gewesen wäre
+    (nur Sports Mole, wie in 1.4.1) – „Tipp <Markt>, Spielen <ja/nein> – gleich“ oder „– anders“. So lässt sich an denselben
+    Spielen messen, was die Zweitquelle verändert.
 Schreibweise (fest, damit `werkzeuge/tippanalyse.py` sie liest): „(10) Kräfteverhältnis: … ; Tabellenhöher: Heim · (11) Spielen: ja ·
 (12) Schattentipp: Über 2,5 – anders wegen Vorrang Sieg-Markt · (13) Vorprüfung: ja – Zahlen zeigten zu: Heimsieg ·
-(14) Zweitquelle: weicht ab (Mwene nur in LigaInsider, angeschlagen seit gestern) – Rang 1 betroffen: nein“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
+(14) Zweitquelle: weicht ab (Mwene nur in LigaInsider, angeschlagen seit gestern) – Rang 1 betroffen: nein ·
+(15) Ohne Zweitquelle: Tipp Heimsieg, Spielen ja – gleich“; die Märkte immer mit ihren festen Namen (Heimsieg, Auswärtssieg,
 Beide treffen – Ja, Beide treffen – Nein, Über 2,5, Unter 2,5).
 Bei der Auswertung wird je Merkmal mitgezählt (Treffer mit/ohne Merkmal; seit 1.4 immer getrennt nach „Spielen: ja“ und „nein“); bei geänderten Tipps auch, ob der
 ursprüngliche Tipp getroffen hätte; immer auch, ob der zweitbeste Markt und der Schattentipp getroffen hätten. **Ausgewertet und dem
